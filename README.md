@@ -16,3 +16,4 @@ Se requiere configurar el navegador para que no pregunte al usuario cuando se re
 
 ## HS POS Fiscal
 Este módulo experimental se integra al punto de venta de venta y su funcionamiento cambia, en este caso llama a una aplicacion de escritorio.
+
