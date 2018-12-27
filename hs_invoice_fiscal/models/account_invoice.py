@@ -68,8 +68,7 @@ class AccountInvoiceInherit(models.Model):
 			payment_cnote = "0.00"			#Temporalmente
 			payment_other = "0.00"			#Temporalmente
 
-			date_invoice = datetime.strptime(str(invoice.date_invoice), 
-								'%d/%m/%Y').strftime('%d/%m/%Y') or ''
+			date_invoice = invoice.date_invoice.toString('%d/%m/%Y', CultureInfo.InvariantCulture) or ''
 
 			data_stream = ""
 			invoice_refund = invoice.refund_invoice_id or ''
