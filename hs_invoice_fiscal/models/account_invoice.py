@@ -68,7 +68,7 @@ class AccountInvoiceInherit(models.Model):
 			payment_cnote = "0.00"			#Temporalmente
 			payment_other = "0.00"			#Temporalmente
 
-			date_invoice = datetime.strptime(invoice.date_invoice, 
+			date_invoice = datetime.strptime(str(invoice.date_invoice), 
 								'%d/%m/%Y').strftime('%d/%m/%Y') or ''
 
 			data_stream = ""
