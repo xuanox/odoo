@@ -49,7 +49,8 @@ class AccountInvoiceInherit(models.Model):
 		for invoice in self:
 			file_name = "FACTI-HS-" + str(invoice.id) + ".txt"
 			client_name = invoice.partner_id.name or 'CONTADO'
-			client_ruc = invoice.partner_id.vat or '00-0000-00000'
+			client_ruc = self.get_ruc_from_field(invoice.partner_id.vat) or '00-0000-00000'
+			client_dv = self.get_dv_from_field(invoice.partner_id.vat) or '00'
 			client_dir = self.get_client_direction(invoice.partner_id)
 			invoice_no = invoice.number or '0'
 			self.invoice_name = "FACTI" + invoice_no
@@ -114,7 +115,7 @@ class AccountInvoiceInherit(models.Model):
 						)
 			
 			if type_invoice == "Factura":
-				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
+				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
 							self.add_field_cell(client_ruc,			15),
@@ -133,6 +134,7 @@ class AccountInvoiceInherit(models.Model):
 							self.add_field_cell(payment_dcard, 		19),
 							self.add_field_cell(payment_cnote, 		19),
 							self.add_field_cell(payment_other, 		19),
+							self.add_field_cell(client_dv,			2),
 						)
 
 			with closing(os.fdopen(content_file_fd, 'w')) as content_file:
@@ -162,6 +164,26 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_file_content(self,id):
 		return self.browse(id).fiscal_file
+
+
+	def get_ruc_from_field(self, vat_field):
+		if " " in vat_field:
+			ruc = vat_field.split(" ")[0]
+			return ruc
+		else:
+			return vat_field
+
+	
+	def get_dv_from_field(self, vat_field):
+		if " " in vat_field:
+			section = vat_field.split(" ")
+			if len(section) == 2:
+				dv = section[1]
+				return dv[2:]
+			elif len(section) == 3:
+				return section[2]
+		else:
+			return vat_field
 
 	
 	
