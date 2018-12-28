@@ -68,7 +68,14 @@ class AccountInvoiceInherit(models.Model):
 			payment_cnote = "0.00"			#Temporalmente
 			payment_other = "0.00"			#Temporalmente
 
-			date_invoice = invoice.date_invoice.toString('%d/%m/%Y', CultureInfo.InvariantCulture) or ''
+			date_invoice = ""
+			if type (invoice.date_invoice) == "str":
+				date_invoice = datetime.strptime(invoice.date_invoice, 
+								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
+			elif type (invoice.date_invoice) == "datetime.datetime":
+				date_invoice = invoice.date_invoice.strftime('%d/%m/%Y') or ''
+			else:
+				date_invoice = ""
 
 			data_stream = ""
 			invoice_refund = invoice.refund_invoice_id or ''
@@ -85,8 +92,13 @@ class AccountInvoiceInherit(models.Model):
 					refound_tax = self.get_tax_item(invoice.amount_tax)
 					refound_note = self.get_refound_name(invoice)
 					refound_date = date_invoice
-					date_invoice = datetime.strptime(refund.date_invoice, '%Y-%m-%d').strftime('%d/%m/%Y') or ''
-
+					if type (refund.date_invoice) == "str":
+						date_invoice = datetime.strptime(refund.date_invoice, 
+											'%Y-%m-%d').strftime('%d/%m/%Y') or ''
+					elif type (refund.date_invoice) == "datetime.datetime":
+						date_invoice = refund.date_invoice.strftime('%d/%m/%Y') or ''
+					else:
+						date_invoice = ""
 					data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell('1',				1),
 							self.add_field_cell(self.invoice_name,	20),
