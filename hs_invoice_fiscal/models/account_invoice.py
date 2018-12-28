@@ -69,10 +69,10 @@ class AccountInvoiceInherit(models.Model):
 			payment_other = "0.00"			#Temporalmente
 
 			date_invoice = ""
-			if type (invoice.date_invoice) == "str":
+			if type(invoice.date_invoice) == str:
 				date_invoice = datetime.strptime(invoice.date_invoice, 
 								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
-			elif type (invoice.date_invoice) == "datetime.datetime":
+			elif type(invoice.date_invoice) == datetime:
 				date_invoice = invoice.date_invoice.strftime('%d/%m/%Y') or ''
 			else:
 				date_invoice = ""
@@ -92,10 +92,10 @@ class AccountInvoiceInherit(models.Model):
 					refound_tax = self.get_tax_item(invoice.amount_tax)
 					refound_note = self.get_refound_name(invoice)
 					refound_date = date_invoice
-					if type (refund.date_invoice) == "str":
+					if type(refund.date_invoice) == str:
 						date_invoice = datetime.strptime(refund.date_invoice, 
 											'%Y-%m-%d').strftime('%d/%m/%Y') or ''
-					elif type (refund.date_invoice) == "datetime.datetime":
+					elif type(refund.date_invoice) == datetime:
 						date_invoice = refund.date_invoice.strftime('%d/%m/%Y') or ''
 					else:
 						date_invoice = ""
