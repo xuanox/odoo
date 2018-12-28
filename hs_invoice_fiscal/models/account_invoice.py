@@ -72,10 +72,8 @@ class AccountInvoiceInherit(models.Model):
 			if type(invoice.date_invoice) == str:
 				date_invoice = datetime.strptime(invoice.date_invoice, 
 								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
-			elif type(invoice.date_invoice) == datetime:
-				date_invoice = invoice.date_invoice.strftime('%d/%m/%Y') or ''
 			else:
-				date_invoice = ""
+				date_invoice = invoice.date_invoice.strftime('%d/%m/%Y') or ''
 
 			data_stream = ""
 			invoice_refund = invoice.refund_invoice_id or ''
