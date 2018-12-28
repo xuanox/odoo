@@ -89,7 +89,7 @@ class AccountInvoiceInherit(models.Model):
 
 					refound_name = invoice.origin
 					refound_price = invoice.amount_untaxed
-					refound_tax = self.get_tax_item(invoice.amount_tax)
+					refound_tax = invoice.amount_tax
 					refound_note = self.get_refound_name(invoice)
 					refound_date = date_invoice
 					if type(refund.date_invoice) == str:
