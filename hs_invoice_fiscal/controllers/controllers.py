@@ -25,5 +25,5 @@ class Binary(Controller):
 				#filename = '%s.%s' % (invoice_number,'txt')
 				filename = Model.get_file_name(int(id))
 				return request.make_response(filecontent,
-						[('Content-Type', 'application/octet-stream'),
+						[('Content-Type', 'text/plain'),
 						('Content-Disposition', content_disposition(filename))])
