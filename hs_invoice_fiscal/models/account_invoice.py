@@ -62,7 +62,8 @@ class AccountInvoiceInherit(models.Model):
 			surcharge1 = "0.00"			#Temporalmente
 			surcharge2 = "0.00"			#Temporalmente
 			
-			payment_chash = amount_total	#Temporalmente
+			#payment_chash = amount_total	#Temporalmente
+			payment_chash = ""				#Temporalmente
 			payment_check = "0.00"			#Temporalmente
 			payment_ccard = "0.00"			#Temporalmente
 			payment_dcard = "0.00"			#Temporalmente
