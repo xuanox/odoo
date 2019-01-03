@@ -69,12 +69,7 @@ class AccountInvoiceInherit(models.Model):
 			payment_cnote = "0.00"			#Temporalmente
 			payment_other = "0.00"			#Temporalmente
 
-			date_invoice = ""
-			if type(invoice.date_invoice) == str:
-				date_invoice = datetime.strptime(invoice.date_invoice, 
-								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
-			else:
-				date_invoice = invoice.date_invoice.strftime('%d/%m/%Y') or ''
+			date_invoice = self.get_date_invoice(invoice.date_invoice)
 
 			data_stream = ""
 			invoice_refund = invoice.refund_invoice_id or ''
@@ -91,11 +86,8 @@ class AccountInvoiceInherit(models.Model):
 					refound_tax = invoice.amount_tax
 					refound_note = self.get_refound_name(invoice)
 					refound_date = date_invoice
-					if type(refund.date_invoice) == str:
-						date_invoice = datetime.strptime(refund.date_invoice, 
-											'%Y-%m-%d').strftime('%d/%m/%Y') or ''
-					else:
-						date_invoice = refund.date_invoice.strftime('%d/%m/%Y') or ''
+					date_invoice = self.get_date_invoice(refund.date_invoice)
+					time_invoice = self.get_time_invoice(invoice.create_date)
 					
 					data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell('1',				1),
@@ -108,7 +100,7 @@ class AccountInvoiceInherit(models.Model):
 							self.add_field_cell(refound_note,		150),
 							self.add_field_cell(refound_date,		10),
 
-							self.add_field_cell("08:00",			5),
+							self.add_field_cell(time_invoice,		5),
 							self.add_field_cell(refound_fiscal_id,	20),
 							self.add_field_cell(refound_fiscal_no, 	8),
 							self.add_field_cell(refound_name,		20),
@@ -164,6 +156,26 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_file_content(self,id):
 		return self.browse(id).fiscal_file
+
+
+	def get_date_invoice(self, invoice_datetime):
+		if type(invoice_datetime) == str:
+			date_invoice = datetime.strptime(invoice_datetime, 
+								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
+			return date_invoice
+		else:
+			date_invoice = invoice_datetime.strftime('%d/%m/%Y') or ''
+			return date_invoice
+
+
+	def get_time_invoice(self, invoice_datetime):
+		if type(invoice_datetime) == str:
+			time_invoice = datetime.strptime(invoice_datetime, 
+								'%Y-%m-%d %H:%M').strftime('%H:%M') or ''
+			return time_invoice
+		else:
+			time_invoice = invoice_datetime.strftime(' %H:%M') or ''
+			return time_invoice
 
 
 	def get_ruc_from_field(self, vat_field):
