@@ -176,7 +176,7 @@ class AccountInvoiceInherit(models.Model):
 								'%Y-%m-%d %H:%M').strftime('%H:%M') or ''
 			return time_invoice
 		else:
-			time_invoice = invoice_datetime.strftime(' %H:%M') or ''
+			time_invoice = invoice_datetime.strftime('%H:%M') or ''
 			return time_invoice
 
 
