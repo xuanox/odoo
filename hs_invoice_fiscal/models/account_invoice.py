@@ -77,6 +77,7 @@ class AccountInvoiceInherit(models.Model):
 			invoice_refund = invoice.refund_invoice_id or ''
 			if type(invoice_refund) is not bool:
 				for refund in invoice_refund:
+					self.invoice_name = "NCTI" + invoice_no
 					file_name = "NCTI-HS-" + str(invoice.id) + ".txt"
 					refound_fiscal_id = refund.fiscal_id
 					refound_fiscal_no = refund.fiscal_reference
