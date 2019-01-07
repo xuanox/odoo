@@ -181,11 +181,14 @@ class AccountInvoiceInherit(models.Model):
 
 
 	def get_ruc_from_field(self, vat_field):
+		"""
 		if " " in vat_field:
 			ruc = vat_field.split(" ")[0]
 			return ruc
 		else:
 			return vat_field
+		"""
+		return vat_field
 
 	
 	def get_dv_from_field(self, vat_field):
