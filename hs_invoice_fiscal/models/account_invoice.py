@@ -51,7 +51,7 @@ class AccountInvoiceInherit(models.Model):
 			file_name = "FACTI-HS-" + str(invoice.id) + ".txt"
 			client_name = invoice.partner_id.name or 'CONTADO'
 			client_ruc = invoice.partner_id.vat or '00-0000-00000'
-			client_dv = self.get_dv_from_field(invoice.partner_id.vat) or '00'
+			client_dv = self.get_dv_from_field(invoice.partner_id.vat or '00')
 			client_dir = self.get_client_direction(invoice.partner_id)
 			invoice_no = invoice.number or '0'
 			self.invoice_name = "FACTI" + invoice_no
