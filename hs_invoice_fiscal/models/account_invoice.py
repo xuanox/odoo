@@ -213,7 +213,7 @@ class AccountInvoiceInherit(models.Model):
 	def get_dv_from_field(self, vat_field):
 		try:
 			if vat_field == "":
-				return ""
+				return "00"
 			if " " in vat_field:
 				section = vat_field.split(" ")
 				if len(section) == 2:
@@ -224,7 +224,7 @@ class AccountInvoiceInherit(models.Model):
 			else:
 				return vat_field
 		except:
-			return ""
+			return "00"
 
 	
 	
