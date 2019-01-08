@@ -27,13 +27,14 @@ class AccountInvoiceInherit(models.Model):
 	fisca_file: Campo donde se guarda el archivo en formato binario
 	fiscal_name: Nombre que tendra el archivo a descargar [FACTI|NCTI]-HS-XXX.txt
 	fiscal_id: Codigo unico de identificacion de la maquina fiscal
+	fiscal_datetime: fecha y hora en que fue impresa la factura y nota credito
 	"""
 	_inherit = "account.invoice"
 	fiscal_reference = fields.Char(string="Numero Fiscal")
 	fiscal_file = fields.Binary('Fiscal Text Report File')
 	fiscal_name = fields.Char()
 	fiscal_id = fields.Char(string="Maquina Fiscal")
-
+	fiscal_datetime = fields.Char()
 
 
 	@api.multi
