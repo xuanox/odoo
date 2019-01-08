@@ -30,11 +30,11 @@ class AccountInvoiceInherit(models.Model):
 	fiscal_datetime: fecha y hora en que fue impresa la factura y nota credito
 	"""
 	_inherit = "account.invoice"
-	fiscal_reference = fields.Char(string="Numero Fiscal")
+	fiscal_reference = fields.Char(string="No. Fiscal")
 	fiscal_file = fields.Binary('Fiscal Text Report File')
 	fiscal_name = fields.Char()
-	fiscal_id = fields.Char(string="Maquina Fiscal")
-	fiscal_datetime = fields.Char()
+	fiscal_id = fields.Char(string="Impresora Fiscal")
+	fiscal_datetime = fields.Char(string="Fecha Impresa")
 
 
 	@api.multi
