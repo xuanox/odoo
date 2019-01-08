@@ -170,7 +170,7 @@ class AccountInvoiceInherit(models.Model):
 			date_invoice = invoice_datetime.strftime('%d/%m/%Y') or ''
 			return date_invoice
 
-
+	"""
 	def get_time_invoice(self, invoice_datetime):
 		if type(invoice_datetime) == str:
 			time_invoice = datetime.strptime(invoice_datetime, 
@@ -179,6 +179,23 @@ class AccountInvoiceInherit(models.Model):
 		else:
 			time_invoice = invoice_datetime.strftime('%H:%M') or ''
 			return time_invoice
+	"""
+
+	def get_time_invoice(self, invoice_datetime):
+		from_zone = tz.gettz('UTC')
+		to_zone = tz.gettz('America/Bogota')
+		if type(invoice_datetime) == str:
+			utc_time = datetime.strptime(invoice_datetime, '%Y-%m-%d %H:%M')
+			if utc_time != "":
+				utc_time = utc_time.replace(tzinfo=from_zone)
+				local_time = utc_time.astimezone(to_zone)
+				return local_time.strftime('%H:%M')
+			return invoice_datetime
+		else:
+			utc_time = invoice_datetime
+			utc_time = utc_time.replace(tzinfo=from_zone)
+			local_time = utc_time.astimezone(to_zone)
+			return local_time.strftime('%H:%M')
 
 
 	def get_ruc_from_field(self, vat_field):
