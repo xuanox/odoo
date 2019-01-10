@@ -122,7 +122,7 @@ class AccountInvoiceInherit(models.Model):
 							self.add_field_cell(amount_total,		19),
 
 							self.add_field_cell(surcharge1,			19),
-							self.add_field_cell(surcharge2,			19),
+							self.add_field_cell(surcharge2,			7),
 
 							self.add_field_cell(payment_chash, 		19),
 							self.add_field_cell(payment_check,		19),
