@@ -271,13 +271,13 @@ class AccountInvoiceInherit(models.Model):
 
 		data_stream = "{}{}{}{}{}{}{}{}\r\n".format(
 				self.add_field_cell(self.invoice_name,	20),
-				self.add_field_cell(product_code,		80),
-				self.add_field_cell(discription,		15),
-				self.add_field_cell(uom,				150),
+				self.add_field_cell(product_code,		25),
+				self.add_field_cell(discription,		80),
+				self.add_field_cell(uom,				20),
 				self.add_field_cell(quantity, 			19),
 				self.add_field_cell(price,				19),
-				self.add_field_cell(taxes,				19),
-				self.add_field_cell(2,					19),
+				self.add_field_cell(taxes,				10),
+				self.add_field_cell(2,					10),
 		)
 		return str(data_stream)
 
