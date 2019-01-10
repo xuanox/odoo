@@ -260,7 +260,7 @@ class AccountInvoiceInherit(models.Model):
 
 		"""
 		product_code = str(invoice_line.product_id.default_code or '')
-		discription = str(invoice_line.product_id.name)
+		description = str(invoice_line.product_id.name)
 		quantity = str(invoice_line.quantity or '')
 		#price = str(invoice_line.price_unit or '')
 		price = self.get_price_item(invoice_line)
@@ -269,10 +269,13 @@ class AccountInvoiceInherit(models.Model):
 		#discount = str(invoice_line.discount or '')
 		taxes = self.get_tax_item(invoice_line)
 
+		if description == "False":	#Description jamas debe ser False
+			return ""
+
 		data_stream = "{}{}{}{}{}{}{}{}\r\n".format(
 				self.add_field_cell(self.invoice_name,	20),
 				self.add_field_cell(product_code,		25),
-				self.add_field_cell(discription,		80),
+				self.add_field_cell(description,		80),
 				self.add_field_cell(uom,				20),
 				self.add_field_cell(quantity, 			19),
 				self.add_field_cell(price,				19),
