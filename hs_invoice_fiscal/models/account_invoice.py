@@ -235,6 +235,7 @@ class AccountInvoiceInherit(models.Model):
 			for invoice_line in invoice.invoice_line_ids:
 				price = float(invoice_line.price_unit)
 				discount = float (invoice_line.discount or '0.00')
+				discount = discount/100
 				amount_off = amount_off + (price * discount)
 			return amount_off
 		except:
@@ -300,6 +301,7 @@ class AccountInvoiceInherit(models.Model):
 		try:
 			price = float(invoice.price_unit)
 			discount = float (invoice.discount or '0.00')
+			discount = discount/100
 			total = price - (price * discount)
 			return str(total)
 		except:
