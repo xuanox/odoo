@@ -56,7 +56,7 @@ class AccountInvoiceInherit(models.Model):
 			invoice_no = invoice.number or '0'
 			self.invoice_name = "FACTI" + invoice_no
 
-			amount_off = "0.00"		#Temporalmente
+			amount_off = self.get_total_amount_off(invoice)
 			amount_close = str(invoice.amount_total) or '0.00'
 			amount_total = str(invoice.amount_total) or '0.00'
 
@@ -229,6 +229,18 @@ class AccountInvoiceInherit(models.Model):
 			return "00"
 
 	
+	def get_total_amount_off(self, invoice):
+		try:
+			amount_off = 0.0
+			for invoice_line in invoice.invoice_line_ids:
+				price = float(invoice_line.price_unit)
+				discount = float (invoice_line.discount or '0.00')
+				amount_off = amount_off + (price * discount)
+			return amount_off
+		except:
+			return 0.0
+
+	
 	
 	def get_file_name(self, id):
 		return self.browse(id).fiscal_name
@@ -262,11 +274,9 @@ class AccountInvoiceInherit(models.Model):
 		product_code = str(invoice_line.product_id.default_code or '')
 		description = str(invoice_line.product_id.name)
 		quantity = str(invoice_line.quantity or '')
-		#price = str(invoice_line.price_unit or '')
 		price = self.get_price_item(invoice_line)
 		uom = self.get_uom_item(invoice_line)
 		total = str(invoice_line.price_subtotal or '')
-		#discount = str(invoice_line.discount or '')
 		taxes = self.get_tax_item(invoice_line)
 
 		if description == "False":	#Description jamas debe ser False
@@ -290,7 +300,7 @@ class AccountInvoiceInherit(models.Model):
 		try:
 			price = float(invoice.price_unit)
 			discount = float (invoice.discount or '0.00')
-			total = price - discount
+			total = price - (price * discount)
 			return str(total)
 		except:
 			return str(invoice.price_unit or '')
