@@ -230,16 +230,13 @@ class AccountInvoiceInherit(models.Model):
 
 	
 	def get_total_amount_off(self, invoice):
-		try:
-			amount_off = 0.0
-			for invoice_line in invoice.invoice_line_ids:
-				price = float(invoice_line.price_unit)
-				discount = float (invoice_line.discount or '0.00')
-				discount = discount/100
-				amount_off = amount_off + (price * discount)
-			return amount_off
-		except:
-			return 0.0
+		amount_off = 0.0
+		for invoice_line in invoice.invoice_line_ids:
+			price = float(invoice_line.price_unit)
+			discount = float (invoice_line.discount or '0.00')
+			discount = discount/100
+			amount_off = amount_off + (price * discount)
+		return amount_off
 
 	
 	
