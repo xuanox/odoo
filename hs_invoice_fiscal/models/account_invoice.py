@@ -230,16 +230,25 @@ class AccountInvoiceInherit(models.Model):
 
 	
 	def get_total_amount_off(self, invoice):
-		amount_off = 0.0
+		total_off = 0.0
 		for invoice_line in invoice.invoice_line_ids:
 			if invoice_line.discount:
+				#Obtenemos el total sin descuento redondeado a 2 decimales
 				price = float(invoice_line.price_unit)
 				quantity = float(invoice_line.quantity or '0.00')
-				discount = float (invoice_line.discount or '0.00')
-				discount = discount/100
-				item_off = (price * discount)
-				amount_off = amount_off + (item_off * quantity)
-		return '{0:.2f}'.format(amount_off)
+				item_total = quantity * price
+				item_total = float('{0:.2f}'.format(item_total))
+
+				#Obtenemos el total con descuento readondeado a 2 decimales
+				discount = (float(invoice_line.discount or '0.00'))/100
+				amount_off = price - (price * discount)
+				item_off = quantity * amount_off
+				item_off = float('{0:.2f}'.format(item_off))
+
+				#Obtenemos el descunto del producto restando a total, off y
+				#Luego agregamos a el descuento total del movimiento
+				total_off = total_off + (item_total - item_off)
+		return '{0:.2f}'.format(total_off)
 
 	
 	
