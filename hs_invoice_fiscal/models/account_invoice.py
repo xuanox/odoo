@@ -94,11 +94,12 @@ class AccountInvoiceInherit(models.Model):
 					date_invoice = self.get_date_invoice(refund.date_invoice)
 					time_invoice = self.get_time_invoice(invoice.create_date)
 					
+					#El valor de cliente_ruc es de 15 pero se alargo a 18
 					data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell('1',				1),
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			15),
+							self.add_field_cell(client_ruc,			18),
 							self.add_field_cell(client_dir,			150),
 							self.add_field_cell(refound_price,		19),
 							self.add_field_cell(refound_tax, 		10),
@@ -115,7 +116,7 @@ class AccountInvoiceInherit(models.Model):
 				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			15),
+							self.add_field_cell(client_ruc,			18),
 							self.add_field_cell(client_dir,			150),
 
 							self.add_field_cell(amount_off, 		19),
@@ -310,10 +311,15 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_price_item(self, invoice):
 		try:
-			price = float(invoice.price_unit)
+			subtotal = float(invoice.price_subtotal)
+			quantity = float(invoice.quantity)
+			"""
 			discount = (float (invoice.discount or '0.00'))/100
 			total = price - (price * discount)
 			return '{0:.2f}'.format(total)
+			"""
+			total = subtotal / quantity
+			return '{0:.3f}'.format(total)
 		except:
 			return str(invoice.price_unit or '0.00')
 
