@@ -56,7 +56,8 @@ class AccountInvoiceInherit(models.Model):
 			invoice_no = invoice.number or '0'
 			self.invoice_name = "FACTI" + invoice_no
 
-			amount_off = self.get_total_amount_off(invoice)
+			#amount_off = self.get_total_amount_off(invoice)
+			amount_off = "0.00"
 			amount_close = str(invoice.amount_total) or '0.00'
 			amount_total = str(invoice.amount_total) or '0.00'
 
@@ -284,8 +285,8 @@ class AccountInvoiceInherit(models.Model):
 		product_code = str(invoice_line.product_id.default_code or '')
 		description = str(invoice_line.product_id.name)
 		quantity = str(invoice_line.quantity or '')
-		#price = self.get_price_item(invoice_line)
-		price = str(invoice_line.price_unit)
+		price = self.get_price_item(invoice_line)
+		#price = str(invoice_line.price_unit)
 		uom = self.get_uom_item(invoice_line)
 		total = str(invoice_line.price_subtotal or '')
 		taxes = self.get_tax_item(invoice_line)
@@ -310,12 +311,11 @@ class AccountInvoiceInherit(models.Model):
 	def get_price_item(self, invoice):
 		try:
 			price = float(invoice.price_unit)
-			discount = float (invoice.discount or '0.00')
-			discount = discount/100
+			discount = (float (invoice.discount or '0.00'))/100
 			total = price - (price * discount)
 			return '{0:.2f}'.format(total)
 		except:
-			return str(invoice.price_unit or '')
+			return str(invoice.price_unit or '0.00')
 
 
 
