@@ -236,8 +236,8 @@ class AccountInvoiceInherit(models.Model):
 			quantity = float(invoice_line.quantity or '0.00')
 			discount = float (invoice_line.discount or '0.00')
 			discount = discount/100
-			amount_off = amount_off + (price * discount)
-			amount_off = amount_off * quantity
+			item_off = (price * discount)
+			amount_off = amount_off + (item_off * quantity)
 		return '{0:.2f}'.format(amount_off)
 
 	
