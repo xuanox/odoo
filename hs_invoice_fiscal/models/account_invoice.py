@@ -50,7 +50,8 @@ class AccountInvoiceInherit(models.Model):
 		for invoice in self:
 			file_name = "FACTI-HS-" + str(invoice.id) + ".txt"
 			client_name = invoice.partner_id.name or 'CONTADO'
-			client_ruc = self.get_ruc_from_field(invoice.partner_id.vat or '00-0000-00000')
+			#client_ruc = self.get_ruc_from_field(invoice.partner_id.vat or '00-0000-00000')
+			client_ruc = invoice.partner_id.vat or '00-0000-00000'
 			client_dv = self.get_dv_from_field(invoice.partner_id.vat or '00')
 			client_dir = self.get_client_direction(invoice.partner_id)
 			invoice_no = invoice.number or '0'
@@ -94,12 +95,12 @@ class AccountInvoiceInherit(models.Model):
 					date_invoice = self.get_date_invoice(refund.date_invoice)
 					time_invoice = self.get_time_invoice(invoice.create_date)
 					
-					#El valor de cliente_ruc es de 15 pero se alargo a 18
+					#El valor de cliente_ruc es de 15 pero se alargo a 25
 					data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell('1',				1),
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			18),
+							self.add_field_cell(client_ruc,			25),
 							self.add_field_cell(client_dir,			150),
 							self.add_field_cell(refound_price,		19),
 							self.add_field_cell(refound_tax, 		10),
@@ -319,7 +320,8 @@ class AccountInvoiceInherit(models.Model):
 			return '{0:.2f}'.format(total)
 			"""
 			total = subtotal / quantity
-			return '{0:.3f}'.format(total)
+			#return '{0:.3f}'.format(total)
+			return str(total)
 		except:
 			return str(invoice.price_unit or '0.00')
 
