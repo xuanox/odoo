@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	  <template id="request">
+			<t t-call="website.layout">
+			  <t t-set="title">Intervention Request</t>
+			  <form action="/intervention/request" method="post">
+			    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+			    <div class="container">
+			    	<br/>
+			        <center><h3>Intervention Request</h3></center>
+			        <div class="row ">
+			        <br/>
+			        <br/>
+			          <div class="col-md-6 form-group">
+			            <label class="control-label" for="category_id">Category:</label>
+	                    <select name="category_id" class="form-control">
+	                      <option value=""> -- Select category -- </option>
+	                      <t t-foreach="categories" t-as="category_id">
+	                        <option t-att-value="category_id.id">
+	                          <t t-esc="category_id.name" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>		          			         
+
+			          <div class="col-md-6 form-group">
+			            <label class="control-label" for="equipment_id">Equipment:</label>
+	                    <select name="equipment_id" class="form-control">
+	                      <option value=""> -- Select equipment -- </option>
+	                      <t t-foreach="equipments" t-as="equipment_id">
+	                        <option t-att-value="equipment_id.id">
+	                          <t t-esc="equipment_id.name" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>
+	
+				      <div class="col-md-6 form-group">
+			            <label class="control-label" for="partner_id">Partner:</label>
+	                    <select name="partner_id" class="form-control">
+	                      <option value=""> -- Select partner -- </option>
+	                      <t t-foreach="partners" t-as="partner_id">
+	                        <option t-att-value="partner_id.id">
+	                          <t t-esc="partner_id.name" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>
+
+				      <div class="col-md-6 form-group">
+			            <label class="control-label" for="state_id">Equipment state:</label>
+	                    <select name="state_id" class="form-control">
+	                      <option value=""> -- Select equipment state -- </option>
+	                      <t t-foreach="equip_states" t-as="state_id">
+	                        <option t-att-value="state_id">
+	                          <t t-esc="state_id" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>
+			          			          		          			          
+			          <div class="col-md-6 form-group">
+			            <label class="control-label" for="priority">Priority:</label>
+	                    <select name="priority" class="form-control">
+	                      <option value=""> -- Select priority -- </option>
+	                      <t t-foreach="priorities" t-as="priority">
+	                        <option t-att-value="priority">
+	                          <t t-esc="priority" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>
+			         
+			         <div class="col-md-6 form-group">
+			            <label class="control-label" for="zone_id">Zone:</label>
+	                    <select name="zone_id" class="form-control">
+	                      <option value=""> -- Select type -- </option>
+	                      <t t-foreach="zones" t-as="zone_id">
+	                        <option t-att-value="zone_id.id">
+	                          <t t-esc="zone_id.name" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>
+
+			          <div class="col-md-6 form-group">
+			            <label for="motif">Description:</label>
+			             <textarea class="form-control" name="motif"><t t-att-value="motif"/></textarea>
+			          </div>
+			          			          
+			         <div class="col-md-6 form-group">
+			            <label class="control-label" for="failure_type">Failure type:</label>
+	                    <select name="failure_type" class="form-control">
+	                      <option value=""> -- Select failure -- </option>
+	                      <t t-foreach="failures" t-as="failure_id">
+	                        <option t-att-value="failure_id.id">
+	                          <t t-esc="failure_id.name" />
+	                        </option>
+	                      </t>
+	                    </select>
+			          </div>
+			          			          
+
+			          
+			        </div>    
+                
+			        <div class="row">
+			          <div class="col-md-12">
+			            <button type="submit" class="btn btn-default btn-primary">
+			              Submit <span class="fa fa-long-arrow-right" />
+			            </button>
+			          </div>
+			        </div>
+			    </div>
+			  </form>
+			</t>
+	</template>
+	
+</odoo>

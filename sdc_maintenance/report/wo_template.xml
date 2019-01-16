@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<!--Custom report-->
+<template id="wo_report_page">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+	             <div class="row">
+	             <div>
+	                <h2>
+		                <span>OT# </span>
+		                <span t-field="o.name"/>
+		            </h2>
+	                 <style>
+						.borderless td, .borderless th {
+						 border: none;
+								}
+					  </style>
+	        
+					<table class="table borderless">
+					  <tr>
+					    <td ><strong>Client: </strong><span t-field="o.partner_id"/></td>
+					    <td ></td>
+					    <td ><strong>Equipement : </strong><span t-field="o.equipment_id"/></td>
+					 </tr>
+					  <tr>
+					  	<td ><strong>Catégorie : </strong><span t-field="o.category_id"/></td>
+					  	<td ></td>
+					    <td ><strong>Etat de l'équipement : </strong><span t-field="o.state_machine"/></td>
+					 </tr>
+					  <tr>
+					  	<td ><strong>Priorité : </strong><span t-field="o.priority"/></td>
+					  	<td ></td>
+					  	<td ><strong>Type de l'intervention : </strong><span t-field="o.type_id"/></td>
+					  </tr>
+					  <tr>
+					  	<td ><strong>Date : </strong><span t-field="o.date"/></td>
+					  	<td ></td>
+					  	<td ><strong>Technicien : </strong><span t-field="o.technician_id"/></td>
+					  </tr>
+					</table>
+				</div>
+                
+                <table class="table table-bordered">
+				  <tr>
+				    <td >Sous garantie: <t t-if="o.warranty"><input type="checkbox" checked="True"/></t></td>
+				    <td >Hors garantie: <t t-if="not o.warranty"><input type="checkbox" checked="True"/></t></td>
+				 </tr>
+				</table>
+			      
+					<div class="well">
+					  <span t-field="o.description"/>
+					</div>
+					
+					  <p><h2>Liste de pièces de rechanges</h2></p>
+                       <!-- table -->
+                       <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Référence</th>
+                                    <th>Quantité</th>
+                                    <th>Type de pièce </th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr t-foreach="o.product_ids" t-as="l">
+                                    <td><span t-field="l.product_id"/></td>
+                                    <td><span t-field="l.ref_intern"/></td>
+                                    <td><span t-field="l.qte"/></td>
+                                    <td><span t-field="l.type_id"/></td>
+                                </tr>
+                            </tbody>
+                        </table> 
+ 
+ 					  <p><h2>Resources affectées</h2></p>
+                       <!-- table -->
+                       <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Membre</th>
+                                    <th>#Heurs</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr t-foreach="o.history_ids" t-as="l">
+                                    <td><span t-field="l.name"/></td>
+                                    <td><span t-field="l.user_id"/></td>
+                                    <td><span t-field="l.hours"/></td>
+                                    <td><span t-field="l.date"/></td>
+                                    <td><span t-field="l.description"/></td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                        
+               </div>
+               </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

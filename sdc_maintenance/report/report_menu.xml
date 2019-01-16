@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		 <report 
+            id="intervention_report"
+            model="maintenance.intervention"
+            string="Demande d'intervention"
+            report_type="qweb-pdf"
+            name="sdc_maintenance.intervention_report_page"
+            file="sdc_maintenance.intervention_report_page"
+            attachment_use="False"
+            print_report_name="'INTERV - %s' %(object.name)"
+        />
+
+		 <report 
+            id="pm_report"
+            model="maintenance.request"
+            string="Maintenence Preventive"
+            report_type="qweb-pdf"
+            name="sdc_maintenance.pm_report_page"
+            file="sdc_maintenance.pm_report_page"
+            attachment_use="False"
+            print_report_name="'PM - %s' %(object.name)"
+        />     
+        
+       	<report 
+            id="cm_report"
+            model="maintenance.request"
+            string="Maintenence Corrective"
+            report_type="qweb-pdf"
+            name="sdc_maintenance.cm_report_page"
+            file="sdc_maintenance.cm_report_page"
+            attachment_use="False"
+            print_report_name="'CM - %s' %(object.name)"
+        /> 
+        
+        <report 
+            id="wo_report"
+            model="maintenance.order"
+            string="Ordre de travail"
+            report_type="qweb-pdf"
+            name="sdc_maintenance.wo_report_page"
+            file="sdc_maintenance.wo_report_page"
+            attachment_use="False"
+            print_report_name="'WO - %s' %(object.name)"
+        />  
+        
+        <report 
+            id="equipment_report"
+            model="maintenance.equipment"
+            string="Equipement"
+            report_type="qweb-pdf"
+            name="sdc_maintenance.equipment_report_page"
+            file="sdc_maintenance.equipment_report_page"
+            attachment_use="False"
+            print_report_name="'EQUIP - %s' %(object.name)"
+        />  
+</odoo>

@@ -1,0 +1,28 @@
+10
+
+dir
+2
+svn+ssh://176.31.160.80/var/svn/madrassa/openerp/addons/madrassa_maintenance/wizard
+svn+ssh://176.31.160.80/var/svn/madrassa
+
+
+
+2013-07-10T15:08:08.346416Z
+1
+madrassauser
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6a671773-a7d9-4c90-bec1-6e52ebd2922c
+

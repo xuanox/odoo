@@ -1,0 +1,1577 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sdc_maintenance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0-20180102\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-08 17:35+0000\n"
+"PO-Revision-Date: 2019-01-05 22:24+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: en\n"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "#Heurs"
+msgstr "#Hours"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "<b>Category:</b>"
+msgstr "<b>Category:</b>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "<b>Request to:</b>"
+msgstr "<b>Request to:</b>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+msgid "<b>Type:</b>"
+msgstr "<b>Type:</b>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid ""
+"<br/>\n"
+"\t\t\t        <strong>Description: </strong>"
+msgstr ""
+"<br/>\n"
+"\t\t\t        <strong>Description: </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<span>EQUIP# </span>"
+msgstr "<span>EQUIP# </span>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+msgid "<span>INT# </span>"
+msgstr "<span>INT# </span>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<span>MP# </span>"
+msgstr "<span>PM# </span>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<span>OT# </span>"
+msgstr "<span>WO# </span>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Categorie : </strong>"
+msgstr "<strong>Category : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Catégorie : </strong>"
+msgstr "<strong>Category : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Catégorie: </strong>"
+msgstr "<strong>Category : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Client: </strong>"
+msgstr "<strong>Partner: </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Date : </strong>"
+msgstr "<strong>Date : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Date de début : </strong>"
+msgstr "<strong>Starting date : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Date de fin de garantie : </strong>"
+msgstr "<strong>Warranty deadline : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Dernière maintenance : </strong>"
+msgstr "<strong>Previous maintenance : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Equipe : </strong>"
+msgstr "<strong>Team : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Equipement : </strong>"
+msgstr "<strong>Equipment : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+msgid "<strong>Etat de l'equipement : </strong>"
+msgstr "<strong>Equipment state: </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Etat de l'équipement : </strong>"
+msgstr "<strong>Equipment state: </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Instruction de sécurité: </strong>"
+msgstr "<strong>Safety instruction : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Intervalle: </strong>"
+msgstr "<strong>Interval: </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Jours restants : </strong>"
+msgstr "<strong>Days left : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Marque : </strong>"
+msgstr "<strong>Brand : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Modèle : </strong>"
+msgstr "<strong>Model : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Priorité : </strong>"
+msgstr "<strong>Priority : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Prochaine maintenance : </strong>"
+msgstr "<strong>Next maintenance : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "<strong>Responsable : </strong>"
+msgstr "<strong>Owner : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Status : </strong>"
+msgstr "<strong>State : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Technicien : </strong>"
+msgstr "<strong>Technician : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+msgid "<strong>Type d'intervention : </strong>"
+msgstr "<strong>Intervention type : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "<strong>Type de l'intervention : </strong>"
+msgstr "<strong>Intervention type : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "<strong>Unité de mesure : </strong>"
+msgstr "<strong>Unite of mesure : </strong>"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_name
+msgid "Action à réaliser"
+msgstr "Action to be achieve"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_active
+msgid "Active"
+msgstr "Active"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Annuler"
+msgstr "Cancel"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+#: selection:maintenance.intervention,state:0
+#: selection:maintenance.order,state:0
+msgid "Annulé"
+msgstr "Cancel"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_answer_history
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+msgid "Answers"
+msgstr "Answers"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,kanban_state:0
+#: selection:maintenance.order,kanban_state:0
+msgid "Blocked"
+msgstr "Blocked"
+
+#. module: sdc_maintenance
+#: selection:maintenance.answer.history,answer:0
+msgid "Bon"
+msgstr "Good"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_request_view_graph
+msgid "Bon de travail"
+msgstr "Work order"
+
+#. module: sdc_maintenance
+#: selection:maintenance.checklist.history,state:0
+msgid "Brouillon"
+msgstr "Draft"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Categorie"
+msgstr "Category"
+
+#. module: sdc_maintenance
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_equi_type
+msgid "Categorie d'équipement"
+msgstr "Equipment category"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_category_id
+msgid "Category"
+msgstr "Category"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_equipment_type
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_category_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_category_id
+msgid "Catégorie"
+msgstr "Category"
+
+#. module: sdc_maintenance
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_checklist_history
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_tree
+msgid "Checklist"
+msgstr "Checklist"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_checklist_history
+msgid "Checklist History"
+msgstr "Checklist History"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,help:sdc_maintenance.hr_equipment_request_action_cm
+#: model:ir.actions.act_window,help:sdc_maintenance.hr_equipment_request_action_pm
+msgid "Click to add a new maintenance request."
+msgstr "Click to add a new maintenance request."
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,help:sdc_maintenance.product_template_action_all_spare_part
+msgid "Click to define a new spare part."
+msgstr "Click to define a new spare part."
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_partner
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_partner_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_partner_id
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Client"
+msgstr "Partner"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_code
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_code
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_code
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_code
+msgid "Code"
+msgstr "Code"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_color
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_color
+msgid "Color Index"
+msgstr "Color Index"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.maintenance_action_sale_config_settings
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_config
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_configuration
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+msgid "Confirmer"
+msgstr "Confirme"
+
+#. module: sdc_maintenance
+#: selection:maintenance.checklist.history,state:0
+msgid "Confirmé"
+msgstr "Confirmed"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_contact
+msgid "Contact"
+msgstr "Contact"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_page
+msgid "Corrective Maintenance List"
+msgstr "Corrective Maintenance List"
+
+#. module: sdc_maintenance
+#: model:website.menu,name:sdc_maintenance.menu_cm
+msgid "Corrective maintenance"
+msgstr "Corrective maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_create_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_create_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_date
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Date"
+msgstr "Date"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_date
+msgid "Date + Heure"
+msgstr "Date + Hour"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_days_warn_period
+msgid "Date d'alerte"
+msgstr "Alert date"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_date_end
+msgid "Date d'intervention"
+msgstr "Intervention date"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_date_end
+msgid "Date de fin"
+msgstr "End date"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_deadlinegar
+msgid "Date de fin de garantie"
+msgstr "Warranty deadline"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_date
+msgid "Date de l’OT"
+msgstr "WO date"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_startingdate
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_date_service
+msgid "Date de mise en service"
+msgstr "Start date"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_date_reception
+msgid "Date de reception client"
+msgstr "Customer's date of receipt"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_date_planned
+msgid "Date planifiée"
+msgstr "Scheduled date"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+msgid "Days left"
+msgstr "Days left"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "Delete"
+msgstr "Delete"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_tree_view
+msgid "Demande Intervention"
+msgstr "Intervention request"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.open_view_intervention_new
+#: model:ir.actions.report,name:sdc_maintenance.intervention_report
+#: model:ir.ui.menu,name:sdc_maintenance.menu_open_view_intervention_new
+msgid "Demande d'intervention"
+msgstr "Intervention request"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_days_last_done
+msgid "Dernière maintenance"
+msgstr "Previous maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_description
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_description
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_description
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_description
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_reclamation
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_description
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_description
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_chicklist_cm_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_line_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Description"
+msgstr "Description"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_sale_order_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_devis_ok
+msgid "Devis"
+msgstr "Devis"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: selection:maintenance.order,state:0
+msgid "Devis à faire"
+msgstr "Devis to do"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_display_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_hours
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Durée"
+msgstr "Duration"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_planned_date
+msgid "Durée prévue"
+msgstr "Expected duration"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_detail
+msgid "Détail"
+msgstr "Detail"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "Edit..."
+msgstr "Edit..."
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,state_machine:0
+#: selection:maintenance.order,state_machine:0
+#: selection:maintenance.request,state_machine:0
+msgid "En Arret"
+msgstr "Stop"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "En Cours"
+msgstr "In progress"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,state_machine:0
+#: selection:maintenance.order,state_machine:0
+#: selection:maintenance.request,state_machine:0
+msgid "En Marche"
+msgstr "Start"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+#: selection:maintenance.intervention,state:0
+#: selection:maintenance.order,state:0
+msgid "En cours"
+msgstr "In progress"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Envoyer par email"
+msgstr "Send by e-mail"
+
+#. module: sdc_maintenance
+#: model:ir.actions.report,name:sdc_maintenance.equipment_report
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_equipment_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_equipment_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_piece_id_equi
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Equipement"
+msgstr "Equipment"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_equipment
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+msgid "Equipment"
+msgstr "Equipment"
+
+#. module: sdc_maintenance
+#: model:ir.ui.menu,name:sdc_maintenance.menu_equipement_inh
+msgid "Equipments"
+msgstr "Equipment"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_answer
+msgid "Etat"
+msgstr "State"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Etat de la machine"
+msgstr "Equipment state"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_state_machine
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_state_machine
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_state_machine
+msgid "Etat à la demande"
+msgstr "Equipment state"
+
+#. module: sdc_maintenance
+#: selection:maintenance.answer.history,answer:0
+msgid "Fait"
+msgstr "Done"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_technique_file
+msgid "Fiche technique"
+msgstr "Technical file"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,help:sdc_maintenance.hr_equipment_request_action_cm
+#: model:ir.actions.act_window,help:sdc_maintenance.hr_equipment_request_action_pm
+msgid "Follow the process of the request and communicate with the collaborator."
+msgstr "Follow the process of the request and communicate with the collaborator."
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Grouper par ..."
+msgstr "Group by ..."
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Générer OT"
+msgstr "WO generate"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+msgid "Générer le devis"
+msgstr "Generate of devis"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,priority:0
+#: selection:maintenance.order,priority:0
+msgid "High"
+msgstr "High"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Hors garantie:"
+msgstr "Out of warranty:"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_id
+msgid "ID"
+msgstr "ID"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_image
+msgid "Image"
+msgstr "Image"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,kanban_state:0
+#: selection:maintenance.order,kanban_state:0
+msgid "In Progress"
+msgstr "In Progress"
+
+#. module: sdc_maintenance
+#: selection:maintenance.answer.history,answer:0
+msgid "Inapplicable"
+msgstr "Inapplicable"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident_tree_view
+msgid "Incident"
+msgstr "Work order"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_safety
+msgid "Instruction de sécurité"
+msgstr "Security instruction"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_days_interval
+msgid "Intervalle (jours)"
+msgstr "Intervel (days)"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_intervention_count
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_intervention_ids
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_intervention_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_piece_id_intrv
+#: model:ir.ui.menu,name:sdc_maintenance.menu_open_view_intervention_list
+#: selection:maintenance.intervention,type_re:0
+#: model:website.menu,name:sdc_maintenance.menu_intervention
+msgid "Intervention"
+msgstr "Intervention"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+msgid "Intervention List"
+msgstr "Intervention List"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_intervention
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Intervention request"
+msgstr "Intervention request"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Intervention research"
+msgstr "Intervention research"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_request_view_graph
+msgid "Interventions"
+msgstr "Interventions"
+
+#. module: sdc_maintenance
+#: selection:maintenance.request,meter:0
+msgid "Jours"
+msgstr "Days"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_days_left
+msgid "Jours restants"
+msgstr "Days left"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_kanban_state
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_kanban_state
+msgid "Kanban State"
+msgstr "Kanban State"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone___last_update
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece___last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_write_uid
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_write_date
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.maintenance_action_view_checklist_config
+msgid "Liste de Contrôle"
+msgstr "Liste de Contrôle"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_checklist_history_id
+#: model:ir.ui.menu,name:sdc_maintenance.maintenance_action_view_checklis_id
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_cm_tree
+msgid "Liste de controle"
+msgstr "Liste de controle"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_checklist_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_maintenance_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_checklist_id
+msgid "Liste de contrôle"
+msgstr "Liste de contrôle"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.maintenance_action_maintenance_checklist
+msgid "Liste de maintenanace"
+msgstr "Maintenanace list"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+msgid "Liste de maintenance"
+msgstr "Maintenanace list"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_product_ids
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_product_ids
+msgid "Liste de pièces"
+msgstr "List of parts"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Liste de pièces de rechanges"
+msgstr "List of spare parts"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,type_re:0
+msgid "Lot"
+msgstr "Lot"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,priority:0
+#: selection:maintenance.order,priority:0
+msgid "Low"
+msgstr "Low"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_cm_count
+msgid "MC"
+msgstr "CM"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_pm_count
+msgid "MP"
+msgstr "PM"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+msgid "Machine"
+msgstr "Equipment"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.res_config_settings_view_form_maintenance
+#: model:website.menu,name:sdc_maintenance.menu_maintenance
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.hr_equipment_request_action_cm
+msgid "Maintenance Corrective"
+msgstr "Corrective Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.hr_equipment_request_action_pm
+msgid "Maintenance Preventive"
+msgstr "Preventive Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_request
+msgid "Maintenance Requests"
+msgstr "Maintenance request"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,type_re:0
+msgid "Maintenance corrective"
+msgstr "Corrective Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.ui.menu,name:sdc_maintenance.menu_m_request_form_cm
+#: selection:maintenance.intervention,type_re:0
+msgid "Maintenance preventive"
+msgstr "preventive Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.actions.report,name:sdc_maintenance.cm_report
+msgid "Maintenence Corrective"
+msgstr "Corrective Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.actions.report,name:sdc_maintenance.pm_report
+msgid "Maintenence Preventive"
+msgstr "Preventive  Maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,help:sdc_maintenance.field_maintenance_request_recurrent
+msgid "Mark this option if PM is periodic"
+msgstr "Mark this option if PM is periodic"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_trademark
+msgid "Marque"
+msgstr "Brand"
+
+#. module: sdc_maintenance
+#: selection:maintenance.answer.history,answer:0
+msgid "Mauvais"
+msgstr "Bad"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_user_id
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Membre"
+msgstr "Member"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_motif
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_motif
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+msgid "Motif"
+msgstr "Report"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Motif d'intervention"
+msgstr "Intervention report"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_res_config_settings_multi_company
+msgid "Multi-company"
+msgstr "Multi-company"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+msgid "Next Maint."
+msgstr "Next Maint."
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_intervention_type_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_critical_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_piece_name
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Nom"
+msgstr "Name"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,priority:0
+#: selection:maintenance.order,priority:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_res_config_settings_module_mail
+msgid "Notifications"
+msgstr "Notifications"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,state:0
+msgid "Nouvelle demande"
+msgstr "New"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_ot
+msgid "N° OT"
+msgstr "WO N°"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_name
+msgid "N° Ordre de travail"
+msgstr "WO N°"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_name
+msgid "N° d'intervention"
+msgstr "Intervention N°"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_devis_track
+msgid "N° de devis"
+msgstr "Devis N°"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_ot_count
+msgid "OT"
+msgstr "WO"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_name
+msgid "Objet"
+msgstr "Subject"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_reclamation
+msgid "Objet de reclamation"
+msgstr "Claim subject"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Observation"
+msgstr "Observation"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_order
+msgid "Order"
+msgstr "Order"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.open_view_incident_new
+#: model:ir.actions.report,name:sdc_maintenance.wo_report
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_ot_ids
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_ot_ids
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_history_incident_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_bon_bool
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_piece_id_incid
+#: model:ir.ui.menu,name:sdc_maintenance.menu_open_view_incident_new2
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+#: selection:maintenance.intervention,state:0
+msgid "Ordre de travail"
+msgstr "Work Order"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_report_page
+msgid "Parametres de maintenance preventive"
+msgstr "Preventive maintenance parameters"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+msgid "Partner"
+msgstr "Partner"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_product_is_piece
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_template_is_piece
+msgid "Peut être piece de rechange"
+msgstr "Can be spare part"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_critcite_form
+msgid "Piece"
+msgstr "Part"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_product_ids
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_product_id
+msgid "Piece de rechange"
+msgstr "Spare part"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Pièce Défectueuses"
+msgstr "Spare part"
+
+#. module: sdc_maintenance
+#: model:ir.ui.menu,name:sdc_maintenance.menu_equipement_pr
+msgid "Pièce de rechange"
+msgstr "Spare part"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.product_template_action_all_spare_part
+msgid "Pièces de rechanges"
+msgstr "Spare part"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+msgid "Planifier"
+msgstr "Plan"
+
+#. module: sdc_maintenance
+#: selection:maintenance.order,state:0
+msgid "Planifié"
+msgstr "Plan"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_date_inter
+msgid "Pour intervention le"
+msgstr "For intervention"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+msgid "Preventive Maintenance List"
+msgstr "Preventive Maintenance List"
+
+#. module: sdc_maintenance
+#: model:website.menu,name:sdc_maintenance.menu_pm
+msgid "Preventive maintenance"
+msgstr "Preventive maintenance"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+msgid "Previous Maint."
+msgstr "Previous Maint."
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+msgid "Priority"
+msgstr "Priority"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_priority
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_priority
+msgid "Priorité"
+msgstr "Priority"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_days_next_due
+msgid "Prochaine maintenance"
+msgstr "Next maintenence"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_qte
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Quantité"
+msgstr "Quantity"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_question
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_name
+msgid "Question"
+msgstr "Question"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_questions_ids
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_chicklist_cm_form
+msgid "Questions"
+msgstr "Questions"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_description
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+msgid "Rapport"
+msgstr "Report"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_observation
+msgid "Rapport d'intervention"
+msgstr "Intervention report"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,kanban_state:0
+#: selection:maintenance.order,kanban_state:0
+msgid "Ready for next stage"
+msgstr "Ready for next stage"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+msgid "Recherche des ordre de service"
+msgstr "Searching for work order"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,type_re:0
+msgid "Reclamation"
+msgstr "Claim"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_recurrent
+msgid "Recurrent ?"
+msgstr "Recurrent ?"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_code
+msgid "Reference de zone"
+msgstr "Zone reference"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Remettre en brouillon"
+msgstr "Draft"
+
+#. module: sdc_maintenance
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_checklist_all
+msgid "Remplir liste de maintenance"
+msgstr "Fill maintenance list"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_answers_ids
+msgid "Reponses"
+msgstr "Reponses"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "Requested by :"
+msgstr "Requested by :"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_history_ids
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_history_ids
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Resources affectées"
+msgstr "Assigned Resources"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_user_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_user_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_user_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_manager_id
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Responsable"
+msgstr "Responsible"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "Responsible :"
+msgstr "Responsible :"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Référence"
+msgstr "Reference"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_ref_intern
+msgid "Référence interne"
+msgstr "Internal reference"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_answer_history_sequence
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_sequence
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_question_sequence
+msgid "Sequence"
+msgstr "Sequence"
+
+#. module: sdc_maintenance
+#: code:addons/sdc_maintenance/models/maintenance.py:303
+#, python-format
+msgid "Service de maintenance - Intervention N° : %s"
+msgstr "Maintenance Service - Intervention N° : %s"
+
+#. module: sdc_maintenance
+#: code:addons/sdc_maintenance/models/maintenance.py:463
+#, python-format
+msgid "Service de maintenance - Ordre de travail N° : %s"
+msgstr "Maintenance Service - Work Order N° : %s"
+
+#. module: sdc_maintenance
+#: code:addons/sdc_maintenance/models/maintenance.py:718
+#, python-format
+msgid "Service de maintenance - maintenance N° : %s"
+msgstr "Maintenance service - maintenance N° : %s"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.res_config_settings_view_form_maintenance
+msgid "Set maintenance for multi-company (e.g. intervention, MP, MC, WO)...."
+msgstr "Set maintenance for multi-company (e.g. intervention, MP, MC, WO)...."
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.res_config_settings_view_form_maintenance
+msgid "Set maintenance notifications (e.g. intervention, MP, MC, WO)...."
+msgstr "Set maintenance notifications (e.g. intervention, MP, MC, WO)...."
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_interv_id
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+msgid "Source"
+msgstr "Source"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_equipment_warranty_func
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_warranty
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_warranty
+msgid "Sous garantie"
+msgstr "Under warranty"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Sous garantie:"
+msgstr "Under warranty:"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.cm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.pm_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+msgid "State"
+msgstr "State"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_state
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_state
+msgid "Status"
+msgstr "State"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_state
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_state
+msgid "Statut"
+msgstr "State"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_technician_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_technician_id
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Technicien"
+msgstr "Technician"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_interv_search
+msgid "Terminé"
+msgstr "Completed"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_name
+msgid "Titre"
+msgstr "Title"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,state:0
+#: selection:maintenance.order,state:0
+msgid "Traité"
+msgstr "Done"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.maintenance_action_intervention_type
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_type
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_type_id
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_intervention_type
+msgid "Type d'intervention"
+msgstr "Intervention type"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.action_view_critical
+msgid "Type de criticité"
+msgstr "Type of criticality"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.open_view_failure_new
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_name
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_failure_type
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_failure_type
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_failure_type
+msgid "Type de panne"
+msgstr "Failure type"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_product_piece_type_id
+msgid "Type de piece"
+msgstr "Part type"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_report_page
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_report_page
+msgid "Type de pièce"
+msgstr "Part type"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_type_re
+msgid "Type de resource"
+msgstr "Resource type"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_type_tree
+msgid "Type intervention"
+msgstr "Intervention type"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_request_meter
+msgid "Unité de mésure"
+msgstr "Unite of mesure"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_intervention_view_kanban
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_work_order_view_kanban
+msgid "Unread Messages"
+msgstr "Unread Messages"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.maintenance_incident-view
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_form
+msgid "Valider"
+msgstr "Validate"
+
+#. module: sdc_maintenance
+#: selection:maintenance.checklist.history,state:0
+msgid "Validé"
+msgstr "Valid"
+
+#. module: sdc_maintenance
+#: selection:maintenance.intervention,priority:0
+#: selection:maintenance.order,priority:0
+msgid "Very Low"
+msgstr "Very Low"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_checklist_maintenance_form
+msgid "Vérification effectuées"
+msgstr "Verification performed"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_page
+msgid "Work Order List"
+msgstr "Work Order List"
+
+#. module: sdc_maintenance
+#: model:website.menu,name:sdc_maintenance.menu_wo
+msgid "Work order"
+msgstr "Work order"
+
+#. module: sdc_maintenance
+#: model:ir.actions.act_window,name:sdc_maintenance.maintenance_action_view_zone
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_checklist_history_zone_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_intervention_zone_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_zone_id
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_zone_name
+#: model:ir.ui.menu,name:sdc_maintenance.menu_maintenance_zone
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_chicklist_cm_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_intervention_type_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_line_form
+msgid "Zone"
+msgstr "Zone"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_line_tree
+msgid "Zone line"
+msgstr "Zone line"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_checklist
+msgid "checklist"
+msgstr "checklist"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_cm_ok
+msgid "cm ok"
+msgstr "cm ok"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_critical
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_critical_tree
+msgid "critical"
+msgstr "critical"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_failure_form
+#: model:ir.ui.view,arch_db:sdc_maintenance.view_failure_tree
+msgid "failure"
+msgstr "failure"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_failure
+msgid "failure cause"
+msgstr "failure cause"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_failure_description
+msgid "failure description"
+msgstr "failure description"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.ao_incident_search
+msgid "filtres"
+msgstr "filtres"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.equipment_report_page
+msgid "hors garantie:"
+msgstr "out of warranty:"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_interv_ok
+msgid "interv ok"
+msgstr "interv ok"
+
+#. module: sdc_maintenance
+#: model:ir.ui.view,arch_db:sdc_maintenance.intervention_request_view_pivot
+#: model:ir.ui.view,arch_db:sdc_maintenance.wo_request_view_pivot
+msgid "intervention"
+msgstr "intervention"
+
+#. module: sdc_maintenance
+#: sql_constraint:maintenance.order:0
+msgid "la Référence de l'ordere de mission doit être unique"
+msgstr "the  order reference must be unique"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_piece
+msgid "maintenance piece"
+msgstr "maintenance part"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_zone
+msgid "maintenance zone"
+msgstr "maintenance zone"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_maintenance_history
+msgid "order follow-up history"
+msgstr "order follow-up history"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_product_piece
+msgid "piece de rechane"
+msgstr "spare part"
+
+#. module: sdc_maintenance
+#: model:ir.model.fields,field_description:sdc_maintenance.field_maintenance_order_pm_ok
+msgid "pm ok"
+msgstr "pm ok"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"
+
+#. module: sdc_maintenance
+#: model:ir.model,name:sdc_maintenance.model_intervention_type
+msgid "type intervention"
+msgstr "intervention type"
