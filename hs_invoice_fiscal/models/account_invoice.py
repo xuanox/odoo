@@ -320,8 +320,15 @@ class AccountInvoiceInherit(models.Model):
 			return '{0:.2f}'.format(total)
 			"""
 			total = subtotal / quantity
-			#return '{0:.3f}'.format(total)
-			return str(total)
+			strTotal = str(total)
+			if "." in total:
+				arrayTotal = total.split(".")
+				intSection = arrayTotal[0]
+				decimalSection = arrayTotal[1]
+				if len(decimalSection) > 4:
+					decimalSection = decimalSection[:4]
+				strTotal = intSection + "." + decimalSection
+			return str(strTotal)
 		except:
 			return str(invoice.price_unit or '0.00')
 
