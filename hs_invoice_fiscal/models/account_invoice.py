@@ -174,16 +174,6 @@ class AccountInvoiceInherit(models.Model):
 			date_invoice = invoice_datetime.strftime('%d/%m/%Y') or ''
 			return date_invoice
 
-	"""
-	def get_time_invoice(self, invoice_datetime):
-		if type(invoice_datetime) == str:
-			time_invoice = datetime.strptime(invoice_datetime, 
-								'%Y-%m-%d %H:%M').strftime('%H:%M') or ''
-			return time_invoice
-		else:
-			time_invoice = invoice_datetime.strftime('%H:%M') or ''
-			return time_invoice
-	"""
 
 	def get_time_invoice(self, invoice_datetime):
 		from_zone = tz.gettz('UTC')
@@ -232,6 +222,7 @@ class AccountInvoiceInherit(models.Model):
 			return "00"
 
 	
+	"""
 	def get_total_amount_off(self, invoice):
 		total_off = 0.0
 		for invoice_line in invoice.invoice_line_ids:
@@ -252,6 +243,7 @@ class AccountInvoiceInherit(models.Model):
 				#Luego agregamos a el descuento total del movimiento
 				total_off = total_off + (item_total - item_off)
 		return '{0:.2f}'.format(total_off)
+	"""
 
 	
 	
