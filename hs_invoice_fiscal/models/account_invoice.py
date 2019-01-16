@@ -321,8 +321,8 @@ class AccountInvoiceInherit(models.Model):
 			"""
 			total = subtotal / quantity
 			strTotal = str(total)
-			if "." in total:
-				arrayTotal = total.split(".")
+			if "." in strTotal:
+				arrayTotal = strTotal.split(".")
 				intSection = arrayTotal[0]
 				decimalSection = arrayTotal[1]
 				if len(decimalSection) > 4:
