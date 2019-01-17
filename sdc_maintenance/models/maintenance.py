@@ -199,8 +199,8 @@ class MaintenanceIntervention(models.Model):
     date_service=fields.Date(u'Date de mise en service')
     date_reception=fields.Date(u'Date de reception client')
         
-    amount=fields.Float(u'Taux'),
-    devis_ok=fields.Boolean(u'invoiced'),
+    amount=fields.Float(u'Taux')
+    devis_ok=fields.Boolean(u'invoiced')
     ot=fields.Char(u'N° OT',track_visibility='always')
     
 
