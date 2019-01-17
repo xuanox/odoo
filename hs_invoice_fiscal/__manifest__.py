@@ -7,6 +7,7 @@
 
 	'description': """
 		Permite la conexion de facturas con impresoras fiscales.
+		Requiere la aplicacion urano corriendo dentro de la computadora cliente
 	""",
 
 	'author': "Hermec Solutions S.A.",
@@ -16,7 +17,7 @@
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
 	'category': 'report',
-	'version': '0.67',
+	'version': '0.68',
 
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],

@@ -162,10 +162,18 @@ class AccountInvoiceInherit(models.Model):
 	
 
 	def get_file_content(self,id):
+		"""
+		Obtenemos el nombre del archivo que llevara el documento txt
+		"""
 		return self.browse(id).fiscal_file
 
 
 	def get_date_invoice(self, invoice_datetime):
+		"""
+		Obtenemos la Fecha en que fue creada la nota credito dentro del Odoo
+		y luego le aplicamos la diferencia horaria para obtener la hora UTC de
+		America - Bogota
+		"""
 		if type(invoice_datetime) == str:
 			date_invoice = datetime.strptime(invoice_datetime, 
 								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
@@ -176,6 +184,11 @@ class AccountInvoiceInherit(models.Model):
 
 
 	def get_time_invoice(self, invoice_datetime):
+		"""
+		Obtenemos la Hora en que fue creada la nota credito dentro del Odoo
+		y luego le aplicamos la diferencia horaria para obtener la hora UTC de
+		America - Bogota
+		"""
 		from_zone = tz.gettz('UTC')
 		to_zone = tz.gettz('America/Bogota')
 		if type(invoice_datetime) == str:
@@ -193,6 +206,10 @@ class AccountInvoiceInherit(models.Model):
 
 
 	def get_ruc_from_field(self, vat_field):
+		"""
+		Obtenemos el ruc sin el digito verificador.
+		Este metodo esta fuera de uso
+		"""
 		try:
 			if vat_field == "":
 				return "00-0000-00000"
@@ -206,6 +223,10 @@ class AccountInvoiceInherit(models.Model):
 
 	
 	def get_dv_from_field(self, vat_field):
+		"""
+		Obtenemos el Digito Verificador del cliente, sino existe agrega
+		por default el valor 00
+		"""
 		try:
 			if vat_field == "":
 				return "00"
@@ -248,6 +269,10 @@ class AccountInvoiceInherit(models.Model):
 	
 	
 	def get_file_name(self, id):
+		"""
+		Realiza una busqueda dentro del reguistro para obtener el nombre del documento
+		del archivo
+		"""
 		return self.browse(id).fiscal_name
 	
 
@@ -274,7 +299,7 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_invoice_line(self, invoice_line):
 		"""
-
+		Obtenemos el movimiento de la factura una linea a la vez
 		"""
 		product_code = str(invoice_line.product_id.default_code or '')
 		description = str(invoice_line.product_id.name)
@@ -303,6 +328,10 @@ class AccountInvoiceInherit(models.Model):
 
 
 	def get_price_item(self, invoice):
+		"""
+		Obtenemos el precio del producto con cuatro digitos decimales para evitar 
+		inconvenientes entre la factura fiscal y el detalle en odoo
+		"""
 		try:
 			subtotal = float(invoice.price_subtotal)
 			quantity = float(invoice.quantity)
@@ -329,6 +358,7 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_uom_item(self, invoice):
 		"""
+		Obtenemos la unidad de medida del producto
 		"""
 		uoms = invoice.uom_id
 		if len(uoms) > 0:
@@ -342,6 +372,7 @@ class AccountInvoiceInherit(models.Model):
 	
 	def get_tax_item(self, invoice):
 		"""
+		Obtenemos el primer impuesto aplicado sobre el producto
 		"""
 		taxes = invoice.invoice_line_tax_ids 
 		if len(taxes) > 0:
@@ -356,6 +387,8 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_client_direction(self, client):
 		"""
+		Obtenemos la direccion del cliente con el formato requerido por la 
+		impresora.
 		"""
 		street = client.street
 		street = (' ' + street) if street != False else ''
@@ -380,6 +413,10 @@ class AccountInvoiceInherit(models.Model):
 	
 
 	def get_refound_name(self, refound):
+		"""
+		Obtenemos el motivo por el cual fue rechazada la factura, la misma
+		se agregara a la nota credito
+		"""
 		note = refound.name
 		if(len(note) > 150):
 			note = note[:147] + "..."
