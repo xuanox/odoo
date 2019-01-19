@@ -2,7 +2,7 @@
 # Author : Addi Ait-Mlouk
 {
     "name": "OMaintenance",
-    "version": "1.1",
+    "version": "1.0",
     "depends": ['maintenance', "mail","sale",'website'],
     "author": "Ait-Mlouk Addi",
     'website': 'https://www.sdatacave.com/',
