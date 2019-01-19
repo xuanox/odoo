@@ -118,10 +118,10 @@ class MaintenanceEquipement(models.Model):
     safety=fields.Text(u'Instruction de sécurité')
     image=fields.Binary(u'Image')
         
-    intervention_ids=fields.One2many('maintenance.intervention','equipment_id',u'Intervention Ids')
+    intervention_ids=fields.One2many('maintenance.intervention','equipment_id',u'Intervention')
     ot_ids=fields.One2many('maintenance.order','equipment_id',u'Ordre de travail')
         
-    intervention_count=fields.Integer(string='Intervention Count',compute='_intervention_count', store=True)
+    intervention_count=fields.Integer(string='Intervention',compute='_intervention_count', store=True)
     ot_count=fields.Integer(compute='_ot_count',  string='OT')
     pm_count=fields.Integer(compute='_pm_maintenance_count', string='MP')
     cm_count=fields.Integer(compute='_pm_maintenance_count', string='MC')
