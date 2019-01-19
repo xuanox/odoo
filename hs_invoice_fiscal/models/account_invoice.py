@@ -50,13 +50,15 @@ class AccountInvoiceInherit(models.Model):
 		for invoice in self:
 			file_name = "FACTI-HS-" + str(invoice.id) + ".txt"
 			client_name = invoice.partner_id.name or 'CONTADO'
-			client_ruc = self.get_ruc_from_field(invoice.partner_id.vat or '00-0000-00000')
+			#client_ruc = self.get_ruc_from_field(invoice.partner_id.vat or '00-0000-00000')
+			client_ruc = invoice.partner_id.vat or '00-0000-00000'
 			client_dv = self.get_dv_from_field(invoice.partner_id.vat or '00')
 			client_dir = self.get_client_direction(invoice.partner_id)
 			invoice_no = invoice.number or '0'
 			self.invoice_name = "FACTI" + invoice_no
 
-			amount_off = "0.00"		#Temporalmente
+			#amount_off = self.get_total_amount_off(invoice)
+			amount_off = "0.00"
 			amount_close = str(invoice.amount_total) or '0.00'
 			amount_total = str(invoice.amount_total) or '0.00'
 
@@ -93,11 +95,12 @@ class AccountInvoiceInherit(models.Model):
 					date_invoice = self.get_date_invoice(refund.date_invoice)
 					time_invoice = self.get_time_invoice(invoice.create_date)
 					
+					#El valor de cliente_ruc es de 15 pero se alargo a 25
 					data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell('1',				1),
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			15),
+							self.add_field_cell(client_ruc,			25),
 							self.add_field_cell(client_dir,			150),
 							self.add_field_cell(refound_price,		19),
 							self.add_field_cell(refound_tax, 		10),
@@ -114,7 +117,7 @@ class AccountInvoiceInherit(models.Model):
 				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			15),
+							self.add_field_cell(client_ruc,			18),
 							self.add_field_cell(client_dir,			150),
 
 							self.add_field_cell(amount_off, 		19),
@@ -159,10 +162,18 @@ class AccountInvoiceInherit(models.Model):
 	
 
 	def get_file_content(self,id):
+		"""
+		Obtenemos el nombre del archivo que llevara el documento txt
+		"""
 		return self.browse(id).fiscal_file
 
 
 	def get_date_invoice(self, invoice_datetime):
+		"""
+		Obtenemos la Fecha en que fue creada la nota credito dentro del Odoo
+		y luego le aplicamos la diferencia horaria para obtener la hora UTC de
+		America - Bogota
+		"""
 		if type(invoice_datetime) == str:
 			date_invoice = datetime.strptime(invoice_datetime, 
 								'%Y-%m-%d').strftime('%d/%m/%Y') or ''
@@ -171,18 +182,13 @@ class AccountInvoiceInherit(models.Model):
 			date_invoice = invoice_datetime.strftime('%d/%m/%Y') or ''
 			return date_invoice
 
-	"""
-	def get_time_invoice(self, invoice_datetime):
-		if type(invoice_datetime) == str:
-			time_invoice = datetime.strptime(invoice_datetime, 
-								'%Y-%m-%d %H:%M').strftime('%H:%M') or ''
-			return time_invoice
-		else:
-			time_invoice = invoice_datetime.strftime('%H:%M') or ''
-			return time_invoice
-	"""
 
 	def get_time_invoice(self, invoice_datetime):
+		"""
+		Obtenemos la Hora en que fue creada la nota credito dentro del Odoo
+		y luego le aplicamos la diferencia horaria para obtener la hora UTC de
+		America - Bogota
+		"""
 		from_zone = tz.gettz('UTC')
 		to_zone = tz.gettz('America/Bogota')
 		if type(invoice_datetime) == str:
@@ -200,6 +206,10 @@ class AccountInvoiceInherit(models.Model):
 
 
 	def get_ruc_from_field(self, vat_field):
+		"""
+		Obtenemos el ruc sin el digito verificador.
+		Este metodo esta fuera de uso
+		"""
 		try:
 			if vat_field == "":
 				return "00-0000-00000"
@@ -213,6 +223,10 @@ class AccountInvoiceInherit(models.Model):
 
 	
 	def get_dv_from_field(self, vat_field):
+		"""
+		Obtenemos el Digito Verificador del cliente, sino existe agrega
+		por default el valor 00
+		"""
 		try:
 			if vat_field == "":
 				return "00"
@@ -229,8 +243,36 @@ class AccountInvoiceInherit(models.Model):
 			return "00"
 
 	
+	"""
+	def get_total_amount_off(self, invoice):
+		total_off = 0.0
+		for invoice_line in invoice.invoice_line_ids:
+			if invoice_line.discount:
+				#Obtenemos el total sin descuento redondeado a 2 decimales
+				price = float(invoice_line.price_unit)
+				quantity = float(invoice_line.quantity or '0.00')
+				item_total = quantity * price
+				item_total = float('{0:.2f}'.format(item_total))
+
+				#Obtenemos el total con descuento readondeado a 2 decimales
+				discount = (float(invoice_line.discount or '0.00'))/100
+				amount_off = price - (price * discount)
+				item_off = quantity * amount_off
+				item_off = float('{0:.2f}'.format(item_off))
+
+				#Obtenemos el descunto del producto restando a total, off y
+				#Luego agregamos a el descuento total del movimiento
+				total_off = total_off + (item_total - item_off)
+		return '{0:.2f}'.format(total_off)
+	"""
+
+	
 	
 	def get_file_name(self, id):
+		"""
+		Realiza una busqueda dentro del reguistro para obtener el nombre del documento
+		del archivo
+		"""
 		return self.browse(id).fiscal_name
 	
 
@@ -257,16 +299,15 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_invoice_line(self, invoice_line):
 		"""
-
+		Obtenemos el movimiento de la factura una linea a la vez
 		"""
 		product_code = str(invoice_line.product_id.default_code or '')
 		description = str(invoice_line.product_id.name)
 		quantity = str(invoice_line.quantity or '')
-		#price = str(invoice_line.price_unit or '')
 		price = self.get_price_item(invoice_line)
+		#price = str(invoice_line.price_unit)
 		uom = self.get_uom_item(invoice_line)
 		total = str(invoice_line.price_subtotal or '')
-		#discount = str(invoice_line.discount or '')
 		taxes = self.get_tax_item(invoice_line)
 
 		if description == "False":	#Description jamas debe ser False
@@ -287,19 +328,37 @@ class AccountInvoiceInherit(models.Model):
 
 
 	def get_price_item(self, invoice):
+		"""
+		Obtenemos el precio del producto con cuatro digitos decimales para evitar 
+		inconvenientes entre la factura fiscal y el detalle en odoo
+		"""
 		try:
-			price = float(invoice.price_unit)
-			discount = float (invoice.discount or '0.00')
-			total = price - discount
-			return str(total)
+			subtotal = float(invoice.price_subtotal)
+			quantity = float(invoice.quantity)
+			"""
+			discount = (float (invoice.discount or '0.00'))/100
+			total = price - (price * discount)
+			return '{0:.2f}'.format(total)
+			"""
+			total = subtotal / quantity
+			strTotal = str(total)
+			if "." in strTotal:
+				arrayTotal = strTotal.split(".")
+				intSection = arrayTotal[0]
+				decimalSection = arrayTotal[1]
+				if len(decimalSection) > 4:
+					decimalSection = decimalSection[:4]
+				strTotal = intSection + "." + decimalSection
+			return str(strTotal)
 		except:
-			return str(invoice.price_unit or '')
+			return str(invoice.price_unit or '0.00')
 
 
 
 
 	def get_uom_item(self, invoice):
 		"""
+		Obtenemos la unidad de medida del producto
 		"""
 		uoms = invoice.uom_id
 		if len(uoms) > 0:
@@ -313,6 +372,7 @@ class AccountInvoiceInherit(models.Model):
 	
 	def get_tax_item(self, invoice):
 		"""
+		Obtenemos el primer impuesto aplicado sobre el producto
 		"""
 		taxes = invoice.invoice_line_tax_ids 
 		if len(taxes) > 0:
@@ -327,6 +387,8 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_client_direction(self, client):
 		"""
+		Obtenemos la direccion del cliente con el formato requerido por la 
+		impresora.
 		"""
 		street = client.street
 		street = (' ' + street) if street != False else ''
@@ -351,6 +413,10 @@ class AccountInvoiceInherit(models.Model):
 	
 
 	def get_refound_name(self, refound):
+		"""
+		Obtenemos el motivo por el cual fue rechazada la factura, la misma
+		se agregara a la nota credito
+		"""
 		note = refound.name
 		if(len(note) > 150):
 			note = note[:147] + "..."
