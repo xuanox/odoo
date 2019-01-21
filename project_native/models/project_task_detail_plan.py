@@ -22,6 +22,7 @@ _logger = logging.getLogger(__name__)  # Need for message in console.
 
 class ProjectTaskDetailPlan(models.Model):
     _name = 'project.task.detail.plan'
+    _description = "Project Task Detail Plan"
 
     @api.model
     def _get_type(self):
