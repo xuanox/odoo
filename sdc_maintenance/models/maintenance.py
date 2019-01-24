@@ -187,8 +187,8 @@ class MaintenanceIntervention(models.Model):
     product_ids=fields.One2many('product.piece','piece_id_intrv',u'Piece de rechange')
         
     type=fields.Many2one('intervention.type', string="Type d'intervention")
-    state_machine=fields.Selection([('start','En Marche'),('stop','En Arret')],u'Etat à la demande')
-    state=fields.Selection([('draft',u'Nouvelle demande'),('process',u'En cours'),('worko',u'Ordre de travail'),('done',u'Traité'),('cancel',u'Annulé')],u'Statut',track_visibility='always', default='draft')
+    state_machine=fields.Selection([('start','Start'),('stop','Stop')],u'Etat à la demande')
+    state=fields.Selection([('draft',u'Nueva Solicitud'),('process',u'En Proceso'),('worko',u'Orden de Trabajo'),('done',u'Completado'),('cancel',u'Cancelado')],u'Statut',track_visibility='always', default='draft')
     kanban_state = fields.Selection([('normal', 'In Progress'), ('blocked', 'Blocked'), ('done', 'Ready for next stage')],
                                     string='Kanban State', required=True, default='normal', track_visibility='onchange')
     type_re=fields.Selection([('re',u'Reclamation'),('inter',u'Intervention'),('pm',u'Maintenance preventive'),('cm',u'Maintenance corrective'),('lot',u'Lot')],u'Type de resource', default='inter')
