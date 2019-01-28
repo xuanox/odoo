@@ -40,7 +40,7 @@ class OpenMaintenance(http.Controller):
     def navigate_to_error_page(self):
         return http.request.render('sdc_maintenance.error_page', {})
            
-    @http.route(['/intervention/request'], type='http', auth='public', website=True)
+    @http.route(['/intervention/request'], type='http', auth='user', website=True)
     def register(self, redirect=None, **post):    
         equipments = request.env['maintenance.equipment'].sudo().search([])
         zones = request.env['maintenance.zone'].sudo().search([])
