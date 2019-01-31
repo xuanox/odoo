@@ -4,22 +4,20 @@
       <t t-call="website.layout">
         <div class="oe_structure">
           <div class="container">
-                        <h1>Thanks!</h1>
+                        <h1>Gracias!</h1>
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="alert alert-success">
-                                    Your request has been sent successfully.
+                                    Su solicitud de cita ha sido creada Exitosamente!
                                     <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
                                 </div>
                                 <p>
-                                    We will get back to you shortly.
+                                    Hemos recibido su solicitud según los datos indicados abajo.
+				    En los proximos minutos, una vez revisemos todos sus datos y la disponibilidad, 
+				    usted estará recibiendo una confirmación y podrá revisar sus solicitudes en el portal.
                                 </p>
-                                <p>
-					              You can make a new maintenance request here.<br/>
-					              <a t-attf-href="/intervention/request" class="btn btn-info">New request</a>
-					            </p>
                                 <p class="mt64">
-                                    If you have an emergency, do not hesitate to contact us by phone:
+                                    Si tiene una emergencia, no dude en contactarnos por teléfono:
                                 </p>
                                 <ul class="list-unstyled">
                                     <li><i class="fa fa-phone"></i> : <span t-field="res_company.phone"/></li>
