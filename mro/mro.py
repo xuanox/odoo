@@ -23,7 +23,7 @@ class mro_order(models.Model):
     STATE_SELECTION = [
         ('draft', 'DRAFT'),
         ('released', 'WAITING PARTS'),
-        ('ready', 'READY TO MAINTENANCE'),
+        ('ready', 'IN PROCESS'),
         ('done', 'DONE'),
         ('cancel', 'CANCELED')
     ]
