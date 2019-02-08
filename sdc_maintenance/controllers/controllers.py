@@ -52,7 +52,7 @@ class OpenMaintenance(http.Controller):
         user = http.request.env.context.get('uid')
         parent = http.request.env.context.get('parent_id')
         partner = http.request.env.user.partner_id
-        partner2 = http.request.env.context.get('partner_id')
+        partner2 = http.request.env.user.parent_id
     
         values = {
             'error': {},
