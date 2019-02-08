@@ -50,9 +50,9 @@ class OpenMaintenance(http.Controller):
         priorities = ['0', '1','2','3']
         equip_states = ['start', 'stop']
         user = http.request.env.context.get('uid')
-        parent = http.request.env.context.get('parent_id')
         partner = http.request.env.user.partner_id
         partner2 = http.request.env.context.get('uid.parent_id')
+        parent = request.env.user.partner_id
     
         values = {
             'error': {},
