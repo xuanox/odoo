@@ -43,16 +43,15 @@ class OpenMaintenance(http.Controller):
            
     @http.route(['/intervention/request'], type='http', auth='user', website=True)
     def register(self, redirect=None, **post):    
-        equipments = request.env['maintenance.equipment'].sudo().search([])
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        equipments = request.env['maintenance.equipment'].sudo().search([('x_studio_cliente.id','=',parent)])
         zones = request.env['maintenance.zone'].sudo().search([])
         partners = request.env['res.partner'].sudo().search([])
         categories = request.env['maintenance.equipment.category'].sudo().search([])
         failures = request.env['maintenance.failure'].sudo().search([])
         priorities = ['0', '1','2','3']
         equip_states = ['start', 'stop']
-        user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        
     
         values = {
             'error': {},
