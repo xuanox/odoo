@@ -50,6 +50,7 @@ class OpenMaintenance(http.Controller):
         priorities = ['0', '1','2','3']
         equip_states = ['start', 'stop']
         user = http.request.env.context.get('uid')
+        parent = http.request.env.context.get('parent_id')
         partner = http.request.env.user.partner_id
         partner2 = http.request.env.context.get('partner_id')
     
@@ -79,6 +80,7 @@ class OpenMaintenance(http.Controller):
             'user': user,
             'partner': partner,
             'partner2': partner2,
+            'parent': parent,
             
         }    
         return request.render("sdc_maintenance.request", values)
