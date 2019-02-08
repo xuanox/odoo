@@ -9,6 +9,7 @@
 			    <div class="container">
 			    	<br/>
 			        <center><h3>Intervention Request</h3></center>
+					 <input type="text" name="user" t-att-value="user"/>
 			        <div class="row ">
 			        <br/>
 			        <br/>

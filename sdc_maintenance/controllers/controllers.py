@@ -31,7 +31,7 @@ class OpenMaintenance(http.Controller):
         return http.request.render('sdc_maintenance.wo_page', {'wo_ids': wo_ids})
     
     #data post
-    MANDATORY_BILLING_FIELDS = ["motif","equipment_id","partner_id"]
+    MANDATORY_BILLING_FIELDS = ["motif","equipment_id"]
     @http.route('/intervention/request/success', type='http', auth='public', website=True)
     def navigate_to_success_page(self):
         return http.request.render('sdc_maintenance.succes_page', {})
@@ -49,6 +49,7 @@ class OpenMaintenance(http.Controller):
         failures = request.env['maintenance.failure'].sudo().search([])
         priorities = ['0', '1','2','3']
         equip_states = ['start', 'stop']
+        user = http.request.env.context.get('uid')
     
         values = {
             'error': {},
@@ -73,6 +74,7 @@ class OpenMaintenance(http.Controller):
             'partners' : partners,
             'categories' : categories,
             'failures' : failures,
+            'user': user,
             
         }    
         return request.render("sdc_maintenance.request", values)
