@@ -9,7 +9,8 @@ class OpenMaintenance(http.Controller):
     @http.route('/intervention', type='http', auth='user', website=True)
     def navigate_to_intervention_page(self):
         user = http.request.env.context.get('uid')
-        intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('technician_id','=',user)])
+        parent = request.env.user.parent_id.id
+        intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('x_client','=',parent)])
         return http.request.render('sdc_maintenance.intervention_page', {'intervention_ids': intervention_ids})
     
     @http.route('/pm', type='http', auth='user', website=True)
@@ -50,8 +51,6 @@ class OpenMaintenance(http.Controller):
         priorities = ['0', '1','2','3']
         equip_states = ['start', 'stop']
         user = http.request.env.context.get('uid')
-        partner = http.request.env.user.partner_id
-        partner2 = http.request.env.context.get('uid.parent_id')
         parent = request.env.user.parent_id.id
         
     
@@ -79,8 +78,6 @@ class OpenMaintenance(http.Controller):
             'categories' : categories,
             'failures' : failures,
             'user': user,
-            'partner': partner,
-            'partner2': partner2,
             'parent': parent,
             
         }    
