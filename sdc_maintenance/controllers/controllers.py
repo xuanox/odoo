@@ -51,6 +51,7 @@ class OpenMaintenance(http.Controller):
         equip_states = ['start', 'stop']
         user = http.request.env.context.get('uid')
         partner = http.request.env.user.partner_id
+        partner2 = http.request.env.context.get('partner_id')
     
         values = {
             'error': {},
@@ -77,6 +78,7 @@ class OpenMaintenance(http.Controller):
             'failures' : failures,
             'user': user,
             'partner': partner,
+            'partner2': partner2,
             
         }    
         return request.render("sdc_maintenance.request", values)
