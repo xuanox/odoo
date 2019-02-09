@@ -93,7 +93,7 @@ class OpenMaintenance(http.Controller):
             'partner': post.get('partner_id'),
             'zone_id': post.get('zone_id'),
             'state_machine': post.get('state_id'),
-            
+            'x_studio_solicitado_por':post.get('user'),
     })
     
 
