@@ -10,7 +10,7 @@ class OpenMaintenance(http.Controller):
     def navigate_to_intervention_page(self):
         user = http.request.env.context.get('uid')
         parent = request.env.user.parent_id.id
-        intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent)])
+        intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente','=',parent)])
         return http.request.render('sdc_maintenance.intervention_page', {'intervention_ids': intervention_ids})
     
     @http.route('/pm', type='http', auth='user', website=True)
