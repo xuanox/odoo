@@ -77,6 +77,7 @@ class OpenMaintenance(http.Controller):
             'categories' : categories,
             'failures' : failures,
             'user': user,
+            'create_uid': user,
             'parent': parent,
             
         }    
@@ -94,6 +95,7 @@ class OpenMaintenance(http.Controller):
             'zone_id': post.get('zone_id'),
             'state_machine': post.get('state_id'),
             'x_studio_solicitado_por':post.get('user'),
+            'create_uid':post.get('user'),
     })
     
 
