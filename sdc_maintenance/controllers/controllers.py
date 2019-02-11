@@ -16,13 +16,15 @@ class OpenMaintenance(http.Controller):
     @http.route('/pm', type='http', auth='user', website=True)
     def navigate_to_pm_page(self):
         user = http.request.env.context.get('uid')
-        pm_ids = http.request.env['maintenance.request'].sudo().search([('technician_user_id','=',user),('maintenance_type','=','preventive')])
+        parent = request.env.user.parent_id.id
+        pm_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent),('type','=','Preventivo')])
         return http.request.render('sdc_maintenance.pm_page', {'pm_ids': pm_ids})
     
     @http.route('/cm', type='http', auth='user', website=True)
     def navigate_to_cm_page(self):
         user = http.request.env.context.get('uid')
-        cm_ids = http.request.env['maintenance.request'].sudo().search([('technician_user_id','=',user),('maintenance_type','=','corrective')])
+        parent = request.env.user.parent_id.id
+        cm_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent),('type','=','Correctivo')])
         return http.request.render('sdc_maintenance.cm_page', {'cm_ids': cm_ids})  
     
     @http.route('/wo', type='http', auth='user', website=True)
