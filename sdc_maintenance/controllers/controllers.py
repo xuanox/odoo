@@ -10,6 +10,7 @@ class OpenMaintenance(http.Controller):
     def navigate_to_intervention_page(self):
         user = http.request.env.context.get('uid')
         parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
         intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent)])
         return http.request.render('sdc_maintenance.intervention_page', {'intervention_ids': intervention_ids})
     
@@ -47,6 +48,7 @@ class OpenMaintenance(http.Controller):
     def register(self, redirect=None, **post):    
         user = request.env.user.id
         parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
         equipments = request.env['maintenance.equipment'].sudo().search([('x_studio_cliente.id','=',parent)])
         zones = request.env['maintenance.zone'].sudo().search([])
         partners = request.env['res.partner'].sudo().search([])
@@ -81,6 +83,7 @@ class OpenMaintenance(http.Controller):
             'user': user,
             'create_uid': user,
             'parent': parent,
+            'parent_name': parent_name,
             
         }    
         return request.render("sdc_maintenance.request", values)
