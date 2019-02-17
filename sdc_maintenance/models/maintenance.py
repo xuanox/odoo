@@ -129,7 +129,7 @@ class MaintenanceEquipement(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    is_piece=fields.Boolean(u'Peut être piece de rechange')
+    is_piece=fields.Boolean(u'Es Pieza')
 
     
 class MaintenanceIntervention(models.Model):
