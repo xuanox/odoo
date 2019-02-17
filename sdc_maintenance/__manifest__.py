@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # Author : Addi Ait-Mlouk
 {
-    "name": "OMaintenance",
+    "name": "Soporte Técnico",
     "version": "1.0",
     "depends": ['maintenance', "mail","sale",'website'],
-    "author": "Ait-Mlouk Addi",
-    'website': 'https://www.sdatacave.com/',
+    "author": "Rocendo Tejada - Electronica Médica",
+    'website': 'https://www.electronicamedica.com/',
     'sequence':1,
-    "category": "Specific module",
+    "category": "Productivity",
     'icon': '/sdc_maintenance/static/src/img/icon.png',
     'summary' : 'cmms, maintenance, Equipment, Repair, Machine, Corrective maintenance, Preventive maintenance, Intervention, Checklist, Work order, website',
     "description": """
@@ -48,5 +48,6 @@
     'currency': 'EUR',
     'demo_xml': [],
     'installable': True,
+    'Aplication': True,
     'active': False,
 }
