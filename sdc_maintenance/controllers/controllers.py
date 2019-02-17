@@ -50,13 +50,7 @@ class OpenMaintenance(http.Controller):
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
         equipments = request.env['maintenance.equipment'].sudo().search([('x_studio_cliente.id','=',parent)])
-        zones = request.env['maintenance.zone'].sudo().search([])
-        partners = request.env['res.partner'].sudo().search([])
-        categories = request.env['maintenance.equipment.category'].sudo().search([])
-        failures = request.env['maintenance.failure'].sudo().search([])
-        priorities = ['0', '1','2','3']
-        equip_states = ['start', 'stop']
-    
+        equip_states = ['Online', 'Funcionamiento Parcial', 'Óffline']
         values = {
             'error': {},
             'error_message': []
@@ -74,12 +68,7 @@ class OpenMaintenance(http.Controller):
 
         values = {
             'equipments' : equipments,
-            'priorities' : priorities,
             'equip_states' : equip_states,
-            'zones' : zones,
-            'partners' : partners,
-            'categories' : categories,
-            'failures' : failures,
             'user': user,
             'create_uid': user,
             'parent': parent,
@@ -91,13 +80,8 @@ class OpenMaintenance(http.Controller):
     
     def _process_registration(self, post):
         request.env['maintenance.intervention'].sudo().create({
-            'category_id' : post.get('category_id'),
             'equipment_id': post.get('equipment_id'),
             'motif': post.get('motif'),
-            'priority': post.get('priority'),
-            'failure_type': post.get('failure_type'),
-            'partner': post.get('partner_id'),
-            'zone_id': post.get('zone_id'),
             'state_machine': post.get('state_id'),
             'x_studio_solicitado_por':post.get('user'),
             'create_uid':post.get('user'),
