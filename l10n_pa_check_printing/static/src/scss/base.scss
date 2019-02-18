@@ -4,7 +4,7 @@
  *  (eg. left: 7.5in; width: 2in;) all the dimensions will be scaled down.
 */
 
-.ckus_page {
+.ckpa_page {
     position: relative;
     font-size: 10pt;
     width: 8in!important;
@@ -19,12 +19,12 @@
         visibility: hidden;
     }
 
-    .ckus_check, .ckus_stub_1, .ckus_stub_2 {
+    .ckpa_check, .ckpa_stub_1, .ckpa_stub_2 {
         position: absolute;
         height: 3.25in;
     }
 
-    .ckus_check > * {
+    .ckpa_check > * {
         position: absolute;
         white-space: nowrap;
     }
@@ -34,29 +34,29 @@
         font-size: 1.3em;
     }
 
-    .ckus_stub {
+    .ckpa_stub {
         width: 8in;
     }
 
-    .ckus_stub .sequence_number {
+    .ckpa_stub .sequence_number {
         height: 0.3in;
         margin-bottom: 0.1in;
     }
 
-    .ckus_stub .summary_line {
+    .ckpa_stub .summary_line {
         width: 100%;
         margin-bottom: 0.1in;
     }
 
-    .ckus_stub .summary_line span {
+    .ckpa_stub .summary_line span {
         padding: 0 0.1in;
     }
 
-    .ckus_stub .stub_lines td {
+    .ckpa_stub .stub_lines td {
         padding: 0.01in 0.05in;
     }
 
-    .ckus_stub .stub_total_amount {
+    .ckpa_stub .stub_total_amount {
         position: absolute;
         bottom: 0.38in;
         right: 0.1in;
