@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_pa_check_printing_l10n_pa_check_printing,l10n_pa_check_printing.l10n_pa_check_printing,model_l10n_pa_check_printing_l10n_pa_check_printing,,1,0,0,0
