@@ -11,7 +11,7 @@
 
 
 <template id="ckpa_check">
-    <div class="ckpa_check" style="margin-top: -9px;">
+    <div class="ckpa_check" style="margin-top: -0.05in;;">
         <t t-if="page['state'] == 'cancelled'">
             <div class="o-watermark">VOID</div>
         </t>
