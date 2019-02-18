@@ -61,7 +61,7 @@ class OpenMaintenance(http.Controller):
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
         equipments = request.env['maintenance.equipment'].sudo().search([('x_studio_cliente.id','=',parent)])
-        equip_states = ['Online', 'Funcionamiento Parcial', 'Óffline']
+        equip_states = ['Online', 'Funcionamiento Parcial', 'Offline']
         values = {
             'error': {},
             'error_message': []
@@ -93,7 +93,7 @@ class OpenMaintenance(http.Controller):
         request.env['maintenance.intervention'].sudo().create({
             'equipment_id': post.get('equipment_id'),
             'motif': post.get('motif'),
-            'state_machine': post.get('state_id'),
+            'state_machine': post.get('equip_states'),
             'x_studio_solicitado_por':post.get('user'),
             'create_uid':post.get('user'),
     })
