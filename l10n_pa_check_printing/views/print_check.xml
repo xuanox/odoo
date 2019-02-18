@@ -11,7 +11,7 @@
 
 
 <template id="ckpa_check">
-    <div class="ckpa_check" style="margin-top: -11px;">
+    <div class="ckpa_check" style="margin-top: -9px;">
         <t t-if="page['state'] == 'cancelled'">
             <div class="o-watermark">VOID</div>
         </t>
@@ -47,7 +47,6 @@
                 <th class="text-left">Fecha de Vencimiento</th>
                 <th class="text-left">Descripción</th>
                 <th class="text-right">Importe Factura</th>
-                <th class="text-right">Balance Due</th>
                 <th class="text-right">Pagos</th>
             </tr></thead>
             <tbody>
@@ -59,9 +58,6 @@
                         <td class="text-left"><t t-if="stub_line['due_date']" t-esc="stub_line['due_date']"/></td>
                         <td class="text-left"><t t-esc="stub_line['number']"/></td>
                         <td class="text-right"><t t-esc="stub_line['amount_total']"/></td>
-                        <td class="text-right">
-                            <t t-esc="stub_line['amount_residual']"/>
-                        </td>
                         <td class="text-right"><t t-esc="stub_line['amount_paid']"/></td>
                     </tr></t>
                 </t>
