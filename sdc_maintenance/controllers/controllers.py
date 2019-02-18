@@ -61,7 +61,7 @@ class OpenMaintenance(http.Controller):
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
         equipments = request.env['maintenance.equipment'].sudo().search([('x_studio_cliente.id','=',parent)])
-        equip_states = request.env['asset.state'].sudo().search([('team','=',3)])
+        equip_states = request.env['asset.state.name'].sudo().search([('team','=',3)])
         values = {
             'error': {},
             'error_message': []
