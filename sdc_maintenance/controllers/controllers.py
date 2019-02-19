@@ -27,7 +27,13 @@ class OpenMaintenance(http.Controller):
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
         pm_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent),('type','=','Preventivo')])
-        return http.request.render('sdc_maintenance.pm_page', {'pm_ids': pm_ids})
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+            'pm_ids': pm_ids,
+        }
+        return http.request.render('sdc_maintenance.pm_page', values)
     
     @http.route('/cm', type='http', auth='user', website=True)
     def navigate_to_cm_page(self):
@@ -35,7 +41,13 @@ class OpenMaintenance(http.Controller):
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
         cm_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent),('type','=','Correctivo')])
-        return http.request.render('sdc_maintenance.cm_page', {'cm_ids': cm_ids})  
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+            'cm_ids': cm_ids,
+        }
+        return http.request.render('sdc_maintenance.cm_page', values)  
     
     @http.route('/wo', type='http', auth='user', website=True)
     def navigate_to_wo_page(self):
