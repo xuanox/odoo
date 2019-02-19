@@ -61,11 +61,27 @@ class OpenMaintenance(http.Controller):
     MANDATORY_BILLING_FIELDS = ["motif","equipment_id"]
     @http.route('/intervention/request/success', type='http', auth='public', website=True)
     def navigate_to_success_page(self):
-        return http.request.render('sdc_maintenance.succes_page', {})
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+        }
+        return http.request.render('sdc_maintenance.succes_page', values)
 
     @http.route('/intervention/request/error', type='http', auth='public', website=True)
     def navigate_to_error_page(self):
-        return http.request.render('sdc_maintenance.error_page', {})
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+        }
+        return http.request.render('sdc_maintenance.error_page', values)
            
     @http.route(['/intervention/request'], type='http', auth='user', website=True)
     def register(self, redirect=None, **post):    
