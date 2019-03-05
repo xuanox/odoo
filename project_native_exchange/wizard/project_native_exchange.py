@@ -33,6 +33,7 @@ import xml.etree.ElementTree as ET
 class ProjectNativeExchangeImportTaskLine(models.TransientModel):
 
     _name = 'project.native.exchange.import.task.line'
+    _description = 'Poject Native Exchange Import Task Line'
 
     name = fields.Char(string='Field', readonly=True)
     seq_line = fields.Integer(string='Seq.', readonly=True)
@@ -47,6 +48,7 @@ class ProjectNativeExchangeImportTaskLine(models.TransientModel):
 class ProjectNativeExchangeImportPrjLine(models.TransientModel):
 
     _name = 'project.native.exchange.import.prj.line'
+    _description = 'Poject Native Exchange Import Project Line'
 
     name = fields.Char(string='Field', readonly=True)
     imp_value = fields.Char(string='imp value')
@@ -60,6 +62,7 @@ class ProjectNativeExchangeImportPrjLine(models.TransientModel):
 
 class ProjectNativeExchangeImport(models.TransientModel):
     _name = "project.native.exchange.import"
+    _description = 'Poject Native Exchange Import'
 
     name = fields.Char(string='File Name')
     file_load = fields.Binary(string='XML File')
@@ -440,7 +443,7 @@ class ProjectNativeExchangeImport(models.TransientModel):
 
 class ProjectNativeExchange(models.TransientModel):
     _name = "project.native.exchange"
-
+    _description = 'Poject Native Exchange'
 
     project_id = fields.Many2one('project.project', 'Project')
     name = fields.Char(string='File Name', default='project_exchange.xml')
