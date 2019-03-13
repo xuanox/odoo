@@ -43,7 +43,6 @@ class AccountInvoiceInherit(models.Model):
 
 	@api.multi
 	def download_fiscal_file(self):
-		type_invoice = "Factura"
 		content_file_fd, content_file_path = tempfile.mkstemp(suffix='.txt', 
 												prefix='report.invoice.tmp.')
 
@@ -256,32 +255,7 @@ class AccountInvoiceInherit(models.Model):
 		except:
 			return "00"
 
-	
-	"""
-	def get_total_amount_off(self, invoice):
-		total_off = 0.0
-		for invoice_line in invoice.invoice_line_ids:
-			if invoice_line.discount:
-				#Obtenemos el total sin descuento redondeado a 2 decimales
-				price = float(invoice_line.price_unit)
-				quantity = float(invoice_line.quantity or '0.00')
-				item_total = quantity * price
-				item_total = float('{0:.2f}'.format(item_total))
 
-				#Obtenemos el total con descuento readondeado a 2 decimales
-				discount = (float(invoice_line.discount or '0.00'))/100
-				amount_off = price - (price * discount)
-				item_off = quantity * amount_off
-				item_off = float('{0:.2f}'.format(item_off))
-
-				#Obtenemos el descunto del producto restando a total, off y
-				#Luego agregamos a el descuento total del movimiento
-				total_off = total_off + (item_total - item_off)
-		return '{0:.2f}'.format(total_off)
-	"""
-
-	
-	
 	def get_file_name(self, id):
 		"""
 		Realiza una busqueda dentro del reguistro para obtener el nombre del documento
@@ -347,11 +321,6 @@ class AccountInvoiceInherit(models.Model):
 		try:
 			subtotal = float(invoice.price_subtotal)
 			quantity = float(invoice.quantity)
-			"""
-			discount = (float (invoice.discount or '0.00'))/100
-			total = price - (price * discount)
-			return '{0:.2f}'.format(total)
-			"""
 			total = subtotal / quantity
 			strTotal = str(total)
 			if "." in strTotal:
