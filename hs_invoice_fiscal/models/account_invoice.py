@@ -20,6 +20,10 @@ import tempfile
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from string import Template
 from contextlib import closing
+import json
+
+import logging
+_logger = logging.getLogger(__name__)
 
 class AccountInvoiceInherit(models.Model):
 	"""
@@ -42,15 +46,10 @@ class AccountInvoiceInherit(models.Model):
 		type_invoice = "Factura"
 		content_file_fd, content_file_path = tempfile.mkstemp(suffix='.txt', 
 												prefix='report.invoice.tmp.')
-		DOC_NO_FISCAL = "DocNoFiscal"
-		invoice_type = "FACTURA"
-		invoice_pay = "CONTADO"
-		line_cont = 0
 
 		for invoice in self:
 			file_name = "FACTI-HS-" + str(invoice.id) + ".txt"
 			client_name = invoice.partner_id.name or 'CONTADO'
-			#client_ruc = self.get_ruc_from_field(invoice.partner_id.vat or '00-0000-00000')
 			client_ruc = invoice.partner_id.vat or '00-0000-00000'
 			client_dv = self.get_dv_from_field(invoice.partner_id.vat or '00')
 			client_dir = self.get_client_direction(invoice.partner_id)
@@ -74,46 +73,61 @@ class AccountInvoiceInherit(models.Model):
 			payment_cnote = "0.00"			#Temporalmente
 			payment_other = "0.00"			#Temporalmente
 
-			date_invoice = self.get_date_invoice(invoice.date_invoice)
+			#date_invoice = self.get_date_invoice(invoice.date_invoice)
+			if invoice.type == "out_refund":
+				refund = None
+				refound_name = ""
+				refund_invoice = invoice.refund_invoice_id
+				if type(refund_invoice) is not bool:
+					for content in refund_invoice:
+						refound_name = invoice.origin
+						refund = content
+				if refund == None:
+					raw_data = invoice.payments_widget
+					payment = json.loads(raw_data)
+					refunds = payment["content"]
+					for content in refunds:
+						refund_id = content["invoice_id"]
+						temp = self.env["account.invoice"].search([('id', '=', refund_id)])
+						if str(temp.fiscal_reference) is not "False":
+							refound_name = temp.number
+							refund = temp
 
-			data_stream = ""
-			invoice_refund = invoice.refund_invoice_id or ''
-			if type(invoice_refund) is not bool:
-				for refund in invoice_refund:
-					self.invoice_name = "NCTI" + invoice_no
-					file_name = "NCTI-HS-" + str(invoice.id) + ".txt"
-					refound_fiscal_id = refund.fiscal_id
-					refound_fiscal_no = refund.fiscal_reference
-					invoice_type = "NOTA DE CREDITO"
-					type_invoice = "NotaCredito"
+				if refund == None:
+					"""
+					Si no se encontraron notas Creditos en esta factura retorna nada
+					"""
+					return
+				self.invoice_name = "NCTI" + invoice_no
+				file_name = "NCTI-HS-" + str(invoice.id) + ".txt"
+				refound_fiscal_id = refund.fiscal_id
+				refound_fiscal_no = refund.fiscal_reference
 
-					refound_name = invoice.origin
-					refound_price = invoice.amount_untaxed
-					refound_tax = invoice.amount_tax
-					refound_note = self.get_refound_name(invoice)
-					refound_date = date_invoice
-					date_invoice = self.get_date_invoice(refund.date_invoice)
-					time_invoice = self.get_time_invoice(invoice.create_date)
+				refound_price = invoice.amount_untaxed
+				refound_tax = invoice.amount_tax
+				refound_note = self.get_refound_name(invoice)
+				refound_date = self.get_date_invoice(invoice.date_invoice)
+				time_invoice = self.get_time_invoice(invoice.create_date)
 					
-					#El valor de cliente_ruc es de 15 pero se alargo a 25
-					data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
-							self.add_field_cell('1',				1),
-							self.add_field_cell(self.invoice_name,	20),
-							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			25),
-							self.add_field_cell(client_dir,			150),
-							self.add_field_cell(refound_price,		19),
-							self.add_field_cell(refound_tax, 		10),
-							self.add_field_cell(refound_note,		150),
-							self.add_field_cell(refound_date,		10),
+				#El valor de cliente_ruc es de 15 pero se alargo a 25
+				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
+						self.add_field_cell('1',				1),
+						self.add_field_cell(self.invoice_name,	20),
+						self.add_field_cell(client_name,		80),
+						self.add_field_cell(client_ruc, 		25),
+						self.add_field_cell(client_dir, 		150),
+						self.add_field_cell(refound_price,		19),
+						self.add_field_cell(refound_tax, 		10),
+						self.add_field_cell(refound_note,		150),
+						self.add_field_cell(refound_date,		10),
 
-							self.add_field_cell(time_invoice,		5),
-							self.add_field_cell(refound_fiscal_id,	20),
-							self.add_field_cell(refound_fiscal_no, 	8),
-							self.add_field_cell(refound_name,		20),
-						)
+						self.add_field_cell(time_invoice,		5),
+						self.add_field_cell(refound_fiscal_id,	20),
+						self.add_field_cell(refound_fiscal_no,	8),
+						self.add_field_cell(refound_name,		20),
+					)
 			
-			if type_invoice == "Factura":
+			if invoice.type == "out_invoice":
 				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
@@ -192,7 +206,7 @@ class AccountInvoiceInherit(models.Model):
 		from_zone = tz.gettz('UTC')
 		to_zone = tz.gettz('America/Bogota')
 		if type(invoice_datetime) == str:
-			utc_time = datetime.strptime(invoice_datetime, '%Y-%m-%d %H:%M')
+			utc_time = datetime.strptime(invoice_datetime, '%Y-%m-%d %H:%M:%S')
 			if utc_time != "":
 				utc_time = utc_time.replace(tzinfo=from_zone)
 				local_time = utc_time.astimezone(to_zone)
@@ -292,8 +306,8 @@ class AccountInvoiceInherit(models.Model):
 		length = len(new_content)
 		if length > columnWidth:
 			new_content = new_content[:columnWidth]
-		new_content = new_content + "\t"
-		return new_content
+		new_content = self.purge_text(new_content)
+		return (new_content + "\t")
 
 
 
@@ -305,9 +319,7 @@ class AccountInvoiceInherit(models.Model):
 		description = str(invoice_line.product_id.name)
 		quantity = str(invoice_line.quantity or '')
 		price = self.get_price_item(invoice_line)
-		#price = str(invoice_line.price_unit)
 		uom = self.get_uom_item(invoice_line)
-		total = str(invoice_line.price_subtotal or '')
 		taxes = self.get_tax_item(invoice_line)
 
 		if description == "False":	#Description jamas debe ser False
@@ -417,7 +429,16 @@ class AccountInvoiceInherit(models.Model):
 		Obtenemos el motivo por el cual fue rechazada la factura, la misma
 		se agregara a la nota credito
 		"""
-		note = refound.name
+		note = refound.name or ""
 		if(len(note) > 150):
 			note = note[:147] + "..."
-		return note 
+		return note
+
+
+
+	def purge_text(self, old_text):
+		"""
+		Eliminamos el texto tabulador para evitar problemas
+		con la herramienta aelospooler y su formato csv
+		"""
+		return old_text.replace("\t", " ")
