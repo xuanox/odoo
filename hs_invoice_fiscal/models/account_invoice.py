@@ -5,7 +5,7 @@
 # el valor de la nota de credito y refound_name el de refound
 
 
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from odoo.tools.misc import find_in_path
 from datetime import datetime, timedelta
 import time
@@ -81,7 +81,7 @@ class AccountInvoiceInherit(models.Model):
 					for content in refund_invoice:
 						refound_name = invoice.origin
 						refund = content
-				if refund == None:
+				if refund == None and invoice.payments_widget != 'false':
 					raw_data = invoice.payments_widget
 					payment = json.loads(raw_data)
 					refunds = payment["content"]
@@ -94,13 +94,20 @@ class AccountInvoiceInherit(models.Model):
 
 				if refund == None:
 					"""
-					Si no se encontraron notas Creditos en esta factura retorna nada
+					Si no se encontraron notas Creditos en esta factura genera un
+					error del mismo y lo muestra en la ventana al usuario
 					"""
-					return
+					raise exceptions.Warning("La nota credito no tiene asignado una \
+						factura.")
 				self.invoice_name = "NCTI" + invoice_no
 				file_name = "NCTI-HS-" + str(invoice.id) + ".txt"
-				refound_fiscal_id = refund.fiscal_id
-				refound_fiscal_no = refund.fiscal_reference
+				refund_fiscal_id = refund.fiscal_id
+				refund_fiscal_no = refund.fiscal_reference
+
+				if refund_fiscal_id == False or refund_fiscal_no == False:
+					raise exceptions.Warning("La factura enlazada a la Nota Credito \
+						no ha sido fiscalizada. Fiscalice la Factura antes de completar \
+						este procedimiento.")
 
 				refound_price = invoice.amount_untaxed
 				refound_tax = invoice.amount_tax
@@ -121,8 +128,8 @@ class AccountInvoiceInherit(models.Model):
 						self.add_field_cell(refound_date,		10),
 
 						self.add_field_cell(time_invoice,		5),
-						self.add_field_cell(refound_fiscal_id,	20),
-						self.add_field_cell(refound_fiscal_no,	8),
+						self.add_field_cell(refund_fiscal_id,	20),
+						self.add_field_cell(refund_fiscal_no,	8),
 						self.add_field_cell(refound_name,		20),
 					)
 			
@@ -358,8 +365,13 @@ class AccountInvoiceInherit(models.Model):
 		taxes = invoice.invoice_line_tax_ids 
 		if len(taxes) > 0:
 			for tax in taxes:
-				name = tax.name.split(" ")[1]
-				return name[:-1]
+				name = tax.amount
+				val = str(name)
+				val = val.split('.')[0] if ('.' in val) else val
+				if (val != "0") and (val != "7") and (val != "10") and (val != "15"):
+					raise exceptions.Warning("El impuesto presente en uno de los \
+					movimientos de la factura no esta permitido fiscalmente.")
+				return val
 			return "0"
 		else:
 			return "0"
