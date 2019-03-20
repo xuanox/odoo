@@ -6,7 +6,9 @@
 		Sincronizacion subscripciones-facturas""",
 
 	'description': """
-		Long description of module's purpose
+		Este modulo Corrige el comportamiento de Odoo al generar una factura 
+		Borrado desde el modulo de suscripciones, Permitiendo asi que el campo
+		Comentarios sea actualizado en la factura desde Suscripciones.
 	""",
 
 	'author': "HS Consulting S.A.",
@@ -15,11 +17,11 @@
 	# Categories can be used to filter modules in modules listing
 	# Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
 	# for the full list
-	'category': 'Uncategorized',
-	'version': '0.1',
+	'category': 'Sales',
+	'version': '0.2',
 
 	# any module necessary for this one to work correctly
-	'depends': ['base'],
+	'depends': ['base', 'account', 'sale_subscription'],
 
 	# always loaded
 	'data': [
