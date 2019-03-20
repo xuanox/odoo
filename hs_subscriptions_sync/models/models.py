@@ -27,11 +27,14 @@ class SubscriptionsInvoiceSync(models.Model):
 
 
 	def search_subscriptions(self, invoice):
+		"""
 		try:
-			origin_name = invoice.origin
-			if origin_name != False:
-				subscriptions = self.env["sale.subscription"].search([('code', '=', origin_name)], limit=1)
-				if len(subscriptions) != 0 :
-					invoice.commnent = subscription.description
+			
 		except:
 			pass
+		"""
+		origin_name = invoice.origin
+		if origin_name != False:
+			subscription = self.env["sale.subscription"].search([('code', '=', origin_name)], limit=1)
+			if len(subscription) != 0 :
+				invoice.commnent = subscription.description
