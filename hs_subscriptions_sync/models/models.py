@@ -33,8 +33,5 @@ class SubscriptionsInvoiceSync(models.Model):
 				subscription = self.env["sale.subscription"].search([('code', '=', origin_name)], limit=1)
 				if len(subscription) != 0 :
 					invoice.comment = subscription.description
-			print("Proceso realizado completamente")
 		except:
-			print("Error en search_subscriptions(...)")
 			pass
-		
