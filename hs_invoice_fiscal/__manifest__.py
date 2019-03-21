@@ -17,7 +17,7 @@
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
 	'category': 'report',
-	'version': '1.08',
+	'version': '1.10',
 
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],
@@ -25,7 +25,7 @@
 	# always loaded
 	'data': [
 		# 'security/ir.model.access.csv',
-		'views/invoice_view.xml',
+		#'views/invoice_view.xml',
 		'views/respartner_view.xml',
 	],
 	# only loaded in demonstration mode
