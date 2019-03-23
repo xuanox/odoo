@@ -17,7 +17,7 @@
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
 	'category': 'report',
-	'version': '1.07',
+	'version': '1.11',
 
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],
