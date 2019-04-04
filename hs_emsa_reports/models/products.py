@@ -21,6 +21,7 @@ class ProductsReport(models.Model):
 	_inherit = "account.invoice.line"
 
 	hs_date_invoice = fields.Date(related='invoice_id.date_invoice', store=False)
+	hs_type_invoice = fields.Selection(related='invoice_id.type', store=False)
 	hs_product_price = fields.Float(related='product_id.standard_price', store=False)
 	hs_product_categ = fields.Char(related='product_id.categ_id.name', store=False)
 
