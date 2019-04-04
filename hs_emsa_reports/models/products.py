@@ -24,7 +24,7 @@ class ProductsReport(models.Model):
 	hs_invoice_number = fields.Char(related='invoice_id.number', string="Documento", store=False)
 	hs_invoice_type = fields.Selection(related='invoice_id.type', string="Categoria Factura", store=False)
 	hs_product_price = fields.Float(related='product_id.standard_price', string="Precio Bodega", store=True)
-	hs_product_name = fields.Char(related='product_id.name', string="Precio Bodega", store=False)
+	hs_product_name = fields.Char(related='product_id.name', string="Nombre Producto", store=False)
 	hs_product_categ = fields.Char(related='product_id.categ_id.name', string="Categoria Producto", store=False)
 
 
