@@ -249,14 +249,14 @@
         </record>
 
         <record model="ir.actions.act_window.view" id="action_equipments_kanban_view">
-            <field name="sequence" eval="0"/>
+            <field name="sequence" eval="1"/>
             <field name="view_mode">kanban</field>
             <field name="view_id" ref="equipments_kanban_view"/>
             <field name="act_window_id" ref="action_equipments"/>
         </record>
 
         <record model="ir.actions.act_window.view" id="action_equipments_tree_view">
-            <field name="sequence" eval="1"/>
+            <field name="sequence" eval="0"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="equipments_tree_view"/>
             <field name="act_window_id" ref="action_equipments"/>
