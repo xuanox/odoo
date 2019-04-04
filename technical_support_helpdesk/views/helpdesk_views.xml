@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+    	<record id="helpdesk_ticket_form_view_inherited" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form.view.inherited</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='assign_ticket_to_self']" position="before">
+                    <button string="New Request" name="%(technical_support_action_request_new)d" type="action" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="equipment_id"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="helpdesk_team_form_view_inherited" model="ir.ui.view">
+              <field name="name">helpdesk.team.form.view.inherited</field>
+              <field name="model">helpdesk.team</field>
+              <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+              <field name="arch" type="xml">
+                  <xpath expr="//div[@class='col-lg-6 o_setting_box']" position="after">
+                    <div class="col-lg-6 o_setting_box" title="Team Leader">
+                      <div class="o_setting_right_pane">
+                        <label for="leader_id"/>
+                          <div class="text-muted">
+                            Team Responsible
+                          </div>
+                          <div>
+                            <field name="leader_id" class="mt16"/>
+                          </div>
+                      </div>
+                    </div>
+                  </xpath>
+              </field>
+          </record>
+    </odoo>
