@@ -220,9 +220,7 @@
             <field name="arch" type="xml">
                 <graph string="Equipment">
 									<field name="brand_id"  type="col"/>
-									<field name="model_id"  type="col"/>
 									<field name="client_id" type="row"/>
-									<field name="category_ids" type="row"/>
 									<field name="modality_id" type="row"/>
                 </graph>
             </field>
