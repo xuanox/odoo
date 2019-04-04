@@ -214,12 +214,41 @@
             </field>
         </record>
 
+				<record id="equipment_equipment_view_graph" model="ir.ui.view">
+            <field name="name">equipment.equipment.view.graph</field>
+            <field name="model">equipment.equipment</field>
+            <field name="arch" type="xml">
+                <graph string="Equipment">
+									<field name="brand_id"  type="col"/>
+									<field name="model_id"  type="col"/>
+									<field name="client_id" type="row"/>
+									<field name="category_ids" type="row"/>
+									<field name="modality_id" type="row"/>
+									<field name="team_id" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="equipment_equipment_view_pivot" model="ir.ui.view">
+            <field name="name">equipment.equipment.view.pivot</field>
+            <field name="model">equipment.equipment</field>
+            <field name="arch" type="xml">
+                <pivot string="Equipments" disable_linking="True">
+                    <field name="create_date" interval="month" type="row"/>
+                    <field name="brand_id"  type="col"/>
+										<field name="client_id" type="row"/>
+										<field name="modality_id" type="row"/>
+										<field name="team_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
         <record id="action_equipments" model="ir.actions.act_window">
             <field name="name">Equipments</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">equipment.equipment</field>
             <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph</field>
             <field name="view_id" eval="False"/>
         </record>
 
