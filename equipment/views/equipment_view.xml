@@ -224,7 +224,6 @@
 									<field name="client_id" type="row"/>
 									<field name="category_ids" type="row"/>
 									<field name="modality_id" type="row"/>
-									<field name="team_id" type="row"/>
                 </graph>
             </field>
         </record>
@@ -238,7 +237,6 @@
                     <field name="brand_id"  type="col"/>
 										<field name="client_id" type="row"/>
 										<field name="modality_id" type="row"/>
-										<field name="team_id" type="row"/>
                 </pivot>
             </field>
         </record>
