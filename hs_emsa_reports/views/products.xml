@@ -46,11 +46,11 @@
 			<field name="model">account.invoice.line</field>
 			<field name="arch" type="xml">
 				<tree create="false" edit="false" delete="false">
-					<field name="hs_date_invoice" string="Fecha"/>
-					<field name="product_id" string="Producto" widget="many2one"/>
+					<field name="hs_invoice_date" string="Fecha Fectura"/>
+					<field name="hs_product_name" string="Producto" />
 					<field name="quantity" string="Cantidad Vendida"/>
-					<field name="invoice_id" string="Documento" widget="many2one" />
-					<field name="hs_type_invoice" string="Tipo"  />
+					<field name="hs_invoice_number" string="Documento" />
+					<field name="hs_invoice_type" string="Tipo"  />
 					<field name="hs_product_categ" string="Categoria"/>
 					<field name="hs_product_price" string="Precio Bodega"/>
 				</tree>
