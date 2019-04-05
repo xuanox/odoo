@@ -17,7 +17,7 @@
 	# for the full list
 	'category': 'Invoicing &amp; Payments',
 	'license': 'LGPL-3',
-	'version': '0.16',
+	'version': '0.17',
 	
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],
@@ -28,6 +28,6 @@
 	],
 	
 	'installable': True,
-	'auto_install': False,
+	'auto_install': True,
 	'application': False,
 }
