@@ -5,14 +5,24 @@
             <field name="name">regulatory_license_form.form</field>
             <field name="model">regulatory.license</field>
             <field name="arch" type="xml">
-                <form>
-                    <sheet>
+              <form string="License">
+                  <sheet>
+                      <div class="oe_title">
+                          <label for="name" class="oe_edit_only" string="Name"/>
+                          <h1>
+                              <field name="name" placeholder="License"/>
+                          </h1>
+                      </div>
+                      <group>
                         <group>
-                            <field name="name"/>
-                            <field name="file"/>
+                          <field name="email"/>
+                          <field name="expiration_date" widget="date"/>
+                          <field name="file"/>
                         </group>
+                      </group>
+                      <field name='description' placeholder="Description ......."/>
                     </sheet>
-                </form>
+              </form>
             </field>
         </record>
         <record id="regulatory_license_tree" model="ir.ui.view">
@@ -21,6 +31,8 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
+                    <field name="email"/>
+                    <field name="expiration_date" widget="date"/>
                 </tree>
             </field>
         </record>
@@ -39,7 +51,7 @@
             id="regulatory_management_license"
             parent="regulatory_management_menu"
             action="regulatory_license_action"
-            sequence="4"/>
+            sequence="3"/>
 
     </data>
 </odoo>

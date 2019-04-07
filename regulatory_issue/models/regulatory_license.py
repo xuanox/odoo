@@ -29,8 +29,10 @@ from odoo.exceptions import UserError, ValidationError
 
 class RegulatoryLicense(models.Model):
     _name = 'regulatory.license'
+    _description = 'Regulatory License'
 
     name = fields.Char(string="License", required=True, translate=True)
     expiration_date = fields.Date(u'Expiration Date')
     description=fields.Text('Description')
     file=fields.Binary(u'File')
+    email=fields.Char('Notification Mail', help="Email address of the Team")
