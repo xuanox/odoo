@@ -23,13 +23,13 @@
 {
     'name': 'Regulatory Issue Management',
     'summary': """Regulatory Issue Management""",
-    'version': '12.0.1.1.6',
+    'version': '12.0.1.1.7',
     'author': 'Rocendo Tejada',
     'website': "http://www.electronicamedica.com",
     'company': 'Electrónica Médica',
     "category": "Productivity",
     'icon': '/regulatory_issue/static/src/img/icon.png',
-    'depends': ['base', 'calendar', 'mail'],
+    'depends': ['base', 'calendar', 'mail', 'equipment'],
     'data': [
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',
