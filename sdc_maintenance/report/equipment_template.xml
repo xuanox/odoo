@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<!--Custom report-->
+<template id="equipment_report_page">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+	             <div class="row">
+	                <h2>
+		                <span>EQUIP# </span>
+		                <span t-field="o.name"/>
+		            </h2>
+	                 <style>
+						.borderless td, .borderless th {
+						 border: none;
+								}
+					  </style>
+	        
+					<table class="table borderless">
+					  <tr>
+					    <td ><strong>Catégorie: </strong><span t-field="o.category_id"/></td>
+					    <td ></td>
+					    <td ><strong>Equipe : </strong><span t-field="o.maintenance_team_id"/></td>
+					 </tr>
+					  <tr>
+					  	<td ><strong>Responsable : </strong><span t-field="o.owner_user_id"/></td>
+					  	<td ></td>
+					    <td ><strong>Technicien : </strong><span t-field="o.technician_user_id"/></td>
+					 </tr>
+					  <tr>
+					  	<td ><strong>Date de début : </strong><span t-field="o.startingdate"/></td>
+					  	<td ></td>
+					  	<td ><strong>Date de fin de garantie : </strong><span t-field="o.deadlinegar"/></td>
+					  </tr>
+					  <tr>
+					  	<td ><strong>Marque : </strong><span t-field="o.trademark"/></td>
+					  	<td ></td>
+					  	<td ><strong>Modèle : </strong><span t-field="o.model"/></td>
+					  </tr>
+					</table>
+				
+                
+                <table class="table table-bordered">
+				  <tr>
+				    <td >Sous garantie: <t t-if="o.warranty"><input type="checkbox" checked="True"/></t></td>
+				    <td >hors garantie: <t t-if="not o.warranty"><input type="checkbox" checked="True"/></t></td>
+				 </tr>
+				</table>
+					
+				<br/>
+			        <strong>Description: </strong>
+					<div class="well">
+					  <span t-field="o.note"/>
+					</div>
+					<strong>Instruction de sécurité: </strong>
+					<div class="well"> 
+					  <span t-field="o.safety"/>
+					</div>
+					
+					<br/>
+					  <p><h2>Liste de pièces de rechanges</h2></p>
+                       <!-- table -->
+                       <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Référence</th>
+                                    <th>Quantité</th>
+                                    <th>Type de pièce </th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr t-foreach="o.product_ids" t-as="l">
+                                    <td><span t-field="l.product_id"/></td>
+                                    <td><span t-field="l.ref_intern"/></td>
+                                    <td><span t-field="l.qte"/></td>
+                                    <td><span t-field="l.type_id"/></td>
+                                </tr>
+                            </tbody>
+                        </table>    
+                     </div>     
+               </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="error_page" name="Error page">
+      <t t-call="website.layout">
+        <div class="oe_structure">
+          <div class="container">
+                        <h1>Attention!</h1>
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="alert alert-danger">
+                                    Some required fields are empty.
+                                    <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
+                                </div>
+
+                                <p class="mt64">
+                                    If you have an emergency, do not hesitate to contact us by phone:
+                                </p>
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-phone"></i> : <span t-field="res_company.phone"/></li>
+                                    <li><i class="fa fa-envelope"></i> : <span t-field="res_company.email"/></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <t t-call="website.company_description"/>
+                            </div>
+                        </div>
+          </div>
+        </div>
+      </t>
+    </template>
+    
+</odoo>
