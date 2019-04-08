@@ -23,7 +23,7 @@
 {
     'name': 'Regulatory Issue Management',
     'summary': """Regulatory Issue Management""",
-    'version': '12.0.1.1.5',
+    'version': '12.0.1.1.6',
     'author': 'Rocendo Tejada',
     'website': "http://www.electronicamedica.com",
     'company': 'Electrónica Médica',
