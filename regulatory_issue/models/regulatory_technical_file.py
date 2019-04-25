@@ -99,9 +99,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     name = fields.Char(string="Proposed Name for the File", required=True, translate=True)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number')
+    technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name')
     observation=fields.Text('Observation')
     sales_team_id = fields.Many2one('crm.team', string='Sales Team')
     responsible_id = fields.Many2one('res.users', string='Responsible')
+    models_id = fields.Many2one('equipment.model', string='Models Equipments')
+    brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', default=_default_stage)
 
 
