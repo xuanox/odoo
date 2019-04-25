@@ -433,6 +433,7 @@
                           <field name="technical_file_id" widget="many2one"/>
                           <field name="technical_file_name" />
                           <field name="models_id" widget="many2one"/>
+                          <field name="brand_id" widget="many2one"/>
                       </group>
                       <group>
                         <field name="responsible_id" widget="many2one"/>
@@ -471,6 +472,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="technical_file_id" widget="many2one"/>
+                    <field name="brand_id" widget="many2one"/>
                     <field name="sales_team_id" widget="many2one"/>
                     <field name="responsible_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
