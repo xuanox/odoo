@@ -91,61 +91,62 @@ class RegulatoryTechnicalFile(models.Model):
 class RegulatoryTechnicalFileRegistry(models.Model):
     _name = 'regulatory.technical.file.registry'
     _description = 'Regulatory Technical File Registry'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
 
-    name = fields.Char(string="Proposed Name for the File", required=True, translate=True)
-    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number')
-    technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name')
-    observation=fields.Text('Observation')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team')
-    responsible_id = fields.Many2one('res.users', string='Responsible', default=lambda self: self.env.user)
-    models_id = fields.Many2one('equipment.model', string='Models Equipments')
-    brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand')
-    stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', default=_default_stage)
+    name = fields.Char('#Request:', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.registry'), copy=False, required=True, readonly=True)
+    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
+    technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
+    observation=fields.Text('Observation', track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
+    models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
+    brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
+    stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
 
 
 class RegulatoryTechnicalFileCreation(models.Model):
     _name = 'regulatory.technical.file.creation'
     _description = 'Regulatory Technical File Creation'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
 
     name = fields.Char(string="Proposed Name for the File", required=True)
-    observation=fields.Text('Observation')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team')
-    responsible_id = fields.Many2one('res.users', string='Responsible', default=lambda self: self.env.user)
-    models_id = fields.Many2one('equipment.model', string='Model Equipment')
-    stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', default=_default_stage)
+    observation=fields.Text('Observation', track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
+    models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange')
+    brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
+    stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
 
 
 class RegulatoryTechnicalFileModification(models.Model):
     _name = 'regulatory.technical.file.modification'
     _description = 'Regulatory Technical File Modification'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
 
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
-    name = fields.Char('Name of the Technical File', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.modification'), copy=False, required=True)
-    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number')
-    technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name')
-    observation=fields.Text('Description')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team')
-    responsible_id = fields.Many2one('res.users', string='Responsible', default=lambda self: self.env.user)
-    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale')
-    models_id = fields.Many2one('equipment.model', string='Models Equipments')
-    brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand')
-    stage_id = fields.Many2one('regulatory.technical.file.modification.stage', string='Stage', default=_default_stage)
-    modification_lines = fields.One2many('regulatory.technical.file.modification.line', 'regulatory_technical_file_modification_id', 'Modification Line')
+    name = fields.Char('#Request:', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.modification'), copy=False, required=True, readonly=True)
+    technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
+    technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
+    observation=fields.Text('Description', track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
+    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange')
+    models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
+    brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
+    stage_id = fields.Many2one('regulatory.technical.file.modification.stage', string='Stage', track_visibility='onchange', default=_default_stage)
+    modification_lines = fields.One2many('regulatory.technical.file.modification.line', 'regulatory_technical_file_modification_id', 'Modification Line', track_visibility='onchange')
 
 
 class RegulatoryTechnicalFileModificationLine(models.Model):
