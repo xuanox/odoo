@@ -135,7 +135,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
-    name = fields.Char(string="Name of the Technical File", required=True)
+    name = fields.Char('Name of the Technical File', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.modification'), copy=False, required=True)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name')
     observation=fields.Text('Description')
