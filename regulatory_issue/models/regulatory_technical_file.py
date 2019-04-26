@@ -109,7 +109,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', copy=False, readonly=True, default=lambda x: x.env['ir.sequence'].get('regulatory.technical.file.creation'))
+    name = fields.Char('#Request:', readonly=True, copy=False)
     technical_file_name = fields.Char(string="Proposed Name for the File", required=True, track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
@@ -130,7 +130,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', readonly=True, copy=False, required=True)
+    name = fields.Char('#Request:', readonly=True, copy=False)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Description', track_visibility='onchange')
