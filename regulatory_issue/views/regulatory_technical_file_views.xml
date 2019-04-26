@@ -496,10 +496,10 @@
             <field name="name">regulatory.technical.file.modification.view.graph</field>
             <field name="model">regulatory.technical.file.modification</field>
             <field name="arch" type="xml">
-                <graph string="Technical File Modification">
+                <graph string="Technical File Modification"  type="pie">
                     <field name="brand_id" type="col"/>
-                    <field name="responsible_id" type="col"/>
-                    <field name="responsible_sales_id" type="row"/>
+                    <field name="responsible_sales_id" type="col"/>
+                    <field name="responsible_id" type="row"/>
                 </graph>
             </field>
         </record>
@@ -516,11 +516,23 @@
             </field>
         </record>
 
+        <record id="regulatory_technical_file_modification_view_dashboard" model="ir.ui.view">
+            <field name="name">regulatory.technical.file.modification.view.dashboard</field>
+            <field name="model">regulatory.technical.file.modification</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <dashboard>
+                    <view type="graph" ref="regulatory_issue.regulatory_technical_file_modification_view_graph"/>
+                    <view type="pivot" ref="regulatory_issue.regulatory_technical_file_modification_view_pivot"/>
+                </dashboard>
+            </field>
+        </record>
+
         <record id="regulatory_technical_file_modification_action" model="ir.actions.act_window">
             <field name="name">Technical File Modification</field>
             <field name="res_model">regulatory.technical.file.modification</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,pivot,graph</field>
+            <field name="view_mode">tree,form,pivot,graph,dashboard</field>
         </record>
 
 
