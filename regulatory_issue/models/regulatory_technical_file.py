@@ -105,7 +105,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.creation'), copy=False, required=True)
+    name = fields.Char('#Request:', copy=False, readonly=True, required=True)
     technical_file_name = fields.Char(string="Proposed Name for the File", required=True, track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
