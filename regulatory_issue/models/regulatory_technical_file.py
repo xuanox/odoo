@@ -85,7 +85,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.registry'), copy=False, required=True)
+    name = fields.Char('#Request:', copy=False, required=True)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
@@ -110,7 +110,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
     responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid),index=True)
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(responsible_sales_id=self.env.uid),index=True)
     models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
     stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
@@ -126,11 +126,11 @@ class RegulatoryTechnicalFileModification(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', default=lambda self: self.env['ir.sequence'].next_by_code('regulatory.technical.file.modification'), copy=False, required=True)
+    name = fields.Char('#Request:', copy=False, required=True)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Description', track_visibility='onchange')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid),index=True)
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(responsible_sales_id=self.env.uid),index=True)
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
     responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
