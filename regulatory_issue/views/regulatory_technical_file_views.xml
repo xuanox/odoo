@@ -301,7 +301,7 @@
                 </header>
                 <sheet>
                   <div class="oe_title">
-                          <label for="name" class="oe_edit_only" string="Name"/>
+                          <label for="name" class="oe_edit_only" string="#Request:"/>
                           <h1>
                               <field name="name" placeholder="Name"/>
                           </h1>
@@ -368,7 +368,7 @@
                 </header>
                   <sheet>
                       <div class="oe_title">
-                          <label for="name" class="oe_edit_only" string="Proposed Name for the File"/>
+                          <label for="name" class="oe_edit_only" string="#Request:"/>
                           <h1>
                               <field name="name" placeholder="Proposed Name for the File"/>
                           </h1>
@@ -407,9 +407,11 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
+                    <field name="brand_id" widget="many2one"/>
+                    <field name="models_id" widget="many2one"/>
                     <field name="sales_team_id" widget="many2one"/>
                     <field name="responsible_id" widget="many2one"/>
-                    <field name="models_id" widget="many2one"/>
+                    <field name="responsible_sales_id" widget="many2one"/>
                     <field name="stage_id" widget="many2one"/>
                 </tree>
             </field>
@@ -433,7 +435,7 @@
                 </header>
                   <sheet>
                       <div class="oe_title">
-                          <label for="name" class="oe_edit_only" string="Name"/>
+                          <label for="name" class="oe_edit_only" string="#Request:"/>
                           <h1>
                               <field name="name" placeholder="Name"/>
                           </h1>
