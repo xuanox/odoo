@@ -17,4 +17,13 @@
             <field name="padding">5</field>
         </record>
     </data>
+
+    <data noupdate="1">
+        <record id="seq_technical_file_creation" model="ir.sequence">
+            <field name="name">Technical File Creation</field>
+            <field name="code">regulatory.technical.file.creation</field>
+            <field name="prefix">TFC/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
 </odoo>
