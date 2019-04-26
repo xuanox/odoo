@@ -419,6 +419,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+<!-- Technical File Modification -->
         <record id="regulatory_technical_file_modification_view_form" model="ir.ui.view">
             <field name="name">regulatory.technical.file.modification.view.form</field>
             <field name="model">regulatory.technical.file.modification</field>
