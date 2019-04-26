@@ -492,11 +492,35 @@
             </field>
         </record>
 
+        <record id="regulatory_technical_file_modification_view_graph" model="ir.ui.view">
+            <field name="name">regulatory.technical.file.modification.view.graph</field>
+            <field name="model">regulatory.technical.file.modification</field>
+            <field name="arch" type="xml">
+                <graph string="Technical File Modification">
+                    <field name="brand_id" type="col"/>
+                    <field name="responsible_id" type="col"/>
+                    <field name="responsible_sales_id" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="regulatory_technical_file_modification_view_pivot" model="ir.ui.view">
+            <field name="name">regulatory.technical.file.modification.view.pivot</field>
+            <field name="model">regulatory.technical.file.modification</field>
+            <field name="arch" type="xml">
+                <pivot string="Technical File Modification" disable_linking="True">
+                    <field name="brand_id" type="row"/>
+                    <field name="responsible_sales_id" type="col"/>
+                    <field name="responsible_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
         <record id="regulatory_technical_file_modification_action" model="ir.actions.act_window">
             <field name="name">Technical File Modification</field>
             <field name="res_model">regulatory.technical.file.modification</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
         </record>
 
 
