@@ -75,6 +75,10 @@ class RegulatoryTechnicalFile(models.Model):
     group_id = fields.Many2one('regulatory.technical.file.group', string='Group')
     type_area_id = fields.Many2one('regulatory.technical.file.type.area', string='Type Area')
 
+    _sql_constraints = [
+        ('technical_file_model_uniq', 'unique (name)', u'This fact sheet number already exists in our database, enter another number'),
+    ]
+
 
 class RegulatoryTechnicalFileRegistry(models.Model):
     _name = 'regulatory.technical.file.registry'
@@ -105,7 +109,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', copy=False, readonly=True, required=True)
+    name = fields.Char('#Request:', copy=False, readonly=True, default=lambda x: x.env['ir.sequence'].get('regulatory.technical.file.creation'))
     technical_file_name = fields.Char(string="Proposed Name for the File", required=True, track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
