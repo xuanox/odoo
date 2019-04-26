@@ -191,7 +191,7 @@
             <field name="name">continuous.improvement.view.pivot</field>
             <field name="model">continuous.improvement</field>
             <field name="arch" type="xml">
-                <pivot string="Continuous Improvement" disable_linking="True">
+                <pivot string="Continuous Improvement">
                     <field name="create_date" interval="month" type="row"/>
                     <field name="stage_id" type="col"/>
                     <field name="type_id" type="col"/>
