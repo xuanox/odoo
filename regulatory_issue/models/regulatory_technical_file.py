@@ -85,7 +85,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', copy=False, required=True)
+    name = fields.Char('#Request:', readonly=True, copy=False, required=True)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
@@ -126,7 +126,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', copy=False, required=True)
+    name = fields.Char('#Request:', readonly=True, copy=False, required=True)
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Description', track_visibility='onchange')
