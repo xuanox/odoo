@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
 <template id="report_technical_support_order">
-    <t t-call="web.html_container">
-        <t t-foreach="docs" t-as="o">
-            <t t-call="web.internal_layout">
-                <div class="page">
-                    <div class="oe_structure"/>
-                    <h2>Maintenance Order № : <span t-field="o.name"/></h2>
+    <t t-call="web.external_layout">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+        <t t-set="address">
+            <div t-field="o.partner_id"
+            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+            <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
+        </t>
+        <t t-if="o.dest_address_id">
+            <t t-set="information_block">
+                <strong>Shipping address:</strong>
+                <div t-if="o.dest_address_id">
+                    <div t-field="o.dest_address_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
+                </div>
 
-                    <div class="row mt32 mb32">
-                        <div class="col-3">
-                            <strong>equipment:</strong><br/>
-                            <span t-field="o.equipment_id.name"/>
-                        </div>
-                        <div class="col-3">
-                            <strong>Maintenance Type:</strong><br/>
-                            <span t-field="o.maintenance_type"/>
-                        </div>
-                        <div class="col-3">
-                            <strong>Description:</strong><br/>
-                            <span t-field="o.description"/>
+            </t>
+        </t>
+        <div class="page">
+            <div class="oe_structure"/>
+
+                <h2>Maintenance Order № : <span t-field="o.name"/></h2>
+
+                <div class="row mt32 mb32">
+                    <div class="col-3">
+                        <strong>equipment:</strong><br/>
+                        <span t-field="o.equipment_id.name"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Maintenance Type:</strong><br/>
+                        <span t-field="o.maintenance_type"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Description:</strong><br/>
+                        <span t-field="o.description"/>
                         </div>
                         <div class="col-3">
                             <strong>Source Document:</strong><br/>
@@ -90,10 +104,7 @@
                     <p t-if="o.problem_description" t-field="o.problem_description"/>
 
                     <div class="oe_structure"/>
-                </div>
-            </t>
-        </t>
+        </div>
     </t>
 </template>
-</data>
-</openerp>
+</odoo>
