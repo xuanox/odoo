@@ -17,14 +17,15 @@
 	# for the full list
 	'category': 'Invoicing &amp; Payments',
 	'license': 'LGPL-3',
-	'version': '0.17',
+	'version': '0.18',
 	
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],
 	
 	# always loaded
 	'data': [
-		'views/products.xml'
+		'views/products.xml',
+		'views/ledger_report.xml'
 	],
 	
 	'installable': True,

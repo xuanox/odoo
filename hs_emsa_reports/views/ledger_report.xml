@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="action_emsa_report_partner_ledger" model="ir.actions.client">
+			<field name="name">EMSA Partner Ledger</field>
+			<field name="tag">account_report</field>
+			<field name="context" eval="{'model': 'emsa.partner.ledger'}" />
+		</record>
+
+		<menuitem id="menu_action_emsa_report_partner_ledger" name="EMSA Partner Ledger" action="action_emsa_report_partner_ledger" parent="menu_emsa_group" groups="account.group_account_user"/>
+	</data>
+</odoo>
