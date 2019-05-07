@@ -10,14 +10,14 @@ class LedgerReportInherit(models.AbstractModel):
 	_inherit = "account.partner.ledger"
 
 	def _get_columns_name(self, options):
-		columns = super(LedgerReportInherit, self).create(options)
+		columns = super(LedgerReportInherit, self)._get_columns_name(options)
 		columns.append({'name': _('Categoria')})
 		return columns
 
 	
 	@api.model
 	def _get_lines(self, options, line_id=None):
-		lines = super(LedgerReportInherit, self).create(options, line_id)
+		lines = super(LedgerReportInherit, self)._get_lines(options, line_id)
 
 
 
