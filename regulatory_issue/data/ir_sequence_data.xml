@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_technical_file_modification" model="ir.sequence">
+            <field name="name">Technical File Modification</field>
+            <field name="code">regulatory.technical.file.modification</field>
+            <field name="prefix">TFM/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="seq_technical_file_registry" model="ir.sequence">
+            <field name="name">Technical File Registry</field>
+            <field name="code">regulatory.technical.file.registry</field>
+            <field name="prefix">TFR/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="seq_technical_file_creation" model="ir.sequence">
+            <field name="name">Technical File Creation</field>
+            <field name="code">regulatory.technical.file.creation</field>
+            <field name="prefix">TFC/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

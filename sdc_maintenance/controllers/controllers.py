@@ -9,87 +9,47 @@ class OpenMaintenance(http.Controller):
     @http.route('/intervention', type='http', auth='user', website=True)
     def navigate_to_intervention_page(self):
         user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
-        intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent)])
-        values = {
-            'user': user,
-            'create_uid': user,
-            'parent': parent,
-            'parent_name': parent_name,
-            'intervention_ids': intervention_ids,
-        }
-        return http.request.render('sdc_maintenance.intervention_page', values)
+        intervention_ids = http.request.env['maintenance.intervention'].sudo().search([('technician_id','=',user)])
+        return http.request.render('sdc_maintenance.intervention_page', {'intervention_ids': intervention_ids})
     
     @http.route('/pm', type='http', auth='user', website=True)
     def navigate_to_pm_page(self):
         user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
-        pm_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent),('type','=','Preventivo')])
-        values = {
-            'user': user,
-            'parent': parent,
-            'parent_name': parent_name,
-            'pm_ids': pm_ids,
-        }
-        return http.request.render('sdc_maintenance.pm_page', values)
+        pm_ids = http.request.env['maintenance.request'].sudo().search([('technician_user_id','=',user),('maintenance_type','=','preventive')])
+        return http.request.render('sdc_maintenance.pm_page', {'pm_ids': pm_ids})
     
     @http.route('/cm', type='http', auth='user', website=True)
     def navigate_to_cm_page(self):
         user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
-        cm_ids = http.request.env['maintenance.intervention'].sudo().search([('x_cliente.id','=',parent),('type','=','Correctivo')])
-        values = {
-            'user': user,
-            'parent': parent,
-            'parent_name': parent_name,
-            'cm_ids': cm_ids,
-        }
-        return http.request.render('sdc_maintenance.cm_page', values)  
+        cm_ids = http.request.env['maintenance.request'].sudo().search([('technician_user_id','=',user),('maintenance_type','=','corrective')])
+        return http.request.render('sdc_maintenance.cm_page', {'cm_ids': cm_ids})  
     
     @http.route('/wo', type='http', auth='user', website=True)
     def navigate_to_wo_page(self):
         user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
         wo_ids = http.request.env['maintenance.order'].sudo().search([('technician_id','=',user)])
         return http.request.render('sdc_maintenance.wo_page', {'wo_ids': wo_ids})
     
     #data post
-    MANDATORY_BILLING_FIELDS = ["motif","equipment_id"]
+    MANDATORY_BILLING_FIELDS = ["motif","equipment_id","partner_id"]
     @http.route('/intervention/request/success', type='http', auth='public', website=True)
     def navigate_to_success_page(self):
-        user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
-        values = {
-            'user': user,
-            'parent': parent,
-            'parent_name': parent_name,
-        }
-        return http.request.render('sdc_maintenance.succes_page', values)
+        return http.request.render('sdc_maintenance.succes_page', {})
 
     @http.route('/intervention/request/error', type='http', auth='public', website=True)
     def navigate_to_error_page(self):
-        user = http.request.env.context.get('uid')
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
-        values = {
-            'user': user,
-            'parent': parent,
-            'parent_name': parent_name,
-        }
-        return http.request.render('sdc_maintenance.error_page', values)
+        return http.request.render('sdc_maintenance.error_page', {})
            
-    @http.route(['/intervention/request'], type='http', auth='user', website=True)
+    @http.route(['/intervention/request'], type='http', auth='public', website=True)
     def register(self, redirect=None, **post):    
-        user = request.env.user.id
-        parent = request.env.user.parent_id.id
-        parent_name = request.env.user.parent_id.name
-        equipments = request.env['maintenance.equipment'].sudo().search([('x_studio_cliente.id','=',parent)])
-        equip_states = request.env['asset.state'].sudo().search([('team','=',3)])
+        equipments = request.env['maintenance.equipment'].sudo().search([])
+        zones = request.env['maintenance.zone'].sudo().search([])
+        partners = request.env['res.partner'].sudo().search([])
+        categories = request.env['maintenance.equipment.category'].sudo().search([])
+        failures = request.env['maintenance.failure'].sudo().search([])
+        priorities = ['0', '1','2','3']
+        equip_states = ['start', 'stop']
+    
         values = {
             'error': {},
             'error_message': []
@@ -107,11 +67,12 @@ class OpenMaintenance(http.Controller):
 
         values = {
             'equipments' : equipments,
+            'priorities' : priorities,
             'equip_states' : equip_states,
-            'user': user,
-            'create_uid': user,
-            'parent': parent,
-            'parent_name': parent_name,
+            'zones' : zones,
+            'partners' : partners,
+            'categories' : categories,
+            'failures' : failures,
             
         }    
         return request.render("sdc_maintenance.request", values)
@@ -119,11 +80,15 @@ class OpenMaintenance(http.Controller):
     
     def _process_registration(self, post):
         request.env['maintenance.intervention'].sudo().create({
+            'category_id' : post.get('category_id'),
             'equipment_id': post.get('equipment_id'),
             'motif': post.get('motif'),
-            'x_studio_estado_del_equipo': post.get('state_id'),
-            'x_studio_solicitado_por':post.get('user'),
-            'create_uid':post.get('user'),
+            'priority': post.get('priority'),
+            'failure_type': post.get('failure_type'),
+            'partner': post.get('partner_id'),
+            'zone_id': post.get('zone_id'),
+            'state_machine': post.get('state_id'),
+            
     })
     
 

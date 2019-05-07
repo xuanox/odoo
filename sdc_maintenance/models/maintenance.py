@@ -118,10 +118,10 @@ class MaintenanceEquipement(models.Model):
     safety=fields.Text(u'Instruction de sécurité')
     image=fields.Binary(u'Image')
         
-    intervention_ids=fields.One2many('maintenance.intervention','equipment_id',u'Intervention Ids')
+    intervention_ids=fields.One2many('maintenance.intervention','equipment_id',u'Intervention')
     ot_ids=fields.One2many('maintenance.order','equipment_id',u'Ordre de travail')
         
-    intervention_count=fields.Integer(string='Intervention Count',compute='_intervention_count', store=True)
+    intervention_count=fields.Integer(string='Intervention',compute='_intervention_count', store=True)
     ot_count=fields.Integer(compute='_ot_count',  string='OT')
     pm_count=fields.Integer(compute='_pm_maintenance_count', string='MP')
     cm_count=fields.Integer(compute='_pm_maintenance_count', string='MC')
@@ -129,7 +129,7 @@ class MaintenanceEquipement(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    is_piece=fields.Boolean(u'Es Pieza')
+    is_piece=fields.Boolean(u'Peut être piece de rechange')
 
     
 class MaintenanceIntervention(models.Model):
@@ -168,9 +168,9 @@ class MaintenanceIntervention(models.Model):
     equipment_id=fields.Many2one('maintenance.equipment', u'Equipement')  
     category_id = fields.Many2one('maintenance.equipment.category', related='equipment_id.category_id', string='Category', store=True, readonly=True) 
     partner=fields.Many2one('res.partner', u'Client',domain=[('customer','=',True)])
-    warranty=fields.Boolean(u'Bajo garantia')
+    warranty=fields.Boolean(u'Sous garantie')
     failure_type=fields.Many2one('maintenance.failure', u'Type de panne')
-    contact=fields.Char(u'Contacto')
+    contact=fields.Char(u'Contact')
     date_inter=fields.Datetime(u'Pour intervention le')
     date_end=fields.Datetime(u'Date d\'intervention')
         
@@ -181,14 +181,14 @@ class MaintenanceIntervention(models.Model):
     priority = fields.Selection([('0', 'Very Low'), ('1', 'Low'), ('2', 'Normal'), ('3', 'High')], string='Priorité')
     color = fields.Integer('Color Index')
     observation=fields.Text(u'Rapport d\'intervention')
-    bon_bool=fields.Boolean(u'Orden de Trabajo')
+    bon_bool=fields.Boolean(u'Ordre de travail')
     motif=fields.Text('Motif')
     #notice=fields.Many2one('maintenance.order',u'Bon')
     product_ids=fields.One2many('product.piece','piece_id_intrv',u'Piece de rechange')
         
     type=fields.Many2one('intervention.type', string="Type d'intervention")
-    state_machine=fields.Selection([('start','Online'),('stop','Offline')],u'Estado del Equipo')
-    state=fields.Selection([('draft',u'Nueva Solicitud'),('process',u'En Proceso'),('worko',u'Orden de Trabajo'),('done',u'Completado'),('cancel',u'Cancelado')],u'Statut',track_visibility='always', default='draft')
+    state_machine=fields.Selection([('start','En Marche'),('stop','En Arret')],u'Etat à la demande')
+    state=fields.Selection([('draft',u'Nouvelle demande'),('process',u'En cours'),('worko',u'Ordre de travail'),('done',u'Traité'),('cancel',u'Annulé')],u'Statut',track_visibility='always', default='draft')
     kanban_state = fields.Selection([('normal', 'In Progress'), ('blocked', 'Blocked'), ('done', 'Ready for next stage')],
                                     string='Kanban State', required=True, default='normal', track_visibility='onchange')
     type_re=fields.Selection([('re',u'Reclamation'),('inter',u'Intervention'),('pm',u'Maintenance preventive'),('cm',u'Maintenance corrective'),('lot',u'Lot')],u'Type de resource', default='inter')
@@ -199,8 +199,8 @@ class MaintenanceIntervention(models.Model):
     date_service=fields.Date(u'Date de mise en service')
     date_reception=fields.Date(u'Date de reception client')
         
-    amount=fields.Float(u'Taux')
-    devis_ok=fields.Boolean(u'invoiced')
+    amount=fields.Float(u'Taux'),
+    devis_ok=fields.Boolean(u'invoiced'),
     ot=fields.Char(u'N° OT',track_visibility='always')
     
 
@@ -392,28 +392,28 @@ class maintenanceOrder(models.Model):
             return self.write({'state' : 'invoice'})
     
     name=fields.Char(u'N° Ordre de travail',readonly=True, default=lambda x: x.env['ir.sequence'].get('maintenance.order'))
-    state=fields.Selection([('plan',u'Planificado'),('draft',u'En Curso'),('invoice',u'Completado'),('done',u'Servicio Completado'),('cancel',u'Cancelado')],u'Statut',track_visibility='always', default='plan')
+    state=fields.Selection([('plan',u'Planifié'),('draft',u'En cours'),('invoice',u'Devis à faire'),('done',u'Traité'),('cancel',u'Annulé')],u'Statut',track_visibility='always', default='plan')
     zone_id=fields.Many2one('maintenance.zone', u'Zone')
     partner_id=fields.Many2one('res.partner', u'Client',domain=[('customer','=',True)])
     equipment_id=fields.Many2one('maintenance.equipment', u'Equipement')
     category_id = fields.Many2one('maintenance.equipment.category', related='equipment_id.category_id', string='Catégorie', store=True, readonly=True) 
-    warranty=fields.Boolean(u'Bajo garantia')
+    warranty=fields.Boolean(u'Sous garantie')
     type_id=fields.Many2one('intervention.type',u'Type d\'intervention')
     date=fields.Datetime(u'Date de l’OT', default=datetime.today())
     user_id=fields.Many2one('res.users', u'Responsable',default=lambda self: self._uid)   
     product_ids=fields.One2many('product.piece','piece_id_incid',u'Liste de pièces')
     history_ids=fields.One2many('maintenance.history', 'incident_id', u'Resources affectées',ondelete='set null')
-    description=fields.Text(u'Informe')
-    reclamation=fields.Text(u'Descripción')
+    description=fields.Text(u'Rapport')
+    reclamation=fields.Text(u'Description')
     devis_ok=fields.Boolean(u'Devis')
     interv_id=fields.Many2one('maintenance.intervention',u'Source')
     cm_ok=fields.Boolean(u'cm ok')
     pm_ok=fields.Boolean(u'pm ok')
     interv_ok=fields.Boolean(u'interv ok')
-    failure_type=fields.Many2one('maintenance.failure', u'Tipo de Falla')
+    failure_type=fields.Many2one('maintenance.failure', u'Type de panne')
     devis_track=fields.Char(u'N° de devis',track_visibility='always')      
-    maintenance_id = fields.Many2one('maintenance.checklist.history', 'Lista de Control')
-    state_machine=fields.Selection([('start','Online'),('stop','Offline')],u'Estado del Equipo')
+    maintenance_id = fields.Many2one('maintenance.checklist.history', 'Liste de contrôle')
+    state_machine=fields.Selection([('start','En Marche'),('stop','En Arret')],u'Etat à la demande')
     
     technician_id=fields.Many2one('res.users', u'Technicien')
     priority = fields.Selection([('0', 'Very Low'), ('1', 'Low'), ('2', 'Normal'), ('3', 'High')], string='Priorité')
@@ -568,7 +568,7 @@ class maintenanceChecklistHistory(models.Model):
     date_end=fields.Datetime("Date de fin")
     category_id=fields.Many2one('maintenance.equipment.category', u'Catégorie')
     user_id=fields.Many2one('res.users', 'Responsable')
-    state=fields.Selection([('draft', 'Borrador'), ('confirmed', 'Confirmado'),('done', 'Valido')], "Status",track_visibility='always', default='draft')
+    state=fields.Selection([('draft', 'Brouillon'), ('confirmed', 'Confirmé'),('done', 'Validé')], "Status",track_visibility='always', default='draft')
 
     
 class maintenanceChecklist(models.Model):
@@ -667,17 +667,17 @@ class MaintenanceRequest(models.Model):
                         record.state = u'OK'
             return True
           
-    meter=fields.Selection([ ('days', 'Jours')], u'Unidad de Medida', default='days')
+    meter=fields.Selection([ ('days', 'Jours')], u'Unité de mésure', default='days')
     recurrent=fields.Boolean(u'Recurrent ?', help="Mark this option if PM is periodic")
-    days_interval=fields.Integer(u'Intervalo (días)')  
-    days_last_done=fields.Date(u'Último mantenimiento')
+    days_interval=fields.Integer(u'Intervalle (jours)')  
+    days_last_done=fields.Date(u'Dernière maintenance')
     days_next_due=fields.Date(compute='_days_next_due', string='Prochaine maintenance')
     days_warn_period=fields.Integer('Date d\'alerte')
     days_left=fields.Integer(compute='_days_left', string='Jours restants')
     state=fields.Char(compute='_get_state', string='Status',track_visibility='always')
     motif=fields.Text('Motif')
     technician_user_id = fields.Many2one('res.users', string='Technicien', track_visibility='onchange')
-    state_machine=fields.Selection([('start','Online'),('stop','Offline')],u'Estado del Equipo', default='start')
+    state_machine=fields.Selection([('start','En Marche'),('stop','En Arret')],u'Etat à la demande', default='start')
     equipment_id=fields.Many2one('maintenance.equipment', u'Equipement')
     partner_id=fields.Many2one('res.partner', u'Client',domain=[('customer','=',True)])
     
