@@ -60,7 +60,7 @@ class ledgerReportInherit(models.AbstractModel):
         return columns
 
     def _set_context(self, options):
-        ctx = super(ReportPartnerLedger, self)._set_context(options)
+        ctx = super(ledgerReportInherit, self)._set_context(options)
         ctx['strict_range'] = True
         return ctx
 
