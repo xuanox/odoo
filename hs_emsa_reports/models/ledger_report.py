@@ -18,9 +18,32 @@ class LedgerReportInherit(models.AbstractModel):
 	@api.model
 	def _get_lines(self, options, line_id=None):
 		lines = super(LedgerReportInherit, self)._get_lines(options, line_id)
+		for line in lines:
+			if type(line.id) is not str:
+				move_line = self.env["account.move.line"].search(["id", "=", line.id])
+				account_invoice = self.env["account.invoice"].search(["id", "=", move_line.invoice_id])
+				if account_invoice.type == "out_refund":
+					line["columns"].append("Nota Credito")
+				elif account_invoice.type == "out_invoice":
+					line["columns"].append("Invoice")
+			else:
+				line["columns"].append("")
+		return lines
 
 
+"""
+domain_columns = [line.journal_id.code, 
+				  line.account_id.code, 
+				  self._format_aml_name(line),
+				  line.date_maturity and format_date(self.env, line.date_maturity) or '',
+                  line.full_reconcile_id.name or '', 
+				  self.format_value(progress_before),
+				  line_debit != 0 and self.format_value(line_debit) or '',
+                  line_credit != 0 and self.format_value(line_credit) or '']
+"""
 
+
+"""
 class ResPartnerInherit(models.Model):
 	_inherit = 'res.partner'
 
@@ -298,3 +321,4 @@ class ledgerReportInherit(models.AbstractModel):
     @api.model
     def _get_report_name(self):
         return _('Partner Ledger')
+"""
