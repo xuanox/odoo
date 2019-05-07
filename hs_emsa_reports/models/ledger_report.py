@@ -19,7 +19,7 @@ class LedgerReportInherit(models.AbstractModel):
 	def _get_lines(self, options, line_id=None):
 		lines = super(LedgerReportInherit, self)._get_lines(options, line_id)
 		for line in lines:
-			if type(line.id) is not str:
+			if type(line["id"]) is not str:
 				move_line = self.env["account.move.line"].search(["id", "=", line.id])
 				account_invoice = self.env["account.invoice"].search(["id", "=", move_line.invoice_id])
 				if account_invoice.type == "out_refund":
