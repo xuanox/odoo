@@ -11,7 +11,7 @@ class LedgerReportInherit(models.AbstractModel):
 
 	def _get_columns_name(self, options):
 		columns = super(LedgerReportInherit, self)._get_columns_name(options)
-		columns.append({'name': _('Categoria')})
+		columns.append({'name': _('Type')})
 		return columns
 
 	
@@ -21,10 +21,11 @@ class LedgerReportInherit(models.AbstractModel):
 		for line in lines:
 			if type(line["id"]) is not str:
 				move_line = self.env["account.move.line"].search([("id", "=", line["id"])])
-				account_invoice = self.env["account.invoice"].search([("id", "=", move_line.invoice_id)])
-				if account_invoice.type == "out_refund":
-					line["columns"].append({"name": "Nota Credito"})
-				elif account_invoice.type == "out_invoice":
+				#account_invoice = self.env["account.invoice"].search([("id", "=", move_line.invoice_id)])
+				document = move_line.invoice_id
+				if document.type == "out_refund":
+					line["columns"].append({"name": "Credit Note"})
+				elif document.type == "out_invoice":
 					line["columns"].append({"name": "Invoice"})
 			else:
 				line["columns"].append({"name": ""})
