@@ -6,6 +6,20 @@ from odoo.tools import float_is_zero
 from odoo.tools.misc import format_date
 from datetime import datetime, timedelta
 
+class LedgerReportInherit(models.AbstractModel):
+	_inherit = "account.partner.ledger"
+
+	def _get_columns_name(self, options):
+		columns = super(LedgerReportInherit, self).create(options)
+		columns.append({'name': _('Categoria')})
+		return columns
+
+	
+	@api.model
+	def _get_lines(self, options, line_id=None):
+		lines = super(LedgerReportInherit, self).create(options, line_id)
+
+
 
 class ResPartnerInherit(models.Model):
 	_inherit = 'res.partner'
