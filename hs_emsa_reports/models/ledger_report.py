@@ -23,11 +23,11 @@ class LedgerReportInherit(models.AbstractModel):
 				move_line = self.env["account.move.line"].search(["id", "=", line.id])
 				account_invoice = self.env["account.invoice"].search(["id", "=", move_line.invoice_id])
 				if account_invoice.type == "out_refund":
-					line["columns"].append("Nota Credito")
+					line["columns"].append({"name": "Nota Credito"})
 				elif account_invoice.type == "out_invoice":
-					line["columns"].append("Invoice")
+					line["columns"].append({"name": "Invoice"})
 			else:
-				line["columns"].append("")
+				line["columns"].append({"name": ""})
 		return lines
 
 
