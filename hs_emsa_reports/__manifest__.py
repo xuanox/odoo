@@ -17,10 +17,10 @@
 	# for the full list
 	'category': 'Invoicing &amp; Payments',
 	'license': 'LGPL-3',
-	'version': '0.18',
+	'version': '0.19',
 	
 	# any module necessary for this one to work correctly
-	'depends': ['base', 'account'],
+	'depends': ['base', 'account', 'account_reports'],
 	
 	# always loaded
 	'data': [
