@@ -77,10 +77,10 @@ class LedgerReportInherit(models.AbstractModel):
 				move_line = self.env["account.move.line"].search([("id", "=", line["id"])])
 				document = move_line.invoice_id
 				if document.type == "out_refund":
-					columns[3] = {'name': "Credit Note"}
-					columns[4] = {'name': str(document.number)}
+					columns[2] = {'name': "Credit Note"}
+					columns[3] = {'name': str(document.number)}
 				elif document.type == "out_invoice":
-					columns[3] = {'name': "Invoice"}
-					columns[4] = {'name': str(document.number)}
+					columns[2] = {'name': "Invoice"}
+					columns[3] = {'name': str(document.number)}
 			line["columns"] = columns
 		return lines
