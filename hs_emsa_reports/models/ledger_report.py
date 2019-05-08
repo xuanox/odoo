@@ -60,9 +60,7 @@ class LedgerReportInherit(models.AbstractModel):
 		-----------------------------------------------------------------------------------------------
 		"""
 		if len(line) == 10:
-			for item in line:
-				_logger.debug("value in line is %s"%(str(item)))
-			return [ line[0], line[1], line[2], " ", " ", line[4], line[6], line[7], line[8], line[9] ]
+			return [ line[0], line[1], line[2], {'name': ""}, {'name': ""}, line[4], line[6], line[7], line[8], line[9] ]
 		else:
 			return line
 	
@@ -79,10 +77,10 @@ class LedgerReportInherit(models.AbstractModel):
 				move_line = self.env["account.move.line"].search([("id", "=", line["id"])])
 				document = move_line.invoice_id
 				if document.type == "out_refund":
-					columns[3] = "Credit Note"
-					columns[4] = document.number
+					columns[3] = {'name': "Credit Note"}
+					columns[4] = {'name': str(document.number)}
 				elif document.type == "out_invoice":
-					columns[3] = "Invoice"
-					columns[4] = document.number
+					columns[3] = {'name': "Invoice"}
+					columns[4] = {'name': str(document.number)}
 			line["columns"] = columns
 		return lines
