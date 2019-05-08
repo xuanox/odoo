@@ -5,6 +5,8 @@ from odoo import models, api, _, fields
 from odoo.tools import float_is_zero
 from odoo.tools.misc import format_date
 from datetime import datetime, timedelta
+import logging
+_logger = logging.getLogger(__name__)
 
 class LedgerReportInherit(models.AbstractModel):
 	_inherit = "account.partner.ledger"
@@ -57,8 +59,9 @@ class LedgerReportInherit(models.AbstractModel):
 		| "" | JRNL | Account | Type | Number  |    Due Date     | Initial Balance | Debit | Credit | Balance |
 		-----------------------------------------------------------------------------------------------
 		"""
-		import pdb; pdb.set_trace()
 		if len(line) == 10:
+			for item in line:
+				_logger.debug("value in line is %s"%(str(item)))
 			return [ line[0], line[1], line[2], " ", " ", line[4], line[6], line[7], line[8], line[9] ]
 		else:
 			return line
