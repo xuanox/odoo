@@ -76,6 +76,7 @@ class LedgerReportInherit(models.AbstractModel):
 			if type(line["id"]) is not str:
 				move_line = self.env["account.move.line"].search([("id", "=", line["id"])])
 				document = move_line.invoice_id
+				columns[4] = columns[3]
 				if document.type == "out_refund":
 					columns[2] = {'name': "Credit Note"}
 					columns[3] = {'name': str(document.number)}
