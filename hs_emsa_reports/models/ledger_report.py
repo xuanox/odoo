@@ -54,11 +54,12 @@ class LedgerReportInherit(models.AbstractModel):
 		------------------------------------------------------------------------------------------------------
 		Formato Nuevo
 		-----------------------------------------------------------------------------------------------
-		| "" | JRNL | Account | Type | Number | Due Date | Initial Balance | Debit | Credit | Balance |
+		| "" | JRNL | Account | Type | Number  |    Due Date     | Initial Balance | Debit | Credit | Balance |
 		-----------------------------------------------------------------------------------------------
 		"""
+		import pdb; pdb.set_trace()
 		if len(line) == 10:
-			return [ line[0], line[1], line[2], "", "", line[4], line[6], line[7], line[8], line[9] ]
+			return [ line[0], line[1], line[2], " ", " ", line[4], line[6], line[7], line[8], line[9] ]
 		else:
 			return line
 	
