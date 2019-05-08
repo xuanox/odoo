@@ -82,5 +82,8 @@ class LedgerReportInherit(models.AbstractModel):
 				elif document.type == "out_invoice":
 					columns[2] = {'name': "Invoice"}
 					columns[3] = {'name': str(document.number)}
+			else:
+				columns[2] = {'name': ""}
+				columns[3] = {'name': ""}
 			line["columns"] = columns
 		return lines
