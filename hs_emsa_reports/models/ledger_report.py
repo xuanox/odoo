@@ -12,7 +12,7 @@ class LedgerReportInherit(models.AbstractModel):
 	def _get_columns_name(self, options):
 		"""
 		Sobreescribimos el metodo haciendo uso de la propiedad super.
-		
+
 		columns = [
 			{},
 			{'name': _('JRNL')},
@@ -48,6 +48,7 @@ class LedgerReportInherit(models.AbstractModel):
 		Convertimos el movimiento del reporte viejo al movimiento nuevo. Como los campos tipo de 
 		factura 'Type' y Numero de Factura 'Number' no los tenemos, los asignamos en blanco
 		Formato Viejo:
+		  0    1         2      3       4             5                   6          7        8        9
 		------------------------------------------------------------------------------------------------------
 		| "" | JRNL | Account | Ref | Due Date | Matching Number | Initial Balance | Debit | Credit | Balance |
 		------------------------------------------------------------------------------------------------------
@@ -56,7 +57,10 @@ class LedgerReportInherit(models.AbstractModel):
 		| "" | JRNL | Account | Type | Number | Due Date | Initial Balance | Debit | Credit | Balance |
 		-----------------------------------------------------------------------------------------------
 		"""
-		return [ line[0], line[1], line[2], "", "", line[4], line[6], line[7], line[8], line[9] ]
+		if len(line) == 10:
+			return [ line[0], line[1], line[2], "", "", line[4], line[6], line[7], line[8], line[9] ]
+		else:
+			return line
 	
 
 	@api.model
