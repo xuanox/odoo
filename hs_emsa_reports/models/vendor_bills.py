@@ -9,7 +9,6 @@ class VendorBillsReport(models.AbstractModel):
 	@api.model
 	def _get_report_values(self, docids, data=None):
 		report = self.env["ir.actions.report"]._get_report_from_name('hs_emsa_reports.vendor_bill_template')
-		document = docids[0]
 		amount = 0.00
 		lines = []
 
@@ -23,11 +22,11 @@ class VendorBillsReport(models.AbstractModel):
 			})
 
 		return {
-			'doc_ids': [document],
+			'doc_ids': docids,
 			'doc_model': report.model,
 			'amount': amount,
 			'columns': lines,
-			'docs': [self.env[report.model].search([('id', '=', document)])],
+			'docs': self.env[report.model].browse(docids),
             'report_type': data.get('report_type') if data else '',
 		}
 
