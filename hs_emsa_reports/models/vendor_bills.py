@@ -2,7 +2,20 @@
 from odoo import api, fields, models
 
 
-class VendorBillsReport(models.Model):
+class VendorBillsReport(models.AbstractModel):
+	_name = "report.hs_emsa_reports.vendor_bill_template"
+
+	@api.model
+	def get_report_values(self, docids, data=None):
+		
+		return {
+			'doc_ids': data['ids'],
+			'doc_model': data['model'],
+			'docs': [],
+		}
+
+
+class VendorBillsInherit(models.Model):
 	_inherit = "account.invoice"
 
 

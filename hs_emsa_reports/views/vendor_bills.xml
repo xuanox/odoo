@@ -1,6 +1,6 @@
 <odoo>
 	<data>
-		<template id="print_vendor_bill">
+		<template id="vendor_bill_template">
 			<t t-call="web.html_container">
 				<t t-foreach="docs" t-as="o">
 					<t t-call="web.external_layout">
@@ -16,7 +16,7 @@
 		<report id="report_vendor_bill"
 			string="Vendors Bill Report"
 			model="account.invoice"
-			name="hs_emsa_reports.print_vendor_bill"
+			name="hs_emsa_reports.vendor_bill_template"
 			report_type="qweb-pdf"
 			attachment="'vendo_bill_report.pdf'"
 			print_report_name="'vendor bill',)"
