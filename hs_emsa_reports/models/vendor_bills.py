@@ -7,19 +7,20 @@ class VendorBillsReport(models.AbstractModel):
 
 	@api.model
 	def _get_report_values(self, docids, data=None):
-		total = 0.00
+		amount = 0.00
 		docs = []
 		for invoice in self:
-			total += invoice.amount_total
+			amount += invoice.amount_total
 			docs.append({
 				'number': invoice.number,
 				'date': invoice.due_date,
-				'monto': invoice.amount_total
+				'amount': invoice.amount_total
 			})
 
 		return {
 			'doc_ids': data['ids'],
 			'doc_model': data['model'],
+			'amount': amount,
 			'docs': docs,
 		}
 
@@ -33,4 +34,8 @@ class VendorBillsInherit(models.Model):
 		"""
 		Call when button 'Get Report' clicked.
 		"""
-		return self.env.ref('hs_emsa_reports.report_vendor_bill').report_action(self)
+		data = {
+			"ids":self.ids,
+			"model":self._name
+		}
+		return self.env.ref('hs_emsa_reports.report_vendor_bill').report_action(self, data=data)
