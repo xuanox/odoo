@@ -18,7 +18,7 @@ class VendorBillsReport(models.AbstractModel):
 			})
 
 		return {
-			'doc_ids': data['ids'],
+			'doc_ids': docids,
 			'doc_model': data['model'],
 			'amount': amount,
 			'docs': docs,
