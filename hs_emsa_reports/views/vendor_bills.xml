@@ -3,12 +3,27 @@
 	<data>
 		<template id="vendor_bill_template">
 			<t t-call="web.html_container">
-				<t t-foreach="docs" t-as="o">
-					<t t-call="web.external_layout">
-						<div class="page">
-							<h1>Hola Mundo</h1>
-						</div>
-					</t>
+				<t t-call="web.external_layout">
+					<div class="page">
+						<table>
+							<thead>
+								<tr>
+									<th>Factura</th>
+									<th>Fecha</th>
+									<th>Monto</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="docs" t-as="o">
+									<tr>
+										<td><span t-esc="o['number']"/></td>
+										<td><span t-esc="o['date']"/></td>
+										<td><span t-esc="o['amount']"/></td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
 				</t>
 			</t>
 		</template>
@@ -19,7 +34,6 @@
 			model="account.invoice"
 			name="hs_emsa_reports.vendor_bill_template"
 			report_type="qweb-pdf"
-			report_name="Pago_de_Factura.pdf"
 			attachment_use="False"
 			print_report_name="'vendor bill',)"
 		/>
