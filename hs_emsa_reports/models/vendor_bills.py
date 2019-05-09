@@ -29,7 +29,7 @@ class VendorBillsReport(models.AbstractModel):
 		}
 
 
-
+"""
 class VendorBillsInherit(models.Model):
 	_inherit = "account.invoice"
 
@@ -41,3 +41,4 @@ class VendorBillsInherit(models.Model):
 			"model":self._name
 		}
 		return self.env.ref('hs_emsa_reports.report_vendor_bill').report_action(self, data=data)
+"""
