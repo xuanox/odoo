@@ -10,14 +10,11 @@
 							<div class="row mt32 mb32">
 								<div class="col-auto mw-100 mb-2">
 									<strong>Date:</strong>
+									<p class="m-0" t-esc="date"/>
 								</div>
 								<div class="col-auto mw-100 mb-2">
 									<strong>Amount:</strong>
 									<p class="m-0" t-esc="amount"/>
-								</div>
-								<div class="col-auto mw-100 mb-2">
-									<strong>Number:</strong>
-									<p class="m-0" t-field="o.number"/>
 								</div>
 							</div>
 
@@ -40,6 +37,15 @@
 									</t>
 								</tbody>
 							</table>
+
+							<div class="row mt32 mb32">
+								<div class="col-xs-12 col-md-6">
+									<strong>Firma del Solicitante:</strong>
+								</div>
+								<div class="col-xs-12 col-md-6">
+									<strong>Firma del Autorizador:</strong>
+								</div>
+							</div>
 						</div>
 					</t>
 				</t>

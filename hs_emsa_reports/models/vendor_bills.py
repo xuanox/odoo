@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
-from datetime import datetime, timedelta
+import datetime
 
 
 class VendorBillsReport(models.AbstractModel):
@@ -10,6 +10,7 @@ class VendorBillsReport(models.AbstractModel):
 	def _get_report_values(self, docids, data=None):
 		report = self.env["ir.actions.report"]._get_report_from_name('hs_emsa_reports.vendor_bill_template')
 		amount = 0.00
+		current_date = (datetime.date.today()).strftime("%d/%m/%Y")
 		lines = []
 
 		for doc in docids:
@@ -24,6 +25,7 @@ class VendorBillsReport(models.AbstractModel):
 		return {
 			'doc_ids': docids,
 			'doc_model': report.model,
+			'date': current_date,
 			'amount': amount,
 			'columns': lines,
 			'docs': self.env[report.model].browse(docids),
