@@ -14,12 +14,12 @@
 
 
 		<report id="action_report_vendor_bill"
-		string="Vendors Bill Report"
-		model="account.invoice"
-		name="l10n_pa_check_printing.print_vendor_bill"
-		report_type="qweb-pdf"
-		attachment="'vendo_bill_report.pdf'"
-		print_report_name="'vendor bill',)"
+			string="Vendors Bill Report"
+			model="account.invoice"
+			name="hs_emsa_reports.print_vendor_bill"
+			report_type="qweb-pdf"
+			attachment="'vendo_bill_report.pdf'"
+			print_report_name="'vendor bill',)"
 		>
 	</data>
 </odoo>
