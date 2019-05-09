@@ -8,12 +8,12 @@ class VendorBillsReport(models.AbstractModel):
 	@api.model
 	def _get_report_values(self, docids, data=None):
 		report = self.env["ir.actions.report"]._get_report_from_name('hs_emsa_reports.vendor_bill_template')
-		invoices = self.env["account.invoice"].browse(docids)
 		document = [docids[0]]
 		amount = 0.00
 		lines = []
 
-		for item in invoices:
+		for doc in docids:
+			item = self.env["account.invoice"].search([('id', '=', doc)])
 			amount += item.amount_total
 			lines.append({
 				'number': item.number,
