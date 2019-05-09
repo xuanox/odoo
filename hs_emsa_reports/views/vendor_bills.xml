@@ -44,7 +44,7 @@
 			name="hs_emsa_reports.vendor_bill_template"
 			report_type="qweb-pdf"
 			attachment_use="False"
-			print_report_name="'vendor bill',)"
+			print_report_name="('vendor_bill_report.pdf')"
 		/>
 	</data>
 </odoo>
