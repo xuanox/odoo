@@ -13,7 +13,7 @@
 								</div>
 								<div class="col-auto mw-100 mb-2">
 									<strong>Amount:</strong>
-									<p class="m-0" t-esc="o['amount']"/>
+									<p class="m-0" t-esc="amount"/>
 								</div>
 							</div>
 
