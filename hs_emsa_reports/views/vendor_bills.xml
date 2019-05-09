@@ -19,8 +19,8 @@
 			model="account.invoice"
 			name="hs_emsa_reports.vendor_bill_template"
 			report_type="qweb-pdf"
+			report_name="Pago_de_Factura.pdf"
 			attachment_use="False"
-			attachment="'vendo_bill_report.pdf'"
 			print_report_name="'vendor bill',)"
 		/>
 	</data>
