@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
+from datetime import datetime, timedelta
 
 
 class VendorBillsReport(models.AbstractModel):
@@ -22,11 +23,11 @@ class VendorBillsReport(models.AbstractModel):
 			})
 
 		return {
-			'doc_ids': document,
+			'doc_ids': [document],
 			'doc_model': report.model,
 			'amount': amount,
 			'columns': lines,
-			'docs': self.env[report.model].search([('id', '=', document)]),
+			'docs': [self.env[report.model].search([('id', '=', document)])],
             'report_type': data.get('report_type') if data else '',
 		}
 
