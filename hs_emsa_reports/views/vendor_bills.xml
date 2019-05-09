@@ -13,7 +13,7 @@
 		</template>
 
 
-		<report id="action_report_vendor_bill"
+		<report id="report_vendor_bill"
 			string="Vendors Bill Report"
 			model="account.invoice"
 			name="hs_emsa_reports.print_vendor_bill"
