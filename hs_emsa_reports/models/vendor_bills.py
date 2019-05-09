@@ -6,12 +6,21 @@ class VendorBillsReport(models.AbstractModel):
 	_name = "report.hs_emsa_reports.vendor_bill_template"
 
 	@api.model
-	def get_report_values(self, docids, data=None):
-		
+	def _get_report_values(self, docids, data=None):
+		total = 0.00
+		docs = []
+		for invoice in self:
+			total += invoice.amount_total
+			docs.append({
+				'number': invoice.number,
+				'date': invoice.due_date,
+				'monto': invoice.amount_total
+			})
+
 		return {
 			'doc_ids': data['ids'],
 			'doc_model': data['model'],
-			'docs': [],
+			'docs': docs,
 		}
 
 
