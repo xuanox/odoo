@@ -22,7 +22,7 @@ class VendorBillsReport(models.AbstractModel):
 			})
 
 		return {
-			'doc_ids': docids,
+			'doc_ids': document,
 			'doc_model': report.model,
 			'amount': amount,
 			'columns': lines,
