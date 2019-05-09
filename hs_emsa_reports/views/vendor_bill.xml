@@ -1,0 +1,25 @@
+<odoo>
+	<data>
+		<template id="print_vendor_bill">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							<h1>Hola Mundo</h1>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+
+		<report id="action_report_vendor_bill"
+		string="Vendors Bill Report"
+		model="account.invoice"
+		name="l10n_pa_check_printing.print_vendor_bill"
+		report_type="qweb-pdf"
+		attachment="'vendo_bill_report.pdf'"
+		print_report_name="'vendor bill',)"
+		>
+	</data>
+</odoo>

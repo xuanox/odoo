@@ -17,7 +17,7 @@
 	# for the full list
 	'category': 'Invoicing &amp; Payments',
 	'license': 'LGPL-3',
-	'version': '0.37',
+	'version': '0.38',
 	
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account', 'account_reports'],
@@ -25,7 +25,8 @@
 	# always loaded
 	'data': [
 		'views/products.xml',
-		'views/ledger_report.xml'
+		'views/ledger_report.xml',
+		'views/vendor_bill.xml',
 	],
 	
 	'installable': True,
