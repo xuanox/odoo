@@ -12,6 +12,9 @@ class VendorBillsReport(models.AbstractModel):
 		amount = 0.00
 		current_date = (datetime.date.today()).strftime("%d/%m/%Y")
 		lines = []
+		document = docids
+		if len(docids) > 1:
+			document = [docids[0]]
 
 		for doc in docids:
 			item = self.env["account.invoice"].search([('id', '=', doc)])
@@ -28,7 +31,7 @@ class VendorBillsReport(models.AbstractModel):
 			'date': current_date,
 			'amount': amount,
 			'columns': lines,
-			'docs': self.env[report.model].browse(docids),
+			'docs': self.env[report.model].browse(document),
             'report_type': data.get('report_type') if data else '',
 		}
 
