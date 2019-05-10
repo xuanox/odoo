@@ -1,0 +1,11 @@
+h2 span{
+	font-size: 32pt !important;
+}
+
+div strong,
+div p,
+div span,
+th span, 
+td span{
+	font-size: 14pt !important;
+}
