@@ -38,6 +38,7 @@ class VendorBillsReport(models.AbstractModel):
 			amount += item.amount_total
 			lines.append({
 				'number': item.number,
+				'partner': item.partner_id.name,
 				'reference': item.reference,
 				'date': self.get_date_invoice(item.date_invoice),
 				'amount': item.amount_total
