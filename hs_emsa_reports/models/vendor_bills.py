@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
+from decimal import Decimal
 import datetime
 
 
@@ -43,12 +44,14 @@ class VendorBillsReport(models.AbstractModel):
 				'date': self.get_date_invoice(item.date_invoice),
 				'amount': item.amount_total
 			})
+		
+		total = round(Decimal(amount), 2)
 
 		return {
 			'doc_ids': docids,
 			'doc_model': report.model,
 			'date': current_date,
-			'amount': amount,
+			'amount': total,
 			'columns': lines,
 			'docs': self.env[report.model].browse(document),
             'report_type': data.get('report_type') if data else '',

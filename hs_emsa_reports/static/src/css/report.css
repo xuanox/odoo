@@ -1,5 +1,5 @@
 h2 span{
-	font-size: 32pt !important;
+	font-size: 30pt !important;
 }
 
 div strong,
@@ -8,4 +8,9 @@ div span,
 th span, 
 td span{
 	font-size: 14pt !important;
+}
+
+div div span{
+	color: white !important;
+	border-bottom: 1px solid #616161 !important;
 }

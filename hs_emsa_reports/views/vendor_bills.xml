@@ -14,14 +14,14 @@
 					<t t-call="web.external_layout">
 						<t t-set="o" t-value="o.with_context(lang=lang)" />
 						<div class="page">
-							<h2><span style="font-size: 32pt !important;">Comprobante de Pago</span></h2>
+							<h2><span>Comprobante de Pago</span></h2>
 							<div class="row mt32 mb32">
 								<div class="col-auto mw-100 mb-2">
-									<strong>Date:</strong>
+									<strong>Fecha Documento:</strong>
 									<p class="m-0" t-esc="date"/>
 								</div>
 								<div class="col-auto mw-100 mb-2">
-									<strong>Amount:</strong>
+									<strong>Cantidad Final:</strong>
 									<p class="m-0" t-esc="amount"/>
 								</div>
 							</div>
@@ -50,14 +50,24 @@
 								</tbody>
 							</table>
 
-							<div class="row mt32 mb32">
-								<div class="col-xs-12 col-sm-6">
+							<div class="row mt32">
+								<div class="col-6">
 									<strong>Firma del Solicitante:</strong>
-									<span>____________________________________________</span>
 								</div>
-								<div class="col-xs-12 col-sm-6">
+								<div class="col-6">
 									<strong>Firma del Autorizador:</strong>
-									<span>____________________________________________</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<span style="color: white !important;border-bottom: 1px solid #616161 !important;">
+										____________________________________________
+									</span>
+								</div>
+								<div class="col-6">
+									<span style="color: white !important;border-bottom: 1px solid #616161 !important;">
+										____________________________________________
+									</span>
 								</div>
 							</div>
 						</div>
