@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-	'name': "hs_invoice_fiscal",
+	'name': "hs_stock_extra",
 
 	'summary': """
-		Facturacion en impresora fiscal """,
+		Modificaciones a inventario """,
 
 	'description': """
-		Permite la conexion de facturas con impresoras fiscales.
-		Requiere la aplicacion urano corriendo dentro de la computadora cliente
+		Realiza modificaciones al sistema de inventario en la empresa EMSA.
+		- 
 	""",
 
 	'author': "HS Consulting S.A.",
@@ -16,20 +16,24 @@
 	# Categories can be used to filter modules in modules listing
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
-	'category': 'report',
-	'version': '1.12',
+	'category': 'other',
+	'version': '0.4',
 
 	# any module necessary for this one to work correctly
-	'depends': ['base', 'account'],
+	'depends': ['base', 'stock'],
 
 	# always loaded
 	'data': [
 		# 'security/ir.model.access.csv',
-		'views/invoice_view.xml',
-		'views/respartner_view.xml',
+		'views/stock.xml',
 	],
+
 	# only loaded in demonstration mode
 	'demo': [
-		'demo/demo.xml',
+		#'demo/demo.xml',
 	],
+	
+	'installable': True,
+	'auto_install': True,
+	'application': False,
 }

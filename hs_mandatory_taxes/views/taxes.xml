@@ -1,0 +1,57 @@
+<odoo>
+	<data>
+
+		<!-- Con esta seccion hacemos obligatorio el impuesto en Facturas/Notas Creditos-->
+		<record id="account_invoice_inherit1" model="ir.ui.view">
+			<field name="name">account.invoice.inherit1</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='invoice_line_tax_ids']" position="attributes">
+					<attribute name="required">True</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<!-- Con esta seccion hacemos hacemos obligatorio el impuesto en Vendor Bills/Refund-->
+		<record id="account_invoice_inherit2" model="ir.ui.view">
+			<field name="name">account.invoice.inherit2</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='invoice_line_tax_ids']" position="attributes">
+					<attribute name="required">True</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<!-- Con esta seccion hacemos hacemos obligatorio el impuesto en Purchase Order-->
+		<record id="purchase_order_inherit1" model="ir.ui.view">
+			<field name="name">purchase.order.inherit1</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='taxes_id']" position="attributes">
+					<attribute name="required">True</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<!-- Con esta seccion hacemos hacemos obligatorio el impuesto en Sales Order-->
+		<!--record id="sale_order_inherit1" model="ir.ui.view">
+			<field name="name">sale.order.inherit1</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='tax_id']" position="attributes">
+					<attribute name="required">True</attribute>
+				</xpath>
+			</field>
+		</record-->
+
+
+	</data>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+
+		<!--
+		<template id="report_account_products">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+		-->
+
+
+		<!--
+		<report id="action_invoice_products"
+			string="Reporte Productos-Facturas"
+			model="account.invoice.line"
+			report_type="qweb-pdf"
+			name="report_account_products"/>
+		-->
+
+
+		<!--
+		<record id="model_name_view_search" model="ir.ui.view">
+			<field name="name">emsa.account.products.search</field>
+			<field name="model">account.invoice.line</field>
+			<field name="inherit_id" ref="" />
+			<field name="arch" type="xml">
+				<search string="Search Description">
+					
+				</search>
+			</field>
+		</record>
+		-->
+
+
+		<record id="view_account_products" model="ir.ui.view">
+			<field name="name">emsa.account.products</field>
+			<field name="model">account.invoice.line</field>
+			<field name="arch" type="xml">
+				<tree create="false" edit="false" delete="false">
+					<field name="hs_invoice_date" string="Fecha Fectura"/>
+					<field name="hs_product_name" string="Producto" />
+					<field name="quantity" string="Cantidad Vendida"/>
+					<field name="hs_invoice_number" string="Documento" />
+					<field name="hs_invoice_type" string="Tipo"  />
+					<field name="hs_product_categ" string="Categoria"/>
+					<field name="hs_product_price" string="Precio Bodega"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="action_account_emsa_reports" model="ir.actions.act_window">
+			<field name="name">Reportes Productos</field>
+			<field name="res_model">account.invoice.line</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_account_products"/>
+		</record>
+
+
+		<menuitem id="menu_emsa_group" name="Electronica Medica" parent="account.menu_finance_reports" sequence="4" />
+		<menuitem name="Reportes Productos" id="menu_emsa_report" action="action_account_emsa_reports" parent="menu_emsa_group" sequence="10" />
+	</data>
+</odoo>
