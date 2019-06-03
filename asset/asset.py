@@ -23,7 +23,7 @@ STATE_COLOR_SELECTION = [
 ]
 
 class asset_state(models.Model):
-    """ 
+    """
     Model for asset states.
     """
     _name = 'asset.state'
@@ -82,7 +82,7 @@ class asset_asset(models.Model):
         result = stage_obj.name_get(access_rights_uid, stage_ids)
         # restore order of the search
         result.sort(lambda x,y: cmp(stage_ids.index(x[0]), stage_ids.index(y[0])))
-        return result, {}    
+        return result, {}
 
     def _read_group_finance_state_ids(self, domain, read_group_order=None, access_rights_uid=None):
         return self._read_group_state_ids(domain, read_group_order, access_rights_uid, '0')
@@ -95,7 +95,7 @@ class asset_asset(models.Model):
 
     def _read_group_maintenance_state_ids(self, domain, read_group_order=None, access_rights_uid=None):
         return self._read_group_state_ids(domain, read_group_order, access_rights_uid, '3')
-        
+
     def _read_group_accounting_state_ids(self, domain, read_group_order=None, access_rights_uid=None):
         return self._read_group_state_ids(domain, read_group_order, access_rights_uid, '4')
 

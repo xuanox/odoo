@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MRP.WORKCENTER -->
+    <record id="mro_order_view_form_inherit_asset" model="ir.ui.view">
+        <field name="name">mro.order.form.inherit.asset</field>
+        <field name="model">mro.order</field>
+        <field name="inherit_id" ref="mro.mro_order_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Maintenance">
+                  <group>
+                      <group name="maintenance">
+                        <field name="schedule_date"/>
+                        <field name="request_date"/>
+                        <field name="close_date"/>
+                        <label for="duration"/>
+                        <div>
+                            <field name="duration"
+                                   widget="float_time"
+                                   class="oe_inline"/> <span class="ml8">hours</span>
+                        </div>
+                      </group>
+                      <group name="statistics">
+                      </group>
+                  </group>
+                  <group></group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
