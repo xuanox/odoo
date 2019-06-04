@@ -6,7 +6,7 @@ import datetime
 
 class VendorBillsReport(models.AbstractModel):
 	_name = "report.hs_emsa_reports.vendor_bill_template"
-
+	_description = 'Vendor Bills Report'
 
 	def get_date_invoice(self, invoice_datetime):
 		"""
@@ -15,7 +15,7 @@ class VendorBillsReport(models.AbstractModel):
 		America - Bogota
 		"""
 		if type(invoice_datetime) == str:
-			date_invoice = datetime.strptime(invoice_datetime, 
+			date_invoice = datetime.strptime(invoice_datetime,
 							'%Y-%m-%d').strftime('%d/%m/%Y') or ''
 			return date_invoice
 		else:
@@ -44,7 +44,7 @@ class VendorBillsReport(models.AbstractModel):
 				'date': self.get_date_invoice(item.date_invoice),
 				'amount': item.amount_total
 			})
-		
+
 		total = round(Decimal(amount), 2)
 
 		return {
