@@ -9,7 +9,7 @@
             <field name="description">Technical Support Order Confirmed</field>
         </record>
 
-        <!-- equipment related subtypes for messaging / Chatter -->
+        <!-- equipment related subtypes for messaging / Chatter
         <record id="mt_equipment_request_sent" model="mail.message.subtype">
             <field name="name">Send Request</field>
             <field name="res_model">equipment.equipment</field>
@@ -30,7 +30,7 @@
             <field name="default" eval="False"/>
             <field name="parent_id" eval="ref('mt_request_rejected')"/>
             <field name="relation_field">equipment_id</field>
-        </record>
+        </record> -->
 
         <!-- Routes -->
         <record id="route_maintenance" model='stock.location.route'>
