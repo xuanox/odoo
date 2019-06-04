@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- Technical Support Request Tree View
+    <record id="technical_support_request_tree_view" model="ir.ui.view">
+    	<field name="name">technical_support.request.tree</field>
+      <field name="model">technical_support.request</field>
+      <field name="arch" type="xml">
+      	<tree fonts="bold:message_unread==True" string="Technical Support Requests">
+        	<field name="message_unread" invisible="1"/>
+          <field name="name"/>
+          <field name="execution_date" string="Date"/>
+          <field name="equipment_id"/>
+          <field name="cause"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+-->
+		<!-- Technical Support Request Form View
+    <record id="technical_support_request_form_view" model="ir.ui.view">
+    	<field name="name">technical_support.request.form</field>
+    	<field name="model">technical_support.request</field>
+      <field name="arch" type="xml">
+      	<form string="Technical Support Request" version="1.0">
+        	<header>
+	        	<button name="action_send" states="draft" string="Send Request" type="object" class="oe_highlight"/>
+                        <button name="action_confirm" states="claim" string="Confirm Request" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+                        <button name="%(action_request_reject)d" states="claim" string="Reject Request" type="action" groups="technical_support.group_technical_support_engineer"/>
+                        <button name="action_cancel" states="draft" string="Cancel" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,claim,run,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="equipment_id"/>
+																<field name="client_id"/>
+                                <field name="cause"/>
+                                <field name="breakdown"/>
+                            </group>
+                            <group>
+                                <field name="requested_date" attrs="{'invisible':[('breakdown','=',True),('state','=','draft')],'readonly':[('state','!=','draft')]}"/>
+                                <field name="execution_date"/>
+																<field name="maintenance_type"/>
+                            </group>
+                        </group>
+                        <group string="Reject Reason" states="reject">
+                            <field name="reject_reason" colspan="4" nolabel="1"/>
+                        </group>
+												<notebook>
+														<page string="Description">
+															<group>
+																	<field name="description" colspan="4" nolabel="1"/>
+															</group>
+														</page>
+														<page string="Equipment">
+															<group>
+																<group>
+																	<field name="modality_id" widget="manyone"/>
+																	<field name="parent_id" widget="manyone"/>
+																	<field name="zone_id" widget="manyone"/>
+																</group>
+																<group>
+																	<field name="brand_id" widget="manyone"/>
+	                                <field name="model_id" widget="manyone"/>
+																</group>
+															</group>
+														</page>
+														<page string="Client">
+																<separator string="Client Information"/>
+														</page>
+														<page string="Subscription">
+															<group>
+																<group>
+																</group>
+																<group>
+																</group>
+															</group>
+														</page>
+														<page string="Contact">
+																<separator string="Contact Information"/>
+														</page>
+												</notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+				</record>
+
+
+    <record id="technical_support_request_search" model="ir.ui.view">
+            <field name="name">technical_support.request.search</field>
+            <field name="model">technical_support.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Technical Support Request">
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="equipment_id"/>
+                    <filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
+                    <separator/>
+                    <filter icon="terp-document-new" name="open" string="Open" domain="['|',('state','in',('draft','claim')),('message_unread','=',True)]" help="Undecided maintenance request"/>
+                    <group expand="0" string="Group By">
+                      <filter name="group_state"
+                              string="State"
+                              context="{'group_by': 'state'}"
+                              />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    <record id="action_requests" model="ir.actions.act_window">
+            <field name="name">Technical Support Requests</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_open': 1}</field>
+        </record>
+-->
+
+
+		<!-- Technical Support Menu
+		<menuitem
+			name="Technical Support Requests"
+			action="action_requests"
+			id="menu_technical_support_request"
+			parent="menu_technical_support_maintenance"
+			sequence="1"/>    -->
+
+		<!-- liste controle
+		<menuitem name="Checklist"
+			id="menu_technical_support_checklist_history"
+			parent="base.menu_technical_support_root"
+			sequence="7"/>
+
+		<menuitem name="Lista de control"
+			id="technical_support_action_view_checklis_id"
+			parent="menu_technical_support_checklist_history"
+			action="technical_support_checklist_action"/>
+
+		<menuitem name="Lista Completa de Mantenimiento"
+			id="menu_maintenance_checklist_all"
+			action="technical_support_checklist_history_action"
+			parent="menu_technical_support_checklist_history"
+			sequence="5" />   -->
+
+
+ 	</data>
+</odoo>
