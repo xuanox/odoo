@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Technical Support Order - Form View -->
+		<record id="technical_support_order_part_line_form_view_inherited" model="ir.ui.view">
+					<field name="name">Technical Support Order - Part Line Form View Inherited</field>
+					<field name="model">technical_support.order</field>
+					<field name="inherit_id" ref="technical_support.technical_support_order_form_view"/>
+					<field name="arch" type="xml">
+							<xpath expr="//page[@name='information']" position="after">
+								<page string="Parts">
+									<group string="Parts">
+										<field name="part_line_ids" nolabel="1" domain="[('ticket_id.id','=',ticket_id), ('state', '=', 'available'), ('installed', '=', False)]">
+											<tree editable="bottom">
+												<field name="product_id" widget="manyone"/>
+												<field name="name"/>
+												<field name="product_uom_qty"/>
+												<field name="product_uom"/>
+												<field name="state" widget="manyone"/>
+												<field name="installed"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+							</xpath>
+					</field>
+			</record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+    	<record id="technical_support_action_order_new" model="ir.actions.act_window">
+        	<field name="name">Order</field>
+        	<field name="res_model">technical_support.order</field>
+        	<field name="view_mode">form,tree,graph</field>
+    	</record>
+
+    	<record id="ticket_action_technical_support" model="ir.actions.act_window">
+        	<field name="name">Order</field>
+        	<field name="res_model">technical_support.order</field>
+    	</record>
+    </odoo>

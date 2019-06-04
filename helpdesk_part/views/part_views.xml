@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+      <record id="part_order_form_view_inherited" model="ir.ui.view">
+        <field name="name">Part Order Form View Inherited</field>
+        <field name="model">part.order</field>
+        <field name="inherit_id" ref="part.view_part_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="before">
+                  <field name="ticket_id" groups="part.group_spare_part_backoffice"/>
+            </xpath>
+            <xpath expr="//field[@name='price_subtotal']" position="after">
+              <tree string="Operations" editable="bottom" >
+                  <field name="ticket_id" groups="part.group_spare_part_backoffice"/>
+              </tree>
+            </xpath>
+        </field>
+      </record>
+
+      <record id="part_order_tree_view_inherited" model="ir.ui.view">
+        <field name="name">Part Order Tree View Inherited</field>
+        <field name="model">part.order</field>
+        <field name="inherit_id" ref="part.view_part_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+              <field name="ticket_id" groups="part.group_spare_part_backoffice"/>
+            </xpath>
+        </field>
+      </record>
+
+      <record id="part_order_line_tree_view_inherited" model="ir.ui.view">
+        <field name="name">Part Order Line Tree View Inherited</field>
+        <field name="model">part.line</field>
+        <field name="inherit_id" ref="part.view_part_order_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='part_id']" position="before">
+              <field name="ticket_id" groups="part.group_spare_part_backoffice"/>
+            </xpath>
+        </field>
+      </record>
+
+    </odoo>
