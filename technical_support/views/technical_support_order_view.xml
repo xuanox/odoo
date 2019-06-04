@@ -42,7 +42,6 @@
 										<button name="action_done" states="ready" string="Done" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
 										<button name="action_ready" states="consulting" string="Ready" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
                     <button name="action_cancel" type="object" states="draft" string="Cancel" groups="technical_support.group_technical_support_engineer"/>
-										<button name="ticket_done" type="object" states="done" string="Ticket Done"  class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,ready,done" statusbar_colors='{"consulting":"red","released":"blue"}'/>
                 </header>
                 <sheet>
