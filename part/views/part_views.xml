@@ -30,7 +30,7 @@
                    <!--<button name="action_part_end" states="requested_part" type="object" string="End Part" class="oe_highlight"/> -->
                    <button name="action_part_invoice_create" states="2binvoiced" type="object" string="Create Invoice" class="oe_highlight" groups="part.group_spare_part_backoffice"/>
                    <!-- <button name="action_part_cancel" string="Cancel Part" type="object" attrs="{'invisible':['|',('invoice_method','!=','none'), ('state', 'not in',('confirmed','2binvoiced','ready','requested_part'))]}"/> -->
-                   <button name="action_part_cancel" states="draft" type="object" string="Cancel Part" groups="part.group_spare_part_backoffice"/>
+                   <button name="action_part_cancel" states="draft" class="oe_highlight" type="object" string="Cancel Part" groups="part.group_spare_part_backoffice"/>
                    <field name="state" widget="statusbar" statusbar_visible="draft,quotation,confirmed,done"/>
                </header>
                <sheet string="Parts order">
