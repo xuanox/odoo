@@ -11,6 +11,7 @@
                 <field name="equipment_id" />
                 <field name="partner_id"/>
                 <field name="company_id" groups="base.group_multi_company" invisible="1"/>
+                <field name="user_id" groups="part.group_spare_part_backoffice"/>
                 <field name="state"/>
             </tree>
         </field>
@@ -49,6 +50,7 @@
                             <field name="partner_id" widget="res_partner_many2one" attrs="{'required':[('invoice_method','!=','none')]}" context="{'show_vat': True}" groups="part.group_spare_part_backoffice"/>
                             <field name="equipment_id" widget="many2one" domain="[('client_id','=',partner_id)]" groups="part.group_spare_part_backoffice"/>
                             <field name="address_id" groups="part.group_spare_part_backoffice"/>
+                            <field name="user_id" groups="part.group_spare_part_backoffice"/>
                         </group>
                         <group>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>

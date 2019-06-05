@@ -41,15 +41,16 @@ class Part(models.Model):
         states={'confirmed': [('readonly', True)]})
     default_address_id = fields.Many2one('res.partner', compute='_compute_default_address_id')
     state = fields.Selection([
-        ('draft', 'Quotation'),
-        ('cancel', 'Cancelled'),
+        ('draft', 'Cost Verification'),
+        ('quotation', 'Quotation'),
         ('confirmed', 'Confirmed'),
         ('requested_part', 'Requested Part'),
         ('received_part', 'Received Part'),
         ('ready', 'Ready to Part'),
         ('2binvoiced', 'To be Invoiced'),
         ('invoice_except', 'Invoice Exception'),
-        ('done', 'Completado')], string='Status',
+        ('done', 'Completado'),
+        ('cancel', 'Cancelled')], string='Status',
         copy=False, default='draft', readonly=True, track_visibility='onchange',
         help="* The \'Draft\' status is used when a user is encoding a new and unconfirmed part order.\n"
              "* The \'Confirmed\' status is used when a user confirms the part order.\n"
