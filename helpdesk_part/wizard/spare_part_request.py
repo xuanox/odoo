@@ -12,5 +12,6 @@ from odoo import netsvc
 class Part(models.TransientModel):
     _inherit = 'part.order'
 
+
 class PartLine(models.TransientModel):
     _inherit = 'part.line'
