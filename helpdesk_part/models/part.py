@@ -27,7 +27,7 @@ class Part(models.Model):
         self.equipment_id = self.ticket_id.equipment_id
         self.partner_id = self.ticket_id.client_id
 
-    def action_incorrect_part_number(self):
+    def action_incorrect_part_number_ids(self):
         self.write({'state': 'incorrect_part_number'})
         return True
 
