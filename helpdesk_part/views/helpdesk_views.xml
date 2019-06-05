@@ -13,7 +13,10 @@
                      <field string="Part List" name="part_line_count" widget="statinfo"/>
                    </button>
                 </xpath>
-
+                <xpath expr="//button[@name='assign_ticket_to_self']" position="after">
+                  <button name="%(action_spare_part_request)d" string="SP Request" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"
+                    context="{'default_partner_id': partner_id}"/>
+                </xpath>
             </field>
         </record>
     </odoo>
