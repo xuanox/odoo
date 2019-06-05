@@ -19,11 +19,18 @@ class Part(models.Model):
         return self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
 
     ticket_id = fields.Many2one('helpdesk.ticket', default=_default_ticket, string='Ticket', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
+    incorrect_part_number_ids = fields.Many2many('part.line', string='Incorrect Part Number')
+    detail_incorrect_part_number= fields.Text('Detail')
 
     @api.onchange('ticket_id')
     def onchange_ticket(self):
         self.equipment_id = self.ticket_id.equipment_id
         self.partner_id = self.ticket_id.client_id
+
+    def action_incorrect_part_number(self):
+        self.write({'state': 'incorrect_part_number'})
+        return True
+
 
 class PartLine(models.Model):
     _inherit = 'part.line'

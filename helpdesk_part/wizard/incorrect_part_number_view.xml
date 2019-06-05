@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_incorrect_part_number_wizard" model="ir.ui.view">
+            <field name="name">Incorrect Part Number</field>
+            <field name="model">incorrect.part.number</field>
+            <field name="arch" type="xml">
+                <form string="Incorrect Part Number" version="7.0">
+                    <group>
+                        <field name="incorrect_part_number_ids"/>
+                        <field name="detail_incorrect_part_number"/>
+                    </group>
+                    <footer>
+                        <button name="incorrect_part_number" string="Incorrect Part Number" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_incorrect_part_number" model="ir.actions.act_window">
+            <field name="name">Incorrect Part Number</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">incorrect.part.number</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

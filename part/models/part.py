@@ -42,6 +42,7 @@ class Part(models.Model):
     default_address_id = fields.Many2one('res.partner', compute='_compute_default_address_id')
     state = fields.Selection([
         ('draft', 'Cost Verification'),
+        ('incorrect_part_number', 'Incorrect Part Number'),
         ('quotation', 'Quotation'),
         ('confirmed', 'Confirmed'),
         ('requested_part', 'Requested Part'),
@@ -356,6 +357,7 @@ class Part(models.Model):
 
     def action_part_verified(self):
         return self.write({'state': 'quotation'})
+
 
     @api.multi
     def action_part_start(self):
