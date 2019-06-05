@@ -354,6 +354,9 @@ class Part(models.Model):
         self.action_part_done2()
         return self.write({'state': 'ready'})
 
+    def action_part_verified(self):
+        return self.write({'state': 'quotation'})
+
     @api.multi
     def action_part_start(self):
         """ Writes part order state to 'Under Part'
