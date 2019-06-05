@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="part.view_part_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_part_verified']" position="after">
-              <button name="action_incorrect_part_number" class="oe_highlight" states="draft" string="Incorrect Part Number" type="object" groups="part.group_spare_part_backoffice"/>
+              <button name="%(action_incorrect_part_number)d" class="oe_highlight" states="draft" string="Incorrect Part Number" type="action" groups="part.group_spare_part_backoffice"/>
               <button name="action_incorrect_draft" class="oe_highlight" states="incorrect_part_number" string="Check Costs Again" type="object" groups="part.group_spare_part_engineer"/>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="before">
