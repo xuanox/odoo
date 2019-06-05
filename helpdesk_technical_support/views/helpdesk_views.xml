@@ -59,6 +59,7 @@
                           <group>
                             <field name="detail_cause"/>
                             <field name="cause_reason"/>
+                            <field name="remote"/>
                           </group>
                         </group>
                       </page>
