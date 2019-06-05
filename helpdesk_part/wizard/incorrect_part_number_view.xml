@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Incorrect Part Number" version="7.0">
                     <group>
-                        <field name="incorrect_part_number_ids"/>
+                        <field name="incorrect_part_number_ids" widget="many2many_tags" />
                         <field name="detail_incorrect_part_number"/>
                     </group>
                     <footer>
