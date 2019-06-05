@@ -31,6 +31,12 @@ class Part(models.Model):
         self.write({'state': 'incorrect_part_number'})
         return True
 
+    @api.multi
+    def action_incorrect_draft(self):
+        if self.filtered(lambda part: part.state != 'incorrect_part_number'):
+            raise UserError(_("Error."))
+        self.mapped('operations').write({'state': 'draft'})
+        return self.write({'state': 'draft'})
 
 class PartLine(models.Model):
     _inherit = 'part.line'
