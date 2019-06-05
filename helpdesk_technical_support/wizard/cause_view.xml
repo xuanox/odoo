@@ -10,6 +10,7 @@
                     <group>
                         <field name="cause_reason_id"/>
                         <field name="detail_cause"/>
+                        <field name="remote"/>
                     </group>
                     <footer>
                         <button name="cause_ticket" string="cause Ticket" type="object"  class="oe_highlight"  />
