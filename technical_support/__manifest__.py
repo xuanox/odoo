@@ -53,7 +53,7 @@ Required modules:
         'report/report_technical_support_order.xml',
         'report/report_technical_support_request.xml',
         'report/technical_support_report.xml',
-        #'report/report_technical_support_templates.xml',
+        'report/report_technical_support_templates.xml',
     ],
     'application': True,
 }
