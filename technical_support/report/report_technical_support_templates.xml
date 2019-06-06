@@ -2,8 +2,7 @@
 <odoo>
 <template id="report_technical_support_templates">
     <t t-call="web.external_layout">
-        <t t-set="doc" t-value="doc.with_context({'lang':doc.client_id.lang})" />
-
+      <t t-foreach="docs" t-as="doc">
         <div class="page">
           <div class="oe_structure"/>
 
@@ -62,6 +61,7 @@
 
             <div class="oe_structure"/>
         </div>
+      </t>
     </t>
 </template>
 
