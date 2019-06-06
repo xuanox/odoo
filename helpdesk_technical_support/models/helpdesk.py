@@ -46,6 +46,7 @@ class HelpdeskTicket(models.Model):
     detail_cause = fields.Text('Detail Causa', readonly=True)
     cause_reason = fields.Many2one('helpdesk.ticket.cause.reason', string='cause Reason', index=True, track_visibility='onchange')
     remote = fields.Boolean('Remote Attention', copy=False)
+    date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
