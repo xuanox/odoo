@@ -9,7 +9,6 @@
 from odoo import api, fields, models
 from odoo import netsvc
 
-
 class HelpdeskTicketAssign(models.TransientModel):
     _name = 'helpdesk.ticket.assign'
     _description = 'Assign Ticket'
