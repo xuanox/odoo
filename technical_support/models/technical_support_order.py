@@ -37,7 +37,10 @@ class TechnicalSupportOrder(models.Model):
         self.ensure_one()
         if 'state' in init_values and self.state == 'ready':
             return 'technical_support.mt_order_confirmed'
-        return super(TechnicalSupportOrder, self)._track_subtype(init_values)
+        return super(TechnicalSupportOrder, self)._track_subtype(init_values
+
+    def _get_default_require_signature(self):
+        return self.env.user.company_id.portal_confirmation_sign
 
     name = fields.Char('Reference', size=64)
     description = fields.Char(related='ticket_id.name', string='Description', size=64, readonly=True, track_visibility='onchange')
@@ -88,6 +91,12 @@ class TechnicalSupportOrder(models.Model):
     location=fields.Char(related='equipment_id.location', string='Location', readonly=True)
 
     active = fields.Boolean(default=True)
+    signature = fields.Binary('Signature', help='Signature received through the portal.', copy=False, attachment=True)
+    require_signature = fields.Boolean('Online Signature', default=_get_default_require_signature, readonly=True,
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
+        help='Request a online signature to the customer in order to confirm orders automatically.')
+    signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
+
 
     @api.onchange('equipment_id','maintenance_type')
     def onchange_equipment(self):

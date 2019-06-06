@@ -11,5 +11,14 @@
             report_type="qweb-pdf"
         />
 
+        <report
+            string="Report TSO"
+            id="action_report_tso_order"
+            model="technical_support.order"
+            name="technical_support.report_technical_support_templates"
+            file="technical_support.report_technical_support_templates"
+            report_type="qweb-pdf"
+        />
+
     </data>
 </odoo>
