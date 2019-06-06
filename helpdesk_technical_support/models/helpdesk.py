@@ -60,9 +60,9 @@ class HelpdeskTicket(models.Model):
         order_id = False
         for request in self:
             order_id = order.create({
-                'date_planned':request.assign_date,
-                'date_scheduled':request.assign_date,
-                'date_execution':request.assign_date,
+                'date_planned':request.date_planned,
+                'date_scheduled':request.date_planned,
+                'date_execution':request.date_planned,
                 'origin': request.id,
                 'user_id': request.user_id.id,
                 'state': 'draft',
