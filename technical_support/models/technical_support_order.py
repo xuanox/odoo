@@ -37,7 +37,7 @@ class TechnicalSupportOrder(models.Model):
         self.ensure_one()
         if 'state' in init_values and self.state == 'ready':
             return 'technical_support.mt_order_confirmed'
-        return super(TechnicalSupportOrder, self)._track_subtype(init_values
+        return super(TechnicalSupportOrder, self)._track_subtype(init_values)
 
     def _get_default_require_signature(self):
         return self.env.user.company_id.portal_confirmation_sign
