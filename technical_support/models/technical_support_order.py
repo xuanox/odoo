@@ -39,9 +39,6 @@ class TechnicalSupportOrder(models.Model):
             return 'technical_support.mt_order_confirmed'
         return super(TechnicalSupportOrder, self)._track_subtype(init_values)
 
-    def _get_default_require_signature(self):
-        return self.env.user.company_id.portal_confirmation_sign
-
     name = fields.Char('Reference', size=64)
     description = fields.Char(related='ticket_id.name', string='Description', size=64, readonly=True, track_visibility='onchange')
     origin = fields.Char('Source Document', size=64, states={'done':[('readonly',True)],'cancel':[('readonly',True)]},
@@ -92,7 +89,7 @@ class TechnicalSupportOrder(models.Model):
 
     active = fields.Boolean(default=True)
     signature = fields.Binary('Signature', help='Signature received through the portal.', copy=False, attachment=True)
-    require_signature = fields.Boolean('Online Signature', default=_get_default_require_signature, readonly=True,
+    require_signature = fields.Boolean('Online Signature', readonly=True,
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
         help='Request a online signature to the customer in order to confirm orders automatically.')
     signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
