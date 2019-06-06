@@ -17,7 +17,7 @@ This shortcut allows you to generate a Technical Support Order.
     'data': [
         'views/technical_support_views.xml',
         'views/helpdesk_technical_support_templates.xml',
-        'views/helpdesk_views.xml',
+        #'views/helpdesk_views.xml',
         'views/equipment_views.xml',
         'data/mail_data.xml',
         'wizard/pending_view.xml',
