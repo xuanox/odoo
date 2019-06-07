@@ -61,6 +61,7 @@
 														<field name="client_id" widget="many2one"/>
                             <field name="category_ids" invisible="1"/>
                             <field name="maintenance_type"/>
+														<field name="ticket_type_id"/>
                             <field name="description"/>
                         </group>
                         <group>
@@ -325,6 +326,7 @@
                         <field name="category_id"/>
 												<field name="model_id"/>
                         <field name="maintenance_type"/>
+												<field name="ticket_type_id"/>
                         <field name="active"/>
                     </group>
                     <notebook>
