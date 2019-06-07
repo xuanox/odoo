@@ -10,7 +10,7 @@
                 <group>
                   <field name="subscription_ids" widget="one2many_list">
                     <tree>
-                        <field name="analytic_account_id">
+                        <field name="analytic_account_id"/>
                     </tree>
                   </field>
                 </group>
