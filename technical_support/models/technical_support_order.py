@@ -79,6 +79,7 @@ class TechnicalSupportOrder(models.Model):
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', store=True, readonly=True)
     order_id = fields.Many2one('technical_support.checklist.history', string='Control List')
+    equipment_state_id = fields.Many2one('equipment.state', 'Equipment State', domain=[('team','=','3')])
 
     parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange')
     assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', readonly=True, states={'draft':[('readonly',False)]})
