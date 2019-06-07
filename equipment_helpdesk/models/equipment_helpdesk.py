@@ -88,6 +88,7 @@ class equipment_equipment(models.Model):
         self.ensure_one()
         self.env['helpdesk.ticket'].create({
             'description': _('Preventive ticket - %s') % self.name,
+            'name': _('Preventive ticket - %s') % self.name,
             'request_date': date,
             'schedule_date': date,
             'equipment_id': self.id,
