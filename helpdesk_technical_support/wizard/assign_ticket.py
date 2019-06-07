@@ -13,14 +13,7 @@ class HelpdeskTicketAssign(models.TransientModel):
     _name = 'helpdesk.ticket.assign'
     _description = 'Assign Ticket'
 
-    def _default_user(self):
-        active_id = self._context.get('active_id')
-        if active_id:
-            ticket = self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
-            result = self.user_id.id
-        return result
-
-    user_id = fields.Many2one('res.users', string='Assigned to', required=True, track_visibility='onchange', default=_default_user, domain=lambda self: [('groups_id', 'in', self.env.ref('helpdesk.group_helpdesk_user').id)])
+    user_id = fields.Many2one('res.users', string='Assigned to', required=True, track_visibility='onchange', default=lambda self: self.env.user.id, domain=lambda self: [('groups_id', 'in', self.env.ref('helpdesk.group_helpdesk_user').id)])
     date_planned = fields.Datetime('Planned Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     detail = fields.Text('Detail Reason', required=True)
 
