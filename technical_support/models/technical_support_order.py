@@ -50,6 +50,7 @@ class TechnicalSupportOrder(models.Model):
         If the stock is available then the status is set to 'Ready to Maintenance'.\n\
         When the maintenance is over, the status is set to 'Done'.", default='draft')
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='cm', track_visibility='onchange')
+    ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type")
 
     date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     date_scheduled = fields.Datetime('Start Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
@@ -335,6 +336,7 @@ class TechnicalSupportTask(models.Model):
     name = fields.Char('Description', size=64, required=True, translate=True)
     active = fields.Boolean('Active', default=True)
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, default='pm')
+    ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type")
 
     category_id = fields.Many2one('equipment.category', 'Category', ondelete='restrict', required=True)
     model_id = fields.Many2one('equipment.model', 'Model', ondelete='restrict', required=True)
