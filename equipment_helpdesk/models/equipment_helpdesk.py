@@ -10,7 +10,7 @@ from datetime import date, datetime, timedelta
 class equipment_equipment(models.Model):
     _inherit = "equipment.equipment"
 
-    ticket_ids = fields.One2many('helpdesk.ticket', 'equipment_id')
+    ticket_ids = fields.One2many('helpdesk.ticket', 'equipment_id', string='Ticket')
     assign_date = fields.Date('Assigned Date', track_visibility='onchange')
     effective_date = fields.Date('Effective Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
     cost = fields.Float('Cost')
