@@ -12,16 +12,15 @@
             </field>
             <xpath expr="//page[@name='info']" position="after">
               <page string="Ticket">
-
                   <group name="Ticket">
                       <field name="next_action_date" class="oe_read_only" string="Next Preventive Maintenance"/>
                       <label for="period" string="Preventive Maintenance Frequency"/>
                       <div class="o_row">
                           <field name="period"/> days
                       </div>
-                      <label for="maintenance_duration" string="Maintenance Duration"/>
+                      <label for="ticket_duration" string="Maintenance Duration"/>
                       <div class="o_row">
-                          <field name="maintenance_duration"/> hours
+                          <field name="ticket_durationn"/> hours
                       </div>
                   </group>
                   <group name="statistics">
