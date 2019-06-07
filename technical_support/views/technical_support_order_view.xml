@@ -58,6 +58,7 @@
 													  <field name="ticket_id" widget="many2one"/>
 														<field name="user_id" widget="many2one"/>
 														<field name="equipment_id" widget="many2one"/>
+														<field name="equipment_state_id"/>
 														<field name="client_id" widget="many2one"/>
                             <field name="category_ids" invisible="1"/>
                             <field name="maintenance_type"/>

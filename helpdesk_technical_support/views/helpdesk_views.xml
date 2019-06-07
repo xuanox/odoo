@@ -17,6 +17,7 @@
                 <field name="client_id" widget="manyone"/>
                 <field name="equipment_number" domain="[('client_id','=',client_id)]"/>
                 <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+                <field name="equipment_state_id"/>
             </xpath>
             <xpath expr="//field[@name='priority']" position="after">
               <field name="remote"/>
