@@ -28,7 +28,7 @@ class equipment_equipment(models.Model):
     @api.multi
     def _compute_ticket_request(self):
         for equipment in self:
-            ticket_requests = equipment.ticket_ids.filtered(lambda x: x.ticket_type_id == '3' and x.stage_id == '3')
+            ticket_requests = equipment.ticket_ids.filtered(lambda x: x.ticket_type_id == '2' and x.stage_id == '3')
             mttr_days = 0
             for ticket in ticket_requests:
                 if ticket.stage_id == '3' and ticket.date_close:
