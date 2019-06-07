@@ -16,7 +16,7 @@ Equipment in Helpdesk
 * Equipments related to workcenters
 * MTBF, MTTR, ...
 """,
-    'depends': ['equipment', 'helpdesk'],
+    'depends': ['equipment', 'helpdesk', 'helpdesk_technical_support'],
     'data': [
     #     'views/equipment_views.xml',
     #    'views/helpdesk_views.xml',
