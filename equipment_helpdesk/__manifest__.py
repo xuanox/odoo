@@ -18,7 +18,7 @@ Equipment in Helpdesk
 """,
     'depends': ['equipment', 'helpdesk', 'helpdesk_technical_support'],
     'data': [
-    #     'views/equipment_views.xml',
+         'views/equipment_views.xml',
     #    'views/helpdesk_views.xml',
     #    'data/maintenance_cron.xml',
     ],
