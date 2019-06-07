@@ -68,6 +68,12 @@
                           </group>
                         </group>
                       </page>
+                      <page string="Team">
+                          <separator string="Ticket and TSO"/>
+                      </page>
+                      <page string="Engineer">
+                          <separator string="Ticket and TSO"/>
+                      </page>
                 </xpath>
             </field>
         </record>
