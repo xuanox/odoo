@@ -94,7 +94,7 @@ class equipment_equipment(models.Model):
             'equipment_id': self.id,
             'client_id': self.client_id,
             'partner_id': self.client_id,
-            'team_id': self.team_id,
+            'team_id': self.team_id.id,
             'ticket_type_id': '3',
             'duration': self.ticket_duration,
             })
