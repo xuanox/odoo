@@ -6,8 +6,17 @@
         <field name="model">sale.subscription</field>
         <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr='//notebook/page[@id="settings"]' position='before'>
-                <field name="asset_category_id" string="Deferred Revenue Type" context="{'default_type':'sale'}" groups="base.group_no_one"/>
+            <xpath expr="//notebook" position="inside">
+                <page string="Equipments">
+                  <div>
+                      <field name="equipments_lines">
+                          <tree editable="bottom">
+                              <field name="equipment_id"/>
+                              <field name="name"/>
+                          </tree>
+                      </field>
+                  </div>
+                </page>
             </xpath>
         </field>
     </record>
