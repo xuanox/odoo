@@ -20,7 +20,7 @@
                       </div>
                       <label for="ticket_duration" string="Maintenance Duration"/>
                       <div class="o_row">
-                          <field name="ticket_durationn"/> hours
+                          <field name="ticket_duration"/> hours
                       </div>
                   </group>
                   <group name="statistics">

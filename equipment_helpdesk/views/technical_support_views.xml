@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- MRP.WORKCENTER -->
-    <record id="technical_support_order_view_form_inherit_equipment" model="ir.ui.view">
-        <field name="name">technical_support.order.form.inherit.equipment</field>
-        <field name="model">technical_support.order</field>
-        <field name="inherit_id" ref="technical_support.technical_support_order_form_view"/>
+    <record id="helpdesk_ticket_view_form_inherit_equipment" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.inherit.equipment</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Maintenance">
@@ -12,7 +12,7 @@
                       <group name="maintenance">
                         <field name="schedule_date"/>
                         <field name="request_date"/>
-                        <field name="close_date"/>
+                        <field name="date_close"/>
                         <label for="duration"/>
                         <div>
                             <field name="duration"
