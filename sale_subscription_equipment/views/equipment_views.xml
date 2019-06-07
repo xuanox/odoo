@@ -8,9 +8,9 @@
             <xpath expr="//page[@name='info']" position="after">
               <page string="Subscriptions">
                 <group>
-                  <field name="subscription_ids" widget="one2many_list">
-                    <tree>
-                        <field name="analytic_account_id"/>
+                  <field name="subscription_ids" widget="one2many_list" nolabel="1">
+                    <tree editable="bottom">
+                        <field name="analytic_account_id" widget="many2one"/>
                     </tree>
                   </field>
                 </group>
