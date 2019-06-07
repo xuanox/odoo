@@ -26,8 +26,7 @@
                      <field string="Reports" name="technical_support_count" widget="statinfo"/>
                    </button>
             </xpath>
-            <xpath expr="//field[@name='description']" position="after">
-                  <notebook>
+            <xpath expr="//notebook" position="inside">
                       <page string="Equipo">
                         <group>
                           <group>
@@ -69,7 +68,6 @@
                           </group>
                         </group>
                       </page>
-                  </notebook>
                 </xpath>
             </field>
         </record>
