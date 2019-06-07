@@ -92,6 +92,9 @@ class equipment_equipment(models.Model):
             'request_date': date,
             'schedule_date': date,
             'equipment_id': self.id,
+            'client_id': self.client_id,
+            'partner_id': self.client_id,
+            'team_id': self.team_id,
             'ticket_type_id': '3',
             'duration': self.ticket_duration,
             })
