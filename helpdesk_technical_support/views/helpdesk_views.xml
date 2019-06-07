@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
           <xpath expr="//button[@name='assign_ticket_to_self']" position="attributes">
-              <attribute name="invisible">0</attribute>
+              <attribute name="invisible">1</attribute>
           </xpath>
             <xpath expr="//button[@name='assign_ticket_to_self']" position="before">
               <button name="%(action_ticket_assign)d" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
