@@ -5,7 +5,7 @@ class SaleSubscription(models.Model):
     _name = "sale.subscription"
     _inherit = "sale.subscription"
 
-    equipments_lines = fields.One2many('sale.subscription.equipment', 'analytic_account_id', 'Equipments', copy=True, readonly=True, states={'draft': [('readonly', False)]})
+    equipments_lines = fields.One2many('sale.subscription.equipment', 'analytic_account_id', 'Equipments', copy=True, readonly=True)
 
 class SaleSubscriptionEquipment(models.Model):
     _name = 'sale.subscription.equipment'
