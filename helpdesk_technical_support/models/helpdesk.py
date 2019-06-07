@@ -22,7 +22,7 @@ class HelpdeskTicket(models.Model):
             self.technical_support_count = order.search_count([('ticket_id', '=', ticket.id)])
 
     order_ids=fields.One2many('technical_support.order','ticket_id', string='Orders')
-    #team_id = fields.Many2one(readonly=True)
+    user_id = fields.Many2one(readonly=True)
     equipment_id=fields.Many2one('equipment.equipment', string='Equipment')
     client_id = fields.Many2one('res.partner', related='partner_id.commercial_partner_id', string='Cliente')
     brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
