@@ -11,6 +11,7 @@ This module allows you to set a deferred revenue on your subscriptions.
     'data': [
         'views/sale_subscription_views.xml',
         'views/equipment_views.xml',
+        'views/helpdesk_views.xml',
         'security/ir.model.access.csv'
     ],
     'installable': True,
