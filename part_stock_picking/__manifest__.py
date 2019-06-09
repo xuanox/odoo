@@ -15,7 +15,8 @@ by external providers and will automatically generate purchase orders directed t
         'part',
         'stock',
         'technical_support',
-        'equipment'
+        'equipment',
+        'helpdesk_part',
     ],
     'data': [
         'views/stock_picking_views.xml',
