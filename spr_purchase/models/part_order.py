@@ -51,6 +51,9 @@ class Part(models.Model):
 
         if self.filtered(lambda part: part.invoice_method == 'none'):
             self.action_confirm_operations()
+
+        if self.filtered(lambda part: part.invoice_method == 'after_part'):
+            self.action_confirm_operations()
         return True
 
     @api.multi

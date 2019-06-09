@@ -47,7 +47,7 @@ class Part(models.Model):
         ('confirmed', 'Confirmed'),
         ('requested_part', 'Requested Part'),
         ('received_part', 'Received Part'),
-        ('ready', 'Ready to Part'),
+        ('ready', 'Ready to Confirm'),
         ('2binvoiced', 'To be Invoiced'),
         ('invoice_except', 'Invoice Exception'),
         ('done', 'Completado'),
@@ -369,8 +369,6 @@ class Part(models.Model):
             }
 
     def action_part_ready(self):
-        self.mapped('operations').write({'state': 'confirmed'})
-        self.action_part_done2()
         return self.write({'state': 'ready'})
 
     def action_part_verified(self):
