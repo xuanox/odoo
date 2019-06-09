@@ -37,12 +37,36 @@ class Part(models.Model):
         return res
 
     def action_confirm_request(self):
-        for order in self:
-            if order.test_if_parts():
-                order.action_confirm_purchase()
-                order.action_confirm_transfer()
-                order.write({'state':'confirmed'})
+        if self.filtered(lambda part: part.state != 'quotation'):
+            raise UserError(_("Only draft Parts can be confirmed."))
+            before_part = self.filtered(lambda part: part.invoice_method == 'b4repair')
+            before_part.write({'state': '2binvoiced'})
+        else
+            for order in self:
+                if order.test_if_parts():
+                    order.action_confirm_purchase()
+                    order.action_confirm_transfer()
+                    order.write({'state':'confirmed'})
         return 0
+
+    @api.multi
+    def action_part_confirm(self):
+        """ part order state is set to 'To be invoiced' when invoice method
+        is 'Before Part' else state becomes 'Confirmed'.
+        @param *arg: Arguments
+        @return: True
+        """
+        if self.filtered(lambda part: part.state != 'quotation'):
+            raise UserError(_("Only draft Parts can be confirmed."))
+        before_part = self.filtered(lambda part: part.invoice_method == 'b4repair')
+        before_part.write({'state': '2binvoiced'})
+        to_confirm = self - before_part
+        to_confirm_operations = to_confirm.mapped('operations')
+        to_confirm_operations.write({'state': 'confirmed'})
+        #to_confirm.action_part_done()
+        to_confirm.action_confirm()
+        to_confirm.write({'state': 'confirmed'})
+        return True
 
     @api.multi
     def action_cancel(self):
