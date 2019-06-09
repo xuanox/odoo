@@ -67,6 +67,11 @@ class PartLine(models.Model):
     def _stock_picking_create(self):
         StockPicking = self.env['stock.picking']
         for line in self:
+            stock_picking = StockPicking.search([
+                ('part_order_id', '=', line.part_id.id),
+                ('state', '=', 'draft'),
+                ('company_id', '=', line.company_id.id),
+            ], limit=1)
             values = line._stock_picking_prepare_order_values()
             stock_picking = StockPicking.create(values)
             # add a PO line to the PO
