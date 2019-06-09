@@ -16,9 +16,7 @@ class PartOrder(models.Model):
     @api.multi
     def action_confirm_transfer(self):
         for order in self:
-#            order.operations.sudo()._purchase_service_create()
             order.operations.sudo()._stock_picking_generation()
-        self.write({'state': 'confirmed'})
         return True
 
 class PartLine(models.Model):

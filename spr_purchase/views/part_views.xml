@@ -17,7 +17,7 @@
                </button>
             </xpath>
             <xpath expr="//button[@name='print_part_order']" position="after">
-              <button name="action_confirm" string="Confirmed Purchase" type="object" class="oe_highlight" />
+              <button name="action_confirm_request" string="SPR Confirmed" states="quotation" type="object" class="oe_highlight" />
             </xpath>
         </field>
 

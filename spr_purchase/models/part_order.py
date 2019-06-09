@@ -24,12 +24,25 @@ class Part(models.Model):
             order.purchase_order_count = purchase_count_map.get(order.id, 0)
 
     @api.multi
-    def action_confirm(self):
+    def action_confirm_purchase(self):
         for order in self:
-#            order.operations.sudo()._purchase_service_create()
             order.operations.sudo()._purchase_service_generation()
-        self.write({'state': 'confirmed'})
         return True
+
+    def test_if_parts(self):
+        res = True
+        for order in self:
+            if not order.operations:
+                res = False
+        return res
+
+    def action_confirm_request(self):
+        for order in self:
+            if order.test_if_parts():
+                order.action_confirm_purchase()
+                order.action_confirm_transfer()
+                order.write({'state':'confirmed'})
+        return 0
 
     @api.multi
     def action_cancel(self):

@@ -14,6 +14,7 @@ by external providers and will automatically generate purchase orders directed t
         'part',
         'purchase',
         'helpdesk_part',
+        'part_stock_picking'
     ],
     'data': [
         #'data/mail_data.xml',
