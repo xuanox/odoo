@@ -46,8 +46,11 @@ class Part(models.Model):
 
     @api.multi
     def action_confirm_request(self):
-        if self.filtered(lambda part: part.invoice_method == 'b4repair'):
+        if self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: part.invoiced == 'False'):
             self.write({'state': '2binvoiced'})
+
+        if self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: part.invoiced == 'True'):
+            self.action_confirm_operations()
 
         if self.filtered(lambda part: part.invoice_method == 'none'):
             self.action_confirm_operations()
