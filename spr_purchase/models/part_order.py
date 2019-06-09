@@ -27,11 +27,12 @@ class Part(models.Model):
     def _action_confirm(self):
         for order in self:
             order.operations.sudo()._purchase_service_create()
-        self.write({'state': 'confirmed'})
         return true
 
     @api.multi
     def action_confirm(self):
+        for order in self:
+            order.operations.sudo()._purchase_service_create()
         self._action_confirm()
         self.write({'state': 'confirmed'})
         return True
