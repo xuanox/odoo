@@ -67,7 +67,7 @@ class PartLine(models.Model):
     def _stock_picking_create(self):
         StockPicking = self.env['stock.picking']
         for line in self:
-            values = line._stock_picking_prepare_order_values(supplierinfo)
+            values = line._stock_picking_prepare_order_values()
             stock_picking = StockPicking.create(values)
             # add a PO line to the PO
             values = line._stock_move_prepare_line_values(stock_picking)
