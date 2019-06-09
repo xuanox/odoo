@@ -185,7 +185,7 @@ class PartLine(models.Model):
             'origin': self.part_id.name,
             'payment_term_id': partner_supplier.property_supplier_payment_term_id.id,
             'date_order': date_order,
-            'create_uid': self.user_id.id,
+            'create_uid': self.part_id.user_id.id,
             'fiscal_position_id': fiscal_position_id,
         }
 
