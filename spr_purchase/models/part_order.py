@@ -31,6 +31,12 @@ class Part(models.Model):
         return result
 
     @api.multi
+    def action_confirm(self):
+        self._action_confirm()
+        self.write({'state': 'confirmed'})
+        return True
+
+    @api.multi
     def action_cancel(self):
         result = super(Part, self).action_cancel()
         # When a sale person cancel a SO, he might not have the rights to write
