@@ -23,7 +23,7 @@
         <field name="arch" type="xml">
             <form string="Part Request">
                <header>
-                   <button name="action_part_verified" states="draft" class="oe_highlight" string="Verified Costs" type="object" attrs="{'invisible':  [('operations', '=', False)]}" groups="part.group_spare_part_backoffice"/>
+                   <button name="action_part_verified" states="draft" class="oe_highlight" string="Verified Costs" type="object" groups="part.group_spare_part_backoffice"/>
                    <button name="action_send_mail" states="quotation" string="Send Quotation" type="object" groups="part.group_spare_part_backoffice"/>
                    <button name="print_part_order" states="quotation" string="Print Quotation" type="object" groups="part.group_spare_part_backoffice"/>
                    <!--<button name="action_part_confirm" string="Confirmed" type="object" class="oe_highlight" states="quotation" groups="part.group_spare_part_backoffice"/>-->
