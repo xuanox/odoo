@@ -16,8 +16,8 @@ by external providers and will automatically generate purchase orders directed t
     ],
     'data': [
         #'data/mail_data.xml',
-        #'views/product_views.xml',
-        #'views/part_views.xml',
+        'views/product_views.xml',
+        'views/part_views.xml',
     ],
     'demo': [
     ],
