@@ -41,12 +41,12 @@ class Part(models.Model):
             raise UserError(_("Only draft Parts can be confirmed."))
             before_part = self.filtered(lambda part: part.invoice_method == 'b4repair')
             before_part.write({'state': '2binvoiced'})
-        else
-            for order in self:
-                if order.test_if_parts():
-                    order.action_confirm_purchase()
-                    order.action_confirm_transfer()
-                    order.write({'state':'confirmed'})
+
+        for order in self:
+            if order.test_if_parts():
+                order.action_confirm_purchase()
+                order.action_confirm_transfer()
+                order.write({'state':'confirmed'})
         return 0
 
     @api.multi
