@@ -201,7 +201,7 @@ class Part(models.Model):
         to_confirm_operations = to_confirm.mapped('operations')
         to_confirm_operations.write({'state': 'confirmed'})
         #to_confirm.action_part_done()
-        to_confirm.action_confirm()
+        #to_confirm.action_confirm()
         to_confirm.write({'state': 'confirmed'})
         return True
 
