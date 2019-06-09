@@ -5,9 +5,6 @@
     <field name="model">part.order</field>
     <field name="inherit_id" ref="part.view_part_order_form"/>
     <field name="arch" type="xml">
-      <xpath expr="//button[@name='print_part_order']" position="after">
-        <button name="action_confirm_transfer" string="Confirm Transfer" type="object" class="oe_highlight" states="draft,quotation" groups="part.group_spare_part_backoffice"/>
-      </xpath>
     </field>
   </record>
 </odoo>
