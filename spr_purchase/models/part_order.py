@@ -279,7 +279,7 @@ class PartLine(models.Model):
                 values = line._purchase_service_prepare_order_values(supplierinfo)
                 purchase_order = PurchaseOrder.create(values)
             else:  # update origin of existing PO
-                so_name = line.order_id.name
+                so_name = line.part_id.name
                 origins = []
                 if purchase_order.origin:
                     origins = purchase_order.origin.split(', ') + origins
