@@ -303,6 +303,7 @@ class PartLine(models.Model):
         part_line_purchase_map = {}
         for line in self:
             # Do not regenerate PO line if the SO line has already created one in the past (SO cancel/reconfirmation case)
-            result = line._purchase_service_create()
-            part_line_purchase_map.update(result)
+            if not line.purchase_line_count:
+                result = line._purchase_service_create()
+                part_line_purchase_map.update(result)
         return part_line_purchase_map
