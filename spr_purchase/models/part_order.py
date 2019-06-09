@@ -25,10 +25,10 @@ class Part(models.Model):
 
     @api.multi
     def _action_confirm(self):
-        result = super(Part, self)._action_confirm()
         for order in self:
-            order.operations.sudo()._purchase_service_generation()
-        return result
+            order.operations.sudo()._purchase_service_create()
+        self.write({'state': 'confirmed'})
+        return true
 
     @api.multi
     def action_confirm(self):
