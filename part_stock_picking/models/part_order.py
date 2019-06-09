@@ -14,49 +14,72 @@ class PartOrder(models.Model):
     stock_picking_ids = fields.One2many('stock.picking', 'part_order_id', 'Stock Picking')
 
     @api.multi
-    def action_stock_picking(self):
-        stock_picking = self.env['stock.picking']
-        StockMove = self.env['stock.move']
-        stock_picking_id = False
-        stock_move = False
-        for request in self:
-            stock_picking_id = stock_picking.create({
-                'company_id': '1',
-                'picking_type_id':5,
-                'move_type':'direct',
-                'state':'draft',
-                'scheduled_date': fields.Datetime.now(),
-                'part_order_id': request.id,
-                'location_dest_id': request.operations.location_dest_id.id,
-                'location_id': request.operations.location_id.id,
-                'equipment_id': request.equipment_id.id,
-                'ticket_id': request.ticket_id.id,
-            })
-
-        for request in self:
-            stock_move = StockMove.create({
-                'company_id': '1',
-                'picking_id': stock_picking_id.id,
-                'name': request.operations.product_id.name,
-                'date': fields.Datetime.now(),
-                'date_expected': fields.Datetime.now(),
-                'product_id': request.operations.product_id.id,
-                'product_uom_qty': request.operations.product_uom_qty,
-                'product_uom': request.operations.product_uom.id,
-                'location_dest_id': request.operations.location_dest_id.id,
-                'location_id': request.operations.location_id.id,
-                'procure_method': 'make_to_stock',
-                'part_order_id': request.id,
-                'equipment_id': request.equipment_id.id,
-                'ticket_id': request.operations.ticket_id.id,
-                'part_line_id': request.operations.id,
-            })
-        self.write({'state':'confirmed'})
-        return stock_picking_id.id
-
-
-    def action_confirm_stock_picking(self):
+    def action_confirm_transfer(self):
         for order in self:
-                order.action_stock_picking()
-                order.write({'state':'confirmed'})
-        return 0
+#            order.operations.sudo()._purchase_service_create()
+            order.operations.sudo()._stock_picking_generation()
+        self.write({'state': 'confirmed'})
+        return True
+
+class PartLine(models.Model):
+    _inherit = 'part.line'
+
+    stock_move_id = fields.One2many('stock.move', 'part_line_id', 'Stock Picking')
+
+    @api.multi
+    def _stock_picking_prepare_order_values(self):
+        self.ensure_one()
+        return {
+            'company_id': self.company_id.id,
+            'picking_type_id':5,
+            'move_type':'direct',
+            'state':'draft',
+            'scheduled_date': fields.Datetime.now(),
+            'part_order_id': self.part_id.id,
+            'location_dest_id': self.location_dest_id.id,
+            'location_id': self.location_id.id,
+            'equipment_id': self.part_id.equipment_id.id,
+            'ticket_id': self.part_id.ticket_id.id,
+        }
+
+    @api.multi
+    def _stock_move_prepare_line_values(self):
+        self.ensure_one()
+        return {
+            'company_id': self.company_id.id,
+            'picking_id': self.stock_picking_ids.id,
+            'name': self.product_id.name,
+            'date': fields.Datetime.now(),
+            'date_expected': fields.Datetime.now(),
+            'product_id': self.product_id.id,
+            'product_uom_qty': self.product_uom_qty,
+            'product_uom': self.product_uom.id,
+            'location_dest_id': self.location_dest_id.id,
+            'location_id': self.location_id.id,
+            'procure_method': 'make_to_stock',
+            'part_order_id': self.part_id.id,
+            'equipment_id': self.part_id.equipment_id.id,
+            'ticket_id': self.part_id.ticket_id.id,
+            'part_line_id': self.id,
+        }
+
+    @api.multi
+    def _stock_picking_create(self):
+        StockPicking = self.env['stock.picking']
+        for line in self:
+            values = line._stock_picking_prepare_order_values(supplierinfo)
+            stock_picking = StockPicking.create(values)
+            # add a PO line to the PO
+            values = line._stock_move_prepare_line_values(stock_picking)
+            stock_move = self.env['stock.move'].create(values)
+        return True
+
+    @api.multi
+    def _stock_picking_generation(self):
+        """ Create a Purchase for the first time from the sale line. If the SO line already created a PO, it
+            will not create a second one.
+        """
+        for line in self:
+            # Do not regenerate PO line if the SO line has already created one in the past (SO cancel/reconfirmation case)
+                result = line._stock_picking_create()
+        return True
