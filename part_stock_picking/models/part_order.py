@@ -49,7 +49,7 @@ class PartLine(models.Model):
         stock_picking = StockPicking.search([('part_order_id', '=', self.part_id.id),('state', '=', 'draft'),('company_id', '=', self.company_id.id)], limit=1)
         return {
             'company_id': self.company_id.id,
-            'picking_id': stock_picking_id.id,
+            'picking_id': stock_pickin.id,
             'name': self.product_id.name,
             'date': fields.Datetime.now(),
             'date_expected': fields.Datetime.now(),
