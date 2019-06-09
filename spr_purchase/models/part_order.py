@@ -33,7 +33,6 @@ class Part(models.Model):
     def action_confirm(self):
         for order in self:
             order.operations.sudo()._purchase_service_create()
-        self._action_confirm()
         self.write({'state': 'confirmed'})
         return True
 
