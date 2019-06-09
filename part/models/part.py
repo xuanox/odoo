@@ -102,6 +102,13 @@ class Part(models.Model):
     amount_tax = fields.Float('Taxes', compute='_amount_tax', store=True)
     amount_total = fields.Float('Total', compute='_amount_total', store=True)
     user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    commitment_date = fields.Datetime('Commitment Date',
+        states={'draft': [('readonly', False)], 'incorrect_part_number': [('readonly', False)], 'quotation': [('readonly', False)]},
+        copy=False, readonly=True, help="This is the delivery date promised to the customer. If set, the delivery order "
+             "will be scheduled based on this date rather than product lead times.")
+    fiscal_position_id = fields.Many2one('account.fiscal.position', string='Fiscal Position')
+    date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
+    partner_shipping_id = fields.Many2one('res.partner', string='Delivery Address', readonly=True, required=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)], 'sale': [('readonly', False)]}, help="Delivery address for current sales order.")
 
     @api.one
     @api.depends('partner_id')
