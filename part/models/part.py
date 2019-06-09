@@ -207,7 +207,7 @@ class Part(models.Model):
 
     @api.multi
     def _action_confirm(self):
-            self.write({'state': 'confirmed'})
+            #self.write({'state': 'confirmed'})
         return True
 
     @api.multi
