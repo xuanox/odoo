@@ -18,7 +18,7 @@ by external providers and will automatically generate purchase orders directed t
         'equipment'
     ],
     'data': [
-        'views/stock_picking_views.xml',
+        #'views/stock_picking_views.xml',
         'views/part_views.xml'
     ],
     'demo': [
