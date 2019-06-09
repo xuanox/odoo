@@ -13,6 +13,7 @@ by external providers and will automatically generate purchase orders directed t
     'depends': [
         'part',
         'purchase',
+        'helpdesk_part',
     ],
     'data': [
         #'data/mail_data.xml',
