@@ -43,11 +43,11 @@ class PartLine(models.Model):
         }
 
     @api.multi
-    def _stock_move_prepare_line_values(self):
+    def _stock_move_prepare_line_values(self, stock_picking):
         self.ensure_one()
         return {
             'company_id': self.company_id.id,
-            'picking_id': self.stock_picking_ids.id,
+            'picking_id': stock_picking_id.id,
             'name': self.product_id.name,
             'date': fields.Datetime.now(),
             'date_expected': fields.Datetime.now(),
