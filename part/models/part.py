@@ -193,7 +193,7 @@ class Part(models.Model):
         @param *arg: Arguments
         @return: True
         """
-        if self.filtered(lambda part: part.state != 'draft'):
+        if self.filtered(lambda part: part.state != 'quotation'):
             raise UserError(_("Only draft Parts can be confirmed."))
         before_part = self.filtered(lambda part: part.invoice_method == 'b4repair')
         before_part.write({'state': '2binvoiced'})
