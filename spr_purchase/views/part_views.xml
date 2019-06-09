@@ -20,7 +20,7 @@
               <button name="action_confirm" string="Confirmed Purchase" type="object" class="oe_highlight" />
             </xpath>
         </field>
-        <field name="active" eval="False"/>
+
     </record>
 
 </odoo>
