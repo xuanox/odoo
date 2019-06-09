@@ -45,6 +45,13 @@ class PartLine(models.Model):
     @api.multi
     def _stock_move_prepare_line_values(self, stock_picking):
         self.ensure_one()
+        for line in self:
+            stock_picking = StockPicking.search([
+                ('part_order_id', '=', line.part_id.id),
+                ('state', '=', 'draft'),
+                ('company_id', '=', line.company_id.id),
+            ], limit=1)
+
         return {
             'company_id': self.company_id.id,
             'picking_id': stock_picking_id.id,
