@@ -185,6 +185,7 @@ class PartLine(models.Model):
             'origin': self.part_id.name,
             'payment_term_id': partner_supplier.property_supplier_payment_term_id.id,
             'date_order': date_order,
+            'create_uid': self.user_id.id,
             'fiscal_position_id': fiscal_position_id,
         }
 
@@ -302,7 +303,7 @@ class PartLine(models.Model):
         part_line_purchase_map = {}
         for line in self:
             # Do not regenerate PO line if the SO line has already created one in the past (SO cancel/reconfirmation case)
-            if line.product_id.service_to_purchase and not line.purchase_line_count:
+            if line.product_id.part_to_purchase and not line.purchase_line_count:
                 result = line._purchase_service_create()
                 part_line_purchase_map.update(result)
         return part_line_purchase_map
