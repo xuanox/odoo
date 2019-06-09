@@ -200,8 +200,19 @@ class Part(models.Model):
         to_confirm = self - before_part
         to_confirm_operations = to_confirm.mapped('operations')
         to_confirm_operations.write({'state': 'confirmed'})
-        to_confirm.action_part_done()
+        #to_confirm.action_part_done()
+        to_confirm.action_confirm()
         to_confirm.write({'state': 'confirmed'})
+        return True
+
+    @api.multi
+    def _action_confirm(self):
+            self.write({'state': 'confirmed'})
+        return True
+
+    @api.multi
+    def action_confirm(self):
+            self._action_confirm()
         return True
 
     @api.multi
