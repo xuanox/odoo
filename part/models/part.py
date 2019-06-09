@@ -569,6 +569,8 @@ class PartLine(models.Model):
         help='The status of a part line is set automatically to the one of the linked part order.')
     installed = fields.Selection([('yes', 'Yes'),('no', 'No')], 'Installed', readonly=True, states={'available':[('readonly',False)]},
         help='Condition of the replacement installation.')
+    company_id = fields.Many2one(related='part_id.company_id', string='Company', store=True, readonly=True)
+
 
     @api.constrains('lot_id', 'product_id')
     def constrain_lot_id(self):
