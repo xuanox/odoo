@@ -48,8 +48,7 @@ class Part(models.Model):
     def action_confirm_request(self):
         if self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: not part.invoiced):
             self.write({'state': '2binvoiced'})
-
-        if self.filtered(lambda part: part.invoice_method == 'b4repair'):
+        else:
             self.action_confirm_operations()
 
         if self.filtered(lambda part: part.invoice_method == 'none'):
