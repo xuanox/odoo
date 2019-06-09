@@ -168,7 +168,7 @@ class PartLine(models.Model):
     @api.multi
     def _purchase_get_date_order(self, supplierinfo):
         """ return the ordered date for the purchase order, computed as : SO commitment date - supplier delay """
-        commitment_date = fields.Datetime.from_string(self.order_id.commitment_date or fields.Datetime.now())
+        commitment_date = fields.Datetime.from_string(self.part_id.commitment_date or fields.Datetime.now())
         return commitment_date - relativedelta(days=int(supplierinfo.delay))
 
     @api.multi
@@ -186,8 +186,8 @@ class PartLine(models.Model):
             'partner_ref': partner_supplier.ref,
             'company_id': self.company_id.id,
             'currency_id': partner_supplier.property_purchase_currency_id.id or self.env.user.company_id.currency_id.id,
-            'dest_address_id': self.order_id.partner_shipping_id.id,
-            'origin': self.order_id.name,
+            'dest_address_id': self.part_id.partner_shipping_id.id,
+            'origin': self.part_id.name,
             'payment_term_id': partner_supplier.property_supplier_payment_term_id.id,
             'date_order': date_order,
             'fiscal_position_id': fiscal_position_id,
