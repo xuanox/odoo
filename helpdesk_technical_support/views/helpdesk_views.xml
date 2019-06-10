@@ -1,96 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <odoo>
-    	<record id="helpdesk_ticket_form_view_inherited" model="ir.ui.view">
-        <field name="name">helpdesk.ticket.form.view.inherited</field>
-        <field name="model">helpdesk.ticket</field>
-        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
-        <field name="arch" type="xml">
-          <xpath expr="//button[@name='assign_ticket_to_self']" position="attributes">
-              <attribute name="invisible">1</attribute>
-          </xpath>
-            <xpath expr="//button[@name='assign_ticket_to_self']" position="before">
-              <button name="%(action_ticket_assign)d" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
-              <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
-              <button name="%(action_ticket_cause)d" string="Done" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
-            </xpath>
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="client_id" widget="manyone"/>
-                <field name="equipment_number" domain="[('client_id','=',client_id)]"/>
-                <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-                <field name="equipment_state_id"/>
-            </xpath>
-            <xpath expr="//field[@name='priority']" position="after">
-              <field name="remote"/>
-            </xpath>
-            <xpath expr="//button[@name='open_customer_tickets']" position="before">
-                   <button class="oe_stat_button" name="action_view_report" type="object" icon="fa-file-pdf-o">
-                     <field string="Reports" name="technical_support_count" widget="statinfo"/>
-                   </button>
-            </xpath>
-            <xpath expr="//notebook" position="inside">
-                      <page string="Equipo">
-                        <group>
-                          <group>
-                            <field name="modality_id" widget="manyone"/>
-                            <field name="parent_id" widget="manyone"/>
-                            <field name="location"/>
-                            <field name="zone_id" widget="manyone"/>
-                          </group>
-                          <group>
-                            <field name="brand_id" widget="manyone"/>
-                            <field name="model_id" widget="manyone"/>
-                            <field name="serial"/>
-                          </group>
-                        </group>
-                        <group>
-                          <group>
-                            <field name="warranty_start_date"/>
-                            <field name="warranty_end_date"/>
-                          </group>
-                          <group>
-                            <field name="dealer_warranty_start_date"/>
-                            <field name="dealer_warranty_end_date"/>
-                          </group>
-                        </group>
-                      </page>
-                      <page string="Cliente">
-                        <group>
-                          <group>
-                            <field name="detail_reason"/>
-                            <field name="pending_reason"/>
-                          </group>
-                          <group>
-                            <field name="detail_cause"/>
-                            <field name="cause_reason"/>
+  <odoo>
+    <record id="helpdesk_ticket_form_view_inherited" model="ir.ui.view">
+      <field name="name">helpdesk.ticket.form.view.inherited</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='assign_ticket_to_self']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//button[@name='assign_ticket_to_self']" position="before">
+          <button name="%(action_ticket_assign)d" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+          <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+          <button name="%(action_ticket_cause)d" string="Done" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
+        </xpath>
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="client_id" widget="manyone"/>
+          <field name="equipment_number" domain="[('client_id','=',client_id)]"/>
+          <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+          <field name="equipment_state_id"/>
+        </xpath>
+        <xpath expr="//field[@name='priority']" position="after">
+          <field name="remote"/>
+        </xpath>
+        <xpath expr="//button[@name='open_customer_tickets']" position="before">
+          <button class="oe_stat_button" name="action_view_report" type="object" icon="fa-file-pdf-o">
+            <field string="Reports" name="technical_support_count" widget="statinfo"/>
+          </button>
+        </xpath>
+        <xpath expr="//notebook" position="inside">
+          <page string="Equipo">
+            <group>
+              <group>
+                <field name="modality_id" widget="manyone"/>
+                <field name="parent_id" widget="manyone"/>
+                <field name="location"/>
+                <field name="zone_id" widget="manyone"/>
+              </group>
+              <group>
+                <field name="brand_id" widget="manyone"/>
+                <field name="model_id" widget="manyone"/>
+                <field name="serial"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="warranty_start_date"/>
+                <field name="warranty_end_date"/>
+              </group>
+              <group>
+                <field name="dealer_warranty_start_date"/>
+                <field name="dealer_warranty_end_date"/>
+              </group>
+            </group>
+          </page>
+          <page string="Cliente">
+            <group>
+              <group>
+                <field name="detail_reason"/>
+                <field name="pending_reason"/>
+              </group>
+              <group>
+                <field name="detail_cause"/>
+                <field name="cause_reason"/>
+              </group>
+            </group>
+          </page>
+          <page string="Team" attrs="{'invisible': [('user_id','=',True)]}">
+            <separator string="Ticket and TSO"/>
+          </page>
+        </xpath>
+      </field>
+    </record>
 
-                          </group>
-                        </group>
-                      </page>
-                      <page string="Team" attrs="{'invisible': [('user_id','=',True)]}">
-                          <separator string="Ticket and TSO"/>
-                      </page>
-                </xpath>
-            </field>
-        </record>
+    <record id="helpdesk_ticket_calendar_view" model="ir.ui.view">
+      <field name="name">Helpdesk Ticket Calendar View</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="arch" type="xml">
+        <calendar color="team_id" date_start="create_date" date_stop="close_date" string="Helpdesk Ticket">
+          <field name="display_name"/>
+          <field name="partner_id"/>
+          <field name="user_id"/>
+          <field name="stage_id"/>
+        </calendar>
+      </field>
+    </record>
 
-        <record id="helpdesk_team_form_view_inherited" model="ir.ui.view">
-              <field name="name">helpdesk.team.form.view.inherited</field>
-              <field name="model">helpdesk.team</field>
-              <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
-              <field name="arch" type="xml">
-                  <xpath expr="//div[@class='col-lg-6 o_setting_box']" position="after">
-                    <div class="col-lg-6 o_setting_box" title="Team Leader">
-                      <div class="o_setting_right_pane">
-                        <label for="leader_id"/>
-                          <div class="text-muted">
-                            Team Responsible
-                          </div>
-                          <div>
-                            <field name="leader_id" class="mt16"/>
-                          </div>
-                      </div>
-                    </div>
-                  </xpath>
-              </field>
-          </record>
-    </odoo>
+    <record id="helpdesk_team_form_view_inherited" model="ir.ui.view">
+      <field name="name">helpdesk.team.form.view.inherited</field>
+      <field name="model">helpdesk.team</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[@class='col-lg-6 o_setting_box']" position="after">
+          <div class="col-lg-6 o_setting_box" title="Team Leader">
+            <div class="o_setting_right_pane">
+              <label for="leader_id"/>
+                <div class="text-muted">
+                  Team Responsible
+                </div>
+                <div>
+                  <field name="leader_id" class="mt16"/>
+                </div>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+  </odoo>
