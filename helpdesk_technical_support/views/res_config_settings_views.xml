@@ -22,8 +22,7 @@
                                     </div>
                                     <div class="content-group" attrs="{'invisible': [('use_mailgateway', '=',  False)]}">
                                         <div class="mt16">
-                                            <label for="new_ticket_notification_mail" string="New Ticket Notification Mail" class="o_light_label"/>
-                                            <field name="new_ticket_notification_mail" class="oe_inline"/>
+                                            <field name="new_ticket_notification_mail"/>
                                         </div>
                                     </div>
                                     <div class="content-group" attrs="{'invisible': [('use_mailgateway', '=',  False)]}">
