@@ -48,7 +48,6 @@
             <field name="context">{'module' : 'helpdesk'}</field>
         </record>
 
-        <menuitem id="menu_helpdesk_global_settings" name="Settings"
-            parent="helpdesk_menu_config" sequence="0" action="action_helpdesk_configuration" groups="base.group_system"/>
+        <menuitem id="menu_helpdesk_global_settings" name="Settings" parent="helpdesk.helpdesk_menu_config" sequence="0" action="action_helpdesk_configuration" groups="base.group_system"/>
     </data>
 </odoo>
