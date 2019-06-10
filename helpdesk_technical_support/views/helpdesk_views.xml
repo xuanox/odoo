@@ -69,9 +69,6 @@
                       <page string="Team" attrs="{'invisible': [('user_id','=',True)]}">
                           <separator string="Ticket and TSO"/>
                       </page>
-                      <page string="Engineer" attrs="{'invisible': [('user_id','=',True)]}">
-                          <separator string="Ticket and TSO"/>
-                      </page>
                 </xpath>
             </field>
         </record>
