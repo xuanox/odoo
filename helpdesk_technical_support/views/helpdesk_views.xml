@@ -10,7 +10,7 @@
           </xpath>
             <xpath expr="//button[@name='assign_ticket_to_self']" position="before">
               <button name="%(action_ticket_assign)d" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
-              <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" attrs="{'invisible':  [('stage_id.done', '=', True)]}" groups="technical_support.group_technical_support_engineer"/>
+              <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
               <button name="%(action_ticket_cause)d" string="Done" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
