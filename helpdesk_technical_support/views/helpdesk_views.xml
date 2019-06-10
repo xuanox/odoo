@@ -85,6 +85,15 @@
       </field>
     </record>
 
+    <record id="helpdesk_ticket_gantt_view" model="ir.ui.view">
+        <field name="name">Helpdesk Ticket Gantt View</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <gantt date_stop="close_date" date_start="create_date" string="Ticket" default_group_by="team_id">
+            </gantt>
+        </field>
+    </record>
+
     <record id="helpdesk_team_form_view_inherited" model="ir.ui.view">
       <field name="name">helpdesk.team.form.view.inherited</field>
       <field name="model">helpdesk.team</field>
