@@ -4,3 +4,4 @@
 from . import helpdesk
 from . import technical_support
 from . import equipment
+from . import res_config_settings
