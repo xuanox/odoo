@@ -28,7 +28,7 @@
                    <button name="print_part_order" states="quotation" string="Print Quotation" type="object" groups="part.group_spare_part_backoffice"/>
                    <!--<button name="action_part_confirm" string="Confirmed" type="object" class="oe_highlight" states="quotation" groups="part.group_spare_part_backoffice"/>-->
                    <button name="action_part_cancel_draft" states="cancel" string="Set to Draft" type="object" groups="part.group_spare_part_backoffice"/>
-                   <!--<button name="action_part_end" states="requested_part" type="object" string="End Part" class="oe_highlight"/> -->
+                   <button name="action_part_end" states="received_part" type="object" string="Installed Parts" class="oe_highlight" attrs="{'invisible':['|',('invoice_method','!=','after_part')]}"/>
                    <button name="action_part_invoice_create" states="2binvoiced" type="object" string="Create Invoice" class="oe_highlight" groups="part.group_spare_part_backoffice"/>
                    <!-- <button name="action_part_cancel" string="Cancel Part" type="object" attrs="{'invisible':['|',('invoice_method','!=','none'), ('state', 'not in',('confirmed','2binvoiced','ready','requested_part'))]}"/> -->
                    <button name="action_part_cancel" states="draft" type="object" string="Cancel Part" groups="part.group_spare_part_backoffice"/>
@@ -39,7 +39,7 @@
                         <button name="action_created_invoice"
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-pencil-square-o" string="Invoice" attrs="{'invisible': ['|',('invoice_method','=','none'), ('state','in',('confirmed','2binvoiced','draft'))]}"
+                            icon="fa-pencil-square-o" string="Invoice" attrs="{'invisible': ['|',('invoice_method','=','none'), ('state','in',('2binvoiced'))]}"
                             groups="account.group_account_invoice">
                         </button>
                     </div>

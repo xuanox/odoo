@@ -391,7 +391,7 @@ class Part(models.Model):
         After part else state is set to 'Ready'.
         @return: True
         """
-        if self.filtered(lambda part: part.state != 'requested_part'):
+        if self.filtered(lambda part: part.state != 'received_part'):
             raise UserError(_("part must be under part in order to end reparation."))
         for part in self:
             part.write({'repaired': True})
