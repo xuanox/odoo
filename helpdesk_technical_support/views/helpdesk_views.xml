@@ -72,6 +72,21 @@
       </field>
     </record>
 
+    <record id="helpdesk_ticket_tree_view_inherited" model="ir.ui.view">
+      <field name="name">Helpdesk Ticket Tree View</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="ticket_type_id" widget="manyone"/>
+          <field name="equipment_id"/>
+          <field name="team_id"/>
+          <field name="modality_id"/>
+          <field name="equipment_state_id"/>
+        </xpath>
+      </field>
+    </record>
+
     <record id="helpdesk_ticket_calendar_view" model="ir.ui.view">
       <field name="name">Helpdesk Ticket Calendar View</field>
       <field name="model">helpdesk.ticket</field>
