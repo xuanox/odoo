@@ -91,6 +91,26 @@
       </field>
     </record>
 
+    <record id="helpdesk_tickets_search_view_inherited" model="ir.ui.view">
+      <field name="name">Helpdesk Ticket Search</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="client_id" widget="manyone"/>
+          <field name="equipment_id" widget="manyone"/>
+          <field name="modality_id"/>
+          <field name="equipment_state_id"/>
+        </xpath>
+        <xpath expr="//filter[@name='team']" position="after">
+          <filter string="Client" name="client_id" context="{'group_by':'client_id'}"/>
+          <filter string="Equipment" name="equipment_id" context="{'group_by':'equipment_id'}"/>
+          <filter string="Modality" name="modality_id" context="{'group_by':'modality_id'}"/>
+          <filter string="Equipment State" name="equipment_state_id" context="{'group_by':'equipment_state_id'}"/>
+        </xpath>
+      </field>
+    </record>
+
     <record id="helpdesk_ticket_calendar_view" model="ir.ui.view">
       <field name="name">Helpdesk Ticket Calendar View</field>
       <field name="model">helpdesk.ticket</field>
