@@ -106,7 +106,33 @@
           <filter string="Client" name="client_id" context="{'group_by':'client_id'}"/>
           <filter string="Equipment" name="equipment_id" context="{'group_by':'equipment_id'}"/>
           <filter string="Modality" name="modality_id" context="{'group_by':'modality_id'}"/>
-          <filter string="Equipment State" name="equipment_state_id" context="{'group_by':'equipment_state_id'}"/>
+          <filter string="Equipment State
+
+            " name="equipment_state_id" context="{'group_by':'equipment_state_id'}"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="helpdesk_tickets_quick_create_form_view_inherited" model="ir.ui.view">
+      <field name="name">Helpdesk Ticket Form Quick Create</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.quick_create_ticket_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="equipment_id" widget="manyone"/>
+          <field name="ticket_type_id"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="helpdesk_tickets_kanban_view_inherited" model="ir.ui.view">
+      <field name="name">Helpdesk Ticket Kanban View</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="equipment_id" widget="manyone"/>
+          <field name="ticket_type_id"/>
         </xpath>
       </field>
     </record>
