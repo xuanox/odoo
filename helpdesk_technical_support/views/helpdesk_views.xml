@@ -76,9 +76,11 @@
       <field name="name">Helpdesk Ticket Calendar View</field>
       <field name="model">helpdesk.ticket</field>
       <field name="arch" type="xml">
-        <calendar color="team_id" date_start="create_date" date_stop="close_date" string="Helpdesk Ticket">
+        <calendar color="ticket_type_id" date_start="create_date" date_stop="close_date" string="Helpdesk Ticket">
           <field name="display_name"/>
           <field name="partner_id"/>
+          <field name="equipment_id"/>
+          <field name="modality_id"/>
           <field name="user_id"/>
           <field name="stage_id"/>
         </calendar>
