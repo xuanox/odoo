@@ -19,7 +19,7 @@
           <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
           <field name="equipment_state_id"/>
         </xpath>
-        <xpath expr="//field[@name='priority']" position="after">
+        <xpath expr="//field[@name='tag_ids']" position="after">
           <field name="remote"/>
         </xpath>
         <xpath expr="//button[@name='open_customer_tickets']" position="before">
