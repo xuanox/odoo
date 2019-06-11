@@ -157,14 +157,7 @@
       <field name="name">Helpdesk Ticket Cohort View</field>
       <field name="model">helpdesk.ticket</field>
       <field name="arch" type="xml">
-        <cohort string="Helpdesk Ticket" date_start="create_date" date_stop="close_date" interval="month">
-          <field name="display_name"/>
-          <field name="partner_id"/>
-          <field name="equipment_id"/>
-          <field name="modality_id"/>
-          <field name="user_id"/>
-          <field name="stage_id"/>
-        </cohort>
+        <cohort string="Helpdesk Ticket" date_start="create_date" date_stop="close_date" interval="month"/>
       </field>
     </record>
 
