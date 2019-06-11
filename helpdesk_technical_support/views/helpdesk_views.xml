@@ -77,9 +77,13 @@
       <field name="model">helpdesk.ticket</field>
       <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
       <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
         <xpath expr="//field[@name='partner_id']" position="after">
-          <field name="ticket_type_id" widget="manyone"/>
-          <field name="equipment_id"/>
+          <field name="ticket_type_id"/>
+          <field name="client_id" widget="manyone"/>
+          <field name="equipment_id" widget="manyone"/>
           <field name="team_id"/>
           <field name="modality_id"/>
           <field name="equipment_state_id"/>
