@@ -131,7 +131,8 @@
       <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='partner_id']" position="after">
-          <field name="equipment_id" widget="manyone"/>
+          <field name="client_id" widget="manyone"/>
+          <field name="equipment_id" widget="manyone" domain="[('client_id','=',client_id)]"/>
           <field name="ticket_type_id"/>
         </xpath>
       </field>
