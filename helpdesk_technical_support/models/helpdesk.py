@@ -71,6 +71,7 @@ class HelpdeskTicket(models.Model):
                 'equipment_id': request.equipment_id.id,
                 'description': request.name,
                 'problem_description': request.description,
+                'ticket_type_id': request.ticket_type_id.id,
                 'ticket_id': request.id,
             })
         self.write({'stage_id': 2})

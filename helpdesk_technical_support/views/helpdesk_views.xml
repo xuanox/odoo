@@ -13,7 +13,7 @@
           <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
           <button name="%(action_ticket_cause)d" string="Done" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
         </xpath>
-        <xpath expr="//field[@name='partner_id']" position="after">
+        <xpath expr="//field[@name='user_id']" position="after">
           <field name="client_id" widget="manyone"/>
           <field name="equipment_number" domain="[('client_id','=',client_id)]"/>
           <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
