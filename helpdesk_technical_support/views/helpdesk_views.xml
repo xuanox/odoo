@@ -87,6 +87,13 @@
           <field name="team_id"/>
           <field name="modality_id"/>
           <field name="equipment_state_id"/>
+          <field name="equipment_state_id"/>
+          <field name="equipment_state_id"/>
+          <field name="assign_date"/>
+          <field name="request_date"/>
+          <field name="date_planned"/>     
+          <field name="date_close"/>
+          <field name="close_date"/>
         </xpath>
       </field>
     </record>

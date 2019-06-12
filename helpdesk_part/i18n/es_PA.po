@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-11 18:10+0000\n"
-"PO-Revision-Date: 2019-06-11 19:53-0500\n"
+"PO-Revision-Date: 2019-06-12 08:12-0500\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "Nombre mostrado"
 #: code:addons/helpdesk_part/models/part.py:37
 #, python-format
 msgid "Error."
-msgstr "Error"
+msgstr "Error."
 
 #. module: helpdesk_part
 #: model:ir.model,name:helpdesk_part.model_helpdesk_ticket
