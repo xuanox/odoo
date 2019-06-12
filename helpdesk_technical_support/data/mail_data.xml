@@ -49,7 +49,7 @@
     The reference of your ticket is ${object.id}.<br /><br />
     To add additional comments, reply to this email.<br />
     Thanks you,<br /><br />
-    ${object.team_id.name or 'Helpdesk'} Team.
+    ${object.company_id.name or 'Helpdesk'} - Technical Support.
 </div>
         </field>
         <field name="auto_delete" eval="False"/>
@@ -73,7 +73,7 @@
     has been received and is pending to assign a responsible.
     The reference of ticket is ${object.id}.<br /><br />
     Thanks you,<br /><br />
-    ${object.company_id.name or 'Helpdesk'} Team.
+    ${object.company_id.name or 'Helpdesk'} - Technical Support.
 </div>
         </field>
         <field name="auto_delete" eval="False"/>
