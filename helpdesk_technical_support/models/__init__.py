@@ -5,3 +5,4 @@ from . import helpdesk
 from . import technical_support
 from . import equipment
 from . import res_config_settings
+from . import res_partner
