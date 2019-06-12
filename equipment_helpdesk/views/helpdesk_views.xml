@@ -36,7 +36,6 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='partner_id']" position="after">
           <field name="request_date"/>
-          <field name="date_planned"/>
           <field name="date_close"/>
         </xpath>
       </field>

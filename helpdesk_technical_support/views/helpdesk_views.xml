@@ -90,7 +90,6 @@
           <field name="equipment_state_id"/>
           <field name="equipment_state_id"/>
           <field name="assign_date"/>
-          <field name="date_planned"/>
           <field name="close_date"/>
         </xpath>
       </field>
