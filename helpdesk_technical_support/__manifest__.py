@@ -25,6 +25,7 @@ This shortcut allows you to generate a Technical Support Order.
         'wizard/pending_view.xml',
         'wizard/cause_view.xml',
         'wizard/assign_view.xml',
+        'wizard/equipment_view.xml',
         'security/ir.model.access.csv',
     ],
     'auto_install': True,
