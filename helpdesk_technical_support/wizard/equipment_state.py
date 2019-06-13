@@ -13,7 +13,7 @@ class HelpdeskStateEquipment(models.TransientModel):
     _name = 'helpdesk.state.equipment'
     _description = 'Equipment State'
 
-    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', store=True, domain=[('team','=','3')])
+    equipment_state_id = fields.Many2one('equipment.state', string='Equipment State', store=True, domain=[('team','=','3')])
 
     def equipment_state(self):
         active_id = self._context.get('active_id')
