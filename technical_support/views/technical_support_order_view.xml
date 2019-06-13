@@ -126,10 +126,10 @@
 																	<field name="name"/>
 																</tree>
 															</field>
-                              <separator string="Description for Operations"/>
-                              <field name="operations_description" placeholder="Specify the jobs that need execute..."/>
                         </page>
                         <page string="Documentation" name="documentation">
+													<separator string="Problem Found"/>
+													<field name="operations_description" placeholder="Problem found..."/>
 													<separator string="Work Done"/>
 													<field name="labor_description" placeholder="Work Done Specify ..."/>
                           <separator string="Observation"/>
