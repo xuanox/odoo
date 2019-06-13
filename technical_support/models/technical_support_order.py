@@ -63,7 +63,7 @@ class TechnicalSupportOrder(models.Model):
     documentation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     problem_description = fields.Text(related='ticket_id.description', string='Problem Description', readonly=True, store=True, track_visibility='onchange')
 
-    ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', required=True, track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     task_id = fields.Many2one('technical_support.task', 'Task', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True, readonly=True, states={'draft':[('readonly',False)]})
     user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
