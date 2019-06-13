@@ -1,4 +1,4 @@
-stateequipment<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
 
@@ -20,7 +20,7 @@ stateequipment<?xml version="1.0" encoding="utf-8"?>
         </record>
 
         <record id="action_state_equipment" model="ir.actions.act_window">
-            <field name="name">equipment state</field>
+            <field name="name">Equipment State</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">helpdesk.state.equipment</field>
             <field name="view_type">form</field>
