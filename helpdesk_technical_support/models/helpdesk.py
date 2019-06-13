@@ -30,7 +30,7 @@ class HelpdeskTicket(models.Model):
     model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True, store=True)
-    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', store=True, domain=[('team','=','3')], readonly=True)
+    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', store=True, domain=[('team','=','3')])
 
     warranty_start_date = fields.Date('Warranty Start', related='equipment_id.warranty_start_date')
     warranty_end_date = fields.Date('Warranty End', related='equipment_id.warranty_end_date')
