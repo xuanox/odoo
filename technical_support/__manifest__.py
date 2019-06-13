@@ -40,8 +40,8 @@ Required modules:
     'data': [
         'security/technical_support_security.xml',
         'security/ir.model.access.csv',
-        'wizard/reject_view.xml',
-        'wizard/convert_order.xml',
+        #'wizard/reject_view.xml',
+        #'wizard/convert_order.xml',
         'data/technical_support_sequence.xml',
         'data/technical_support_data.xml',
         'data/mail_template_data.xml',
