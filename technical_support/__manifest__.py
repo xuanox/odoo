@@ -46,7 +46,7 @@ Required modules:
         'data/technical_support_data.xml',
         'data/mail_template_data.xml',
         #'views/technical_support_view.xml',
-        #'views/technical_support_order_view.xml',
+        'views/technical_support_order_view.xml',
         'views/equipment_view.xml',
         'views/product_view.xml',
         'views/technical_support_workorder_view.xml',
