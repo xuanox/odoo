@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="equipment_view_form_inherit_subscription" model="ir.ui.view">
+        <field name="name">equipment.view.form.inherit.subscription</field>
+        <field name="model">equipment.equipment</field>
+        <field name="inherit_id" ref="equipment.equipments_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='info']" position="after">
+              <page string="Subscriptions">
+                <group>
+                  <field name="subscription_ids" widget="one2many_list" nolabel="1">
+                    <tree editable="bottom">
+                        <field name="analytic_account_id" widget="many2one"/>
+                    </tree>
+                  </field>
+                </group>
+              </page>
+            </xpath>
+            <xpath expr="//div[@name='buttons']" position="inside">
+               <button class="oe_inline oe_stat_button" name="action_view_maintenance" type="object"
+                   icon="fa-cogs">
+                   <field string="Subscriptions" name="subscription_count" widget="statinfo"/>
+               </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

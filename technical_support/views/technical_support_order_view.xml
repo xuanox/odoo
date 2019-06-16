@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Technical Support Order -->
+    <!-- Technical Support Order - Tree View -->
+		<record id="technical_support_order_tree_view" model="ir.ui.view">
+			<field name="name">Technical Support Order - Tree</field>
+      <field name="model">technical_support.order</field>
+      <field name="arch" type="xml">
+      <tree fonts="bold:message_unread==True" string="Technical Support Orders">
+      	<field name="message_unread" invisible="1"/>
+        <field name="name"/>
+        <field name="date_scheduled" string="Date Scheduled" widget="date"/>
+				<field name="user_id"/>
+        <field name="maintenance_type"/>
+        <field name="state"/>
+      </tree>
+      </field>
+    </record>
+
+    <!-- Technical Support Order - Caendar View -->
+    <record id="technical_support_order_calendar_view" model="ir.ui.view">
+      <field name="name">Technical Support Order - Calendar</field>
+      <field name="model">technical_support.order</field>
+      <field name="arch" type="xml">
+        <calendar color="maintenance_type" date_start="date_scheduled" string="Technical Support Orders">
+          <field name="name"/>
+          <field name="description"/>
+        </calendar>
+      </field>
+    </record>
+
+    <!-- Technical Support Order - Form View -->
+    <record id="technical_support_order_form_view" model="ir.ui.view">
+    		<field name="name">Technical Support Order - Form</field>
+        <field name="model">technical_support.order</field>
+        <field name="arch" type="xml">
+        		<form string="Technical Support Orders">
+            		<header>
+                	  <button name="action_confirm" states="draft" string="Confirm" type="object" class="oe_highlight"/> -->
+										<button name="action_send_mail" states="draft,consulting,ready" string="Consulting Factory" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+										<button name="action_done" states="ready" string="Done" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+										<button name="action_ready" states="consulting" string="Ready" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+                    <button name="action_cancel" type="object" states="draft" string="Cancel" groups="technical_support.group_technical_support_engineer"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,ready,done" statusbar_colors='{"consulting":"red","released":"blue"}'/>
+                </header>
+                <sheet>
+									<div class="oe_button_box" name="button_box">
+											<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+													<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+											</button>
+									</div>
+										<div class="oe_title">
+                    		<h1># <field name="name" class="oe_inline" readonly="1"/></h1>
+                    </div>
+                    <group>
+                    		<group>
+													  <field name="ticket_id" widget="many2one"/>
+														<field name="user_id" widget="many2one"/>
+														<field name="equipment_id" widget="many2one"/>
+														<field name="equipment_state_id"/>
+														<field name="client_id" widget="many2one"/>
+                            <field name="category_ids" invisible="1"/>
+                            <field name="maintenance_type"/>
+														<field name="ticket_type_id"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+														<field name="date_planned" />
+														<field name="date_execution" invisible="1"/>
+                            <field name="date_scheduled" string="Start"/>
+														<field name="date_finish" string="End"/>
+														<field name="task_id" domain="[('maintenance_type','=',True)]" widget="many2one"/>
+                        </group>
+                        <group groups="stock.group_locations">
+                        </group>
+                        <group>
+                        		<field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                        </group>
+                    </group>
+                    <notebook>
+												<page string="Information" name="information">
+														<separator string="Equipo"/>
+														<group>
+																<group>
+																	<field name="equipment_number"/>
+																	<field name="brand_id" widget="manyone"/>
+																	<field name="model_id" widget="manyone"/>
+																	<field name="serial"/>
+																</group>
+																<group>
+																	<field name="modality_id" widget="manyone"/>
+																	<field name="parent_id" widget="manyone"/>
+																	<field name="zone_id" widget="manyone"/>
+																	<field name="location" widget="manyone"/>
+																</group>
+													  </group>
+														<separator string="Cliente"/>
+														<group>
+																<group>
+
+																</group>
+																<group>
+
+																</group>
+													  </group>
+												</page>
+                        <page string="Tools">
+													<group string="Tools">
+														<field name="assets_lines" nolabel="1">
+																			<tree editable="bottom">
+																					<field name="assets_id"/>
+																					<field name="name"/>
+																					<field name="maintenance_state_id"/>
+																			</tree>
+																	</field>
+															</group>
+                                <separator string="Description for Tools"/>
+                                <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..."/>
+                        </page>
+                        <page string="Operations">
+															<field name="checklist_lines" nolabel="1">
+																<tree string="Checklist" editable="bottom">
+																	<field name="question_id"/>
+																	<field name="answer"/>
+																	<field name="name"/>
+																</tree>
+															</field>
+                        </page>
+                        <page string="Documentation" name="documentation">
+													<separator string="Problem Found"/>
+													<field name="operations_description" placeholder="Problem found..."/>
+													<separator string="Work Done"/>
+													<field name="labor_description" placeholder="Work Done Specify ..."/>
+                          <separator string="Observation"/>
+                          <field name="documentation_description" placeholder="Observation ..."/>
+                        </page>
+                    </notebook>
+                        <group string="Problem Description">
+                            <field name="problem_description" colspan="4" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+												<field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+    </record>
+
+    <!-- Technical Support Order - Graph View -->
+    <record id="technical_support_order_view_graph" model="ir.ui.view">
+	            <field name="name">Technical Support Order - Graph</field>
+	            <field name="model">technical_support.order</field>
+	            <field name="arch" type="xml">
+	                <graph string="Technical Support Order"  type="pie">
+	                    <field name="user_id" type="col"/>
+	                    <field name="modality_id" type="row"/>
+	                </graph>
+	            </field>
+    </record>
+
+		<!-- Technical Support Order - Pivot View -->
+	  <record id="technical_support_order_view_pivot" model="ir.ui.view">
+	            <field name="name">Technical Support Order - Pivot</field>
+	            <field name="model">technical_support.order</field>
+	            <field name="arch" type="xml">
+	                <pivot string="Technical Support Order" disable_linking="True">
+	                  <field name="user_id" type="col"/>
+	                  <field name="modality_id" type="row"/>
+	                </pivot>
+	            </field>
+    </record>
+
+		<!-- Technical Support Order - Dashboard View -->
+    <record id="technical_support_order_view_dashboard" model="ir.ui.view">
+	            <field name="name">Technical Support Order - Dashboard</field>
+	            <field name="model">technical_support.order</field>
+	            <field name="mode">primary</field>
+	            <field name="arch" type="xml">
+	                <dashboard>
+	                    <view type="graph" ref="technical_support.technical_support_order_view_graph"/>
+	                    <view type="pivot" ref="technical_support.technical_support_order_view_pivot"/>
+	                </dashboard>
+	            </field>
+    </record>
+
+		<!-- Technical Support Order - Search -->
+		<record id="technical_support_order_search" model="ir.ui.view">
+					<field name="name">Technical Support Order - Search</field>
+					<field name="model">technical_support.order</field>
+					<field name="arch" type="xml">
+					<search string="Search Technical Support Order">
+						<field name="name"/>
+						<field name="user_id"/>
+						<field name="maintenance_type"/>
+						<field name="equipment_id"/>
+						<field name="client_id"/>
+						<field name="modality_id"/>
+						<field name="brand_id"/>
+						<field name="state"/>
+						<filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
+						<separator/>
+							<group expand="0" string="Group By">
+								<filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+								<filter name="group_type" string="Maintenance Type" context="{'group_by': 'maintenance_type'}"/>
+								<filter name="group_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
+								<filter name="group_client" string="Client" context="{'group_by': 'client_id'}"/>
+								<filter name="group_modality" string="Modality" context="{'group_by': 'modality_id'}"/>
+								<filter name="group_user" string="Responsible" context="{'group_by': 'user_id'}"/>
+								<filter name="group_date_scheduled" string="Scheduled Date" context="{'group_by': 'date_scheduled'}"/>
+								<filter name="group_date_execution" string="Execution Date" context="{'group_by': 'date_execution'}"/>
+								<filter name="group_date_finish" string="Finish Date" context="{'group_by': 'date_finish'}"/>
+							</group>
+					</search>
+					</field>
+		</record>
+
+		<!-- Technical Support Order - Actions -->
+		<record id="action_orders" model="ir.actions.act_window">
+            <field name="name">Technical Support Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">technical_support.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,pivot,graph,dashboard</field>
+            <field name="context" eval="{'default_categ_id': ref('technical_support.product_category_technical_support')}"/>
+    </record>
+
+		<!-- Technical Support Order - Tree View - Leader -->
+		<record id="technical_support_order_leader_tree_view" model="ir.ui.view">
+			<field name="name">Technical Support Order - Leader - Tree</field>
+      <field name="model">technical_support.order</field>
+      <field name="arch" type="xml">
+      <tree string="Technical Support Orders - Leader">
+        <field name="name"/>
+        <field name="date_scheduled" string="Date Scheduled" widget="date"/>
+        <field name="client_id"/>
+				<field name="equipment_id"/>
+				<field name="user_id"/>
+        <field name="maintenance_type"/>
+				<field name="modality_id"/>
+        <field name="state"/>
+      </tree>
+      </field>
+    </record>
+
+		<!-- Technical Support Order - Tree View - Manager -->
+		<record id="technical_support_order_manager_tree_view" model="ir.ui.view">
+			<field name="name">Technical Support Order - Manager - Tree</field>
+			<field name="model">technical_support.order</field>
+			<field name="arch" type="xml">
+			<tree string="Technical Support Orders - Manager">
+				<field name="name"/>
+				<field name="date_scheduled" string="Date Scheduled" widget="date"/>
+				<field name="client_id"/>
+				<field name="equipment_id"/>
+				<field name="user_id"/>
+				<field name="maintenance_type"/>
+				<field name="modality_id"/>
+				<field name="state"/>
+			</tree>
+			</field>
+		</record>
+
+		<record id="mt_state_change" model="mail.message.subtype">
+					<field name="name">Ticket Cerrado</field>
+					<field name="res_model">technical_support.order</field>
+					<field name="default" eval="True"/>
+					<field name="description">Orden Cerrado!</field>
+				</record>
+
+		<!-- Technical Support Parts - Form View  -->
+    <record id="part_search_form_view" model="ir.ui.view">
+            <field name="name">product.template.search.technical_support</field>
+            <field name="model">product.template</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <filter name="services" position="before">
+                    <filter string="Parts" name="parts" domain="[('isParts','=',True)]" help="Parts your store in the inventory"/>
+                </filter>
+            </field>
+        </record>
+
+    <record id="part_action" model="ir.actions.act_window">
+            <field name="name">Part</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="part_search_form_view"/>
+            <field name="context" eval="{'default_categ_id': ref('technical_support.product_category_technical_support'), 'default_isParts': True, 'search_default_parts':1}"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new spare part.
+              </p>
+            </field>
+        </record>
+
+    <!-- Tasks menu -->
+    <record id="technical_support_task_tree_view" model="ir.ui.view">
+    	<field name="name">technical_support.task.tree</field>
+      <field name="model">technical_support.task</field>
+      <field name="arch" type="xml">
+      	<tree string="Maintenance Tasks">
+      		<field name="name"/>
+					<field name="model_id"/>
+        	<field name="maintenance_type"/>
+      	</tree>
+      </field>
+    </record>
+
+    <record id="technical_support_task_form_view" model="ir.ui.view">
+    	<field name="name">technical_support.task.form</field>
+      <field name="model">technical_support.task</field>
+      <field name="arch" type="xml">
+      	<form string="Tasks" version="7.0">
+      		<header>
+          </header>
+        	<sheet>
+                    <div class="oe_title">
+                        <h1>Task Name <field name="name" class="oe_inline"/></h1>
+                    </div>
+                    <group>
+                        <field name="category_id"/>
+												<field name="model_id"/>
+                        <field name="maintenance_type"/>
+												<field name="ticket_type_id"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Parts">
+                            <field name="parts_lines" nolabel="1" context="{'default_categ_id': context.get('default_categ_id')}">
+                                <tree string="Parts" editable="bottom">
+                                    <field name="parts_id" domain="[('isParts','=','True')]" context="{'default_categ_id': context.get('default_categ_id')}"/>
+                                    <field name="parts_qty"/>
+                                    <field name="parts_uom" groups="product.group_uom"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Tools">
+                            <separator string="Description for Tools"/>
+                            <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..."/>
+                        </page>
+                        <page string="Labor">
+                            <separator string="Description for Labor"/>
+                            <field name="labor_description" placeholder="Specify the specialists needed for execute this order..."/>
+                        </page>
+                        <page string="Operations">
+													<field name="checklist_lines" nolabel="1">
+														<tree string="Checklist" editable="bottom">
+															<field name="question_id"/>
+															<field name="answer"/>
+															<field name="name"/>
+														</tree>
+													</field>
+                          <separator string="Description for Operations"/>
+                          <field name="operations_description" placeholder="Operations Description..."/>
+                        </page>
+                        <page string="Documentation">
+                            <separator string="Description for Documentation"/>
+                            <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                </form>
+            </field>
+    </record>
+
+    <record id="action_tasks" model="ir.actions.act_window">
+    	<field name="name">Maintenance Tasks</field>
+    	<field name="type">ir.actions.act_window</field>
+      <field name="res_model">technical_support.task</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context" eval="{'default_categ_id': ref('technical_support.product_category_technical_support')}"/>
+    </record>
+
+		<!-- list maintenenace -->
+		<record model="ir.ui.view" id="technical_support_checklist_history_tree_view">
+			<field name="name">technical_support.checklist.history.tree</field>
+			<field name="model">technical_support.checklist.history</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Checklist"  colors="red:date_planned&lt;=current_date and state=='draft';orange:date_planned&lt;=current_date and state=='confirmed'">
+					<field name="name" />
+				  <field name="user_id" />
+				  <field name="date_planned"/>
+				  <field name="date_end"/>
+				  <field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="technical_support_checklist_history_form_view">
+			<field name="name">technical_support.checklist.history.form</field>
+			<field name="model">technical_support.checklist.history</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="CheckList">
+					<header>
+						<button name="action_confirmed" states="draft" string="To Confirm" type="object"/>
+				    <button name="action_done" states="draft" string="Valider" type="object" />
+						<button name="action_draft" states="confirmed,done" string="Re-Work" type="object" />
+				    <field name="state" widget="statusbar" />
+				  </header>
+				  <sheet>
+				  	<newline/>
+							<group>
+								<group>
+									<field name="name" />
+									<field name="models_id"/>
+				          <field name="checklist_id" />
+				        </group>
+				        <group>
+				        	<field name="date_planned"/>
+				          <field name="date_end"/>
+				          <field name="user_id"/>
+				        </group>
+				      </group>
+				    <newline/>
+
+				    <separator string="Verification Performed" colspan="4"/>
+				    <field name="answers_ids" colspan="4" >
+				                        <tree string="Answers" editable="bottom">
+				                            <field name="sequence" widget="handle"/>
+				                            <field name="name" select="1"/>
+																		<field name="question_id" widget="Many2one"/>
+				                            <field name="answer" select="1"/>
+				                            <field name="detail" select="1"/>
+				                        </tree>
+				                    </field>
+				                	<notebook>
+					                    <page string="Work Order">
+					                    <field name="ot_ids">
+
+						                </field>
+					                    </page>
+				                    </notebook>
+				                    </sheet>
+				                     <div class="oe_chatter">
+					                    <field name="message_follower_ids" widget="mail_followers"/>
+					                    <field name="message_ids" widget="mail_thread"/>
+				                	</div>
+				                </form>
+				            </field>
+		</record>
+
+		<record id="technical_support_checklist_history_action" model="ir.actions.act_window">
+			<field name="name">CheckList</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">technical_support.checklist.history</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- maintenance checklist -->
+		<record id="technical_support_checklist_form_view" model="ir.ui.view">
+			<field name="name">technical_support.checklist.form</field>
+			<field name="model">technical_support.checklist</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+				  	<group>
+							<group>
+								<field name="name"/>
+								<field name="active"/>
+							</group>
+							<group>
+					    	<field name="models_id"/>
+					      <field name="planned_date" widget="float_time"/>
+					    </group>
+				    </group>
+				    <field name="description" placeholder="Description"/>
+				    <notebook>
+				    	<page string="Questions">
+					    	<field name="questions_ids">
+							  	<tree editable="bottom" >
+							  		<field name="sequence" widget="handle"/>
+						      	<field name="name"  />
+						    	</tree>
+						    </field>
+					    </page>
+				    </notebook>
+				 </sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="technical_support_checklist_tree_view" model="ir.ui.view">
+			<field name="name">technical_support.checklist.tree</field>
+			<field name="model">technical_support.checklist</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Control List">
+					<field name="sequence" widget="handle"/>
+				  <field name="name" />
+				  <field name="models_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="technical_support_checklist_action" model="ir.actions.act_window">
+			<field name="name">Control List</field>
+			<field name="res_model">technical_support.checklist</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<!-- Technical Support Menu Icon-->
+		<menuitem name="Technical Support"
+				id="base.menu_technical_support_root"
+				groups="technical_support.group_technical_support_customer"
+				web_icon="technical_support,static/description/icon.png"
+				sequence="80"/>
+
+    <!-- Technical Support Menu -->
+		<menuitem name="Orders"
+			id="menu_technical_support_maintenance"
+			parent="base.menu_technical_support_root"
+			sequence="1"/>
+
+    <!-- Technical Support Orders Menu -->
+		<menuitem name="Technical Support Orders"
+			action="action_orders"
+			id="menu_technical_support_order"
+			parent="menu_technical_support_maintenance"
+			sequence="10"/>
+
+		<!-- Technical Support Parts menu -->
+		<menuitem name="Parts"
+			id="menu_maintenance_parts"
+			parent="base.menu_technical_support_root"
+			groups="technical_support.group_technical_support_engineer"
+			sequence="9"/>
+
+		<menuitem name="Parts"
+			action="part_action"
+			id="menu_maintenance_parts_parts"
+			parent="menu_maintenance_parts"
+			sequence="100"/>
+
+		<!-- Technical Support Tasks menu -->
+		<menuitem name="Tasks"
+			id="menu_maintenance_tasks"
+			parent="base.menu_technical_support_root"
+			sequence="9"/>
+
+		<menuitem name="Tasks"
+			action="action_tasks"
+			id="menu_maintenance_tasks_tasks"
+			parent="menu_maintenance_tasks"
+			sequence="100"/>
+
+ 	</data>
+</odoo>

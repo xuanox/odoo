@@ -39,17 +39,6 @@
             <field name="isParts" eval="True"/>
         </record>
 
-        <!-- Requests -->
-        <record id="technical_support_request_1" model="technical_support.request">
-            <field name="equipment_id" ref="equipment.equipment_equipment_1"/>
-            <field name="cause">Don't work Pump</field>
-        </record>
-
-        <record id="technical_support_request_2" model="technical_support.request">
-            <field name="equipment_id" ref="equipment.equipment_equipment_3"/>
-            <field name="cause">There is no light</field>
-        </record>
-
         <!-- Tasks -->
         <record id="technical_support_task_1" model="technical_support.task">
             <field name="category_id" ref="equipment.equipment_category_2"/>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+        <!-- Add contextual button on partner form view -->
+        <record id="view_partners_email_cm_pm_form" model="ir.ui.view">
+            <field name="name">view.res.partner.email.cm.pm.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field eval="1" name="priority"/>
+            <field name="groups_id" eval="[(4, ref('technical_support.group_technical_support_engineer'))]"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='email']" position="after">
+                <field name="email_pm"/>
+                <field name="email_cm"/>
+              </xpath>
+            </field>
+        </record>
+
+</odoo>

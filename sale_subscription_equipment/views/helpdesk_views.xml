@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+    	<record id="helpdesk_ticket_subscription_form_view_inherited" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.subscription.form.view.inherited</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                      <page string="Suscripción">
+                        <group>
+                          <field name="subscription_id" widget="one2many_list" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="analytic_account_id" widget="many2one"/>
+                            </tree>
+                          </field>
+                        </group>
+                      </page>
+                </xpath>
+            </field>
+        </record>
+    </odoo>

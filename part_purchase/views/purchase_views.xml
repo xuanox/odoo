@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="purchase_order_form_view_inherited" model="ir.ui.view">
+    <field name="name">purchase.order.form.view.inherited</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='incoterm_id']" position="after">
+              <group>
+                <field name="ticket_id"/>
+                <field name="part_order_id"/>
+                <field name="equipment_id"/>
+              </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>

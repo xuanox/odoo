@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo
-#    Copyright (C) 2015-2018 emsa (<http://www.electronicamedica.com>).
+#    Copyright (C) 2015-2018 CodUP (<http://codup.com>).
 #
 ##############################################################################
 
@@ -25,8 +25,8 @@ class technical_support_convert_order(models.TransientModel):
                     'parts_uom': line.parts_uom.id,
                     }])
             category_id = 1
-            if order.equipment_id.category_ids:
-                for category in order.equipment_id.category_ids:
+            if order.asset_id.category_ids:
+                for category in order.asset_id.category_ids:
                     category_id = category.id
                     break
             values = {

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_ticket_pending_user,helpdesk.ticket.pending.user,model_helpdesk_ticket_pending,helpdesk.group_helpdesk_user,1,0,0,0
+access_helpdesk_ticket_pending_reason_user,helpdesk.ticket.pending.reason.user,model_helpdesk_ticket_pending_reason,helpdesk.group_helpdesk_user,1,1,1,0
+
+access_helpdesk_ticket_cause_user,helpdesk.ticket.cause.user,model_helpdesk_ticket_cause,helpdesk.group_helpdesk_user,1,0,0,0
+access_helpdesk_ticket_cause_reason_user,helpdesk.ticket.cause.reason.user,model_helpdesk_ticket_cause_reason,helpdesk.group_helpdesk_user,1,1,1,0

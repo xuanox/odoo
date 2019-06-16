@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="part_order_purchase_form_view_inherit" model="ir.ui.view">
+        <field name="name">part.order.purchase.form.inherit</field>
+        <field name="model">part.order</field>
+        <field name="inherit_id" ref="part.view_part_order_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_created_invoice']" position="before">
+               <button type="object"
+                   name="action_view_purchase"
+                   class="oe_stat_button"
+                   icon="fa-shopping-cart"
+                   attrs="{'invisible': [('purchase_order_count', '=', 0)]}"
+                   groups="purchase.group_purchase_user">
+                   <field name="purchase_order_count" widget="statinfo" string="Purchase Orders"/>
+               </button>
+            </xpath>
+            <xpath expr="//button[@name='print_part_order']" position="after">
+              <button name="action_confirm_request" string="Confirmed SPR" states="quotation,ready" type="object" class="oe_highlight" />
+            </xpath>
+        </field>
+
+    </record>
+
+</odoo>

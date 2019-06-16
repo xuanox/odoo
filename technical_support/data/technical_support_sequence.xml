@@ -21,14 +21,6 @@
             <field name="number_increment">1</field>
         </record>
 
-        <!-- Sequences for Maintenance request -->
-        <record id="sequence_technical_support_request" model="ir.sequence">
-            <field name="name">Technical Support Request</field>
-            <field name="code">technical_support.request</field>
-            <field name="prefix">TSR</field>
-            <field name="padding">5</field>
-            <field name="number_next">1</field>
-            <field name="number_increment">1</field>
-        </record>
+
     </data>
 </odoo>

@@ -7,6 +7,7 @@
 ##############################################################################
 
 from . import technical_support
+from . import technical_support_order
 from . import technical_support_workorder
 from . import product_template
 from . import equipment

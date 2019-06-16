@@ -8,7 +8,7 @@
 
 {
     'name': 'Technical Support',
-    'version': '1.2',
+    'version': '1.3',
     'summary': 'Equipment Maintenance, Diagnostic, Preventive, Corrective, Repair and Operation',
     'description': """
 Manage Maintenance process in Odoo
@@ -33,9 +33,9 @@ Required modules:
     """,
     'author': 'emsa',
     'website': 'http://www.electronicamedica.com',
-    'category': 'Industries',
+    'category': 'Productivity',
     'sequence': 0,
-    'depends': ['equipment','purchase'],
+    'depends': ['asset','equipment','purchase','helpdesk', 'part'],
     'demo': ['data/technical_support_demo.xml'],
     'data': [
         'security/technical_support_security.xml',
@@ -44,13 +44,16 @@ Required modules:
         'wizard/convert_order.xml',
         'data/technical_support_sequence.xml',
         'data/technical_support_data.xml',
+        'data/mail_template_data.xml',
         'views/technical_support_view.xml',
+        'views/technical_support_order_view.xml',
         'views/equipment_view.xml',
         'views/product_view.xml',
         'views/technical_support_workorder_view.xml',
         'report/report_technical_support_order.xml',
         'report/report_technical_support_request.xml',
         'report/technical_support_report.xml',
+        'report/report_technical_support_templates.xml',
     ],
     'application': True,
 }

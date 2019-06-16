@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_state_equipment_wizard" model="ir.ui.view">
+            <field name="name">equipment state</field>
+            <field name="model">helpdesk.state.equipment</field>
+            <field name="arch" type="xml">
+                <form string="Equipment State" version="7.0">
+                    <group>
+                        <field name="equipment_state_id"/>
+                    </group>
+                    <footer>
+                        <button name="equipment_state" string="Equipment State" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_state_equipment" model="ir.actions.act_window">
+            <field name="name">Equipment State</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpdesk.state.equipment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

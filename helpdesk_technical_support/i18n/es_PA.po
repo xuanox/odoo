@@ -1,0 +1,530 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* helpdesk_technical_support
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-11 18:11+0000\n"
+"PO-Revision-Date: 2019-06-11 16:16-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__technical_support_count
+msgid "# Reports"
+msgstr "# Reportes"
+
+#. module: helpdesk_technical_support
+#: model:mail.template,subject:helpdesk_technical_support.customer_pending_ticket_request_email_template
+msgid "${object.display_name}"
+msgstr ""
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.website_helpdesk_technical_support_template
+msgid "-- Seleccione el Equipo --"
+msgstr ""
+
+#. module: helpdesk_technical_support
+#: model:mail.template,body_html:helpdesk_technical_support.customer_pending_ticket_request_email_template
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<div>\n"
+"    Dear ${object.sudo().partner_id.name or 'Madam/Sir'},<br/><br/>\n"
+"    Your request\n"
+"    % if object.access_token:\n"
+"    <a href=\"/helpdesk/ticket/${object.id}/${object.access_token}\">${object.name}</a>\n"
+"    % endif\n"
+"    has been received and is Customer Pending.\n"
+"    The reference of your ticket is ${object.id}.<br/><br/>\n"
+"    To add additional comments, reply to this email.<br/>\n"
+"    Thanks you,<br/><br/>\n"
+"    ${object.team_id.name or 'Helpdesk'} Team.\n"
+"</div>\n"
+"        "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<div>\n"
+"    Estimado ${object.sudo().partner_id.name or 'Madam/Sir'},<br/><br/>\n"
+"    Su Solicitud\n"
+"    % if object.access_token:\n"
+"    <a href=\"/helpdesk/ticket/${object.id}/${object.access_token}\">${object.name}</a>\n"
+"    % endif\n"
+"    recibida esta pendiente de programación.\n"
+"    La referencia de su Ticket es ${object.id}.<br/><br/>\n"
+"    Otra consulta adicional nos escribe a este email.<br/>\n"
+"    Gracias,<br/><br/>\n"
+"    ${object.team_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: helpdesk_technical_support
+#: model:mail.template,body_html:helpdesk_technical_support.new_ticket_request_email_template
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<div>\n"
+"    Dear ${object.sudo().team_id.name or 'Madam/Sir'},<br/><br/>\n"
+"    Your request\n"
+"    % if object.access_token:\n"
+"    <a href=\"/helpdesk/ticket/${object.id}/${object.access_token}\">${object.name}</a>\n"
+"    % endif\n"
+"    has been received and is pending to assign a responsible.\n"
+"    The reference of ticket is ${object.id}.<br/><br/>\n"
+"    Thanks you,<br/><br/>\n"
+"    ${object.company_id.name or 'Helpdesk'} Team.\n"
+"</div>\n"
+"        "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<div>\n"
+"    Estimado ${object.sudo().team_id.name or 'Madam/Sir'},<br/><br/>\n"
+"    La Solicitud\n"
+"    % if object.access_token:\n"
+"    <a href=\"/helpdesk/ticket/${object.id}/${object.access_token}\">${object.name}</a>\n"
+"    % endif\n"
+"    recibida esta pendiente por asignar un responsable.\n"
+"    La referencia del Ticket es ${object.id}.<br/><br/>\n"
+"    Gracias,<br/><br/>\n"
+"    ${object.company_id.name or 'Helpdesk'}.\n"
+"</div>\n"
+"        "
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.website_helpdesk_technical_support_tickets_followup_template
+msgid "<i class=\"fa fa-check\"/> Accept &amp; Sign"
+msgstr ""
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.website_helpdesk_technical_support_tickets_followup_template
+msgid "<i class=\"fa fa-comment\"/> Feedback"
+msgstr "<i class=\"fa fa-comment\"/> Opinión"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.website_helpdesk_technical_support_tickets_followup_template
+msgid "<i class=\"fa fa-download\"/> Download"
+msgstr "<i class=\"fa fa-download\"/> Descargar"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.website_helpdesk_technical_support_tickets_followup_template
+msgid "<i class=\"fa fa-print\"/> Print"
+msgstr "<i class=\"fa fa-print\"/> Imprimir"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__active
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: helpdesk_technical_support
+#: model:ir.actions.act_window,name:helpdesk_technical_support.action_ticket_assign
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_ticket_assign
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_assign_wizard
+msgid "Assign Ticket"
+msgstr "Asignar Ticket"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__user_id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__user_id
+msgid "Assigned to"
+msgstr "Asignada a"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__brand_id
+msgid "Brand"
+msgstr "Marca"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_assign_wizard
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_cause_wizard
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_pending_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__cause_reason_id
+msgid "Cause"
+msgstr "Causa"
+
+#. module: helpdesk_technical_support
+#: model:ir.actions.act_window,name:helpdesk_technical_support.action_ticket_cause
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_ticket_cause
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_cause_wizard
+msgid "Cause Ticket"
+msgstr "Causa"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_tickets_search_view_inherited
+msgid "Client"
+msgstr "Cliente"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__client_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Cliente"
+msgstr "Cliente"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__create_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__create_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__create_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__create_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__create_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__create_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__create_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__create_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__dealer_warranty_end_date
+msgid "Dealer Warranty End"
+msgstr "Fin de la Garantía del distribuidor"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__dealer_warranty_start_date
+msgid "Dealer Warranty Start"
+msgstr "Inicio de Garantía del distribuidor"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__detail_cause
+msgid "Detail Causa"
+msgstr "Detalle de la Causa"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__detail_reason
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__detail
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__detail_cause
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__detail_reason
+msgid "Detail Reason"
+msgstr "Detalle de la Razón"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__display_name
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__display_name
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__display_name
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__display_name
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Done"
+msgstr "Cerrar Ticket"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.res_config_settings_view_form
+msgid "Emails"
+msgstr "Correos electrónicos"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_equipment_equipment
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__equipment_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_tickets_search_view_inherited
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.website_helpdesk_technical_support_template
+msgid "Equipment"
+msgstr "Equipo"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_equipment_modality
+msgid "Equipment Modality"
+msgstr "Modalidad"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__equipment_number
+msgid "Equipment Number"
+msgstr "N° Equipo"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__parent_id
+msgid "Equipment Relation"
+msgstr "Relación"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__equipment_state_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_tickets_search_view_inherited
+msgid "Equipment State"
+msgstr "Estado del Equipo"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Equipo"
+msgstr "Equipo"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.res_config_settings_view_form
+msgid "Helpdesk"
+msgstr "Helpdesk"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_team
+msgid "Helpdesk Team"
+msgstr "Equipo de Helpdesk"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_ticket
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_calendar_view
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_cohort_view
+msgid "Helpdesk Ticket"
+msgstr "Ticket"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_ticket_pending_reason
+msgid "Helpdesk Ticket - Pending Reason"
+msgstr "Pendiente"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_ticket_cause_reason
+msgid "Helpdesk Ticket - cause Reason"
+msgstr "Causa"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__id
+msgid "ID"
+msgstr "ID"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign____last_update
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause____last_update
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason____last_update
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending____last_update
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__write_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__write_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__write_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__write_uid
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__write_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__write_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__write_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__write_date
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_team__leader_id
+msgid "Leader"
+msgstr "Lider"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__location
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.res_config_settings_view_form
+msgid "Mail Reception"
+msgstr "Email de Recepción"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.res_config_settings_view_form
+msgid "Mail where the new ticket will be received"
+msgstr "Correo donde se recibirá el nuevo ticket"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__modality_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_tickets_search_view_inherited
+msgid "Modality"
+msgstr "Modalidad"
+
+#. module: helpdesk_technical_support
+#: model:ir.actions.act_window,name:helpdesk_technical_support.equipment_modaliy_action_team_new
+#: model:ir.actions.act_window,name:helpdesk_technical_support.team_action_equipment_modality
+msgid "Modality Team"
+msgstr "Team"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__model_id
+msgid "Model"
+msgstr "Modelo"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause_reason__name
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending_reason__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "New Order"
+msgstr "Nueva Orden"
+
+#. module: helpdesk_technical_support
+#: model:mail.template,subject:helpdesk_technical_support.new_ticket_request_email_template
+msgid "New Ticket - ${object.display_name}"
+msgstr "Nuevo Ticket - ${object.display_name}"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_res_config_settings__use_mailgateway
+msgid "New Ticket Notification"
+msgstr "Notificación de Nuevo Ticket"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_res_config_settings__new_ticket_notification_mail
+msgid "New Ticket Notification Mail"
+msgstr "Email de Notificación de Nuevo Ticket"
+
+#. module: helpdesk_technical_support
+#: model:ir.actions.act_window,name:helpdesk_technical_support.technical_support_action_order_new
+#: model:ir.actions.act_window,name:helpdesk_technical_support.ticket_action_technical_support
+msgid "Order"
+msgstr "Orden"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__order_ids
+msgid "Orders"
+msgstr "Pedidos"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__pending_reason
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_pending__pending_reason_id
+msgid "Pending Reason"
+msgstr "Razón - Pendiente"
+
+#. module: helpdesk_technical_support
+#: model:ir.actions.act_window,name:helpdesk_technical_support.action_ticket_pending
+#: model:ir.model,name:helpdesk_technical_support.model_helpdesk_ticket_pending
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_pending_wizard
+msgid "Pending Ticket"
+msgstr "Ticket Pendiente"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__date_planned
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_assign__date_planned
+msgid "Planned Date"
+msgstr "Fecha Planeada"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__remote
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket_cause__remote
+msgid "Remote Attention"
+msgstr "Atención Remota"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Reports"
+msgstr "Reportes"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__serial
+msgid "Serial no."
+msgstr "N° Serial."
+
+#. module: helpdesk_technical_support
+#: model:ir.actions.act_window,name:helpdesk_technical_support.action_helpdesk_configuration
+#: model:ir.ui.menu,name:helpdesk_technical_support.menu_helpdesk_global_settings
+msgid "Settings"
+msgstr "Ajustes"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.res_config_settings_view_form
+msgid "Setup your domain alias"
+msgstr "Configure su alias de dominio"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_equipment_equipment__team_id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_equipment_modality__team_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Team"
+msgstr "Team"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_equipment_equipment__team_leader_id
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_equipment_modality__team_leader_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_team_form_view_inherited
+msgid "Team Leader"
+msgstr "Líder del Team"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_team_form_view_inherited
+msgid "Team Responsible"
+msgstr "Responsable del Team"
+
+#. module: helpdesk_technical_support
+#: model:ir.model,name:helpdesk_technical_support.model_technical_support_order
+msgid "Technical Support Order"
+msgstr "Orden de Soporte Técnico"
+
+#. module: helpdesk_technical_support
+#: code:addons/helpdesk_technical_support/models/helpdesk.py:83
+#, python-format
+msgid "Technical Support Orders"
+msgstr "Ordenes de Soporte Técnico"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_gantt_view
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.helpdesk_ticket_form_view_inherited
+msgid "Ticket and TSO"
+msgstr "Ticket y TSO"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__warranty_end_date
+msgid "Warranty End"
+msgstr "Fin de la Garantía"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__warranty_start_date
+msgid "Warranty Start"
+msgstr "Inicio de la Garantía"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__zone_id
+msgid "Zone"
+msgstr "Zona"
+
+#. module: helpdesk_technical_support
+#: model:ir.model.fields,field_description:helpdesk_technical_support.field_helpdesk_ticket__cause_reason
+msgid "cause Reason"
+msgstr "causa - Detalle"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_cause_wizard
+msgid "cause Ticket"
+msgstr "causa"
+
+#. module: helpdesk_technical_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_assign_wizard
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_cause_wizard
+#: model_terms:ir.ui.view,arch_db:helpdesk_technical_support.view_ticket_pending_wizard
+msgid "or"
+msgstr "o"
