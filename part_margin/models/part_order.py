@@ -40,20 +40,20 @@ class PartLine(models.Model):
             return
         self.purchase_price = self._compute_margin(self.part_id, self.product_id, self.product_uom)
 
-    @api.model
-    def create(self, vals):
-        vals.update(self._prepare_add_missing_fields(vals))
+#    @api.model
+#    def create(self, vals):
+#        vals.update(self._prepare_add_missing_fields(vals))
 
         # Calculation of the margin for programmatic creation of a SO line. It is therefore not
         # necessary to call product_id_change_margin manually
-        if 'purchase_price' not in vals and ('display_type' not in vals or not vals['display_type']):
-            part_id = self.env['sale.order'].browse(vals['part_id'])
-            product_id = self.env['product.product'].browse(vals['product_id'])
-            product_uom_id = self.env['uom.uom'].browse(vals['product_uom'])
+#        if 'purchase_price' not in vals and ('display_type' not in vals or not vals['display_type']):
+#            part_id = self.env['sale.order'].browse(vals['part_id'])
+#            product_id = self.env['product.product'].browse(vals['product_id'])
+#            product_uom_id = self.env['uom.uom'].browse(vals['product_uom'])
 
-            vals['purchase_price'] = self._compute_margin(part_id, product_id, product_uom_id)
+#            vals['purchase_price'] = self._compute_margin(part_id, product_id, product_uom_id)
 
-        return super(PartLine, self).create(vals)
+#        return super(PartLine, self).create(vals)
 
     @api.depends('product_id', 'purchase_price', 'product_uom_qty', 'price_unit', 'price_subtotal')
     def _product_margin(self):
