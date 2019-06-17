@@ -165,7 +165,7 @@ class equipment_equipment(models.Model):
     network_ids=fields.One2many('equipment.network','equipment_id',u'Networks')
     dicom_ids=fields.One2many('equipment.dicom','equipment_id',u'Dicom')
     child_ids=fields.One2many('equipment.equipment','parent_id',u'Accesory')
-
+    history_state_ids=fields.One2many('equipment.history.state','equipment_id', string='State History')
 
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
