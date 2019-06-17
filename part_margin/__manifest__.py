@@ -14,7 +14,7 @@ Price and Cost Price.
     """,
     'depends':['part'],
     'data':[
-    #'security/ir.model.access.csv',
-    #'views/part_margin_view.xml'
+    'security/ir.model.access.csv',
+    'views/part_margin_view.xml'
     ],
 }
