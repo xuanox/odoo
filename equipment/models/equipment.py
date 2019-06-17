@@ -302,7 +302,7 @@ class EquipmentHistoryState(models.Model):
 
     name = fields.Char('Refernce', required=True, translate=True)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
-    equipment_state_id = fields.Many2one('equipment.state', string='Equipment State')
+    equipment_state_id = fields.Many2one('equipment.state', string='Equipment State', domain=[('team','=','3')])
     date_from = fields.Datetime(
         'Start Date', readonly=True, index=True, copy=False, required=True,
         default=fields.Datetime.now, track_visibility='onchange')
