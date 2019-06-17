@@ -21,7 +21,7 @@ class IncorrectPartNumber(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             part = self.env['part.order'].browse(self._context.get('active_id'))
-            part.write({'incorrect_part_number_ids':self.incorrect_part_number_ids.id})
+            part.write({'incorrect_part_number_ids':self.incorrect_part_number_ids})
             part.write({'detail_incorrect_part_number': self.detail_incorrect_part_number})
             part.action_incorrect_part_number_ids()
         return {'type': 'ir.actions.act_window_close',}
