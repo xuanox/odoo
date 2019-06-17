@@ -300,7 +300,7 @@ class EquipmentHistoryState(models.Model):
     _name = 'equipment.history.state'
     _description = 'Equipment History State'
 
-    name = fields.Char('Modality Name', required=True, translate=True)
+    name = fields.Char('Refernce', required=True, translate=True)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
     equipment_state_id = fields.Many2one('equipment.state', string='Equipment State')
     date_from = fields.Datetime(
