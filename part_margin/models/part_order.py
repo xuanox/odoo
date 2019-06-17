@@ -68,7 +68,7 @@ class Part(models.Model):
 
     margin = fields.Monetary(compute='_product_margin', help="It gives profitability by calculating the difference between the Unit Price and the cost.", currency_field='currency_id', digits=dp.get_precision('Product Price'), store=True)
 
-    @api.depends('order_line.margin')
+    @api.depends('operations.margin')
     def _product_margin(self):
         for order in self:
-            order.margin = sum(order.order_line.filtered(lambda r: r.state != 'cancel').mapped('margin'))
+            order.margin = sum(order.operations.filtered(lambda r: r.state != 'cancel').mapped('margin'))
