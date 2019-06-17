@@ -73,6 +73,7 @@ class Part(models.Model):
         'product.pricelist', 'Pricelist',
         default=lambda self: self.env['product.pricelist'].search([], limit=1).id,
         help='Pricelist of the selected partner.')
+    currency_id = fields.Many2one("res.currency", related='pricelist_id.currency_id', string="Currency", readonly=True, required=True)
     partner_invoice_id = fields.Many2one('res.partner', 'Invoicing Address')
     invoice_method = fields.Selection([
         ("none", "No Invoice"),
