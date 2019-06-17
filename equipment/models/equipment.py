@@ -342,3 +342,16 @@ class EquipmentHistoryState(models.Model):
                 holiday.number_of_hours_display = number_of_hours or (holiday.number_of_days * HOURS_PER_DAY)
             else:
                 holiday.number_of_hours_display = 0
+
+    def _get_number_of_days(self, date_from, date_to, equipment_state_id):
+        """ Returns a float equals to the timedelta between two dates given as string."""
+#        if employee_id:
+#            employee = self.env['hr.employee'].browse(employee_id)
+#            return employee.get_work_days_data(date_from, date_to)['days']
+
+        today_hours = self.env.user.company_id.resource_calendar_id.get_work_hours_count(
+            datetime.combine(date_from.date(), time.min),
+            datetime.combine(date_from.date(), time.max),
+            False)
+
+        return self.env.user.company_id.resource_calendar_id.get_work_hours_count(date_from, date_to) / (today_hours or HOURS_PER_DAY)
