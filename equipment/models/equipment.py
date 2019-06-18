@@ -73,12 +73,9 @@ class equipment_category(models.Model):
     equipment_ids = fields.Many2many('equipment.equipment', id1='category_id', id2='equipment_id', string='Equipments')
 
 class equipment_equipment(models.Model):
-    """
-    Equipments
-    """
     _name = 'equipment.equipment'
     _description = 'Equipment'
-    _inherit = ['mail.thread']
+    _inherit =  ['mail.thread', 'mail.activity.mixin']
 
     def _read_group_state_ids(self, domain, read_group_order=None, access_rights_uid=None, team='3'):
         access_rights_uid = access_rights_uid or self.uid
@@ -125,7 +122,7 @@ class equipment_equipment(models.Model):
     finance_state_id = fields.Many2one('equipment.state', 'State Finance', domain=[('team','=','0')])
     warehouse_state_id = fields.Many2one('equipment.state', 'State Warehouse', domain=[('team','=','1')])
     manufacture_state_id = fields.Many2one('equipment.state', 'State Manufacture', domain=[('team','=','2')])
-    maintenance_state_id = fields.Many2one('equipment.state', 'State Maintenance', domain=[('team','=','3')])
+    maintenance_state_id = fields.Many2one('equipment.state', 'State Maintenance', domain=[('team','=','3')], track_visibility='onchange')
     accounting_state_id = fields.Many2one('equipment.state', 'State Accounting', domain=[('team','=','4')])
     maintenance_state_color = fields.Selection(related='maintenance_state_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
@@ -138,6 +135,7 @@ class equipment_equipment(models.Model):
     equipment_number = fields.Char('Equipment Number', size=64)
     model = fields.Char('Model', size=64)
     serial = fields.Char('Serial no.', size=64)
+    n_active = fields.Char('Active no.', size=64)
     location = fields.Char('Location')
     provider_id = fields.Many2one('res.partner', 'Provider')
     vendor_id = fields.Many2one('res.partner', 'Commercial')

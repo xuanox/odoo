@@ -30,7 +30,7 @@ class HelpdeskTicket(models.Model):
     model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True, store=True)
-    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', store=True, domain=[('team','=','3')])
+    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', store=True, track_visibility='onchange', domain=[('team','=','3')])
 
     warranty_start_date = fields.Date('Warranty Start', related='equipment_id.warranty_start_date')
     warranty_end_date = fields.Date('Warranty End', related='equipment_id.warranty_end_date')
@@ -50,6 +50,7 @@ class HelpdeskTicket(models.Model):
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
+    duration = fields.Float('Real Duration', store=True)
 
     @api.onchange('equipment_id','team_id')
     def onchange_equipment(self):
@@ -96,6 +97,15 @@ class HelpdeskTicket(models.Model):
         self.write({'stage_id': 3})
         return True
 
+    def update_equipment_state_operative(self):
+        for order in self:
+            if order.equipment_id: order.equipment_id.write({'maintenance_state_id': 21})
+        return True
+
+    def update_equipment_state_breakdown(self):
+        for order in self:
+            if order.equipment_id: order.equipment_id.write({'maintenance_state_id': 18})
+        return True
 
 class HelpdeskTeam(models.Model):
     _inherit = 'helpdesk.team'
