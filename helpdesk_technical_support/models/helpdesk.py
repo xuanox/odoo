@@ -50,6 +50,7 @@ class HelpdeskTicket(models.Model):
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
+    duration = fields.Float('Real Duration', store=True)
 
     @api.onchange('equipment_id','team_id')
     def onchange_equipment(self):
