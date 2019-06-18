@@ -24,8 +24,9 @@
         </xpath>
         <xpath expr="//field[@name='kanban_state']" position="after">
           <button style="pointer-events: none;" class="oe_inline badge badge-secondary">
-              <field name="duration" widget="mrp_time_counter" help="Time."/><field name="equipment_state_id"/>
+              <field name="duration" widget="mrp_time_counter" help="Time."/>
           </button>
+          <field name="equipment_state_id"/>
         </xpath>
         <xpath expr="//button[@name='open_customer_tickets']" position="before">
           <button class="oe_stat_button" name="action_view_report" type="object" icon="fa-file-pdf-o">
