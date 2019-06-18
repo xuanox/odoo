@@ -124,17 +124,17 @@ class equipment_equipment(models.Model):
     manufacture_state_id = fields.Many2one('equipment.state', 'State Manufacture', domain=[('team','=','2')])
     maintenance_state_id = fields.Many2one('equipment.state', 'State Maintenance', domain=[('team','=','3')], track_visibility='onchange')
     accounting_state_id = fields.Many2one('equipment.state', 'State Accounting', domain=[('team','=','4')])
-    maintenance_state_color = fields.Selection(related='maintenance_state_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True, track_visibility='onchange')
+    maintenance_state_color = fields.Selection(related='maintenance_state_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
     property_stock_equipment = fields.Many2one(
         'stock.location', "Equipment Location",
         company_dependent=True, domain=[('usage', 'like', 'equipment')],
         help="This location will be used as the destination location for installed parts during equipment life.")
-    user_id = fields.Many2one('res.users', 'Assigned to', track_visibility='onchange', track_visibility='onchange')
+    user_id = fields.Many2one('res.users', 'Assigned to', track_visibility='onchange')
     active = fields.Boolean('Active', default=True)
-    equipment_number = fields.Char('Equipment Number', size=64, track_visibility='onchange')
-    model = fields.Char('Model', size=64, track_visibility='onchange')
-    serial = fields.Char('Serial no.', size=64, track_visibility='onchange')
+    equipment_number = fields.Char('Equipment Number', size=64)
+    model = fields.Char('Model', size=64)
+    serial = fields.Char('Serial no.', size=64)
     location = fields.Char('Location')
     provider_id = fields.Many2one('res.partner', 'Provider')
     vendor_id = fields.Many2one('res.partner', 'Commercial')
@@ -151,18 +151,18 @@ class equipment_equipment(models.Model):
     image_medium = fields.Binary("Medium-sized image")
     category_ids = fields.Many2many('equipment.category', id1='equipment_id', id2='category_id', string='Tags')
 
-    brand_id=fields.Many2one('equipment.brand', u'Brand', track_visibility='onchange')
-    zone_id=fields.Many2one('equipment.zone', u'Zone', track_visibility='onchange')
-    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange')
-    model_id=fields.Many2one('equipment.model', u'Models', track_visibility='onchange')
+    brand_id=fields.Many2one('equipment.brand', u'Brand')
+    zone_id=fields.Many2one('equipment.zone', u'Zone')
+    client_id=fields.Many2one('res.partner', string='Client')
+    model_id=fields.Many2one('equipment.model', u'Models')
     parent_id=fields.Many2one('equipment.equipment', u'Equipment Relation')
     modality_id=fields.Many2one('equipment.modality', string='Modality')
 
-    software_ids=fields.One2many('equipment.software.list','equipment_id',u'Softwares', track_visibility='onchange')
-    network_ids=fields.One2many('equipment.network','equipment_id',u'Networks', track_visibility='onchange')
-    dicom_ids=fields.One2many('equipment.dicom','equipment_id',u'Dicom', track_visibility='onchange')
-    child_ids=fields.One2many('equipment.equipment','parent_id',u'Accesory', track_visibility='onchange')
-    history_state_ids=fields.One2many('equipment.history.state','equipment_id', string='State History', track_visibility='onchange')
+    software_ids=fields.One2many('equipment.software.list','equipment_id',u'Softwares')
+    network_ids=fields.One2many('equipment.network','equipment_id',u'Networks')
+    dicom_ids=fields.One2many('equipment.dicom','equipment_id',u'Dicom')
+    child_ids=fields.One2many('equipment.equipment','parent_id',u'Accesory')
+    history_state_ids=fields.One2many('equipment.history.state','equipment_id', string='State History')
 
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
