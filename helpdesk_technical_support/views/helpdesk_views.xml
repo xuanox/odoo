@@ -23,12 +23,14 @@
         <xpath expr="//field[@name='tag_ids']" position="after">
           <field name="remote"/>
         </xpath>
+        <xpath expr="//field[@name='kanban_state']" position="after">
+          <button style="pointer-events: none;" class="oe_inline badge badge-secondary">
+              <field name="duration" widget="mrp_time_counter" help="Time."/>
+          </button>
+        </xpath>
         <xpath expr="//button[@name='open_customer_tickets']" position="before">
           <button class="oe_stat_button" name="action_view_report" type="object" icon="fa-file-pdf-o">
             <field string="Reports" name="technical_support_count" widget="statinfo"/>
-          </button>
-          <button style="pointer-events: none;" class="oe_inline badge badge-secondary">
-              <field name="duration" widget="mrp_time_counter" help="Time."/>
           </button>
         </xpath>
         <xpath expr="//notebook" position="inside">
