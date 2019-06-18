@@ -17,6 +17,14 @@ from dateutil import relativedelta
 from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from dateutil.relativedelta import *
+import logging
+import math
+from datetime import datetime, time
+from pytz import timezone, UTC
+from odoo.addons.resource.models.resource import float_to_time, HOURS_PER_DAY
+from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.tools import float_compare
+from odoo.tools.translate import _
 
 STATE_COLOR_SELECTION = [
     ('0', 'Red'),
@@ -57,14 +65,12 @@ class equipment_state(models.Model):
         if (color>9): color = 0
         return self.write({'state_color': str(color)})
 
-
 class equipment_category(models.Model):
     _description = 'Equipment Tags'
     _name = 'equipment.category'
 
     name = fields.Char('Tag', required=True, translate=True)
     equipment_ids = fields.Many2many('equipment.equipment', id1='category_id', id2='equipment_id', string='Equipments')
-
 
 class equipment_equipment(models.Model):
     """
@@ -159,7 +165,7 @@ class equipment_equipment(models.Model):
     network_ids=fields.One2many('equipment.network','equipment_id',u'Networks')
     dicom_ids=fields.One2many('equipment.dicom','equipment_id',u'Dicom')
     child_ids=fields.One2many('equipment.equipment','parent_id',u'Accesory')
-
+    history_state_ids=fields.One2many('equipment.history.state','equipment_id', string='State History')
 
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
@@ -187,7 +193,6 @@ class equipment_equipment(models.Model):
         modality_ids = modalities._search([], order=order, access_rights_uid=SUPERUSER_ID)
         return modalities.browse(modality_ids)
 
-
 class EquipmentBrand(models.Model):
     _name = 'equipment.brand'
     _description = 'Brand'
@@ -198,7 +203,6 @@ class EquipmentBrand(models.Model):
     manager_id=fields.Many2one('res.partner','Provider')
     description=fields.Text('Description')
 
-
 class EquipmentSoftwareType(models.Model):
     _name = 'equipment.software.type'
     _description = 'Software Type'
@@ -207,7 +211,6 @@ class EquipmentSoftwareType(models.Model):
     name=fields.Char('Software Type',required=True)
     code=fields.Char('Reference Software Type')
     description=fields.Text('Description')
-
 
 class EquipmentZone(models.Model):
     _name = 'equipment.zone'
@@ -238,7 +241,6 @@ class EquipmentModel(models.Model):
     brand_id=fields.Many2one('equipment.brand','Brand')
     description=fields.Text('Description')
 
-
 class EquipmentSoftware(models.Model):
     _name = 'equipment.software'
     _description = 'Software'
@@ -249,7 +251,6 @@ class EquipmentSoftware(models.Model):
     software_type_id=fields.Many2one('equipment.software.type','Software Type')
     description=fields.Text('Description')
 
-
 class EquipmentSoftwareList(models.Model):
     _name = 'equipment.software.list'
     _description = 'Software List'
@@ -259,7 +260,6 @@ class EquipmentSoftwareList(models.Model):
     software_id=fields.Many2one('equipment.software','Software')
     equipment_id=fields.Many2one('equipment.equipment','Equipment')
     description=fields.Text('Description')
-
 
 class EquipmentNetwork(models.Model):
     _name = 'equipment.network'
@@ -275,7 +275,6 @@ class EquipmentNetwork(models.Model):
     equipment_id=fields.Many2one('equipment.equipment','Equipment')
     description=fields.Text('Description')
 
-
 class EquipmentDicom(models.Model):
     _name = 'equipment.dicom'
     _description = 'Dicom'
@@ -288,7 +287,6 @@ class EquipmentDicom(models.Model):
     dicom_type_id=fields.Many2one('equipment.dicom.type','Dicom Type')
     description=fields.Text('Description')
 
-
 class EquipmentModality(models.Model):
     _name = 'equipment.modality'
     _description = 'Equipment Modality'
@@ -297,3 +295,63 @@ class EquipmentModality(models.Model):
     color = fields.Integer('Color Index')
     note = fields.Text('Comments', translate=True)
     equipment_ids = fields.One2many('equipment.equipment', 'modality_id', string='Equipments', copy=False)
+
+class EquipmentHistoryState(models.Model):
+    _name = 'equipment.history.state'
+    _description = 'Equipment History State'
+
+    name = fields.Char('Refernce', required=True, translate=True)
+    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
+    equipment_state_id = fields.Many2one('equipment.state', string='Equipment State', domain=[('team','=','3')])
+    date_from = fields.Datetime(
+        'Start Date', readonly=True, index=True, copy=False, required=True,
+        default=fields.Datetime.now, track_visibility='onchange')
+    date_to = fields.Datetime(
+        'End Date', readonly=True, copy=False, required=True,
+        default=fields.Datetime.now, track_visibility='onchange')
+    number_of_days = fields.Float(
+        'Duration (Days)', copy=False, readonly=True, track_visibility='onchange',
+        help='Number of days of the leave request according to your working schedule.')
+    number_of_days_display = fields.Float(
+        'Duration in days', compute='_compute_number_of_days_display', copy=False, readonly=True,
+        help='Number of days of the leave request. Used for interface.')
+    number_of_hours_display = fields.Float(
+        'Duration in hours', compute='_compute_number_of_hours_display', copy=False, readonly=True,
+        help='Number of hours of the leave request according to your working schedule. Used for interface.')
+
+    @api.onchange('date_from', 'date_to', 'equipment_state_id')
+    def _onchange_leave_dates(self):
+        if self.date_from and self.date_to:
+            self.number_of_days = self._get_number_of_days(self.date_from, self.date_to, self.equipment_state_id.id)
+        else:
+            self.number_of_days = 0
+
+    @api.multi
+    @api.depends('number_of_days')
+    def _compute_number_of_days_display(self):
+        for holiday in self:
+            holiday.number_of_days_display = holiday.number_of_days
+
+    @api.multi
+    @api.depends('number_of_days')
+    def _compute_number_of_hours_display(self):
+        for holiday in self:
+            calendar = holiday.employee_id.resource_calendar_id or self.env.user.company_id.resource_calendar_id
+            if holiday.date_from and holiday.date_to:
+                number_of_hours = calendar.get_work_hours_count(holiday.date_from, holiday.date_to)
+                holiday.number_of_hours_display = number_of_hours or (holiday.number_of_days * HOURS_PER_DAY)
+            else:
+                holiday.number_of_hours_display = 0
+
+    def _get_number_of_days(self, date_from, date_to, equipment_state_id):
+        """ Returns a float equals to the timedelta between two dates given as string."""
+#        if employee_id:
+#            employee = self.env['hr.employee'].browse(employee_id)
+#            return employee.get_work_days_data(date_from, date_to)['days']
+
+        today_hours = self.env.user.company_id.resource_calendar_id.get_work_hours_count(
+            datetime.combine(date_from.date(), time.min),
+            datetime.combine(date_from.date(), time.max),
+            False)
+
+        return self.env.user.company_id.resource_calendar_id.get_work_hours_count(date_from, date_to) / (today_hours or HOURS_PER_DAY)

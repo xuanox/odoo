@@ -130,6 +130,16 @@
 		                                </tree>
 		                            </field>
 		                        </page>
+														<page string="State History">
+		                            <field name="history_state_ids" >
+		                                 <tree editable="bottom">
+		                                    <field name="equipment_state_id" />
+		                                    <field name="date_from"/>
+		                                    <field name="date_to"/>
+		                                    <field name="number_of_days"/>
+		                                </tree>
+		                            </field>
+		                        </page>
                         </notebook>
                      </sheet>
                      <div class="oe_chatter">
