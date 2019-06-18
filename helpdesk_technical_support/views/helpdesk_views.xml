@@ -18,14 +18,13 @@
           <field name="client_id" widget="manyone"/>
           <field name="equipment_number" domain="[('client_id','=',client_id)]"/>
           <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-          <field name="equipment_state_id"/>
         </xpath>
         <xpath expr="//field[@name='tag_ids']" position="after">
           <field name="remote"/>
         </xpath>
         <xpath expr="//field[@name='kanban_state']" position="after">
           <button style="pointer-events: none;" class="oe_inline badge badge-secondary">
-              <field name="duration" widget="mrp_time_counter" help="Time."/>
+              <field name="duration" widget="mrp_time_counter" help="Time."/><field name="equipment_state_id"/>
           </button>
         </xpath>
         <xpath expr="//button[@name='open_customer_tickets']" position="before">
