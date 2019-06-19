@@ -52,6 +52,7 @@
                             <field name="partner_id" widget="res_partner_many2one" attrs="{'required':[('invoice_method','!=','none')]}" context="{'show_vat': True}" groups="part.group_spare_part_backoffice"/>
                             <field name="equipment_id" widget="many2one" domain="[('client_id','=',partner_id)]" groups="part.group_spare_part_backoffice"/>
                             <field name="address_id" groups="part.group_spare_part_backoffice"/>
+                            <field name="partner_shipping_id" groups="part.group_spare_part_backoffice"/>
                             <field name="user_id" groups="part.group_spare_part_backoffice"/>
                         </group>
                         <group>

@@ -99,12 +99,14 @@ class HelpdeskTicket(models.Model):
 
     def update_equipment_state_operative(self):
         for order in self:
-            if order.equipment_id: order.equipment_id.write({'maintenance_state_id': 21})
+            if order.equipment_id:
+                order.equipment_id.write({'maintenance_state_id': 21})
         return True
 
     def update_equipment_state_breakdown(self):
         for order in self:
-            if order.equipment_id: order.equipment_id.write({'maintenance_state_id': 18})
+            if order.equipment_id: 
+                order.equipment_id.write({'maintenance_state_id': 18})
         return True
 
 class HelpdeskTeam(models.Model):
