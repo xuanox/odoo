@@ -137,7 +137,7 @@ class HelpdeskTicket(models.Model):
     def button_finish(self):
         self.ensure_one()
         self.end_all()
-        return self.write({'state': 'done', 'date_finished': fields.Datetime.now()})
+        return self.equipment_id.write({'maintenance_state_id': 21, 'date_end': fields.Datetime.now()})
 
     @api.multi
     def end_previous(self, doall=False):
