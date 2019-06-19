@@ -84,6 +84,7 @@ class TechnicalSupportOrder(models.Model):
     parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange')
     assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', readonly=True, states={'draft':[('readonly',False)]})
     checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'Planned CheckList', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    signature_lines = fields.One2many('technical_support.order.signature.line', 'maintenance_id', 'Users', states={'done':[('readonly',True)]})
 
     serial=fields.Char(related='equipment_id.serial', string='Serial', readonly=True)
     equipment_number=fields.Char(related='equipment_id.equipment_number', string='N° de Equipo', readonly=True)
@@ -95,6 +96,7 @@ class TechnicalSupportOrder(models.Model):
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
         help='Request a online signature to the customer in order to confirm orders automatically.')
     signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
+    wait_time= fields.Float(help="Wait Time in hours and minutes.")
 
 
     @api.onchange('equipment_id','maintenance_type')
@@ -502,3 +504,12 @@ class TechnicalSupportQuestion(models.Model):
     name=fields.Char("Question", required=True)
     sequence=fields.Integer('Sequence')
     checklist_id=fields.Many2one('technical_support.checklist', 'Control List', required=True)
+
+class TechnicalSupportOrderSignatureLine(models.Model):
+    _name = 'technical_support.order.signature.line'
+    _description = 'Technical Support Order Signature Line'
+
+    name = fields.Char('Description', size=64)
+    user_id=fields.Many2one('res.users', string='Usuarios', required=True)
+    maintenance_id = fields.Many2one('technical_support.order', string='Order')
+    description=fields.Text('Description')

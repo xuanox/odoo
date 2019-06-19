@@ -68,6 +68,12 @@
                         <group>
 														<field name="date_planned" />
 														<field name="date_execution" invisible="1"/>
+														<label for="wait_time"/>
+		                        <div>
+		                            <field name="wait_time"
+		                                   widget="float_time"
+		                                   class="oe_inline"/> <span class="ml8">hours</span>
+		                        </div>
                             <field name="date_scheduled" string="Start"/>
 														<field name="date_finish" string="End"/>
 														<field name="task_id" domain="[('maintenance_type','=',True)]" widget="many2one"/>
@@ -134,6 +140,14 @@
 													<field name="labor_description" placeholder="Work Done Specify ..."/>
                           <separator string="Observation"/>
                           <field name="documentation_description" placeholder="Observation ..."/>
+                        </page>
+												<page string="Users">
+															<field name="signature_lines" nolabel="1">
+																<tree string="Users" editable="bottom">
+																	<field name="user_id"/>
+																	<field name="name" string="Description"/>
+																</tree>
+															</field>
                         </page>
                     </notebook>
                         <group string="Problem Description">
