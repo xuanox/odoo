@@ -135,6 +135,14 @@
                           <separator string="Observation"/>
                           <field name="documentation_description" placeholder="Observation ..."/>
                         </page>
+												<page string="Users">
+															<field name="signature_lines" nolabel="1">
+																<tree string="Users" editable="bottom">
+																	<field name="user_id"/>
+																	<field name="name" string="Description"/>
+																</tree>
+															</field>
+                        </page>
                     </notebook>
                         <group string="Problem Description">
                             <field name="problem_description" colspan="4" nolabel="1"/>
