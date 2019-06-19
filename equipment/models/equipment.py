@@ -304,22 +304,6 @@ class EquipmentHistoryState(models.Model):
     name = fields.Char('Refernce', required=True, translate=True)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
     equipment_state_id = fields.Many2one('equipment.state', string='Equipment State', domain=[('team','=','3')])
-    date_from = fields.Datetime(
-        'Start Date', readonly=True, index=True, copy=False, required=True,
-        default=fields.Datetime.now, track_visibility='onchange')
-    date_to = fields.Datetime(
-        'End Date', readonly=True, copy=False, required=True,
-        default=fields.Datetime.now, track_visibility='onchange')
-    number_of_days = fields.Float(
-        'Duration (Days)', copy=False, readonly=True, track_visibility='onchange',
-        help='Number of days of the leave request according to your working schedule.')
-    number_of_days_display = fields.Float(
-        'Duration in days', compute='_compute_number_of_days_display', copy=False, readonly=True,
-        help='Number of days of the leave request. Used for interface.')
-    number_of_hours_display = fields.Float(
-        'Duration in hours', compute='_compute_number_of_hours_display', copy=False, readonly=True,
-        help='Number of hours of the leave request according to your working schedule. Used for interface.')
-
     ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', required=True)
     date_start = fields.Datetime('Start Date', default=fields.Datetime.now, required=True)
     date_end = fields.Datetime('End Date')
@@ -338,40 +322,3 @@ class EquipmentHistoryState(models.Model):
                 blocktime.duration = round(diff.total_seconds() / 60.0, 2)
             else:
                 blocktime.duration = 0.0
-
-    @api.onchange('date_from', 'date_to', 'equipment_state_id')
-    def _onchange_leave_dates(self):
-        if self.date_from and self.date_to:
-            self.number_of_days = self._get_number_of_days(self.date_from, self.date_to, self.equipment_state_id.id)
-        else:
-            self.number_of_days = 0
-
-    @api.multi
-    @api.depends('number_of_days')
-    def _compute_number_of_days_display(self):
-        for holiday in self:
-            holiday.number_of_days_display = holiday.number_of_days
-
-    @api.multi
-    @api.depends('number_of_days')
-    def _compute_number_of_hours_display(self):
-        for holiday in self:
-            calendar = holiday.employee_id.resource_calendar_id or self.env.user.company_id.resource_calendar_id
-            if holiday.date_from and holiday.date_to:
-                number_of_hours = calendar.get_work_hours_count(holiday.date_from, holiday.date_to)
-                holiday.number_of_hours_display = number_of_hours or (holiday.number_of_days * HOURS_PER_DAY)
-            else:
-                holiday.number_of_hours_display = 0
-
-    def _get_number_of_days(self, date_from, date_to, equipment_state_id):
-        """ Returns a float equals to the timedelta between two dates given as string."""
-#        if employee_id:
-#            employee = self.env['hr.employee'].browse(employee_id)
-#            return employee.get_work_days_data(date_from, date_to)['days']
-
-        today_hours = self.env.user.company_id.resource_calendar_id.get_work_hours_count(
-            datetime.combine(date_from.date(), time.min),
-            datetime.combine(date_from.date(), time.max),
-            False)
-
-        return self.env.user.company_id.resource_calendar_id.get_work_hours_count(date_from, date_to) / (today_hours or HOURS_PER_DAY)
