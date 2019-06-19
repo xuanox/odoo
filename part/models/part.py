@@ -109,7 +109,6 @@ class Part(models.Model):
              "will be scheduled based on this date rather than product lead times.")
     fiscal_position_id = fields.Many2one('account.fiscal.position', string='Fiscal Position')
     date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
-    partner_shipping_id = fields.Many2one('res.partner', string='Delivery Address', readonly=True, required=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)], 'sale': [('readonly', False)]}, help="Delivery address for current sales order.")
 
     @api.one
     @api.depends('partner_id')
