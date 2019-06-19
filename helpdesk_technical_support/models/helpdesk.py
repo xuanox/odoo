@@ -30,7 +30,7 @@ class HelpdeskTicket(models.Model):
     model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True, store=True)
-    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', store=True, track_visibility='onchange', domain=[('team','=','3')])
+    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', readonly=True, store=True, track_visibility='onchange', domain=[('team','=','3')])
 
     warranty_start_date = fields.Date('Warranty Start', related='equipment_id.warranty_start_date')
     warranty_end_date = fields.Date('Warranty End', related='equipment_id.warranty_end_date')
@@ -105,9 +105,57 @@ class HelpdeskTicket(models.Model):
 
     def update_equipment_state_breakdown(self):
         for order in self:
-            if order.equipment_id: 
+            if order.equipment_id:
                 order.equipment_id.write({'maintenance_state_id': 18})
         return True
+
+    @api.multi
+    def button_start(self):
+        self.ensure_one()
+        # Need a loss in case of the real time exceeding the expected
+        timeline = self.env['equipment.history.state']
+
+        for workorder in self:
+            if workorder.equipment_id.maintenance_state_id != 21:
+                workorder.equipment_id.write({
+                    'maintenance_state_id': 18,
+                    'date_start': datetime.now(),
+                })
+            timeline.create({
+                'ticket_id': workorder.id,
+                'name': _('Time Tracking: ')+self.env.user.name,
+                'equipment_id': workorder.equipment_id.id,
+                'equipment_state_id': 18,
+                'date_start': datetime.now(),
+                'user_id': self.env.user.id
+            })
+        return self.equipment_id.write({'maintenance_state_id': 18,
+                    'date_start': datetime.now(),
+        })
+
+    @api.multi
+    def button_finish(self):
+        self.ensure_one()
+        self.end_all()
+        return self.equipment_id.write({'maintenance_state_id': 21, 'date_end': fields.Datetime.now()})
+
+    @api.multi
+    def end_previous(self, doall=False):
+        """
+        @param: doall:  This will close all open time lines on the open work orders when doall = True, otherwise
+        only the one of the current user
+        """
+        # TDE CLEANME
+        timeline_obj = self.env['equipment.history.state']
+        domain = [('ticket_id', 'in', self.ids), ('date_end', '=', False)]
+        for timeline in timeline_obj.search(domain, limit=1):
+            wo = timeline.ticket_id
+            timeline.write({'date_end': fields.Datetime.now()})
+        return True
+
+    @api.multi
+    def end_all(self):
+        return self.end_previous(doall=True)
 
 class HelpdeskTeam(models.Model):
     _inherit = 'helpdesk.team'
