@@ -133,6 +133,30 @@ class HelpdeskTicket(models.Model):
                     'date_start': datetime.now(),
         })
 
+    @api.multi
+    def button_finish(self):
+        self.ensure_one()
+        self.end_all()
+        return self.write({'state': 'done', 'date_finished': fields.Datetime.now()})
+
+    @api.multi
+    def end_previous(self, doall=False):
+        """
+        @param: doall:  This will close all open time lines on the open work orders when doall = True, otherwise
+        only the one of the current user
+        """
+        # TDE CLEANME
+        timeline_obj = self.env['equipment.history.state']
+        domain = [('ticket_id', 'in', self.ids), ('date_end', '=', False)]
+        for timeline in timeline_obj.search(domain, limit=1):
+            wo = timeline.ticket_id
+            timeline.write({'date_end': fields.Datetime.now()})
+        return True
+
+    @api.multi
+    def end_all(self):
+        return self.end_previous(doall=True)
+
 class HelpdeskTeam(models.Model):
     _inherit = 'helpdesk.team'
 
