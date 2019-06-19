@@ -51,7 +51,7 @@ class Part(models.Model):
 
         if self.filtered(lambda part: part.invoice_method == 'after_part'):
             self.action_confirm_operations()
-            
+
         if self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: not part.invoiced):
             self.write({'state': '2binvoiced'})
         else:
@@ -208,7 +208,7 @@ class PartLine(models.Model):
             'partner_ref': partner_supplier.ref,
             'company_id': self.company_id.id,
             'currency_id': partner_supplier.property_purchase_currency_id.id or self.env.user.company_id.currency_id.id,
-            'dest_address_id': self.part_id.partner_shipping_id.id,
+            'dest_address_id': self.part_id.address_id.id,
             'origin': self.part_id.name,
             'payment_term_id': partner_supplier.property_supplier_payment_term_id.id,
             'date_order': date_order,
