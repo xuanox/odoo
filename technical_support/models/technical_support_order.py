@@ -510,6 +510,6 @@ class TechnicalSupportOrderSignatureLine(models.Model):
     _description = 'Technical Support Order Signature Line'
 
     name = fields.Char('Description', size=64)
-    user_id=fields.Many2one('res.user', string='Usuarios', required=True)
+    user_id=fields.Many2one('res.users', string='Usuarios', required=True)
     maintenance_id = fields.Many2one('technical_support.order', string='Order')
     description=fields.Text('Description')
