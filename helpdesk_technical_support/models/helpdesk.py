@@ -123,6 +123,7 @@ class HelpdeskTicket(models.Model):
                 })
             timeline.create({
                 'ticket_id': workorder.id,
+                'name': _('Time Tracking: ')+self.env.user.name,
                 'equipment_id': workorder.equipment_id.id,
                 'equipment_state_id': 18,
                 'date_start': datetime.now(),
