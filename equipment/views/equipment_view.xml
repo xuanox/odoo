@@ -136,7 +136,7 @@
 		                                    <field name="equipment_state_id" />
 		                                    <field name="date_start"/>
 		                                    <field name="date_end"/>
-		                                    <field name="duration"/>
+		                                    <field name="duration" widget="mrp_time_counter"/>
 		                                </tree>
 		                            </field>
 		                        </page>
