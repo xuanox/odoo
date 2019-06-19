@@ -105,9 +105,32 @@ class HelpdeskTicket(models.Model):
 
     def update_equipment_state_breakdown(self):
         for order in self:
-            if order.equipment_id: 
+            if order.equipment_id:
                 order.equipment_id.write({'maintenance_state_id': 18})
         return True
+
+    @api.multi
+    def button_start(self):
+        self.ensure_one()
+        # Need a loss in case of the real time exceeding the expected
+        timeline = self.env['equipment.history.state']
+
+        for workorder in self:
+            if workorder.equipment_id.maintenance_state_id != 21:
+                workorder.equipment_id.write({
+                    'maintenance_state_id': 18,
+                    'date_start': datetime.now(),
+                })
+            timeline.create({
+                'ticket_id': workorder.id,
+                'equipment_id': workorder.equipment_id.id,
+                'equipment_state_id': 18,
+                'date_start': datetime.now(),
+                'user_id': self.env.user.id
+            })
+        return self.equipment_id.write({'maintenance_state_id': 18,
+                    'date_start': datetime.now(),
+        })
 
 class HelpdeskTeam(models.Model):
     _inherit = 'helpdesk.team'

@@ -165,6 +165,9 @@ class equipment_equipment(models.Model):
     child_ids=fields.One2many('equipment.equipment','parent_id',u'Accesory')
     history_state_ids=fields.One2many('equipment.history.state','equipment_id', string='State History')
 
+    date_start = fields.Datetime('Start Date', copy=False, index=True, readonly=True)
+    date_finished = fields.Datetime('End Date', copy=False, index=True, readonly=True)
+
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
         'warehouse_state_id': _read_group_warehouse_state_ids,
@@ -316,6 +319,29 @@ class EquipmentHistoryState(models.Model):
     number_of_hours_display = fields.Float(
         'Duration in hours', compute='_compute_number_of_hours_display', copy=False, readonly=True,
         help='Number of hours of the leave request according to your working schedule. Used for interface.')
+
+    ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', required=True)
+    date_start = fields.Datetime('Start Date', default=fields.Datetime.now, required=True)
+    date_end = fields.Datetime('End Date')
+    duration = fields.Float('Duration', compute='_compute_duration', store=True)
+    user_id = fields.Many2one(
+        'res.users', "User",
+        default=lambda self: self.env.uid)
+        
+    @api.depends('date_end', 'date_start')
+    def _compute_duration(self):
+        for blocktime in self:
+            if blocktime.date_end:
+                d1 = fields.Datetime.from_string(blocktime.date_start)
+                d2 = fields.Datetime.from_string(blocktime.date_end)
+                diff = d2 - d1
+                if (blocktime.loss_type not in ('productive', 'performance')) and blocktime.workcenter_id.resource_calendar_id:
+                    r = blocktime.workcenter_id.get_work_days_data(d1, d2)['hours']
+                    blocktime.duration = round(r * 60, 2)
+                else:
+                    blocktime.duration = round(diff.total_seconds() / 60.0, 2)
+            else:
+                blocktime.duration = 0.0
 
     @api.onchange('date_from', 'date_to', 'equipment_state_id')
     def _onchange_leave_dates(self):
