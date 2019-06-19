@@ -502,3 +502,12 @@ class TechnicalSupportQuestion(models.Model):
     name=fields.Char("Question", required=True)
     sequence=fields.Integer('Sequence')
     checklist_id=fields.Many2one('technical_support.checklist', 'Control List', required=True)
+
+class TechnicalSupportOrderSignatureLine(models.Model):
+    _name = 'technical_support.order.signature.line'
+    _description = 'Technical Support Order Signature Line'
+
+    name = fields.Char('Description', size=64)
+    user_id=fields.Many2one('res.user', string='Usuarios', required=True)
+    maintenance_id = fields.Many2one('technical_support.order', string='Order')
+    description=fields.Text('Description')
