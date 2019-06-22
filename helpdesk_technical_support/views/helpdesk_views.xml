@@ -204,4 +204,19 @@
       </field>
     </record>
 
+    <menuitem
+      id="helpdesk_equipment_root_menu_main"
+      name="Equipment"
+      sequence="19"
+      parent="helpdesk.menu_helpdesk_root"
+      groups="helpdesk.group_helpdesk_user"/>
+
+    <menuitem
+      id="helpdesk_equipment_menu"
+      name="Equipment"
+      action="action_equipments"
+      sequence="10"
+      parent="helpdesk_equipment_root_menu_main"
+      groups="helpdesk.group_helpdesk_user"/>
+
   </odoo>
