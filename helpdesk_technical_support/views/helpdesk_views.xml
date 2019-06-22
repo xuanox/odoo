@@ -14,8 +14,8 @@
           <button name="%(action_ticket_cause)d" string="Done" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
         <!--  <button name="update_equipment_state_operative" string="Operative" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('equipment_state_id', '=', 21)]}"/>
           <button name="update_equipment_state_breakdown" string="Breakdown" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('equipment_state_id', '=', 18)]}"/> -->
-          <button name="button_start" string="ESTADO" type="object" class="btn btn-success" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('equipment_state_id', '=', 18)]}"/>
-          <button name="button_finish" string="ESTADO" type="object" class="btn btn-danger" groups="technical_support.group_technical_support_engineer" attrs="{'invisible': ['|',('equipment_state_id', '=', 21), ('equipment_id', '=', False)]}"/>
+          <button name="button_start" string="ESTADO" type="object" class="btn btn-success" groups="technical_support.group_technical_support_engineer" attrs="{'invisible': ['|',('equipment_state_id', '=', 18), ('equipment_state_id', '=', False)]}"/>
+          <button name="button_finish" string="ESTADO" type="object" class="btn btn-danger" groups="technical_support.group_technical_support_engineer" attrs="{'invisible': ['|',('equipment_state_id', '=', 21), ('equipment_state_id', '=', False)]}"/>
         </xpath>
         <xpath expr="//field[@name='user_id']" position="after">
           <field name="client_id" widget="manyone"/>
