@@ -44,8 +44,12 @@
                         </div>
                         <group>
 													<group>
-															<field name="client_id" widget="many2one"/>
-															<field name="modality_id" widget="many2one"/>
+														<field name="brand_id" widget="many2one"/>
+														<field name="model_id"/>
+														<field name="serial"/>
+														<field name="client_id" widget="many2one"/>
+														<field name="modality_id" widget="many2one"/>
+														<field name="n_active"/>
 													</group>
 													<group>
 															<field name="effective_date"/>
@@ -64,16 +68,12 @@
                             <page name="info" string="Info">
                                 <group>
                                     <group>
-																			<field name="brand_id" widget="many2one"/>
-                                      <field name="model_id"/>
-                                      <field name="serial"/>
-																			<field name="n_active"/>
+																			<field name="software_v"/>
+																			<field name="hardware_v"/>
                                     </group>
                                     <group>
 																			<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 																			<field name="criticality"/>
-																			<field name="software_v"/>
-																			<field name="hardware_v"/>
                                     </group>
                                 </group>
                             </page>
