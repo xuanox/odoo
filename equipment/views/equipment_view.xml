@@ -71,6 +71,8 @@
                                     <group>
 																			<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 																			<field name="criticality"/>
+																			<field name="software_v"/>
+																			<field name="hardware_v"/>
                                     </group>
                                 </group>
                             </page>
