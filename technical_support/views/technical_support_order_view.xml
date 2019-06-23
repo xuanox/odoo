@@ -50,40 +50,44 @@
 													<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
 											</button>
 									</div>
+									<button style="pointer-events: none;" class="oe_inline badge badge-secondary">
+											<field name="duration" widget="mrp_time_counter" help="Time."/>
+									</button>
 									<field name="equipment_state_id"/>
 										<div class="oe_title">
                     		<h1># <field name="name" class="oe_inline" readonly="1"/></h1>
                     </div>
                     <group>
-                    		<group>
-													  <field name="ticket_id" widget="many2one"/>
-														<field name="user_id" widget="many2one"/>
-														<field name="equipment_id" widget="many2one"/>
-														<field name="equipment_state_id"/>
-														<field name="client_id" widget="many2one"/>
-                            <field name="category_ids" invisible="1"/>
-                            <field name="maintenance_type"/>
-														<field name="ticket_type_id"/>
-                            <field name="description"/>
-                        </group>
-                        <group>
-														<field name="date_planned" />
-														<field name="date_execution" invisible="1"/>
-														<label for="wait_time"/>
-		                        <div>
-		                            <field name="wait_time"
-		                                   widget="float_time"
-		                                   class="oe_inline"/> <span class="ml8">hours</span>
-		                        </div>
-                            <field name="date_scheduled" string="Start"/>
-														<field name="date_finish" string="End"/>
-														<field name="task_id" domain="[('maintenance_type','=',True)]" widget="many2one"/>
-                        </group>
-                        <group groups="stock.group_locations">
-                        </group>
-                        <group>
-                        		<field name="company_id" groups="base.group_multi_company" widget="selection"/>
-                        </group>
+                    	<group>
+												<field name="company_id" groups="base.group_multi_company" widget="selection"/>
+												<field name="ticket_id" widget="many2one"/>
+												<field name="user_id" widget="many2one"/>
+												<field name="client_id" widget="many2one"/>
+												<field name="equipment_id" widget="many2one"/>
+                      </group>
+                      <group>
+												<field name="category_ids" invisible="1"/>
+												<field name="maintenance_type"/>
+												<field name="ticket_type_id"/>
+												<field name="description"/>
+                      </group>
+										</group>
+										<group>
+                      <group>
+												<field name="date_planned" />
+												<field name="date_execution" invisible="1"/>
+												<label for="wait_time"/>
+												<div>
+														<field name="wait_time"
+																	 widget="float_time"
+																	 class="oe_inline"/> <span class="ml8">hours</span>
+												</div>
+												<field name="date_scheduled" string="Start"/>
+												<field name="date_finish" string="End"/>
+                      </group>
+                      <group>
+                        <field name="task_id" domain="[('maintenance_type','=',True)]" widget="many2one"/>		
+                      </group>
                     </group>
                     <notebook>
 												<page string="Information" name="information">
