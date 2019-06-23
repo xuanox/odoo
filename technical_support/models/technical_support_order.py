@@ -97,7 +97,7 @@ class TechnicalSupportOrder(models.Model):
         help='Request a online signature to the customer in order to confirm orders automatically.')
     signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
     wait_time= fields.Float(help="Wait Time in hours and minutes.")
-
+    duration = fields.Float('Real Duration', store=True)
 
     @api.onchange('equipment_id','maintenance_type')
     def onchange_equipment(self):

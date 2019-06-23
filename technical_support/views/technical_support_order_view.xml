@@ -38,7 +38,7 @@
         		<form string="Technical Support Orders">
             		<header>
                 	  <button name="action_confirm" states="draft" string="Confirm" type="object" class="oe_highlight"/> -->
-										<button name="action_send_mail" states="draft,consulting,ready" string="Consulting Factory" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+										<button name="action_send_mail" states="consulting,ready" string="Consulta a Fábrica" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
 										<button name="action_done" states="ready" string="Done" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
 										<button name="action_ready" states="consulting" string="Ready" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
                     <button name="action_cancel" type="object" states="draft" string="Cancel" groups="technical_support.group_technical_support_engineer"/>
@@ -50,6 +50,7 @@
 													<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
 											</button>
 									</div>
+									<field name="equipment_state_id"/>
 										<div class="oe_title">
                     		<h1># <field name="name" class="oe_inline" readonly="1"/></h1>
                     </div>
