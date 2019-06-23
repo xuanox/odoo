@@ -12,7 +12,6 @@
 					<field name="client_id"/>
           <field name="equipment_id"/>
         	<field name="subject"/>
-					<field name="schedule_date"/>
           <field name="state"/>
         </tree>
       </field>
@@ -51,7 +50,7 @@
 	                          <field name="execution_date"/>
 	                        </group>
 													<group>
-														
+
 	                        </group>
                         </group>
 												<notebook>
