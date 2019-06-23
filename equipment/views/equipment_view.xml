@@ -58,12 +58,6 @@
 															<field name="zone_id" widget="many2one"/>
 													</group>
                         </group>
-                        <group>
-                            <group>
-                            </group>
-                            <group>
-                            </group>
-                        </group>
                         <notebook>
                             <page name="info" string="Info">
                                 <group>
