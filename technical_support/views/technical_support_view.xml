@@ -4,15 +4,15 @@
 
 		<!-- Technical Support Request Tree View -->
     <record id="technical_support_request_tree_view" model="ir.ui.view">
-    	<field name="name">technical_support.request.tree</field>
+    	<field name="name">Technical Support Request Tree</field>
       <field name="model">technical_support.request</field>
       <field name="arch" type="xml">
-      	<tree fonts="bold:message_unread==True" string="Technical Support Requests">
-        	<field name="message_unread" invisible="1"/>
+      	<tree string="Technical Support Requests">
           <field name="name"/>
-          <field name="execution_date" string="Date"/>
+					<field name="client_id"/>
           <field name="equipment_id"/>
         	<field name="subject"/>
+					<field name="schedule_date"/>
           <field name="state"/>
         </tree>
       </field>
@@ -101,6 +101,7 @@
                 <search string="Search Technical Support Request">
                     <field name="state"/>
                     <field name="name"/>
+										<field name="client_id"/>
                     <field name="equipment_id"/>
                     <filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
                     <separator/>
