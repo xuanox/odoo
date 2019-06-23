@@ -31,9 +31,8 @@ class Part(models.Model):
 
     def test_if_parts(self):
         res = True
-        for order in self:
-            if not order.operations:
-                res = False
+        if not self.operations:
+            res = False
         return res
 
     def action_confirm_operations(self):
