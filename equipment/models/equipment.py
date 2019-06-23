@@ -170,6 +170,13 @@ class equipment_equipment(models.Model):
     date_start = fields.Datetime('Start Date', copy=False, index=True, readonly=True)
     date_finished = fields.Datetime('End Date', copy=False, index=True, readonly=True)
 
+    effective_date = fields.Date('Effective Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
+    expected_mtbf = fields.Integer(string='Expected MTBF', help='Expected Mean Time Between Failure')
+    mtbf = fields.Integer(compute='_compute_state_history', string='MTBF', help='Mean Time Between Failure, computed based on done corrective maintenances.')
+    mttr = fields.Integer(compute='_compute_state_history', string='MTTR', help='Mean Time To Repair')
+    estimated_next_failure = fields.Date(compute='_compute_state_history', string='Estimated time before next failure (in days)', help='Computed as Latest Failure Date + MTBF')
+    latest_failure_date = fields.Date(compute='_compute_state_history', string='Latest Failure Date')
+
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
         'warehouse_state_id': _read_group_warehouse_state_ids,
@@ -177,6 +184,24 @@ class equipment_equipment(models.Model):
         'maintenance_state_id': _read_group_maintenance_state_ids,
         'accounting_state_id': _read_group_accounting_state_ids,
     }
+
+    @api.multi
+    def _compute_state_history(self):
+        for equipment in self:
+            state_history = equipment.history_state_ids.filtered(lambda x: x.date_end == True and x.duration == True)
+            mttr_days = 0
+            for state in state_history:
+                if state.duration and state.date_end:
+                    mttr_days += (state.date_end - state.date_start).days
+            equipment.mttr = len(state_history) and (mttr_days / len(state_history)) or 0
+            state = state_history.sorted(lambda x: x.date_start)
+            if len(state) >= 1:
+                equipment.mtbf = (state[-1].date_start - equipment.effective_date).days / len(state)
+            equipment.latest_failure_date = state and state[-1].date_start or False
+            if equipment.mtbf:
+                equipment.estimated_next_failure = equipment.latest_failure_date + relativedelta(days=equipment.mtbf)
+            else:
+                equipment.estimated_next_failure = False
 
     # CRUD
     @api.model

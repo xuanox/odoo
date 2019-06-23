@@ -12,36 +12,11 @@ class equipment_equipment(models.Model):
 
     maintenance_ids = fields.One2many('technical_support.order', 'equipment_id')
     assign_date = fields.Date('Assigned Date', track_visibility='onchange')
-    effective_date = fields.Date('Effective Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
     cost = fields.Float('Cost')
 
     period = fields.Integer('Days between each preventive maintenance')
     next_action_date = fields.Date(compute='_compute_next_maintenance', string='Date of the next preventive maintenance', store=True)
     maintenance_duration = fields.Float(help="Maintenance Duration in hours.")
-
-    expected_mtbf = fields.Integer(string='Expected MTBF', help='Expected Mean Time Between Failure')
-    mtbf = fields.Integer(compute='_compute_maintenance_request', string='MTBF', help='Mean Time Between Failure, computed based on done corrective maintenances.')
-    mttr = fields.Integer(compute='_compute_maintenance_request', string='MTTR', help='Mean Time To Repair')
-    estimated_next_failure = fields.Date(compute='_compute_maintenance_request', string='Estimated time before next failure (in days)', help='Computed as Latest Failure Date + MTBF')
-    latest_failure_date = fields.Date(compute='_compute_maintenance_request', string='Latest Failure Date')
-
-    @api.multi
-    def _compute_maintenance_request(self):
-        for equipment in self:
-            maintenance_requests = equipment.maintenance_ids.filtered(lambda x: x.maintenance_type == 'cm' and x.state == 'done')
-            mttr_days = 0
-            for maintenance in maintenance_requests:
-                if maintenance.state == 'done' and maintenance.close_date:
-                    mttr_days += (maintenance.close_date - maintenance.request_date).days
-            equipment.mttr = len(maintenance_requests) and (mttr_days / len(maintenance_requests)) or 0
-            maintenance = maintenance_requests.sorted(lambda x: x.request_date)
-            if len(maintenance) >= 1:
-                equipment.mtbf = (maintenance[-1].request_date - equipment.effective_date).days / len(maintenance)
-            equipment.latest_failure_date = maintenance and maintenance[-1].request_date or False
-            if equipment.mtbf:
-                equipment.estimated_next_failure = equipment.latest_failure_date + relativedelta(days=equipment.mtbf)
-            else:
-                equipment.estimated_next_failure = False
 
     @api.depends('effective_date', 'period', 'maintenance_ids.request_date', 'maintenance_ids.close_date')
     def _compute_next_maintenance(self):
