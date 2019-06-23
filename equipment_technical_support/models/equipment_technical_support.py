@@ -61,7 +61,10 @@ class equipment_equipment(models.Model):
         self.env['technical_support.request'].create({
             'subject': _('Mantenimiento Preventivo - %s') % self.name,
             'request_date': date,
+            'requested_date': date,
+            'execution_date': date,
             'schedule_date': date,
+            'close_date': date,
             'equipment_id': self.id,
             'client_id': self.client_id.id,
             'maintenance_type': 'pm',
