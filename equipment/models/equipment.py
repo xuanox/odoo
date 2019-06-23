@@ -177,6 +177,9 @@ class equipment_equipment(models.Model):
     estimated_next_failure = fields.Datetime(compute='_compute_state_history', string='Estimated time before next failure (in days)', help='Computed as Latest Failure Date + MTBF')
     latest_failure_date = fields.Datetime(compute='_compute_state_history', string='Latest Failure Date')
 
+    assign_date = fields.Date('Assigned Date', track_visibility='onchange')
+    cost = fields.Float('Cost')
+
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
         'warehouse_state_id': _read_group_warehouse_state_ids,

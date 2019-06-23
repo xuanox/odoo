@@ -11,9 +11,6 @@ class equipment_equipment(models.Model):
     _inherit = "equipment.equipment"
 
     maintenance_ids = fields.One2many('technical_support.order', 'equipment_id')
-    assign_date = fields.Date('Assigned Date', track_visibility='onchange')
-    cost = fields.Float('Cost')
-
     period = fields.Integer('Days between each preventive maintenance')
     next_action_date = fields.Date(compute='_compute_next_maintenance', string='Date of the next preventive maintenance', store=True)
     maintenance_duration = fields.Float(help="Maintenance Duration in hours.")
