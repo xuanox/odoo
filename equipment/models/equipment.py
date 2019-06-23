@@ -170,6 +170,7 @@ class equipment_equipment(models.Model):
     date_start = fields.Datetime('Start Date', copy=False, index=True, readonly=True)
     date_finished = fields.Datetime('End Date', copy=False, index=True, readonly=True)
 
+    effective_start_date = fields.Date('Effective Start Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute Maintenance.")
     effective_date = fields.Datetime('Effective Date', default=datetime.today(), required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
     expected_mtbf = fields.Integer(string='Expected MTBF', help='Expected Mean Time Between Failure')
     mtbf = fields.Integer(compute='_compute_state_history', string='MTBF', help='Mean Time Between Failure, computed based on done corrective maintenances.')
