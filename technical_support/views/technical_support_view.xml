@@ -37,10 +37,9 @@
                         </div>
                         <group>
                             <group>
-                                <field name="equipment_id"/>
-																<field name="client_id"/>
-                                <field name="cause"/>
-                                <field name="breakdown"/>
+															<field name="client_id"/>
+                              <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+															<field name="cause"/>
                             </group>
                             <group>
                                 <field name="requested_date" attrs="{'invisible':[('breakdown','=',True),('state','=','draft')],'readonly':[('state','!=','draft')]}"/>
