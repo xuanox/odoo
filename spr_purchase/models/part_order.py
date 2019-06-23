@@ -50,8 +50,6 @@ class Part(models.Model):
             self.action_confirm_operations()
         elif self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: not part.invoiced):
             self.write({'state': '2binvoiced'})
-        else:
-            self.action_confirm_operations()
         return True
 
     @api.multi
