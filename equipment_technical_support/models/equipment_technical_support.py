@@ -63,7 +63,7 @@ class equipment_equipment(models.Model):
             'request_date': date,
             'schedule_date': date,
             'equipment_id': self.id,
-            'client_id': self.client_id,
+            'client_id': self.client_id.id,
             'maintenance_type': 'pm',
             'duration': self.maintenance_duration,
             })
