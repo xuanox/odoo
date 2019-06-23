@@ -170,12 +170,12 @@ class equipment_equipment(models.Model):
     date_start = fields.Datetime('Start Date', copy=False, index=True, readonly=True)
     date_finished = fields.Datetime('End Date', copy=False, index=True, readonly=True)
 
-    effective_date = fields.Date('Effective Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
+    effective_date = fields.Datetime('Effective Date', default=datetime.today(), required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
     expected_mtbf = fields.Integer(string='Expected MTBF', help='Expected Mean Time Between Failure')
     mtbf = fields.Integer(compute='_compute_state_history', string='MTBF', help='Mean Time Between Failure, computed based on done corrective maintenances.')
     mttr = fields.Integer(compute='_compute_state_history', string='MTTR', help='Mean Time To Repair')
-    estimated_next_failure = fields.Date(compute='_compute_state_history', string='Estimated time before next failure (in days)', help='Computed as Latest Failure Date + MTBF')
-    latest_failure_date = fields.Date(compute='_compute_state_history', string='Latest Failure Date')
+    estimated_next_failure = fields.Datetime(compute='_compute_state_history', string='Estimated time before next failure (in days)', help='Computed as Latest Failure Date + MTBF')
+    latest_failure_date = fields.Datetime(compute='_compute_state_history', string='Latest Failure Date')
 
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,
