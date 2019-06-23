@@ -172,6 +172,7 @@ class TechnicalSupportOrder(models.Model):
     # ACTIONS
     def action_confirm(self):
         self.write({'state': 'ready'})
+        self.ticket_id.write({'stage_id': 2})
         return True
 
     def action_ready(self):
