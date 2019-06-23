@@ -192,7 +192,7 @@ class equipment_equipment(models.Model):
             mttr_days = 0
             for state in state_history:
                 if state.duration and state.date_end:
-                    mttr_days += (state.date_end - state.date_start).days
+                    mttr_days += (state.date_end - state.date_start).hours
             equipment.mttr = len(state_history) and (mttr_days / len(state_history)) or 0
             state = state_history.sorted(lambda x: x.date_start)
             if len(state) >= 1:
