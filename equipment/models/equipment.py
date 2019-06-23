@@ -136,6 +136,8 @@ class equipment_equipment(models.Model):
     model = fields.Char('Model', size=64)
     serial = fields.Char('Serial no.', size=64)
     n_active = fields.Char('Active no.', size=64)
+    software_v = fields.Char('Software Versión.', size=64)
+    hardware_v = fields.Char('Hardware Versión.', size=64)
     location = fields.Char('Location')
     provider_id = fields.Many2one('res.partner', 'Provider')
     vendor_id = fields.Many2one('res.partner', 'Commercial')

@@ -66,6 +66,7 @@
 																			<field name="brand_id" widget="many2one"/>
                                       <field name="model_id"/>
                                       <field name="serial"/>
+																			<field name="n_active"/>
                                     </group>
                                     <group>
 																			<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
