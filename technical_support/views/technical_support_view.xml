@@ -12,7 +12,7 @@
           <field name="name"/>
           <field name="execution_date" string="Date"/>
           <field name="equipment_id"/>
-        
+        	<field name="subject"/>
           <field name="state"/>
         </tree>
       </field>
@@ -39,7 +39,7 @@
                             <group>
 															<field name="client_id"/>
                               <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-															<!--<field name="subject"/>-->
+															<field name="subject"/>
                             </group>
                             <group>
                                 <field name="requested_date"/>
