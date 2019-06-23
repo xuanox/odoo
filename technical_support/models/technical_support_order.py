@@ -252,7 +252,7 @@ class TechnicalSupportOrder(models.Model):
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
         if self.env.context.get('mark_consulting_as_sent'):
-            self.filtered(lambda o: o.state == 'draft').write({'state': 'consulting'})
+            self.filtered(lambda o: o.state == 'ready').write({'state': 'consulting'})
         return super(TechnicalSupportOrder, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
 
 class TechnicalSupportOrderPartsLine(models.Model):

@@ -86,7 +86,7 @@
 												<field name="date_finish" string="End"/>
                       </group>
                       <group>
-                        <field name="task_id" domain="[('maintenance_type','=',True)]" widget="many2one"/>		
+                        <field name="task_id" domain="[('maintenance_type','=',True)]" widget="many2one"/>
                       </group>
                     </group>
                     <notebook>
