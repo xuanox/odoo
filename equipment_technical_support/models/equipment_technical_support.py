@@ -59,10 +59,11 @@ class equipment_equipment(models.Model):
     def _create_new_request(self, date):
         self.ensure_one()
         self.env['technical_support.request'].create({
-            'description': _('Mantenimiento Preventivo - %s') % self.name,
+            'subject': _('Mantenimiento Preventivo - %s') % self.name,
             'request_date': date,
             'schedule_date': date,
             'equipment_id': self.id,
+            'client_id': self.client_id,
             'maintenance_type': 'pm',
             'duration': self.maintenance_duration,
             })
