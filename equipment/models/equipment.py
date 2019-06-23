@@ -188,7 +188,7 @@ class equipment_equipment(models.Model):
     @api.multi
     def _compute_state_history(self):
         for equipment in self:
-            state_history = equipment.history_state_ids.filtered(lambda x: x.date_end == True and x.duration == True)
+            state_history = equipment.history_state_ids.filtered(lambda x: x.ticket_id != 0 and x.duration != 0)
             mttr_days = 0
             for state in state_history:
                 if state.duration and state.date_end:
