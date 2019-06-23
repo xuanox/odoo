@@ -82,7 +82,7 @@ class TechnicalSupportOrder(models.Model):
     equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', domain=[('team','=','3')], readonly=True)
 
     parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange')
-    assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', readonly=True, states={'draft':[('readonly',False)]})
+    assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', states={'done':[('readonly',True)], 'cancel':[('readonly',True)]})
     checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'Planned CheckList', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     signature_lines = fields.One2many('technical_support.order.signature.line', 'maintenance_id', 'Users', states={'done':[('readonly',True)]})
 
