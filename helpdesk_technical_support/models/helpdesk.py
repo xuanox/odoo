@@ -75,7 +75,6 @@ class HelpdeskTicket(models.Model):
                 'ticket_type_id': request.ticket_type_id.id,
                 'ticket_id': request.id,
             })
-        self.write({'stage_id': 2})
         return order_id.id
 
     def action_view_report(self):
