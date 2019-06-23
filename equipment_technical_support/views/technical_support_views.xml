@@ -9,6 +9,9 @@
           <xpath expr="//field[@name='requested_date']" position="after">
             <field name="schedule_date"/>
             <field name="request_date"/>
+            <div><field name="duration" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>
+          </xpath>
+          <xpath expr="//field[@name='execution_date']" position="after">
             <field name="close_date"/>
             <label for="duration"/>
             <div><field name="duration" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>

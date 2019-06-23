@@ -36,25 +36,32 @@
                             <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
                         </div>
                         <group>
-                            <group>
-															<field name="client_id"/>
-                              <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-															<field name="subject"/>
-                            </group>
-                            <group>
-                                <field name="requested_date"/>
-                                <field name="execution_date"/>
-																<field name="maintenance_type"/>
-                            </group>
+                          <group>
+														<field name="client_id"/>
+                            <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+														<field name="maintenance_type"/>
+														<field name="subject"/>
+                          </group>
+                          <group>
+                            <field name="requested_date"/>
+													</group>
                         </group>
-                        <group string="Reject Reason" states="reject">
-                            <field name="reject_reason" colspan="4" nolabel="1"/>
+                        <group>
+													<group>
+	                          <field name="execution_date"/>
+	                        </group>
+													<group>
+														
+	                        </group>
                         </group>
 												<notebook>
 														<page string="Description">
 															<group>
 																	<field name="description" colspan="4" nolabel="1"/>
 															</group>
+															<group string="Reject Reason" states="reject">
+			                            <field name="reject_reason" colspan="4" nolabel="1"/>
+			                        </group>
 														</page>
 														<page string="Equipment">
 															<group>
