@@ -37,11 +37,10 @@ class Part(models.Model):
         return res
 
     def action_confirm_operations(self):
-        for order in self:
-            if order.test_if_parts():
-                order.action_confirm_purchase()
-                order.action_confirm_transfer()
-                order.write({'state':'confirmed'})
+        if self.test_if_parts():
+            self.action_confirm_purchase()
+            self.action_confirm_transfer()
+            self.write({'state':'confirmed'})
         return 0
 
     @api.multi
