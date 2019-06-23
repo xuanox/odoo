@@ -10,7 +10,7 @@
         </xpath>
         <xpath expr="//button[@name='assign_ticket_to_self']" position="before">
           <button name="%(action_ticket_assign)d" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('name', '=', False)]}" />
-          <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"  attrs="{'invisible': ['|',('stage_id.sequence', '=', 1), ('stage_id.sequence', '=', 3), ('stage_id.sequence', '=', 4), ('name', '=', False)]}"/>
+          <button name="%(action_ticket_pending)d" string="Pending" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"  attrs="{'invisible': ['|',('stage_id', '=', 10), ('stage_id', '=', 3), ('stage_id', '=', 4), ('name', '=', False)]}"/>
           <button name="%(action_ticket_cause)d" string="Done" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
         <!--  <button name="update_equipment_state_operative" string="Operative" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('equipment_state_id', '=', 21)]}"/>
           <button name="update_equipment_state_breakdown" string="Breakdown" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('equipment_state_id', '=', 18)]}"/> -->
