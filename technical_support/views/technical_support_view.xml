@@ -42,7 +42,7 @@
 															<field name="cause"/>
                             </group>
                             <group>
-                                <field name="requested_date" attrs="{'invisible':[('breakdown','=',True),('state','=','draft')],'readonly':[('state','!=','draft')]}"/>
+                                <field name="requested_date"/>
                                 <field name="execution_date"/>
 																<field name="maintenance_type"/>
                             </group>
