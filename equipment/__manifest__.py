@@ -43,6 +43,7 @@ Support following feature:
         'views/equipment.xml',
         'data/equipment_data.xml',
         'data/stock_data.xml',
+        'data/equipment_sequence.xml',
     ],
     'installable': True,
     'application': True,

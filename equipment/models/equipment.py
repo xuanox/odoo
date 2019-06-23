@@ -176,9 +176,12 @@ class equipment_equipment(models.Model):
         'accounting_state_id': _read_group_accounting_state_ids,
     }
 
+    # CRUD
     @api.model
     def create(self, vals):
         tools.image_resize_images(vals)
+        if vals.get('equipment_number','/')=='/':
+            vals['equipment_number'] = self.env['ir.sequence'].next_by_code('equipment.equipment') or '/'
         return super(equipment_equipment, self).create(vals)
 
     @api.multi

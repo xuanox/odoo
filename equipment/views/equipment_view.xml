@@ -35,7 +35,7 @@
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only"/>
                             <h1>
-															<field name="equipment_number"/>
+															<field name="equipment_number" class="oe_inline" readonly="1"/>
 														</h1>
 														<h2>
 																<field name="name"/>
