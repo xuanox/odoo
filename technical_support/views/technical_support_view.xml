@@ -39,7 +39,7 @@
                             <group>
 															<field name="client_id"/>
                               <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-															<field name="cause"/>
+															<!--<field name="subject"/>-->
                             </group>
                             <group>
                                 <field name="requested_date"/>

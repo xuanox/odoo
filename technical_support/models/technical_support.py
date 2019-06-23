@@ -48,7 +48,7 @@ class TechnicalSupportRequest(models.Model):
         If the request is confirmed the status is set to 'Execution'.\n\
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft')
-    cause = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    subject = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason', readonly=True)
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
