@@ -64,10 +64,13 @@
                                     <group>
 																			<field name="software_v"/>
 																			<field name="hardware_v"/>
+																			<field name="assign_date"/>
+																			<field name="cost"/>
                                     </group>
                                     <group>
 																			<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 																			<field name="criticality"/>
+
                                     </group>
                                 </group>
                             </page>
