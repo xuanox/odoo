@@ -39,15 +39,15 @@
 														<field name="client_id"/>
                             <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
 														<field name="maintenance_type"/>
-														<field name="subject"/>
                           </group>
                           <group>
                             <field name="requested_date"/>
+														<field name="execution_date"/>
 													</group>
                         </group>
                         <group>
 													<group>
-	                          <field name="execution_date"/>
+														<field name="subject"/>
 	                        </group>
 													<group>
 
