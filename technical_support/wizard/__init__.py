@@ -9,3 +9,4 @@
 from . import reject
 from . import convert_order
 from . import confirm_client
+from . import assign_order

@@ -20,7 +20,8 @@ class TechnicalSupportRequest(models.Model):
     STATE_SELECTION = [
         ('draft', 'Draft'),
         ('confirm', 'Confirm'),
-        ('run', 'Execution'),
+        ('asigned', 'Asigned'),
+        ('run', 'In Process'),
         ('done', 'Done'),
         ('reject', 'Rejected'),
         ('cancel', 'Canceled')
@@ -44,7 +45,9 @@ class TechnicalSupportRequest(models.Model):
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
     execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
-    create_uid = fields.Many2one('res.users', 'Responsible')
+    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    detail_new_order = fields.Text('Detail Reason', readonly=True)
 
     client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
     equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
@@ -81,6 +84,7 @@ class TechnicalSupportRequest(models.Model):
                 'date_scheduled':request.requested_date,
                 'date_execution':request.requested_date,
                 'origin': request.name,
+                'user_id': request.user_id.id,
                 'state': 'draft',
                 'maintenance_type': 'pm',
                 'equipment_id': request.equipment_id.id,
@@ -88,7 +92,7 @@ class TechnicalSupportRequest(models.Model):
                 'problem_description': request.description,
                 'request_id': request.id,
             })
-        self.write({'state': 'run'})
+        self.write({'state': 'asigned'})
         return order_id.id
 
     def action_done(self):

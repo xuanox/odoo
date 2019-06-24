@@ -43,6 +43,7 @@ Required modules:
         'wizard/reject_view.xml',
         'wizard/convert_order.xml',
         'wizard/confirm_client_view.xml',
+        'wizard/assign_view.xml',
         'data/technical_support_sequence.xml',
         'data/technical_support_data.xml',
         'data/mail_template_data.xml',

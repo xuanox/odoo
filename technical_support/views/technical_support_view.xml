@@ -26,8 +26,8 @@
         	<header>
 						<button name="%(action_confirm_client)d" states="draft" string="Confirmed by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_confirm_client" states="draft" string="Confirm" type="object" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
-						<button name="action_confirm" states="confirm" string="New Order" type="object" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
-            <button name="%(action_request_reject)d" states="draf" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="%(action_order_assign)d" states="confirm" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
+            <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,confirm,run,done"/>
           </header>
@@ -37,68 +37,56 @@
             </div>
             <group>
               <group>
-														<field name="client_id"/>
-                            <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-														<field name="maintenance_type"/>
-                          </group>
-                          <group>
-                            <field name="requested_date"/>
-														<field name="execution_date"/>
-													</group>
-                        </group>
-                        <group>
-													<group>
-														<field name="subject"/>
-	                        </group>
-													<group>
+								<field name="client_id"/>
+                <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+								<field name="user_id"/>
+								<field name="maintenance_type"/>
+              </group>
+              <group>
+                <field name="requested_date"/>
+								<field name="execution_date"/>
+							</group>
+            </group>
+            <group>
+							<group>
+								<field name="subject"/>
+	            </group>
+							<group>
 
-	                        </group>
-                        </group>
-												<notebook>
-														<page string="Description">
-															<group>
-																	<field name="description" colspan="4" nolabel="1"/>
-															</group>
-															<group string="Reject Reason" states="reject">
-			                            <field name="reject_reason" colspan="4" nolabel="1"/>
-			                        </group>
-														</page>
-														<page string="Equipment">
-															<group>
-																<group>
-																	<field name="modality_id" widget="manyone"/>
-																	<field name="parent_id" widget="manyone"/>
-																	<field name="zone_id" widget="manyone"/>
-																</group>
-																<group>
-																	<field name="brand_id" widget="manyone"/>
-	                                <field name="model_id" widget="manyone"/>
-																</group>
-															</group>
-														</page>
-														<page string="Client">
-																<separator string="Client Information"/>
-														</page>
-														<page string="Subscription">
-															<group>
-																<group>
-																</group>
-																<group>
-																</group>
-															</group>
-														</page>
-														<page string="Contact">
-																<separator string="Contact Information"/>
-														</page>
-												</notebook>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>
-                </form>
-            </field>
-				</record>
+	            </group>
+            </group>
+						<notebook>
+							<page string="Description">
+								<group>
+									<field name="description" colspan="4" nolabel="1"/>
+									<field name="detail_new_order" colspan="4" nolabel="1"/>
+								</group>
+								<group string="Reject Reason" states="reject">
+			            <field name="reject_reason" colspan="4" nolabel="1"/>
+			          </group>
+							</page>
+							<page string="Equipment">
+								<group>
+									<group>
+										<field name="modality_id" widget="manyone"/>
+										<field name="parent_id" widget="manyone"/>
+										<field name="zone_id" widget="manyone"/>
+									</group>
+									<group>
+										<field name="brand_id" widget="manyone"/>
+	                  <field name="model_id" widget="manyone"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+		</record>
 
 
     <record id="technical_support_request_search" model="ir.ui.view">
