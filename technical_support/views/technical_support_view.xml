@@ -23,7 +23,7 @@
       <field name="name">Technical Support Request - Calendar</field>
       <field name="model">technical_support.request</field>
       <field name="arch" type="xml">
-        <calendar color="user_id" date_start="requested_date" string="Technical Support Requests">
+        <calendar color="user_id" date_start="requested_date" date_delay="duration" string="Technical Support Requests">
           <field name="name"/>
 					<field name="client_id"/>
 					<field name="equipment_id"/>
