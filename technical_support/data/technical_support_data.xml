@@ -3,14 +3,30 @@
     <data noupdate="1">
 
         <!-- Maintenance Request related subtypes for messaging / Chatter -->
+        <record id="mt_request_sent" model="mail.message.subtype">
+            <field name="name">Send Request</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="default" eval="False"/>
+            <field name="description">Technical Support Request sent</field>
+        </record>
+        <record id="mt_request_confirmed" model="mail.message.subtype">
+            <field name="name">Confirm Request</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="description">Technical Support Request confirmed</field>
+        </record>
+        <record id="mt_request_rejected" model="mail.message.subtype">
+            <field name="name">Reject Request</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="description">Technical Support Request rejected</field>
+        </record>
         <record id="mt_order_confirmed" model="mail.message.subtype">
             <field name="name">Confirm Maintenance</field>
             <field name="res_model">technical_support.order</field>
             <field name="description">Technical Support Order Confirmed</field>
         </record>
 
-        <!-- equipment related subtypes for messaging / Chatter
-        <record id="mt_equipment_request_sent" model="mail.message.subtype">
+        <!-- equipment related subtypes for messaging / Chatter -->
+       <record id="mt_equipment_request_sent" model="mail.message.subtype">
             <field name="name">Send Request</field>
             <field name="res_model">equipment.equipment</field>
             <field name="default" eval="False"/>
@@ -30,7 +46,7 @@
             <field name="default" eval="False"/>
             <field name="parent_id" eval="ref('mt_request_rejected')"/>
             <field name="relation_field">equipment_id</field>
-        </record> -->
+        </record>
 
         <!-- Routes -->
         <record id="route_maintenance" model='stock.location.route'>
