@@ -26,8 +26,8 @@
         	<header>
 						<button name="%(action_confirm_client)d" states="draft" string="Confirmed by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_confirm_client" states="draft" string="Confirm" type="object" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
-						<button name="action_confirm" states="confirm" string="New Order" type="object" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
-            <button name="%(action_request_reject)d" states="draf" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="%(action_order_assign)d" states="confirm" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
+            <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,confirm,run,done"/>
           </header>
