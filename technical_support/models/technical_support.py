@@ -19,7 +19,7 @@ class TechnicalSupportRequest(models.Model):
 
     STATE_SELECTION = [
         ('draft', 'Draft'),
-        ('claim', 'Claim'),
+        ('confirm', 'Confirm'),
         ('run', 'Execution'),
         ('done', 'Done'),
         ('reject', 'Rejected'),
@@ -33,7 +33,7 @@ class TechnicalSupportRequest(models.Model):
     @api.multi
     def _track_subtype(self, init_values):
         self.ensure_one()
-        if 'state' in init_values and self.state == 'claim':
+        if 'state' in init_values and self.state == 'confirm':
             return 'technical_support.mt_request_sent'
         elif 'state' in init_values and self.state == 'run':
             return 'technical_support.mt_request_confirmed'
@@ -44,15 +44,16 @@ class TechnicalSupportRequest(models.Model):
     name = fields.Char('Reference', size=64)
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
-        If the request is sent the status is set to 'Claim'.\n\
+        If the request is sent the status is set to 'confirm'.\n\
         If the request is confirmed the status is set to 'Execution'.\n\
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft')
     subject = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason', readonly=True)
+    detail_confirm_client = fields.Text('Detail Confirm Client', readonly=True)
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'claim':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
     create_uid = fields.Many2one('res.users', 'Responsible')
 
@@ -76,7 +77,7 @@ class TechnicalSupportRequest(models.Model):
             self.requested_date = self.execution_date
 
     def action_send(self):
-        value = {'state': 'claim'}
+        value = {'state': 'confirm'}
         for request in self:
             if request.breakdown:
                 value['requested_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -107,6 +108,10 @@ class TechnicalSupportRequest(models.Model):
 
     def action_reject(self):
         self.write({'state': 'reject', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
+        return True
+
+    def action_confirm_client(self):
+        self.write({'state': 'confirm'})
         return True
 
     def action_cancel(self):
