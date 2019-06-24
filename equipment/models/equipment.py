@@ -134,7 +134,7 @@ class equipment_equipment(models.Model):
     active = fields.Boolean('Active', default=True)
     equipment_number = fields.Char('Equipment Number', size=64)
     model = fields.Char('Model', size=64)
-    serial = fields.Char('Serial no.', size=64)
+    serial = fields.Char('Serial no.', size=64, required=True, track_visibility='onchange')
     n_active = fields.Char('Active no.', size=64)
     software_v = fields.Char('Software Versión.', size=64)
     hardware_v = fields.Char('Hardware Versión.', size=64)
@@ -154,12 +154,12 @@ class equipment_equipment(models.Model):
     image_medium = fields.Binary("Medium-sized image")
     category_ids = fields.Many2many('equipment.category', id1='equipment_id', id2='category_id', string='Tags')
 
-    brand_id=fields.Many2one('equipment.brand', u'Brand')
-    zone_id=fields.Many2one('equipment.zone', u'Zone')
-    client_id=fields.Many2one('res.partner', string='Client')
-    model_id=fields.Many2one('equipment.model', u'Models')
-    parent_id=fields.Many2one('equipment.equipment', u'Equipment Relation')
-    modality_id=fields.Many2one('equipment.modality', string='Modality')
+    brand_id=fields.Many2one('equipment.brand', string='Brand', required=True, track_visibility='onchange')
+    zone_id=fields.Many2one('equipment.zone', string='Zone', required=True, track_visibility='onchange')
+    client_id=fields.Many2one('res.partner', string='Client', required=True, track_visibility='onchange')
+    model_id=fields.Many2one('equipment.model', string='Models', required=True, track_visibility='onchange')
+    parent_id=fields.Many2one('equipment.equipment', string='Equipment Relation')
+    modality_id=fields.Many2one('equipment.modality', string='Modality', required=True, track_visibility='onchange')
 
     software_ids=fields.One2many('equipment.software.list','equipment_id',u'Softwares')
     network_ids=fields.One2many('equipment.network','equipment_id',u'Networks')
@@ -170,12 +170,16 @@ class equipment_equipment(models.Model):
     date_start = fields.Datetime('Start Date', copy=False, index=True, readonly=True)
     date_finished = fields.Datetime('End Date', copy=False, index=True, readonly=True)
 
+    effective_start_date = fields.Date('Effective Start Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute Maintenance.")
     effective_date = fields.Datetime('Effective Date', default=datetime.today(), required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
     expected_mtbf = fields.Integer(string='Expected MTBF', help='Expected Mean Time Between Failure')
     mtbf = fields.Integer(compute='_compute_state_history', string='MTBF', help='Mean Time Between Failure, computed based on done corrective maintenances.')
     mttr = fields.Integer(compute='_compute_state_history', string='MTTR', help='Mean Time To Repair')
     estimated_next_failure = fields.Datetime(compute='_compute_state_history', string='Estimated time before next failure (in days)', help='Computed as Latest Failure Date + MTBF')
     latest_failure_date = fields.Datetime(compute='_compute_state_history', string='Latest Failure Date')
+
+    assign_date = fields.Date('Assigned Date', track_visibility='onchange')
+    cost = fields.Float('Cost')
 
     _group_by_full = {
         'finance_state_id': _read_group_finance_state_ids,

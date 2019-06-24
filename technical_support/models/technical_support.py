@@ -12,14 +12,14 @@ from odoo import netsvc
 import odoo.addons.decimal_precision as dp
 
 
-class technical_support_request(models.Model):
+class TechnicalSupportRequest(models.Model):
     _name = 'technical_support.request'
-    _description = 'Maintenance Request'
-    _inherit = ['mail.thread']
+    _description = 'Tehcnical Support Request'
+    _inherit =  ['mail.thread', 'mail.activity.mixin']
 
     STATE_SELECTION = [
         ('draft', 'Draft'),
-        ('claim', 'Claim'),
+        ('confirm', 'Confirm'),
         ('run', 'Execution'),
         ('done', 'Done'),
         ('reject', 'Rejected'),
@@ -27,46 +27,45 @@ class technical_support_request(models.Model):
     ]
 
     MAINTENANCE_TYPE_SELECTION = [
-        ('bm', 'Breakdown'),
         ('pm', 'Preventive'),
-        ('cm', 'Corrective')
     ]
 
     @api.multi
     def _track_subtype(self, init_values):
         self.ensure_one()
-        if 'state' in init_values and self.state == 'claim':
+        if 'state' in init_values and self.state == 'confirm':
             return 'technical_support.mt_request_sent'
         elif 'state' in init_values and self.state == 'run':
             return 'technical_support.mt_request_confirmed'
         elif 'state' in init_values and self.state == 'reject':
             return 'technical_support.mt_request_rejected'
-        return super(technical_support_request, self)._track_subtype(init_values)
+        return super(TechnicalSupportRequest, self)._track_subtype(init_values)
 
     name = fields.Char('Reference', size=64)
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
-        If the request is sent the status is set to 'Claim'.\n\
+        If the request is sent the status is set to 'confirm'.\n\
         If the request is confirmed the status is set to 'Execution'.\n\
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft')
-    equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, states={'draft': [('readonly', False)]})
-    cause = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    subject = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason', readonly=True)
+    detail_confirm_client = fields.Text('Detail Confirm Client', readonly=True)
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'claim':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
     create_uid = fields.Many2one('res.users', 'Responsible')
 
-    client_id=fields.Many2one('res.partner', related='equipment_id.client_id', string='Client', store=True, readonly=True)
+    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
+    equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
     brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
     zone_id=fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True)
     model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True)
-    maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='bm')
-
+    maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
+    duration = fields.Float('Real Duration', store=True)
 
     @api.onchange('requested_date')
     def onchange_requested_date(self):
@@ -78,7 +77,7 @@ class technical_support_request(models.Model):
             self.requested_date = self.execution_date
 
     def action_send(self):
-        value = {'state': 'claim'}
+        value = {'state': 'confirm'}
         for request in self:
             if request.breakdown:
                 value['requested_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -94,7 +93,7 @@ class technical_support_request(models.Model):
                 'date_execution':request.requested_date,
                 'origin': request.name,
                 'state': 'draft',
-                'maintenance_type': 'bm',
+                'maintenance_type': 'pm',
                 'equipment_id': request.equipment_id.id,
                 'description': request.cause,
                 'problem_description': request.description,
@@ -111,6 +110,10 @@ class technical_support_request(models.Model):
         self.write({'state': 'reject', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
 
+    def action_confirm_client(self):
+        self.write({'state': 'confirm'})
+        return True
+
     def action_cancel(self):
         self.write({'state': 'cancel', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
@@ -119,4 +122,4 @@ class technical_support_request(models.Model):
     def create(self, vals):
         if vals.get('name','/')=='/':
             vals['name'] = self.env['ir.sequence'].next_by_code('technical_support.request') or '/'
-        return super(technical_support_request, self).create(vals)
+        return super(TechnicalSupportRequest, self).create(vals)

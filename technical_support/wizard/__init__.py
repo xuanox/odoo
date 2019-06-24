@@ -8,3 +8,4 @@
 
 from . import reject
 from . import convert_order
+from . import confirm_client

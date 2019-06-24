@@ -10,16 +10,7 @@
           <field name="body_html" type="xml">
               <div style="margin: 0px; padding: 0px;">
               <p style="margin: 0px; padding: 0px;font-size: 13px;">
-                Hello ,<br/>
-                We send you the quote <strong></strong>
-
-                amounting in <strong></strong><br/>
-
-                .<br/>
-
-                You can reply to this email if you have any questions.
-                <br/><br/>
-                Thank you,
+                
               </p>
             </div>
           </field>

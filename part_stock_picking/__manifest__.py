@@ -20,7 +20,7 @@ by external providers and will automatically generate purchase orders directed t
     ],
     'data': [
         'views/stock_picking_views.xml',
-        #'views/part_views.xml'
+        'views/part_views.xml'
     ],
     'demo': [
     ],

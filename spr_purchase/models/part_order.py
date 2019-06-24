@@ -31,31 +31,25 @@ class Part(models.Model):
 
     def test_if_parts(self):
         res = True
-        for order in self:
-            if not order.operations:
-                res = False
+        if not self.operations:
+            res = False
         return res
 
     def action_confirm_operations(self):
-        for order in self:
-            if order.test_if_parts():
-                order.action_confirm_purchase()
-                order.action_confirm_transfer()
-                order.write({'state':'confirmed'})
+        if self.test_if_parts():
+            self.action_confirm_purchase()
+            self.action_confirm_transfer()
+            self.write({'state':'confirmed'})
         return 0
 
     @api.multi
     def action_confirm_request(self):
         if self.filtered(lambda part: part.invoice_method == 'none'):
             self.action_confirm_operations()
-
-        if self.filtered(lambda part: part.invoice_method == 'after_part'):
+        elif self.filtered(lambda part: part.invoice_method == 'after_part'):
             self.action_confirm_operations()
-
-        if self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: not part.invoiced):
+        elif self.filtered(lambda part: part.invoice_method == 'b4repair') and self.filtered(lambda part: not part.invoiced):
             self.write({'state': '2binvoiced'})
-        else:
-            self.action_confirm_operations()
         return True
 
     @api.multi

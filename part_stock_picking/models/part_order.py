@@ -81,10 +81,6 @@ class PartLine(models.Model):
 
     @api.multi
     def _stock_picking_generation(self):
-        """ Create a Purchase for the first time from the sale line. If the SO line already created a PO, it
-            will not create a second one.
-        """
         for line in self:
-            # Do not regenerate PO line if the SO line has already created one in the past (SO cancel/reconfirmation case)
-                result = line._stock_picking_create()
+            result = line._stock_picking_create()
         return True

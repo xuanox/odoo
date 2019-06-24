@@ -22,7 +22,7 @@ class TechnicalSupportOrder(models.Model):
         ('draft', 'DRAFT'),
         ('released', 'WAITING PARTS'),
         ('consulting', 'CONSULTING FACTORY'),
-        ('ready', 'READY TO MAINTENANCE'),
+        ('ready', 'IN PROCESS'),
         ('done', 'DONE'),
         ('cancel', 'CANCELED')
     ]
@@ -50,7 +50,7 @@ class TechnicalSupportOrder(models.Model):
         If the stock is available then the status is set to 'Ready to Maintenance'.\n\
         When the maintenance is over, the status is set to 'Done'.", default='draft')
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='cm', track_visibility='onchange')
-    ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type")
+    ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     date_scheduled = fields.Datetime('Start Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
@@ -81,10 +81,10 @@ class TechnicalSupportOrder(models.Model):
     order_id = fields.Many2one('technical_support.checklist.history', string='Control List')
     equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', domain=[('team','=','3')], readonly=True)
 
-    parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange')
-    assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', readonly=True, states={'draft':[('readonly',False)]})
-    checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'Planned CheckList', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
-    signature_lines = fields.One2many('technical_support.order.signature.line', 'maintenance_id', 'Users', states={'done':[('readonly',True)]})
+    parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', track_visibility='onchange', states={'done':[('readonly',True)], 'cancel':[('readonly',True)]})
+    checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'Planned CheckList', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    signature_lines = fields.One2many('technical_support.order.signature.line', 'maintenance_id', 'Users', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     serial=fields.Char(related='equipment_id.serial', string='Serial', readonly=True)
     equipment_number=fields.Char(related='equipment_id.equipment_number', string='N° de Equipo', readonly=True)
@@ -96,8 +96,8 @@ class TechnicalSupportOrder(models.Model):
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
         help='Request a online signature to the customer in order to confirm orders automatically.')
     signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
-    wait_time= fields.Float(help="Wait Time in hours and minutes.")
-
+    wait_time= fields.Float(help="Wait Time in hours and minutes.", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    duration = fields.Float('Real Duration', store=True)
 
     @api.onchange('equipment_id','maintenance_type')
     def onchange_equipment(self):
@@ -172,6 +172,7 @@ class TechnicalSupportOrder(models.Model):
     # ACTIONS
     def action_confirm(self):
         self.write({'state': 'ready'})
+        self.ticket_id.write({'stage_id': 2})
         return True
 
     def action_ready(self):
@@ -251,7 +252,7 @@ class TechnicalSupportOrder(models.Model):
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
         if self.env.context.get('mark_consulting_as_sent'):
-            self.filtered(lambda o: o.state == 'draft').write({'state': 'consulting'})
+            self.filtered(lambda o: o.state == 'ready').write({'state': 'consulting'})
         return super(TechnicalSupportOrder, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
 
 class TechnicalSupportOrderPartsLine(models.Model):
