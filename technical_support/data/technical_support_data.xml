@@ -3,6 +3,22 @@
     <data noupdate="1">
 
         <!-- Maintenance Request related subtypes for messaging / Chatter -->
+        <record id="mt_request_sent" model="mail.message.subtype">
+            <field name="name">Send Request</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="default" eval="False"/>
+            <field name="description">Technical Support Request sent</field>
+        </record>
+        <record id="mt_request_confirmed" model="mail.message.subtype">
+            <field name="name">Confirm Request</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="description">Technical Support Request confirmed</field>
+        </record>
+        <record id="mt_request_rejected" model="mail.message.subtype">
+            <field name="name">Reject Request</field>
+            <field name="res_model">technical_support.request</field>
+            <field name="description">Technical Support Request rejected</field>
+        </record>
         <record id="mt_order_confirmed" model="mail.message.subtype">
             <field name="name">Confirm Maintenance</field>
             <field name="res_model">technical_support.order</field>
