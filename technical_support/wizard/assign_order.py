@@ -22,7 +22,7 @@ class TechnicalSupportAssign(models.TransientModel):
         if active_id:
             order = self.env['technical_support.request'].browse(self._context.get('active_id'))
             order.write({'user_id': self.user_id.id})
-            order.write({'date_planned':self.date_planned})
+            order.write({'requested_date':self.date_planned})
             order.write({'detail_new_order':self.detail})
             order.action_confirm()
         return {'type': 'ir.actions.act_window_close',}
