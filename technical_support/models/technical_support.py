@@ -14,7 +14,7 @@ import odoo.addons.decimal_precision as dp
 
 class TechnicalSupportRequest(models.Model):
     _name = 'technical_support.request'
-    _description = 'Maintenance Request'
+    _description = 'Tehcnical Support Request'
     _inherit =  ['mail.thread', 'mail.activity.mixin']
 
     STATE_SELECTION = [

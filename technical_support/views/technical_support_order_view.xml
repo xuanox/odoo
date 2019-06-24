@@ -50,9 +50,6 @@
 													<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
 											</button>
 									</div>
-									<button style="pointer-events: none;" class="oe_inline badge badge-secondary">
-											<field name="duration" widget="mrp_time_counter" help="Time."/>
-									</button>
 									<field name="equipment_state_id"/>
 										<div class="oe_title">
                     		<h1># <field name="name" class="oe_inline" readonly="1"/></h1>
