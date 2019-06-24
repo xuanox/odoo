@@ -24,18 +24,18 @@
       <field name="arch" type="xml">
       	<form string="Technical Support Request" version="1.0">
         	<header>
-	        	<button name="action_send" states="draft" string="Send Request" type="object" class="oe_highlight"/>
-                        <button name="action_confirm" states="confirm" string="Confirm Request" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
-                        <button name="%(action_request_reject)d" states="confirm" string="Reject Request" type="action" groups="technical_support.group_technical_support_engineer"/>
-                        <button name="action_cancel" states="draft" string="Cancel" type="object"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,run,done"/>
-                    </header>
-                    <sheet>
-                        <div class="oe_title">
-                            <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
-                        </div>
-                        <group>
-                          <group>
+						<button name="%(action_confirm_client)d" states="draft" string="Confirmed by the Customer" type="action" groups="technical_support.group_technical_support_backoffice"/>
+            <button name="action_confirm" states="confirm" string="New Order" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+            <button name="%(action_request_reject)d" states="draf" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,confirm,run,done"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
+            </div>
+            <group>
+              <group>
 														<field name="client_id"/>
                             <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
 														<field name="maintenance_type"/>
