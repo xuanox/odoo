@@ -30,17 +30,6 @@ class TechnicalSupportRequest(models.Model):
         ('pm', 'Preventive'),
     ]
 
-    @api.multi
-    def _track_subtype(self, init_values):
-        self.ensure_one()
-        if 'state' in init_values and self.state == 'confirm':
-            return 'technical_support.mt_request_sent'
-        elif 'state' in init_values and self.state == 'run':
-            return 'technical_support.mt_request_confirmed'
-        elif 'state' in init_values and self.state == 'reject':
-            return 'technical_support.mt_request_rejected'
-        return super(TechnicalSupportRequest, self)._track_subtype(init_values)
-
     name = fields.Char('Reference', size=64)
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
@@ -50,8 +39,8 @@ class TechnicalSupportRequest(models.Model):
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft')
     subject = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
-    reject_reason = fields.Text('Reject Reason', readonly=True)
-    detail_confirm_client = fields.Text('Detail Confirm Client', readonly=True)
+    reject_reason = fields.Text('Reject Reason')
+    detail_confirm_client = fields.Text('Detail Confirm Client')
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
     execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
