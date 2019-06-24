@@ -42,6 +42,7 @@ Required modules:
         'security/ir.model.access.csv',
         'wizard/reject_view.xml',
         'wizard/convert_order.xml',
+        'wizard/confirm_client_view.xml',
         'data/technical_support_sequence.xml',
         'data/technical_support_data.xml',
         'data/mail_template_data.xml',
