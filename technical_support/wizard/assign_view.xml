@@ -13,7 +13,7 @@
                         <field name="detail"/>
                     </group>
                     <footer>
-                        <button name="assign_order" string="Assign workorder" type="object"  class="oe_highlight"  />
+                        <button name="assign_order" string="Assign Order" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>

@@ -20,7 +20,7 @@ class TechnicalSupportRequest(models.Model):
     STATE_SELECTION = [
         ('draft', 'Draft'),
         ('confirm', 'Confirm'),
-        ('asigned', 'Asigned'),
+        ('assigned', 'Assigned'),
         ('run', 'In Process'),
         ('done', 'Done'),
         ('reject', 'Rejected'),
@@ -88,11 +88,11 @@ class TechnicalSupportRequest(models.Model):
                 'state': 'draft',
                 'maintenance_type': 'pm',
                 'equipment_id': request.equipment_id.id,
-                'description': request.cause,
+                'description': request.subject,
                 'problem_description': request.description,
                 'request_id': request.id,
             })
-        self.write({'state': 'asigned'})
+        self.write({'state': 'assigned'})
         return order_id.id
 
     def action_done(self):
