@@ -25,6 +25,40 @@ import json
 import logging
 _logger = logging.getLogger(__name__)
 
+
+
+class AccountRefundInherit(models.Model):
+	_inherit = "account.invoice"
+
+	@api.multi
+	def action_invoice_open(self):
+		document = super(AccountRefundInherit, self).action_invoice_open()
+		for invoice in self:
+			if invoice.type == "out_refund":
+				invoice_lines = invoice.invoice_line_ids
+				for line in invoice_lines:
+					product = line.product_id
+
+					product_name = product.name
+					price = line.price_unit
+					quantity = line.quantity
+
+					if price <= 0:
+						message = "El precio de venta del producto " + product_name + " en una Nota de Credito " \
+								" no pude ser menor o igual a cero (0)."
+						raise exceptions.Warning(message)
+						
+					if quantity <= 0:
+						message = "La cantidad a vender del producto " + product_name + " en una Nota de Credito " \
+								"no pude ser menor o igual a cero (0)."
+						raise exceptions.Warning(message)
+		
+		
+		return document
+
+
+
+
 class AccountInvoiceInherit(models.Model):
 	"""
 	fiscal_reference: Hace referencia a el numero de la factura en la impresion fiscal
@@ -49,14 +83,26 @@ class AccountInvoiceInherit(models.Model):
 		for invoice in self:
 			file_name = "FACTI-HS-" + str(invoice.id) + ".txt"
 			client_name = invoice.partner_id.name or 'CONTADO'
-			client_ruc = invoice.partner_id.vat or '00-0000-00000'
-			client_dv = self.get_dv_from_field(invoice.partner_id.vat or '00')
+			client_ruc = self.get_ruc_from_invoice(invoice)
+			client_dv = self.get_dv_from_invoice(invoice)
 			client_dir = self.get_client_direction(invoice.partner_id)
 			invoice_no = invoice.number or '0'
 			self.invoice_name = "FACTI" + invoice_no
 
+
+			lines = []
+			amount_off = 0.00
+			for invoice_line in invoice.invoice_line_ids:
+				line = self.get_invoice_line(invoice_line)
+				if (line["type"] == False) and (line["data"] != None):
+					off = (-1) * float(line["data"])
+					amount_off  = amount_off + off
+				else:
+					lines.append(line["data"])
+
+
 			#amount_off = self.get_total_amount_off(invoice)
-			amount_off = "0.00"
+			
 			amount_close = str(invoice.amount_total) or '0.00'
 			amount_total = str(invoice.amount_total) or '0.00'
 
@@ -120,7 +166,7 @@ class AccountInvoiceInherit(models.Model):
 						self.add_field_cell('1',				1),
 						self.add_field_cell(self.invoice_name,	20),
 						self.add_field_cell(client_name,		80),
-						self.add_field_cell(client_ruc, 		25),
+						self.add_field_cell(client_ruc, 		30),
 						self.add_field_cell(client_dir, 		150),
 						self.add_field_cell(refound_price,		19),
 						self.add_field_cell(refound_tax, 		10),
@@ -137,7 +183,7 @@ class AccountInvoiceInherit(models.Model):
 				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 							self.add_field_cell(self.invoice_name,	20),
 							self.add_field_cell(client_name,		80),
-							self.add_field_cell(client_ruc,			18),
+							self.add_field_cell(client_ruc,			30),
 							self.add_field_cell(client_dir,			150),
 
 							self.add_field_cell(amount_off, 		19),
@@ -160,10 +206,13 @@ class AccountInvoiceInherit(models.Model):
 				content_file.write(data_stream)
 
 
-			for invoice_line in invoice.invoice_line_ids:
-				line = self.get_invoice_line(invoice_line)
+			#for invoice_line in invoice.invoice_line_ids:
+			for line in lines:
+				#line = self.get_invoice_line(invoice_line)
+				#if line["type"] == True:
 				with open(content_file_path, 'a') as content_file2:
 					content_file2.write(line)
+
 
 			with open(content_file_path, 'rb') as textreport:
 				invoice.fiscal_file = base64.encodestring(textreport.read())
@@ -225,40 +274,52 @@ class AccountInvoiceInherit(models.Model):
 			return local_time.strftime('%H:%M')
 
 
-	def get_ruc_from_field(self, vat_field):
+	def get_ruc_from_invoice(self, invoice):
 		"""
 		Obtenemos el ruc sin el digito verificador.
 		Este metodo esta fuera de uso
 		"""
 		try:
-			if vat_field == "":
-				return "00-0000-00000"
-			if " DV" in vat_field:
-				ruc = vat_field.split(" DV")[0]
-				return ruc
+			raw = invoice.partner_id.vat or 00
+			if raw == "":
+				return "00-0000-00000 DV.00"
+			if "dv" in raw.lower():
+				section = raw.lower().split("dv")
+				field = section[0].strip(' ')
+				dv = self.get_dv_from_invoice(invoice)
+				return "{} DV.{}".format(field, dv)
 			else:
-				return vat_field
+				dv = self.get_dv_from_invoice(invoice)
+				field = raw.strip(' ')
+				return "{} DV.{}".format(field, dv)
 		except:
-			return "00"
+			return "00-0000-00000 DV.00"
 
 	
-	def get_dv_from_field(self, vat_field):
+	def get_dv_from_invoice(self, invoice):
 		"""
 		Obtenemos el Digito Verificador del cliente, sino existe agrega
 		por default el valor 00
 		"""
 		try:
-			if vat_field == "":
-				return "00"
-			if " " in vat_field:
-				section = vat_field.split(" ")
-				if len(section) == 2:
-					dv = section[1]
-					return dv[2:]
-				elif len(section) == 3:
-					return section[2]
+
+			raw = invoice.partner_id.vat or '00'
+			if "dv" in raw.lower():
+				section = raw.lower().split("dv")
+				field = (section[1] if len(section) > 1 else section[0])
+				field = field.strip(' ')
+				return field
 			else:
-				return vat_field
+				if 'dv' in self.env['res.partner']._fields:
+					field = invoice.partner_id.dv
+					if len(field) == 0:
+						return "00"
+					elif len(field) == 1:
+						return "0{}".format(field)
+					else:
+						return field
+				else:
+					return "00"
 		except:
 			return "00"
 
@@ -303,8 +364,21 @@ class AccountInvoiceInherit(models.Model):
 		uom = self.get_uom_item(invoice_line)
 		taxes = self.get_tax_item(invoice_line)
 
+		if float(price) < 0.0:
+			tax = float(taxes) / 100
+			taxed = float(price) * tax
+			subtotal = float(price) * float(quantity)
+			total = subtotal # + taxed
+			return {
+				"type": False,
+				"data": total
+			}
+
 		if description == "False":	#Description jamas debe ser False
-			return ""
+			return {
+				"type": False,
+				"data": "None"
+			}
 
 		data_stream = "{}{}{}{}{}{}{}{}\r\n".format(
 				self.add_field_cell(self.invoice_name,	20),
@@ -316,7 +390,11 @@ class AccountInvoiceInherit(models.Model):
 				self.add_field_cell(taxes,				10),
 				self.add_field_cell(2,					10),
 		)
-		return str(data_stream)
+		
+		return {
+			"type": True,
+			"data": data_stream
+		}
 
 
 
@@ -328,16 +406,21 @@ class AccountInvoiceInherit(models.Model):
 		try:
 			subtotal = float(invoice.price_subtotal)
 			quantity = float(invoice.quantity)
-			total = subtotal / quantity
-			strTotal = str(total)
-			if "." in strTotal:
-				arrayTotal = strTotal.split(".")
-				intSection = arrayTotal[0]
-				decimalSection = arrayTotal[1]
-				if len(decimalSection) > 4:
-					decimalSection = decimalSection[:4]
-				strTotal = intSection + "." + decimalSection
-			return str(strTotal)
+			price = float(invoice.price_unit)
+			discount = float(invoice.discount)
+			if discount == 0.0:
+				return str(price)
+			else:
+				total = subtotal / quantity
+				strTotal = str(total)
+				if "." in strTotal:
+					arrayTotal = strTotal.split(".")
+					intSection = arrayTotal[0]
+					decimalSection = arrayTotal[1]
+					if len(decimalSection) > 4:
+						decimalSection = decimalSection[:4]
+					strTotal = intSection + "." + decimalSection
+				return str(strTotal)
 		except:
 			return str(invoice.price_unit or '0.00')
 
