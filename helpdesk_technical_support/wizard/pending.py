@@ -14,7 +14,7 @@ class HelpdeskTicketPending(models.TransientModel):
     _description = 'Pending Ticket'
 
     pending_reason_id = fields.Many2one('helpdesk.ticket.pending.reason', 'Pending Reason')
-    detail_reason = fields.Text('Detail Reason', required=True)
+    detail_reason = fields.Text('Detail')
 
     def pending_ticket(self):
         active_id = self._context.get('active_id')

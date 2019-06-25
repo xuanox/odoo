@@ -1,0 +1,1864 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* technical_support
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-25 15:00+0000\n"
+"PO-Revision-Date: 2019-06-25 10:46-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_equipment_equipment__technical_support_count
+msgid "# Maintenance"
+msgstr "Mantenimiento"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "(Breakdown)"
+msgstr "(Offline)"
+
+#. module: technical_support
+#: model:mail.template,body_html:technical_support.mail_template_technical_support_consulting
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"              <p style=\"margin: 0px; padding: 0px;font-size: 13px;\">\n"
+"                Hello ,<br/>\n"
+"                We send you the quote <strong/>\n"
+"\n"
+"                amounting in <strong/><br/>\n"
+"\n"
+"                .<br/>\n"
+"\n"
+"                You can reply to this email if you have any questions.\n"
+"                <br/><br/>\n"
+"                Thank you,\n"
+"              </p>\n"
+"            </div>\n"
+"          "
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "<span class=\"ml8\">hours</span>"
+msgstr "<span class=\"ml8\">horas</span>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Asset:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "<strong>Cause:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>CheckList</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Description:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Description</strong>"
+msgstr "<strong>Descripción</strong>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "<strong>Execution Date:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "<strong>Finish Date:</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "<strong>Maintenance Type:</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Maintenance Type:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "<strong>Planned Date:</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Planned Date:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Planned Parts</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "<strong>Printing date:</strong><br/>"
+msgstr "<strong>Fecha de impresión:</strong><br/>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Product</strong>"
+msgstr "<strong>Producto</strong>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Quantity</strong>"
+msgstr "<strong>Cantidad</strong>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "<strong>Requested Date:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Scheduled Date:</strong><br/>"
+msgstr "<strong>Fecha planificada:</strong><br/>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "<strong>Signature</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "<strong>Source Document:</strong><br/>"
+msgstr "<strong>Documento de origen:</strong><br/>"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "<strong>Start Date:</strong>"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "<strong>equipment:</strong><br/>"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__name
+msgid "Acción a realizar"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_needaction
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_needaction
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_needaction
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_needaction
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__active
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__active
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__activity_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__activity_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__activity_state
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__activity_state
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_administrator
+msgid "Administrator TS"
+msgstr "Administrador"
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_answer_history
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__answers_ids
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "Answers"
+msgstr "Respuestas"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+msgid "Approved Part"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__assets_id
+msgid "Assets"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_order_assign
+#: model:ir.model,name:technical_support.model_technical_support_request_assign
+#: model_terms:ir.ui.view,arch_db:technical_support.view_order_assign_wizard
+msgid "Assign Order"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.request,state:0
+msgid "Assigned"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__user_id
+msgid "Assigned to"
+msgstr "Asignada a"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_attachment_count
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_attachment_count
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_attachment_count
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_attachment_count
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteo de archivos adjuntos"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_backoffice
+msgid "Back Office TS"
+msgstr "Back Office"
+
+#. module: technical_support
+#: selection:technical_support.answer.history,answer:0
+msgid "Bad"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "Bill Of Material"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__brand_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__brand_id
+msgid "Brand"
+msgstr "Marca"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__breakdown
+msgid "Breakdown"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.order,state:0
+msgid "CANCELED"
+msgstr "Cancelado"
+
+#. module: technical_support
+#: selection:technical_support.order,state:0
+msgid "CONSULTING FACTORY"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_product_product__isParts
+#: model:ir.model.fields,field_description:technical_support.field_product_template__isParts
+msgid "Can be Part"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.view_confirm_client_wizard
+#: model_terms:ir.ui.view,arch_db:technical_support.view_convert_order
+#: model_terms:ir.ui.view,arch_db:technical_support.view_order_assign_wizard
+#: model_terms:ir.ui.view,arch_db:technical_support.view_request_reject_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+#: selection:technical_support.request,state:0
+msgid "Canceled"
+msgstr "Cancelado"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "Cantidad"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__category_id
+msgid "Category"
+msgstr "Categoría"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.technical_support_checklist_history_action
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__checklist_lines
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "CheckList"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_checklist
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_tree_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Checklist"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_checklist_history
+msgid "Checklist History"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.actions.act_window,help:technical_support.part_action
+msgid "Click to define a new spare part."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__client_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__client_id
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Client"
+msgstr "Cliente"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Cliente"
+msgstr "Cliente"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__company_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.view_confirm_client_wizard
+#: selection:technical_support.request,state:0
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_confirm_client
+#: model:ir.model,name:technical_support.model_technical_support_confirm_client
+#: model_terms:ir.ui.view,arch_db:technical_support.view_confirm_client_wizard
+msgid "Confirm Client"
+msgstr "Confirmación con el Cliente"
+
+#. module: technical_support
+#: model:mail.message.subtype,name:technical_support.mt_order_confirmed
+msgid "Confirm Maintenance"
+msgstr "Confirmar mantenimiento"
+
+#. module: technical_support
+#: model:mail.message.subtype,name:technical_support.mt_equipment_request_confirmed
+#: model:mail.message.subtype,name:technical_support.mt_request_confirmed
+msgid "Confirm Request"
+msgstr "Confirmar solicitud"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+msgid "Confirmed by the Customer"
+msgstr "Confirmado por el Cliente"
+
+#. module: technical_support
+#: model:mail.template,subject:technical_support.mail_template_technical_support_consulting
+msgid "Consult Factory"
+msgstr "Consulta a Fábrica"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Consulta a Fábrica"
+msgstr "Consulta a Fábrica"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.technical_support_checklist_action
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__checklist_history_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__checklist_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__order_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__checklist_id
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_tree_view
+msgid "Control List"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_convert_order
+msgid "Convert Order to Task"
+msgstr "Convertir orden en tarea"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_view_convert_order
+#: model_terms:ir.ui.view,arch_db:technical_support.view_convert_order
+msgid "Convert to Task"
+msgstr "Convertir a tarea"
+
+#. module: technical_support
+#: selection:technical_support.order,maintenance_type:0
+#: selection:technical_support.task,maintenance_type:0
+msgid "Corrective"
+msgstr "Correctivo"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__create_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__create_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_customer
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: technical_support
+#: selection:technical_support.order,state:0
+msgid "DONE"
+msgstr "Realizado"
+
+#. module: technical_support
+#: selection:technical_support.order,state:0
+msgid "DRAFT"
+msgstr "Borrador"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_leader_tree_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_manager_tree_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_tree_view
+msgid "Date Scheduled"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__requested_date
+msgid "Date requested by the customer for maintenance."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__name
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+msgid "Description"
+msgstr "Descripción"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Description for Documentation"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Description for Labor"
+msgstr "Descripción del Trabajo"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Description for Operations"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Description for Tools"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__detail
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__detail
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__detail
+msgid "Detail"
+msgstr "Detalle"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__detail_confirm_client
+msgid "Detail Confirm Client"
+msgstr "Detalle de la Confirmación del Cliente"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__detail_new_order
+msgid "Detail Reason"
+msgstr "Detalle de la Razón"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__display_name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.view_convert_order
+msgid "Do you really want convert Maintenance Order to Task?"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Documentation"
+msgstr "Documentación"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__documentation_description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__documentation_description
+msgid "Documentation Description"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: selection:technical_support.checklist.history,state:0
+#: selection:technical_support.order.checklist.line,answer:0
+#: selection:technical_support.order.parts.line,answer:0
+#: selection:technical_support.request,state:0
+#: selection:technical_support.task.checklist.line,answer:0
+#: selection:technical_support.workorder,state:0
+msgid "Done"
+msgstr "Cerrar Orden"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+#: selection:technical_support.request,state:0
+#: selection:technical_support.workorder,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__duration
+msgid "Duration in hours and minutes."
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "End"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__date_end
+msgid "End Date"
+msgstr "Fecha finalización"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_engineer
+msgid "Engineer TS"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_equipment_equipment
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__equipment_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__equipment_id
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+msgid "Equipment"
+msgstr "Equipamiento"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__parent_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__parent_id
+msgid "Equipment Relation"
+msgstr "Relación"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__equipment_state_id
+msgid "Equipment State"
+msgstr "Estado del Equipo"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Equipo"
+msgstr "Equipo"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "Estado"
+msgstr "Estado"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__date_execution
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__execution_date
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Execution Date"
+msgstr "Fecha de Ejecución"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__planned_date
+msgid "Expected Duration"
+msgstr "Duración esperada"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__date_finish
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Finish Date"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_follower_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_follower_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_follower_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_follower_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_channel_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_channel_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_channel_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_channel_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_partner_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_partner_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_partner_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_partner_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Empresas)"
+
+#. module: technical_support
+#: selection:technical_support.answer.history,answer:0
+msgid "Good"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: technical_support
+#: model:ir.module.category,description:technical_support.module_category_technical_support
+msgid "Helps you manage your Technical Support Processes."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__id
+msgid "ID"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.order,state:0
+msgid "IN PROCESS"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_unread
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__message_unread
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__message_unread
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__message_unread
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__message_unread
+msgid "If checked new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_needaction
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__message_needaction
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__message_needaction
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__message_needaction
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_has_error
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__message_has_error
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__message_has_error
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__message_has_error
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
+
+#. module: technical_support
+#: selection:technical_support.request,state:0
+#: selection:technical_support.workorder,state:0
+msgid "In Process"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.answer.history,answer:0
+msgid "Inapplicable"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Information"
+msgstr "Información"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+msgid "Installed"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_is_follower
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_is_follower
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_is_follower
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_is_follower
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Labor"
+msgstr "Acciones"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__labor_description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__labor_description
+msgid "Labor Description"
+msgstr "Acciones Tomadas"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line____last_update
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__write_uid
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_confirm_client__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_convert_order__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__write_date
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_leader
+msgid "Leader TS"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__location
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: technical_support
+#: selection:technical_support.answer.history,answer:0
+msgid "Made"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_main_attachment_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_main_attachment_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_main_attachment_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_main_attachment_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.view_equipment_equipment_technical_support_buttons_from
+#: model:stock.location.route,name:technical_support.route_maintenance
+msgid "Maintenance"
+msgstr "Mantenimiento"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_equipment_equipment__maintenance_date
+msgid "Maintenance Date"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.actions.report,name:technical_support.action_report_maintenance_order
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__maintenance_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__maintenance_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__maintenance_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__mo_ids
+msgid "Maintenance Order"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+msgid "Maintenance Order № :"
+msgstr ""
+
+#. module: technical_support
+#: code:addons/technical_support/models/equipment.py:37
+#, python-format
+msgid "Maintenance Orders"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_order_assets_line
+msgid "Maintenance Planned Assets"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_task_checklist_line
+msgid "Maintenance Planned CheckList"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_order_checklist_line
+msgid "Maintenance Planned Checklist"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_order_parts_line
+#: model:ir.model,name:technical_support.model_technical_support_task_parts_line
+msgid "Maintenance Planned Parts"
+msgstr "Partes planeadas de mantenimiento"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+msgid "Maintenance Request № :"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_task
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__task_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__task_id
+msgid "Maintenance Task"
+msgstr "Tarea de mantenimiento"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_tasks
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_tree_view
+msgid "Maintenance Tasks"
+msgstr "Tareas de mantenimiento"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__maintenance_type
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__maintenance_type
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__maintenance_type
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Maintenance Type"
+msgstr "Tipos de mantenimiento"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_manager
+msgid "Manager TS"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_has_error
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_has_error
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_has_error
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_has_error
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__modality_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__modality_id
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Modality"
+msgstr "Modalidad"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__models_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__models_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__model_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__model_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__model_id
+msgid "Model"
+msgstr "Modelo"
+
+#. module: technical_support
+#: selection:technical_support.order.checklist.line,answer:0
+#: selection:technical_support.order.parts.line,answer:0
+#: selection:technical_support.task.checklist.line,answer:0
+msgid "N/A"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__signed_by
+msgid "Name of the person that signed the SO."
+msgstr ""
+
+#. module: technical_support
+#: code:addons/technical_support/models/technical_support_workorder.py:40
+#: code:addons/technical_support/models/technical_support_workorder.py:52
+#: code:addons/technical_support/models/technical_support_workorder.py:53
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+msgid "New Order"
+msgstr "Nueva Orden"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__activity_date_deadline
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__activity_date_deadline
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente plazo de actividad"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__activity_summary
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__activity_summary
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__activity_type_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__activity_type_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__name
+msgid "Nom"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.order.checklist.line,answer:0
+#: selection:technical_support.order.parts.line,answer:0
+#: selection:technical_support.task.checklist.line,answer:0
+msgid "Not Done"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_needaction_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_needaction_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_needaction_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_needaction_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_has_error_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_has_error_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_has_error_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_has_error_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_has_error_counter
+msgid "Number of error"
+msgstr "Número de error"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_needaction_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__message_needaction_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__message_needaction_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__message_needaction_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_has_error_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__message_has_error_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__message_has_error_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__message_has_error_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_unread_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__message_unread_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__message_unread_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__message_unread_counter
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__equipment_number
+msgid "N° de Equipo"
+msgstr "N° de Equipo"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Observation"
+msgstr "Observación"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Observation ..."
+msgstr "Observación …."
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__require_signature
+msgid "Online Signature"
+msgstr "Firma en línea"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_search
+msgid "Open"
+msgstr "Abierto"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__operations_description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__operations_description
+msgid "Operations Description"
+msgstr "Operaciones"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Operations Description..."
+msgstr "Operaciones"
+
+#. module: technical_support
+#: model:mail.message.subtype,description:technical_support.mt_state_change
+msgid "Orden Cerrado!"
+msgstr "Orden Cerrado!"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__ot_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__maintenance_id
+msgid "Order"
+msgstr "Orden"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__date_order
+msgid "Order Date"
+msgstr "Fecha de pedido"
+
+#. module: technical_support
+#: model:ir.ui.menu,name:technical_support.menu_technical_support_maintenance
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_workorder_form_view
+msgid "Orders"
+msgstr "Pedidos"
+
+#. module: technical_support
+#: selection:technical_support.order,activity_state:0
+#: selection:technical_support.order.parts.line,activity_state:0
+#: selection:technical_support.request,activity_state:0
+msgid "Overdue"
+msgstr "Atrasado"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.part_action
+msgid "Part"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__part_line_id
+msgid "Part Line"
+msgstr "Línea de Pedido"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__parts_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__parts_lines
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__parts_id
+#: model:ir.ui.menu,name:technical_support.menu_maintenance_parts
+#: model:ir.ui.menu,name:technical_support.menu_maintenance_parts_parts
+#: model_terms:ir.ui.view,arch_db:technical_support.part_search_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+#: model:product.category,name:technical_support.product_category_technical_support
+msgid "Parts"
+msgstr "Piezas"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.part_search_form_view
+msgid "Parts your store in the inventory"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "Pieza"
+msgstr "Pieza"
+
+#. module: technical_support
+#: selection:technical_support.order,activity_state:0
+#: selection:technical_support.order.parts.line,activity_state:0
+#: selection:technical_support.request,activity_state:0
+msgid "Planned"
+msgstr "Planeada"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__checklist_lines
+msgid "Planned CheckList"
+msgstr "Checklist"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__date_planned
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__date_planned
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__date_planned
+msgid "Planned Date"
+msgstr "Fecha Planeada"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__parts_lines
+msgid "Planned Parts"
+msgstr "Piezas"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__assets_lines
+msgid "Planned Tools"
+msgstr "Herramientas"
+
+#. module: technical_support
+#: selection:technical_support.order,maintenance_type:0
+#: selection:technical_support.request,maintenance_type:0
+#: selection:technical_support.task,maintenance_type:0
+msgid "Preventive"
+msgstr "Preventivo"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__problem_description
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Problem Description"
+msgstr "Descripción del Problema"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Problem Found"
+msgstr "Descripción de la Falla"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Problem found..."
+msgstr "Descripción de la Falla..."
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__procurement_group_id
+msgid "Procurement group"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__parts_qty
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__parts_qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_question
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__question_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__question_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__question_id
+msgid "Question"
+msgstr "Pregunta"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__questions_ids
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_form_view
+msgid "Questions"
+msgstr "Cuestionario"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "Re-Work"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Ready"
+msgstr "Preparado"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__duration
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__duration
+msgid "Real Duration"
+msgstr "Duración real"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+msgid "Received Part"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__name
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__name
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__origin
+msgid "Reference of the document that generated this Technical Support Order."
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+msgid "Registered Part"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__reject_reason
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request_reject__reject_reason
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+msgid "Reject Reason"
+msgstr "Razón del Rechazo"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_request_reject
+#: model:ir.model,name:technical_support.model_technical_support_request_reject
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.view_request_reject_wizard
+#: model:mail.message.subtype,name:technical_support.mt_equipment_request_rejected
+#: model:mail.message.subtype,name:technical_support.mt_request_rejected
+msgid "Reject Request"
+msgstr "Rechazar solicitud"
+
+#. module: technical_support
+#: selection:technical_support.request,state:0
+msgid "Rejected"
+msgstr "Rechazar"
+
+#. module: technical_support
+#: model:ir.actions.report,name:technical_support.action_report_tso_order
+msgid "Report TSO"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__require_signature
+msgid "Request a online signature to the customer in order to confirm orders automatically."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__requested_date
+msgid "Requested Date"
+msgstr "Fecha Solicitada"
+
+#. module: technical_support
+#: selection:technical_support.order.parts.line,state:0
+msgid "Requested Part"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__user_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__user_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__user_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__user_id
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__activity_user_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__activity_user_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: technical_support
+#: selection:technical_support.checklist.history,state:0
+msgid "Rough draft"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__date_planned
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Scheduled Date"
+msgstr "Fecha prevista"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+msgid "Search Technical Support Order"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_search
+msgid "Search Technical Support Request"
+msgstr ""
+
+#. module: technical_support
+#: model:mail.message.subtype,name:technical_support.mt_equipment_request_sent
+#: model:mail.message.subtype,name:technical_support.mt_request_sent
+msgid "Send Request"
+msgstr "Enviar solicitud"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__sequence
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__sequence
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_question__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__serial
+msgid "Serial"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__signature
+msgid "Signature"
+msgstr "Firma"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__signature
+msgid "Signature received through the portal."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__signed_by
+msgid "Signed by"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__origin
+msgid "Source Document"
+msgstr "Documento origen"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Specify the documentation useful when execute this order..."
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Specify the specialists needed for execute this order..."
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Specify the tools and mechanisms needed for execute this order..."
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Start"
+msgstr "Iniciar"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__date_scheduled
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__answer
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__maintenance_state_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__answer
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__answer
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__answer
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_search
+msgid "State"
+msgstr "Estado"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__state
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__state
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__state
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__state
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__state
+#: model_terms:ir.ui.view,arch_db:technical_support.view_equipment_search_technical_support
+msgid "Status"
+msgstr "Estado"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__activity_state
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__activity_state
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: La fecha tope es hoy\n"
+"Planificada: futuras actividades."
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de Stock"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__subject
+msgid "Subject"
+msgstr "Asunto"
+
+#. module: technical_support
+#: model:res.groups,name:technical_support.group_technical_support_supervisor
+msgid "Supervisor TS"
+msgstr ""
+
+#. module: technical_support
+#: code:addons/technical_support/wizard/convert_order.py:43
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__task_id
+#, python-format
+msgid "Task"
+msgstr "Tarea"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Task Name"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.ui.menu,name:technical_support.menu_maintenance_tasks
+#: model:ir.ui.menu,name:technical_support.menu_maintenance_tasks_tasks
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Tasks"
+msgstr "Tareas"
+
+#. module: technical_support
+#: model:ir.module.category,name:technical_support.module_category_technical_support
+msgid "Technical Support"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_view_graph
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_view_pivot
+msgid "Technical Support Order"
+msgstr "Orden de Soporte Técnico"
+
+#. module: technical_support
+#: model:mail.message.subtype,description:technical_support.mt_order_confirmed
+msgid "Technical Support Order Confirmed"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_order_signature_line
+msgid "Technical Support Order Signature Line"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_orders
+#: model:ir.ui.menu,name:technical_support.menu_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_calendar_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_tree_view
+msgid "Technical Support Orders"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_leader_tree_view
+msgid "Technical Support Orders - Leader"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_manager_tree_view
+msgid "Technical Support Orders - Manager"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
+msgid "Technical Support Request"
+msgstr ""
+
+#. module: technical_support
+#: model:mail.message.subtype,description:technical_support.mt_request_confirmed
+msgid "Technical Support Request confirmed"
+msgstr ""
+
+#. module: technical_support
+#: model:mail.message.subtype,description:technical_support.mt_request_rejected
+msgid "Technical Support Request rejected"
+msgstr ""
+
+#. module: technical_support
+#: model:mail.message.subtype,description:technical_support.mt_request_sent
+msgid "Technical Support Request sent"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_requests
+#: model:ir.ui.menu,name:technical_support.menu_technical_support_request
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_calendar_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_tree_view
+msgid "Technical Support Requests"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_request
+msgid "Tehcnical Support Request"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__ticket_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__ticket_id
+msgid "Ticket"
+msgstr ""
+
+#. module: technical_support
+#: model:mail.message.subtype,name:technical_support.mt_state_change
+msgid "Ticket Cerrado"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__ticket_type_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__ticket_type_id
+msgid "Ticket Type"
+msgstr "Tipo de vale"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__name
+msgid "Title"
+msgstr "Título"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "To Confirm"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.order,activity_state:0
+#: selection:technical_support.order.parts.line,activity_state:0
+#: selection:technical_support.request,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_order
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
+msgid "Tools"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__tools_description
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task__tools_description
+msgid "Tools Description"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_search
+msgid "Undecided maintenance request"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
+msgid "Unidad de Medida"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__parts_uom
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_task_parts_line__parts_uom
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_unread
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_unread
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_unread
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_unread
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_unread
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_search
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_unread_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__message_unread_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__message_unread_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__message_unread_counter
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes sin leer"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__signature_lines
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_signature_line__user_id
+msgid "Usuarios"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "Valider"
+msgstr "Validar"
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "Verification Performed"
+msgstr ""
+
+#. module: technical_support
+#: selection:technical_support.order,state:0
+msgid "WAITING PARTS"
+msgstr "Esperando partes"
+
+#. module: technical_support
+#: model:stock.rule,name:technical_support.rule_wh_equipment
+msgid "WH: Stock -> equipment"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__wait_time
+msgid "Wait Time"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__wait_time
+msgid "Wait Time in hours and minutes."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__website_message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__website_message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__website_message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__website_message_ids
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__website_message_ids
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__website_message_ids
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__website_message_ids
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__website_message_ids
+#: model:ir.model.fields,help:technical_support.field_technical_support_workorder__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order__state
+msgid ""
+"When the maintenance order is created the status is set to 'Draft'.\n"
+"        If the order is confirmed the status is set to 'Waiting Parts'.\n"
+"        If the order is confirmed the status is set to 'Consulting Factory'.\n"
+"        If the stock is available then the status is set to 'Ready to Maintenance'.\n"
+"        When the maintenance is over, the status is set to 'Done'."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_order_parts_line__state
+msgid ""
+"When the maintenance order is created the status is set to 'Draft'.\n"
+"        If the order is confirmed the status is set to 'Waiting Parts'.\n"
+"        If the stock is available then the status is set to 'Ready to Maintenance'.\n"
+"        When the maintenance is over, the status is set to 'Done'."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,help:technical_support.field_technical_support_request__state
+msgid ""
+"When the maintenance request is created the status is set to 'Draft'.\n"
+"        If the request is sent the status is set to 'confirm'.\n"
+"        If the request is confirmed the status is set to 'Execution'.\n"
+"        If the request is rejected the status is set to 'Rejected'.\n"
+"        When the maintenance is over, the status is set to 'Done'."
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Work Done"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
+msgid "Work Done Specify ..."
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model,name:technical_support.model_technical_support_workorder
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__wo_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_workorder__name
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_checklist_history_form_view
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: technical_support
+#: model:ir.actions.act_window,name:technical_support.action_workorders
+#: model:ir.ui.menu,name:technical_support.menu_technical_support_workorder
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_workorder_calendar_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_workorder_form_view
+#: model_terms:ir.ui.view,arch_db:technical_support.technical_support_workorder_tree_view
+msgid "Work Orders"
+msgstr "Órdenes de trabajo"
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__zone_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__zone_id
+msgid "Zone"
+msgstr "Zona"
+
+#. module: technical_support
+#: selection:technical_support.checklist.history,state:0
+msgid "confirmado"
+msgstr ""
+
+#. module: technical_support
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order__category_ids
+msgid "equipment Category"
+msgstr ""
+
+#. module: technical_support
+#: model_terms:ir.ui.view,arch_db:technical_support.view_confirm_client_wizard
+#: model_terms:ir.ui.view,arch_db:technical_support.view_convert_order
+#: model_terms:ir.ui.view,arch_db:technical_support.view_order_assign_wizard
+#: model_terms:ir.ui.view,arch_db:technical_support.view_request_reject_wizard
+msgid "or"
+msgstr "o"
