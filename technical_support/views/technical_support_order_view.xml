@@ -39,7 +39,7 @@
             		<header>
                 	  <button name="action_confirm" states="draft" string="Confirm" type="object" class="oe_highlight"/> -->
 										<button name="action_send_mail" states="consulting,ready" string="Consulta a Fábrica" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
-										<button name="action_done" states="ready" string="Done" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+										<button name="action_done" states="ready" string="Done" type="object" class="btn btn-warning" groups="technical_support.group_technical_support_engineer"/>
 										<button name="action_ready" states="consulting" string="Ready" type="object" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
                     <button name="action_cancel" type="object" states="draft" string="Cancel" groups="technical_support.group_technical_support_engineer"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,ready,done" statusbar_colors='{"consulting":"red","released":"blue"}'/>
