@@ -14,7 +14,7 @@ class HelpdeskTicketCause(models.TransientModel):
     _description = 'Cause Ticket'
 
     cause_reason_id = fields.Many2one('helpdesk.ticket.cause.reason', 'Cause')
-    detail_cause = fields.Text('Detail Reason', required=True)
+    detail_cause = fields.Text('Detail')
     remote = fields.Boolean('Remote Attention', copy=False)
 
     def cause_ticket(self):
