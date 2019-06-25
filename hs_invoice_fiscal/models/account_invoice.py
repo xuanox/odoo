@@ -44,8 +44,8 @@ class AccountRefundInherit(models.Model):
 					quantity = line.quantity
 
 					if price <= 0:
-						message = "El precio de venta en una Nota de Credito del producto " + product_name + \
-								" no pude ser negativo."
+						message = "El precio de venta del producto " + product_name + " en una Nota de Credito " \
+								" no pude ser menor o igual a cero (0)."
 						raise exceptions.Warning(message)
 						
 					if quantity <= 0:
