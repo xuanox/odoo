@@ -273,7 +273,7 @@ class AccountInvoiceInherit(models.Model):
 			if "dv" in raw.lower():
 				section = raw.lower().split("dv")
 				field = (section[1] if len(section) > 1 else section[0])
-				field = section.strip(' ')
+				field = field.strip(' ')
 				return field
 			else:
 				if 'dv' in self.env['res.partner']._fields:
