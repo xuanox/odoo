@@ -25,6 +25,42 @@ import json
 import logging
 _logger = logging.getLogger(__name__)
 
+
+
+class AccountRefundInherit(models.Model):
+	_inherit = "account.invoice"
+
+	@api.model
+	def create(self, vals):
+		invoice = super(AccountRefundInherit, self).create(vals)
+		
+		try:
+			if invoice.type == "out_refund":
+				invoice_lines = invoice.invoice_line_ids
+				for line in invoice_lines:
+					product = line.product_id
+
+					product_name = product.name
+					price = line.price_unit
+					quantity = line.quantity
+
+					if price <= 0:
+						message = "El precio de venta en una Nota de Credito del producto " + product_name + \
+								" no pude ser negativo."
+						raise exceptions.Warning(message)
+					
+					if quantity <= 0:
+						message = "La cantidad a vender del producto " + product_name + " en una Nota de Credito " \
+								"no pude ser menor o igual a cero (0)."
+						raise exceptions.Warning(message)
+		except Exception as identifier:
+			pass
+			
+		return invoice
+
+
+
+
 class AccountInvoiceInherit(models.Model):
 	"""
 	fiscal_reference: Hace referencia a el numero de la factura en la impresion fiscal
