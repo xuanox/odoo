@@ -83,7 +83,7 @@ class TechnicalSupportOrder(models.Model):
 
     parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', track_visibility='onchange', states={'done':[('readonly',True)], 'cancel':[('readonly',True)]})
-    checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'Planned CheckList', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'CheckList', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     signature_lines = fields.One2many('technical_support.order.signature.line', 'maintenance_id', 'Users', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     serial=fields.Char(related='equipment_id.serial', string='Serial', readonly=True)
@@ -123,22 +123,13 @@ class TechnicalSupportOrder(models.Model):
     @api.onchange('task_id')
     def onchange_task(self):
         task = self.task_id
-        new_parts_lines = []
         new_checklist_lines = []
-        for line in task.parts_lines:
-            new_parts_lines.append([0,0,{
-                'name': line.name,
-                'parts_id': line.parts_id.id,
-                'parts_qty': line.parts_qty,
-                'parts_uom': line.parts_uom.id,
-                }])
         for line in task.checklist_lines:
             new_checklist_lines.append([0,0,{
                 'name': line.name,
                 'question_id': line.question_id.id,
                 'answer': line.answer,
                 }])
-        self.parts_lines = new_parts_lines
         self.checklist_lines = new_checklist_lines
         self.description = task.name
         self.tools_description = task.tools_description
@@ -345,7 +336,6 @@ class TechnicalSupportTask(models.Model):
     category_id = fields.Many2one('equipment.category', 'Category', ondelete='restrict', required=True)
     model_id = fields.Many2one('equipment.model', 'Model', ondelete='restrict', required=True)
 
-    parts_lines = fields.One2many('technical_support.task.parts.line', 'task_id', 'Parts')
     checklist_lines = fields.One2many('technical_support.task.checklist.line', 'task_id', 'CheckList')
 
     tools_description = fields.Text('Tools Description')
