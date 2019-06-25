@@ -30,11 +30,10 @@ _logger = logging.getLogger(__name__)
 class AccountRefundInherit(models.Model):
 	_inherit = "account.invoice"
 
-	@api.model
-	def create(self, vals):
-		invoice = super(AccountRefundInherit, self).create(vals)
-		
-		try:
+	@api.multi
+	def action_invoice_open(self):
+		document = super(AccountRefundInherit, self).action_invoice_open()
+		for invoice in self:
 			if invoice.type == "out_refund":
 				invoice_lines = invoice.invoice_line_ids
 				for line in invoice_lines:
@@ -48,17 +47,14 @@ class AccountRefundInherit(models.Model):
 						message = "El precio de venta en una Nota de Credito del producto " + product_name + \
 								" no pude ser negativo."
 						raise exceptions.Warning(message)
-					
+						
 					if quantity <= 0:
 						message = "La cantidad a vender del producto " + product_name + " en una Nota de Credito " \
 								"no pude ser menor o igual a cero (0)."
 						raise exceptions.Warning(message)
-		except Exception as identifier:
-			message = "Se encontro el siguiente error " + str(identifier)
-			raise exceptions.Warning(message)
-			pass
-			
-		return invoice
+		
+		
+		return document
 
 
 
