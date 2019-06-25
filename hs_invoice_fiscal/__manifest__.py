@@ -17,7 +17,7 @@
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
 	'category': 'report',
-	'version': '2.4',
+	'version': '2.5',
 
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],
@@ -32,4 +32,7 @@
 	'demo': [
 		'demo/demo.xml',
 	],
+
+	'installable': True,
+	'auto_install': True,
 }
