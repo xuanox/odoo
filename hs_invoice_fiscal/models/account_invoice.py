@@ -54,6 +54,8 @@ class AccountRefundInherit(models.Model):
 								"no pude ser menor o igual a cero (0)."
 						raise exceptions.Warning(message)
 		except Exception as identifier:
+			message = "Se encontro el siguiente error " + str(identifier)
+			raise exceptions.Warning(message)
 			pass
 			
 		return invoice
