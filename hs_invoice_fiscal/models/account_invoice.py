@@ -304,24 +304,26 @@ class AccountInvoiceInherit(models.Model):
 		try:
 
 			raw = invoice.partner_id.vat or '00'
+			dv_field = "00"
 			if "dv" in raw.lower():
 				section = raw.lower().split("dv")
 				field = (section[1] if len(section) > 1 else section[0])
-				field = field.strip(' ')
-				return field
+				dv_field = field.strip(' ')
 			else:
 				if 'dv' in self.env['res.partner']._fields:
 					field = invoice.partner_id.dv
 					if len(field) == 0:
-						return "00"
+						dv_field = "00"
 					elif len(field) == 1:
-						return "0{}".format(field)
+						dv_field = "0{}".format(field)
 					else:
-						return field
+						dv_field = field
 				else:
-					return "00"
+					dv_field = "00"
 		except:
-			return "00"
+			dv_field = "00"
+			dv_field = re.sub("[^0-9]", "", dv_field)
+			return dv_field
 
 
 	def get_file_name(self, id):
