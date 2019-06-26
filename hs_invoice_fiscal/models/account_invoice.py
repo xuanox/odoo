@@ -302,7 +302,6 @@ class AccountInvoiceInherit(models.Model):
 		por default el valor 00
 		"""
 		try:
-
 			raw = invoice.partner_id.vat or '00'
 			dv_field = "00"
 			if "dv" in raw.lower():
@@ -320,6 +319,8 @@ class AccountInvoiceInherit(models.Model):
 						dv_field = field
 				else:
 					dv_field = "00"
+			dv_field = re.sub("[^0-9]", "", dv_field)
+			return dv_field
 		except:
 			dv_field = "00"
 			dv_field = re.sub("[^0-9]", "", dv_field)
