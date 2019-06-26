@@ -110,7 +110,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
-    category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, default='cm', track_visibility='onchange')
+    category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, default='new', track_visibility='onchange')
 
 
 class RegulatoryTechnicalFileCreation(models.Model):
