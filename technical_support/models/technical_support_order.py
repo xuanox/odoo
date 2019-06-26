@@ -72,6 +72,7 @@ class TechnicalSupportOrder(models.Model):
     procurement_group_id = fields.Many2one('procurement.group', 'Procurement group', copy=False)
     category_ids = fields.Many2many(related='equipment_id.category_ids', string='equipment Category', readonly=True)
     wo_id = fields.Many2one('technical_support.workorder', 'Work Order', ondelete='cascade')
+    request_id = fields.Many2one('technical_support.request', 'Request', ondelete='cascade')
 
     client_id=fields.Many2one('res.partner', related='equipment_id.client_id', string='Client', store=True, readonly=True)
     brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
