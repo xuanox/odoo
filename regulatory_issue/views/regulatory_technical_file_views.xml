@@ -326,7 +326,7 @@
 <!-- Technical File Registry -->
 
         <record id="regulatory_technical_file_registry_view_form" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.registry.view.form</field>
+            <field name="name">Regulatory Technical File Registry View Form</field>
             <field name="model">regulatory.technical.file.registry</field>
             <field name="arch" type="xml">
               <form string="Technical File Registry">
@@ -345,9 +345,11 @@
                           <field name="technical_file_id" widget="many2one"/>
                           <field name="technical_file_name" />
                           <field name="sales_team_id" widget="many2one"/>
+                          <field name="priority" widget="priority"/>
                       </group>
                       <group>
                         <field name="responsible_id" widget="many2one"/>
+                        <field name="category"/>
                         <field name="models_id" widget="many2one"/>
                         <field name="brand_id" widget="many2one"/>
                       </group>
