@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-25 15:00+0000\n"
-"PO-Revision-Date: 2019-06-25 10:46-0500\n"
+"PO-Revision-Date: 2019-06-25 16:42-0500\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -602,7 +602,7 @@ msgstr ""
 #: selection:technical_support.task.checklist.line,answer:0
 #: selection:technical_support.workorder,state:0
 msgid "Done"
-msgstr "Cerrar Orden"
+msgstr "Realizado"
 
 #. module: technical_support
 #: selection:technical_support.order.parts.line,state:0
@@ -1815,12 +1815,12 @@ msgstr ""
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
 msgid "Work Done"
-msgstr ""
+msgstr "Acciones Tomadas"
 
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
 msgid "Work Done Specify ..."
-msgstr ""
+msgstr "Especifique Acciones Tomadas …."
 
 #. module: technical_support
 #: model:ir.model,name:technical_support.model_technical_support_workorder
