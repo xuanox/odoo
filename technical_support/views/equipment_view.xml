@@ -36,7 +36,7 @@
             <field name="model">equipment.equipment</field>
             <field name="inherit_id" ref="equipment.equipments_search"/>
             <field name="arch" type="xml">
-                <xpath expr="//filter[@name='group_user']" position="after">
+                <xpath expr="//filter[@name='group_client']" position="after">
                   <filter name="group_maintenance_state"
                           string="Status"
                           context="{'group_by': 'maintenance_state_id'}"

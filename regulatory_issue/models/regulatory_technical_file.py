@@ -14,6 +14,12 @@ from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
 
+TICKET_PRIORITY = [
+    ('0', 'All'),
+    ('1', 'Low priority'),
+    ('2', 'High priority'),
+    ('3', 'Urgent'),
+]
 
 class RegulatoryTechnicalFileTypeArea(models.Model):
     _name = 'regulatory.technical.file.type.area'
@@ -85,6 +91,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     _description = 'Regulatory Technical File Registry'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    CATEGORY_SELECTION = [
+        ('new', 'New'),
+        ('update', 'Update')
+    ]
+
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
@@ -98,6 +109,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
+    priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
+    category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, default='new', track_visibility='onchange')
 
 
 class RegulatoryTechnicalFileCreation(models.Model):
@@ -118,6 +131,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
     stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
+    priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
 
 
 class RegulatoryTechnicalFileModification(models.Model):
@@ -141,6 +155,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.modification.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     modification_lines = fields.One2many('regulatory.technical.file.modification.line', 'regulatory_technical_file_modification_id', 'Modification Line', track_visibility='onchange')
+    priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
 
 
 class RegulatoryTechnicalFileModificationLine(models.Model):
