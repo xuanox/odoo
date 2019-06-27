@@ -96,21 +96,40 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('update', 'Update')
     ]
 
+    STATE_SELECTION = [
+        ('draft', 'New'),
+        ('assigned', 'Assigned'),
+        ('review', 'Review of Technical Specifications'),
+        ('wait', 'Wait for Factory Documentation'),
+        ('appointment', 'Appointment Assigned'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected')
+    ]
+
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True)
-    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
+    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
-    responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
-    models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange')
+    responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', readonly=True)
+    models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
     category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, default='new', track_visibility='onchange')
+    client_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
+    state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
+        help="When the maintenance order is created the status is set to 'New'.\n\
+        If the order is confirmed the status is set to 'Assigned'.\n\
+        If the order is confirmed the status is set to 'Review of Technical Specifications'.\n\
+        If the stock is available then the status is set to 'Wait for Factory Documentation'.\n\
+        If the stock is available then the status is set to 'Appointment Assigned'.\n\
+        If the stock is available then the status is set to 'Approved'.\n\
+        When the maintenance is over, the status is set to 'Rejected'.", default='draft')
 
     def action_assign(self):
         stage_id = self.env['regulatory.technical.file.registry.stage'].search([('sequence', '=', '2')], order="sequence asc", limit=1)
