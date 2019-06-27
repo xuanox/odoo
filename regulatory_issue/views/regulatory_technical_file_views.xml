@@ -331,7 +331,7 @@
             <field name="arch" type="xml">
               <form string="Technical File Registry">
                 <header>
-                  <button name="%(action_request_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" attrs="{'invisible':  [('responsible_id', '=', True)]}" />
+                  <button name="%(action_request_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" attrs="{'invisible':  [('responsible_id', '=', False)]}" />
                   <field name="state" widget="statusbar" statusbar_visible="draft,assigned,review,appointment,approved" statusbar_colors='{"assigned":"red","appointment":"blue"}'/>
                 </header>
                 <sheet>
