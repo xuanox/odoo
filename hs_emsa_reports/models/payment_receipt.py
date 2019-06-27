@@ -33,7 +33,7 @@ class VendorBillsReport(models.AbstractModel):
 	"""
 	@api.model
 	def _get_report_values(self, docids, data=None):
-		report_name = 'hs_emsa_reports.vendor_bill_template'
+		report_name = 'report.hs_emsa_reports.payment_receipt_template'
 		current_date = self.get_date_document(datetime.date.today())
 		conversor = Number2Letter.To_Letter()
 		docs = self.env["account.payment"].browse(docids)
