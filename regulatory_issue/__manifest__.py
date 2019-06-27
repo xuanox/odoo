@@ -37,7 +37,8 @@
         'views/regulatory_technical_file_views.xml',
         'data/ir_sequence_data.xml',
         'security/regulatory_issue.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'wizard/assign_view.xml'
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],
