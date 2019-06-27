@@ -12,6 +12,7 @@
                 <field name="partner_id"/>
                 <field name="company_id" groups="base.group_multi_company" invisible="1"/>
                 <field name="user_id" groups="part.group_spare_part_backoffice"/>
+                <field name="amount_total" sum="Total amount" widget="monetary"/>
                 <field name="state"/>
             </tree>
         </field>
