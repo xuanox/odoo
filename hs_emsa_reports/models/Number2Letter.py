@@ -4,7 +4,7 @@
 # __author__ = 'efrenfuentes'
 
 
-class Numero_Letra:
+class To_Letter():
 	MONEDA_SINGULAR = 'dolar'
 	MONEDA_PLURAL = 'dolares'
 
