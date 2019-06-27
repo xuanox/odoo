@@ -68,7 +68,7 @@ class To_Letter():
 
 	def convertir(self, numero):
 		numero_entero = int(numero)
-		if numero_entero > MAX_NUMERO:
+		if numero_entero > self.MAX_NUMERO:
 			raise OverflowError('Número demasiado alto')
 		if numero_entero < 0:
 			return 'menos %s' % self.convertir(abs(numero))
@@ -102,14 +102,14 @@ class To_Letter():
 		parte_decimal = int(round((abs(numero) - abs(numero_entero)) * 100))
 		centimos = ''
 		if parte_decimal == 1:
-			centimos = CENTIMOS_SINGULAR
+			centimos = self.CENTIMOS_SINGULAR
 		else:
-			centimos = CENTIMOS_PLURAL
+			centimos = self.CENTIMOS_PLURAL
 		moneda = ''
 		if numero_entero == 1:
-			moneda = MONEDA_SINGULAR
+			moneda = self.MONEDA_SINGULAR
 		else:
-			moneda = MONEDA_PLURAL
+			moneda = self.MONEDA_PLURAL
 		letras = self.convertir(numero_entero)
 		letras = letras.replace('uno', 'un')
 		letras_decimal = 'con %s %s' % (self.convertir(parte_decimal).replace('uno', 'un'), centimos)
@@ -119,16 +119,16 @@ class To_Letter():
 
 	def leer_decenas(self, numero):
 		if numero < 10:
-			return UNIDADES[numero]
+			return self.UNIDADES[numero]
 		decena, unidad = divmod(numero, 10)
 		if numero <= 19:
-			resultado = DECENAS[unidad]
+			resultado = self.DECENAS[unidad]
 		elif numero <= 29:
-			resultado = 'veinti%s' % UNIDADES[unidad]
+			resultado = 'veinti%s' % self.UNIDADES[unidad]
 		else:
-			resultado = DIEZ_DIEZ[decena]
+			resultado = self.DIEZ_DIEZ[decena]
 			if unidad > 0:
-				resultado = '%s y %s' % (resultado, UNIDADES[unidad])
+				resultado = '%s y %s' % (resultado, self.UNIDADES[unidad])
 		return resultado
 
 
@@ -137,7 +137,7 @@ class To_Letter():
 		if numero == 0:
 			resultado = 'cien'
 		else:
-			resultado = CIENTOS[centena]
+			resultado = self.CIENTOS[centena]
 			if decena > 0:
 				resultado = '%s %s' % (resultado, self.leer_decenas(decena))
 		return resultado
@@ -149,7 +149,7 @@ class To_Letter():
 		if (millar == 1):
 			resultado = ''
 		if (millar >= 2) and (millar <= 9):
-			resultado = UNIDADES[millar]
+			resultado = self.UNIDADES[millar]
 		elif (millar >= 10) and (millar <= 99):
 			resultado = self.leer_decenas(millar)
 		elif (millar >= 100) and (millar <= 999):
@@ -166,7 +166,7 @@ class To_Letter():
 		if (millon == 1):
 			resultado = ' un millon '
 		if (millon >= 2) and (millon <= 9):
-			resultado = UNIDADES[millon]
+			resultado = self.UNIDADES[millon]
 		elif (millon >= 10) and (millon <= 99):
 			resultado = self.leer_decenas(millon)
 		elif (millon >= 100) and (millon <= 999):
