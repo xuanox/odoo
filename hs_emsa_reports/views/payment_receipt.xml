@@ -20,16 +20,16 @@
 							</div>
 
 							<table class="table table-sm" style="border-radius: 30px !important;">
-								<tr><td colspan="2">Recibimos de:</td></tr>
+								<tr><td colspan="2"><strong>Recibimos de:</strong></td></tr>
 								<tr>
 									<td colspan="2"><span style="color: white !important;">|</span><span t-esc="partner" /></td>
 								</tr>
-								<tr><td colspan="2"><span>La Cantidad de:</span></td></tr>
+								<tr><td colspan="2"><span><strong>La Cantidad de:</strong></span></td></tr>
 								<tr>
 									<td style="width: 80%"><span style="color: white !important;">|</span><span t-esc="letter_amount" /></td>
-									<td style="width: 20%">B/. <span t-esc="number_amount" /></td>
+									<td style="width: 20%"><strong>B/. </strong><span t-esc="number_amount" /></td>
 								</tr>
-								<tr><td colspan="2"><span>En Concepto de:</span></td></tr>
+								<tr><td colspan="2"><span><strong>En Concepto de:</strong></span></td></tr>
 								<tr><td colspan="2"><span t-field="o.communication"/></td></tr>
 								<tr><td colspan="2"><span style="color: white !important;">|</span></td></tr>
 							</table>
