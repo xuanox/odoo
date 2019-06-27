@@ -1,0 +1,123 @@
+<odoo>
+	<data>
+
+		<template id="payment_receipt_template">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<t t-set="o" t-value="o.with_context(lang=lang)" />
+						<div class="page">
+							<h2>
+								<span>Recibo de Caja</span>
+								<span t-field="o.name"/>
+							</h2>
+
+							<div id="informations" class="row mt32 mb32">
+								<div class="col-auto mw-100 mb-2" t-if="o.payment_date">
+									<strong>Payment Date:</strong>
+									<p class="m-0" t-field="o.payment_date"/>
+								</div>
+							</div>
+
+							<table class="table table-sm" style="border-radius: 30px !important;">
+								<tr><td colspan="2">Recibimos de:</td></tr>
+								<tr>
+									<td colspan="2"><span style="color: white !important;">|</span><span t-esc="partner" /></td>
+								</tr>
+								<tr><td colspan="2"><span>La Cantidad de:</span></td></tr>
+								<tr>
+									<td style="width: 80%"><span style="color: white !important;">|</span><span t-esc="letter_amount" /></td>
+									<td style="width: 20%">B/. <span t-esc="number_amount" /></td>
+								</tr>
+								<tr><td colspan="2"><span>En Concepto de:</span></td></tr>
+								<tr><td colspan="2"><span t-field="o.communication"/></td></tr>
+								<tr><td colspan="2"><span style="color: white !important;">|</span></td></tr>
+							</table>
+
+
+							<div class="row">
+								<div class="col-7"><br/></div>
+								<div class="col-5">
+									<table class="table table-sm" style="max-width: 300px;">
+										<!--tr><td>Efectivo</td>    <td><span t-esc="Efectivo"></span></td></tr>
+										<tr><td>Cheque No.</td>  <td><span t-esc="ChequeNumero"></span></td></tr>
+										<tr><td>Banco</td>       <td><span t-esc="Banco"></span></td></tr>
+										<tr><td>ACH</td>         <td><span t-esc="ACH"></span></td></tr>
+										<tr><td>Pago Tarjeta</td><td><span t-esc="PagoTarjeta"></span></td></tr-->
+										<tr>
+											<td style="width: 40%;">Efectivo</td>
+											<td style="width: 60%;"></td>
+										</tr>
+										<tr>
+											<td>Cheque No.</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>Banco</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>ACH</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>Pago Tarjeta</td>
+											<td></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+
+							
+
+							<div class="row mt32">
+								<div class="col-6">
+									<strong>Recibido por:</strong>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<div style="height:50px !important;"> </div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-6">
+									<span style="color: white !important;border-bottom: 1px solid #616161 !important;">
+										____________________________________________
+									</span>
+								</div>
+							</div>
+
+							
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+		
+		<report id="report_payment_receipt"
+			string="Recibo de Caja"
+			model="account.payment"
+			name="hs_emsa_reports.payment_receipt_template"
+			report_type="qweb-pdf"
+			attachment_use="False"
+			print_report_name="('payment_receipt_report')"
+		/>
+
+
+		<!-- accion para llamar al wizar de impresion-->
+		<!--act_window id="vendor_bill_wizard_action"
+			name="Solicitud de Pago"
+			src_model="account.invoice"
+			res_model="vendor.bill.report.wizard"
+			view_type="form" 
+			view_mode="form" 
+			target="new"
+			key2="client_print_multi"
+			/-->
+	</data>
+</odoo>
