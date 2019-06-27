@@ -66,28 +66,28 @@ class To_Letter():
 	)
 
 
-	def convertir(numero):
+	def convertir(self, numero):
 		numero_entero = int(numero)
 		if numero_entero > MAX_NUMERO:
 			raise OverflowError('Número demasiado alto')
 		if numero_entero < 0:
-			return 'menos %s' % convertir(abs(numero))
+			return 'menos %s' % self.convertir(abs(numero))
 		letras_decimal = ''
 		parte_decimal = int(round((abs(numero) - abs(numero_entero)) * 100))
 		if parte_decimal > 9:
-			letras_decimal = 'punto %s' % convertir(parte_decimal)
+			letras_decimal = 'punto %s' % self.convertir(parte_decimal)
 		elif parte_decimal > 0:
-			letras_decimal = 'punto cero %s' % convertir(parte_decimal)
+			letras_decimal = 'punto cero %s' % self.convertir(parte_decimal)
 		if (numero_entero <= 99):
-			resultado = leer_decenas(numero_entero)
+			resultado = self.leer_decenas(numero_entero)
 		elif (numero_entero <= 999):
-			resultado = leer_centenas(numero_entero)
+			resultado = self.leer_centenas(numero_entero)
 		elif (numero_entero <= 999999):
-			resultado = leer_miles(numero_entero)
+			resultado = self.leer_miles(numero_entero)
 		elif (numero_entero <= 999999999):
-			resultado = leer_millones(numero_entero)
+			resultado = self.leer_millones(numero_entero)
 		else:
-			resultado = leer_millardos(numero_entero)
+			resultado = self.leer_millardos(numero_entero)
 		resultado = resultado.replace('uno mil', 'un mil')
 		resultado = resultado.strip()
 		resultado = resultado.replace(' _ ', ' ')
@@ -97,7 +97,7 @@ class To_Letter():
 		return resultado
 
 
-	def numero_a_moneda(numero):
+	def numero_a_moneda(self, numero):
 		numero_entero = int(numero)
 		parte_decimal = int(round((abs(numero) - abs(numero_entero)) * 100))
 		centimos = ''
@@ -110,14 +110,14 @@ class To_Letter():
 			moneda = MONEDA_SINGULAR
 		else:
 			moneda = MONEDA_PLURAL
-		letras = convertir(numero_entero)
+		letras = self.convertir(numero_entero)
 		letras = letras.replace('uno', 'un')
-		letras_decimal = 'con %s %s' % (convertir(parte_decimal).replace('uno', 'un'), centimos)
+		letras_decimal = 'con %s %s' % (self.convertir(parte_decimal).replace('uno', 'un'), centimos)
 		letras = '%s %s %s' % (letras, moneda, letras_decimal)
 		return letras
 
 
-	def leer_decenas(numero):
+	def leer_decenas(self, numero):
 		if numero < 10:
 			return UNIDADES[numero]
 		decena, unidad = divmod(numero, 10)
@@ -132,18 +132,18 @@ class To_Letter():
 		return resultado
 
 
-	def leer_centenas(numero):
+	def leer_centenas(self, numero):
 		centena, decena = divmod(numero, 100)
 		if numero == 0:
 			resultado = 'cien'
 		else:
 			resultado = CIENTOS[centena]
 			if decena > 0:
-				resultado = '%s %s' % (resultado, leer_decenas(decena))
+				resultado = '%s %s' % (resultado, self.leer_decenas(decena))
 		return resultado
 
 
-	def leer_miles(numero):
+	def leer_miles(self, numero):
 		millar, centena = divmod(numero, 1000)
 		resultado = ''
 		if (millar == 1):
@@ -151,16 +151,16 @@ class To_Letter():
 		if (millar >= 2) and (millar <= 9):
 			resultado = UNIDADES[millar]
 		elif (millar >= 10) and (millar <= 99):
-			resultado = leer_decenas(millar)
+			resultado = self.leer_decenas(millar)
 		elif (millar >= 100) and (millar <= 999):
-			resultado = leer_centenas(millar)
+			resultado = self.leer_centenas(millar)
 		resultado = '%s mil' % resultado
 		if centena > 0:
-			resultado = '%s %s' % (resultado, leer_centenas(centena))
+			resultado = '%s %s' % (resultado, self.leer_centenas(centena))
 		return resultado
 
 
-	def leer_millones(numero):
+	def leer_millones(self, numero):
 		millon, millar = divmod(numero, 1000000)
 		resultado = ''
 		if (millon == 1):
@@ -168,18 +168,18 @@ class To_Letter():
 		if (millon >= 2) and (millon <= 9):
 			resultado = UNIDADES[millon]
 		elif (millon >= 10) and (millon <= 99):
-			resultado = leer_decenas(millon)
+			resultado = self.leer_decenas(millon)
 		elif (millon >= 100) and (millon <= 999):
-			resultado = leer_centenas(millon)
+			resultado = self.leer_centenas(millon)
 		if millon > 1:
 			resultado = '%s millones' % resultado
 		if (millar > 0) and (millar <= 999):
-			resultado = '%s %s' % (resultado, leer_centenas(millar))
+			resultado = '%s %s' % (resultado, self.leer_centenas(millar))
 		elif (millar >= 1000) and (millar <= 999999):
-			resultado = '%s %s' % (resultado, leer_miles(millar))
+			resultado = '%s %s' % (resultado, self.leer_miles(millar))
 		return resultado
 
 
-	def leer_millardos(numero):
+	def leer_millardos(self, numero):
 		millardo, millon = divmod(numero, 1000000)
-		return '%s millones %s' % (leer_miles(millardo), leer_millones(millon))
+		return '%s millones %s' % (self.leer_miles(millardo), self.leer_millones(millon))

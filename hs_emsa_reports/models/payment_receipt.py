@@ -35,14 +35,14 @@ class VendorBillsReport(models.AbstractModel):
 	def _get_report_values(self, docids, data=None):
 		report_name = 'hs_emsa_reports.vendor_bill_template'
 		current_date = self.get_date_document(datetime.date.today())
-		letras = Number2Letter.To_Letter()
+		conversor = Number2Letter.To_Letter()
 		docs = self.env["account.payment"].browse(docids)
 		letter_amount=""
 		amount=""
 		partner = ""
 		for value in docids:
 			record = self.env["account.payment"].search([('id', '=', value)])
-			letter_amount = letras.convertir(str(record.amount))
+			letter_amount = conversor.numero_a_moneda(str(record.amount))
 			amount = record.amount
 			partner = record.partner_id.name
 
