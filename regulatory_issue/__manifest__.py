@@ -37,6 +37,7 @@
         'views/regulatory_technical_criteria_views.xml',
         'views/regulatory_technical_file_views.xml',
         'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
         'security/regulatory_issue.xml',
         'security/ir.model.access.csv',
     ],
