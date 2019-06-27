@@ -37,7 +37,9 @@ class VendorBillsReport(models.AbstractModel):
 		current_date = self.get_date_document(datetime.date.today())
 		letras = Number2Letter.To_Letter()
 		docs = self.env["account.payment"].browse(docids)
-		letter_amount, amount, partner = ""
+		letter_amount=""
+		amount=""
+		partner = ""
 		for value in docids:
 			record = self.env["account.payment"].search([('id', '=', value)])
 			letter_amount = letras.convertir(record.amount)
