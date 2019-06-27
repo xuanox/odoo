@@ -2,18 +2,17 @@
 <openerp>
     <data>
 
-        <record id="view_ticket_assign_wizard" model="ir.ui.view">
-            <field name="name">Assign Ticket</field>
-            <field name="model">helpdesk.ticket.assign</field>
+        <record id="view_request_assign_wizard" model="ir.ui.view">
+            <field name="name">Assign Request</field>
+            <field name="model">regulatory.technical.file.registry.assign</field>
             <field name="arch" type="xml">
-                <form string="Assign Ticket" version="7.0">
+                <form string="Assign Request" version="7.0">
                     <group>
                         <field name="user_id"/>
-                        <field name="date_planned"/>
                         <field name="detail"/>
                     </group>
                     <footer>
-                        <button name="assign_ticket" string="Assign Ticket" type="object"  class="oe_highlight"  />
+                        <button name="assign_request" string="Assign Request" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
@@ -21,10 +20,10 @@
             </field>
         </record>
 
-        <record id="action_ticket_assign" model="ir.actions.act_window">
-            <field name="name">Assign Ticket</field>
+        <record id="action_request_assign" model="ir.actions.act_window">
+            <field name="name">Assign Request</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">helpdesk.ticket.assign</field>
+            <field name="res_model">regulatory.technical.file.registry.assign</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
