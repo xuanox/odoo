@@ -42,7 +42,7 @@ class VendorBillsReport(models.AbstractModel):
 		partner = ""
 		for value in docids:
 			record = self.env["account.payment"].search([('id', '=', value)])
-			letter_amount = letras.convertir(record.amount)
+			letter_amount = letras.convertir(str(record.amount))
 			amount = record.amount
 			partner = record.partner_id.name
 
