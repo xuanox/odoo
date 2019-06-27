@@ -110,7 +110,7 @@
 
 
 		<!-- accion para llamar al wizar de impresion-->
-		<act_window id="vendor_bill_wizard_action"
+		<act_window id="payment_receipt_wizard_action"
 			name="Recibo de Caja"
 			src_model="account.payment"
 			res_model="payment.receipt.wizard"
