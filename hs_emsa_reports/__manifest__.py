@@ -17,7 +17,7 @@
 	# for the full list
 	'category': 'Invoicing & Payments',
 	'license': 'LGPL-3',
-	'version': '1.01',
+	'version': '1.0',
 	
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account', 'account_reports'],
