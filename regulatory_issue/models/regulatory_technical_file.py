@@ -113,7 +113,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, default='new', track_visibility='onchange')
 
     def action_assign(self):
-        stage_id = self.env['regulatory.technical.file.registry.stage'].search([('sequence', '=', '1')], order="sequence asc", limit=1)
+        stage_id = self.env['regulatory.technical.file.registry.stage'].search([('sequence', '=', '2')], order="sequence asc", limit=1)
         self.write({'stage_id': stage_id.id})
         return True
 
