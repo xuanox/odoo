@@ -16,7 +16,7 @@
           <field name="name">regulatory.technical.file.registry.stage.view.tree</field>
           <field name="model">regulatory.technical.file.registry.stage</field>
           <field name="arch" type="xml">
-              <tree string="Technical File Registry Stage" editable="top">
+              <tree string="Technical File Registry Stage">
                   <field name="sequence" widget="handle"/>
                   <field name="name"/>
                   <field name="fold"/>
