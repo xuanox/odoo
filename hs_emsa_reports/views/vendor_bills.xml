@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-	
-		<template id="vendor_bill_template_inherit" inherit_id="web.report_layout">
-			<xpath expr="//head" position="inside">
-				<link rel='stylesheet' href="/hs_emsa_reports/static/src/css/report.css"/>
-			</xpath>
-		</template>
-
 		<template id="vendor_bill_template">
 			<t t-call="web.html_container">
 				<t t-foreach="docs" t-as="o">
 					<t t-call="web.external_layout">
 						<t t-set="o" t-value="o.with_context(lang=lang)" />
 						<div class="page">
-							<h2><span>Comprobante de Pago</span></h2>
+							<style type="text/css">
+								div > strong,
+								div > p,
+								div > span{
+									font-size: 12pt !important;
+								}
+							</style>
+
+							<h2><span>Solicitud de Pago</span></h2>
 							<div class="row mt32 mb32">
 								<div class="col-auto mw-100 mb-2">
 									<strong>Fecha Documento:</strong>
@@ -58,6 +59,13 @@
 									<strong>Firma del Autorizador:</strong>
 								</div>
 							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<div style="height:50px !important;"> </div>
+								</div>
+							</div>
+
 							<div class="row">
 								<div class="col-6">
 									<span style="color: white !important;border-bottom: 1px solid #616161 !important;">
@@ -70,6 +78,14 @@
 									</span>
 								</div>
 							</div>
+
+							<div class="row mt32">
+								<div class="col-12">
+									<strong>Observaciones</strong>
+									<p class="m-0" t-esc="observations"/>
+								</div>
+							</div>
+
 						</div>
 					</t>
 				</t>
@@ -78,12 +94,45 @@
 
 
 		<report id="report_vendor_bill"
-			string="Vendors Bill Report"
+			string="Solicitud de Pago"
 			model="account.invoice"
+			menu="False"
 			name="hs_emsa_reports.vendor_bill_template"
 			report_type="qweb-pdf"
 			attachment_use="False"
 			print_report_name="('vendor_bill_report.pdf')"
 		/>
+
+
+		<record model="ir.ui.view" id="vendor_bill_report_wizard">
+			<field name="name">Reporte para Solicitudes de Pagos</field>
+			<field name="model">vendor.bill.report.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Reporte - Solicitudes de Pagos">
+					<group>
+						<field name="observaciones"/>
+					</group>
+					<footer>
+						<button name="get_report" string="Generar reporte" type="object" class="oe_highlight"/>
+						<button string="Cancel" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<!-- wizard action on res.partner -->
+		<act_window id="vendor_bill_wizard_action"
+			name="Solicitud de Pago"
+			src_model="account.invoice"
+			res_model="vendor.bill.report.wizard"
+			view_type="form" 
+			view_mode="form" 
+			target="new"
+			key2="client_print_multi"
+			/>
+
+
 	</data>
 </odoo>
