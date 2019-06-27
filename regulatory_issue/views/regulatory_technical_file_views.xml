@@ -331,6 +331,7 @@
             <field name="arch" type="xml">
               <form string="Technical File Registry">
                 <header>
+                  <button name="%(action_request_assign)d" string="Assign Responsible" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" attrs="{'invisible':  [('responsible_id', '=', False)]}" />
                   <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
