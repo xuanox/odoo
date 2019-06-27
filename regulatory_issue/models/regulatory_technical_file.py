@@ -132,10 +132,13 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         When the maintenance is over, the status is set to 'Rejected'.", default='draft')
 
     def action_assign(self):
+        self.write({'state': 'assigned'})
+        return True
+
+    def action_wait(self):
         stage_id = self.env['regulatory.technical.file.registry.stage'].search([('sequence', '=', '2')], order="sequence asc", limit=1)
         self.write({'stage_id': stage_id.id})
         return True
-
 
 class RegulatoryTechnicalFileCreation(models.Model):
     _name = 'regulatory.technical.file.creation'
