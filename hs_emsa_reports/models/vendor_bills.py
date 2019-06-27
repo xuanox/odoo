@@ -27,14 +27,14 @@ class VendorBillsReport(models.AbstractModel):
 	def _get_report_values(self, docids, data=None):
 		report_name = 'hs_emsa_reports.vendor_bill_template'
 		report = self.env["ir.actions.report"]._get_report_from_name(report_name)
-		amount = 0.00
 		current_date = self.get_date_invoice(datetime.date.today())
-		lines = []
-		document = docids
-		if len(docids) > 1:
-			document = [docids[0]]
+		observaciones = data['form']['observaciones']
+		doc_ids = data['ids']
+		document = [doc_ids[0]] if len(doc_ids) > 1 else doc_ids
 
-		for doc in docids:
+		lines = []
+		amount = 0.00
+		for doc in doc_ids:
 			item = self.env["account.invoice"].search([('id', '=', doc)])
 			amount += item.amount_total
 			lines.append({
@@ -48,26 +48,32 @@ class VendorBillsReport(models.AbstractModel):
 		total = round(Decimal(amount), 2)
 
 		return {
-			'doc_ids': docids,
-			'doc_model': report.model,
+			'doc_ids': data['ids'],
+			'doc_model': "account.invoice",
 			'date': current_date,
 			'amount': total,
+			'observations': observaciones,
 			'columns': lines,
 			'docs': self.env[report.model].browse(document),
-            'report_type': data.get('report_type') if data else '',
+			'report_type': data.get('report_type') if data else '',
 		}
 
 
-"""
-class VendorBillsInherit(models.Model):
-	_inherit = "account.invoice"
+class AttendanceRecapReportWizard(models.TransientModel):
+	_name = 'vendor.bill.report.wizard'
+	_description = 'Vendor Bills Wizzard'
+	observaciones = fields.Text(string="Observaciones")
 
 
 	@api.multi
 	def get_report(self):
-		data = {
-			"ids":self.ids,
-			"model":self._name
+		doc_ids=self._context.get('active_ids')
+		content = {
+			'ids': doc_ids,
+			'model': "account.invoice",
+			'form': {
+				'observaciones': self.observaciones,
+			}
 		}
-		return self.env.ref('hs_emsa_reports.report_vendor_bill').report_action(self, data=data)
-"""
+
+		return self.env.ref('hs_emsa_reports.report_vendor_bill').report_action(self, data=content)
