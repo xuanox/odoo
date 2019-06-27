@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-25 15:00+0000\n"
-"PO-Revision-Date: 2019-06-25 16:42-0500\n"
+"PO-Revision-Date: 2019-06-26 10:25-0500\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -209,7 +209,7 @@ msgstr "Respuestas"
 #. module: technical_support
 #: selection:technical_support.order.parts.line,state:0
 msgid "Approved Part"
-msgstr ""
+msgstr "Pieza Aprobada"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__assets_id
@@ -221,12 +221,12 @@ msgstr ""
 #: model:ir.model,name:technical_support.model_technical_support_request_assign
 #: model_terms:ir.ui.view,arch_db:technical_support.view_order_assign_wizard
 msgid "Assign Order"
-msgstr ""
+msgstr "Asignar Orden"
 
 #. module: technical_support
 #: selection:technical_support.request,state:0
 msgid "Assigned"
-msgstr ""
+msgstr "Asignado"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_request_assign__user_id
@@ -271,7 +271,7 @@ msgstr "Marca"
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_request__breakdown
 msgid "Breakdown"
-msgstr ""
+msgstr "Offline"
 
 #. module: technical_support
 #: selection:technical_support.order,state:0
@@ -281,13 +281,13 @@ msgstr "Cancelado"
 #. module: technical_support
 #: selection:technical_support.order,state:0
 msgid "CONSULTING FACTORY"
-msgstr ""
+msgstr "Consulta a Fábrica"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_product_product__isParts
 #: model:ir.model.fields,field_description:technical_support.field_product_template__isParts
 msgid "Can be Part"
-msgstr ""
+msgstr "Es Repuesto"
 
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
@@ -308,7 +308,7 @@ msgstr "Cancelado"
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_templates
 msgid "Cantidad"
-msgstr ""
+msgstr "Cantidad"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_task__category_id
@@ -490,12 +490,12 @@ msgstr "Borrador"
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_manager_tree_view
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_tree_view
 msgid "Date Scheduled"
-msgstr ""
+msgstr "Fecha Programada"
 
 #. module: technical_support
 #: model:ir.model.fields,help:technical_support.field_technical_support_request__requested_date
 msgid "Date requested by the customer for maintenance."
-msgstr ""
+msgstr "Fecha solicitada por el cliente para su mantenimiento."
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist__description
@@ -614,12 +614,12 @@ msgstr "Borrador"
 #. module: technical_support
 #: model:ir.model.fields,help:technical_support.field_technical_support_request__duration
 msgid "Duration in hours and minutes."
-msgstr ""
+msgstr "Duración en Horas y Minutos."
 
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__date_end
@@ -629,7 +629,7 @@ msgstr "Fecha finalización"
 #. module: technical_support
 #: model:res.groups,name:technical_support.group_technical_support_engineer
 msgid "Engineer TS"
-msgstr ""
+msgstr "Ingeniero"
 
 #. module: technical_support
 #: model:ir.model,name:technical_support.model_equipment_equipment
@@ -638,7 +638,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_request_form_view
 msgid "Equipment"
-msgstr "Equipamiento"
+msgstr "Equipo"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__parent_id
@@ -677,7 +677,7 @@ msgstr "Duración esperada"
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__date_finish
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_search
 msgid "Finish Date"
-msgstr ""
+msgstr "Fecha de finalización"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_follower_ids
@@ -747,7 +747,7 @@ msgstr ""
 #. module: technical_support
 #: selection:technical_support.order,state:0
 msgid "IN PROCESS"
-msgstr ""
+msgstr "En Proceso"
 
 #. module: technical_support
 #: model:ir.model.fields,help:technical_support.field_technical_support_checklist_history__message_unread
@@ -780,7 +780,7 @@ msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
 #: selection:technical_support.request,state:0
 #: selection:technical_support.workorder,state:0
 msgid "In Process"
-msgstr ""
+msgstr "En Proceso"
 
 #. module: technical_support
 #: selection:technical_support.answer.history,answer:0
@@ -795,7 +795,7 @@ msgstr "Información"
 #. module: technical_support
 #: selection:technical_support.order.parts.line,state:0
 msgid "Installed"
-msgstr ""
+msgstr "Instalado"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__message_is_follower
@@ -887,7 +887,7 @@ msgstr "Última actualización el"
 #. module: technical_support
 #: model:res.groups,name:technical_support.group_technical_support_leader
 msgid "Leader TS"
-msgstr ""
+msgstr "Lider"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__location
@@ -1169,7 +1169,7 @@ msgstr "Operaciones"
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_task_form_view
 msgid "Operations Description..."
-msgstr "Operaciones"
+msgstr "Operaciones …."
 
 #. module: technical_support
 #: model:mail.message.subtype,description:technical_support.mt_state_change
@@ -1203,7 +1203,7 @@ msgstr "Atrasado"
 #. module: technical_support
 #: model:ir.actions.act_window,name:technical_support.part_action
 msgid "Part"
-msgstr ""
+msgstr "Pieza"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__part_line_id
@@ -1336,7 +1336,7 @@ msgstr "Duración real"
 #. module: technical_support
 #: selection:technical_support.order.parts.line,state:0
 msgid "Received Part"
-msgstr ""
+msgstr "Pieza Recibida"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__name
@@ -1352,7 +1352,7 @@ msgstr ""
 #. module: technical_support
 #: selection:technical_support.order.parts.line,state:0
 msgid "Registered Part"
-msgstr ""
+msgstr "Pieza Registrada"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_request__reject_reason
@@ -1394,7 +1394,7 @@ msgstr "Fecha Solicitada"
 #. module: technical_support
 #: selection:technical_support.order.parts.line,state:0
 msgid "Requested Part"
-msgstr ""
+msgstr "Pieza Solicitada"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__user_id
@@ -1449,7 +1449,7 @@ msgstr "Secuencia"
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__serial
 msgid "Serial"
-msgstr ""
+msgstr "Serial"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__signature
@@ -1758,12 +1758,12 @@ msgstr ""
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__wait_time
 msgid "Wait Time"
-msgstr ""
+msgstr "Tiempo de Espera"
 
 #. module: technical_support
 #: model:ir.model.fields,help:technical_support.field_technical_support_order__wait_time
 msgid "Wait Time in hours and minutes."
-msgstr ""
+msgstr "Tiempo de Espera en Horas y Minutos."
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_checklist_history__website_message_ids
