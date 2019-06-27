@@ -331,7 +331,6 @@
             <field name="arch" type="xml">
               <form string="Technical File Registry">
                 <header>
-                  <button name="%(action_request_assign)d" string="Assign Resposible" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer" attrs="{'invisible':  [('name', '=', False)]}" />
                   <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
