@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-__author__ = 'efrenfuentes'
+# __author__ = 'efrenfuentes'
 
 
 class Numero_Letra:

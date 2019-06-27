@@ -2,7 +2,7 @@
 from odoo import api, fields, models
 from decimal import Decimal
 import datetime
-from hs_emsa_reports.models.numero_letras import Numero_Letra
+from . import numero_letras
 
 
 class VendorBillsReport(models.AbstractModel):
@@ -35,7 +35,7 @@ class VendorBillsReport(models.AbstractModel):
 	def _get_report_values(self, docids, data=None):
 		report_name = 'hs_emsa_reports.vendor_bill_template'
 		current_date = self.get_date_document(datetime.date.today())
-		conversor = Numero_Letra()
+		conversor = numero_letras()
 		docs = self.env["account.payment"].browse(docids)
 		letter_amount = ""
 		amount = ""
