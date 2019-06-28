@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Pending Ticket" version="7.0">
                     <group>
-                        <field name="date_planned ="/>
+                        <field name="date_planned"/>
                         <field name="location_appointment"/>
                     </group>
                     <footer>
