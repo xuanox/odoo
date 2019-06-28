@@ -22,5 +22,5 @@ class RegulatoryTechnicalFileAppointmentAssigned(models.TransientModel):
             request = self.env['regulatory.technical.file.registry'].browse(self._context.get('active_id'))
             request.write({'location_appointment':self.location_appointment})
             request.write({'date_planned':self.date_planned})
-            ticket.action_appointment()
+            request.action_appointment()
         return {'type': 'ir.actions.act_window_close',}
