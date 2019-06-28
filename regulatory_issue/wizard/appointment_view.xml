@@ -4,7 +4,7 @@
 
         <record id="view_appointment_wizard" model="ir.ui.view">
             <field name="name">Appointment</field>
-            <field name="model">regulatory.issue.appointment.assigned</field>
+            <field name="model">regulatory.technical.file.appointment.assigned</field>
             <field name="arch" type="xml">
                 <form string="Pending Ticket" version="7.0">
                     <group>
@@ -23,7 +23,7 @@
         <record id="action_appointment_assigned" model="ir.actions.act_window">
             <field name="name">Appointment Assigned</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">regulatory.issue.appointment.assigned</field>
+            <field name="res_model">regulatory.technical.file.appointment.assigned</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>

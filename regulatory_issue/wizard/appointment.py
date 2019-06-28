@@ -5,12 +5,12 @@
 #    Copyright (C) 2013-2019 CodUP (<http://codup.com>).
 #
 ##############################################################################
-
+import time
 from odoo import api, fields, models
 from odoo import netsvc
 
-class RegulatoryIssueAppointmentAssigned(models.TransientModel):
-    _name = 'regulatory.issue.appointment.assigned'
+class RegulatoryTechnicalFileAppointmentAssigned(models.TransientModel):
+    _name = 'regulatory.technical.file.appointment.assigned'
     _description = 'Appointment Assigned'
 
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), required=True, track_visibility='onchange')
