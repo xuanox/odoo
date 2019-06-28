@@ -31,7 +31,7 @@
     'icon': '/regulatory_issue/static/src/img/icon.png',
     'depends': ['base', 'calendar', 'mail', 'equipment'],
     'data': [
-        'wizard/assign_view.xml',
+        #'wizard/assign_view.xml',
         #'wizard/appointment_view.xml',
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',
