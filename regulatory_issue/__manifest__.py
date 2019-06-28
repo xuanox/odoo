@@ -32,7 +32,7 @@
     'depends': ['base', 'calendar', 'mail', 'equipment'],
     'data': [
         'wizard/assign_view.xml',
-        'wizard/appointment_view.xml',
+        #'wizard/appointment_view.xml',
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',
         'views/regulatory_technical_criteria_views.xml',
