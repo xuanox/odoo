@@ -130,6 +130,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         If the stock is available then the status is set to 'Appointment Assigned'.\n\
         If the stock is available then the status is set to 'Approved'.\n\
         When the maintenance is over, the status is set to 'Rejected'.", default='draft')
+    date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    location_appointment = fields.Text('Appointment Location')
 
     def action_assign(self):
         self.write({'state': 'assigned'})

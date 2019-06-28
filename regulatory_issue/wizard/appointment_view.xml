@@ -2,17 +2,17 @@
 <openerp>
     <data>
 
-        <record id="view_ticket_pending_wizard" model="ir.ui.view">
-            <field name="name">Pending Ticket</field>
-            <field name="model">helpdesk.ticket.pending</field>
+        <record id="view_appointment_wizard" model="ir.ui.view">
+            <field name="name">Appointment</field>
+            <field name="model">regulatory.issue.appointment.assigned</field>
             <field name="arch" type="xml">
                 <form string="Pending Ticket" version="7.0">
                     <group>
-                        <field name="pending_reason_id"/>
-                        <field name="detail_reason"/>
+                        <field name="date_planned ="/>
+                        <field name="location_appointment"/>
                     </group>
                     <footer>
-                        <button name="pending_ticket" string="Pending Ticket" type="object"  class="oe_highlight"  />
+                        <button name="appointment_assigned" string="Cita Asignada" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
@@ -20,10 +20,10 @@
             </field>
         </record>
 
-        <record id="action_ticket_pending" model="ir.actions.act_window">
-            <field name="name">Pending Ticket</field>
+        <record id="action_appointment_assigned" model="ir.actions.act_window">
+            <field name="name">Appointment Assigned</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">helpdesk.ticket.pending</field>
+            <field name="res_model">regulatory.issue.appointment.assigned</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
