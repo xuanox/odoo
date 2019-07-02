@@ -108,6 +108,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('rejected', 'Rejected')
     ]
 
+    ENTITY_SELECTION = [
+        ('minsa', 'MINSA'),
+        ('css', 'CSS'),
+    ]
+
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
@@ -134,6 +139,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         When the maintenance is over, the status is set to 'Rejected'.", default='draft')
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     location_appointment = fields.Text('Appointment Location')
+    fulfill = fields.Boolean('Cumple', track_visibility=True)
+    entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
 
     def action_assign(self):
         self.write({'state': 'assigned'})
@@ -188,6 +195,16 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         if self.env.context.get('mark_consulting_as_sent'):
             self.filtered(lambda o: o.state == 'review').write({'state': 'wait'})
         return super(RegulatoryTechnicalFileRegistry, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
+
+    @api.multi
+    def action_set_fulfill(self):
+        """ Fulfill semantic: """
+        return self.write({'fulfill': True})
+
+    @api.multi
+    def action_set_fails(self):
+        """ Fulfill semantic: """
+        return self.write({'fulfill': False})
 
 
 class RegulatoryTechnicalFileCreation(models.Model):
