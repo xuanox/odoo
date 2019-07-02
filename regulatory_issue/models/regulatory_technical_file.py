@@ -256,6 +256,13 @@ class RegulatoryTechnicalFileModificationLine(models.Model):
     _name = 'regulatory.technical.file.modification.line'
     _description = 'Regulatory Technical File Modification Line'
 
+    name = fields.Char('Point to Change', required=True)
+    value = fields.Char('Value', required=True)
+    regulatory_technical_file_modification_id = fields.Many2one('regulatory.technical.file.modification', 'Regulatory Technical File Modification')
+
+class RegulatoryTechnicalFileRegistry(models.Model):
+    _name = 'regulatory.technical.file.modification.line'
+    _description = 'Regulatory Technical File Modification Line'
 
     name = fields.Char('Point to Change', required=True)
     value = fields.Char('Value', required=True)
