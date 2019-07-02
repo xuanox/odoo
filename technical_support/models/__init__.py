@@ -11,4 +11,3 @@ from . import technical_support_order
 from . import technical_support_workorder
 from . import product_template
 from . import equipment
-from . import stock
