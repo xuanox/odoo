@@ -9,6 +9,7 @@ class VendorBillsReport(models.AbstractModel):
 	_name = "report.hs_emsa_reports.payment_receipt_template"
 	_description = 'Payment Receipt Report'
 
+
 	def get_date_document(self, document_datetime):
 		"""
 		Obtenemos la Fecha en que fue creada la nota credito dentro del Odoo
@@ -23,12 +24,43 @@ class VendorBillsReport(models.AbstractModel):
 			temp_date = document_datetime.strftime('%d/%m/%Y') or ''
 			return temp_date
 
-	"""
+	
 	@api.model
 	def _get_report_values(self, docids, data=None):
+		current_date = self.get_date_document(datetime.date.today())
+		
 		doc_ids = data['ids']
 		medioPago = data['form']['MedioPago']
-	
+		conversor = Number2Letter.To_Letter()
+
+		docs = self.env["account.payment"].browse(doc_ids)
+		letter_amount=""
+		amount=""
+		partner = ""
+		for value in doc_ids:
+			record = self.env["account.payment"].search([('id', '=', value)])
+			letter_amount = conversor.numero_a_moneda(record.amount)
+			amount = record.amount
+			partner = record.partner_id.name
+
+		pago = {
+			"Efectivo" : amount if medioPago == "Efectivo" else "",
+			"Cheque" : amount if medioPago == "Cheque" else "",
+			"Banco" : amount if medioPago == "Banco" else "",
+			"ACH" :  amount if medioPago == "ACH" else "",
+			"PagoTarjeta" :  amount if medioPago == "PagoTarjeta" else ""
+		}
+		
+		return {
+			'doc_ids': doc_ids,
+			'doc_model': "account.payment",
+			"letter_amount": letter_amount,
+			"number_amount": amount,
+			'partner': partner,
+			'docs': docs,
+			'pago': pago
+		}
+
 
 	"""
 	@api.model
@@ -54,6 +86,7 @@ class VendorBillsReport(models.AbstractModel):
 			'partner': partner,
 			'docs': docs,
 		}
+	"""
 
 
 class PaymentReceiptWizard(models.TransientModel):
@@ -64,7 +97,7 @@ class PaymentReceiptWizard(models.TransientModel):
 									"Cheque": "Cheque No.",
 									"Banco": "Banco",
 									"ACH": "ACH",
-									"Pago Tarjeta": "PagoTarjeta"})
+									"PagoTarjeta": "Pago Tarjeta"})
 
 
 	@api.multi

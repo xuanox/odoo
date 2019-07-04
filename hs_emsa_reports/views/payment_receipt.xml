@@ -46,23 +46,23 @@
 										<tr><td>Pago Tarjeta</td><td><span t-esc="PagoTarjeta"></span></td></tr-->
 										<tr>
 											<td style="width: 40%;">Efectivo</td>
-											<td style="width: 60%;"></td>
+											<td style="width: 60%;"><span t-esc="pago['Efectivo']"></span></td>
 										</tr>
 										<tr>
 											<td>Cheque No.</td>
-											<td></td>
+											<td><span t-esc="pago['Cheque']"></span></td>
 										</tr>
 										<tr>
 											<td>Banco</td>
-											<td></td>
+											<td><span t-esc="pago['Banco']"></span></td>
 										</tr>
 										<tr>
 											<td>ACH</td>
-											<td></td>
+											<td><span t-esc="pago['ACH']"></span></td>
 										</tr>
 										<tr>
 											<td>Pago Tarjeta</td>
-											<td></td>
+											<td><span t-esc="pago['PagoTarjeta']"></span></td>
 										</tr>
 									</table>
 								</div>
@@ -107,6 +107,24 @@
 			attachment_use="False"
 			print_report_name="('payment_receipt_report')"
 		/>
+
+
+		<record model="ir.ui.view" id="payment_receipt_report_wizard">
+			<field name="name">Reporte para Recibo de caja</field>
+			<field name="model">payment.receipt.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Reporte - Recibo de Caja">
+					<group>
+						<field name="categoria"/>
+					</group>
+					<footer>
+						<button name="get_report" string="Generar reporte" type="object" class="oe_highlight"/>
+						<button string="Cancel" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
 
 
 		<!-- accion para llamar al wizar de impresion-->
