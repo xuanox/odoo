@@ -14,7 +14,7 @@
 
 							<div id="informations" class="row mt32 mb32">
 								<div class="col-auto mw-100 mb-2" t-if="o.payment_date">
-									<strong>Payment Date:</strong>
+									<strong>Fecha:</strong>
 									<p class="m-0" t-field="o.payment_date"/>
 								</div>
 							</div>
@@ -118,7 +118,7 @@
 				<form string="Reporte - Recibo de Caja">
 					<group>
 						<group><field name="categoria"/></group>
-						<group> <group>
+						<group> </group>
 					</group>
 					<footer>
 						<button name="get_report" string="Generar reporte" type="object" class="oe_highlight"/>
