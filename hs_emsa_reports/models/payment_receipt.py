@@ -35,7 +35,6 @@ class VendorBillsReport(models.AbstractModel):
 		medioPago = data['form']['medioPago']
 		conversor = Number2Letter.To_Letter()
 
-		
 		document = [doc_ids[0]] if len(doc_ids) > 1 else doc_ids
 		letter_amount=""
 		amount=""
@@ -93,7 +92,7 @@ class VendorBillsReport(models.AbstractModel):
 
 
 class PaymentReceiptWizard(models.TransientModel):
-	_name = 'payment.receipt.wizard'
+	_name = 'payment.receipt.report.wizard'
 	_description = 'Payment Receipt Wizzard'
 	categoria = fields.Selection(string="Medio de Pago", selection={ 
 									"Efectivo": "Efectivo",
@@ -114,4 +113,4 @@ class PaymentReceiptWizard(models.TransientModel):
 			}
 		}
 
-		return self.env.ref('hs_emsa_reports.payment_receipt_template').report_action(self, data=content)
+		return self.env.ref('hs_emsa_reports.report_payment_receipt').report_action(self, data=content)
