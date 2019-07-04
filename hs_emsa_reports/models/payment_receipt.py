@@ -54,17 +54,18 @@ class VendorBillsReport(models.AbstractModel):
 		}
 		
 		return {
-			'doc_ids': doc_ids,
+			'doc_ids': data['ids'],
 			'doc_model': "account.payment",
 			"letter_amount": letter_amount,
 			"number_amount": amount,
 			'partner': partner,
 			'docs': self.env[report.model].browse(document),
+			'report_type': data.get('report_type') if data else '',
 			'pago': pago
 		}
 
 
-	"""
+"""
 	@api.model
 	def _get_report_values(self, docids, data=None):
 		report_name = 'report.hs_emsa_reports.payment_receipt_template'
@@ -88,7 +89,7 @@ class VendorBillsReport(models.AbstractModel):
 			'partner': partner,
 			'docs': docs,
 		}
-	"""
+"""
 
 
 class PaymentReceiptWizard(models.TransientModel):
