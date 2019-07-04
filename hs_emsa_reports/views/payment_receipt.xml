@@ -112,7 +112,7 @@
 
 		<record model="ir.ui.view" id="payment_receipt_report_wizard">
 			<field name="name">Reporte para Recibo de caja</field>
-			<field name="model">payment.receipt.wizard</field>
+			<field name="model">payment.receipt.report.wizard</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Reporte - Recibo de Caja">
