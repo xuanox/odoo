@@ -27,7 +27,7 @@ class VendorBillsReport(models.AbstractModel):
 	
 	@api.model
 	def _get_report_values(self, docids, data=None):
-		report_name = 'hs_emsa_reports.vendor_bill_template'
+		report_name = 'hs_emsa_reports.payment_receipt_template'
 		report = self.env["ir.actions.report"]._get_report_from_name(report_name)
 		current_date = self.get_date_document(datetime.date.today())
 		

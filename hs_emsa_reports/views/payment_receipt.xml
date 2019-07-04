@@ -106,7 +106,7 @@
 			name="hs_emsa_reports.payment_receipt_template"
 			report_type="qweb-pdf"
 			attachment_use="False"
-			print_report_name="('payment_receipt_report')"
+			print_report_name="('payment_receipt_report.pdf')"
 		/>
 
 
