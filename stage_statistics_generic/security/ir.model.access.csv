@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lead_history,lead.history,model_lead_history,,1,1,1,0
+access_task_history,task.history,model_task_history,,1,1,1,0
+access_helpdesk_ticket_history,helpdesk.ticket.history,model_helpdesk_ticket_history,,1,1,1,0
+access_hr_applicant_history,hr.applicant.history,model_hr_applicant_history,,1,1,1,0
+access_purchase_order_history,purchase.order.history,model_purchase_order_history,,1,1,1,0
+access_quality_check_history,quality.check.history,model_quality_check_history,,1,1,1,0
+access_sale_order_history,sale.order.history,model_sale_order_history,,1,1,1,0
+access_stock_picking_history,stock.picking.history,model_stock_picking_history,,1,1,1,0
