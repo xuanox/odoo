@@ -11,5 +11,18 @@
             </xpath>
           </field>
       </record>
+
+      <record id="crm_case_form_view_leads_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.lead.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='team_id']" position="after">
+            <field name="modality"/>
+            <field name="model_id"/>
+          </xpath>
+        </field>
+      </record>
+
     </data>
 </odoo>
