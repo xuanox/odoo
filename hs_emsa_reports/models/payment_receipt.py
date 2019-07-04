@@ -34,7 +34,6 @@ class VendorBillsReport(models.AbstractModel):
 		doc_ids = data['ids']
 		medioPago = data['form']['medioPago']
 		conversor = Number2Letter.To_Letter()
-
 		document = [doc_ids[0]] if len(doc_ids) > 1 else doc_ids
 		letter_amount=""
 		amount=""
@@ -95,12 +94,12 @@ class VendorBillsReport(models.AbstractModel):
 class PaymentReceiptWizard(models.TransientModel):
 	_name = 'payment.receipt.report.wizard'
 	_description = 'Payment Receipt Wizzard'
-	categoria = fields.Selection(string="Medio de Pago", selection={ 
-									"Efectivo": "Efectivo",
-									"Cheque": "Cheque No.",
-									"Banco": "Banco",
-									"ACH": "ACH",
-									"PagoTarjeta": "Pago Tarjeta"})
+	categoria = fields.Selection(string="Medio de Pago", selection=[ 
+									("Efectivo", "Efectivo"),
+									("Cheque", "Cheque No."),
+									("Banco", "Banco"),
+									("ACH", "ACH"),
+									("PagoTarjeta", "Pago Tarjeta")])
 
 
 	@api.multi
