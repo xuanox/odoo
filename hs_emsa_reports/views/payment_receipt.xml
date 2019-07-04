@@ -46,23 +46,23 @@
 										<tr><td>Pago Tarjeta</td><td><span t-esc="PagoTarjeta"></span></td></tr-->
 										<tr>
 											<td style="width: 40%;">Efectivo</td>
-											<td style="width: 60%;"><span t-esc="pago['Efectivo']"></span></td>
+											<td style="width: 60%;" class="text-right"><span t-esc="pago['Efectivo']"></span></td>
 										</tr>
 										<tr>
 											<td>Cheque No.</td>
-											<td><span t-esc="pago['Cheque']"></span></td>
+											<td class="text-right"><span t-esc="pago['Cheque']"></span></td>
 										</tr>
 										<tr>
 											<td>Banco</td>
-											<td><span t-esc="pago['Banco']"></span></td>
+											<td class="text-right"><span t-esc="pago['Banco']"></span></td>
 										</tr>
 										<tr>
 											<td>ACH</td>
-											<td><span t-esc="pago['ACH']"></span></td>
+											<td class="text-right"><span t-esc="pago['ACH']"></span></td>
 										</tr>
 										<tr>
 											<td>Pago Tarjeta</td>
-											<td><span t-esc="pago['PagoTarjeta']"></span></td>
+											<td class="text-right"><span t-esc="pago['PagoTarjeta']"></span></td>
 										</tr>
 									</table>
 								</div>
@@ -117,7 +117,8 @@
 			<field name="arch" type="xml">
 				<form string="Reporte - Recibo de Caja">
 					<group>
-						<field name="categoria"/>
+						<group><field name="categoria"/></group>
+						<group> <group>
 					</group>
 					<footer>
 						<button name="get_report" string="Generar reporte" type="object" class="oe_highlight"/>
