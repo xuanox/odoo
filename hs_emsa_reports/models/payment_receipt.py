@@ -27,13 +27,16 @@ class VendorBillsReport(models.AbstractModel):
 	
 	@api.model
 	def _get_report_values(self, docids, data=None):
+		report_name = 'hs_emsa_reports.vendor_bill_template'
+		report = self.env["ir.actions.report"]._get_report_from_name(report_name)
 		current_date = self.get_date_document(datetime.date.today())
 		
 		doc_ids = data['ids']
-		medioPago = data['form']['MedioPago']
+		medioPago = data['form']['medioPago']
 		conversor = Number2Letter.To_Letter()
 
-		docs = self.env["account.payment"].browse(doc_ids)
+		
+		document = [doc_ids[0]] if len(doc_ids) > 1 else doc_ids
 		letter_amount=""
 		amount=""
 		partner = ""
@@ -57,7 +60,7 @@ class VendorBillsReport(models.AbstractModel):
 			"letter_amount": letter_amount,
 			"number_amount": amount,
 			'partner': partner,
-			'docs': docs,
+			'docs': self.env[report.model].browse(document),
 			'pago': pago
 		}
 
