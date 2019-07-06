@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class Lead(models.Model):
     _inherit = 'crm.lead'
 
-    modality = fields.Selection([('high', 'High Tech'), ('low', 'Low Tech')], string='Modality')
+    category_id=fields.Many2one('crm.lead.category', string='Modality')
     model_id=fields.Many2one('equipment.model', string='Model')
     date_deadline = fields.Date(required=True)
 
