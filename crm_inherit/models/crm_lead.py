@@ -8,6 +8,7 @@ class Lead(models.Model):
     _inherit = 'crm.lead'
 
     category_id=fields.Many2one('crm.lead.category', string='Category', domain="[('team_ids', '=', team_id)]")
+    modality_id=fields.Many2one('equipment.modality', string='Modality', domain="[('category_id', '=', category_id)]")
     model_id=fields.Many2one('equipment.model', string='Model')
     date_deadline = fields.Date(required=True)
 
