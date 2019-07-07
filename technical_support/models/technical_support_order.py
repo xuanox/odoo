@@ -64,7 +64,7 @@ class TechnicalSupportOrder(models.Model):
     problem_description = fields.Text(related='ticket_id.description', string='Problem Description', readonly=True, store=True, track_visibility='onchange')
 
     ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
-    task_id = fields.Many2one('technical_support.task', 'Task', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    task_id = fields.Many2one('technical_support.task', 'Task', states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, domain="[('model_id', '=', model_id)]")
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True, readonly=True, states={'draft':[('readonly',False)]})
     user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     company_id = fields.Many2one('res.company','Company', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=lambda self: self.env['res.company']._company_default_get('technical_support.order'))
@@ -75,7 +75,7 @@ class TechnicalSupportOrder(models.Model):
     client_id=fields.Many2one('res.partner', related='equipment_id.client_id', string='Client', store=True, readonly=True)
     brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
     zone_id=fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True)
-    model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
+    model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', store=True, readonly=True)
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', store=True, readonly=True)
     order_id = fields.Many2one('technical_support.checklist.history', string='Control List')
