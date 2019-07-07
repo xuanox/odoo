@@ -1,97 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<odoo>
+		<!-- equipment.modality : Form -->
+		<record id="equipment_modality_view_form" model="ir.ui.view">
+		  <field name="name">Equipment Modality View Form</field>
+		  <field name="model">equipment.modality</field>
+		  <field name="arch" type="xml">
+				<form string="Modality">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+						</div>
+						<group>
+							<group>
+								<field name="name"/>
+							</group>
+							<group>
+							</group>
+						</group>
+						<notebook>
+							<page string="Note">
+								<field name="note" nolabel="1"/>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+		  </field>
+		</record>
 
-		    <!-- equipment.modality : views -->
-		    <record id="equipment_modality_view_form" model="ir.ui.view">
-		        <field name="name">equipment.modality.view.form</field>
-		        <field name="model">equipment.modality</field>
-		        <field name="arch" type="xml">
-							<form string="Modality">
-									<sheet>
-										<div class="oe_button_box" name="button_box">
-										</div>
-										<group>
-											<group>
-											<field name="name"/>
-											</group>
-											<group>
-											</group>
-										</group>
-										<notebook>
-											<page string="Note">
-													<field name="note" nolabel="1"/>
-											</page>
-										</notebook>
-									</sheet>
-							</form>
-		        </field>
-		    </record>
+		<!-- equipment.modality : Tree -->
+		<record id="equipment_modality_view_tree" model="ir.ui.view">
+		  <field name="name">equipment.modality.view.tree</field>
+		  <field name="model">equipment.modality</field>
+		  <field name="arch" type="xml">
+		    <tree string="Modality">
+		      <field name="name" string="Name"/>
+		    </tree>
+		  </field>
+		</record>
 
-		    <record id="equipment_modality_view_tree" model="ir.ui.view">
-		        <field name="name">equipment.modality.view.tree</field>
-		        <field name="model">equipment.modality</field>
-		        <field name="arch" type="xml">
-		            <tree string="Assign To User">
-		                <field name="name" string="Name"/>
-		            </tree>
-		        </field>
-		    </record>
+		<!-- equipment.modality : Search -->
+		<record id="equipment_modality_view_search" model="ir.ui.view">
+		  <field name="name">equipment.modality.view.search</field>
+		  <field name="model">equipment.modality</field>
+		  <field name="arch" type="xml">
+		    <search string="Search">
+		      <field name="name" string="Modality Name" filter_domain="[('name','ilike',self)]"/>
+		      <group  expand='0' string='Group by...'>
+		      </group>
+		    </search>
+		  </field>
+		</record>
 
-		    <record id="equipment_modality_view_search" model="ir.ui.view">
-		        <field name="name">equipment.modality.view.search</field>
-		        <field name="model">equipment.modality</field>
-		        <field name="arch" type="xml">
-		            <search string="Search">
-		                <field name="name" string="Modality Name" filter_domain="[('name','ilike',self)]"/>
-		                <group  expand='0' string='Group by...'>
-		                </group>
-		            </search>
-		        </field>
-		    </record>
+		<!-- equipment.modality : Kanban -->
+		<record id="equipment_modality_view_kanban" model="ir.ui.view">
+		  <field name="name">equipment.modality.view.kanban</field>
+		  <field name="model">equipment.modality</field>
+		  <field name="arch" type="xml">
+		    <kanban>
+		      <field name="name"/>
+		      <templates>
+		        <t t-name="kanban-box">
+		          <div t-attf-class="oe_kanban_global_click">
+		            <div class="mb4">
+		              <strong><field name="name"/></strong>
+		            </div>
+		            <div class="row mt4">
+		              <div class="col-6">
+		                <span class="badge badge-pill">
+		                </span>
+		              </div>
+		              <div class="col-6 text-right">
+		                <span class="badge badge-pill">
+		                </span>
+		              </div>
+		            </div>
+		          </div>
+		        </t>
+		      </templates>
+		    </kanban>
+		  </field>
+		</record>
 
-		    <record id="equipment_modality_view_kanban" model="ir.ui.view">
-		        <field name="name">equipment.modality.view.kanban</field>
-		        <field name="model">equipment.modality</field>
-		        <field name="arch" type="xml">
-		            <kanban>
-		                <field name="name"/>
-		                <templates>
-		                    <t t-name="kanban-box">
-		                        <div t-attf-class="oe_kanban_global_click">
-		                            <div class="mb4">
-		                                <strong><field name="name"/></strong>
-		                            </div>
-		                            <div class="row mt4">
-		                                <div class="col-6">
-		                                    <span class="badge badge-pill">
-		                                    </span>
-		                                </div>
-		                                <div class="col-6 text-right">
-		                                    <span class="badge badge-pill">
-		                                    </span>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </t>
-		                </templates>
-		            </kanban>
-		        </field>
-		    </record>
+		<!-- equipment.modality : actions -->
+		<record id="equipment_modality_action_view" model="ir.actions.act_window">
+		  <field name="name">Equipment Modalities</field>
+		  <field name="res_model">equipment.modality</field>
+		  <field name="view_mode">tree,kanban,form</field>
+		  <field name="view_id" ref="equipment_modality_view_tree"/>
+		  <field name="help" type="html">
+		    <p class="o_view_nocontent_smiling_face">
+		      Add a new equipment Modality
+		    </p>
+		  </field>
+		</record>
 
-		    <!-- equipment.modality : actions -->
-		    <record id="equipment_modality_action_view" model="ir.actions.act_window">
-		        <field name="name">Equipment Modalities</field>
-		        <field name="res_model">equipment.modality</field>
-		        <field name="view_mode">tree,kanban,form</field>
-		        <field name="view_id" ref="equipment_modality_view_tree"/>
-		        <field name="help" type="html">
-		            <p class="o_view_nocontent_smiling_face">
-		                Add a new equipment Modality
-		            </p>
-		        </field>
-		    </record>
-
-		<!-- Equipment Brand item -->
+		<!-- Equipment Modality Menu -->
 		<menuitem
 			name="Modality"
 			id="menu_equipment_modality"
