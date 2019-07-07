@@ -19,8 +19,8 @@
         <field name="arch" type="xml">
           <xpath expr="//field[@name='team_id']" position="after">
             <field name="category_id" widget="selection" attrs="{'invisible': [('team_id', '=', False)]}"/>
-            <field name="modality_id" widget="selection"/>
-            <field name="model_id"/>
+            <field name="modality_id" widget="selection" attrs="{'invisible': [('category_id', '=', False)]}"/>
+            <field name="model_id"  widget="Many2one"/>
           </xpath>
         </field>
       </record>
