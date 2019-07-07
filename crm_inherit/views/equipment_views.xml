@@ -7,8 +7,9 @@
     	<field name="model">equipment.modality</field>
       <field name="inherit_id" ref="equipment.equipment_modality_view_form"/>
       <field name="arch" type="xml">
-        <field name="name" position="before">
+        <field name="name" position="after">
           <field name="category_id"/>
+					<field name="applicationist_id"/>
         </field>
       </field>
     </record>
