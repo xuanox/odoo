@@ -13,6 +13,7 @@ Contains advanced features for CRM such as new views
     'data': [
         'views/crm_lead_views.xml',
         'views/equipment_views.xml',
+        'views/crm_category_views.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [

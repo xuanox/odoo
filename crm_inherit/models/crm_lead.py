@@ -15,8 +15,9 @@ class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
     _description = "Sales Category"
 
-    name=fields.Char("Category", required=True)
-    description=fields.Text('Description')
+    name = fields.Char("Category", required=True)
+    team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    description = fields.Text('Description')
 
 class CrmLeadChecklistDemo(models.Model):
     _name = "crm.lead.checklist.demo"
