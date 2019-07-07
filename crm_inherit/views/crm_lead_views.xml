@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
           <xpath expr="//field[@name='team_id']" position="after">
-            <field name="category_id"/>
+            <field name="category_id" widget="selection" domain="[('team_ids','=','team_id')]"/>
             <field name="model_id"/>
           </xpath>
         </field>
