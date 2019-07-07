@@ -16,7 +16,7 @@ class CrmLeadCategory(models.Model):
     _description = "Sales Category"
 
     name = fields.Char("Category", required=True)
-    team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    team_ids = fields.Many2many('crm.team', relation='team_category_rel', string='Sales Team')
     description = fields.Text('Description')
 
 class CrmLeadChecklistDemo(models.Model):
@@ -27,3 +27,8 @@ class CrmLeadChecklistDemo(models.Model):
     name=fields.Char("Item", required=True)
     sequence=fields.Integer('Sequence')
     description=fields.Text('Description')
+
+class Team(models.Model):
+    _inherit = 'crm.team'
+
+    category_ids = fields.Many2many('crm.lead.category', relation='team_category_rel', string='Categories')
