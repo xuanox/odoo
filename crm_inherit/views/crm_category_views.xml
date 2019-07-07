@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_lead_category_search" model="ir.ui.view">
+      <field name="name">Category - Search</field>
+      <field name="model">crm.lead.category</field>
+      <field name="arch" type="xml">
+        <search string="Category Search">
+          <field name="name"/>
+          <field name="team_ids"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="crm_category_tree" model="ir.ui.view">
+      <field name="name">Category - Tree</field>
+      <field name="model">crm.lead.category</field>
+      <field name="arch" type="xml">
+        <tree string="Category">
+          <field name="name"/>
+          <field name="team_ids" widget="many2many_tags"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="crm_category_form" model="ir.ui.view">
+      <field name="name">Category - Form</field>
+      <field name="model">crm.lead.category</field>
+      <field name="priority" eval="1"/>
+      <field name="arch" type="xml">
+        <form string="Category">
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="team_ids" widget="many2many_tags"/>
+            </group>
+            <group>
+            </group>
+          </group>
+          <separator string="Description"/>
+          <field name="description" nolabel="1" placeholder="Description..."/>
+        </form>
+      </field>
+    </record>
+
+    <record id="crm_category_action" model="ir.actions.act_window">
+      <field name="name">Category</field>
+      <field name="res_model">crm.lead.category</field>
+      <field name="view_type">form</field>
+      <field name="view_id" ref="crm_inherit.crm_category_tree"/>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Set a new Sales Category
+        </p><p>
+          Sales Category
+        </p>
+      </field>
+    </record>
+
+    <menuitem
+        id="menu_crm_category_action"
+        name="Category"
+        sequence="0"
+        action="crm_category_action"
+        parent="crm.menu_crm_config_lead"
+        groups="sales_team.group_sale_manager"/>
+
+</odoo>

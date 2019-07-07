@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+  	<record id="equipment_modality_crm_view_form_inherit" model="ir.ui.view">
+    	<field name="name">Equipment Modality - CRM Form Inherit</field>
+    	<field name="model">equipment.modality</field>
+      <field name="inherit_id" ref="equipment.equipment_modality_view_form"/>
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="category_id"/>
+					<field name="applicationist_id"/>
+        </field>
+      </field>
+    </record>
+
+		<record id="equipment_modality_crm_view_tree_inherit" model="ir.ui.view">
+			<field name="name">Equipment Modality - CRM Tree Inherit</field>
+			<field name="model">equipment.modality</field>
+			<field name="inherit_id" ref="equipment.equipment_modality_view_tree"/>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+          <field name="category_id"/>
+					<field name="applicationist_id"/>
+        </field>
+			</field>
+		</record>
+
+ 	</data>
+</odoo>

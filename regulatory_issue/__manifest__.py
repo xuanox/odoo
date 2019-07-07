@@ -31,13 +31,16 @@
     'icon': '/regulatory_issue/static/src/img/icon.png',
     'depends': ['base', 'calendar', 'mail', 'equipment'],
     'data': [
+        'wizard/assign_view.xml',
+        'wizard/appointment_view.xml',
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',
         'views/regulatory_technical_criteria_views.xml',
         'views/regulatory_technical_file_views.xml',
         'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
         'security/regulatory_issue.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],
