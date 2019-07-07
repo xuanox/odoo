@@ -82,7 +82,7 @@
 
 		<!-- equipment.modality : actions -->
 		<record id="equipment_modality_action_view" model="ir.actions.act_window">
-		  <field name="name">Equipment Modalities</field>
+		  <field name="name">Modalities</field>
 		  <field name="res_model">equipment.modality</field>
 		  <field name="view_mode">tree,kanban,form</field>
 		  <field name="view_id" ref="equipment_modality_view_tree"/>
@@ -95,7 +95,7 @@
 
 		<!-- Equipment Modality Menu -->
 		<menuitem
-			name="Modality"
+			name="Modalities"
 			id="menu_equipment_modality"
 			parent="menu_equipment_config"
 			action="equipment_modality_action_view"
