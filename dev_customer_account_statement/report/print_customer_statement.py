@@ -169,24 +169,15 @@ class print_customer_statement(models.AbstractModel):
                             paid_amt += (m.amount * -1)
                         
                 total = float(inv_amt - paid_amt)
-
-
-                temp = ''
-                if line.invoice_id.type == 'out_invoice':
-                  temp = 'Factura'
-                elif line.invoice_id.type == 'out_refund':
-                    temp = 'Nota Credito'
-                else: 
-                   temp 
-
                 if total > 0 or total < 0:
                     res.append({
                                 'date':line.date,
-                                'desc':line.invoice_id.number or '/',
-                                'ref':temp or '',  #Editado
+                                'desc':line.ref or '/',
+                                'ref':line.move_id.name or '',
                                 'date_maturity':line.date_maturity,
                                 'debit':float(inv_amt),
                                 'credit':float(paid_amt),
+                                'total':float(total),
                             })
                    
         return res    
