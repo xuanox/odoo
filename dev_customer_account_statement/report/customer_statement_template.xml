@@ -51,14 +51,14 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
 				<table class="my_table" style="font-size: 12px" t-if="get_lines">
 	            	<thead>
 	                    <tr>
-	                        <th style="width:20%">Description</th>
+						 	<th style="width:20%" class="text-center">Invoice #</th>
 	                        <t t-if="o.aging_by == 'inv_date'">
 	                            <th style="width:15%" class="text-center">Invoice Date</th>
 	                        </t>
 	                        <t t-if="o.aging_by == 'due_date'">
 	                            <th style="width:15%" class="text-center">Due Date</th>
 	                        </t>
-	                        <th style="width:20%" class="text-center">Invoice #</th>
+	                       	<th style="width:20%">Description</th>
 	                        <th style="width:15%" class="text-right">Invoice Amt</th>
 	                        <th style="width:15%" class="text-right">Payment Amt</th>
 	                        <th style="width:15%" class="text-right">Balance Due</th>
