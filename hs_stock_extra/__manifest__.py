@@ -7,7 +7,7 @@
 
 	'description': """
 		Realiza modificaciones al sistema de inventario en la empresa EMSA.
-		- 
+		- Agrega la columna Comercial en el inventario para Ordenes de Entrega y Recepciones.
 	""",
 
 	'author': "HS Consulting S.A.",
@@ -17,7 +17,7 @@
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
 	'category': 'other',
-	'version': '0.4',
+	'version': '0.6',
 
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'stock'],

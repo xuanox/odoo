@@ -29,7 +29,8 @@ class TechnicalSupportOrder(models.Model):
 
     MAINTENANCE_TYPE_SELECTION = [
         ('pm', 'Preventive'),
-        ('cm', 'Corrective')
+        ('cm', 'Corrective'),
+        ('in', 'Instalación')
     ]
 
     @api.multi
@@ -71,6 +72,7 @@ class TechnicalSupportOrder(models.Model):
     procurement_group_id = fields.Many2one('procurement.group', 'Procurement group', copy=False)
     category_ids = fields.Many2many(related='equipment_id.category_ids', string='equipment Category', readonly=True)
     wo_id = fields.Many2one('technical_support.workorder', 'Work Order', ondelete='cascade')
+    request_id = fields.Many2one('technical_support.request', 'Request', ondelete='cascade')
 
     client_id=fields.Many2one('res.partner', related='equipment_id.client_id', string='Client', store=True, readonly=True)
     brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
@@ -502,5 +504,14 @@ class TechnicalSupportOrderSignatureLine(models.Model):
 
     name = fields.Char('Description', size=64)
     user_id=fields.Many2one('res.users', string='Usuarios', required=True)
+    maintenance_id = fields.Many2one('technical_support.order', string='Order')
+    description=fields.Text('Description')
+
+class TechnicalSupportOrderSignatureClientLine(models.Model):
+    _name = 'technical_support.order.signature.client.line'
+    _description = 'Technical Support Order Signature Client Line'
+
+    name = fields.Char('Description', size=64)
+    user_id=fields.Many2one('res.partner', string='Client', required=True)
     maintenance_id = fields.Many2one('technical_support.order', string='Order')
     description=fields.Text('Description')
