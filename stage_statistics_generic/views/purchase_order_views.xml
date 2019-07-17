@@ -8,11 +8,11 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
                 <page name="history" string="History">
-                    <field name="po_stage_ids" attrs="{'readonly': 1}">
+                    <field name="stage_ids" attrs="{'readonly': 1}">
                         <tree default_order="id desc">
                             <field name="name"/>
                             <field name="person_assign_id"/>
-                            <field name="state"/>
+                            <field name="stage"/>
                             <field name="entry_date"/>
                             <field name="exit_date"/>
                             <field name="total_time"/>
@@ -23,26 +23,15 @@
         </field>
     </record>
 
-    <record id="po_history_view_pivot" model="ir.ui.view">
-        <field name="name">purchase.order.history.pivot</field>
-        <field name="model">purchase.order.history</field>
-        <field name="arch" type="xml">
-            <pivot string="Purchase Stage Analysis" disable_linking="True">
-                <field name="po_id" type="row"/>
-                <field name="state" type="col"/>
-                <field name="total_time" type="measure"/>
-            </pivot>
-        </field>
-    </record>
-
     <record id="po_stage_action_analysis" model="ir.actions.act_window">
         <field name="name">Purchase Stage Analysis</field>
-        <field name="res_model">purchase.order.history</field>
+        <field name="res_model">stage.history</field>
         <field name="view_type">form</field>
         <field name="view_mode">pivot</field>
         <field name="view_ids" eval="[
             (5, 0, 0),
-            (0, 0, {'view_mode': 'pivot', 'view_id': ref('po_history_view_pivot')})]"/>
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('stage_history_view_pivot')})]"/>
+        <field name="domain">[('res_model', '=', 'purchase.order')]</field>
         <field name="context">{}</field>  <!-- force empty -->
     </record>
 
