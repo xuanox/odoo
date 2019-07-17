@@ -38,20 +38,20 @@ class AccountRefundInherit(models.Model):
 				invoice_lines = invoice.invoice_line_ids
 				for line in invoice_lines:
 					product = line.product_id
+					if product != False:
+						product_name = product.name
+						price = line.price_unit
+						quantity = line.quantity
 
-					product_name = product.name
-					price = line.price_unit
-					quantity = line.quantity
-
-					if price <= 0:
-						message = "El precio de venta del producto " + product_name + " en una Nota de Credito " \
-								" no pude ser menor o igual a cero (0)."
-						raise exceptions.Warning(message)
-						
-					if quantity <= 0:
-						message = "La cantidad a vender del producto " + product_name + " en una Nota de Credito " \
-								"no pude ser menor o igual a cero (0)."
-						raise exceptions.Warning(message)
+						if price <= 0:
+							message = "El precio de venta del producto " + product_name + " en una Nota de Credito " \
+									" no pude ser menor o igual a cero (0)."
+							raise exceptions.Warning(message)
+							
+						if quantity <= 0:
+							message = "La cantidad a vender del producto " + product_name + " en una Nota de Credito " \
+									"no pude ser menor o igual a cero (0)."
+							raise exceptions.Warning(message)
 
 		return document
 
