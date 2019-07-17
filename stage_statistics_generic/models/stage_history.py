@@ -69,14 +69,14 @@ class StageHistory(models.Model):
             else:
                 state.total_time = (date.today() - state.entry_date).days
 
-    name = fields.Char(string="Lead/Opportunity")
+    name = fields.Char()
     stage = fields.Char(string='Stage')
     entry_date = fields.Date(string="Stage Entry")
     exit_date = fields.Date(string="Stage Exit")
     total_time = fields.Integer(string="Total Time", store=True, compute="_compute_total_time")
     person_assign_id = fields.Many2one('res.users', string="Person Assigned")
-    res_id = fields.Integer('Message ID')
-    res_model = fields.Char('Model')
+    res_id = fields.Integer(string='Message ID')
+    res_model = fields.Char(string='Model')
 
 
 class Lead(models.Model):
