@@ -3,7 +3,7 @@ from odoo import api, fields, models
 
 class StockDeliveryOrderInherit1(models.Model):
 	_inherit = "stock.picking"
-	hs_managment = fields.Char('Administrador', compute="_compute_managment", store=False)
+	hs_managment = fields.Char('Comercial', compute="_compute_managment", store=False)
 
 
 	@api.one
