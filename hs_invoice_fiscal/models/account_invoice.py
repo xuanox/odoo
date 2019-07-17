@@ -52,8 +52,7 @@ class AccountRefundInherit(models.Model):
 						message = "La cantidad a vender del producto " + product_name + " en una Nota de Credito " \
 								"no pude ser menor o igual a cero (0)."
 						raise exceptions.Warning(message)
-		
-		
+
 		return document
 
 
@@ -97,28 +96,23 @@ class AccountInvoiceInherit(models.Model):
 				if (line["type"] == False) and (line["data"] != None):
 					off = (-1) * float(line["data"])
 					amount_off  = amount_off + off
-				else:
+				elif line["type"] == True:
 					lines.append(line["data"])
 
 
-			#amount_off = self.get_total_amount_off(invoice)
-			
 			amount_close = str(invoice.amount_total) or '0.00'
 			amount_total = str(invoice.amount_total) or '0.00'
 
 			surcharge1 = "0.00"			#Temporalmente
 			surcharge2 = "0.00"			#Temporalmente
 			
-			#payment_chash = amount_total	#Temporalmente
 			payment_chash = "0.00"			#Temporalmente
 			payment_check = "0.00"			#Temporalmente
-			#payment_check = str(invoice.amount_total) or '0.00'
 			payment_ccard = "0.00"			#Temporalmente
 			payment_dcard = "0.00"			#Temporalmente
 			payment_cnote = "0.00"			#Temporalmente
 			payment_other = "0.00"			#Temporalmente
 
-			#date_invoice = self.get_date_invoice(invoice.date_invoice)
 			if invoice.type == "out_refund":
 				refund = None
 				refound_name = ""
@@ -160,8 +154,7 @@ class AccountInvoiceInherit(models.Model):
 				refound_note = self.get_refound_name(invoice)
 				refound_date = self.get_date_invoice(invoice.date_invoice)
 				time_invoice = self.get_time_invoice(invoice.create_date)
-					
-				#El valor de cliente_ruc es de 15 pero se alargo a 25
+				
 				data_stream = "{}{}{}{}{}{}{}{}{}{}{}{}{}\r\n".format(
 						self.add_field_cell('1',				1),
 						self.add_field_cell(self.invoice_name,	20),
@@ -206,10 +199,7 @@ class AccountInvoiceInherit(models.Model):
 				content_file.write(data_stream)
 
 
-			#for invoice_line in invoice.invoice_line_ids:
 			for line in lines:
-				#line = self.get_invoice_line(invoice_line)
-				#if line["type"] == True:
 				with open(content_file_path, 'a') as content_file2:
 					content_file2.write(line)
 
@@ -358,8 +348,16 @@ class AccountInvoiceInherit(models.Model):
 
 	def get_invoice_line(self, invoice_line):
 		"""
-		Obtenemos el movimiento de la factura una linea a la vez
+		Obtenenemos el detalle de una linea de la factura. Si el mismo no tiene un
+		producto enlazada no sera tomado en cuenta. Si lo tiene se valida si el 
+		mismo tiene un valor negativo para tratarlo como descuento. en caso contrario
+		se considera como un linea de factura regular.
 		"""
+
+		#si la linea no es un movimiento de compra
+		if invoice_line.product_id == False: 
+			return {"type": False, "data": None}
+
 		product_code = str(invoice_line.product_id.default_code or '')
 		description = str(invoice_line.product_id.name)
 		quantity = str(invoice_line.quantity or '')
@@ -367,21 +365,16 @@ class AccountInvoiceInherit(models.Model):
 		uom = self.get_uom_item(invoice_line)
 		taxes = self.get_tax_item(invoice_line)
 
-		if float(price) < 0.0:
-			tax = float(taxes) / 100
-			taxed = float(price) * tax
-			subtotal = float(price) * float(quantity)
-			total = subtotal # + taxed
-			return {
-				"type": False,
-				"data": total
-			}
+		#Si la linea no es un movimiento de compra
+		if description == "False":	
+			return { "type": False, "data": None }
 
-		if description == "False":	#Description jamas debe ser False
-			return {
-				"type": False,
-				"data": "None"
-			}
+
+		#Si la linea es descuento de producto
+		if float(price) < 0.0:
+			subtotal = float(price) * float(quantity)
+			return { "type": False, "data": subtotal }
+
 
 		data_stream = "{}{}{}{}{}{}{}{}\r\n".format(
 				self.add_field_cell(self.invoice_name,	20),
@@ -394,10 +387,8 @@ class AccountInvoiceInherit(models.Model):
 				self.add_field_cell(2,					10),
 		)
 		
-		return {
-			"type": True,
-			"data": data_stream
-		}
+		#Si la linea es un movimiento regular
+		return { "type": True, "data": data_stream }
 
 
 
