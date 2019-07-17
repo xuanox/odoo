@@ -86,7 +86,8 @@ class AccountInvoiceInherit(models.Model):
 			client_dv = self.get_dv_from_invoice(invoice)
 			client_dir = self.get_client_direction(invoice.partner_id)
 			invoice_no = invoice.number or '0'
-			self.invoice_name = "FACTI" + invoice_no
+			invoice_name = "FACTI" if invoice.type != "out_refund" else "NCTI"
+			self.invoice_name = invoice_name + invoice_no
 
 
 			lines = []
@@ -139,7 +140,7 @@ class AccountInvoiceInherit(models.Model):
 					"""
 					raise exceptions.Warning("La nota credito no tiene asignado una \
 						factura.")
-				self.invoice_name = "NCTI" + invoice_no
+				
 				file_name = "NCTI-HS-" + str(invoice.id) + ".txt"
 				refund_fiscal_id = refund.fiscal_id
 				refund_fiscal_no = refund.fiscal_reference
