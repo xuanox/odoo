@@ -77,7 +77,7 @@ class equipment_equipment(models.Model):
             Generates maintenance request on the next_action_date or today if none exists
         """
         for equipment in self.search([('period', '>', 0)]):
-            next_requests = self.env['technical_support.request'].search([('state', '=', 'done'),
+            next_requests = self.env['technical_support.request'].search([('state', '=', 'draft'),
                                                     ('equipment_id', '=', equipment.id),
                                                     ('maintenance_type', '=', 'pm'),
                                                     ('request_date', '=', equipment.next_action_date)])

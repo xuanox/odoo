@@ -2,7 +2,7 @@
 <odoo>
     <!-- MRP.WORKCENTER -->
     <record id="technical_support_request_view_form_inherit_equipment" model="ir.ui.view">
-        <field name="name">Technical Support Request Form Inherit</field>
+        <field name="name">technical_support.request.form.inherit.equipment</field>
         <field name="model">technical_support.request</field>
         <field name="inherit_id" ref="technical_support.technical_support_request_form_view"/>
         <field name="arch" type="xml">
@@ -16,18 +16,6 @@
             <field name="close_date"/>
           </xpath>
         </field>
-    </record>
-
-    <!-- Technical Support Request Tree View -->
-    <record id="technical_support_request_tree_view_inherit" model="ir.ui.view">
-      <field name="name">Technical Support Request Tree Inherit</field>
-      <field name="model">technical_support.request</field>
-      <field name="inherit_id" ref="technical_support.technical_support_request_tree_view"/>
-      <field name="arch" type="xml">
-        <xpath expr="//field[@name='name']" position="after">
-          <field name="schedule_date"/>
-        </xpath>
-      </field>
     </record>
 
 
