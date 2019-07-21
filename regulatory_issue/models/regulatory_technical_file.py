@@ -102,7 +102,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('draft', 'New'),
         ('assigned', 'Assigned'),
         ('review', 'Review of Technical Specifications'),
-        ('wait', 'Wait for Factory Documentation'),
+        ('wait', 'Awaiting Documentation'),
         ('appointment', 'Appointment Assigned'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected')
@@ -117,18 +117,19 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', readonly=True, copy=False, required=True)
+    name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange')
+    team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid))
+    user_id = fields.Many2one('res.users', string='Sales Person', required=True, track_visibility='onchange', default=lambda self: self.env.user)
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', readonly=True)
     models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
-    category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, default='new', track_visibility='onchange')
-    client_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
+    category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, track_visibility='onchange')
+    contact_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the order is confirmed the status is set to 'Assigned'.\n\
@@ -139,8 +140,31 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         When the maintenance is over, the status is set to 'Rejected'.", default='draft')
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     location_appointment = fields.Text('Appointment Location')
-    fulfill = fields.Boolean('Cumple', track_visibility=True)
+    is_won = fields.Boolean('Cumple', track_visibility=True)
+    is_lost = fields.Boolean('No Cumple', track_visibility=True)
+    lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
+    reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
+    pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
+
+    @api.model
+    def _onchange_user_values(self, user_id):
+        """ returns new values when user_id has changed """
+        if not user_id:
+            return {}
+        if user_id and self._context.get('team_id'):
+            team = self.env['crm.team'].browse(self._context['team_id'])
+            if user_id in team.member_ids.ids:
+                return {}
+        team_id = self.env['crm.team']._get_default_team_id(user_id=user_id)
+        return {'team_id': team_id}
+
+    @api.onchange('user_id')
+    def _onchange_user_id(self):
+        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
+        if self.user_id.sale_team_id:
+            values = self._onchange_user_values(self.user_id.id)
+            self.update(values)
 
     def action_assign(self):
         self.write({'state': 'assigned'})
@@ -199,12 +223,18 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     @api.multi
     def action_set_fulfill(self):
         """ Fulfill semantic: """
-        return self.write({'fulfill': True})
+        return self.write({'is_won': True})
 
     @api.multi
     def action_set_fails(self):
         """ Fulfill semantic: """
-        return self.write({'fulfill': False})
+        return self.write({'is_lost': True})
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.registry') or '/'
+        return super(RegulatoryTechnicalFileRegistry, self).create(vals)
 
 
 class RegulatoryTechnicalFileCreation(models.Model):
@@ -260,10 +290,38 @@ class RegulatoryTechnicalFileModificationLine(models.Model):
     value = fields.Char('Value', required=True)
     regulatory_technical_file_modification_id = fields.Many2one('regulatory.technical.file.modification', 'Regulatory Technical File Modification')
 
-class RegulatoryTechnicalFileRegistry(models.Model):
-    _name = 'regulatory.technical.file.modification.line'
-    _description = 'Regulatory Technical File Modification Line'
 
-    name = fields.Char('Point to Change', required=True)
-    value = fields.Char('Value', required=True)
-    regulatory_technical_file_modification_id = fields.Many2one('regulatory.technical.file.modification', 'Regulatory Technical File Modification')
+class RegulatoryTechnicalFileRegistryLostReason(models.Model):
+    _name = 'regulatory.technical.file.registry.lost.reason'
+    _description = 'Regulatory Technical File Registry Lost Reason'
+
+    name = fields.Char(string="Reason", required=True)
+    description=fields.Text('Description')
+
+
+class RegulatoryTechnicalFileRegistryRejectReason(models.Model):
+    _name = 'regulatory.technical.file.registry.reject.reason'
+    _description = 'Regulatory Technical File Registry Reject Reason'
+
+    name = fields.Char(string="Reason", required=True)
+    description=fields.Text('Description')
+
+
+class RegulatoryTechnicalFileRegistryPendingDocumentation(models.Model):
+    _name = 'regulatory.technical.file.registry.pending.documentation'
+    _description = 'Regulatory Technical File Registry Pending Documentation'
+
+    CHOICE_STATUS = [
+        ('done','Done'),
+        ('notdone','Not Done')]
+
+    name = fields.Char('Description', required=True)
+    legal_documentation_id=fields.Many2one('regulatory.legal.documentation', string='Documentation', required=True)
+    registry_id=fields.Many2one('regulatory.technical.file.registry', string='Registry')
+    status=fields.Selection(CHOICE_STATUS, string="Status")
+    done = fields.Boolean('Done')
+    note = fields.Text('Note')
+
+    @api.onchange('legal_documentation_id')
+    def onchange_legal_documentation_id(self):
+        self.name = self.legal_documentation_id.display_name
