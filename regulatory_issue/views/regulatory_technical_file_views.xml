@@ -250,6 +250,7 @@
                   <field name="type_area_id" widget="many2one"/>
                 </group>
                 <group>
+                  <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                   <field name="group_id" widget="many2one"/>
                 </group>
               </group>
