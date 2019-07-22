@@ -13,8 +13,8 @@ class AccountInvoiceInherit2(models.Model):
 	@api.depends('type')
 	def _compute_doctype_item(self):
 		if self.type == "out_invoice":
-			self.hs_doctype_item = "F/."
+			self.hs_doctype_item = "F."
 		elif self.type == "out_refund":
-			self.hs_doctype_item = "N/C "
+			self.hs_doctype_item = "NC "
 		else:
 			self.hs_doctype_item = ""
