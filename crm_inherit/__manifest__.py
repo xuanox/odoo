@@ -11,10 +11,10 @@ Contains advanced features for CRM such as new views
     """,
     'depends': ['crm', 'equipment'],
     'data': [
-        #'views/equipment_views.xml',
-        #'views/crm_category_views.xml',
-        #'views/crm_team_views.xml',
-        #'views/crm_lead_views.xml',
+        'views/equipment_views.xml',
+        'views/crm_category_views.xml',
+        'views/crm_team_views.xml',
+        'views/crm_lead_views.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
