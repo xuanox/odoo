@@ -11,6 +11,8 @@ class Lead(models.Model):
     modality_id=fields.Many2one('equipment.modality', string='Modality', domain="[('category_id', '=', category_id)]")
     model_id=fields.Many2one('equipment.model', string='Model')
     date_deadline = fields.Date(required=True)
+    checklist_demo_ids=fields.One2many('crm.lead.checklist.demo','opportunity_id', string='Checklist Demo')
+
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
