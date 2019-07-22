@@ -77,6 +77,27 @@ class HelpdeskTicket(models.Model):
             })
         return order_id.id
 
+    def action_confirm_schedule(self):
+        order = self.env['technical_support.order']
+        order_id = False
+        for request in self:
+            order_id = order.create({
+                'date_planned':request.date_planned,
+                'date_scheduled':request.date_planned,
+                'date_execution':request.date_planned,
+                'origin': request.id,
+                'user_id': request.user_id.id,
+                'state': 'draft',
+                'maintenance_type': 'cm',
+                'equipment_id': request.equipment_id.id,
+                'description': request.name,
+                'problem_description': request.description,
+                'ticket_type_id': request.ticket_type_id.id,
+                'ticket_id': request.id,
+            })
+            self.action_schedule()
+        return order_id.id
+
     def action_view_report(self):
         return {
             'domain': "[('ticket_id','in',[" + ','.join(map(str, self.ids)) + "])]",
@@ -90,6 +111,10 @@ class HelpdeskTicket(models.Model):
 
     def action_pending(self):
         self.write({'stage_id': 10})
+        return True
+
+    def action_schedule(self):
+        self.write({'stage_id': 14})
         return True
 
     def action_cause(self):
