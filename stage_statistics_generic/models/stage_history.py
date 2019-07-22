@@ -28,10 +28,10 @@ class MailThread(models.AbstractModel):
 
                 flag = False
                 if self._fields[stage].type == 'selection':
-                    if rec and initial_values and state_name != initial_values.get(rec.id).get(self.tracking_fields[0]):
+                    if rec and initial_values and initial_values.get(rec.id).get(self.tracking_fields[0]) and state_name != initial_values.get(rec.id).get(self.tracking_fields[0]):
                         flag = True
                 if self._fields[stage].type == 'many2one':
-                    if rec and initial_values and state_name != initial_values.get(rec.id).get(self.tracking_fields[0]).name:
+                    if rec and initial_values and initial_values.get(rec.id).get(self.tracking_fields[0]) and state_name != initial_values.get(rec.id).get(self.tracking_fields[0]).name:
                         flag = True
 
                 if flag:
