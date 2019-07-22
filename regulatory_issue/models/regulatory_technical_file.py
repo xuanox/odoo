@@ -82,9 +82,10 @@ class RegulatoryTechnicalFile(models.Model):
     description=fields.Text('Description')
     group_id = fields.Many2one('regulatory.technical.file.group', string='Group')
     type_area_id = fields.Many2one('regulatory.technical.file.type.area', string='Type Area')
+    company_id = fields.Many2one('res.company', 'Company', required=True, index=True, states=READONLY_STATES, default=lambda self: self.env.user.company_id.id)
 
     _sql_constraints = [
-        ('technical_file_model_uniq', 'unique (name)', u'This fact sheet number already exists in our database, enter another number'),
+        ('technical_file_model_uniq', 'unique (name)', u'This fact sheet number already exists in our database, enter another number')
     ]
 
 
