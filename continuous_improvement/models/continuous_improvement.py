@@ -62,3 +62,4 @@ class ContinuousImprovement(models.Model):
     stage_id = fields.Many2one('continuous.improvement.stage', string='Stage', default=_default_stage)
     description=fields.Text('Description')
     observation=fields.Text('Observation')
+    company_id = fields.Many2one('res.company', 'Company', required=True, index=True, states=READONLY_STATES, default=lambda self: self.env.user.company_id.id)
