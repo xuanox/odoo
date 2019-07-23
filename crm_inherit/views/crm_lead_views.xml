@@ -23,7 +23,7 @@
             <field name="model_id"  widget="Many2one"/>
           </xpath>
           <xpath expr="//page[@name='lead']" position="after">
-            <page name="demo" string="Checklist Demo" >
+            <page name="demo" string="Checklist Demo" attrs="{'invisible': [('demo', '=', False)]}">
               <group>
                 <group>
                   <field name="contact_id" widget="many2one"/>
