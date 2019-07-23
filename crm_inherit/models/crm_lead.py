@@ -2,7 +2,9 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import time
 from odoo import api, fields, models
-
+from odoo.addons import decimal_precision as dp
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_compare
 
 class Lead(models.Model):
     _inherit = 'crm.lead'
@@ -23,6 +25,7 @@ class Lead(models.Model):
     note=fields.Text('Note')
     tool= fields.Boolean('Tool', default=False)
     personal = fields.Boolean('Personal', default=False)
+    cost_line = fields.One2many('cost.line', 'opportunity_id', string='Cost Lines', copy=True)
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
@@ -37,3 +40,19 @@ class Team(models.Model):
     _inherit = 'crm.team'
 
     category_ids = fields.Many2many('crm.lead.category', relation='team_category_rel', string='Categories')
+
+
+class CostLine(models.Model):
+    _name = 'cost.line'
+    _description = 'Cost Line'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'line desc'
+
+    opportunity_id = fields.Many2one('crm.lead', string='Opportunity')
+    line = fields.Integer('Line', default=0)
+    name = fields.Char(string='Item', required=True)
+    description = fields.Text('Description')
+    apply= fields.Boolean('Apply', default=False)
+    included_in_the_customer_price= fields.Boolean('included in the customer price', default=False)
+    estimated_cost = fields.Float(string='Estimated Cost', digits=dp.get_precision('Product Price'))
+    comment = fields.Text('Comment')
