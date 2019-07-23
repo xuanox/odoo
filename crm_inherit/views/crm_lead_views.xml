@@ -35,6 +35,8 @@
                   <field name="date_planned" widget="datetime"/>
                   <field name="retirement_date" widget="datetime"/>
                   <field name="access_path"/>
+                  <field name="tool"/>
+                  <field name="personal"/>
                 </group>
               </group>
               <group>

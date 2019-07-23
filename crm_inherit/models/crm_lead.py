@@ -21,6 +21,8 @@ class Lead(models.Model):
     retirement_date=fields.Datetime('Retirement Date', track_visibility='onchange')
     special_delivery_procedure=fields.Text('Procedimiento Especial de Entrega')
     note=fields.Text('Note')
+    tool= fields.Boolean('Tool', default=False)
+    personal = fields.Boolean('Personal', default=False)
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
