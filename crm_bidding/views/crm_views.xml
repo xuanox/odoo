@@ -11,6 +11,8 @@
                     <tree string="Bidding Lines" editable="bottom">
                         <field name="product_id"/>
                         <field name="product_name"/>
+                        <field name="technical_file_id"/>
+                        <field name="model_id"/>
                         <field name="product_qty"/>
                         <field name="product_uom" groups="uom.group_uom"/>
                         <field name="price_unit"/>
