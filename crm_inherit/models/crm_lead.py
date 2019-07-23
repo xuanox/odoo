@@ -12,14 +12,14 @@ class Lead(models.Model):
     model_id=fields.Many2one('equipment.model', string='Model')
     date_deadline = fields.Date(required=True)
 
-    download_place=fields.Text('Lugar de Descarga')
-    place_of_delivery=fields.Text('Lugar de Entrega')
+    download_place=fields.Char('Lugar de Descarga')
+    place_of_delivery=fields.Char('Lugar de Entrega')
     contact_id=fields.Many2one('res.partner', string='Contact')
-    access_path=fields.Text('Ruta de Acceso')
-    date_planned=fields.Datetime('Delivery Time', required=True, readonly=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    retirement_date=fields.Datetime('Retirement Date', required=True, readonly=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    special_delivery_procedure=fields.Text('Description')
-    note=fields.Text('Description')
+    access_path=fields.Char('Ruta de Acceso')
+    date_planned=fields.Datetime('Delivery Time', track_visibility='onchange')
+    retirement_date=fields.Datetime('Retirement Date', track_visibility='onchange')
+    special_delivery_procedure=fields.Text('Procedimiento Especial de Entrega')
+    note=fields.Text('Note')
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"

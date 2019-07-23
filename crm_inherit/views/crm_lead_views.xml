@@ -33,14 +33,14 @@
                 <group>
                   <field name="date_planned" widget="datetime"/>
                   <field name="retirement_date" widget="datetime"/>
+                  <field name="access_path"/>
                 </group>
               </group>
               <group>
                 <group>
-                  <field name="access_path"/>
+                  <field name="special_delivery_procedure"/>
                 </group>
                 <group>
-                  <field name="special_delivery_procedure"/>
                   <field name="note"/>
                 </group>
               </group>
