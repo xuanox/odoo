@@ -25,7 +25,7 @@ class Lead(models.Model):
     note=fields.Text('Note')
     tool= fields.Boolean('Tool', default=False)
     personal = fields.Boolean('Personal', default=False)
-    cost_line = fields.One2many('cost.line', 'opportunity_id', string='Cost Lines', copy=True)
+    cost_line = fields.One2many('crm.cost.line', 'opportunity_id', string='Cost Lines', copy=True)
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
