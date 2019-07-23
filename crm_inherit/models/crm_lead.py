@@ -11,6 +11,7 @@ class Lead(models.Model):
     modality_id=fields.Many2one('equipment.modality', string='Modality', domain="[('category_id', '=', category_id)]")
     model_id=fields.Many2one('equipment.model', string='Model')
     date_deadline = fields.Date(required=True)
+    demo = fields.Boolean('Demo', default=False)
 
     download_place=fields.Char('Lugar de Descarga')
     place_of_delivery=fields.Char('Lugar de Entrega')
