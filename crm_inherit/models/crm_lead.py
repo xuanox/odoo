@@ -56,3 +56,21 @@ class CostLine(models.Model):
     included_in_the_customer_price= fields.Boolean('included in the customer price', default=False)
     estimated_cost = fields.Float(string='Estimated Cost', digits=dp.get_precision('Product Price'))
     comment = fields.Text('Comment')
+    category_id=fields.Many2one('crm.lead.category', string='Sales Category')
+
+
+class CrmCostLine(models.Model):
+    _name = 'crm.cost.line'
+    _description = 'Crm Cost Line'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'line desc'
+
+    opportunity_id = fields.Many2one('crm.lead', string='Opportunity')
+    line = fields.Integer('Line', default=0)
+    name = fields.Char(string='Item', required=True)
+    description = fields.Text('Description')
+    apply= fields.Boolean('Apply', default=False)
+    included_in_the_customer_price= fields.Boolean('included in the customer price', default=False)
+    estimated_cost = fields.Float(string='Estimated Cost', digits=dp.get_precision('Product Price'))
+    comment = fields.Text('Comment')
+    category_id=fields.Many2one('crm.lead.category', string='Sales Category')
