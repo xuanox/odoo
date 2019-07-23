@@ -21,7 +21,7 @@
             <field name="category_id" widget="selection" attrs="{'invisible': [('team_id', '=', False)]}"/>
             <field name="modality_id" widget="selection"  attrs="{'invisible': [('category_id', '=', False)]}"/>
             <field name="model_id"  widget="Many2one"/>
-            <field name="demo"  attrs="{'invisible': [('category_id', '!=', '2')]}"/>
+            <field name="demo"  attrs="{'invisible': [('category_id.id', '!=', '2')]}"/>
           </xpath>
           <xpath expr="//page[@name='lead']" position="after">
             <page name="demo" string="Checklist Demo" attrs="{'invisible': [('demo', '=', False)]}">
