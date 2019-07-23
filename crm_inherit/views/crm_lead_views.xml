@@ -9,6 +9,23 @@
             <xpath expr="//field[@name='planned_revenue']" position="after">
               <field name="date_deadline" widget="datetime"/>
             </xpath>
+            <xpath expr="//page[@name='extra']" position="after">
+              <page name="info" string="Info">
+                <group>
+                  <field name="pending_documentation_ids" nolabel="1">
+                    <tree editable="bottom">
+                      <field name="legal_documentation_id" widget="manyone"/>
+                      <field name="name"/>
+                      <field name="note"/>
+                      <field name="status"/>
+                    </tree>
+                  </field>
+                </group>
+                <group>
+                  <field name='observation' placeholder="Observation ......."/>
+                </group>
+              </page>
+            </xpath>
           </field>
       </record>
 
