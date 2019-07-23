@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_ticket_schedule_wizard" model="ir.ui.view">
+            <field name="name">schedule Ticket</field>
+            <field name="model">helpdesk.ticket.schedule</field>
+            <field name="arch" type="xml">
+                <form string="schedule Ticket" version="7.0">
+                    <group>
+                        <field name="user_id"/>
+                        <field name="date_planned"/>
+                        <field name="detail"/>
+                    </group>
+                    <footer>
+                        <button name="schedule_ticket" string="Schedule Ticket" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ticket_schedule" model="ir.actions.act_window">
+            <field name="name">Schedule Ticket</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpdesk.ticket.schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

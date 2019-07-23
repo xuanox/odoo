@@ -250,6 +250,7 @@
                   <field name="type_area_id" widget="many2one"/>
                 </group>
                 <group>
+                  <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                   <field name="group_id" widget="many2one"/>
                 </group>
               </group>
@@ -326,7 +327,7 @@
 <!-- Technical File Registry -->
 
         <record id="regulatory_technical_file_registry_view_form" model="ir.ui.view">
-            <field name="name">Regulatory Technical File Registry View Form</field>
+            <field name="name">Registry View Form</field>
             <field name="model">regulatory.technical.file.registry</field>
             <field name="arch" type="xml">
               <form string="Technical File Registry">
@@ -335,9 +336,17 @@
                   <button name="%(action_appointment_assigned)d" string="Cita Asignada" states="review,wait" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
                   <button name="action_send_mail" states="review,wait" string="Consulta a Fábrica" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="action_review" states="assigned,wait" string="Revisión" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_set_fulfill" states="review,wait,appointment" string="Cumple" attrs="{'invisible': ['|', ('is_won', '=', True)]}" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="%(registry_lost_action)d" states="review,wait" string="No Cumple" attrs="{'invisible': ['|', ('is_lost', '=', True)]}" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="%(action_registry_reject)d" states="appointment" string="Rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_approved" states="appointment" string="Approved" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <field name="state" widget="statusbar" statusbar_visible="draft,assigned,review,appointment,approved" statusbar_colors='{"assigned":"red","appointment":"blue"}'/>
                 </header>
                 <sheet>
+                  <div class="oe_button_box" name="button_box">
+                  </div>
+                  <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_lost', '=', False)]}">No Cumple</div>
+                  <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_won', '=', False)]}">Cumple</div>
                   <div class="oe_title">
                           <label for="name" class="oe_edit_only" string="#Request:"/>
                           <h1>
@@ -348,30 +357,46 @@
                     <group>
                       <field name="technical_file_id" widget="many2one"/>
                       <field name="technical_file_name" />
-                      <field name="sales_team_id" widget="many2one"/>
+                      <field name="user_id" widget="many2one"/>
+                      <field name="team_id" widget="many2one"/>
+                      <field name="category"/>
                       <field name="priority" widget="priority"/>
                     </group>
-                    <group>
-                      <field name="responsible_id" widget="many2one"/>
-                      <field name="category"/>
-                      <field name="models_id" widget="many2one"/>
+                    <group string="Factory Owner">
                       <field name="brand_id" widget="many2one"/>
+                      <field name="models_id" widget="many2one"/>
+                      <field name="contact_id" widget="many2one"/>
                     </group>
                   </group>
                   <group>
-                    <group>
+                    <group string="Appointment Assigned" attrs="{'invisible':[('entity', '=', False)]}">
                       <field name="date_planned" />
                       <field name="location_appointment"/>
+                      <field name="entity"/>
                     </group>
-                    <group>
+                    <group string="Info" attrs="{'invisible':[('responsible_id', '=', False)]}">
+                      <field name="responsible_id" widget="many2one"/>
                       <field name="stage_id" widget="many2one"/>
+                      <field name='is_won' invisible="1"/>
+                      <field name='is_lost' invisible="1"/>
+                      <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
                     </group>
                   </group>
                 <notebook>
                     <page name="info" string="Info">
-                        <group>
-                          <field name='observation' placeholder="Observation ......."/>
-                        </group>
+                      <group>
+                        <field name="pending_documentation_ids" nolabel="1">
+    											<tree editable="bottom">
+    												<field name="legal_documentation_id" widget="manyone"/>
+    												<field name="name"/>
+    												<field name="note"/>
+                            <field name="status"/>
+    											</tree>
+    										</field>
+                      </group>
+                      <group>
+                        <field name='observation' placeholder="Observation ......."/>
+                      </group>
                     </page>
                 </notebook>
               </sheet>
@@ -384,7 +409,7 @@
         </record>
 
         <record id="regulatory_technical_file_registry_view_tree" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.registry.view.tree</field>
+            <field name="name">Registry View Tree</field>
             <field name="model">regulatory.technical.file.registry</field>
             <field name="arch" type="xml">
                 <tree>
@@ -392,10 +417,28 @@
                     <field name="technical_file_id" widget="many2one"/>
                     <field name="models_id" widget="many2one"/>
                     <field name="brand_id" widget="many2one"/>
-                    <field name="sales_team_id" widget="many2one"/>
+                    <field name="team_id" widget="many2one"/>
                     <field name="responsible_id" widget="many2one"/>
-                    <field name="stage_id" widget="many2one"/>
+                    <field name="priority" widget="priority"/>
+                    <field name="state" />
                 </tree>
+            </field>
+        </record>
+
+        <record id="regulatory_technical_file_registry_view_kanban" model="ir.ui.view">
+            <field name="name">Registry View Kanban</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="state" />
+                    <field name="name"/>
+                    <field name="technical_file_id"/>
+                    <field name="models_id"/>
+                    <field name="brand_id"/>
+                    <field name="team_id"/>
+                    <field name="responsible_id" />
+                    <field name="priority" widget="priority"/>
+                </kanban>
             </field>
         </record>
 
@@ -437,7 +480,7 @@
             <field name="name">Technical File Registry</field>
             <field name="res_model">regulatory.technical.file.registry</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,pivot,graph,dashboard</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph,dashboard</field>
         </record>
 
 <!-- Technical File Creation -->

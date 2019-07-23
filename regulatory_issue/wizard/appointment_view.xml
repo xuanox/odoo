@@ -10,6 +10,8 @@
                     <group>
                         <field name="date_planned"/>
                         <field name="location_appointment"/>
+                        <field name="entity"/>
+
                     </group>
                     <footer>
                         <button name="appointment_assigned" string="Cita Asignada" type="object"  class="oe_highlight"  />

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_registry_reject_wizard" model="ir.ui.view">
+            <field name="name">Reject Registry</field>
+            <field name="model">regulatory.technical.file.registry.reject</field>
+            <field name="arch" type="xml">
+                <form string="Reject Registry" version="7.0">
+                    <group>
+                        <field name="reject_reason_id"/>
+                    </group>
+                    <footer>
+                        <button name="reject_registry" string="Reject Registry" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_registry_reject" model="ir.actions.act_window">
+            <field name="name">Reject Registry</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">regulatory.technical.file.registry.reject</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

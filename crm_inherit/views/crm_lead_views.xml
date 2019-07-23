@@ -19,8 +19,35 @@
         <field name="arch" type="xml">
           <xpath expr="//field[@name='team_id']" position="after">
             <field name="category_id" widget="selection" attrs="{'invisible': [('team_id', '=', False)]}"/>
-            <field name="modality_id" widget="selection" attrs="{'invisible': [('category_id', '=', False)]}"/>
+            <field name="modality_id" widget="selection"  attrs="{'invisible': [('category_id', '=', False)]}"/>
             <field name="model_id"  widget="Many2one"/>
+            <field name="demo"  attrs="{'invisible': [('category_id', '=', False)]}"/>
+          </xpath>
+          <xpath expr="//page[@name='lead']" position="after">
+            <page name="demo" string="Checklist Demo" attrs="{'invisible': [('demo', '=', False)]}">
+              <group>
+                <group>
+                  <field name="contact_id" widget="many2one"/>
+                  <field name="download_place"/>
+                  <field name="place_of_delivery"/>
+                </group>
+                <group>
+                  <field name="date_planned" widget="datetime"/>
+                  <field name="retirement_date" widget="datetime"/>
+                  <field name="access_path"/>
+                  <field name="tool"/>
+                  <field name="personal"/>
+                </group>
+              </group>
+              <group>
+                <group>
+                  <field name="special_delivery_procedure"/>
+                </group>
+                <group>
+                  <field name="note"/>
+                </group>
+              </group>
+            </page>
           </xpath>
         </field>
       </record>
