@@ -39,7 +39,7 @@ class BiddingLine(models.Model):
         ('confirmed', 'Confirmed'),
         ('done', 'Done'),
         ('cancel', 'Cancelled')], 'Status', default='draft',
-        copy=False, readonly=True, required=True,
+        copy=False, required=True,
         help='The status of a Bidding line is set automatically.')
     technical_file_id = fields.Many2one('regulatory.technical.file', 'Technical File', required=True)
     model_id=fields.Many2one('equipment.model', string='Equipment Model')
