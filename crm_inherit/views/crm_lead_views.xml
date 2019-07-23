@@ -9,6 +9,30 @@
             <xpath expr="//field[@name='planned_revenue']" position="after">
               <field name="date_deadline" widget="datetime"/>
             </xpath>
+            <xpath expr="//page[@name='extra']" position="after">
+              <page name="demo" string="Checklist Demo">
+                <group>
+                  <group>
+                    <field name="contact_id" widget="many2one"/>
+                    <field name="download_place"/>
+                    <field name="place_of_delivery"/>
+                  </group>
+                  <group>
+                    <field name="date_planned" widget="datetime"/>
+                    <field name="retirement_date" widget="datetime"/>
+                  </group>
+                </group>
+                <group>
+                  <group>
+                    <field name="access_path"/>
+                  </group>
+                  <group>
+                    <field name="special_delivery_procedure"/>
+                    <field name="note"/>
+                  </group>
+                </group>
+              </page>
+            </xpath>
           </field>
       </record>
 
