@@ -22,7 +22,7 @@
             <field name="modality_id" widget="selection" attrs="{'invisible': [('category_id', '=', False)]}"/>
             <field name="model_id"  widget="Many2one"/>
           </xpath>
-          <xpath expr="//page[@name='extra']" position="after">
+          <xpath expr="//page[@name='lead']" position="after">
             <page name="demo" string="Checklist Demo">
               <group>
                 <group>
