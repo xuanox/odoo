@@ -15,6 +15,7 @@
     ],
     'data': [
         'views/technical_support_views.xml',
+        'views/regulatory_issue_views.xml',
     ],
     'demo': [
     ],
