@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_electronica" model="ir.ui.view">
+        <field name="name">purchase.order.form.electronica</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page name="history" string="History">
+                    <field name="stage_ids" attrs="{'readonly': 1}">
+                        <tree default_order="id desc">
+                            <field name="name"/>
+                            <field name="person_assign_id"/>
+                            <field name="stage"/>
+                            <field name="entry_date"/>
+                            <field name="exit_date"/>
+                            <field name="total_time"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="po_stage_action_analysis" model="ir.actions.act_window">
+        <field name="name">Purchase Stage Analysis</field>
+        <field name="res_model">stage.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('stage_history_view_pivot')})]"/>
+        <field name="domain">[('res_model', '=', 'purchase.order')]</field>
+        <field name="context">{}</field>  <!-- force empty -->
+    </record>
+
+    <menuitem name="Stage Statistics" id="report_project_stage_analysis" parent="purchase.menu_purchase_root"
+    sequence="99" action="po_stage_action_analysis"/>
+
+</odoo>
