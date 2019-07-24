@@ -48,6 +48,6 @@
     </record>
 
     <menuitem name="Stage Statistics" id="report_stage_analysis" parent="base.menu_technical_support_root"
-    sequence="99" action="stage_action_analysis"/>
+    sequence="99" action="technical_support_stage_action_analysis"/>
 
 </odoo>
