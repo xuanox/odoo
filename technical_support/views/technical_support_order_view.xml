@@ -7,7 +7,7 @@
 			<field name="name">Technical Support Order - Tree</field>
       <field name="model">technical_support.order</field>
       <field name="arch" type="xml">
-      <tree fonts="bold:message_unread==True" string="Technical Support Orders">
+      <tree string="Technical Support Orders">
       	<field name="message_unread" invisible="1"/>
         <field name="name"/>
         <field name="date_scheduled" string="Date Scheduled" widget="date"/>
@@ -18,7 +18,7 @@
       </field>
     </record>
 
-    <!-- Technical Support Order - Caendar View -->
+    <!-- Technical Support Order - Calendar View -->
     <record id="technical_support_order_calendar_view" model="ir.ui.view">
       <field name="name">Technical Support Order - Calendar</field>
       <field name="model">technical_support.order</field>
@@ -57,7 +57,8 @@
                     <group>
                     	<group>
 												<field name="company_id" groups="base.group_multi_company" widget="selection"/>
-												<field name="ticket_id" widget="many2one"/>
+												<field name="ticket_id" widget="many2one"  attrs="{'invisible':  [('ticket_id', '=', False)]}"/>
+												<field name="request_id" widget="many2one"  attrs="{'invisible':  [('request_id', '=', False)]}"/>
 												<field name="user_id" widget="many2one"/>
 												<field name="client_id" widget="many2one"/>
 												<field name="equipment_id" widget="many2one"/>

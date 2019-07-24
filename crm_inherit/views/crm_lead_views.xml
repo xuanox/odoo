@@ -48,6 +48,20 @@
                 </group>
               </group>
             </page>
+            <page name="cost" string="Cost Line" attrs="{'invisible': [('category_id', '=', False)]}">
+              <group>
+                <field name="cost_line" nolabel="1">
+                  <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="apply"/>
+                    <field name="included_in_the_customer_price"/>
+                    <field name="estimated_cost"/>
+                    <field name="comment"/>
+                  </tree>
+                </field>
+              </group>
+            </page>
           </xpath>
         </field>
       </record>
