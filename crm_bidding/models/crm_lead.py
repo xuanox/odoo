@@ -57,7 +57,7 @@ class BiddingLine(models.Model):
         required=True)
 
     @api.one
-    @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id', 'opportunity_id.invoice_method')
+    @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id')
     def _compute_price_subtotal(self):
         taxes = self.tax_id.compute_all(self.price_unit, self.product_uom_qty, self.product_id, self.opportunity_id.partner_id)
         self.price_subtotal = taxes['total_excluded']
