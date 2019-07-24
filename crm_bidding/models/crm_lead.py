@@ -23,7 +23,10 @@ class Lead(models.Model):
     term_of_validity_of_the_bond = fields.Integer('Term of Validity of the Bond', default=0)
     adjudicated_company = fields.Many2one('res.partner', string='Adjudicated Company', track_visibility='onchange', track_sequence=1, index=True)
     bidding_line = fields.One2many('bidding.line', 'opportunity_id', string='Bidding Lines', copy=True)
-
+    pricelist_id = fields.Many2one(
+        'product.pricelist', 'Pricelist',
+        default=lambda self: self.env['product.pricelist'].search([], limit=1).id,
+        help='Pricelist of the selected partner.')
 
 class BiddingLine(models.Model):
     _name = 'bidding.line'
@@ -53,10 +56,10 @@ class BiddingLine(models.Model):
         digits=dp.get_precision('Product Unit of Measure'), required=True)
     product_uom = fields.Many2one(
         'uom.uom', 'Product Unit of Measure',
-        required=True)
+        required=True
 
     @api.one
     @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id')
     def _compute_price_subtotal(self):
-        taxes = self.tax_id.compute_all(self.price_unit, self.product_uom_qty, self.product_id)
+        taxes = self.tax_id.compute_all(self.price_unit, self.opportunity_id.pricelist_id.currency_id, self.product_uom_qty, self.product_id, self.opportunity_id.partner_id)
         self.price_subtotal = taxes['total_excluded']
