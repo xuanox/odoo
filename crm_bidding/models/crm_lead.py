@@ -23,6 +23,7 @@ class Lead(models.Model):
     term_of_validity_of_the_bond = fields.Integer('Term of Validity of the Bond', default=0)
     adjudicated_company = fields.Many2one('res.partner', string='Adjudicated Company', track_visibility='onchange', track_sequence=1, index=True)
     bidding_line = fields.One2many('bidding.line', 'opportunity_id', string='Bidding Lines', copy=True)
+    pricelist_id = fields.Many2one('product.pricelist', 'Pricelist', default=lambda self: self.env['product.pricelist'].search([], limit=1).id, help='Pricelist of the selected partner.')
 
 class BiddingLine(models.Model):
     _name = 'bidding.line'
@@ -41,17 +42,13 @@ class BiddingLine(models.Model):
         help='The status of a Bidding line is set automatically.')
     technical_file_id = fields.Many2one('regulatory.technical.file', 'Technical File', required=True)
     model_id=fields.Many2one('equipment.model', string='Equipment Model')
-
     name = fields.Text('Description', required=True)
     product_id = fields.Many2one('product.product', 'Product', required=True)
     price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'))
     price_subtotal = fields.Float('Subtotal', compute='_compute_price_subtotal', store=True, digits=0)
     tax_id = fields.Many2one('account.tax', 'Taxes')
-    product_uom_qty = fields.Float(
-        'Quantity', default=1.0,
-        digits=dp.get_precision('Product Unit of Measure'), required=True)
-    product_uom = fields.Many2one('uom.uom', 'Product Unit of Measure',
-        required=True
+    product_uom_qty = fields.Float('Quantity', default=1.0, digits=dp.get_precision('Product Unit of Measure'), required=True)
+    product_uom = fields.Many2one('uom.uom', 'Product Unit of Measure', required=True)
 
     @api.one
     @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id')
