@@ -33,7 +33,6 @@ class BiddingLine(models.Model):
 
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity')
     line = fields.Integer('Line', default=0)
-    product_name = fields.Char(string='Product Name', required=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
@@ -44,18 +43,21 @@ class BiddingLine(models.Model):
     technical_file_id = fields.Many2one('regulatory.technical.file', 'Technical File', required=True)
     model_id=fields.Many2one('equipment.model', string='Equipment Model')
 
-    product_id = fields.Many2one('product.product', string='Product')
-    product_uom = fields.Many2one('uom.uom', string='Product Unit of Measure')
-    product_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'))
-    product_uom_qty = fields.Float(string='Total Quantity', compute='_compute_product_uom_qty', store=True)
-    taxes_id = fields.Many2many('account.tax', string='Taxes', domain=['|', ('active', '=', False), ('active', '=', True)])
-    price_unit = fields.Float(string='Unit Price', digits=dp.get_precision('Product Price'))
+    name = fields.Text('Description', required=True)
+    product_id = fields.Many2one('product.product', 'Product', required=True)
+    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'))
+    price_subtotal = fields.Float('Subtotal', compute='_compute_price_subtotal', store=True, digits=0)
+    tax_id = fields.Many2many(
+        'account.tax', 'repair_operation_line_tax', 'repair_operation_line_id', 'tax_id', 'Taxes')
+    product_uom_qty = fields.Float(
+        'Quantity', default=1.0,
+        digits=dp.get_precision('Product Unit of Measure'), required=True)
+    product_uom = fields.Many2one(
+        'uom.uom', 'Product Unit of Measure',
+        required=True)
 
-    @api.multi
-    @api.depends('product_uom', 'product_qty', 'product_id.uom_id')
-    def _compute_product_uom_qty(self):
-        for line in self:
-            if line.product_id.uom_id != line.product_uom:
-                line.product_uom_qty = line.product_uom._compute_quantity(line.product_qty, line.product_id.uom_id)
-            else:
-                line.product_uom_qty = line.product_qty
+    @api.one
+    @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id', 'opportunity_id.invoice_method')
+    def _compute_price_subtotal(self):
+        taxes = self.tax_id.compute_all(self.price_unit, self.product_uom_qty, self.product_id, self.opportunity_id.partner_id)
+        self.price_subtotal = taxes['total_excluded']
