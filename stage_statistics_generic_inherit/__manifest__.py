@@ -14,7 +14,6 @@
         'regulatory_issue',
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/technical_support_views.xml',
     ],
     'demo': [
