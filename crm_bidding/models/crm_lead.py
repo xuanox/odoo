@@ -47,8 +47,7 @@ class BiddingLine(models.Model):
     product_id = fields.Many2one('product.product', 'Product', required=True)
     price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'))
     price_subtotal = fields.Float('Subtotal', compute='_compute_price_subtotal', store=True, digits=0)
-    tax_id = fields.Many2many(
-        'account.tax', 'repair_operation_line_tax', 'repair_operation_line_id', 'tax_id', 'Taxes')
+    tax_id = fields.Many2one('account.tax', 'Taxes')
     product_uom_qty = fields.Float(
         'Quantity', default=1.0,
         digits=dp.get_precision('Product Unit of Measure'), required=True)
@@ -59,5 +58,5 @@ class BiddingLine(models.Model):
     @api.one
     @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id')
     def _compute_price_subtotal(self):
-        taxes = self.tax_id.compute_all(self.price_unit, self.product_uom_qty, self.product_id, self.opportunity_id.partner_id)
+        taxes = self.tax_id.compute_all(self.price_unit, self.product_uom_qty, self.product_id)
         self.price_subtotal = taxes['total_excluded']
