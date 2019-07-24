@@ -10,7 +10,6 @@
     'description': "",
     'depends': [
         'technical_support',
-        'continuous_improvement',
         'part',
         'regulatory_issue',
     ],

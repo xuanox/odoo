@@ -10,11 +10,6 @@ class TechnicalSupportOrder(models.Model):
     tracking_fields = ['state', 'user_id']
 
 
-class ContinuousImprovement(models.Model):
-    _inherit = "continuous.improvement"
-    tracking_fields = ['stage_id', 'user_id']
-
-
 class Part(models.Model):
     _inherit = "part.order"
     tracking_fields = ['state', 'user_id']
