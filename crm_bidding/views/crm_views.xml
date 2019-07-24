@@ -9,14 +9,16 @@
           <xpath expr="//field[@name='description']" position="after">
                 <field name="bidding_line">
                     <tree string="Bidding Lines" editable="bottom">
-                        <field name="product_id"/>
+                        <field name="line"/>
                         <field name="product_name"/>
                         <field name="technical_file_id"/>
                         <field name="model_id"/>
+                        <field name="product_id"/>
                         <field name="product_qty"/>
-                        <field name="product_uom" groups="uom.group_uom"/>
+                        <field name="product_uom"/>
                         <field name="price_unit"/>
-                        <field name="taxes_id" widget="many2many_tags"/>
+                        <field name="taxes_id"/>
+                        <field name="product_uom_qty"/>
                     </tree>
                     <form string="Bidding Line">
                         <sheet>
