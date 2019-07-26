@@ -23,6 +23,7 @@ class HelpdeskTicket(models.Model):
 
     order_ids=fields.One2many('technical_support.order','ticket_id', string='Orders')
     user_id = fields.Many2one(readonly=True)
+    stage_id = fields.Many2one(readonly=True)
     equipment_id=fields.Many2one('equipment.equipment', string='Equipment')
     client_id = fields.Many2one('res.partner', related='partner_id.commercial_partner_id', string='Cliente', store=True)
     brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
