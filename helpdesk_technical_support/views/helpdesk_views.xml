@@ -96,6 +96,7 @@
           <field name="team_id"/>
           <field name="modality_id"/>
           <field name="equipment_state_id"/>
+          <field name="create_date"/>
           <field name="assign_date"/>
           <field name="close_date"/>
         </xpath>
