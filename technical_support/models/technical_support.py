@@ -37,7 +37,7 @@ class TechnicalSupportRequest(models.Model):
         If the request is sent the status is set to 'confirm'.\n\
         If the request is confirmed the status is set to 'Execution'.\n\
         If the request is rejected the status is set to 'Rejected'.\n\
-        When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft')
+        When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft', copy=False)
     subject = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason')
