@@ -49,6 +49,7 @@ class BiddingLine(models.Model):
     tax_id = fields.Many2one('account.tax', 'Taxes')
     product_uom_qty = fields.Float('Quantity', default=1.0, digits=dp.get_precision('Product Unit of Measure'), required=True)
     product_uom = fields.Many2one('uom.uom', 'Product Unit of Measure', required=True)
+    participation = fields.Selection([('yes', 'Yes'), ('no', 'No')], 'Participation', copy=False, required=True)
 
     @api.one
     @api.depends('price_unit', 'opportunity_id', 'product_uom_qty', 'product_id')
