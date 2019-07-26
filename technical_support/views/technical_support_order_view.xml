@@ -144,7 +144,7 @@
                           <separator string="Observation"/>
                           <field name="documentation_description" placeholder="Observation ..."/>
                         </page>
-												<page string="Users">
+												<page string="Users" name="user">
 															<field name="signature_lines" nolabel="1">
 																<tree string="Users" editable="bottom">
 																	<field name="user_id"/>

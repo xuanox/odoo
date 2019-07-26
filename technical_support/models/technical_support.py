@@ -31,7 +31,7 @@ class TechnicalSupportRequest(models.Model):
         ('pm', 'Preventive'),
     ]
 
-    name = fields.Char('Reference', size=64)
+    name = fields.Char('Reference', size=64, copy=False)
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
         If the request is sent the status is set to 'confirm'.\n\
