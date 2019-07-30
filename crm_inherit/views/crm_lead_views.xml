@@ -121,7 +121,7 @@
       </record>
 
       <menuitem name="Template"
-        action="action_tasks"
+        action="action_cost"
         id="template_checklist_menu"
         parent="crm_inherit.crm_checklist"
         sequence="100"/>
