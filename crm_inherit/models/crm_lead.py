@@ -26,6 +26,23 @@ class Lead(models.Model):
     tool= fields.Boolean('Tool', default=False)
     personal = fields.Boolean('Personal', default=False)
     cost_line = fields.One2many('crm.cost.line', 'opportunity_id', string='Cost Lines', copy=True)
+    crm_cost_id = fields.Many2one('crm.cost', 'Checklist', domain="[('category_id', '=', category_id)]")
+
+    @api.onchange('crm_cost_id')
+    def onchange_cost(self):
+        cost = self.crm_cost_id
+        new_checklist_lines = []
+        for line in cost.cost_line:
+            new_checklist_lines.append([0,0,{
+                'name': line.name,
+                'description': line.description,
+                'apply': line.apply,
+                'included_in_the_customer_price': line.included_in_the_customer_price,
+                'estimated_cost': line.estimated_cost,
+                'comment': line.comment,
+                }])
+        self.cost_line = new_checklist_lines
+
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
