@@ -14,9 +14,9 @@ access_equipment_software_list_manager,equipment.software.list manager,model_equ
 access_equipment_modality_manager,equipment.modality manager,model_equipment_modality,equipment.group_equipment_manager,1,1,1,1
 access_equipment_history_state_manager,equipment.history.state manager,model_equipment_history_state,equipment.group_equipment_manager,1,1,1,1
 
-access_equipment_equipment_user,equipment.equipment user,model_equipment_equipment,equipment.group_equipment_user,1,1,0,0
-access_equipment_state_user,equipment.state user,model_equipment_state,equipment.group_equipment_user,1,0,0,0
-access_equipment_category_user,equipment.category user,model_equipment_category,equipment.group_equipment_user,1,1,1,1
+access_equipment_equipment_engineer,equipment.equipment engineer,model_equipment_equipment,equipment.group_equipment_engineer,1,1,0,0
+access_equipment_state_engineer,equipment.state engineer,model_equipment_state,equipment.group_equipment_engineer,1,0,0,0
+access_equipment_category_engineer,equipment.category engineer,model_equipment_category,equipment.group_equipment_engineer,1,1,1,1
 
 access_equipment_equipment_customer,equipment.equipment customer,model_equipment_equipment,equipment.group_equipment_customer,1,0,0,0
 access_equipment_state_customer,equipment.state customer,model_equipment_state,equipment.group_equipment_customer,1,0,0,0
