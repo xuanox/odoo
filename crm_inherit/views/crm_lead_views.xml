@@ -123,7 +123,7 @@
       <menuitem name="Template"
         action="action_tasks"
         id="template_checklist_menu"
-        parent="crm_checklist"
+        parent="crm.crm_checklist"
         sequence="100"/>
 
       <menuitem
