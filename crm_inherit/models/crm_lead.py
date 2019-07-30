@@ -32,7 +32,7 @@ class Lead(models.Model):
     def onchange_cost(self):
         cost = self.crm_cost_id
         new_checklist_lines = []
-        for line in cost.cost_line:
+        for line in cost.cost_lines:
             new_checklist_lines.append([0,0,{
                 'name': line.name,
                 'description': line.description,
@@ -41,7 +41,7 @@ class Lead(models.Model):
                 'estimated_cost': line.estimated_cost,
                 'comment': line.comment,
                 }])
-        self.cost_line = new_checklist_lines
+        self.cost_lines = new_checklist_lines
 
 
 class CrmLeadCategory(models.Model):
