@@ -42,6 +42,16 @@ class Team(models.Model):
     category_ids = fields.Many2many('crm.lead.category', relation='team_category_rel', string='Categories')
 
 
+class CrmCost(models.Model):
+    _name = 'crm.cost'
+    _description = 'Crm Cost'
+
+    name = fields.Char('Template', size=64, required=True)
+    active = fields.Boolean('Active', default=True)
+    category_id=fields.Many2one('crm.lead.category', string='Sales Category')
+    cost_lines = fields.One2many('cost.line', 'crm_cost_id', 'Cost Line')
+
+
 class CostLine(models.Model):
     _name = 'cost.line'
     _description = 'Cost Line'
@@ -57,6 +67,7 @@ class CostLine(models.Model):
     estimated_cost = fields.Float(string='Estimated Cost', digits=dp.get_precision('Product Price'))
     comment = fields.Text('Comment')
     category_id=fields.Many2one('crm.lead.category', string='Sales Category')
+    crm_cost_id = fields.Many2one('crm.cost', 'Cost')
 
 
 class CrmCostLine(models.Model):
