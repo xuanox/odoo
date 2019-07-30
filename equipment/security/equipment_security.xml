@@ -46,7 +46,7 @@
       <record id="group_equipment_manager" model="res.groups">
             <field name="name">Manager TS</field>
             <field name="category_id" ref="module_category_equipment"/>
-            <field name="implied_ids" eval="[(4, ref('group_equipment__administrator'))]"/>
+            <field name="implied_ids" eval="[(4, ref('group_equipment_administrator'))]"/>
       </record>
 
         <record model="res.users" id="base.user_root">
