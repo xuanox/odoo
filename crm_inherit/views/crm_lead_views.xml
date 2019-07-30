@@ -120,12 +120,6 @@
         <field name="view_mode">tree,form</field>
       </record>
 
-      <menuitem name="Template"
-        action="action_tasks"
-        id="template_checklist_menu"
-        parent="crm.crm_checklist"
-        sequence="100"/>
-
       <menuitem
         name="CheckList"
         id="crm_checklist"
