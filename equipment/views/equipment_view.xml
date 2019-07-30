@@ -26,7 +26,7 @@
             <field name="arch" type="xml">
                 <form string="Equipments" version="7.0">
                     <header>
-                        <field name="maintenance_state_id" widget="statusbar" clickable="True" groups="equipment.group_equipment_user"/>
+                        <field name="maintenance_state_id" widget="statusbar" clickable="True" groups="equipment.group_equipment_engineer"/>
                     </header>
                     <sheet>
                         <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
@@ -451,7 +451,7 @@
         <menuitem
 						name="Equipments"
             id="menu_equipment"
-            groups="equipment.group_equipment_user"
+            groups="equipment.group_equipment_engineer"
 						web_icon="equipment,static/description/icon.png"
             sequence="92"/>
 
@@ -461,7 +461,7 @@
 						action="action_equipments"
 						id="menu_maintenance_equipments_equipments"
 						parent="menu_equipment"
-						groups="equipment.group_equipment_user"
+						groups="equipment.group_equipment_engineer"
 						sequence="1"/>
 
 				<!-- Management equipment item -->
@@ -469,7 +469,7 @@
 						action="action_management_equipments"
 						id="menu_equipments_states"
 						parent="menu_equipment"
-						groups="equipment.group_equipment_user"
+						groups="equipment.group_equipment_engineer"
 						sequence="100"/>
 
 				<!-- Report menu -->
