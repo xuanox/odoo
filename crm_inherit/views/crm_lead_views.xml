@@ -66,5 +66,72 @@
         </field>
       </record>
 
+      <!-- Tasks menu -->
+      <record id="crm_cost_tree_view" model="ir.ui.view">
+      	<field name="name">Crm Cost Tree</field>
+        <field name="model">crm.cost</field>
+        <field name="arch" type="xml">
+        	<tree string="Cost">
+        		<field name="name"/>
+  					<field name="category_id"/>
+        	</tree>
+        </field>
+      </record>
+
+      <record id="crm_cost_form_view" model="ir.ui.view">
+      	<field name="name">Crm Cost Form</field>
+        <field name="model">crm.cost</field>
+        <field name="arch" type="xml">
+        	<form string="Cost" version="7.0">
+        		<header>
+            </header>
+          	<sheet>
+  						<div class="oe_title">
+  							<h1>Template Name <field name="name" class="oe_inline"/></h1>
+  						</div>
+  						<group>
+  							<field name="category_id"/>
+                <field name="active"/>
+              </group>
+              <notebook>
+  							<page string="Item">
+  								<field name="cost_lines" nolabel="1">
+  									<tree string="Item" editable="bottom">
+                      <field name="name"/>
+                      <field name="description"/>
+                      <field name="apply"/>
+                      <field name="included_in_the_customer_price"/>
+                      <field name="estimated_cost"/>
+                      <field name="comment"/>
+  									</tree>
+  								</field>
+                </page>
+              </notebook>
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+      <record id="action_cost" model="ir.actions.act_window">
+      	<field name="name">Item Cost</field>
+      	<field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.cost</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <menuitem name="Template"
+        action="action_tasks"
+        id="template_checklist_menu"
+        parent="crm.crm_checklist"
+        sequence="100"/>
+
+      <menuitem
+        name="CheckList"
+        id="crm_checklist"
+        parent="crm.crm_menu_root"
+        sequence="99"
+        action="action_cost"/>
+
     </data>
 </odoo>
