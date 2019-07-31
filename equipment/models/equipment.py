@@ -132,7 +132,7 @@ class equipment_equipment(models.Model):
         help="This location will be used as the destination location for installed parts during equipment life.")
     user_id = fields.Many2one('res.users', 'Assigned to', track_visibility='onchange')
     active = fields.Boolean('Active', default=True)
-    equipment_number = fields.Char('Equipment Number', size=64)
+    equipment_number = fields.Char('Equipment Number', size=64, copy=False)
     model = fields.Char('Model', size=64)
     serial = fields.Char('Serial no.', size=64, required=True, track_visibility='onchange')
     n_active = fields.Char('Active no.', size=64)
