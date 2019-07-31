@@ -53,7 +53,7 @@
             </page>
             <page name="cost" string="Cost Line" attrs="{'invisible': [('category_id', '=', False)]}">
               <group>
-                <field name="cost_line" nolabel="1">
+                <field name="cost_lines" nolabel="1">
                   <tree editable="bottom">
                     <field name="name"/>
                     <field name="description"/>
