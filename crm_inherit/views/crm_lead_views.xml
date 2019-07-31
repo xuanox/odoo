@@ -23,6 +23,9 @@
             <field name="model_id"  widget="Many2one"/>
             <field name="demo"  attrs="{'invisible': [('category_id', '=', False)]}"/>
           </xpath>
+          <xpath expr="//field[@name='tag_ids']" position="after">
+            <field name="crm_cost_id" widget="selection"  attrs="{'invisible': [('category_id', '=', False)]}"/>
+          </xpath>
           <xpath expr="//page[@name='lead']" position="after">
             <page name="demo" string="Checklist Demo" attrs="{'invisible': [('demo', '=', False)]}">
               <group>
@@ -50,13 +53,13 @@
             </page>
             <page name="cost" string="Cost Line" attrs="{'invisible': [('category_id', '=', False)]}">
               <group>
-                <field name="cost_line" nolabel="1">
+                <field name="cost_lines" nolabel="1">
                   <tree editable="bottom">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="apply"/>
                     <field name="included_in_the_customer_price"/>
-                    <field name="estimated_cost"/>
+                    <field name="estimated_cost" sum="Total" widget="monetary"/>
                     <field name="comment"/>
                   </tree>
                 </field>
@@ -65,6 +68,67 @@
           </xpath>
         </field>
       </record>
+
+      <!-- Tasks menu -->
+      <record id="crm_cost_tree_view" model="ir.ui.view">
+      	<field name="name">Crm Cost Tree</field>
+        <field name="model">crm.cost</field>
+        <field name="arch" type="xml">
+        	<tree string="Cost">
+        		<field name="name"/>
+  					<field name="category_id"/>
+        	</tree>
+        </field>
+      </record>
+
+      <record id="crm_cost_form_view" model="ir.ui.view">
+      	<field name="name">Crm Cost Form</field>
+        <field name="model">crm.cost</field>
+        <field name="arch" type="xml">
+        	<form string="Cost" version="7.0">
+        		<header>
+            </header>
+          	<sheet>
+  						<div class="oe_title">
+  							<h1>Template Name <field name="name" class="oe_inline"/></h1>
+  						</div>
+  						<group>
+  							<field name="category_id"/>
+                <field name="active"/>
+              </group>
+              <notebook>
+  							<page string="Item">
+  								<field name="cost_lines" nolabel="1">
+  									<tree string="Item" editable="bottom">
+                      <field name="name"/>
+                      <field name="description"/>
+                      <field name="apply"/>
+                      <field name="included_in_the_customer_price"/>
+                      <field name="estimated_cost" sum="Total" widget="monetary"/>
+                      <field name="comment"/>
+  									</tree>
+  								</field>
+                </page>
+              </notebook>
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+      <record id="action_cost" model="ir.actions.act_window">
+      	<field name="name">Item Cost</field>
+      	<field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.cost</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <menuitem
+        name="CheckList"
+        id="crm_checklist"
+        parent="crm.crm_menu_root"
+        sequence="99"
+        action="action_cost"/>
 
     </data>
 </odoo>

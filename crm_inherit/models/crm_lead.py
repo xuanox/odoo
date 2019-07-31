@@ -25,7 +25,24 @@ class Lead(models.Model):
     note=fields.Text('Note')
     tool= fields.Boolean('Tool', default=False)
     personal = fields.Boolean('Personal', default=False)
-    cost_line = fields.One2many('crm.cost.line', 'opportunity_id', string='Cost Lines', copy=True)
+    cost_lines = fields.One2many('crm.cost.line', 'opportunity_id', string='Cost Lines', copy=True)
+    crm_cost_id = fields.Many2one('crm.cost', 'Checklist', domain="[('category_id', '=', category_id)]")
+
+    @api.onchange('crm_cost_id')
+    def onchange_cost(self):
+        cost = self.crm_cost_id
+        new_cost_lines = []
+        for line in cost.cost_lines:
+            new_cost_lines.append([0,0,{
+                'name': line.name,
+                'description': line.description,
+                'apply': line.apply,
+                'included_in_the_customer_price': line.included_in_the_customer_price,
+                'estimated_cost': line.estimated_cost,
+                'comment': line.comment,
+                }])
+        self.cost_lines = new_cost_lines
+
 
 class CrmLeadCategory(models.Model):
     _name = "crm.lead.category"
@@ -40,6 +57,16 @@ class Team(models.Model):
     _inherit = 'crm.team'
 
     category_ids = fields.Many2many('crm.lead.category', relation='team_category_rel', string='Categories')
+
+
+class CrmCost(models.Model):
+    _name = 'crm.cost'
+    _description = 'Crm Cost'
+
+    name = fields.Char('Template', size=64, required=True)
+    active = fields.Boolean('Active', default=True)
+    category_id=fields.Many2one('crm.lead.category', string='Sales Category')
+    cost_lines = fields.One2many('cost.line', 'crm_cost_id', 'Cost Line')
 
 
 class CostLine(models.Model):
@@ -57,6 +84,7 @@ class CostLine(models.Model):
     estimated_cost = fields.Float(string='Estimated Cost', digits=dp.get_precision('Product Price'))
     comment = fields.Text('Comment')
     category_id=fields.Many2one('crm.lead.category', string='Sales Category')
+    crm_cost_id = fields.Many2one('crm.cost', 'Cost')
 
 
 class CrmCostLine(models.Model):
