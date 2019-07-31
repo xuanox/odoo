@@ -25,7 +25,7 @@ class Lead(models.Model):
     note=fields.Text('Note')
     tool= fields.Boolean('Tool', default=False)
     personal = fields.Boolean('Personal', default=False)
-    cost_line = fields.One2many('crm.cost.line', 'opportunity_id', string='Cost Lines', copy=True)
+    cost_lines = fields.One2many('crm.cost.line', 'opportunity_id', string='Cost Lines', copy=True)
     crm_cost_id = fields.Many2one('crm.cost', 'Checklist', domain="[('category_id', '=', category_id)]")
 
     @api.onchange('crm_cost_id')
