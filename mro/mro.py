@@ -30,8 +30,7 @@ class mro_order(models.Model):
 
     MAINTENANCE_TYPE_SELECTION = [
         ('bm', 'Breakdown'),
-        ('cm', 'Corrective'),
-        ('pm', 'Preventive')
+        ('cm', 'Corrective')
     ]
 
     @api.multi
@@ -138,7 +137,7 @@ class mro_order(models.Model):
                 if any(states) or len(states) == 0: res = False
         return res
 
-    def action_confirm(self):
+    def action_confirm(self):        
         for order in self:
             order.write({'state':'released'})
         return 0
@@ -234,8 +233,7 @@ class mro_task(models.Model):
     _description = 'Maintenance Task'
 
     MAINTENANCE_TYPE_SELECTION = [
-        ('cm', 'Corrective'),
-        ('pm', 'Preventive')
+        ('cm', 'Corrective')
     ]
 
     name = fields.Char('Description', size=64, required=True, translate=True)
