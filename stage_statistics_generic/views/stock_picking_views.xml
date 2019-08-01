@@ -11,10 +11,12 @@
                     <field name="stage_ids" attrs="{'readonly': 1}">
                         <tree default_order="id desc">
                             <field name="name"/>
+                            <field name="person_assign_id"/>
                             <field name="stage"/>
                             <field name="entry_date"/>
                             <field name="exit_date"/>
-                            <field name="total_time"/>
+                            <field name="total_days"/>
+                            <field name="total_time" widget="float_time"/>
                         </tree>
                     </field>
                 </page>
