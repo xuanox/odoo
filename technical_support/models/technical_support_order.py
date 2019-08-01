@@ -165,6 +165,7 @@ class TechnicalSupportOrder(models.Model):
     def action_confirm(self):
         self.write({'state': 'ready'})
         self.ticket_id.write({'stage_id': 2})
+        self.request_id.write({'state': 'run'})
         return True
 
     def action_ready(self):
@@ -172,6 +173,7 @@ class TechnicalSupportOrder(models.Model):
         return True
 
     def action_done(self):
+        self.request_id.write({'state': 'done'})
         for order in self:
             if order.test_if_parts():
                 order.write({'state': 'done', 'date_execution': time.strftime('%Y-%m-%d %H:%M:%S')})
