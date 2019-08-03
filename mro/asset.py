@@ -6,11 +6,8 @@
 #
 ##############################################################################
 
-from datetime import date, datetime, timedelta
+from odoo import api, fields, models, _
 
-from odoo import api, fields, models, SUPERUSER_ID, _
-from odoo.exceptions import UserError
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 
 class asset_asset(models.Model):
     _name = 'asset.asset'

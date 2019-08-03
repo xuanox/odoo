@@ -138,7 +138,7 @@
                 </kanban>
             </field>
         </record>
-
+        
         <!-- Asset Search  -->
         <record model="ir.ui.view" id="assets_search">
             <field name="name">Asset Search</field>
@@ -284,8 +284,8 @@
             parent="base.menu_mro_root"
             groups="asset.group_mro_manager"
             sequence="200"/>
-
-        <!-- Asset State Form View  -->
+            
+        <!-- Asset State Form View  -->        
         <record id="asset_state_form_view" model="ir.ui.view">
             <field name="name">asset.state.form</field>
             <field name="model">asset.state</field>
@@ -308,7 +308,7 @@
                 </form>
             </field>
         </record>
-
+        
         <!-- Asset State Kanban View  -->
         <record model="ir.ui.view" id="asset_state_kanban_view">
             <field name="name">Asset State Kanban</field>
