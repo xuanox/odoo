@@ -30,8 +30,8 @@ Support following feature:
     'depends': ['stock', 'helpdesk'],
     'demo': ['data/equipment_demo.xml'],
     'data': [
-        'security/equipment_security.xml',
-        'security/ir.model.access.csv',
+        #'security/equipment_security.xml',
+        #'security/ir.model.access.csv',
         'views/equipment_view.xml',
         'views/equipment_brand_view.xml',
         'views/equipment_zone_view.xml',
