@@ -23,7 +23,7 @@ STATE_COLOR_SELECTION = [
 ]
 
 class asset_state(models.Model):
-    """ 
+    """
     Model for asset states.
     """
     _name = 'asset.state'
@@ -82,7 +82,7 @@ class asset_asset(models.Model):
         result = stage_obj.name_get(access_rights_uid, stage_ids)
         # restore order of the search
         result.sort(lambda x,y: cmp(stage_ids.index(x[0]), stage_ids.index(y[0])))
-        return result, {}    
+        return result, {}
 
     def _read_group_finance_state_ids(self, domain, read_group_order=None, access_rights_uid=None):
         return self._read_group_state_ids(domain, read_group_order, access_rights_uid, '0')
@@ -95,7 +95,7 @@ class asset_asset(models.Model):
 
     def _read_group_maintenance_state_ids(self, domain, read_group_order=None, access_rights_uid=None):
         return self._read_group_state_ids(domain, read_group_order, access_rights_uid, '3')
-        
+
     def _read_group_accounting_state_ids(self, domain, read_group_order=None, access_rights_uid=None):
         return self._read_group_state_ids(domain, read_group_order, access_rights_uid, '4')
 
@@ -107,11 +107,11 @@ class asset_asset(models.Model):
     ]
 
     name = fields.Char('Asset Name', size=64, required=True, translate=True)
-    finance_state_id = fields.Many2one('asset.state', 'State', domain=[('team','=','0')])
-    warehouse_state_id = fields.Many2one('asset.state', 'State', domain=[('team','=','1')])
-    manufacture_state_id = fields.Many2one('asset.state', 'State', domain=[('team','=','2')])
-    maintenance_state_id = fields.Many2one('asset.state', 'State', domain=[('team','=','3')])
-    accounting_state_id = fields.Many2one('asset.state', 'State', domain=[('team','=','4')])
+    finance_state_id = fields.Many2one('asset.state', 'State Finance', domain=[('team','=','0')])
+    warehouse_state_id = fields.Many2one('asset.state', 'State Warehouse', domain=[('team','=','1')])
+    manufacture_state_id = fields.Many2one('asset.state', 'State Manufacture', domain=[('team','=','2')])
+    maintenance_state_id = fields.Many2one('asset.state', 'State Maintenance', domain=[('team','=','3')])
+    accounting_state_id = fields.Many2one('asset.state', 'State Accounting', domain=[('team','=','4')])
     maintenance_state_color = fields.Selection(related='maintenance_state_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
     property_stock_asset = fields.Many2one(
