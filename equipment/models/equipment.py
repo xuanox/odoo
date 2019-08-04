@@ -232,7 +232,7 @@ class equipment_equipment(models.Model):
     def name_get(self):
         result = []
         for equipment in self:
-            result.append((equipment.id, "%s (#%d)" % (equipment.name, equipment.id, equipment.serial)))
+            result.append((equipment.id, "%s (#%d)" % (equipment.name, equipment.id)))
         return result
 
 class EquipmentBrand(models.Model):
