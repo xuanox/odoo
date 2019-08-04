@@ -13,12 +13,10 @@ import odoo.addons.decimal_precision as dp
 
 
 class mro_order(models.Model):
-    """
-    Maintenance Orders
-    """
     _name = 'mro.order'
-    _description = 'Maintenance Order'
-    _inherit = ['mail.thread']
+    _description = 'Request'
+    _inherit =  ['mail.thread', 'mail.activity.mixin']
+
 
     STATE_SELECTION = [
         ('draft', 'DRAFT'),
@@ -137,7 +135,7 @@ class mro_order(models.Model):
                 if any(states) or len(states) == 0: res = False
         return res
 
-    def action_confirm(self):        
+    def action_confirm(self):
         for order in self:
             order.write({'state':'released'})
         return 0
