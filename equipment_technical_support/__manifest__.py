@@ -1,5 +1,10 @@
-# -*- encoding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    Odoo
+#    Copyright (C) 2013-2018 emsa (<http://www.electronicamedica.com>).
+#
+##############################################################################
 
 {
     'name': 'Equipment - Technical Support',
