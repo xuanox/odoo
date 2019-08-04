@@ -17,7 +17,6 @@ class mro_order(models.Model):
     _description = 'Request'
     _inherit =  ['mail.thread', 'mail.activity.mixin']
 
-
     STATE_SELECTION = [
         ('draft', 'DRAFT'),
         ('released', 'WAITING PARTS'),
