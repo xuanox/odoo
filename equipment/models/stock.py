@@ -33,4 +33,4 @@ class stock_location(models.Model):
              "\n* Procurement: Virtual location serving as temporary counterpart for procurement operations when the source (vendor or production) is not known yet. This location should be empty when the procurement scheduler has finished running."
              "\n* Production: Virtual counterpart location for production operations: this location consumes the raw material and produces finished products"
              "\n* Transit Location: Counterpart location that should be used in inter-companies or inter-warehouses operations"
-             "\n* Equipment Location: Physical locations representing the destination location for parts installed on the equipment (Maintenance and Repair)")
+             "\n* Equipment: Physical locations representing the destination location for parts installed on the equipment (Maintenance and Repair)")
