@@ -231,8 +231,8 @@ class equipment_equipment(models.Model):
     @api.multi
     def name_get(self):
         result = []
-        for equipment in self:
-            result.append((equipment.id, equipment.serial, "%s (#%d)" % (equipment.name, equipment.id, equipment.serial)))
+        for record in self:
+            result.append((record.id, "{} ({})".format(record.name, record.serial)))
         return result
 
 
