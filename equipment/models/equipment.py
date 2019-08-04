@@ -167,8 +167,8 @@ class equipment_equipment(models.Model):
     child_ids=fields.One2many('equipment.equipment','parent_id',u'Accesory')
     history_state_ids=fields.One2many('equipment.history.state','equipment_id', string='State History')
 
-    date_start = fields.Datetime('Start Date', copy=False, index=True, readonly=True)
-    date_finished = fields.Datetime('End Date', copy=False, index=True, readonly=True)
+    date_start = fields.Datetime('Start', copy=False, index=True, readonly=True)
+    date_finished = fields.Datetime('End', copy=False, index=True, readonly=True)
 
     effective_start_date = fields.Date('Effective Start Date', default=fields.Date.context_today, required=True, help="Date at which the equipment became effective. This date will be used to compute Maintenance.")
     effective_date = fields.Datetime('Effective Date', default=datetime.today(), required=True, help="Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure.")
