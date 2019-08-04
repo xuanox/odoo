@@ -11,7 +11,7 @@ class SaleSubscriptionEquipment(models.Model):
     _name = 'sale.subscription.equipment'
     _description = 'Sale Subscription Equipment'
 
-    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
+    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True, domain="[('client_id', '=', partner_id)]")
     analytic_account_id = fields.Many2one('sale.subscription', string='Subscription')
     name = fields.Text('Description', index=True, required=True)
 
