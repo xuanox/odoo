@@ -229,11 +229,12 @@ class equipment_equipment(models.Model):
         return modalities.browse(modality_ids)
 
     @api.multi
-    def name_get(self):
-        result = []
-        for equipment in self:
-            result.append((equipment.id, "%s (#%d)" % (equipment.name, equipment.id)))
-        return result
+    def _name_get(self):
+        name = self.get('name', '')
+        code = self.get('serial', False) or False
+        if code:
+            name = '[%s] %s' % (code,name)
+        return (self['id'], name)
 
 class EquipmentBrand(models.Model):
     _name = 'equipment.brand'
