@@ -5,7 +5,7 @@
 #    Copyright (C) 2013-2019 CodUP (<http://codup.com>).
 #
 ##############################################################################
-
+import time
 from odoo import api, fields, models
 from odoo import netsvc
 
@@ -14,7 +14,7 @@ class HelpdeskTicketSchedule(models.TransientModel):
     _description = 'Schedule Ticket'
 
     user_id = fields.Many2one('res.users', string='Assigned to', required=True, track_visibility='onchange', default=lambda self: self.env.user.id, domain=lambda self: [('groups_id', 'in', self.env.ref('helpdesk.group_helpdesk_user').id)])
-    date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
+    date_planned = fields.Datetime('Planned Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     detail = fields.Text('Detail')
 
     def schedule_ticket(self):
