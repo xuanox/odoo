@@ -347,7 +347,7 @@
 
     <menuitem
       id="menu_part_order"
-      groups="stock.group_stock_user"
+      groups="part.group_spare_part_engineer"
       name="Spare Parts" sequence="36"
       web_icon="part,static/description/icon.png"/>
 
@@ -356,7 +356,7 @@
       action="action_part_order_tree"
       id="menu_part_request_tree"
       parent="menu_part_order"
-      groups="stock.group_stock_user"
+      groups="part.group_spare_part_engineer"
       sequence="1"/>
 
     <menuitem
@@ -364,7 +364,7 @@
       action="action_part_order_line_tree"
       id="menu_part_request_line_tree"
       parent="menu_part_order"
-      groups="stock.group_stock_user"
+      groups="part.group_spare_part_engineer"
       sequence="1"/>
 
   </data>
