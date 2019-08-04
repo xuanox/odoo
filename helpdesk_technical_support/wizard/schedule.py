@@ -5,7 +5,7 @@
 #    Copyright (C) 2013-2019 CodUP (<http://codup.com>).
 #
 ##############################################################################
-
+import time
 from odoo import api, fields, models
 from odoo import netsvc
 
