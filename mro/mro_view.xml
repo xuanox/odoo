@@ -174,8 +174,6 @@
                                 <field name="user_id"/>
                                 <field name="origin"/>
                             </group>
-                            <group groups="stock.group_locations">
-                            </group>
                             <group>
                                 <field name="company_id" groups="base.group_multi_company" widget="selection"/>
                             </group>

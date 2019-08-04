@@ -29,7 +29,7 @@ class SaleSubscriptionEquipment(models.Model):
 class SaleSubscriptionTemplate(models.Model):
     _inherit = "sale.subscription.template"
 
-    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
+    equipment_id = fields.Many2one('equipment.equipment', string='Equipment')
     analytic_account_id = fields.Many2one('sale.subscription', string='Subscription')
     name = fields.Text('Description', index=True, required=True)
 

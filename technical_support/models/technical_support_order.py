@@ -506,7 +506,6 @@ class TechnicalSupportOrderSignatureLine(models.Model):
     name = fields.Char('Description', size=64)
     user_id=fields.Many2one('res.users', string='Usuarios', required=True)
     maintenance_id = fields.Many2one('technical_support.order', string='Order')
-    description=fields.Text('Description')
 
 class TechnicalSupportOrderSignatureClientLine(models.Model):
     _name = 'technical_support.order.signature.client.line'
@@ -515,4 +514,3 @@ class TechnicalSupportOrderSignatureClientLine(models.Model):
     name = fields.Char('Description', size=64)
     user_id=fields.Many2one('res.partner', string='Client', required=True)
     maintenance_id = fields.Many2one('technical_support.order', string='Order')
-    description=fields.Text('Description')
