@@ -32,8 +32,8 @@
     'depends': ['base', 'calendar', 'mail'],
     'data': [
         'views/continuous_improvement_views.xml',
-        #'security/continuous_improvement.xml',
-        #'security/ir.model.access.csv',
+        'security/continuous_improvement.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [],
     'images': [
