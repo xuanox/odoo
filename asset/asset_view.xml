@@ -110,7 +110,7 @@
                         <t t-name="kanban-box">
                             <div class="oe_kanban_vignette">
                                 <div class="codup_kanban_left">
-                                    <a type="open"><img t-att-src="kanban_image('asset.asset', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                                    <a type="open"></a>
                                     <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="codup_status_color_#{record.maintenance_state_color.raw_value} codup_status"></div>
                                 </div>
                                 <div class="oe_kanban_details">
@@ -128,7 +128,7 @@
                                         <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
                                         <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="codup_attention_off"><span class="fa fa-exclamation-triangle"/></a>
                                         <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -138,7 +138,7 @@
                 </kanban>
             </field>
         </record>
-        
+
         <!-- Asset Search  -->
         <record model="ir.ui.view" id="assets_search">
             <field name="name">Asset Search</field>
@@ -219,7 +219,7 @@
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_card codup_kanban_status oe_kanban_global_click">
                                 <div class="codup_kanban_left">
-                                    <a type="open"><img t-att-src="kanban_image('asset.asset', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                                    <a type="open"></a>
                                     <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="codup_status_color_#{record.maintenance_state_color.raw_value} codup_status"></div>
                                 </div>
                                 <div class="codup_kanban_details">
@@ -236,7 +236,6 @@
                                         <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
                                         <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="codup_attention_off"><span class="fa fa-exclamation-triangle"/></a>
                                         <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
                                         </li>
                                     </ul>
                                 </div>
@@ -284,8 +283,8 @@
             parent="base.menu_mro_root"
             groups="asset.group_mro_manager"
             sequence="200"/>
-            
-        <!-- Asset State Form View  -->        
+
+        <!-- Asset State Form View  -->
         <record id="asset_state_form_view" model="ir.ui.view">
             <field name="name">asset.state.form</field>
             <field name="model">asset.state</field>
@@ -308,7 +307,7 @@
                 </form>
             </field>
         </record>
-        
+
         <!-- Asset State Kanban View  -->
         <record model="ir.ui.view" id="asset_state_kanban_view">
             <field name="name">Asset State Kanban</field>
