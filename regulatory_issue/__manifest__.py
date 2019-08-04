@@ -31,8 +31,8 @@
     'icon': '/regulatory_issue/static/src/img/icon.png',
     'depends': ['base', 'calendar', 'mail', 'equipment'],
     'data': [
-        'security/regulatory_issue.xml',
-        'security/ir.model.access.csv',
+        #'security/regulatory_issue.xml',
+        #'security/ir.model.access.csv',
         'wizard/assign_view.xml',
         'wizard/appointment_view.xml',
         'wizard/registry_lost_views.xml',
