@@ -75,7 +75,6 @@ class equipment_category(models.Model):
 class equipment_equipment(models.Model):
     _name = 'equipment.equipment'
     _description = 'Equipment'
-    _rec_name = 'serial'
     _inherit =  ['mail.thread', 'mail.activity.mixin']
 
     def _read_group_state_ids(self, domain, read_group_order=None, access_rights_uid=None, team='3'):
@@ -228,6 +227,13 @@ class equipment_equipment(models.Model):
         """
         modality_ids = modalities._search([], order=order, access_rights_uid=SUPERUSER_ID)
         return modalities.browse(modality_ids)
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for equipment in self:
+            result.append((equipment.serial, "%s (#%d)" % (equipment.name, equipment.serial)))
+        return result
 
 class EquipmentBrand(models.Model):
     _name = 'equipment.brand'
