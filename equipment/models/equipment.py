@@ -228,6 +228,14 @@ class equipment_equipment(models.Model):
         modality_ids = modalities._search([], order=order, access_rights_uid=SUPERUSER_ID)
         return modalities.browse(modality_ids)
 
+    @api.multi
+    def name_get(self):
+        result = []
+        for record in self:
+            result.append((record.id, "{} ({})".format(record.name, record.serial)))
+        return result
+
+
 class EquipmentBrand(models.Model):
     _name = 'equipment.brand'
     _description = 'Brand'

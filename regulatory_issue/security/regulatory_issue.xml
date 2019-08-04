@@ -9,7 +9,6 @@
   <record id="group_regulatory_issue_user" model="res.groups">
       <field name="name">User</field>
       <field name="category_id" ref="regulatory_issue.module_category_regulatory_issue"/>
-      <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
   </record>
 
   <record id="group_regulatory_issue_manager" model="res.groups">
