@@ -9,6 +9,7 @@
       <field name="arch" type="xml">
       	<tree string="Technical Support Requests">
           <field name="name"/>
+					<field name="requested_date"/>
 					<field name="client_id"/>
           <field name="equipment_id"/>
 					<field name="user_id"/>
@@ -57,7 +58,6 @@
                 <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
 								<field name="user_id"/>
 								<field name="maintenance_type"/>
-								<field name="state" groups="technical_support.group_technical_support_manager"/>
               </group>
               <group>
                 <field name="requested_date"/>
