@@ -597,7 +597,7 @@ class PartLine(models.Model):
             args = self.part_id.company_id and [('company_id', '=', self.part_id.company_id.id)] or []
             warehouse = self.env['stock.warehouse'].search(args, limit=1)
             self.location_id = warehouse.lot_stock_id
-            self.location_dest_id = self.env['stock.location'].search([('usage', '=', 'production')], limit=1).id
+            self.location_dest_id = self.env['stock.location'].search([('usage', '=', 'equipment')], limit=1).id
         else:
             self.price_unit = 0.0
             self.tax_id = False
