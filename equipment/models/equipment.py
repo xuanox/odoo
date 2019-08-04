@@ -229,7 +229,7 @@ class equipment_equipment(models.Model):
         return modalities.browse(modality_ids)
 
     @api.multi
-    def _name_get(self):
+    def name_get(self):
         name = self.get('name', '')
         code = self.get('serial', False) or False
         if code:
