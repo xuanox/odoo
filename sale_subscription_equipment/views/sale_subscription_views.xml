@@ -11,6 +11,8 @@
                   <div>
                       <field name="equipments_lines">
                           <tree editable="bottom">
+                              <field name="analytic_account_id" invisible="1"/>
+                              <field name="client_id" invisible="1"/>
                               <field name="equipment_id"/>
                               <field name="name"/>
                           </tree>

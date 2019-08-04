@@ -11,9 +11,10 @@ class SaleSubscriptionEquipment(models.Model):
     _name = 'sale.subscription.equipment'
     _description = 'Sale Subscription Equipment'
 
-    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
     analytic_account_id = fields.Many2one('sale.subscription', string='Subscription')
     name = fields.Text('Description', index=True, required=True)
+    client_id = fields.Many2one('res.partner', related='analytic_account_id.partner_id', store=True, readonly=False)
+    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True, domain="[('client_id', '=', client_id)]")
 
     @api.onchange('equipment_id')
     def onchange_equipment_id(self):
