@@ -20,7 +20,7 @@ class stock_location(models.Model):
         ('procurement', 'Procurement'),
         ('production', 'Production'),
         ('transit', 'Transit Location'),
-        ('equipment', 'equipment Location')
+        ('equipment', 'Equipment')
     ]
 
     usage = fields.Selection(TYPE_SELECTION, string='Location Type',

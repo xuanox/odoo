@@ -29,7 +29,7 @@ class PartLine(models.Model):
         self.ensure_one()
         return {
             'company_id': self.company_id.id,
-            'picking_type_id':5,
+            'picking_type_id':2,
             'move_type':'direct',
             'state':'draft',
             'scheduled_date': fields.Datetime.now(),
