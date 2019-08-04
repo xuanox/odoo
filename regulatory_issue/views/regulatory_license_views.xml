@@ -46,6 +46,7 @@
         <menuitem
             id="regulatory_management_menu"
             name="Regulatory"
+            groups="group_regulatory_issue_user"
             web_icon="regulatory_issue,static/description/icon.png"/>
         <menuitem
             id="regulatory_management_license"

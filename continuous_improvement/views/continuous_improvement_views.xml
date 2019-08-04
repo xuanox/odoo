@@ -209,6 +209,7 @@
         <menuitem
             id="continuous_improvement_menu"
             name="Continuous Improvement"
+            groups="group_continuous_improvement_user"
             web_icon="continuous_improvement,static/description/icon.png"/>
         <menuitem
             id="continuous_improvement"
