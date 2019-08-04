@@ -230,11 +230,11 @@ class equipment_equipment(models.Model):
 
     @api.multi
     def name_get(self):
-        name = self.get('name', '')
-        code = self.get('serial', False) or False
-        if code:
-            name = '[%s] %s' % (code,name)
-        return (self['id'], name)
+        result = []
+        for equipment in self:
+            result.append((equipment.id, "%s (#%d)" % (equipment.name, equipment.id)))
+        return result
+
 
 class EquipmentBrand(models.Model):
     _name = 'equipment.brand'
