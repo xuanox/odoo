@@ -1325,7 +1325,7 @@ msgstr ""
 #. module: technical_support
 #: model_terms:ir.ui.view,arch_db:technical_support.technical_support_order_form_view
 msgid "Ready"
-msgstr "Preparado"
+msgstr "CONSULTA FINALIZADA"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order__duration
