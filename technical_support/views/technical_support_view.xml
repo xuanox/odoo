@@ -144,6 +144,7 @@
 			name="Technical Support Requests"
 			action="action_requests"
 			id="menu_technical_support_request"
+			groups="technical_support.group_technical_support_backoffice"
 			parent="menu_technical_support_maintenance"
 			sequence="1"/>
 
