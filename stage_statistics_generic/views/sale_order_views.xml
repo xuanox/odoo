@@ -15,7 +15,8 @@
                             <field name="stage"/>
                             <field name="entry_date"/>
                             <field name="exit_date"/>
-                            <field name="total_time"/>
+                            <field name="total_days"/>
+                            <field name="total_time" widget="float_time"/>
                         </tree>
                     </field>
                 </page>

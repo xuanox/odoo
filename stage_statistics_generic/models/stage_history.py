@@ -16,7 +16,6 @@ class MailThread(models.AbstractModel):
         if self.tracking_fields:
             stage = self.tracking_fields[0]
             for rec in self:
-
                 if 'stage_id' in self.tracking_fields:
                     state_name = rec.stage_id.name
                 elif 'state' in self.tracking_fields:
@@ -36,7 +35,7 @@ class MailThread(models.AbstractModel):
 
                 if flag:
                     if rec.stage_ids:
-                        rec.stage_ids[-1].exit_date = date.today()
+                        rec.stage_ids[-1].exit_date = fields.Datetime.now()
 
                     if 'team_id' in self.tracking_fields:
                         person_assign = rec.team_id.id
@@ -48,7 +47,7 @@ class MailThread(models.AbstractModel):
                     rec.env['stage.history'].create({
                         'name': rec.name,
                         'stage': state_name,
-                        'entry_date': date.today(),
+                        'entry_date': fields.Datetime.now(),
                         'res_id': rec.id,
                         'res_model': rec._name,
                         'person_assign_id': person_assign,
@@ -64,16 +63,20 @@ class StageHistory(models.Model):
     @api.depends('entry_date', "exit_date")
     def _compute_total_time(self):
         for state in self:
-            if state.exit_date:
-                state.total_time = (state.exit_date - state.entry_date).days
-            else:
-                state.total_time = (date.today() - state.entry_date).days
+            diff_timedelta = (state.exit_date or fields.Datetime.now()) - state.entry_date
+            diff_seconds = diff_timedelta.days * 24 * 3600 + diff_timedelta.seconds
+            diff_minutes, diff_seconds = divmod(diff_seconds, 60)
+            diff_hours, diff_minutes = divmod(diff_minutes, 60)
+            diff_days, diff_hours = divmod(diff_hours, 24)
+            state.total_days = diff_days
+            state.total_time = diff_hours + (diff_minutes/60)
 
     name = fields.Char()
     stage = fields.Char(string='Stage')
-    entry_date = fields.Date(string="Stage Entry")
-    exit_date = fields.Date(string="Stage Exit")
-    total_time = fields.Integer(string="Total Time", store=True, compute="_compute_total_time")
+    entry_date = fields.Datetime(string="Stage Entry")
+    exit_date = fields.Datetime(string="Stage Exit")
+    total_days = fields.Integer(string="Days", store=True, compute="_compute_total_time")
+    total_time = fields.Float(string="Time (HH:MM)", digits=(16,2), store=True, compute="_compute_total_time")
     person_assign_id = fields.Many2one('res.users', string="Person Assigned")
     res_id = fields.Integer(string='Message ID')
     res_model = fields.Char(string='Model')
