@@ -29,6 +29,7 @@ class TechnicalSupportRequest(models.Model):
 
     MAINTENANCE_TYPE_SELECTION = [
         ('pm', 'Preventive'),
+        ('cbm', 'Predictive')
     ]
 
     name = fields.Char('Reference', size=64, copy=False)
@@ -86,7 +87,7 @@ class TechnicalSupportRequest(models.Model):
                 'origin': request.name,
                 'user_id': request.user_id.id,
                 'state': 'draft',
-                'maintenance_type': 'pm',
+                'maintenance_type': request.maintenance_type,
                 'equipment_id': request.equipment_id.id,
                 'description': request.subject,
                 'problem_description': request.description,

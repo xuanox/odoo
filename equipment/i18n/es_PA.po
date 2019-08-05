@@ -1,0 +1,1394 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* equipment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-04 16:48+0000\n"
+"PO-Revision-Date: 2019-08-04 11:52-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_kanban_view
+#: model_terms:ir.ui.view,arch_db:equipment.management_equipments_kanban_view
+msgid "#{record.criticality.value}"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_kanban_view
+#: model_terms:ir.ui.view,arch_db:equipment.management_equipments_kanban_view
+msgid "#{record.maintenance_state_id.value}"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_stock_location__usage
+msgid ""
+"* Vendor Location: Virtual location representing the source location for products coming from your vendors\n"
+"* View: Virtual location used to create a hierarchical structures for your warehouse, aggregating its child locations ; can't directly contain products\n"
+"* Internal Location: Physical locations inside your own warehouses,\n"
+"* Customer Location: Virtual location representing the destination location for products sent to your customers\n"
+"* Inventory Loss: Virtual location serving as counterpart for inventory operations used to correct stock levels (Physical inventories)\n"
+"* Procurement: Virtual location serving as temporary counterpart for procurement operations when the source (vendor or production) is not known yet. This location should be empty when the procurement scheduler has finished running.\n"
+"* Production: Virtual counterpart location for production operations: this location consumes the raw material and produces finished products\n"
+"* Transit Location: Counterpart location that should be used in inter-companies or inter-warehouses operations\n"
+"* Equipment: Physical locations representing the destination location for parts installed on the equipment (Maintenance and Repair)"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__child_ids
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Accesory"
+msgstr "Accesorio"
+
+#. module: equipment
+#: selection:equipment.state,team:0
+msgid "Accounting"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_needaction
+msgid "Action Needed"
+msgstr "Acción Necesaria"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__n_active
+msgid "Active no."
+msgstr "N° Activo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: equipment
+#: model_terms:ir.actions.act_window,help:equipment.equipment_modality_action_view
+msgid "Add a new equipment Modality"
+msgstr ""
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_administrator
+msgid "Administrator TS"
+msgstr "Administrador"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__name
+msgid "AeTitle"
+msgstr "AeTitle"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__assign_date
+msgid "Assigned Date"
+msgstr "Fecha de asignación"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__user_id
+msgid "Assigned to"
+msgstr "Asignada a"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteo de archivos adjuntos"
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_backoffice
+msgid "Back Office TS"
+msgstr "Back Office"
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Black"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Blue"
+msgstr ""
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_brand_action_view
+#: model:ir.model,name:equipment.model_equipment_brand
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__name
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__brand_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__brand_id
+#: model:ir.ui.menu,name:equipment.menu_equipment_brand
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_brand_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_brand_view_tree
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_search
+msgid "Brand"
+msgstr "Marca"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_kanban_view
+msgid "Brand:"
+msgstr "Marca:"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_breakdown
+msgid "Breakdown"
+msgstr "Offline"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_state_kanban_view
+msgid "Change color"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__client_id
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_search
+msgid "Client"
+msgstr "Cliente"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_close
+msgid "Close"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__maintenance_state_color
+msgid "Color"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__color
+msgid "Color Index"
+msgstr "Índice de Colores"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__note
+msgid "Comments"
+msgstr "Comentarios"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__vendor_id
+msgid "Commercial"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__estimated_next_failure
+msgid "Computed as Latest Failure Date + MTBF"
+msgstr "Calculado como fecha de ultimo fallo + MTBF (tiempo medio entre fallos)"
+
+#. module: equipment
+#: model:ir.ui.menu,name:equipment.menu_equipment_config
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__cost
+msgid "Cost"
+msgstr "Coste"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__create_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__create_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: equipment
+#: selection:equipment.equipment,criticality:0
+msgid "Critical"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__criticality
+msgid "Criticality"
+msgstr ""
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_customer
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Customer Location"
+msgstr "Ubicación de cliente"
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Cyan"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__effective_start_date
+msgid "Date at which the equipment became effective. This date will be used to compute Maintenance."
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__effective_date
+msgid "Date at which the equipment became effective. This date will be used to compute the Mean Time Between Failure."
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__dealer_warranty_end_date
+msgid "Dealer Warranty End"
+msgstr "Fin de la Garantía del distribuidor"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__dealer_warranty_start_date
+msgid "Dealer Warranty Start"
+msgstr "Inicio de Garantía del distribuidor"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_depreciation
+msgid "Depreciation"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__description
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__description
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_brand_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_dicom_type_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_dicom_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_model_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_network_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_software_type_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_software_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_zone_view_form
+msgid "Description"
+msgstr "Descripción"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_dicom_action_view
+#: model:ir.model,name:equipment.model_equipment_dicom
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__dicom_ids
+#: model:ir.ui.menu,name:equipment.menu_equipment_dicom
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_dicom_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_dicom_view_tree
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Dicom"
+msgstr "Dicom"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_dicom_type_action_view
+#: model:ir.model,name:equipment.model_equipment_dicom_type
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__dicom_type_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__name
+#: model:ir.ui.menu,name:equipment.menu_equipment_dicom_type
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_dicom_type_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_dicom_type_view_tree
+msgid "Dicom Type"
+msgstr "Tipo Dicom"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__display_name
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__dns1
+msgid "Dns1"
+msgstr "Dns1"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__dns2
+msgid "Dns2"
+msgstr "Dns2"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_down
+msgid "Down"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_draft
+msgid "Draft"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__duration
+msgid "Duration"
+msgstr "Duración"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__effective_date
+msgid "Effective Date"
+msgstr "Fecha efectiva"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__effective_start_date
+msgid "Effective Start Date"
+msgstr "Fecha inicio de efectividad"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__date_finished
+msgid "End"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__date_end
+msgid "End Date"
+msgstr "Fecha finalización"
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_engineer
+msgid "Engineer TS"
+msgstr "Ingeniero"
+
+#. module: equipment
+#: model:ir.model,name:equipment.model_equipment_equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__equipment_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__equipment_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__equipment_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__equipment_id
+#: model:ir.module.category,name:equipment.module_category_equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_graph_view
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_pivot_view
+#: selection:stock.location,usage:0
+msgid "Equipment"
+msgstr "Equipo"
+
+#. module: equipment
+#: model:ir.model,name:equipment.model_equipment_history_state
+msgid "Equipment History State"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__property_stock_equipment
+msgid "Equipment Location"
+msgstr "Ubicación del Equipo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__name
+msgid "Equipment Name"
+msgstr "Nombre del equipo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__equipment_number
+msgid "Equipment Number"
+msgstr "N° Equipo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__parent_id
+msgid "Equipment Relation"
+msgstr "Relación"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_search
+msgid "Equipment Search"
+msgstr "Buscar Equipo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__equipment_state_id
+msgid "Equipment State"
+msgstr "Estado del Equipo"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.action_equipment_state
+msgid "Equipment States"
+msgstr "Estados del Equipo"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.action_equipment_category
+#: model:ir.model,name:equipment.model_equipment_category
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_category_tree_view
+msgid "Equipment Tags"
+msgstr "Etiquetas del Equipo"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.action_equipments
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__equipment_ids
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__equipment_ids
+#: model:ir.ui.menu,name:equipment.menu_equipment
+#: model:ir.ui.menu,name:equipment.menu_maintenance_equipments_equipments
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Equipments"
+msgstr "Equipos"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Estimated Next Failure"
+msgstr "Próxima fallo estimado"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__estimated_next_failure
+msgid "Estimated time before next failure (in days)"
+msgstr "Tiempo estimado antes del fallo siguiente (en días)"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__expected_mtbf
+msgid "Expected MTBF"
+msgstr "Tiempo medio entre fallos estimado"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__expected_mtbf
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Expected Mean Time Between Failure"
+msgstr "Tiempo medio entre fallos estimado"
+
+#. module: equipment
+#: selection:equipment.state,team:0
+msgid "Finance"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Empresas)"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__gateway
+msgid "Gateway"
+msgstr "Puerta de Enlace"
+
+#. module: equipment
+#: selection:equipment.equipment,criticality:0
+msgid "General"
+msgstr "General"
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Green"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_search
+msgid "Group by..."
+msgstr "Agrupar por..."
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__hardware_v
+msgid "Hardware Versión."
+msgstr ""
+
+#. module: equipment
+#: model:ir.module.category,description:equipment.module_category_equipment
+msgid "Helps you manage your Technical Support processes."
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__id
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__id
+msgid "ID"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__name
+msgid "IP"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__message_unread
+msgid "If checked new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__image
+msgid "Image"
+msgstr "Imagen"
+
+#. module: equipment
+#: selection:equipment.equipment,criticality:0
+msgid "Important"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Info"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__instalation_date
+msgid "Instalation Date"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_installed
+msgid "Installed"
+msgstr ""
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Internal Location"
+msgstr "Ubicación interna"
+
+#. module: equipment
+#: model:ir.model,name:equipment.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicaciones de inventario"
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Inventory Loss"
+msgstr "Pérdida de inventario"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__ip
+msgid "Ip"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_category____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_model____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_network____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_software____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_state____last_update
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__write_uid
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__write_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Latest Failure"
+msgstr "Último fallo"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__latest_failure_date
+msgid "Latest Failure Date"
+msgstr "Fecha del último fallo"
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_leader
+msgid "Leader TS"
+msgstr "Lider"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_leased
+msgid "Leased"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__name
+msgid "License"
+msgstr "Licencia"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__location
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_stock_location__usage
+msgid "Location Type"
+msgstr "Tipo de ubicación"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__mtbf
+msgid "MTBF"
+msgstr "Tiempo medio entre fallos"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__mttr
+msgid "MTTR"
+msgstr "Tiempo medio de reparación"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__mac_address
+msgid "Mac Address"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Magenta"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_maintenance
+#: selection:equipment.state,team:0
+msgid "Maintenance"
+msgstr ""
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.action_management_equipments
+#: model:ir.ui.menu,name:equipment.menu_equipments_states
+msgid "Manage states"
+msgstr "Administrador de Estados"
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_manager
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: equipment
+#: selection:equipment.state,team:0
+msgid "Manufacture"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__manufacturer_id
+#: model_terms:ir.ui.view,arch_db:equipment.management_equipments_kanban_view
+msgid "Manufacturer"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Mean Time Between Failure"
+msgstr "Tiempo medio entre fallos"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__mtbf
+msgid "Mean Time Between Failure, computed based on done corrective maintenances."
+msgstr "Tiempo medio entre fallos, calculado sobre la base de los mantenimientos correctivos realizados."
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__mttr
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Mean Time To Repair"
+msgstr "Tiempo medio de reparación"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__image_medium
+msgid "Medium-sized image"
+msgstr "Imagen de tamaño mediano"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_modality_action_view
+#: model:ir.ui.menu,name:equipment.menu_equipment_modality
+msgid "Modalities"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model,name:equipment.model_equipment_modality
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__modality_id
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_tree
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_search
+msgid "Modality"
+msgstr "Modalidad"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_modality__name
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_search
+msgid "Modality Name"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_kanban_view
+msgid "Modality:"
+msgstr "Modalidad"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_model_action_view
+#: model:ir.model,name:equipment.model_equipment_model
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__model
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__name
+#: model:ir.ui.menu,name:equipment.menu_equipment_model
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_model_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_model_view_tree
+#: model_terms:ir.ui.view,arch_db:equipment.management_equipments_kanban_view
+msgid "Model"
+msgstr "Modelo"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_kanban_view
+msgid "Model:"
+msgstr "Modelo:"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__model_id
+msgid "Models"
+msgstr "Modelos"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_moves
+msgid "Moves"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_tree
+msgid "Name"
+msgstr "Nombre"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_network_action_view
+#: model:ir.model,name:equipment.model_equipment_network
+#: model:ir.ui.menu,name:equipment.menu_equipment_network
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_network_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_network_view_tree
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Network"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__network_ids
+msgid "Networks"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente plazo de actividad"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_form
+msgid "Note"
+msgstr "Nota"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_has_error_counter
+msgid "Number of error"
+msgstr "Número de error"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_operable
+msgid "Operable"
+msgstr "Online"
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Orange"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.equipment,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.equipment,activity_state:0
+#: model:equipment.state,name:equipment.equipment_state_planned
+msgid "Planned"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom__port
+msgid "Port"
+msgstr "Puerto"
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Production"
+msgstr "Producción"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__manager_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__provider_id
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__purchase_date
+msgid "Purchase Date"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_purchased
+msgid "Purchased"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Red"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_brand__code
+msgid "Reference Brand"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_dicom_type__code
+msgid "Reference Dicom Type"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_model__code
+msgid "Reference Model"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__code
+msgid "Reference Software Type"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__code
+msgid "Reference de zone"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__name
+msgid "Refernce"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_rented
+msgid "Rented"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_repair
+msgid "Repair"
+msgstr ""
+
+#. module: equipment
+#: model:ir.ui.menu,name:equipment.menu_equipment_report
+msgid "Reports"
+msgstr "Informes"
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_responsable
+msgid "Responsable"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__manager_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_retired
+msgid "Retired"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_run
+msgid "Run"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__team
+msgid "Scope Team"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_modality_view_search
+msgid "Search"
+msgstr "Búsqueda"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__serial
+msgid "Serial no."
+msgstr "N° Serial."
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_setup
+msgid "Setup"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_shipped
+msgid "Shipped"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_shutdown
+msgid "Shutdown"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "SkyBlue"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__image_small
+msgid "Small-sized image"
+msgstr "Imagen de tamaño pequeño"
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_software_action_view
+#: model:ir.model,name:equipment.model_equipment_software
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__name
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_list__software_id
+#: model:ir.ui.menu,name:equipment.menu_equipment_software
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_software_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_software_view_tree
+msgid "Software"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model,name:equipment.model_equipment_software_list
+msgid "Software List"
+msgstr ""
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_software_type_action_view
+#: model:ir.model,name:equipment.model_equipment_software_type
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__software_type_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_software_type__name
+#: model:ir.ui.menu,name:equipment.menu_equipment_software_type
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_software_type_view_form
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_software_type_view_tree
+msgid "Software Type"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__software_v
+msgid "Software Versión."
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__software_ids
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Softwares"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_sold
+msgid "Sold"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_standby
+msgid "Standby"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__date_start
+msgid "Start"
+msgstr "Iniciar"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__start_date
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__date_start
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__name
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_state_form_view
+msgid "State"
+msgstr "Estado"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__accounting_state_id
+msgid "State Accounting"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_state__state_color
+msgid "State Color"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__finance_state_id
+msgid "State Finance"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__history_state_ids
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "State History"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__maintenance_state_id
+msgid "State Maintenance"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__manufacture_state_id
+msgid "State Manufacture"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__warehouse_state_id
+msgid "State Warehouse"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model,name:equipment.model_equipment_state
+msgid "State of equipment"
+msgstr ""
+
+#. module: equipment
+#: model:ir.ui.menu,name:equipment.menu_equipment_state
+msgid "States"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: La fecha tope es hoy\n"
+"Planificada: futuras actividades."
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_stolen
+msgid "Stolen"
+msgstr ""
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_stored
+msgid "Stored"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_network__subred
+msgid "SubRed"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_network_view_form
+msgid "Subred..."
+msgstr ""
+
+#. module: equipment
+#: model:res.groups,name:equipment.group_equipment_supervisor
+msgid "Supervisor TS"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_category__name
+msgid "Tag"
+msgstr "Etiqueta"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__category_ids
+#: model:ir.ui.menu,name:equipment.menu_equipment_category
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Tags..."
+msgstr "Etiquetas..."
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__property_stock_equipment
+msgid "This location will be used as the destination location for installed parts during equipment life."
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__ticket_id
+msgid "Ticket"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.equipment,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Transit Location"
+msgstr "Ubicación de tránsito"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes por leer"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes sin leer"
+
+#. module: equipment
+#: model:equipment.state,name:equipment.equipment_state_use
+msgid "Use"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_state__sequence
+msgid "Used to order states."
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_history_state__user_id
+#: model:res.groups,name:equipment.group_equipment_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "Vendor Location"
+msgstr "Ubicación de proveedor"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_software__version
+msgid "Version"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.equipment,criticality:0
+msgid "Very important"
+msgstr ""
+
+#. module: equipment
+#: selection:stock.location,usage:0
+msgid "View"
+msgstr "Ver"
+
+#. module: equipment
+#: selection:equipment.state,team:0
+msgid "Warehouse"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "Warranty"
+msgstr ""
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__warranty_end_date
+msgid "Warranty End"
+msgstr "Fin de la Garantía"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__warranty_start_date
+msgid "Warranty Start"
+msgstr "Inicio de la Garantía"
+
+#. module: equipment
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: equipment
+#: model:ir.model.fields,help:equipment.field_equipment_equipment__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "White"
+msgstr ""
+
+#. module: equipment
+#: selection:equipment.state,state_color:0
+msgid "Yellow"
+msgstr ""
+
+#. module: equipment
+#: model:ir.actions.act_window,name:equipment.equipment_zone_action_view
+#: model:ir.model,name:equipment.model_equipment_zone
+#: model:ir.model.fields,field_description:equipment.field_equipment_equipment__zone_id
+#: model:ir.model.fields,field_description:equipment.field_equipment_zone__name
+#: model:ir.ui.menu,name:equipment.menu_equipment_zone
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_zone_view_form
+msgid "Zone"
+msgstr "Zona"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipment_zone_view_tree
+msgid "Zone line"
+msgstr ""
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_form_view
+msgid "days"
+msgstr "días"
+
+#. module: equipment
+#: model_terms:ir.ui.view,arch_db:equipment.equipments_tree_view
+msgid "equipments"
+msgstr "equipos"

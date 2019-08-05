@@ -30,7 +30,8 @@ class TechnicalSupportOrder(models.Model):
     MAINTENANCE_TYPE_SELECTION = [
         ('pm', 'Preventive'),
         ('cm', 'Corrective'),
-        ('in', 'Instalación')
+        ('in', 'Instalación'),
+        ('cbm', 'Predictive')
     ]
 
     @api.multi
