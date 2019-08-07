@@ -188,7 +188,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_appointment_approved(self):
-        self.write({'state': 'correct'})
+        self.write({'state': 'waiting'})
         return True
 
     def action_approved(self):
@@ -196,11 +196,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_rejected(self):
-        self.write({'state': 'done'})
+        self.write({'state': 'correct'})
         return True
 
     def action_appointment_rejected(self):
-        self.write({'state': 'correct'})
+        self.write({'state': 'waiting'})
         return True
 
     @api.multi
