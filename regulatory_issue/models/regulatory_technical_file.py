@@ -106,7 +106,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('wait', 'Consult'),
         ('appointment', 'Appointment Assigned'),
         ('waiting', 'Waiting'),
-        ('waiting', 'Waiting'),
+        ('correct', 'Correct'),
         ('done', 'Completed'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected')
@@ -187,8 +187,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         self.write({'state': 'appointment'})
         return True
 
+    def action_appointment_approved(self):
+        self.write({'state': 'correct'})
+        return True
+
     def action_approved(self):
-        self.write({'state': 'approved'})
+        self.write({'state': 'done'})
         return True
 
     def action_rejected(self):
