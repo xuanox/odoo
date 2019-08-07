@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+    	<record id="technical_support_request_part_form_view_inherited" model="ir.ui.view">
+            <field name="name">Technical Support - Part Form View Inherited</field>
+            <field name="model">technical_support.request</field>
+            <field name="inherit_id" ref="technical_support.technical_support_request_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_report']" position="before">
+                   <button class="oe_stat_button" name="action_view_part_request" type="object" icon="fa-file-excel-o">
+                     <field string="Part Requests" name="part_count" widget="statinfo"/>
+                   </button>
+                   <button class="oe_stat_button" name="action_view_part_line_request" type="object" icon="fa-cogs">
+                     <field string="Part List" name="part_line_count" widget="statinfo"/>
+                   </button>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="before">
+                  <button name="%(action_spare_part_request)d" string="SP Request" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"
+                    context="{'default_partner_id': partner_id}"/>
+                </xpath>
+            </field>
+        </record>
+    </odoo>
