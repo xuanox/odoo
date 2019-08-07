@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_spare_part_request" model="ir.actions.act_window">
+            <field name="name">Spare Part Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">part.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

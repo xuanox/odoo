@@ -32,6 +32,11 @@ class TechnicalSupportRequest(models.Model):
         ('cbm', 'Predictive')
     ]
 
+    def _technical_support_count(self):
+        order = self.env['technical_support.order']
+        for request in self:
+            self.technical_support_count = order.search_count([('request_id', '=', request.id)])
+
     name = fields.Char('Reference', size=64, copy=False)
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=False,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
@@ -60,6 +65,8 @@ class TechnicalSupportRequest(models.Model):
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
     duration = fields.Float('Real Duration', store=True)
 
+    technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
+
     @api.onchange('requested_date')
     def onchange_requested_date(self):
         self.execution_date = self.requested_date
@@ -68,6 +75,17 @@ class TechnicalSupportRequest(models.Model):
     def onchange_execution_date(self):
         if self.state == 'draft' and not self.breakdown:
             self.requested_date = self.execution_date
+
+    def action_view_report(self):
+        return {
+            'domain': "[('request_id','in',[" + ','.join(map(str, self.ids)) + "])]",
+            'name': _('Technical Support Orders'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'technical_support.order',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
 
     def action_send(self):
         value = {'state': 'confirm'}
