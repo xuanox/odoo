@@ -196,7 +196,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_rejected(self):
-        self.write({'state': 'rejected'})
+        self.write({'state': 'done'})
+        return True
+
+    def action_appointment_rejected(self):
+        self.write({'state': 'correct'})
         return True
 
     @api.multi
