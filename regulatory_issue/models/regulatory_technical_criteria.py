@@ -33,7 +33,7 @@ class RegulatoryTechnicalCriteria(models.Model):
 
     name = fields.Char(string="Certificate Name", required=True, translate=True)
     ctni=fields.Char('CTNI')
-    technical_file=fields.Char('Technical File')
+    technical_file=fields.Char('Certificate Number')
     criterion_expiration_date = fields.Date(u'Criterion Expiration Date')
     date_expiration_authenticated_seal = fields.Date(u'Date Expiration of the Authenticated Seal')
     description=fields.Text('Description')
