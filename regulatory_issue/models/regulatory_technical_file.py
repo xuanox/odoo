@@ -103,8 +103,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('draft', 'New'),
         ('assigned', 'Assigned'),
         ('review', 'Review of Technical Specifications'),
-        ('wait', 'Awaiting Documentation'),
+        ('wait', 'Consult'),
         ('appointment', 'Appointment Assigned'),
+        ('waiting', 'Waiting'),
+        ('waiting', 'Waiting'),
+        ('done', 'Completed'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected')
     ]
