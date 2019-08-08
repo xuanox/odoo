@@ -87,6 +87,7 @@ class TechnicalSupportOrder(models.Model):
     assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', track_visibility='onchange', states={'done':[('readonly',True)], 'cancel':[('readonly',True)]})
     checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'CheckList', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     signature_lines = fields.One2many('technical_support.order.signature.line', 'maintenance_id', 'Users', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    signature_client_lines = fields.One2many('technical_support.order.signature.client.line', 'maintenance_id', 'Clients', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     serial=fields.Char(related='equipment_id.serial', string='Serial', readonly=True)
     equipment_number=fields.Char(related='equipment_id.equipment_number', string='N° de Equipo', readonly=True)
