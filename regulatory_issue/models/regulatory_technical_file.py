@@ -103,8 +103,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('draft', 'New'),
         ('assigned', 'Assigned'),
         ('review', 'Review of Technical Specifications'),
-        ('wait', 'Awaiting Documentation'),
+        ('wait', 'Consult'),
         ('appointment', 'Appointment Assigned'),
+        ('waiting', 'Waiting'),
+        ('correct', 'Correct'),
+        ('done', 'Completed'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected')
     ]
@@ -184,12 +187,20 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         self.write({'state': 'appointment'})
         return True
 
+    def action_appointment_approved(self):
+        self.write({'state': 'waiting'})
+        return True
+
     def action_approved(self):
-        self.write({'state': 'approved'})
+        self.write({'state': 'done'})
         return True
 
     def action_rejected(self):
-        self.write({'state': 'rejected'})
+        self.write({'state': 'correct'})
+        return True
+
+    def action_appointment_rejected(self):
+        self.write({'state': 'waiting'})
         return True
 
     @api.multi
@@ -243,6 +254,14 @@ class RegulatoryTechnicalFileCreation(models.Model):
     _description = 'Regulatory Technical File Creation'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    STATE_SELECTION = [
+        ('draft', 'New'),
+        ('assigned', 'Assigned'),
+        ('process', 'In Process'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected')
+    ]
+
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
@@ -257,7 +276,15 @@ class RegulatoryTechnicalFileCreation(models.Model):
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
     stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
-
+    state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
+        help="When the maintenance order is created the status is set to 'New'.\n\
+        If the order is confirmed the status is set to 'Assigned'.\n\
+        If the order is confirmed the status is set to 'Process'.\n\
+        If the stock is available then the status is set to 'Approved'.\n\
+        When the maintenance is over, the status is set to 'Rejected'.", default='draft')
+    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
+    technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
+    entity_reference = fields.Char('Entity Reference', copy=False)
 
 class RegulatoryTechnicalFileModification(models.Model):
     _name = 'regulatory.technical.file.modification'
