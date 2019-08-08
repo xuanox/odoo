@@ -130,6 +130,10 @@ class TechnicalSupportRequest(models.Model):
         self.write({'state': 'cancel', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
 
+    def action_draft(self):
+        self.write({'state': 'draft'})
+        return True
+
     @api.model
     def create(self, vals):
         if vals.get('name','/')=='/':
