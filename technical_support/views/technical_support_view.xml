@@ -46,7 +46,7 @@
 						<button name="%(action_order_assign)d" states="confirm" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
             <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
-						<button name="action_draft" states="assigned" string="Draft" type="object"/>
+						<button name="action_draft" states="assigned" string="Draft" type="object" groups="technical_support.group_technical_support_backoffice"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,confirm,assigned,run,done"/>
           </header>
           <sheet>
