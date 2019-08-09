@@ -251,6 +251,7 @@ class TechnicalSupportOrder(models.Model):
             self.filtered(lambda o: o.state == 'ready').write({'state': 'consulting'})
         return super(TechnicalSupportOrder, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
 
+
 class TechnicalSupportOrderPartsLine(models.Model):
     _name = 'technical_support.order.parts.line'
     _description = 'Maintenance Planned Parts'

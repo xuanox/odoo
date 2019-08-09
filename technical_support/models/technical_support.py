@@ -48,6 +48,7 @@ class TechnicalSupportRequest(models.Model):
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason')
     detail_confirm_client = fields.Text('Detail Confirm Client')
+    detail_confirm_done = fields.Text('Detail Confirm Done')
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
     execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
