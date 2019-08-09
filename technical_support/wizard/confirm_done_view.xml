@@ -7,9 +7,10 @@
             <field name="model">technical_support.confirm.done</field>
             <field name="arch" type="xml">
                 <form string="Confirm Order" version="7.0">
-                    <group>
-                        <field name="detail"/>
-                    </group>
+                  <p>Está Seguro de Cerrar la Orden de Servicio</p><br />
+                  <p>Al Cerrar la Orden, no podrá editar la información</p><br />
+                  <p>Aseguré de llenar toda la información</p><br />
+                  <p>Si no está seguro, cierre la ventana y verifique la información</p><br />
                     <footer>
                         <button name="confirm_done" string="Confirm" type="object"  class="oe_highlight"  />
                         or
