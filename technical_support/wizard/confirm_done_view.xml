@@ -22,7 +22,7 @@
         <record id="action_confirm_done" model="ir.actions.act_window">
             <field name="name">Confirm Order</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">technical_support.confirm.client</field>
+            <field name="res_model">technical_support.confirm.done</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
