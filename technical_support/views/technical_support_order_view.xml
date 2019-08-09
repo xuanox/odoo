@@ -148,7 +148,13 @@
 															<field name="signature_lines" nolabel="1">
 																<tree string="Users" editable="bottom">
 																	<field name="user_id"/>
-																	<field name="name" string="Description"/>
+																</tree>
+															</field>
+                        </page>
+												<page string="Contact" name="client">
+															<field name="signature_client_lines" nolabel="1">
+																<tree string="Users" editable="bottom">
+																	<field name="user_id"/>
 																</tree>
 															</field>
                         </page>
