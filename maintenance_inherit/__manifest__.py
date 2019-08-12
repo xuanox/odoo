@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+
+{
+    'name': 'Maintenance Inherit',
+    'version': '1.0',
+    'sequence': 125,
+    'category': 'Human Resources',
+    'description': """
+        Track equipments and maintenance requests""",
+    'depends': ['mail'],
+    'summary': 'Track equipment and manage maintenance requests',
+    'website': 'https://www.odoo.com/page/tpm-maintenance-software',
+    'data': [
+
+    ],
+    'installable': True,
+    'application': True,
+}
