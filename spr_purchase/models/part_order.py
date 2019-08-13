@@ -290,6 +290,7 @@ class PartLine(models.Model):
                 purchase_order = PurchaseOrder.search([
                     ('partner_id', '=', partner_supplier.id),
                     ('state', '=', 'draft'),
+                    ('origin', '=', False),
                     ('company_id', '=', line.company_id.id),
                 ], limit=1)
             if not purchase_order:
