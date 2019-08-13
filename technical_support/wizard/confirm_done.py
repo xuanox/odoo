@@ -19,6 +19,5 @@ class TechnicalSupportConfirmDone(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             request = self.env['technical_support.order'].browse(self._context.get('active_id'))
-            request.write({'detail_confirm_done':self.detail})
             request.action_done()
         return {'type': 'ir.actions.act_window_close',}
