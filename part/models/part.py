@@ -68,7 +68,7 @@ class Part(models.Model):
     guarantee_limit = fields.Date('Warranty Expiration', states={'confirmed': [('readonly', True)]})
     operations = fields.One2many(
         'part.line', 'part_id', 'Parts',
-        copy=True, readonly=True, states={'draft': [('readonly', False)]})
+        copy=True, readonly=True, states={'draft': [('readonly', False)], 'incorrect_part_number': [('readonly', False)], 'quotation': [('readonly', False)]})
     pricelist_id = fields.Many2one(
         'product.pricelist', 'Pricelist',
         default=lambda self: self.env['product.pricelist'].search([], limit=1).id,
@@ -80,7 +80,7 @@ class Part(models.Model):
         ("b4repair", "Before Part"),
         ("after_part", "After Part")], string="Invoice Method",
         default='none', index=True, readonly=True, required=True,
-        states={'draft': [('readonly', False)]},
+        states={'draft': [('readonly', False)], 'quotation': [('readonly', False)]},
         help='Selecting \'Before Part\' or \'After Part\' will allow you to generate invoice before or after the part is done respectively. \'No invoice\' means you don\'t want to generate invoice for this part order.')
     invoice_id = fields.Many2one(
         'account.invoice', 'Invoice',
@@ -373,7 +373,6 @@ class Part(models.Model):
 
     def action_part_verified(self):
         return self.write({'state': 'quotation'})
-
 
     @api.multi
     def action_part_start(self):
