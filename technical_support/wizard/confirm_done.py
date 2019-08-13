@@ -13,7 +13,7 @@ class TechnicalSupportConfirmDone(models.TransientModel):
     _name = 'technical_support.confirm.done'
     _description = 'Confirm Done Order'
 
-    detail = fields.Text('Detail', required=True)
+    detail = fields.Text('Detail')
 
     def confirm_done(self):
         active_id = self._context.get('active_id')
