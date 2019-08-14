@@ -102,9 +102,9 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     STATE_SELECTION = [
         ('draft', 'New'),
         ('assigned', 'Assigned'),
-        ('review', 'Review of Technical Specifications'),
+        ('review', 'Review'),
         ('wait', 'Consult'),
-        ('appointment', 'Appointment Assigned'),
+        ('appointment', 'Scheduled'),
         ('waiting', 'Waiting'),
         ('correct', 'Correct'),
         ('done', 'Completed'),
@@ -169,6 +169,14 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         if self.user_id.sale_team_id:
             values = self._onchange_user_values(self.user_id.id)
             self.update(values)
+
+    @api.onchange('entity')
+    def _onchange_entity(self):
+        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
+        if self.entity == 'minsa':
+            location_appointment = "Dirección Nacional de Dispositivos Médicos."
+        if self.entity == 'css':
+            location_appointment = "Departamento Nacional de Evaluación y Gestión de Tecnología Sanitaria."
 
     def action_assign(self):
         self.write({'state': 'assigned'})
