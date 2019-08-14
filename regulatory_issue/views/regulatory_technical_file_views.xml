@@ -349,6 +349,8 @@
                   </div>
                   <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_lost', '=', False)]}">No Cumple</div>
                   <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_won', '=', False)]}">Cumple</div>
+                  <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_rejected', '=', False)]}">Rejected</div>
+                  <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_approved', '=', False)]}">Approved</div>
                   <div class="oe_title">
                           <label for="name" class="oe_edit_only" string="#Request:"/>
                           <h1>

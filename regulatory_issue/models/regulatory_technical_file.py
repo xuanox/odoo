@@ -107,9 +107,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('appointment', 'Scheduled'),
         ('waiting', 'Waiting'),
         ('correct', 'Correct'),
-        ('done', 'Completed'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected')
+        ('done', 'Completed')
     ]
 
     ENTITY_SELECTION = [
@@ -146,6 +144,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     location_appointment = fields.Text('Appointment Location')
     is_won = fields.Boolean('Cumple', track_visibility=True)
     is_lost = fields.Boolean('No Cumple', track_visibility=True)
+    is_approved = fields.Boolean('Approved', track_visibility=True)
+    is_rejected = fields.Boolean('Rejected', track_visibility=True)
     lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
@@ -197,6 +197,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     def action_appointment_approved(self):
         self.write({'state': 'waiting'})
+        self.write({'is_approved': True})
         return True
 
     def action_approved(self):
@@ -209,6 +210,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     def action_appointment_rejected(self):
         self.write({'state': 'waiting'})
+        self.write({'is_rejected': True})
         return True
 
     @api.multi
