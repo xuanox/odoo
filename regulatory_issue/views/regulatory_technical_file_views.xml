@@ -383,6 +383,8 @@
                       <field name="stage_id" widget="many2one"/>
                       <field name='is_won' invisible="1"/>
                       <field name='is_lost' invisible="1"/>
+                      <field name='is_approved' invisible="1"/>
+                      <field name='is_rejected' invisible="1"/>
                       <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
                     </group>
                   </group>
