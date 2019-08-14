@@ -209,7 +209,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_appointment_rejected(self):
-        self.write({'state': 'review'})
+        self.write({'state': 'correct'})
         self.write({'is_rejected': True})
         return True
 
