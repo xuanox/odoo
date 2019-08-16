@@ -11,7 +11,7 @@
     'summary': 'Track equipment and manage maintenance requests',
     'website': 'https://www.odoo.com/page/tpm-maintenance-software',
     'data': [
-
+        'views/maintenance_views.xml'
     ],
     'installable': True,
     'application': True,

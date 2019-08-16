@@ -17,3 +17,10 @@ class MaintenanceRequest(models.Model):
     _inherit = 'maintenance.request'
 
     maintenance_type = fields.Selection([('corrective', 'Corrective'), ('preventive', 'Preventive'), ('request', 'Request'), ('quotation', 'Quotation'),('installation', 'Installation')], string='Maintenance Type', default="corrective")
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for record in self:
+            result.append((record.id, "{} ({})".format(record.name, record.id)))
+        return result
