@@ -102,14 +102,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     STATE_SELECTION = [
         ('draft', 'New'),
         ('assigned', 'Assigned'),
-        ('review', 'Review of Technical Specifications'),
+        ('review', 'Review'),
         ('wait', 'Consult'),
-        ('appointment', 'Appointment Assigned'),
+        ('appointment', 'Scheduled'),
         ('waiting', 'Waiting'),
         ('correct', 'Correct'),
-        ('done', 'Completed'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected')
+        ('done', 'Completed')
     ]
 
     ENTITY_SELECTION = [
@@ -146,6 +144,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     location_appointment = fields.Text('Appointment Location')
     is_won = fields.Boolean('Cumple', track_visibility=True)
     is_lost = fields.Boolean('No Cumple', track_visibility=True)
+    is_approved = fields.Boolean('Approved', track_visibility=True)
+    is_rejected = fields.Boolean('Rejected', track_visibility=True)
     lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
@@ -170,6 +170,14 @@ class RegulatoryTechnicalFileRegistry(models.Model):
             values = self._onchange_user_values(self.user_id.id)
             self.update(values)
 
+    @api.onchange('entity')
+    def _onchange_entity(self):
+        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
+        if self.entity == 'minsa':
+            location_appointment = "Dirección Nacional de Dispositivos Médicos."
+        if self.entity == 'css':
+            location_appointment = "Departamento Nacional de Evaluación y Gestión de Tecnología Sanitaria."
+
     def action_assign(self):
         self.write({'state': 'assigned'})
         return True
@@ -189,6 +197,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     def action_appointment_approved(self):
         self.write({'state': 'waiting'})
+        self.write({'is_approved': True})
         return True
 
     def action_approved(self):
@@ -200,7 +209,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_appointment_rejected(self):
-        self.write({'state': 'waiting'})
+        self.write({'state': 'correct'})
+        self.write({'is_rejected': True})
         return True
 
     @api.multi
