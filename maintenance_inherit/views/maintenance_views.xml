@@ -29,8 +29,8 @@
                 </group>
               </group>
             </page>
-          </field>
-        </xpath>
+          </xpath>
+        </field>
     </record>
 
 </odoo>
