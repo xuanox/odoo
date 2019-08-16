@@ -134,7 +134,7 @@ class equipment_equipment(models.Model):
     active = fields.Boolean('Active', default=True)
     equipment_number = fields.Char('Equipment Number', size=64, copy=False)
     model = fields.Char('Model', size=64)
-    serial = fields.Char('Serial no.', size=64, required=True, track_visibility='onchange', copy=False)
+    serial = fields.Char('Serial no.', size=64, required=True, track_visibility='onchange')
     n_active = fields.Char('Active no.', size=64)
     software_v = fields.Char('Software Versión.', size=64)
     hardware_v = fields.Char('Hardware Versión.', size=64)
