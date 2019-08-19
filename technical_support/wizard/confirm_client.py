@@ -13,7 +13,7 @@ class TechnicalSupportConfirmClient(models.TransientModel):
     _name = 'technical_support.confirm.client'
     _description = 'Confirm Client'
 
-    detail = fields.Text('Detail', required=True)
+    detail = fields.Text('Detail')
 
     def confirm_client(self):
         active_id = self._context.get('active_id')
