@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
           <xpath expr="//button[@name='action_confirm']" position="attributes">
-            <attribute name="confirm">Estas Seguro que deseas confirmar el SO?</attribute>
+            <attribute name="confirm">Estas Seguro que deseas confirmar el SO, al confirmar no podrá modificar el SO?</attribute>
           </xpath>
         </field>
       </record>
