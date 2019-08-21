@@ -57,7 +57,7 @@ class OpenMaintenance(http.Controller):
         wo_ids = http.request.env['helpdesk.ticket'].sudo().search([('client_id.id','=',parent)])
         return http.request.render('helpdesk_technical_support.wo_page', {'wo_ids': wo_ids})
 
-    MANDATORY_BILLING_FIELDS = ["motif","equipment_id"]
+    MANDATORY_BILLING_FIELDS = ["description","equipment_id"]
     @http.route('/intervention/request/success', type='http', auth='public', website=True)
     def navigate_to_success_page(self):
         user = http.request.env.context.get('uid')
@@ -119,8 +119,8 @@ class OpenMaintenance(http.Controller):
     def _process_registration(self, post):
         request.env['helpdesk.ticket'].sudo().create({
             'equipment_id': post.get('equipment_id'),
-            'description': post.get('motif'),
-            'name': post.get('name'),
+            'description': post.get('description'),
+            'name': post.get('description'),
             'create_uid':post.get('user'),
     })
 
