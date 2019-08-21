@@ -122,8 +122,6 @@ class OpenMaintenance(http.Controller):
             'description': post.get('description'),
             'name': post.get('description'),
             'create_uid':post.get('user'),
-            'partner_id':post.get('user'),
-            'client_id':post.get('parent'),
     })
 
 
