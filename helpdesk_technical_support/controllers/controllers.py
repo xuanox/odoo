@@ -119,6 +119,7 @@ class OpenMaintenance(http.Controller):
     def _process_registration(self, post):
         request.env['helpdesk.ticket'].sudo().create({
             'equipment_id': post.get('equipment_id'),
+            'partner_id': post.get('parent'),
             'description': post.get('description'),
             'name': post.get('description'),
             'create_uid':post.get('user'),
