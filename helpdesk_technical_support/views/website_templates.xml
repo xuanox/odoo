@@ -47,10 +47,10 @@
                                         	<option value=""> -- Seleccione el Equipo -- </option>
                                         	<t t-foreach="equipments" t-as="equipment_id">
                                             	<option t-att-value="equipment_id.id">
-                                                	<t t-esc="equipment_id.x_studio_n_externo"/>
-                                                	<t t-esc="equipment_id.category_id.name"/>
-                                                	<t t-esc="equipment_id.x_studio_marca.x_name"/>
-                                                	<t t-esc="equipment_id.x_studio_modelo.x_name"/>
+                                                	<t t-esc="equipment_id.equipment_number"/>
+                                                	<t t-esc="equipment_id.modality_id.name"/>
+                                                	<t t-esc="equipment_id.brand_id.name"/>
+                                                	<t t-esc="equipment_id.model_id.name"/>
                                                 	<t t-esc="equipment_id.serial_no"/>
                                             	</option>
                                         	</t>
