@@ -48,6 +48,9 @@
                                         	<t t-foreach="equipments" t-as="equipment_id">
                                             	<option t-att-value="equipment_id.id">
                                                 	<t t-esc="equipment_id.name"/>
+																									<t t-esc="equipment_id.equipment_number"/>
+																									<t t-esc="equipment_id.modality_id"/>
+																									<t t-esc="equipment_id.serial"/>
                                             	</option>
                                         	</t>
                                     	</select>
