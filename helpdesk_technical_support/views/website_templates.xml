@@ -51,7 +51,7 @@
                                                 	<t t-esc="equipment_id.modality_id.name"/>
                                                 	<t t-esc="equipment_id.brand_id.name"/>
                                                 	<t t-esc="equipment_id.model_id.name"/>
-                                                	<t t-esc="equipment_id.serial_no"/>
+                                                	<t t-esc="equipment_id.seria"/>
                                             	</option>
                                         	</t>
                                     	</select>
