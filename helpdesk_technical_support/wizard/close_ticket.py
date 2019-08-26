@@ -28,5 +28,6 @@ class TechnicalSupportCloseTicket(models.TransientModel):
             request.write({'remote':self.remote})
             request.write({'close_order':self.close_order})
             request.write({'close_ticket':self.close_ticket})
+            request.ticket_done()
             request.action_done()
         return {'type': 'ir.actions.act_window_close',}

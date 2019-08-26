@@ -189,7 +189,8 @@ class TechnicalSupportOrder(models.Model):
 
     def ticket_done(self):
         for order in self:
-            if order.ticket_id: order.ticket_id.write({'stage_id': 3})
+            if order.ticket_id:
+                order.ticket_id.write({'stage_id': 3})
         return True
 
     def _track_subtype(self, init_values):

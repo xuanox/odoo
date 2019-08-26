@@ -12,7 +12,8 @@
                   <p>Aseguré de llenar toda la información</p><br />
                   <p>Si no está seguro, cierre la ventana y verifique la información</p><br />
                     <footer>
-                        <button name="close_ticket" string="Confirmar" type="object"  class="oe_highlight"  />
+                        <button name="close_ticket" string="Close Order and Ticket" type="object"  class="oe_highlight"  />
+                        <button name="%(action_confirm_done)d" string="Close Order Only" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
