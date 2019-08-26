@@ -13,7 +13,7 @@
                   <p>Si no está seguro, cierre la ventana y verifique la información</p><br />
                   <group>
                       <field name="close_order"/>
-                      <field name="close_ticket"/>
+                      <field name="close_order_ticket"/>
                       <field name="cause_reason"/>
                       <field name="detail_cause"/>
                       <field name="remote"/>
