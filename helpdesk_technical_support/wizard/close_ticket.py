@@ -32,7 +32,7 @@ class TechnicalSupportCloseTicket(models.TransientModel):
             request.action_done()
         return {'type': 'ir.actions.act_window_close',}
 
-    def close_order(self):
+    def close_order_done(self):
         active_id = self._context.get('active_id')
         if active_id:
             request = self.env['technical_support.order'].browse(self._context.get('active_id'))

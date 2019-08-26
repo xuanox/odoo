@@ -19,7 +19,9 @@
                       <field name="remote" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
                   </group>
                   <footer>
-                      <button name="close_ticket" string="Close Order and Ticket" attrs="{'invisible':[('close_order_ticket','=',False)]}" type="object"  class="oe_highlight"  />                      or
+                      <button name="close_ticket" string="Close Order and Ticket" attrs="{'invisible':[('close_order_ticket','=',False)]}" type="object"  class="oe_highlight"  />
+                      <button name="close_order_done" string="Close Order" type="object"  attrs="{'invisible':[('close_order_ticket','=',True)]}" class="oe_highlight"  />
+                      or
                       <button string="Cancel" class="oe_link" special="cancel" />
                   </footer>
                 </form>
