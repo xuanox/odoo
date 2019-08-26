@@ -31,9 +31,9 @@
     'icon': '/continuous_improvement/static/src/img/icon.png',
     'depends': ['base', 'calendar', 'mail'],
     'data': [
-        'views/continuous_improvement_views.xml',
         'security/continuous_improvement.xml',
         'security/ir.model.access.csv',
+        'views/continuous_improvement_views.xml',
     ],
     'demo': [],
     'images': [
