@@ -6,7 +6,7 @@
           <field name="inherit_id" ref="technical_support.technical_support_order_form_view"/>
           <field name="arch" type="xml">
               <xpath expr="//button[@name='action_send_mail']" position="after">
-                <button name="%(action_close_ticket)d" string="CLOSE ORDER/TICKET" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
+                <button name="%(action_close_ticket)d" string="CLOSE ORDER/TICKET" states="ready" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
               </xpath>
           </field>
       </record>
