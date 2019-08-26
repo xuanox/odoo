@@ -17,7 +17,7 @@ class TechnicalSupportCloseTicket(models.TransientModel):
     cause_reason = fields.Many2one('helpdesk.ticket.cause.reason', string='cause Reason', index=True, track_visibility='onchange')
     remote = fields.Boolean('Remote Attention', copy=False)
     close_order = fields.Boolean('Close Order Only', copy=False)
-    close_ticket = fields.Boolean('Close Order and Ticket', copy=False)
+    close_order_ticket = fields.Boolean('Close Order and Ticket', copy=False)
 
     def close_ticket(self):
         active_id = self._context.get('active_id')
