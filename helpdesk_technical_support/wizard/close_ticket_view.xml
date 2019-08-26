@@ -7,10 +7,8 @@
             <field name="model">technical_support.close.ticket</field>
             <field name="arch" type="xml">
                 <form string="Close Ticket" version="7.0">
-                  <p>Está Seguro de Cerrar la Orden de Servicio</p>
-                  <p>Al Cerrar la Orden, no podrá editar la información</p>
-                  <p>Aseguré de llenar toda la información</p>
-                  <p>Si no está seguro, cierre la ventana y verifique la información</p>
+                  <p>Está Seguro de Cerrar la Orden de Servicio, al Cerrar la Orden, no podrá editar la información</p>
+                  <p>Aseguré de llenar toda la información, si no está seguro, cierre la ventana y verifique la información</p>
                   <group>
                       <field name="close_order"/>
                       <field name="close_order_ticket"/>
