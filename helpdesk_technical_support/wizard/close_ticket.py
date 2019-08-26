@@ -13,7 +13,7 @@ class TechnicalSupportCloseTicket(models.TransientModel):
     _name = 'technical_support.close.ticket'
     _description = 'Close Ticket'
 
-    detail_cause = fields.Text('Detail', readonly=True)
+    detail_cause = fields.Text('Detail')
     cause_reason = fields.Many2one('helpdesk.ticket.cause.reason', string='Cause', index=True, track_visibility='onchange')
     remote = fields.Boolean('Remote Attention', copy=False)
     close_order = fields.Boolean('Close Order Only', copy=False)
@@ -29,5 +29,12 @@ class TechnicalSupportCloseTicket(models.TransientModel):
             request.write({'close_order':self.close_order})
             request.write({'close_ticket':self.close_ticket})
             request.ticket_done()
+            request.action_done()
+        return {'type': 'ir.actions.act_window_close',}
+
+    def close_order(self):
+        active_id = self._context.get('active_id')
+        if active_id:
+            request = self.env['technical_support.order'].browse(self._context.get('active_id'))
             request.action_done()
         return {'type': 'ir.actions.act_window_close',}
