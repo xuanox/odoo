@@ -199,7 +199,7 @@ class TechnicalSupportOrder(models.Model):
                 order.ticket_id.write({'stage_id': 3})
                 order.ticket_id.remote = order.remote
                 order.ticket_id.detail_cause= order.detail_cause
-                order.ticket_id.cause_reason.id= order.cause_reason.id
+                order.ticket_id.cause_reason= order.cause_reason.id
         return True
 
     def _track_subtype(self, init_values):
