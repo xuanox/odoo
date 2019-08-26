@@ -11,11 +11,18 @@
                   <p>Al Cerrar la Orden, no podrá editar la información</p><br />
                   <p>Aseguré de llenar toda la información</p><br />
                   <p>Si no está seguro, cierre la ventana y verifique la información</p><br />
-                    <footer>
-                        <button name="close_ticket" string="Close Order and Ticket" type="object"  class="oe_highlight"  />
-                        or
-                        <button string="Cancel" class="oe_link" special="cancel" />
-                    </footer>
+                  <group>
+                      <field name="close_order"/>
+                      <field name="close_ticket"/>
+                      <field name="cause_reason"/>
+                      <field name="detail_cause"/>
+                      <field name="remote"/>
+                  </group>
+                  <footer>
+                      <button name="close_ticket" string="Close Order and Ticket" type="object"  class="oe_highlight"  />
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
                 </form>
             </field>
         </record>
