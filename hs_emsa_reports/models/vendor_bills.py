@@ -8,6 +8,7 @@ class VendorBillsReport(models.AbstractModel):
 	_name = "report.hs_emsa_reports.vendor_bill_template"
 	_description = 'Vendor Bills Report'
 
+
 	def get_date_invoice(self, invoice_datetime):
 		"""
 		Obtenemos la Fecha en que fue creada la nota credito dentro del Odoo
