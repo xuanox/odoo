@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_close_ticket_wizard" model="ir.ui.view">
+            <field name="name">Close Ticket</field>
+            <field name="model">technical_support.close.ticket</field>
+            <field name="arch" type="xml">
+                <form string="Close Ticket" version="7.0">
+                  <p>Está Seguro de Cerrar la Orden de Servicio, al Cerrar la Orden, no podrá editar la información</p>
+                  <p>Aseguré de llenar toda la información, si no está seguro, cierre la ventana y verifique la información</p>
+                  <group>
+                      <field name="close_order"/>
+                      <field name="close_order_ticket"/>
+                      <field name="cause_reason" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
+                      <field name="detail_cause" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
+                      <field name="remote" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
+                  </group>
+                  <footer>
+                      <button name="close_ticket" string="Close Order and Ticket" attrs="{'invisible':[('close_order_ticket','=',False)]}" type="object"  class="oe_highlight"  />
+                      <button name="close_order_done" string="Close Order" type="object"  attrs="{'invisible':[('close_order','=',False), ('close_order_ticket','=',True)]}" class="oe_highlight"  />
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_close_ticket" model="ir.actions.act_window">
+            <field name="name">Close Ticket</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">technical_support.close.ticket</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

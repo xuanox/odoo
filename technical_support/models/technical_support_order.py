@@ -102,6 +102,12 @@ class TechnicalSupportOrder(models.Model):
     wait_time= fields.Float(help="Wait Time in hours and minutes.", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     duration = fields.Float('Real Duration', store=True)
 
+    detail_cause = fields.Text('Detail Causa', readonly=True)
+    cause_reason = fields.Many2one('helpdesk.ticket.cause.reason', string='cause Reason', index=True, track_visibility='onchange')
+    remote = fields.Boolean('Remote Attention', copy=False)
+    close_order = fields.Boolean('Close Order Only', copy=False)
+    close_ticket = fields.Boolean('Close Order and Ticket', copy=False)
+
     @api.onchange('equipment_id','maintenance_type')
     def onchange_equipment(self):
         if self.equipment_id:
@@ -189,7 +195,11 @@ class TechnicalSupportOrder(models.Model):
 
     def ticket_done(self):
         for order in self:
-            if order.ticket_id: order.ticket_id.write({'stage_id': 3})
+            if order.ticket_id:
+                order.ticket_id.write({'stage_id': 3})
+                order.ticket_id.remote = order.remote
+                order.ticket_id.detail_cause= order.detail_cause
+                order.ticket_id.cause_reason= order.cause_reason.id
         return True
 
     def _track_subtype(self, init_values):

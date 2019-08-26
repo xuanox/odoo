@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
     <odoo>
-  <!--    <record id="technical_support_order_view_form_inherit_equipment_state" model="ir.ui.view">
-          <field name="name">technical_support.order.form.inherit.equipment.state</field>
+      <record id="technical_support_order_view_form_inherit" model="ir.ui.view">
+          <field name="name">Technical Support Order Form Inherit</field>
           <field name="model">technical_support.order</field>
           <field name="inherit_id" ref="technical_support.technical_support_order_form_view"/>
           <field name="arch" type="xml">
-              <xpath expr="//button[@name='action_done']" position="after">
-                <button name="%(action_state_equipment)d" string="Equipment State" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
+              <xpath expr="//button[@name='action_send_mail']" position="after">
+                <button name="%(action_close_ticket)d" string="CLOSE ORDER/TICKET" states="ready" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
               </xpath>
           </field>
-      </record> -->
+      </record>
     </odoo>
