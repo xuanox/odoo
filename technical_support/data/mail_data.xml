@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <!-- technical_support-specific activities, for automatic generation mainly -->
+    <record id="mail_act_technical_support_order" model="mail.activity.type">
+        <field name="name">Technical Support order</field>
+        <field name="icon">fa-wrench</field>
+        <field name="res_model_id" ref="technical_support.model_technical_support_order"/>
+    </record>
+
+</data>
+</odoo>
