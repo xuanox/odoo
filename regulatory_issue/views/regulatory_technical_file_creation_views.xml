@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-
-      <!-- stages : actions -->
+      <!-- stages : views -->
       <record id="regulatory_technical_file_creation_stage_view_search" model="ir.ui.view">
           <field name="name">regulatory.technical.file.creation.stage.view.search</field>
           <field name="model">regulatory.technical.file.creation.stage</field>
@@ -58,7 +57,7 @@
       </record>
 
 <!-- Technical File Creation -->
-        <record id="regulatory_technical_file_creation_view_form" model="ir.ui.view">
+      <record id="regulatory_technical_file_creation_view_form" model="ir.ui.view">
             <field name="name">regulatory.technical.file.creation.view.form</field>
             <field name="model">regulatory.technical.file.creation</field>
             <field name="arch" type="xml">
@@ -101,7 +100,7 @@
             </field>
         </record>
 
-        <record id="regulatory_technical_file_creation_view_tree" model="ir.ui.view">
+      <record id="regulatory_technical_file_creation_view_tree" model="ir.ui.view">
             <field name="name">regulatory.technical.file.creation.view.tree</field>
             <field name="model">regulatory.technical.file.creation</field>
             <field name="arch" type="xml">
@@ -117,7 +116,7 @@
             </field>
         </record>
 
-        <record id="regulatory_technical_file_creation_view_graph" model="ir.ui.view">
+      <record id="regulatory_technical_file_creation_view_graph" model="ir.ui.view">
             <field name="name">regulatory.technical.file.creation.view.graph</field>
             <field name="model">regulatory.technical.file.creation</field>
             <field name="arch" type="xml">
@@ -129,7 +128,7 @@
             </field>
         </record>
 
-        <record id="regulatory_technical_file_creation_view_pivot" model="ir.ui.view">
+      <record id="regulatory_technical_file_creation_view_pivot" model="ir.ui.view">
             <field name="name">regulatory.technical.file.creation.view.pivot</field>
             <field name="model">regulatory.technical.file.creation</field>
             <field name="arch" type="xml">
@@ -141,7 +140,7 @@
             </field>
         </record>
 
-        <record id="regulatory_technical_file_creation_view_dashboard" model="ir.ui.view">
+      <record id="regulatory_technical_file_creation_view_dashboard" model="ir.ui.view">
             <field name="name">regulatory.technical.file.creation.view.dashboard</field>
             <field name="model">regulatory.technical.file.creation</field>
             <field name="mode">primary</field>
@@ -153,19 +152,20 @@
             </field>
         </record>
 
-        <record id="regulatory_technical_file_creation_action" model="ir.actions.act_window">
+      <!-- Technical File Creation : actions -->
+      <record id="regulatory_technical_file_creation_action" model="ir.actions.act_window">
             <field name="name">Technical File Creation</field>
             <field name="res_model">regulatory.technical.file.creation</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,pivot,graph,dashboard</field>
         </record>
 
-        <menuitem
-          id="regulatory_technical_file_creation"
-          parent="regulatory_management_registry"
-          action="regulatory_technical_file_creation_action"
-          name="Creation"
-          sequence="2"/>
+      <menuitem
+        id="regulatory_technical_file_creation"
+        parent="regulatory_management_registry"
+        action="regulatory_technical_file_creation_action"
+        name="Creation"
+        sequence="2"/>
 
     </data>
 </odoo>

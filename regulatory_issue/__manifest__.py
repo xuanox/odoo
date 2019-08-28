@@ -44,6 +44,8 @@
         'views/regulatory_technical_criteria_views.xml',
         'views/regulatory_technical_file_views.xml',
         'views/regulatory_technical_file_creation_views.xml',
+        'views/regulatory_technical_file_modification_views.xml',
+        'views/regulatory_technical_file_registry_views.xml',
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],
