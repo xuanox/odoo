@@ -221,12 +221,5 @@
             <field name="view_mode">tree,form,kanban,pivot,graph,dashboard</field>
       </record>
 
-      <menuitem
-        id="regulatory_technical_file_registry"
-        parent="regulatory_management_registry"
-        action="regulatory_technical_file_registry_action"
-        name="Registry"
-        sequence="3"/>
-
     </data>
 </odoo>

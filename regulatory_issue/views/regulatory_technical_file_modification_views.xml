@@ -168,12 +168,5 @@
             <field name="view_mode">tree,form,pivot,graph,dashboard</field>
         </record>
 
-        <menuitem
-          id="regulatory_technical_file_modification"
-          parent="regulatory_management_registry"
-          action="regulatory_technical_file_modification_action"
-          name="Modification"
-          sequence="4"/>
-
     </data>
 </odoo>

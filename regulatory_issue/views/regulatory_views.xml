@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+      <menuitem
+          id="regulatory_management_menu"
+          name="Regulatory"
+          groups="group_regulatory_issue_user"
+          web_icon="regulatory_issue,static/description/icon.png"/>
+
+      <menuitem
+        id="regulatory_management_registry"
+        parent="regulatory_management_menu"
+        name="Registry"
+        sequence="2"/>
+
+      <menuitem
+        id="regulatory_management_legal_documentation"
+        name="Legal Documents"
+        parent="regulatory_management_menu"
+        action="regulatory_legal_documentation_action"
+        sequence="3" />
+
+      <menuitem
+        id="regulatory_management_technical_criteria"
+        parent="regulatory_management_menu"
+        action="regulatory_technical_criteria_action"
+        name="Technical Criteria"
+        sequence="4"/>
+
+      <menuitem
+        id="regulatory_management_license"
+        parent="regulatory_management_menu"
+        action="regulatory_license_action"
+        name="License"
+        sequence="5"/>
+
+      <menuitem
+        id="regulatory_management_statistics"
+        parent="regulatory_management_menu"
+        action="regulatory_technical_file_action"
+        name="Statistics"
+        sequence="6"/>
+
+      <menuitem
+        id="regulatory_management_configuration"
+        parent="regulatory_management_menu"
+        name="Configuration"
+        sequence="7" />
+
+      <!-- Registry -->
+      <menuitem
+        id="regulatory_technical_file"
+        parent="regulatory_management_registry"
+        action="regulatory_technical_file_action"
+        name="Technical File"
+        sequence="1"/>
+
+      <menuitem
+        id="regulatory_technical_file_creation"
+        parent="regulatory_management_registry"
+        action="regulatory_technical_file_creation_action"
+        name="Creation Request"
+        sequence="2"/>
+
+      <menuitem
+        id="regulatory_technical_file_modification"
+        parent="regulatory_management_registry"
+        action="regulatory_technical_file_modification_action"
+        name="Modification Request"
+        sequence="3"/>
+
+      <menuitem
+        id="regulatory_technical_file_registry"
+        parent="regulatory_management_registry"
+        action="regulatory_technical_file_registry_action"
+        name="Registry Request"
+        sequence="4"/>
+
+      <!-- Configuration -->
+      <menuitem
+        id="regulatory_legal_documentation_stage"
+        parent="regulatory_management_configuration"
+        action="regulatory_legal_documentation_stage_action"/>
+
+      <menuitem
+        id="regulatory_legal_documentation_type"
+        parent="regulatory_management_configuration"
+        action="regulatory_legal_documentation_type_action"/>
+
+      <menuitem
+        id="regulatory_technical_file_type_area"
+        parent="regulatory_management_configuration"
+        action="regulatory_technical_file_type_area_action"/>
+
+      <menuitem
+        id="regulatory_technical_file_group"
+        parent="regulatory_management_configuration"
+        action="regulatory_technical_file_group_action"/>
+
+      <menuitem
+        id="regulatory_technical_file_modification_stage"
+        parent="regulatory_management_configuration"
+        action="regulatory_technical_file_modification_stage_action"/>
+
+      <menuitem
+        id="regulatory_technical_file_creation_stage"
+        parent="regulatory_management_configuration"
+        action="regulatory_technical_file_creation_stage_action"/>
+
+      <menuitem
+        id="regulatory_technical_file_registry_stage"
+        parent="regulatory_management_configuration"
+        action="regulatory_technical_file_registry_stage_action"/>
+
+    </data>
+</odoo>

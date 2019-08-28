@@ -47,7 +47,11 @@
         <field name="context">{}</field>  <!-- force empty -->
     </record>
 
-    <menuitem name="Stage Statistics" id="report_stage_analysis" parent="regulatory_issue.regulatory_technical_file"
-    sequence="99" action="regulatory_issue_registry_stage_action_analysis"/>
+    <menuitem
+      name="State Statistics"
+      id="report_stage_analysis"
+      parent="regulatory_issue.regulatory_management_statistics"
+      sequence="5"
+      action="regulatory_issue_registry_stage_action_analysis"/>
 
 </odoo>

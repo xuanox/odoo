@@ -161,39 +161,5 @@
             <field name="view_mode">tree,form,pivot,graph,dashboard</field>
         </record>
 
-        <menuitem
-            id="regulatory_management_registry"
-            parent="regulatory_management_menu"
-            name="Registry"
-            sequence="1"/>
-
-        <menuitem
-            id="regulatory_technical_file"
-            parent="regulatory_management_registry"
-            action="regulatory_technical_file_action"
-            name="Technical File"
-            sequence="1"/>
-
-        <menuitem
-          id="regulatory_technical_file_type_area"
-          parent="regulatory_management_configuration"
-          action="regulatory_technical_file_type_area_action"/>
-        <menuitem
-          id="regulatory_technical_file_group"
-          parent="regulatory_management_configuration"
-          action="regulatory_technical_file_group_action"/>
-        <menuitem
-          id="regulatory_technical_file_modification_stage"
-          parent="regulatory_management_configuration"
-          action="regulatory_technical_file_modification_stage_action"/>
-        <menuitem
-          id="regulatory_technical_file_creation_stage"
-          parent="regulatory_management_configuration"
-          action="regulatory_technical_file_creation_stage_action"/>
-        <menuitem
-          id="regulatory_technical_file_registry_stage"
-          parent="regulatory_management_configuration"
-          action="regulatory_technical_file_registry_stage_action"/>
-
     </data>
 </odoo>
