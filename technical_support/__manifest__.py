@@ -48,6 +48,7 @@ Required modules:
         'data/technical_support_sequence.xml',
         'data/technical_support_data.xml',
         'data/mail_template_data.xml',
+        'data/mail_data.xml',
         'views/technical_support_order_view.xml',
         'views/technical_support_view.xml',
         'views/equipment_view.xml',
