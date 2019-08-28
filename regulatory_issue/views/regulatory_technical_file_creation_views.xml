@@ -63,7 +63,8 @@
             <field name="arch" type="xml">
               <form string="Technical File Creation">
                 <header>
-                      <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                  <button name="%(action_homologation_assigned)d" string="Cita de Homologación" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+                  <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                   <sheet>
                       <div class="oe_title">
@@ -82,6 +83,7 @@
                         <field name="responsible_id" widget="many2one"/>
                         <field name="responsible_sales_id" widget="many2one"/>
                         <field name="sales_team_id" widget="many2one"/>
+                        <field name="responsible_team_lider_id" widget="many2one"/>
                       </group>
                   </group>
               <notebook>

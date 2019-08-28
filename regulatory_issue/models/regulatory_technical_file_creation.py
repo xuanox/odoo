@@ -79,5 +79,9 @@ class RegulatoryTechnicalFileCreation(models.Model):
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     entity_reference = fields.Char('Entity Reference', copy=False)
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    location_appointment = fields.Text('Appointment Location')
+    location_homologation = fields.Text('Homologation Location')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
+
+    def action_homologation(self):
+        self.write({'state': 'homologation'})
+        return True
