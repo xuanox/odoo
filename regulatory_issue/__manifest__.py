@@ -33,6 +33,8 @@
     'data': [
         'security/regulatory_issue.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
         'wizard/assign_view.xml',
         'wizard/appointment_view.xml',
         'wizard/registry_lost_views.xml',
@@ -41,8 +43,7 @@
         'views/regulatory_legal_documentation_views.xml',
         'views/regulatory_technical_criteria_views.xml',
         'views/regulatory_technical_file_views.xml',
-        'data/ir_sequence_data.xml',
-        'data/mail_template_data.xml',
+        'views/regulatory_technical_file_creation_views.xml',
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],
