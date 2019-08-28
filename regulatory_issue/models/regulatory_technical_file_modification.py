@@ -39,7 +39,6 @@ class RegulatoryTechnicalFileModification(models.Model):
     _description = 'Regulatory Technical File Modification'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
