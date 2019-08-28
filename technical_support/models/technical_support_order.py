@@ -31,7 +31,9 @@ class TechnicalSupportOrder(models.Model):
         ('pm', 'Preventive'),
         ('cm', 'Corrective'),
         ('in', 'Instalación'),
-        ('cbm', 'Predictive')
+        ('cbm', 'Predictive'),
+        ('din', 'Desinstalación'),
+        ('fco', 'FCO')
     ]
 
     @api.multi
@@ -217,7 +219,9 @@ class TechnicalSupportOrder(models.Model):
     def create(self, vals):
         if vals.get('name','/')=='/':
             vals['name'] = self.env['ir.sequence'].next_by_code('technical_support.order') or '/'
-        return super(TechnicalSupportOrder, self).create(vals)
+        request = super(TechnicalSupportOrder, self).create(vals)
+        request.activity_update()
+        return request
 
     @api.multi
     def write(self, vals):
@@ -230,7 +234,39 @@ class TechnicalSupportOrder(models.Model):
                 elif order.state in ('released','ready'):
                     vals['date_scheduled'] = vals['date_execution']
                 else: del vals['date_execution']
-        return super(TechnicalSupportOrder, self).write(vals)
+        res = super(TechnicalSupportOrder, self).write(vals)
+        if 'state' in vals:
+            self.filtered(lambda m: m.state == 'ready')
+            self.activity_feedback(['technical_support.mail_act_technical_support_order'])
+        if vals.get('user_id') or vals.get('date_planned'):
+            self.activity_update()
+        if vals.get('equipment_id'):
+            # need to change description of activity also so unlink old and create new activity
+            self.activity_unlink(['technical_support.mail_act_technical_support_order'])
+            self.activity_update()
+        return res
+
+    def activity_update(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['technical_support.mail_act_technical_support_order'])
+        for request in self.filtered(lambda request: request.date_planned):
+            date_dl = fields.Datetime.from_string(request.date_planned).date()
+            updated = request.activity_reschedule(
+                ['technical_support.mail_act_technical_support_order'],
+                date_deadline=date_dl,
+                new_user_id=request.user_id.id or self.env.uid)
+            if not updated:
+                if request.equipment_id:
+                    note = _('Request planned for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>') % (
+                        request.equipment_id._name, request.equipment_id.id, request.equipment_id.display_name)
+                else:
+                    note = False
+                request.activity_schedule(
+                    'technical_support.mail_act_technical_support_order',
+                    fields.Datetime.from_string(request.date_planned).date(),
+                    note=note, user_id=request.user_id.id or self.env.uid)
+
 
     @api.multi
     def action_send_mail(self):
