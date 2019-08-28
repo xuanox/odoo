@@ -6,6 +6,8 @@
 
 	'description': """
 		Conjunto de Reportes personalizados para la empresa Electronica Medica S.A.
+		Reporte de Recibo de pago
+		Reporte de Productos con stock 0
 	""",
 
 	'author': 'HS Consulting S.A.',
