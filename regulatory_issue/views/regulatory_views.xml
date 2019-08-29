@@ -9,6 +9,13 @@
           web_icon="regulatory_issue,static/description/icon.png"/>
 
       <menuitem
+        id="regulatory_management_dashboard"
+        action="regulatory_dashboard_action_main"
+        sequence="1"
+        parent="regulatory_management_menu"
+        name="Dashboard"/>
+
+      <menuitem
         id="regulatory_management_registry"
         parent="regulatory_management_menu"
         name="Registry"

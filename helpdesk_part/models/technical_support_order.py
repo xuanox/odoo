@@ -15,4 +15,4 @@ from dateutil.relativedelta import *
 class TechnicalSupportOrder(models.Model):
     _inherit = 'technical_support.order'
 
-    part_line_ids = fields.Many2many('part.line', 'technical_support_order_part_line_rel', 'technical_support_order_id', 'part_line_id', string="Orders", copy=False, track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    part_line_ids = fields.Many2many('part.line', 'technical_support_order_part_line_rel', 'technical_support_order_id', 'part_line_id', string="Orders", copy=False, track_visibility='onchange')
