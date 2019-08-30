@@ -32,7 +32,7 @@ class TechnicalSupportOrder(models.Model):
         ('cm', 'Corrective'),
         ('in', 'Instalación'),
         ('cbm', 'Predictive'),
-        ('din', 'Desinstalación'),
+        ('din', 'Uninstall'),
         ('fco', 'FCO')
     ]
 
