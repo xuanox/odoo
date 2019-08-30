@@ -6,7 +6,7 @@
           <field name="model">regulatory.technical.file</field>
           <field name="priority">200</field>
           <field name="arch" type="xml">
-              <kanban class="oe_background_grey">
+              <kanban>
 
               </kanban>
           </field>
@@ -15,8 +15,8 @@
       <record id="regulatory_dashboard_action_main" model="ir.actions.act_window">
           <field name="name">Regulatory Dashboard</field>
           <field name="res_model">regulatory.technical.file</field>
-          <field name="view_type">form</field>
-          <field name="view_mode">kanban,form</field>
+          <field name="view_type">kanban</field>
+          <field name="view_mode">kanban</field>
           <field name="context">{}</field>
           <field name="view_id" ref="regulatory_dashboard_view_kanban"/>
           <field name="help" type="html">
