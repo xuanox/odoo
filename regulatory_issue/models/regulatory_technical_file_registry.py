@@ -96,6 +96,22 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
 
+    @api.model
+    def _onchange_user_values(self, user_id):
+        if not user_id:
+            return {}
+        if user_id and self._context.get('team_id'):
+            team = self.env['crm.team'].browse(self._context['team_id'])
+            if user_id in team.member_ids.ids:
+                return {}
+        team_id = self.env['crm.team']._get_default_team_id(user_id=user_id)
+        return {'team_id': team_id}
+
+    @api.onchange('user_id')
+    def _onchange_user_id(self):
+        if self.user_id.sale_team_id:
+            values = self._onchange_user_values(self.user_id.id)
+            self.update(values)
 
     @api.onchange('entity')
     def _onchange_entity(self):
