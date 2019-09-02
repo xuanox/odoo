@@ -40,6 +40,7 @@
         'wizard/registry_lost_views.xml',
         'wizard/reject_view.xml',
         'wizard/homologation_view.xml',
+        'views/assets.xml',
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',
         'views/regulatory_technical_criteria_views.xml',
