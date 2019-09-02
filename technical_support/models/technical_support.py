@@ -29,7 +29,10 @@ class TechnicalSupportRequest(models.Model):
 
     MAINTENANCE_TYPE_SELECTION = [
         ('pm', 'Preventive'),
-        ('cbm', 'Predictive')
+        ('in', 'Install'),
+        ('cbm', 'Predictive'),
+        ('din', 'Uninstall'),
+        ('fco', 'FCO')
     ]
 
     def _technical_support_count(self):

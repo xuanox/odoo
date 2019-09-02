@@ -15,6 +15,18 @@ class Part(models.Model):
     tracking_fields = ['state', 'user_id']
 
 
+class RegulatoryTechnicalFileCreation(models.Model):
+    _inherit = "regulatory.technical.file.creation"
+    tracking_fields = ['state', 'user_id']
+
+class RegulatoryTechnicalFileModification (models.Model):
+    _inherit = "regulatory.technical.file.modification"
+    tracking_fields = ['state', 'user_id']
+
 class RegulatoryTechnicalFileRegistry(models.Model):
     _inherit = "regulatory.technical.file.registry"
     tracking_fields = ['state', 'user_id']
+
+class MaintenanceRequest(models.Model):
+    _inherit = "maintenance.request"
+    tracking_fields = ['stage_id', 'user_id']

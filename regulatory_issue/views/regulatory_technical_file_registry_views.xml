@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+      <record id="regulatory_technical_file_registry_stage_view_search" model="ir.ui.view">
+          <field name="name">regulatory.technical.file.registry.stage.view.search</field>
+          <field name="model">regulatory.technical.file.registry.stage</field>
+          <field name="arch" type="xml">
+              <search string="Technical File Registry Stage">
+                 <field name="name" string="Technical File Registry Stage"/>
+              </search>
+          </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_stage_view_tree" model="ir.ui.view">
+          <field name="name">regulatory.technical.file.registry.stage.view.tree</field>
+          <field name="model">regulatory.technical.file.registry.stage</field>
+          <field name="arch" type="xml">
+              <tree string="Technical File Registry Stage">
+                  <field name="sequence" widget="handle"/>
+                  <field name="name"/>
+                  <field name="fold"/>
+                  <field name="done"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_stage_view_kanban" model="ir.ui.view">
+          <field name="name">regulatory.technical.file.registry.stage.view.kanban</field>
+          <field name="model">regulatory.technical.file.registry.stage</field>
+          <field name="arch" type="xml">
+              <kanban class="o_kanban_mobile">
+                  <templates>
+                      <t t-name="kanban-box">
+                          <div t-attf-class="oe_kanban_global_click">
+                              <div>
+                                  <strong><field name="name"/></strong>
+                              </div>
+                          </div>
+                      </t>
+                  </templates>
+              </kanban>
+          </field>
+      </record>
+
+      <!-- stages : actions -->
+      <record id="regulatory_technical_file_registry_stage_action" model="ir.actions.act_window">
+          <field name="name">Technical File Registry Stages</field>
+          <field name="res_model">regulatory.technical.file.registry.stage</field>
+          <field name="view_mode">tree,kanban,form</field>
+          <field name="view_type">form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Add a new stage in the Technical File Registry
+            </p>
+          </field>
+      </record>
+
+      <!-- Technical File Registry -->
+      <record id="regulatory_technical_file_registry_view_form" model="ir.ui.view">
+            <field name="name">Registry View Form</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="arch" type="xml">
+              <form string="Technical File Registry">
+                <header>
+                  <button name="%(action_request_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+                  <button name="%(action_appointment_assigned)d" string="Cita Asignada" states="review,wait,rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+                  <button name="action_send_mail" states="review,wait" string="Consulta a Fábrica" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_review" states="assigned,wait,rejected,correct" string="Revisión" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_set_fulfill" states="review,wait,appointment" string="Cumple" attrs="{'invisible': ['|', ('is_won', '=', True)]}" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="%(registry_lost_action)d" states="review,wait" string="No Cumple" attrs="{'invisible': ['|', ('is_lost', '=', True)]}" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="%(action_registry_reject)d" states="waiting" string="Rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_approved" states="waiting" string="Approved" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_appointment_approved" states="appointment" string="Approved" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_appointment_rejected" states="appointment" string="Rejected" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,assigned,review,appointment,waiting,done" statusbar_colors='{"assigned":"red","appointment":"blue"}'/>
+                </header>
+                <sheet>
+                  <div class="oe_button_box" name="button_box">
+                  </div>
+                  <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_lost', '=', False)]}">No Cumple</div>
+                  <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_won', '=', False)]}">Cumple</div>
+                  <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_rejected', '=', False)]}">Rejected</div>
+                  <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_approved', '=', False)]}">Approved</div>
+                  <div class="oe_title">
+                          <label for="name" class="oe_edit_only" string="#Request:"/>
+                          <h1>
+                              <field name="name" placeholder="Name"/>
+                          </h1>
+                  </div>
+                  <group>
+                    <group>
+                      <field name="technical_file_id" widget="many2one"/>
+                      <field name="technical_file_name" />
+                      <field name="user_id" widget="many2one"/>
+                      <field name="team_id" widget="many2one"/>
+                      <field name="category"/>
+                      <field name="priority" widget="priority"/>
+                    </group>
+                    <group string="Factory Owner">
+                      <field name="brand_id" widget="many2one"/>
+                      <field name="models_id" widget="many2one"/>
+                      <field name="contact_id" widget="many2one"/>
+                    </group>
+                  </group>
+                  <group>
+                    <group string="Appointment Assigned" attrs="{'invisible':[('entity', '=', False)]}">
+                      <field name="date_planned" />
+                      <field name="entity"/>
+                      <field name="location_appointment"/>
+                    </group>
+                    <group string="Info" attrs="{'invisible':[('responsible_id', '=', False)]}">
+                      <field name="responsible_id" widget="many2one"/>
+                      <field name="stage_id" widget="many2one"/>
+                      <field name='is_won' invisible="1"/>
+                      <field name='is_lost' invisible="1"/>
+                      <field name='is_approved' invisible="1"/>
+                      <field name='is_rejected' invisible="1"/>
+                      <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
+                    </group>
+                  </group>
+                <notebook>
+                    <page name="info" string="Info">
+                      <group>
+                        <field name="pending_documentation_ids" nolabel="1">
+    											<tree editable="bottom">
+    												<field name="legal_documentation_id" widget="manyone"/>
+    												<field name="name"/>
+    												<field name="note"/>
+                            <field name="status"/>
+    											</tree>
+    										</field>
+                      </group>
+                      <group>
+                        <field name='observation' placeholder="Observation ......."/>
+                      </group>
+                    </page>
+                </notebook>
+              </sheet>
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="activity_ids" widget="mail_activity"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+              </form>
+            </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_view_tree" model="ir.ui.view">
+            <field name="name">Registry View Tree</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="technical_file_id" widget="many2one"/>
+                    <field name="models_id" widget="many2one"/>
+                    <field name="brand_id" widget="many2one"/>
+                    <field name="team_id" widget="many2one"/>
+                    <field name="responsible_id" widget="many2one"/>
+                    <field name="priority" widget="priority"/>
+                    <field name="state" />
+                </tree>
+            </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_view_kanban" model="ir.ui.view">
+            <field name="name">Registry View Kanban</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="state" />
+                    <field name="name"/>
+                    <field name="technical_file_id"/>
+                    <field name="models_id"/>
+                    <field name="brand_id"/>
+                    <field name="team_id"/>
+                    <field name="responsible_id" />
+                    <field name="priority" widget="priority"/>
+                </kanban>
+            </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_view_graph" model="ir.ui.view">
+            <field name="name">regulatory.technical.file.registry.view.graph</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="arch" type="xml">
+                <graph string="Technical File Registry"  type="pie">
+                    <field name="brand_id" type="col"/>
+                    <field name="responsible_id" type="row"/>
+                </graph>
+            </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_view_pivot" model="ir.ui.view">
+            <field name="name">regulatory.technical.file.registry.view.pivot</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="arch" type="xml">
+                <pivot string="Technical File Registry" disable_linking="True">
+                    <field name="brand_id" type="row"/>
+                    <field name="responsible_id" type="col"/>
+                </pivot>
+            </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_view_dashboard" model="ir.ui.view">
+            <field name="name">regulatory.technical.file.registry.view.dashboard</field>
+            <field name="model">regulatory.technical.file.registry</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <dashboard>
+                    <view type="graph" ref="regulatory_issue.regulatory_technical_file_registry_view_graph"/>
+                    <view type="pivot" ref="regulatory_issue.regulatory_technical_file_registry_view_pivot"/>
+                </dashboard>
+            </field>
+      </record>
+
+      <record id="regulatory_technical_file_registry_action" model="ir.actions.act_window">
+            <field name="name">Technical File Registry</field>
+            <field name="res_model">regulatory.technical.file.registry</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph,dashboard</field>
+      </record>
+
+    </data>
+</odoo>
