@@ -10,7 +10,7 @@
 
       <menuitem
         id="regulatory_management_dashboard"
-        action="regulatory_dashboard_action_main"
+        action="regulatory_dashboard_action"
         sequence="1"
         parent="regulatory_management_menu"
         name="Dashboard"/>
