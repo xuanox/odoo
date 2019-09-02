@@ -23,14 +23,14 @@
     'version': '0.6',
 
     # any module necessary for this one to work correctly
-    'depends': ['account_check_printing', 'hr_expense_check', 'l10n_pa'],
+    'depends': ['base', 'account_check_printing', 'hr_expense_check', 'l10n_pa'],
 
     # always loaded
     'data': [
-		'views/action_print_check.xml',
-		'views/print_check.xml',
-		'views/print_check_pa.xml',
-		'views/account_payment.xml'
+      'views/action_print_check.xml',
+      'views/print_check.xml',
+      'views/print_check_pa.xml',
+      'views/account_payment.xml'
     ],
     'installable': True,
     'auto_install': True,
