@@ -20,7 +20,7 @@
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Localization',
-    'version': '0.5',
+    'version': '0.6',
 
     # any module necessary for this one to work correctly
     'depends': ['account_check_printing', 'hr_expense_check', 'l10n_pa'],
@@ -30,6 +30,7 @@
 		'views/action_print_check.xml',
 		'views/print_check.xml',
 		'views/print_check_pa.xml',
+		'views/account_payment.xml'
     ],
     'installable': True,
     'auto_install': True,

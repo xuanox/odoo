@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+		<!-- Add you code here -->
+		
+		<!-- model.name inherit form view -->
+		<record id="account_check_payment_inherit2" model="ir.ui.view">
+			<field name="name">account.check.payment.inherit2</field>
+			<field name="model">account.payment</field>
+			<field name="inherit_id" ref="account_check_printing.view_account_payment_form_inherited"/>
+			<field name="arch" type="xml">
+				<!-- Add your xpath here -->
+				<xpath expr="//field[@name='check_amount_in_words']" position="attributes">
+					<attribute name="attrs">{}</attribute>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>
