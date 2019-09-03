@@ -90,7 +90,7 @@
         parent="regulatory_management_configuration"
         action="regulatory_dashboard_view_action"
         name="Dashboard Configuration"
-        sequence="0"/>
+        sequence="1"/>
 
       <menuitem
         id="regulatory_legal_documentation_type"
