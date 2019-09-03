@@ -119,7 +119,6 @@
           <field name="model">regulatory.dashboard</field>
           <field name="arch" type="xml">
               <tree string="Regulatory Dashboard">
-                  <field name="sequence" widget="handle"/>
                   <field name="name"/>
                   <field name="description"/>
                   <field name="company_id"/>
