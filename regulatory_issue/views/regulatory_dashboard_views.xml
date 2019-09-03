@@ -13,7 +13,7 @@
                     <div t-attf-class="o_kanban_card_header">
                       <div class="o_kanban_card_header_title">
                         <div class="o_primary">
-
+                          <field name="name"/>
                         </div>
                         <div class="o_kanban_manage_button_section">
                           <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
@@ -102,7 +102,7 @@
       </record>
 
       <record id="regulatory_dashboard_action" model="ir.actions.act_window">
-          <field name="name">Regulatory Dashboard</field>
+          <field name="name">Dashboard</field>
           <field name="res_model">regulatory.dashboard</field>
           <field name="view_mode">kanban,form</field>
           <field name="view_type">form</field>
