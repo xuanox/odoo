@@ -98,7 +98,6 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     @api.model
     def _onchange_user_values(self, user_id):
-        """ returns new values when user_id has changed """
         if not user_id:
             return {}
         if user_id and self._context.get('team_id'):
@@ -110,14 +109,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     @api.onchange('user_id')
     def _onchange_user_id(self):
-        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
         if self.user_id.sale_team_id:
             values = self._onchange_user_values(self.user_id.id)
             self.update(values)
 
     @api.onchange('entity')
     def _onchange_entity(self):
-        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
         if self.entity == 'minsa':
             location_appointment = "Dirección Nacional de Dispositivos Médicos."
         if self.entity == 'css':

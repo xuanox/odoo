@@ -29,3 +29,4 @@ from . import regulatory_technical_file_modification
 from . import regulatory_technical_file_registry
 from . import regulatory_technical_criteria
 from . import regulatory_legal_documentation
+from . import regulatory_dashboard

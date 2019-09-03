@@ -64,7 +64,7 @@
               <form string="Technical File Creation">
                 <header>
                   <button name="%(action_homologation_assigned)d" string="Cita de Homologación" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
-                  <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                  <field name="state" widget="statusbar"/>
                 </header>
                   <sheet>
                       <div class="oe_title">
