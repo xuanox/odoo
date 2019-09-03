@@ -114,5 +114,31 @@
           </field>
       </record>
 
+      <record id="regulatory_dashboard_view_tree" model="ir.ui.view">
+          <field name="name">Regulatory Dashboard View Tree</field>
+          <field name="model">regulatory.dashboard</field>
+          <field name="arch" type="xml">
+              <tree string="Regulatory Dashboard">
+                  <field name="sequence" widget="handle"/>
+                  <field name="name"/>
+                  <field name="description"/>
+                  <field name="company_id"/>
+              </tree>
+          </field>
+      </record>
+
+      <!-- stages : actions -->
+      <record id="regulatory_dashboard_view_action" model="ir.actions.act_window">
+          <field name="name">Regulatory Dashboard View Action</field>
+          <field name="res_model">regulatory.dashboard</field>
+          <field name="view_mode">tree,form</field>
+          <field name="view_type">form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Add a new Dashboard
+            </p>
+          </field>
+      </record>
+
     </data>
 </odoo>

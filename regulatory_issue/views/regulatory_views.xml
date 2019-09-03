@@ -86,9 +86,11 @@
 
       <!-- Configuration -->
       <menuitem
-        id="regulatory_legal_documentation_stage"
+        id="regulatory_dashboard_view"
         parent="regulatory_management_configuration"
-        action="regulatory_legal_documentation_stage_action"/>
+        action="regulatory_dashboard_view_action"
+        name="Dashboard"
+        sequence="0"/>
 
       <menuitem
         id="regulatory_legal_documentation_type"
