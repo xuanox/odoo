@@ -1,5 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_regulatory_license_user,regulatory_license.user,model_regulatory_license,base.group_user,1,0,0,0
+access_regulatory_license_user,regulatory_license.user,model_regulatory_license,group_regulatory_issue_user,1,0,0,0
+access_regulatory_dashboard_user,regulatory_dashboard.user,model_regulatory_dashboard,group_regulatory_issue_user,1,0,0,0
+access_regulatory_dashboard_lider_user,regulatory_dashboard.lider.user,model_regulatory_dashboard,group_regulatory_issue_lider,1,1,1,1
+access_regulatory_dashboard_admin_user,regulatory_dashboard.admin.user,model_regulatory_dashboard,group_regulatory_issue_manager,1,1,1,1
 access_regulatory_license_admin_user,regulatory_license.admin.user,model_regulatory_license,group_regulatory_issue_manager,1,1,1,1
 
 access_regulatory_legal_documentation_user,regulatory_legal_documentation.user,model_regulatory_legal_documentation,base.group_user,1,0,0,0
