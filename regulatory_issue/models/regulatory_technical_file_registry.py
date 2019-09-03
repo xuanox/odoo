@@ -194,6 +194,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         """ Fulfill semantic: """
         return self.write({'is_lost': True})
 
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.registry') or '/'
+        return super(RegulatoryTechnicalFileRegistry, self).create(vals)
 
 
 class RegulatoryTechnicalFileRegistryLostReason(models.Model):
