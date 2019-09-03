@@ -89,7 +89,7 @@
         id="regulatory_dashboard_view"
         parent="regulatory_management_configuration"
         action="regulatory_dashboard_view_action"
-        name="Dashboard"
+        name="Dashboard Configuration"
         sequence="0"/>
 
       <menuitem
