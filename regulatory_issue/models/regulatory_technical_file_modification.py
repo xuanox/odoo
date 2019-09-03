@@ -39,6 +39,20 @@ class RegulatoryTechnicalFileModification(models.Model):
     _description = 'Regulatory Technical File Modification'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    STATE_SELECTION = [
+        ('draft', 'New'),
+        ('assigned', 'Assigned'),
+        ('process', 'In Process'),
+        ('homologation', 'In Homologation'),
+        ('done', 'Completed'),
+        ('rejected', 'Rejected')
+    ]
+
+    ENTITY_SELECTION = [
+        ('minsa', 'MINSA'),
+        ('css', 'CSS'),
+    ]
+
     @api.returns('self')
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
@@ -55,7 +69,14 @@ class RegulatoryTechnicalFileModification(models.Model):
     stage_id = fields.Many2one('regulatory.technical.file.modification.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     modification_lines = fields.One2many('regulatory.technical.file.modification.line', 'regulatory_technical_file_modification_id', 'Modification Line', track_visibility='onchange')
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
-
+    state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
+        help="When the maintenance order is created the status is set to 'New'.\n\
+        If the order is Assigned the status is set to 'Assigned'.\n\
+        If the order is Process the status is set to 'Process'.\n\
+        If the order is Homologation the status is set to 'Homologation'.\n\
+        If the stock is Completed then the status is set to 'Completed'.\n\
+        When the request is over, the status is set to 'Rejected'.", default='draft')
+    entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
 
 class RegulatoryTechnicalFileModificationLine(models.Model):
     _name = 'regulatory.technical.file.modification.line'
