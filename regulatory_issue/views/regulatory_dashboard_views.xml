@@ -13,7 +13,9 @@
                     <div t-attf-class="o_kanban_card_header">
                       <div class="o_kanban_card_header_title">
                         <div class="o_primary">
-                          <field name="name"/>
+                          <a name="#" type="action">
+                            <field name="name"/>
+                          </a>
                         </div>
                         <div class="o_kanban_manage_button_section">
                           <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
