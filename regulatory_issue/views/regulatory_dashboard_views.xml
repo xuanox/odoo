@@ -3,7 +3,7 @@
     <data>
       <record id="regulatory_team_kanban" model="ir.ui.view">
         <field name="name">Regulatory Dashboard</field>
-        <field name="model">regulatory.technical.file</field>
+        <field name="model">regulatory.dashboard</field>
         <field name="arch" type="xml">
           <kanban class="oe_background_grey o_kanban_dashboard o_maintenance_team_kanban" create="0">
             <field name="name"/>
