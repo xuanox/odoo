@@ -6,7 +6,6 @@
         <field name="model">regulatory.dashboard</field>
         <field name="arch" type="xml">
           <kanban class="oe_background_grey o_kanban_dashboard o_maintenance_team_kanban" create="0">
-            <field name="name"/>
               <templates>
                 <t t-name="kanban-box">
                   <div t-attf-class="#{kanban_color}">
@@ -25,7 +24,7 @@
                         <div class="row">
                           <div class="col-6 o_kanban_primary_left">
                             <button class="btn btn-primary" name="" type="action" context="{}">
-                              5 To Do
+                              5To Do
                             </button>
                           </div>
                           <div class="col-6 o_kanban_primary_right">
@@ -98,6 +97,8 @@
                     </div>
                   </div>
                 </t>
+              </templates>
+              <templates>
                 <t t-name="kanban-box">
                   <div t-attf-class="#{kanban_color}">
                     <div t-attf-class="o_kanban_card_header">
@@ -115,7 +116,7 @@
                         <div class="row">
                           <div class="col-6 o_kanban_primary_left">
                             <button class="btn btn-primary" name="" type="action" context="{}">
-                              5 To Do
+                              5To Do
                             </button>
                           </div>
                           <div class="col-6 o_kanban_primary_right">
