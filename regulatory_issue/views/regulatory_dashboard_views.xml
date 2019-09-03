@@ -103,7 +103,7 @@
 
       <record id="regulatory_dashboard_action" model="ir.actions.act_window">
           <field name="name">Regulatory Dashboard</field>
-          <field name="res_model">regulatory.technical.file</field>
+          <field name="res_model">regulatory.dashboard</field>
           <field name="view_mode">kanban,form</field>
           <field name="view_type">form</field>
           <field name="view_id" ref="regulatory_dashboard_kanban"/>
