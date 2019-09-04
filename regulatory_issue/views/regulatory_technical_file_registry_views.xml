@@ -83,10 +83,10 @@
                   <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_rejected', '=', False)]}">Rejected</div>
                   <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_approved', '=', False)]}">Approved</div>
                   <div class="oe_title">
-                          <label for="name" class="oe_edit_only" string="#Request:"/>
-                          <h1>
-                              <field name="name" placeholder="Name"/>
-                          </h1>
+                    <label for="name" class="oe_edit_only" string="#Request:"/>
+                    <h1>
+                      <field name="name" placeholder="Name"/>
+                    </h1>
                   </div>
                   <group>
                     <group>
@@ -94,6 +94,7 @@
                       <field name="technical_file_name" />
                       <field name="user_id" widget="many2one"/>
                       <field name="team_id" widget="many2one"/>
+                      <field name="responsible_team_lider_id"/>
                       <field name="category"/>
                       <field name="priority" widget="priority"/>
                     </group>
