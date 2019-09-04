@@ -71,6 +71,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid))
     user_id = fields.Many2one('res.users', string='Sales Person', required=True, track_visibility='onchange', default=lambda self: self.env.user)
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', readonly=True)
+    responsible_team_lider_id = fields.Many2one('res.users', related='team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
