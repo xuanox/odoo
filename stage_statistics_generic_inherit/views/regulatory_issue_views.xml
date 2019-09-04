@@ -9,14 +9,15 @@
             <xpath expr="//page[@name='info']" position="after">
                 <page name="history" string="History">
                     <field name="stage_ids" attrs="{'readonly': 1}">
-                        <tree default_order="id desc">
-                            <field name="name"/>
-                            <field name="person_assign_id"/>
-                            <field name="stage"/>
-                            <field name="entry_date"/>
-                            <field name="exit_date"/>
-                            <field name="total_time"/>
-                        </tree>
+                      <tree default_order="id desc">
+                          <field name="name"/>
+                          <field name="person_assign_id"/>
+                          <field name="stage"/>
+                          <field name="entry_date"/>
+                          <field name="exit_date"/>
+                          <field name="total_days"/>
+                          <field name="total_time" widget="float_time"/>
+                      </tree>
                     </field>
                 </page>
             </xpath>
@@ -47,11 +48,65 @@
         <field name="context">{}</field>  <!-- force empty -->
     </record>
 
+    <record id="regulatory_issue_creation_view_form_electronica" model="ir.ui.view">
+        <field name="name">regulatory_issue_creation.form.electronica</field>
+        <field name="model">regulatory.technical.file.creation</field>
+        <field name="inherit_id" ref="regulatory_issue.regulatory_technical_file_creation_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='info']" position="after">
+                <page name="history" string="History">
+                    <field name="stage_ids" attrs="{'readonly': 1}">
+                      <tree default_order="id desc">
+                          <field name="name"/>
+                          <field name="person_assign_id"/>
+                          <field name="stage"/>
+                          <field name="entry_date"/>
+                          <field name="exit_date"/>
+                          <field name="total_days"/>
+                          <field name="total_time" widget="float_time"/>
+                      </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="regulatory_issue_creation_stage_history_view_pivot" model="ir.ui.view">
+         <field name="name">stage.history.pivot</field>
+         <field name="model">stage.history</field>
+         <field name="arch" type="xml">
+             <pivot string="Stage Analysis" disable_linking="True">
+                 <field name="name" type="row"/>
+                 <field name="stage" type="col"/>
+                 <field name="total_time" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+
+    <record id="regulatory_issue_creation_stage_action_analysis" model="ir.actions.act_window">
+        <field name="name">Stage History Analysis</field>
+        <field name="res_model">stage.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('regulatory_issue_creation_stage_history_view_pivot')})]"/>
+        <field name="domain">[('res_model', '=', 'regulatory.technical.file.creation')]</field>
+        <field name="context">{}</field>  <!-- force empty -->
+    </record>
+
     <menuitem
-      name="State Statistics"
-      id="report_stage_analysis"
+      name="Creation"
+      id="report_creation_stage_analysis"
       parent="regulatory_issue.regulatory_management_statistics"
-      sequence="5"
+      sequence="2"
+      action="regulatory_issue_creation_stage_action_analysis"/>
+
+    <menuitem
+      name="Registry"
+      id="report_stage_registry__analysis"
+      parent="regulatory_issue.regulatory_management_statistics"
+      sequence="3"
       action="regulatory_issue_registry_stage_action_analysis"/>
 
 </odoo>
