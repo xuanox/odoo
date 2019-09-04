@@ -100,7 +100,7 @@
         <field name="model">regulatory.technical.file.modification</field>
         <field name="inherit_id" ref="regulatory_issue.regulatory_technical_file_modification_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='info']" position="after">
+            <xpath expr="//page[@name='line']" position="after">
                 <page name="history" string="History">
                     <field name="stage_ids" attrs="{'readonly': 1}">
                       <tree default_order="id desc">

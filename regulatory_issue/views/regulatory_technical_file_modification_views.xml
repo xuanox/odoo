@@ -89,7 +89,7 @@
                     <field name='observation' placeholder="Observation ......."/>
                   </group>
               <notebook>
-                  <page name="Line" string="Modification Line">
+                  <page name="line" string="Modification Line">
                     <group string="Modification Line">
                         <field name="modification_lines" nolabel="1">
                             <tree string="Modification Line" editable="bottom">
