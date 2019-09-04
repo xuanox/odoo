@@ -61,6 +61,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     technical_file_name = fields.Char(string="Proposed Name for the File", required=True, track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
+    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
     responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user)
     sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
