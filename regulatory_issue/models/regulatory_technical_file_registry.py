@@ -95,6 +95,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
+    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
 
     @api.model
     def _onchange_user_values(self, user_id):
