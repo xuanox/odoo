@@ -57,7 +57,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', readonly=True, copy=False)
+    name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Description', track_visibility='onchange')
@@ -77,6 +77,13 @@ class RegulatoryTechnicalFileModification(models.Model):
         If the stock is Completed then the status is set to 'Completed'.\n\
         When the request is over, the status is set to 'Rejected'.", default='draft')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
+    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.modification') or '/'
+        return super(RegulatoryTechnicalFileModification, self).create(vals)
 
 class RegulatoryTechnicalFileModificationLine(models.Model):
     _name = 'regulatory.technical.file.modification.line'

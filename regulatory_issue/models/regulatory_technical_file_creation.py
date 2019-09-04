@@ -57,7 +57,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     def _default_stage(self):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
 
-    name = fields.Char('#Request:', readonly=True, copy=False)
+    name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_name = fields.Char(string="Proposed Name for the File", required=True, track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
@@ -81,7 +81,14 @@ class RegulatoryTechnicalFileCreation(models.Model):
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     location_homologation = fields.Text('Homologation Location')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
+    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
 
     def action_homologation(self):
         self.write({'state': 'homologation'})
         return True
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.creation') or '/'
+        return super(RegulatoryTechnicalFileCreation, self).create(vals)
