@@ -122,8 +122,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
                 new_user_id=request.user_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Request planned for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>') % (
-                        request.models_id._name)
+                    note = _('Request planned for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
                 else:
                     note = False
                 request.activity_schedule(
