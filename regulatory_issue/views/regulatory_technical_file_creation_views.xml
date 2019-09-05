@@ -78,6 +78,7 @@
                           <field name="technical_file_name" placeholder="Proposed Name for the File"/>
                           <field name="models_id" widget="many2one"/>
                           <field name="brand_id" widget="many2one"/>
+                          <field name="priority" widget="priority"/>
                       </group>
                       <group>
                         <field name="user_id" widget="many2one"/>
@@ -113,6 +114,7 @@
                     <field name="sales_team_id" widget="many2one"/>
                     <field name="user_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
+                    <field name="priority" widget="priority"/>
                     <field name="stage_id" widget="many2one"/>
                 </tree>
             </field>
