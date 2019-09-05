@@ -123,7 +123,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
             if not updated:
                 if request.models_id:
                     note = _('Request planned for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>') % (
-                        request.models_id._name, request.models_id.display_name)
+                        request.models_id._name)
                 else:
                     note = False
                 request.activity_schedule(
