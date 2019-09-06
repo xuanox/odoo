@@ -23,17 +23,6 @@ TICKET_PRIORITY = [
     ('3', 'Urgent'),
 ]
 
-class RegulatoryTechnicalFileCreationStage(models.Model):
-    _name = 'regulatory.technical.file.creation.stage'
-    _description = 'Regulatory Technical File Creation Stage'
-    _order = 'sequence, id'
-
-    name = fields.Char('Name', required=True, translate=True)
-    sequence = fields.Integer('Sequence', default=20)
-    fold = fields.Boolean('Folded in Regulatory Technical File Creation Pipe')
-    done = fields.Boolean('Request Done')
-
-
 class RegulatoryTechnicalFileCreation(models.Model):
     _name = 'regulatory.technical.file.creation'
     _description = 'Regulatory Technical File Creation'
@@ -62,11 +51,10 @@ class RegulatoryTechnicalFileCreation(models.Model):
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
     user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
     responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True)
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid))
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange', required=True)
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
-    stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0', track_visibility='onchange')
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
