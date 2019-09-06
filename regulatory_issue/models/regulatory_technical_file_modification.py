@@ -23,17 +23,6 @@ TICKET_PRIORITY = [
     ('3', 'Urgent'),
 ]
 
-class RegulatoryTechnicalFileModificationStage(models.Model):
-    _name = 'regulatory.technical.file.modification.stage'
-    _description = 'Regulatory Technical File Modification Stage'
-    _order = 'sequence, id'
-
-    name = fields.Char('Name', required=True, translate=True)
-    sequence = fields.Integer('Sequence', default=20)
-    fold = fields.Boolean('Folded in Regulatory Technical File Modification Pipe')
-    done = fields.Boolean('Request Done')
-
-
 class RegulatoryTechnicalFileModification(models.Model):
     _name = 'regulatory.technical.file.modification'
     _description = 'Regulatory Technical File Modification'
@@ -41,21 +30,11 @@ class RegulatoryTechnicalFileModification(models.Model):
 
     STATE_SELECTION = [
         ('draft', 'New'),
-        ('assigned', 'Assigned'),
         ('process', 'In Process'),
-        ('homologation', 'In Homologation'),
+        ('scheduled', 'Scheduled'),
         ('done', 'Completed'),
         ('rejected', 'Rejected')
     ]
-
-    ENTITY_SELECTION = [
-        ('minsa', 'MINSA'),
-        ('css', 'CSS'),
-    ]
-
-    @api.returns('self')
-    def _default_stage(self):
-        return self.env['regulatory.technical.file.modification.stage'].search([], limit=1)
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
@@ -68,7 +47,6 @@ class RegulatoryTechnicalFileModification(models.Model):
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
-    stage_id = fields.Many2one('regulatory.technical.file.modification.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     modification_lines = fields.One2many('regulatory.technical.file.modification.line', 'regulatory_technical_file_modification_id', 'Modification Line', track_visibility='onchange')
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
@@ -78,8 +56,24 @@ class RegulatoryTechnicalFileModification(models.Model):
         If the order is Homologation the status is set to 'Homologation'.\n\
         If the stock is Completed then the status is set to 'Completed'.\n\
         When the request is over, the status is set to 'Rejected'.", default='draft')
-    entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+
+    def action_process(self):
+        self.write({'state': 'process'})
+        return True
+
+    def action_scheduled(self):
+        self.write({'state': 'scheduled'})
+        return True
+
+    def action_done(self):
+        self.write({'state': 'done'})
+        return True
+
+    def action_rejected(self):
+        self.write({'state': 'rejected'})
+        return True
 
     @api.model
     def create(self, vals):
