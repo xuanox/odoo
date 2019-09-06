@@ -63,8 +63,11 @@
             <field name="arch" type="xml">
               <form string="Technical File Creation">
                 <header>
+                  <button name="%(action_creation_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+                  <button name="action_process" states="assigned" string="Revisión" type="object" class="oe_highlight"/>
                   <button name="%(action_homologation_assigned)d" string="Cita de Homologación" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
-                  <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                  <button name="%(action_creation_done)d" string="Complete" states="homologation" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+                  <field name="state" widget="statusbar"/>
                 </header>
                   <sheet>
                       <div class="oe_title">
@@ -75,28 +78,43 @@
                   </div>
                   <group>
                       <group>
-                          <field name="technical_file_name" placeholder="Proposed Name for the File"/>
+                          <field name="technical_file_name" attrs="{'invisible':[('technical_file_name', '=', False)]}"/>
                           <field name="models_id" widget="many2one"/>
                           <field name="brand_id" widget="many2one"/>
+                          <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
                       </group>
                       <group>
-                        <field name="responsible_id" widget="many2one"/>
                         <field name="responsible_sales_id" widget="many2one"/>
                         <field name="sales_team_id" widget="many2one"/>
                         <field name="responsible_team_lider_id" widget="many2one"/>
+                        <field name="user_id" widget="many2one" readonly="1"/>
                       </group>
+                  </group>
+                  <group>
+                    <field name='observation' placeholder="Observation ......."/>
                   </group>
               <notebook>
                   <page name="info" string="Info">
                       <group>
-                        <field name='observation' placeholder="Observation ......."/>
+                        <group name="homologation" string="Homologation">
+                        <field name='date_planned' readonly="1"/>
+                        <field name='entity_id' readonly="1"/>
+                        <field name='location_homologation'/>
+                        </group>
+                        <group name="log" string="Detail Request">
+                          <field name='create_uid'/>
+                          <field name='create_date'/>
+                          <field name='write_uid'/>
+                          <field name='write_date'/>
+                        </group>
                       </group>
                   </page>
               </notebook>
             </sheet>
             <div class="oe_chatter">
-              <field name="message_follower_ids" widget="mail_followers"/>
-              <field name="message_ids" widget="mail_thread"/>
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread"/>
             </div>
               </form>
             </field>
@@ -111,9 +129,10 @@
                     <field name="brand_id" widget="many2one"/>
                     <field name="models_id" widget="many2one"/>
                     <field name="sales_team_id" widget="many2one"/>
-                    <field name="responsible_id" widget="many2one"/>
+                    <field name="user_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
-                    <field name="stage_id" widget="many2one"/>
+                    <field name="priority" widget="priority"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -125,7 +144,7 @@
                 <graph string="Technical File Creation"  type="pie">
                     <field name="brand_id" type="col"/>
                     <field name="responsible_sales_id" type="col"/>
-                    <field name="responsible_id" type="row"/>
+                    <field name="user_id" type="row"/>
                 </graph>
             </field>
         </record>
@@ -137,7 +156,7 @@
                 <pivot string="Technical File Creation" disable_linking="True">
                     <field name="brand_id" type="row"/>
                     <field name="responsible_sales_id" type="col"/>
-                    <field name="responsible_id" type="col"/>
+                    <field name="user_id" type="col"/>
                 </pivot>
             </field>
         </record>

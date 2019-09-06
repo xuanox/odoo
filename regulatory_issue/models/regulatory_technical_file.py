@@ -54,3 +54,12 @@ class RegulatoryTechnicalFile(models.Model):
     _sql_constraints = [
         ('technical_file_model_uniq', 'unique (name)', u'This fact sheet number already exists in our database, enter another number')
     ]
+
+
+class RegulatoryEntity(models.Model):
+    _name = 'regulatory.entity'
+    _description = 'Regulatory Entity'
+    _order = 'id'
+
+    name = fields.Char('Entity', required=True)
+    description=fields.Text('Location')

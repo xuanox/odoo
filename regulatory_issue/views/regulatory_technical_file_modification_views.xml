@@ -63,7 +63,7 @@
             <field name="arch" type="xml">
               <form string="Technical File Modification">
                 <header>
-                      <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                  <field name="state" widget="statusbar"/>
                 </header>
                   <sheet>
                       <div class="oe_title">
@@ -80,7 +80,7 @@
                           <field name="brand_id" widget="many2one"/>
                       </group>
                       <group>
-                        <field name="responsible_id" widget="many2one"/>
+                        <field name="user_id" widget="many2one"/>
                         <field name="responsible_sales_id" widget="many2one"/>
                         <field name="sales_team_id" widget="many2one"/>
                       </group>
@@ -89,7 +89,7 @@
                     <field name='observation' placeholder="Observation ......."/>
                   </group>
               <notebook>
-                  <page name="Line" string="Modification Line">
+                  <page name="line" string="Modification Line">
                     <group string="Modification Line">
                         <field name="modification_lines" nolabel="1">
                             <tree string="Modification Line" editable="bottom">
@@ -118,7 +118,7 @@
                     <field name="technical_file_id" widget="many2one"/>
                     <field name="brand_id" widget="many2one"/>
                     <field name="sales_team_id" widget="many2one"/>
-                    <field name="responsible_id" widget="many2one"/>
+                    <field name="user_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
                 </tree>
             </field>
@@ -131,7 +131,7 @@
                 <graph string="Technical File Modification"  type="pie">
                     <field name="brand_id" type="col"/>
                     <field name="responsible_sales_id" type="col"/>
-                    <field name="responsible_id" type="row"/>
+                    <field name="user_id" type="row"/>
                 </graph>
             </field>
         </record>
@@ -143,7 +143,7 @@
                 <pivot string="Technical File Modification" disable_linking="True">
                     <field name="brand_id" type="row"/>
                     <field name="responsible_sales_id" type="col"/>
-                    <field name="responsible_id" type="col"/>
+                    <field name="user_id" type="col"/>
                 </pivot>
             </field>
         </record>

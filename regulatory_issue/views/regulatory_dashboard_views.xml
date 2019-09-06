@@ -1,25 +1,233 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-      <record id="regulatory_dashboard_view_kanban" model="ir.ui.view" >
-          <field name="name">Regulatory Dashboard</field>
-          <field name="model">regulatory.technical.file</field>
-          <field name="priority">200</field>
-          <field name="arch" type="xml">
-              <kanban>
+      <record id="regulatory_dashboard_kanban" model="ir.ui.view">
+        <field name="name">Regulatory Dashboard</field>
+        <field name="model">regulatory.dashboard</field>
+        <field name="arch" type="xml">
+          <kanban class="oe_background_grey o_kanban_dashboard o_maintenance_team_kanban" create="0">
+              <templates>
+                <t t-name="kanban-box">
+                  <div t-attf-class="#{kanban_color}">
+                    <div t-attf-class="o_kanban_card_header">
+                      <div class="o_kanban_card_header_title">
+                        <div class="o_primary">
+                          <a name="#" type="action">
+                            <field name="name"/>
+                          </a>
+                        </div>
+                        <div class="o_kanban_manage_button_section">
+                          <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                        </div>
+                      </div>
+                      <div class="container o_kanban_card_content">
+                        <div class="row">
+                          <div class="col-6 o_kanban_primary_left">
+                            <button class="btn btn-primary" name="" type="action" context="{}">
+                              5To Do
+                            </button>
+                          </div>
+                          <div class="col-6 o_kanban_primary_right">
+                            <div class="row">
+                              <div class="col-9">
+                                <a name="#" type="action">Scheduled</a>
+                              </div>
+                              <div class="col-3">
 
-              </kanban>
+                              </div>
+                              <div class="col-9">
+                                <a name="#" type="action" context="{}">Top Priorities</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                              <div class="col-9">
+                                <a name="#" type="action" context="{}">Blocked</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                              <div class="col-9">
+                                <a name="#" type="action" context="{}">Unscheduled</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                        <div class="row">
+                          <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+                            <div role="menuitem" class="o_kanban_card_manage_title">
+                              <span>View</span>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action">All</a>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action" context="{}">To Do</a>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action" context="{}">In Progress</a>
+                            </div>
+                            <div role="menuitem">
+                              <a name="#" type="action" context="{}">Done</a>
+                            </div>
+                          </div>
+                          <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">
+                            <div role="menuitem" class="o_kanban_card_manage_title">
+                              <span>Reporting</span>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action" context="{}">Maintenance Requests</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                          <div class="col-8" role="menuitem" aria-haspopup="true">
+                            <ul role="menu" class="oe_kanban_colorpicker" data-field="color"/>
+                          </div>
+                          <div role="menuitem" class="col-4 text-right">
+                            <a type="edit">Settings</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </t>
+              </templates>
+              <templates>
+                <t t-name="kanban-box">
+                  <div t-attf-class="#{kanban_color}">
+                    <div t-attf-class="o_kanban_card_header">
+                      <div class="o_kanban_card_header_title">
+                        <div class="o_primary">
+                          <a name="#" type="action">
+                            <field name="name"/>
+                          </a>
+                        </div>
+                        <div class="o_kanban_manage_button_section">
+                          <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                        </div>
+                      </div>
+                      <div class="container o_kanban_card_content">
+                        <div class="row">
+                          <div class="col-6 o_kanban_primary_left">
+                            <button class="btn btn-primary" name="" type="action" context="{}">
+                              5To Do
+                            </button>
+                          </div>
+                          <div class="col-6 o_kanban_primary_right">
+                            <div class="row">
+                              <div class="col-9">
+                                <a name="#" type="action">Scheduled</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                              <div class="col-9">
+                                <a name="#" type="action" context="{}">Top Priorities</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                              <div class="col-9">
+                                <a name="#" type="action" context="{}">Blocked</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                              <div class="col-9">
+                                <a name="#" type="action" context="{}">Unscheduled</a>
+                              </div>
+                              <div class="col-3">
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                        <div class="row">
+                          <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+                            <div role="menuitem" class="o_kanban_card_manage_title">
+                              <span>View</span>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action">All</a>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action" context="{}">To Do</a>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action" context="{}">In Progress</a>
+                            </div>
+                            <div role="menuitem">
+                              <a name="#" type="action" context="{}">Done</a>
+                            </div>
+                          </div>
+                          <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">
+                            <div role="menuitem" class="o_kanban_card_manage_title">
+                              <span>Reporting</span>
+                            </div>
+                            <div role="menuitem">
+                              <a name="" type="action" context="{}">Maintenance Requests</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                          <div class="col-8" role="menuitem" aria-haspopup="true">
+                            <ul role="menu" class="oe_kanban_colorpicker" data-field="color"/>
+                          </div>
+                          <div role="menuitem" class="col-4 text-right">
+                            <a type="edit">Settings</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </t>
+              </templates>
+            </kanban>
+        </field>
+      </record>
+
+      <record id="regulatory_dashboard_action" model="ir.actions.act_window">
+          <field name="name">Dashboard</field>
+          <field name="res_model">regulatory.dashboard</field>
+          <field name="view_mode">kanban,form</field>
+          <field name="view_type">form</field>
+          <field name="view_id" ref="regulatory_dashboard_kanban"/>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Add a new stage in the maintenance request
+            </p>
           </field>
       </record>
 
-      <record id="regulatory_dashboard_action_main" model="ir.actions.act_window">
-          <field name="name">Regulatory Dashboard</field>
-          <field name="res_model">regulatory.technical.file</field>
-          <field name="view_mode">kanban</field>
-          <field name="view_type">kanban</field>
+      <record id="regulatory_dashboard_view_tree" model="ir.ui.view">
+          <field name="name">Regulatory Dashboard View Tree</field>
+          <field name="model">regulatory.dashboard</field>
+          <field name="arch" type="xml">
+              <tree string="Regulatory Dashboard">
+                  <field name="name"/>
+                  <field name="description"/>
+                  <field name="company_id"/>
+              </tree>
+          </field>
+      </record>
+
+      <!-- stages : actions -->
+      <record id="regulatory_dashboard_view_action" model="ir.actions.act_window">
+          <field name="name">Regulatory Dashboard View Action</field>
+          <field name="res_model">regulatory.dashboard</field>
+          <field name="view_mode">tree,form</field>
+          <field name="view_type">form</field>
           <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-              Add a new stage in the Continuous Improvement
+              Add a new Dashboard
             </p>
           </field>
       </record>

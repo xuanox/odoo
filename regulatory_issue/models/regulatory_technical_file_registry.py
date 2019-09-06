@@ -69,8 +69,9 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid))
-    user_id = fields.Many2one('res.users', string='Sales Person', required=True, track_visibility='onchange', default=lambda self: self.env.user)
-    responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', readonly=True)
+    user_id = fields.Many2one('res.users', string='Responsible', required=True, track_visibility='onchange', default=lambda self: self.env.user)
+    responsible_sales_id = fields.Many2one('res.users', string='Sales Person', track_visibility='onchange', readonly=True)
+    responsible_team_lider_id = fields.Many2one('res.users', related='team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
@@ -95,10 +96,10 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
+    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
 
     @api.model
     def _onchange_user_values(self, user_id):
-        """ returns new values when user_id has changed """
         if not user_id:
             return {}
         if user_id and self._context.get('team_id'):
@@ -110,14 +111,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     @api.onchange('user_id')
     def _onchange_user_id(self):
-        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
         if self.user_id.sale_team_id:
             values = self._onchange_user_values(self.user_id.id)
             self.update(values)
 
     @api.onchange('entity')
     def _onchange_entity(self):
-        """ When changing the user, also set a team_id or restrict team id to the ones user_id is member of. """
         if self.entity == 'minsa':
             location_appointment = "Dirección Nacional de Dispositivos Médicos."
         if self.entity == 'css':
