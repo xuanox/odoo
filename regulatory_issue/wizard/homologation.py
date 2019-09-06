@@ -19,8 +19,8 @@ class RegulatoryTechnicalFileHomologationAssigned(models.TransientModel):
     ]
 
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), required=True, track_visibility='onchange')
-    location_homologation = fields.Text('Homologation Location', required=True)
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True)
 
     def homologation_assigned(self):
         active_id = self._context.get('active_id')
