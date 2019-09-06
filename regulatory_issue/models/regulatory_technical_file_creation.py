@@ -153,3 +153,23 @@ class RegulatoryTechnicalFileCreation(models.Model):
                     'regulatory_issue.mail_act_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.create_date).date(),
                     note=note, user_id=request.user_id.id or self.env.uid)
+
+    def activity_update_scheduled(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
+        for request in self.filtered(lambda request: request.date_planned):
+            date_dl = fields.Datetime.from_string(request.date_planned).date()
+            updated = request.activity_reschedule(
+                ['regulatory_issue.mail_act_regulatory_technical_file_creation'],
+                date_deadline=date_dl,
+                new_user_id=request.user_id.id or self.env.uid)
+            if not updated:
+                if request.models_id:
+                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                else:
+                    note = False
+                request.activity_schedule(
+                    'regulatory_issue.mail_act_regulatory_technical_file_creation',
+                    fields.Datetime.from_string(request.date_planned).date(),
+                    note=note, user_id=request.user_id.id or self.env.uid)
