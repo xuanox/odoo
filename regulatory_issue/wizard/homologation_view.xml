@@ -9,12 +9,11 @@
                 <form string="Pending Ticket" version="7.0">
                     <group>
                         <field name="date_planned"/>
+                        <field name="entity_id"/>
                         <field name="location_homologation"/>
-                        <field name="entity"/>
-
                     </group>
                     <footer>
-                        <button name="homologation_assigned" string="Cita Asignada" type="object"  class="oe_highlight"  />
+                        <button name="homologation_assigned" string="Schedule Appointment" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
