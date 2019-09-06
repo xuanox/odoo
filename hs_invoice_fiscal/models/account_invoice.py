@@ -76,6 +76,11 @@ class AccountInvoiceInherit(models.Model):
 
 	@api.multi
 	def download_fiscal_file(self):
+		"""
+		Funcion llamada cuando el boton de fiscalizar es presionado.
+		Lee la factura/nota credito que esta activada en ese momento y genera
+		un documento plano, que es descargado luego.
+		"""
 		content_file_fd, content_file_path = tempfile.mkstemp(suffix='.txt', 
 												prefix='report.invoice.tmp.')
 
