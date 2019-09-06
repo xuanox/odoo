@@ -62,10 +62,10 @@ class RegulatoryTechnicalFileCreation(models.Model):
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
     user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
-    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user)
+    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True)
     sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
-    models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange')
+    models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange', required=True)
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
     stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
@@ -80,9 +80,8 @@ class RegulatoryTechnicalFileCreation(models.Model):
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     entity_reference = fields.Char('Entity Reference', copy=False)
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    location_homologation = fields.Text('Homologation Location')
-    entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True)
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
@@ -93,6 +92,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
         return True
 
     def action_homologation(self):
+        self.activity_update()
         self.write({'state': 'homologation'})
         return True
 

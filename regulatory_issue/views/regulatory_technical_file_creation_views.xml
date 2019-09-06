@@ -78,7 +78,7 @@
                   </div>
                   <group>
                       <group>
-                          <field name="technical_file_name" placeholder="Proposed Name for the File"/>
+                          <field name="technical_file_name" attrs="{'invisible':[('technical_file_name', '=', False)]}"/>
                           <field name="models_id" widget="many2one"/>
                           <field name="brand_id" widget="many2one"/>
                           <field name="priority" widget="priority"/>
@@ -90,10 +90,14 @@
                         <field name="responsible_team_lider_id" widget="many2one"/>
                       </group>
                   </group>
+                  <group>
+                    <field name='observation' placeholder="Observation ......."/>
+                  </group>
               <notebook>
                   <page name="info" string="Info">
                       <group>
-                        <field name='observation' placeholder="Observation ......."/>
+                        <field name='entity_id'/>
+                        <field name='location_homologation'/>
                       </group>
                   </page>
               </notebook>
@@ -119,7 +123,7 @@
                     <field name="user_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
                     <field name="priority" widget="priority"/>
-                    <field name="stage_id" widget="many2one"/>
+                    <field name="state" widget="many2one"/>
                 </tree>
             </field>
         </record>
