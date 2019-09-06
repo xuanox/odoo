@@ -118,7 +118,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
         if 'state' in vals:
             self.filtered(lambda m: m.state == 'process')
             self.activity_feedback(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
-        if vals.get('user_id') or vals.get('create_date'):
+        if vals.get('responsible_team_lider_id') or vals.get('create_date'):
             self.activity_update()
         if vals.get('models_id'):
             # need to change description of activity also so unlink old and create new activity
@@ -135,13 +135,13 @@ class RegulatoryTechnicalFileCreation(models.Model):
             updated = request.activity_reschedule(
                 ['regulatory_issue.mail_act_regulatory_technical_file_creation'],
                 date_deadline=date_dl,
-                new_user_id=request.user_id.id or self.env.uid)
+                new_user_id=request.responsible_team_lider_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Request planned for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
                 else:
                     note = False
                 request.activity_schedule(
                     'regulatory_issue.mail_act_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.create_date).date(),
-                    note=note, user_id=request.user_id.id or self.env.uid)
+                    note=note, user_id=request.responsible_team_lider_id.id or self.env.uid)
