@@ -16,7 +16,7 @@
             <div class="o-watermark">VOID</div>
         </t>
         <div class="sequence_number" t-if="page['sequence_number']" t-esc="page['sequence_number']"/>
-        <div class="ckpa_date" t-esc="o.payment_date" t-options="{&quot;widget&quot;: &quot;date&quot;, &quot;format&quot;: &quot;ddMMyyyy&quot;}" style="letter-spacing: 17px; margin-top:-0.14in; margin-left: -85px;"/>
+        <div class="ckpa_date" t-esc="o.payment_date" t-options="{'widget': 'date', 'format': 'ddMMyyyy'}" style="letter-spacing: 17px; margin-top:-0.14in; margin-left: -85px;"/>
         <div class="ckpa_payee_name" t-esc="page['partner_name']" style="margin-top: -0.04in;"/>
         <div class="ckpa_amount">
             <t t-esc="page['amount'].replace(o.currency_id.symbol, '')"/>
