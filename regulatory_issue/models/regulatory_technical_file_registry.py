@@ -23,17 +23,6 @@ TICKET_PRIORITY = [
     ('3', 'Urgent'),
 ]
 
-class RegulatoryTechnicalFileRegistryStage(models.Model):
-    _name = 'regulatory.technical.file.registry.stage'
-    _description = 'Regulatory Technical File Registry Stage'
-    _order = 'sequence, id'
-
-    name = fields.Char('Name', required=True, translate=True)
-    sequence = fields.Integer('Sequence', default=20)
-    fold = fields.Boolean('Folded in Regulatory Technical File Registry Pipe')
-    done = fields.Boolean('Request Done')
-
-
 class RegulatoryTechnicalFileRegistry(models.Model):
     _name = 'regulatory.technical.file.registry'
     _description = 'Regulatory Technical File Registry'
@@ -74,7 +63,6 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     responsible_team_lider_id = fields.Many2one('res.users', related='team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
-    stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
     category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, track_visibility='onchange')
     contact_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
