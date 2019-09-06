@@ -32,7 +32,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
         ('draft', 'New'),
         ('assigned', 'Assigned'),
         ('process', 'In Process'),
-        ('homologation', 'In Homologation'),
+        ('scheduled', 'Scheduled'),
         ('done', 'Completed'),
         ('rejected', 'Rejected')
     ]
@@ -60,7 +60,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the order is Assigned the status is set to 'Assigned'.\n\
         If the order is Process the status is set to 'Process'.\n\
-        If the order is Homologation the status is set to 'Homologation'.\n\
+        If the order is Scheduled the status is set to 'Scheduled'.\n\
         If the stock is Completed then the status is set to 'Completed'.\n\
         When the request is over, the status is set to 'Rejected'.", default='draft')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
@@ -78,9 +78,9 @@ class RegulatoryTechnicalFileCreation(models.Model):
         self.write({'state': 'process'})
         return True
 
-    def action_homologation(self):
+    def action_scheduled(self):
+        self.write({'state': 'scheduled'})
         self.activity_update()
-        self.write({'state': 'homologation'})
         return True
 
     def action_done(self):
