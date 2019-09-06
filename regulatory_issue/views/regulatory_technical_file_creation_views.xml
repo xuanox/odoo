@@ -8,7 +8,7 @@
               <form string="Technical File Creation">
                 <header>
                   <button name="%(action_creation_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
-                  <button name="action_process" states="assigned" string="Revisión" type="object" class="oe_highlight"/>
+                  <button name="action_process" states="assigned,scheduled" string="Revisión" type="object" class="oe_highlight"/>
                   <button name="%(action_homologation_assigned)d" string="Cita de Homologación" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_user" />
                   <button name="%(action_creation_done)d" string="Complete" states="scheduled" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_user" />
                   <field name="state" widget="statusbar"/>
