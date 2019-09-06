@@ -21,18 +21,26 @@
                           </h1>
                   </div>
                   <group>
-                      <group>
+                      <group name="request" string="Request">
                           <field name="technical_file_id" attrs="{'invisible':[('technical_file_id', '=', False)]}"/>
                           <field name="technical_file_name" attrs="{'invisible':[('technical_file_id', '=', False)]}"/>
                           <field name="models_id" widget="many2one"/>
                           <field name="brand_id" widget="many2one"/>
+                          <field name="user_id" widget="many2one" readonly="1"/>
                           <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
                       </group>
-                      <group>
+                      <group name="sale" string="Sales Team">
                         <field name="responsible_sales_id" widget="many2one"/>
                         <field name="sales_team_id" widget="many2one"/>
                         <field name="responsible_team_lider_id" widget="many2one"/>
-                        <field name="user_id" widget="many2one" readonly="1"/>
+                      </group>
+                  </group>
+                  <group>
+                      <group name="regulatory" string="Regulatory Team">
+                          <field name="user_id" widget="many2one" readonly="1"/>
+                      </group>
+                      <group name="priority" string="Priority">
+                        <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
                       </group>
                   </group>
                   <group>
@@ -76,7 +84,7 @@
                     <field name="sales_team_id" widget="many2one"/>
                     <field name="user_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
-                    <field name="priority" widget="priority"/>
+                    <field name="priority" widget="priority" readonly="1"/>
                     <field name="state"/>
                 </tree>
             </field>
