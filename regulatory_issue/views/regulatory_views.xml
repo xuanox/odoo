@@ -107,20 +107,5 @@
         parent="regulatory_management_configuration"
         action="regulatory_technical_file_group_action"/>
 
-      <menuitem
-        id="regulatory_technical_file_modification_stage"
-        parent="regulatory_management_configuration"
-        action="regulatory_technical_file_modification_stage_action"/>
-
-      <menuitem
-        id="regulatory_technical_file_creation_stage"
-        parent="regulatory_management_configuration"
-        action="regulatory_technical_file_creation_stage_action"/>
-
-      <menuitem
-        id="regulatory_technical_file_registry_stage"
-        parent="regulatory_management_configuration"
-        action="regulatory_technical_file_registry_stage_action"/>
-
     </data>
 </odoo>
