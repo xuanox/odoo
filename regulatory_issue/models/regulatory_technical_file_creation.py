@@ -62,7 +62,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
     user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
     responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True)
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange')
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange', required=True)
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
