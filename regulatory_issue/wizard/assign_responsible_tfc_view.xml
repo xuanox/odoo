@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_creation_assign_wizard" model="ir.ui.view">
+            <field name="name">Assign Responsible to the Creation Request</field>
+            <field name="model">regulatory.technical.file.creation.assign</field>
+            <field name="arch" type="xml">
+                <form string="Assign Responsible to the Creation Request">
+                    <group>
+                        <field name="user_id"/>
+                    </group>
+                    <footer>
+                        <button name="assign_creation_request" string="Assign Responsible" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_creation_assign" model="ir.actions.act_window">
+            <field name="name">Assign Responsible to the Creation Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">regulatory.technical.file.creation.assign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+</odoo>
