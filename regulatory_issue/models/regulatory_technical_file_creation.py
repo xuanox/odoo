@@ -68,7 +68,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange', required=True)
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', track_visibility='onchange', store=True, string='Brand')
     stage_id = fields.Many2one('regulatory.technical.file.creation.stage', string='Stage', track_visibility='onchange', default=_default_stage)
-    priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
+    priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0', track_visibility='onchange')
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the order is Assigned the status is set to 'Assigned'.\n\
@@ -81,7 +81,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     entity_reference = fields.Char('Entity Reference', copy=False)
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
-    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True)
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
 
     def action_assigned(self):
         self.write({'state': 'assigned'})

@@ -81,13 +81,13 @@
                           <field name="technical_file_name" attrs="{'invisible':[('technical_file_name', '=', False)]}"/>
                           <field name="models_id" widget="many2one"/>
                           <field name="brand_id" widget="many2one"/>
-                          <field name="priority" widget="priority"/>
+                          <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
                       </group>
                       <group>
-                        <field name="user_id" widget="many2one" readonly="1"/>
                         <field name="responsible_sales_id" widget="many2one"/>
                         <field name="sales_team_id" widget="many2one"/>
                         <field name="responsible_team_lider_id" widget="many2one"/>
+                        <field name="user_id" widget="many2one" readonly="1"/>
                       </group>
                   </group>
                   <group>
@@ -96,8 +96,17 @@
               <notebook>
                   <page name="info" string="Info">
                       <group>
-                        <field name='entity_id'/>
+                        <group name="homologation" string="Homologation">
+                        <field name='date_planned' readonly="1"/>
+                        <field name='entity_id' readonly="1"/>
                         <field name='location_homologation'/>
+                        </group>
+                        <group name="log" string="Detail Request">
+                          <field name='create_uid'/>
+                          <field name='create_date'/>
+                          <field name='write_uid'/>
+                          <field name='write_date'/>
+                        </group>
                       </group>
                   </page>
               </notebook>
