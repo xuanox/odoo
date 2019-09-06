@@ -58,7 +58,6 @@ class RegulatoryTechnicalFileCreation(models.Model):
         return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
-    technical_file_name = fields.Char(string="Proposed Name for the File", required=True, track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
     user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
@@ -76,7 +75,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
         If the order is Homologation the status is set to 'Homologation'.\n\
         If the stock is Completed then the status is set to 'Completed'.\n\
         When the request is over, the status is set to 'Rejected'.", default='draft')
-    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
+    technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     entity_reference = fields.Char('Entity Reference', copy=False)
     date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
