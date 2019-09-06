@@ -123,7 +123,7 @@
                     <field name="user_id" widget="many2one"/>
                     <field name="responsible_sales_id" widget="many2one"/>
                     <field name="priority" widget="priority"/>
-                    <field name="state" widget="many2one"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
