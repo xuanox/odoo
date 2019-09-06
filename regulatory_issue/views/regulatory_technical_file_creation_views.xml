@@ -34,10 +34,10 @@
                       </group>
                   </group>
                   <group>
-                      <group name="regulatory" string="Regulatory Team">
+                      <group name="regulatory" string="Regulatory Team" attrs="{'invisible':[('user_id', '=', False)]}">
                           <field name="user_id" widget="many2one" readonly="1"/>
                       </group>
-                      <group name="priority" string="Priority">
+                      <group name="priority" string="Priority" groups="regulatory_issue.group_regulatory_issue_lider">
                         <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
                       </group>
                   </group>
