@@ -36,7 +36,7 @@
                     <group>
                       <field name="technical_file_id" widget="many2one"/>
                       <field name="technical_file_name" />
-                      <field name="user_id" widget="many2one"/>
+                      <field name="responsible_sales_id" widget="many2one"/>
                       <field name="team_id" widget="many2one"/>
                       <field name="responsible_team_lider_id"/>
                       <field name="category"/>
