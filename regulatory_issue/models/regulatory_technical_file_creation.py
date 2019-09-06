@@ -84,8 +84,24 @@ class RegulatoryTechnicalFileCreation(models.Model):
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
 
+    def action_assigned(self):
+        self.write({'state': 'assigned'})
+        return True
+
+    def action_process(self):
+        self.write({'state': 'process'})
+        return True
+
     def action_homologation(self):
         self.write({'state': 'homologation'})
+        return True
+
+    def action_done(self):
+        self.write({'state': 'done'})
+        return True
+
+    def action_rejected(self):
+        self.write({'state': 'rejected'})
         return True
 
     @api.model
