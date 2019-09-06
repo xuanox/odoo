@@ -119,7 +119,6 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_wait(self):
-        stage_id = self.env['regulatory.technical.file.registry.stage'].search([('sequence', '=', '2')], order="sequence asc", limit=1)
         self.write({'state': 'wait'})
         return True
 
