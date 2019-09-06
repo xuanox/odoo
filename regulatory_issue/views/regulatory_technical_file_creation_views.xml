@@ -78,7 +78,8 @@
                   </div>
                   <group>
                       <group>
-                          <field name="technical_file_name" attrs="{'invisible':[('technical_file_name', '=', False)]}"/>
+                          <field name="technical_file_id" attrs="{'invisible':[('technical_file_id', '=', False)]}"/>
+                          <field name="technical_file_name" attrs="{'invisible':[('technical_file_id', '=', False)]}"/>
                           <field name="models_id" widget="many2one"/>
                           <field name="brand_id" widget="many2one"/>
                           <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>

@@ -13,14 +13,9 @@ class RegulatoryTechnicalFileHomologationAssigned(models.TransientModel):
     _name = 'regulatory.technical.file.homologation.assigned'
     _description = 'homologation Assigned'
 
-    ENTITY_SELECTION = [
-        ('minsa', 'MINSA'),
-        ('css', 'CSS'),
-    ]
-
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), required=True, track_visibility='onchange')
-    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
-    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True)
+    entity_id = fields.Many2one('regulatory.entity', string='Entity', required=True, track_visibility='onchange')
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
 
     def homologation_assigned(self):
         active_id = self._context.get('active_id')
