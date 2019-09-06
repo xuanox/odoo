@@ -109,7 +109,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
         if vals.get('name','/')=='/':
             vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.creation') or '/'
         request = super(RegulatoryTechnicalFileCreation, self).create(vals)
-        request.activity_update()
+        request.activity_update_responsible_team_lider()
         return request
 
     @api.multi
@@ -118,15 +118,15 @@ class RegulatoryTechnicalFileCreation(models.Model):
         if 'state' in vals:
             self.filtered(lambda m: m.state == 'process')
             self.activity_feedback(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
-        if vals.get('responsible_team_lider_id') or vals.get('create_date'):
+        if vals.get('user_id') or vals.get('create_date'):
             self.activity_update()
         if vals.get('models_id'):
             # need to change description of activity also so unlink old and create new activity
             self.activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
-            self.activity_update()
+            self.activity_update_responsible_team_lider()
         return res
 
-    def activity_update(self):
+    def activity_update_responsible_team_lider(self):
         """ Update maintenance activities based on current record set state.
         It reschedule, unlink or create maintenance request activities. """
         self.filtered(lambda request: not request.create_date).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
@@ -145,3 +145,24 @@ class RegulatoryTechnicalFileCreation(models.Model):
                     'regulatory_issue.mail_act_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.create_date).date(),
                     note=note, user_id=request.responsible_team_lider_id.id or self.env.uid)
+
+
+    def activity_update(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.create_date).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
+        for request in self.filtered(lambda request: request.create_date):
+            date_dl = fields.Datetime.from_string(request.create_date).date()
+            updated = request.activity_reschedule(
+                ['regulatory_issue.mail_act_regulatory_technical_file_creation'],
+                date_deadline=date_dl,
+                new_user_id=request.user_id.id or self.env.uid)
+            if not updated:
+                if request.models_id:
+                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                else:
+                    note = False
+                request.activity_schedule(
+                    'regulatory_issue.mail_act_regulatory_technical_file_creation',
+                    fields.Datetime.from_string(request.create_date).date(),
+                    note=note, user_id=request.user_id.id or self.env.uid)
