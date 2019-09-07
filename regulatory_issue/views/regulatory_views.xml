@@ -57,32 +57,25 @@
 
       <!-- Registry -->
       <menuitem
-        id="regulatory_technical_file"
-        parent="regulatory_management_registry"
-        action="regulatory_technical_file_action"
-        name="Technical File"
-        sequence="1"/>
-
-      <menuitem
         id="regulatory_technical_file_creation"
         parent="regulatory_management_registry"
         action="regulatory_technical_file_creation_action"
         name="Creation Request"
-        sequence="2"/>
+        sequence="1"/>
 
       <menuitem
         id="regulatory_technical_file_modification"
         parent="regulatory_management_registry"
         action="regulatory_technical_file_modification_action"
         name="Modification Request"
-        sequence="3"/>
+        sequence="2"/>
 
       <menuitem
         id="regulatory_technical_file_registry"
         parent="regulatory_management_registry"
         action="regulatory_technical_file_registry_action"
         name="Registry Request"
-        sequence="4"/>
+        sequence="3"/>
 
       <!-- Configuration -->
       <menuitem
@@ -91,6 +84,13 @@
         action="regulatory_dashboard_view_action"
         name="Dashboard Configuration"
         sequence="1"/>
+
+      <menuitem
+        id="regulatory_technical_file"
+        parent="regulatory_management_configuration"
+        action="regulatory_technical_file_action"
+        name="Technical File"
+        sequence="2"/>
 
       <menuitem
         id="regulatory_legal_documentation_type"
