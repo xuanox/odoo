@@ -53,8 +53,8 @@
                   <group>
                     <group string="Appointment Assigned" attrs="{'invisible':[('entity', '=', False)]}">
                       <field name="date_planned" />
-                      <field name="entity"/>
-                      <field name="location_appointment"/>
+                      <field name="entity_id"/>
+                      <field name="location_homologation"/>
                     </group>
                     <group string="Info" attrs="{'invisible':[('user_id', '=', False)]}">
                       <field name="user_id" widget="many2one"/>
