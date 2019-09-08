@@ -1,4 +1,4 @@
-_# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ###################################################################################
 #
 #    Electrónica Médica.
@@ -37,6 +37,11 @@ class RegulatoryTechnicalFileCreation(models.Model):
         ('rejected', 'Rejected')
     ]
 
+    def _tfr_count(self):
+        request = self.env['regulatory.technical.file.registry']
+        for tfr in self:
+            self.tfr_count = request.search_count([('tfc_id', '=', tfr.id)])
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
@@ -59,6 +64,8 @@ class RegulatoryTechnicalFileCreation(models.Model):
     date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfc_id', string='TFR')
+    tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
@@ -184,3 +191,14 @@ class RegulatoryTechnicalFileCreation(models.Model):
                     'regulatory_issue.mail_act_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.date_planned).date(),
                     note=note, user_id=request.responsible_sales_id.id or self.env.uid)
+
+    def action_view_tfr_request(self):
+        return {
+            'domain': "[('tfc_id','in',[" + ','.join(map(str, self.ids)) + "])]",
+            'name': _('Registry Request'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'regulatory.technical.file.registry',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }

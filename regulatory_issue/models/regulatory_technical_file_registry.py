@@ -49,6 +49,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('css', 'CSS'),
     ]
 
+    def _default_tfc(self):
+        return self.env['regulatory.technical.file.creation'].browse(self._context.get('active_id'))
+
+    def _default_tfm(self):
+        return self.env['regulatory.technical.file.modification'].browse(self._context.get('active_id'))
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
@@ -82,6 +88,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC', default=_default_tfc, track_visibility='onchange', readonly=True)
+    tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM', default=_default_tfm, track_visibility='onchange', readonly=True)
 
     @api.model
     def _onchange_user_values(self, user_id):
