@@ -169,11 +169,4 @@
             <field name="view_mode">tree,form,kanban,pivot,graph,dashboard</field>
       </record>
 
-      <record id="regulatory_technical_file_registry_action_new" model="ir.actions.act_window">
-          <field name="name">Technical File Registry</field>
-          <field name="res_model">regulatory.technical.file.registry</field>
-          <field name="view_mode">form</field>
-          <field name="domain">[('tfc_id', '=', active_id)]</field>
-          <field name="context">{'search_default_tfc_id': active_id, 'default_tfc_id': active_id}</field>
-      </record>
 </odoo>
