@@ -47,7 +47,6 @@
                       <field name="team_id" widget="many2one"/>
                       <field name="responsible_team_lider_id"/>
                       <field name="tfc_id" widget="many2one"/>
-                      <field name="tfm_id" widget="many2one"/>
                     </group>
                   </group>
                   <group>
