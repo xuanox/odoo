@@ -91,6 +91,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC', default=_default_tfc, track_visibility='onchange', readonly=True)
     tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM', default=_default_tfm, track_visibility='onchange', readonly=True)
 
+    @api.onchange('tfc_id')
+    def onchange_tfc_id(self):
+        self.technical_file_id = self.tfc_id.technical_file_id
+        self.models_id = self.tfc_id.models_id
+
     @api.model
     def _onchange_user_values(self, user_id):
         if not user_id:
