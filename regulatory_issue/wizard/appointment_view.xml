@@ -10,7 +10,7 @@
                     <group>
                         <field name="date_planned"/>
                         <field name="entity_id"/>
-                        <field name="location_appointment"/>
+                        <field name="location_homologation"/>
                     </group>
                     <footer>
                         <button name="appointment_assigned" string="Cita Asignada" type="object"  class="oe_highlight"  />
