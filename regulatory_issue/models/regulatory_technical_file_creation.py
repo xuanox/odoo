@@ -37,15 +37,6 @@ class RegulatoryTechnicalFileCreation(models.Model):
         ('rejected', 'Rejected')
     ]
 
-    ENTITY_SELECTION = [
-        ('minsa', 'MINSA'),
-        ('css', 'CSS'),
-    ]
-
-    @api.returns('self')
-    def _default_stage(self):
-        return self.env['regulatory.technical.file.creation.stage'].search([], limit=1)
-
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
@@ -65,10 +56,10 @@ class RegulatoryTechnicalFileCreation(models.Model):
         When the request is over, the status is set to 'Rejected'.", default='draft')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
-    entity_reference = fields.Char('Entity Reference', copy=False)
     date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfc_id', string='Records')
 
     def action_assigned(self):
         self.write({'state': 'assigned'})

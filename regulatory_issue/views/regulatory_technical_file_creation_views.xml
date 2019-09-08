@@ -11,7 +11,7 @@
                   <button name="action_process" states="assigned,scheduled" string="Revisión" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(action_homologation_assigned)d" string="Cita de Homologación" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
                   <button name="%(action_creation_done)d" string="Complete" states="scheduled" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_user" />
-                  <field name="state" widget="statusbar"/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,assigned,process,scheduled,done"/>
                 </header>
                   <sheet>
                       <div class="oe_title">

@@ -58,6 +58,7 @@ class RegulatoryTechnicalFileModification(models.Model):
         When the request is over, the status is set to 'Rejected'.", default='draft')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
 
     def action_process(self):
         self.write({'state': 'process'})

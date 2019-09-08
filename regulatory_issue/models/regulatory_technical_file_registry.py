@@ -81,6 +81,9 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC')
+    tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM')
 
     @api.model
     def _onchange_user_values(self, user_id):
