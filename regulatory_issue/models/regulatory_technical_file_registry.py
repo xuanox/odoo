@@ -49,6 +49,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('css', 'CSS'),
     ]
 
+    def _default_tfc(self):
+        return self.env['regulatory.technical.file.creation'].browse(self._context.get('active_id'))
+
+    def _default_tfm(self):
+        return self.env['regulatory.technical.file.modification'].browse(self._context.get('active_id'))
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
