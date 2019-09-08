@@ -15,7 +15,7 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
-            <button class="oe_stat_button" name="action_view_tfr_request" type="object" icon="fa-file-excel-o">
+            <button class="oe_stat_button" name="#" type="object" icon="fa-file-excel-o">
               <field string="TFR" name="tfr_count" widget="statinfo"/>
             </button>
           </div>

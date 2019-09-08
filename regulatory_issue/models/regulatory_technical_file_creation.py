@@ -191,14 +191,3 @@ class RegulatoryTechnicalFileCreation(models.Model):
                     'regulatory_issue.mail_act_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.date_planned).date(),
                     note=note, user_id=request.responsible_sales_id.id or self.env.uid)
-
-    def action_view_tfr_request(self):
-        return {
-            'domain': "[('tfc_id','in',[" + ','.join(map(str, self.ids)) + "])]",
-            'name': _('Registry Request'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'regulatory.technical.file.registry',
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-        }
