@@ -143,13 +143,5 @@
     <field name="view_mode">tree,form,pivot,graph,dashboard</field>
   </record>
 
-  <record id="regulatory_technical_file_registry_action" model="ir.actions.act_window">
-      <field name="name">Technical File Registry Action</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="res_model">regulatory.technical.file.registry</field>
-      <field name="view_type">form</field>
-      <field name="view_mode">form</field>
-      <field name="target">new</field>
-  </record>
 
 </odoo>
