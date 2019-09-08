@@ -13,11 +13,6 @@ class RegulatoryTechnicalFileAppointmentAssigned(models.TransientModel):
     _name = 'regulatory.technical.file.appointment.assigned'
     _description = 'Appointment Assigned'
 
-    ENTITY_SELECTION = [
-        ('minsa', 'MINSA'),
-        ('css', 'CSS'),
-    ]
-
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), required=True, track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
