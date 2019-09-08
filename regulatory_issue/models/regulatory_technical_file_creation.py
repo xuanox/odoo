@@ -37,11 +37,6 @@ class RegulatoryTechnicalFileCreation(models.Model):
         ('rejected', 'Rejected')
     ]
 
-    def _tfr_count(self):
-        request = self.env['regulatory.technical.file.registry']
-        for tfr in self:
-            self.tfr_count = request.search_count([('tfc_id', '=', tfr.id)])
-
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
@@ -64,8 +59,6 @@ class RegulatoryTechnicalFileCreation(models.Model):
     date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
-    tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfc_id', string='TFR')
-    tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
