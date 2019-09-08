@@ -43,7 +43,6 @@
         'wizard/homologation_view.xml',
         'wizard/assign_responsible_tfc_view.xml',
         'wizard/done_tfc_view.xml',
-        'wizard/tfc_tfr_request_view.xml',
         'views/regulatory_templates.xml',
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',
