@@ -36,6 +36,11 @@ class RegulatoryTechnicalFileModification(models.Model):
         ('rejected', 'Rejected')
     ]
 
+    def _tfr_count(self):
+        request = self.env['regulatory.technical.file.registry']
+        for tfr in self:
+            self.tfr_count = request.search_count([('tfm_id', '=', tfr.id)])
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
@@ -59,6 +64,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
     tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
+    tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
 
     def action_process(self):
         self.write({'state': 'process'})
@@ -81,6 +87,17 @@ class RegulatoryTechnicalFileModification(models.Model):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.modification') or '/'
         return super(RegulatoryTechnicalFileModification, self).create(vals)
+
+    def action_view_tfr_request(self):
+        return {
+            'domain': "[('tfm_id','in',[" + ','.join(map(str, self.ids)) + "])]",
+            'name': _('Registry Request'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'regulatory.technical.file.modification',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
 
 class RegulatoryTechnicalFileModificationLine(models.Model):
     _name = 'regulatory.technical.file.modification.line'
