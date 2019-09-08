@@ -51,7 +51,7 @@
                     </group>
                   </group>
                   <group>
-                    <group string="Appointment Assigned" attrs="{'invisible':[('entity', '=', False)]}">
+                    <group string="Appointment Assigned" attrs="{'invisible':[('entity_id', '=', False)]}">
                       <field name="date_planned" />
                       <field name="entity_id"/>
                       <field name="location_homologation"/>
