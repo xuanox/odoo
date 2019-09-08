@@ -94,7 +94,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
                 'technical_file_id':request.technical_file_id.id,
                 'models_id':request.models_id.id,
                 'responsible_sales_id':request.responsible_sales_id.id,
-                'sales_team_id': request.sales_team_id.id,
+                'team_id': request.sales_team_id.id,
                 'user_id': request.user_id.id,
                 'category': 'new',
                 'contact_id':request.contact_id.id,
