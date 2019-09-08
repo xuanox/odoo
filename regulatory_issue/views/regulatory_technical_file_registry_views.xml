@@ -33,19 +33,21 @@
                     </h1>
                   </div>
                   <group>
-                    <group>
+                    <group name="request" string="Request">
                       <field name="technical_file_id" widget="many2one"/>
                       <field name="technical_file_name" />
-                      <field name="responsible_sales_id" widget="many2one"/>
-                      <field name="team_id" widget="many2one"/>
-                      <field name="responsible_team_lider_id"/>
+                      <field name="models_id" widget="many2one"/>
+                      <field name="brand_id" widget="many2one"/>
+                      <field name="contact_id" widget="many2one"/>
                       <field name="category"/>
                       <field name="priority" widget="priority"/>
                     </group>
-                    <group string="Factory Owner">
-                      <field name="brand_id" widget="many2one"/>
-                      <field name="models_id" widget="many2one"/>
-                      <field name="contact_id" widget="many2one"/>
+                    <group name="sale" string="Sales Team">
+                      <field name="responsible_sales_id" widget="many2one"/>
+                      <field name="team_id" widget="many2one"/>
+                      <field name="responsible_team_lider_id"/>
+                      <field name="tfc_id" widget="many2one"/>
+                      <field name="tfm_id" widget="many2one"/>
                     </group>
                   </group>
                   <group>
@@ -63,6 +65,11 @@
                       <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
                     </group>
                   </group>
+                  <group>
+                    <group>
+                      <field name='observation' placeholder="Observation ......."/>
+                    </group>
+                  </group>
                 <notebook>
                     <page name="info" string="Info">
                       <group>
@@ -74,9 +81,6 @@
                             <field name="status"/>
     											</tree>
     										</field>
-                      </group>
-                      <group>
-                        <field name='observation' placeholder="Observation ......."/>
                       </group>
                     </page>
                 </notebook>
