@@ -30,6 +30,7 @@ class RegulatoryTechnicalFileModification(models.Model):
 
     STATE_SELECTION = [
         ('draft', 'New'),
+        ('assigned', 'Assigned'),
         ('process', 'In Process'),
         ('scheduled', 'Scheduled'),
         ('done', 'Completed'),
@@ -37,15 +38,15 @@ class RegulatoryTechnicalFileModification(models.Model):
     ]
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
-    technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange')
+    technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange', required=True)
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Description', track_visibility='onchange')
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', track_visibility='onchange', required=True)
     user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
     responsible_id = fields.Many2one('res.users', string='Responsible', track_visibility='onchange', default=lambda self: self.env.user)
-    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange')
+    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid), required=True)
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
-    models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange')
+    models_id = fields.Many2one('equipment.model', string='Models Equipments', track_visibility='onchange', required=True)
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     modification_lines = fields.One2many('regulatory.technical.file.modification.line', 'regulatory_technical_file_modification_id', 'Modification Line', track_visibility='onchange')
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
@@ -58,6 +59,10 @@ class RegulatoryTechnicalFileModification(models.Model):
         When the request is over, the status is set to 'Rejected'.", default='draft')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+
+    def action_assigned(self):
+        self.write({'state': 'assigned'})
+        return True
 
     def action_process(self):
         self.write({'state': 'process'})
