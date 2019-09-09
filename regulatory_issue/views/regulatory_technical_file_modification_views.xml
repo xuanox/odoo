@@ -70,9 +70,11 @@
         <field name="technical_file_id"/>
         <field name="models_id"/>
         <field name="brand_id"/>
-        <field name="sales_team_id"/>
         <field name="responsible_sales_id"/>
+        <field name="sales_team_id"/>
+        <field name="responsible_team_lider_id"/>
         <field name="user_id"/>
+        <field name="priority" widget="priority" readonly="1"/>
         <field name="state"/>
       </tree>
     </field>
