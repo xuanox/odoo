@@ -57,6 +57,7 @@ class RegulatoryTechnicalFileModification(models.Model):
         If the order is Homologation the status is set to 'Homologation'.\n\
         If the stock is Completed then the status is set to 'Completed'.\n\
         When the request is over, the status is set to 'Rejected'.", default='draft')
+    date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
 
