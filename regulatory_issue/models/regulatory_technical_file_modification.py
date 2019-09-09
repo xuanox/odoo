@@ -87,7 +87,7 @@ class RegulatoryTechnicalFileModification(models.Model):
             'name': _('Registry Request'),
             'view_type': 'form',
             'view_mode': 'tree,form',
-            'res_model': 'regulatory.technical.file.modification',
+            'res_model': 'regulatory.technical.file.registry',
             'type': 'ir.actions.act_window',
             'target': 'current',
         }
