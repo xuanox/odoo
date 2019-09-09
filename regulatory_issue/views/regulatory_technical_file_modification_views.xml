@@ -73,7 +73,7 @@
         <field name="sales_team_id"/>
         <field name="responsible_sales_id"/>
         <field name="user_id"/>
-        <field name="states"/>
+        <field name="state"/>
       </tree>
     </field>
   </record>
