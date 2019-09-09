@@ -41,6 +41,7 @@
         'wizard/registry_lost_views.xml',
         'wizard/reject_view.xml',
         'wizard/homologation_view.xml',
+        'wizard/scheduled_tfm_view.xml',
         'wizard/assign_responsible_tfc_view.xml',
         'wizard/assign_responsible_tfm_view.xml',
         'wizard/done_tfc_view.xml',

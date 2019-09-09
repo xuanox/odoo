@@ -2,18 +2,18 @@
 <openerp>
     <data>
 
-        <record id="view_homologation_wizard" model="ir.ui.view">
-            <field name="name">Homologation</field>
-            <field name="model">regulatory.technical.file.homologation.assigned</field>
+        <record id="view_scheduled_modification_wizard" model="ir.ui.view">
+            <field name="name">Scheduled Modification Assigned</field>
+            <field name="model">regulatory.technical.file.scheduled.modification.assigned</field>
             <field name="arch" type="xml">
-                <form string="Scheduled" version="7.0">
+                <form string="Scheduled Modification" version="7.0">
                     <group>
                         <field name="date_planned"/>
                         <field name="entity_id"/>
                         <field name="location_homologation"/>
                     </group>
                     <footer>
-                        <button name="homologation_assigned" string="Schedule Appointment" type="object"  class="oe_highlight"  />
+                        <button name="scheduled_tfm_assigned" string="Scheduled" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
@@ -21,10 +21,10 @@
             </field>
         </record>
 
-        <record id="action_homologation_assigned" model="ir.actions.act_window">
-            <field name="name">Homologation Assigned</field>
+        <record id="action_scheduled_modification_assigned" model="ir.actions.act_window">
+            <field name="name">Scheduled Modification Assigned</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">regulatory.technical.file.homologation.assigned</field>
+            <field name="res_model">regulatory.technical.file.scheduled.modification.assigned</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
