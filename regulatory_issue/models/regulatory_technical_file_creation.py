@@ -98,7 +98,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
                 'team_id': request.sales_team_id.id,
                 'user_id': request.user_id.id,
                 'category': 'new',
-                'contact_id':request.contact_id.id,
+                'contact_ids':request.contact_ids.id,
                 'tfc_id': request.id,
             })
         return tfr_id.id

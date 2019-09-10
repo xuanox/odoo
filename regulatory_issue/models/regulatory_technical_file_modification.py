@@ -96,7 +96,7 @@ class RegulatoryTechnicalFileModification(models.Model):
                 'responsible_sales_id':request.responsible_sales_id.id,
                 'team_id': request.sales_team_id.id,
                 'category': 'update',
-                'contact_id':request.contact_id.id,
+                'contact_ids':request.contact_ids.id,
                 'tfm_id': request.id,
             })
         return tfr_id.id
