@@ -38,7 +38,7 @@
                       <field name="technical_file_name" />
                       <field name="models_id" widget="many2one"/>
                       <field name="brand_id" widget="many2one"/>
-                      <field name="contact_id" widget="many2one"/>
+                      <field name="contact_ids" widget="many2many"/>
                     </group>
                     <group name="sale" string="Sales Team">
                       <field name="responsible_sales_id" widget="many2one"/>
