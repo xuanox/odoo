@@ -26,7 +26,6 @@ from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
 
-
 class RegulatoryTechnicalCriteria(models.Model):
     _name = 'regulatory.technical.criteria'
     _description = 'Regulatory Technical Criteria'
@@ -37,3 +36,4 @@ class RegulatoryTechnicalCriteria(models.Model):
     criterion_expiration_date = fields.Date(u'Criterion Expiration Date')
     date_expiration_authenticated_seal = fields.Date(u'Date Expiration of the Authenticated Seal')
     description=fields.Text('Description')
+    qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.")
