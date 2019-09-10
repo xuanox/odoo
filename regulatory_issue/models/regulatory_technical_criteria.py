@@ -29,6 +29,7 @@ from odoo.exceptions import UserError, ValidationError
 class RegulatoryTechnicalCriteria(models.Model):
     _name = 'regulatory.technical.criteria'
     _description = 'Regulatory Technical Criteria'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string="Certificate Name", required=True, translate=True)
     ctni=fields.Char('CTNI')
