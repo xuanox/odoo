@@ -98,7 +98,7 @@
         action="regulatory_tag_action"
         parent="regulatory_management_configuration"
         sequence="3"/>
-        
+
       <menuitem
         id="regulatory_legal_documentation_type"
         parent="regulatory_management_configuration"
