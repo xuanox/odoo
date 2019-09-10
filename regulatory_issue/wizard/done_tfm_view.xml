@@ -6,7 +6,7 @@
             <field name="arch" type="xml">
                 <form string="Done to the Modification Request">
                     <group>
-                      <field name="contact_ids" widget="many2many_tags"/>
+                      <field name="contact_ids"/>
                     </group>
                     <footer>
                         <button name="done_modification_request" string="Done TFM" type="object"  class="oe_highlight"  />

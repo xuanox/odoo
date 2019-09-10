@@ -67,7 +67,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
     category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, track_visibility='onchange')
-    contact_ids = fields.Many2many('res.partner', 'regulatory_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
+    contact_ids = fields.Many2many('res.partner', 'regulatory_tfr_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the order is confirmed the status is set to 'Assigned'.\n\
@@ -90,7 +90,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
     tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC', default=_default_tfc, track_visibility='onchange', readonly=True)
     tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM', default=_default_tfm, track_visibility='onchange', readonly=True)
-    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfr_tag_rel', 'tfr_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
+    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tag_rel', 'tfr_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
 
     @api.model
     def _onchange_user_values(self, user_id):
