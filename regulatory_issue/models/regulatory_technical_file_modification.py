@@ -68,7 +68,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
     tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
     contact_ids = fields.Many2many('res.partner', 'regulatory_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
-    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tag_rel', 'tfm_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
+    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfm_tag_rel', 'tfm_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
 
     def action_assigned(self):
         self.write({'state': 'assigned'})

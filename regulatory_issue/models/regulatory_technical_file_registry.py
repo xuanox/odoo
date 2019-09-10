@@ -90,7 +90,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
     tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC', default=_default_tfc, track_visibility='onchange', readonly=True)
     tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM', default=_default_tfm, track_visibility='onchange', readonly=True)
-    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tag_rel', 'tfr_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
+    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfr_tag_rel', 'tfr_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
 
     @api.model
     def _onchange_user_values(self, user_id):
