@@ -10,12 +10,7 @@
         </header>
         <div class="oe_button_box" name="button_box">
           <button class="oe_stat_button" name="#" icon="fa-building-o" type="action">
-            <div class="o_field_widget o_stat_info">
-              <span class="o_stat_value">
-                <field name="qty_available" widget="statinfo" nolabel="1" class="mr4"/>
-              </span>
-              <span class="o_stat_text">On Hand</span>
-            </div>
+            <field name="qty_available" widget="statinfo" nolabel="1" class="mr4"/>
           </button>
         </div>
         <sheet>

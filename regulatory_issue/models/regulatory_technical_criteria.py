@@ -31,10 +31,10 @@ class RegulatoryTechnicalCriteria(models.Model):
     _description = 'Regulatory Technical Criteria'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string="Certificate Name", required=True, translate=True)
-    ctni=fields.Char('CTNI')
-    technical_file=fields.Char('Certificate Number')
-    criterion_expiration_date = fields.Date(u'Criterion Expiration Date')
-    date_expiration_authenticated_seal = fields.Date(u'Date Expiration of the Authenticated Seal')
-    description=fields.Text('Description')
-    qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.")
+    name = fields.Char(string="Certificate Name", required=True, translate=True, track_visibility='onchange')
+    ctni=fields.Char('CTNI', track_visibility='onchange')
+    technical_file=fields.Char('Certificate Number', track_visibility='onchange')
+    criterion_expiration_date = fields.Date(u'Criterion Expiration Date', track_visibility='onchange')
+    date_expiration_authenticated_seal = fields.Date(u'Date Expiration of the Authenticated Seal', track_visibility='onchange')
+    description=fields.Text('Description', track_visibility='onchange')
+    qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.", track_visibility='onchange')
