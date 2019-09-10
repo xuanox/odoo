@@ -15,7 +15,7 @@ class RegulatoryTechnicalFileCreationDone(models.TransientModel):
 
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
-    contact_ids = fields.Many2many('res.partner', 'regulatory_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
+    contact_ids = fields.Many2many('res.partner', 'regulatory_wtfc_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
 
     def done_creation_request(self):
         active_id = self._context.get('active_id')
