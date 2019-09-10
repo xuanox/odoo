@@ -30,6 +30,7 @@
               <field name="responsible_sales_id" widget="many2one"/>
               <field name="sales_team_id" widget="many2one"/>
               <field name="responsible_team_lider_id" widget="many2one"/>
+              <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
             </group>
           </group>
           <group>
@@ -39,8 +40,7 @@
               <field name='entity_id' readonly="1"/>
               <field name='location_homologation'/>
             </group>
-            <group name="detail" string="Detail" groups="regulatory_issue.group_regulatory_issue_lider">
-              <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
+            <group name="info" string="Info" groups="regulatory_issue.group_regulatory_issue_lider">
               <field name='create_uid'/>
               <field name='create_date'/>
               <field name='write_uid'/>
