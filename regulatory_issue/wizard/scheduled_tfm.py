@@ -24,5 +24,4 @@ class RegulatoryTechnicalFileScheduledModificationAssigned(models.TransientModel
             request.write({'date_planned':self.date_planned})
             request.write({'entity_id':self.entity_id.id})
             request.write({'location_homologation':self.location_homologation})
-            request.action_scheduled()
         return {'type': 'ir.actions.act_window_close',}
