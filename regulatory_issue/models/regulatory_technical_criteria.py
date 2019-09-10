@@ -31,6 +31,14 @@ class RegulatoryTechnicalCriteria(models.Model):
     _description = 'Regulatory Technical Criteria'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    STATE_SELECTION = [
+        ('available', 'Available'),
+        ('stamp_to_expire', 'Stamp to Expire'),
+        ('expired_stamp', 'Expired Stamp'),
+        ('tc_to_expire', 'TC to Expire'),
+        ('expired_tc', 'Expired TC')
+    ]
+
     name = fields.Char(string="Certificate Name", required=True, translate=True, track_visibility='onchange')
     ctni=fields.Char('CTNI', track_visibility='onchange')
     technical_file=fields.Char('Certificate Number', track_visibility='onchange')
@@ -38,3 +46,10 @@ class RegulatoryTechnicalCriteria(models.Model):
     date_expiration_authenticated_seal = fields.Date(u'Date Expiration of the Authenticated Seal', track_visibility='onchange')
     description=fields.Text('Description', track_visibility='onchange')
     qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.", track_visibility='onchange')
+    state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
+        help="When the maintenance order is created the status is set to 'New'.\n\
+        If the TC is Valid the status is set to 'Valid'.\n\
+        If the TC is Stamp to Expire the status is set to 'Stamp to Expire'.\n\
+        If the TC is Expired Stamp the status is set to 'Expired Stamp'.\n\
+        If the TC is Technical Criteria to Expire then the status is set to 'TC to Expire'.\n\
+        If the TC is Expired Technical Criteria, the status is set to 'Expired TC'.", default='valid')
