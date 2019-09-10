@@ -16,9 +16,9 @@
           </div>
           <div class="oe_title">
             <label for="name" class="oe_edit_only" string="Name"/>
-            <h1>
+            <h3>
               <field name="name" placeholder="Certificate Name"/>
-            </h1>
+            </h3>
           </div>
           <group>
             <group>
