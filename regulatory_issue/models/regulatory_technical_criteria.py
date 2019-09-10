@@ -32,7 +32,7 @@ class RegulatoryTechnicalCriteria(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     STATE_SELECTION = [
-        ('available', 'Available'),
+        ('valid', 'Valid'),
         ('stamp_to_expire', 'Stamp to Expire'),
         ('expired_stamp', 'Expired Stamp'),
         ('tc_to_expire', 'TC to Expire'),
