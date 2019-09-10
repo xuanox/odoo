@@ -31,7 +31,7 @@
               <field name="technical_file_name" attrs="{'invisible':[('technical_file_id', '=', False)]}"/>
               <field name="models_id" widget="many2one"/>
               <field name="brand_id" widget="many2one"/>
-              <field name="contact_ids" widget="many2many"/>
+              <field name="contact_ids" widget="many2many_tags"/>
             </group>
             <group name="sale" string="Sales Team">
               <field name="responsible_sales_id" widget="many2one"/>
