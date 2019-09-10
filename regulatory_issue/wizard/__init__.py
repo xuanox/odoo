@@ -10,4 +10,3 @@ from . import assign_responsible_tfc
 from . import assign_responsible_tfm
 from . import done_tfc
 from . import done_tfm
-from . import tc_update_qty
