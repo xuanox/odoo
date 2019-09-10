@@ -37,6 +37,11 @@ class RegulatoryTechnicalFileModification(models.Model):
         ('rejected', 'Rejected')
     ]
 
+    def _tfr_count(self):
+        request = self.env['regulatory.technical.file.registry']
+        for tfr in self:
+            self.tfr_count = request.search_count([('tfm_id', '=', tfr.id)])
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange', required=True)
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
@@ -60,6 +65,9 @@ class RegulatoryTechnicalFileModification(models.Model):
     date_planned = fields.Datetime('Planned Date', track_visibility='onchange')
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
+    tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
+    contact_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
@@ -76,6 +84,23 @@ class RegulatoryTechnicalFileModification(models.Model):
     def action_done(self):
         self.write({'state': 'done'})
         return True
+
+    def action_confirm(self):
+        tfr = self.env['regulatory.technical.file.registry']
+        tfr_id = False
+        for request in self:
+            tfr_id = tfr.create({
+                'technical_file_id':request.technical_file_id.id,
+                'models_id':request.models_id.id,
+                'responsible_sales_id':request.responsible_sales_id.id,
+                'team_id': request.sales_team_id.id,
+                'user_id': request.user_id.id,
+                'category': 'update',
+                'contact_id':request.contact_id.id,
+                'tfm_id': request.id,
+            })
+        return tfr_id.id
+
 
     def action_rejected(self):
         self.write({'state': 'rejected'})
