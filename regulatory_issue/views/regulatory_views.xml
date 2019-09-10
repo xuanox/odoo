@@ -93,6 +93,13 @@
         sequence="2"/>
 
       <menuitem
+        id="regulatory_tag"
+        name="Tags"
+        action="regulatory_tag_action"
+        parent="regulatory_management_configuration"
+        sequence="3"/>
+        
+      <menuitem
         id="regulatory_legal_documentation_type"
         parent="regulatory_management_configuration"
         action="regulatory_legal_documentation_type_action"/>

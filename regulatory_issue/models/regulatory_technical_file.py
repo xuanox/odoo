@@ -63,3 +63,23 @@ class RegulatoryEntity(models.Model):
 
     name = fields.Char('Entity', required=True)
     description=fields.Text('Location')
+
+class RegulatoryTag(models.Model):
+
+    _name = "regulatory.tag"
+    _description = "Regulatory Tag"
+
+    name = fields.Char('Name', required=True, translate=True)
+    color = fields.Integer('Color Index')
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]
+
+
+class RegulatoryLostReason(models.Model):
+    _name = "regulatory.lost.reason"
+    _description = 'Regulatory Lost Reason'
+
+    name = fields.Char('Name', required=True, translate=True)
+    active = fields.Boolean('Active', default=True)

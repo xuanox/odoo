@@ -68,6 +68,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
     tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
     contact_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
+    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tag_rel', 'tfm_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
@@ -94,7 +95,6 @@ class RegulatoryTechnicalFileModification(models.Model):
                 'models_id':request.models_id.id,
                 'responsible_sales_id':request.responsible_sales_id.id,
                 'team_id': request.sales_team_id.id,
-                'user_id': request.user_id.id,
                 'category': 'update',
                 'contact_id':request.contact_id.id,
                 'tfm_id': request.id,
