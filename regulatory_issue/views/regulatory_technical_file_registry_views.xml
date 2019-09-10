@@ -39,14 +39,14 @@
                       <field name="models_id" widget="many2one"/>
                       <field name="brand_id" widget="many2one"/>
                       <field name="contact_id" widget="many2one"/>
-                      <field name="category"/>
-                      <field name="priority" widget="priority"/>
                     </group>
                     <group name="sale" string="Sales Team">
                       <field name="responsible_sales_id" widget="many2one"/>
                       <field name="team_id" widget="many2one"/>
                       <field name="responsible_team_lider_id"/>
-                      <field name="tfc_id" widget="many2one"/>
+                      <field name="category"/>
+                      <field name="priority" widget="priority"/>
+                      <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                     </group>
                   </group>
                   <group>
@@ -54,6 +54,8 @@
                       <field name="date_planned" />
                       <field name="entity_id"/>
                       <field name="location_homologation"/>
+                      <field name="tfc_id" widget="many2one" attrs="{'invisible':[('tfc_id', '=', False)]}"/>
+                      <field name="tfm_id" widget="many2one" attrs="{'invisible':[('tfm_id', '=', False)]}"/>
                     </group>
                     <group string="Info" attrs="{'invisible':[('user_id', '=', False)]}">
                       <field name="user_id" widget="many2one"/>

@@ -37,6 +37,7 @@
               <field name="sales_team_id" widget="many2one"/>
               <field name="responsible_team_lider_id" widget="many2one"/>
               <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
+              <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>              
             </group>
           </group>
           <group>
