@@ -22,6 +22,8 @@
             <h3>
               <field name="name" placeholder="Certificate Name"/>
             </h3>
+            <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}">
+             Available</field>
           </div>
           <group>
             <group>
@@ -40,8 +42,6 @@
             <group>
               <field name='minimum_quantity' string="Notification Minimum"/>
               <field name='max_quantity'/>
-              <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}">
-               Available</field>
               <field name='is_minimum_quantity' invisible="1"/>
               <field name='is_unavailable' invisible="1"/>
             </group>
