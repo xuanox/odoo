@@ -6,7 +6,7 @@
     <field name="arch" type="xml">
       <form string="Technical Criteria">
         <header>
-          <button name="%(tc_update_qty_action)d" string="Update Qty" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+          <button name="#" string="Update Qty" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
           <field name="state" widget="statusbar"/>
         </header>
         <sheet>
