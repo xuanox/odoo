@@ -18,7 +18,7 @@
       <menuitem
         id="regulatory_management_registry"
         parent="regulatory_management_menu"
-        name="Registry"
+        name="Request"
         sequence="2"/>
 
       <menuitem
