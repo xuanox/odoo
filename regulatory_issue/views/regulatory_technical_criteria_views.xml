@@ -11,8 +11,6 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
-            <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'qty_available'}">
-             Available</field>
             <button class="oe_stat_button" name="#" type="object" icon="fa-dot-circle-o">
               <field string="Available" name="qty_available" widget="statinfo"/>
             </button>
@@ -41,6 +39,8 @@
             </group>
             <group>
               <field name='minimum_quantity'/>
+              <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'qty_available'}">
+               Available</field>
               <field name='is_minimum_quantity' invisible="1"/>
               <field name='is_unavailable' invisible="1"/>
             </group>
