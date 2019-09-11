@@ -1,52 +1,78 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
-        <record id="regulatory_technical_criteria_view_form" model="ir.ui.view">
-            <field name="name">regulatory.technical.criteria.view.form</field>
-            <field name="model">regulatory.technical.criteria</field>
-            <field name="arch" type="xml">
-              <form string="Technical Criteria">
-                  <sheet>
-                      <div class="oe_title">
-                          <label for="name" class="oe_edit_only" string="Name"/>
-                          <h1>
-                              <field name="name" placeholder="Certificate Name"/>
-                          </h1>
-                      </div>
-                      <group>
-                        <group>
-                          <field name="ctni"/>
-                          <field name="technical_file"/>
-                          <field name="criterion_expiration_date" widget="date"/>
-                          <field name="date_expiration_authenticated_seal" widget="date"/>
-                        </group>
-                      </group>
-                      <field name='description' placeholder="Description ......."/>
-                    </sheet>
-              </form>
-            </field>
-        </record>
+  <record id="regulatory_technical_criteria_view_form" model="ir.ui.view">
+    <field name="name">regulatory.technical.criteria.view.form</field>
+    <field name="model">regulatory.technical.criteria</field>
+    <field name="arch" type="xml">
+      <form string="Technical Criteria">
+        <header>
+          <button name="%(tc_update_qty_action)d" string="Update Qty" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+          </div>
+          <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_minimum_quantity', '=', False)]}">Cumple</div>
+          <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_unavailable', '=', False)]}">Unavailable</div>
+          <div class="oe_title">
+            <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}" class="oe_avatar oe_right"/>
+            <label for="name" string="Technical Criteria"/>
+            <h3>
+              <field name="name" placeholder="Certificate Name"/>
+            </h3>
+          </div>
+          <group>
+            <group>
+              <field name="ctni"/>
+              <field name="technical_file"/>
+            </group>
+            <group>
+              <field name="criterion_expiration_date" widget="date"/>
+              <field name="date_expiration_authenticated_seal" widget="date"/>
+            </group>
+          </group>
+          <group>
+            <group>
+              <field name='description' placeholder="Description ......."/>
+            </group>
+            <group>
+              <field name='minimum_quantity' string="Notification Minimum"/>
+              <field name='max_quantity'/>
+              <field name='is_minimum_quantity' invisible="1"/>
+              <field name='is_unavailable' invisible="1"/>
+            </group>
+          </group>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="activity_ids" widget="mail_activity"/>
+          <field name="message_ids" widget="mail_thread"/>
+        </div>
+      </form>
+    </field>
+  </record>
 
-        <record id="regulatory_technical_criteria_view_tree" model="ir.ui.view">
-            <field name="name">regulatory.technical.criteria.view.tree</field>
-            <field name="model">regulatory.technical.criteria</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                    <field name="ctni"/>
-                    <field name="technical_file"/>
-                    <field name="criterion_expiration_date" widget="date"/>
-                    <field name="date_expiration_authenticated_seal" widget="date"/>
-                </tree>
-            </field>
-        </record>
+  <record id="regulatory_technical_criteria_view_tree" model="ir.ui.view">
+    <field name="name">regulatory.technical.criteria.view.tree</field>
+    <field name="model">regulatory.technical.criteria</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="ctni"/>
+        <field name="technical_file"/>
+        <field name="criterion_expiration_date" widget="date"/>
+        <field name="date_expiration_authenticated_seal" widget="date"/>
+        <field string="Quantity" name="qty_available" widget="progressbar"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record>
 
-        <record id="regulatory_technical_criteria_action" model="ir.actions.act_window">
-            <field name="name">Technical Criteria</field>
-            <field name="res_model">regulatory.technical.criteria</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+  <record id="regulatory_technical_criteria_action" model="ir.actions.act_window">
+    <field name="name">Technical Criteria</field>
+    <field name="res_model">regulatory.technical.criteria</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+  </record>
 
-    </data>
 </odoo>

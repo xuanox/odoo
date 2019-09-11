@@ -1,172 +1,145 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
-
-      <record id="regulatory_technical_file_modification_stage_view_search" model="ir.ui.view">
-          <field name="name">regulatory.technical.file.modification.stage.view.search</field>
-          <field name="model">regulatory.technical.file.modification.stage</field>
-          <field name="arch" type="xml">
-              <search string="Technical File Modification Stage">
-                 <field name="name" string="Technical File Modification Stage"/>
-              </search>
-          </field>
-      </record>
-
-      <record id="regulatory_technical_file_modification_stage_view_tree" model="ir.ui.view">
-          <field name="name">regulatory.technical.file.modification.stage.view.tree</field>
-          <field name="model">regulatory.technical.file.modification.stage</field>
-          <field name="arch" type="xml">
-              <tree string="Technical File Modification Stage" editable="top">
-                  <field name="sequence" widget="handle"/>
-                  <field name="name"/>
-                  <field name="fold"/>
-                  <field name="done"/>
-              </tree>
-          </field>
-      </record>
-
-      <record id="regulatory_technical_file_modification_stage_view_kanban" model="ir.ui.view">
-          <field name="name">regulatory.technical.file.modification.stage.view.kanban</field>
-          <field name="model">regulatory.technical.file.modification.stage</field>
-          <field name="arch" type="xml">
-              <kanban class="o_kanban_mobile">
-                  <templates>
-                      <t t-name="kanban-box">
-                          <div t-attf-class="oe_kanban_global_click">
-                              <div>
-                                  <strong><field name="name"/></strong>
-                              </div>
-                          </div>
-                      </t>
-                  </templates>
-              </kanban>
-          </field>
-      </record>
-
-      <!-- stages : actions -->
-      <record id="regulatory_technical_file_modification_stage_action" model="ir.actions.act_window">
-          <field name="name">Technical File Modification Stages</field>
-          <field name="res_model">regulatory.technical.file.modification.stage</field>
-          <field name="view_mode">tree,kanban,form</field>
-          <field name="view_type">form</field>
-          <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-              Add a new stage in the Technical File Modification
-            </p>
-          </field>
-      </record>
-
-      <!-- Technical File Modification -->
-        <record id="regulatory_technical_file_modification_view_form" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.modification.view.form</field>
-            <field name="model">regulatory.technical.file.modification</field>
-            <field name="arch" type="xml">
-              <form string="Technical File Modification">
-                <header>
-                  <field name="state" widget="statusbar"/>
-                </header>
-                  <sheet>
-                      <div class="oe_title">
-                          <label for="name" class="oe_edit_only" string="#Request:"/>
-                          <h1>
-                              <field name="name" placeholder="Name"/>
-                          </h1>
-                  </div>
-                  <group>
-                      <group>
-                          <field name="technical_file_id" widget="many2one"/>
-                          <field name="technical_file_name" />
-                          <field name="models_id" widget="many2one"/>
-                          <field name="brand_id" widget="many2one"/>
-                      </group>
-                      <group>
-                        <field name="user_id" widget="many2one"/>
-                        <field name="responsible_sales_id" widget="many2one"/>
-                        <field name="sales_team_id" widget="many2one"/>
-                      </group>
-                  </group>
-                  <group>
-                    <field name='observation' placeholder="Observation ......."/>
-                  </group>
-              <notebook>
-                  <page name="line" string="Modification Line">
-                    <group string="Modification Line">
-                        <field name="modification_lines" nolabel="1">
-                            <tree string="Modification Line" editable="bottom">
-                                <field name="name"/>
-                                <field name="value"/>
-                            </tree>
-                        </field>
-                    </group>
-                  </page>
-              </notebook>
-            </sheet>
-            <div class="oe_chatter">
-              <field name="message_follower_ids" widget="mail_followers"/>
-              <field name="message_ids" widget="mail_thread"/>
-            </div>
-              </form>
-            </field>
-        </record>
-
-        <record id="regulatory_technical_file_modification_view_tree" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.modification.view.tree</field>
-            <field name="model">regulatory.technical.file.modification</field>
-            <field name="arch" type="xml">
-                <tree>
+  <!-- Technical File Modification -->
+  <record id="regulatory_technical_file_modification_view_form" model="ir.ui.view">
+    <field name="name">Regulatory Technical File Modification View Form</field>
+    <field name="model">regulatory.technical.file.modification</field>
+    <field name="arch" type="xml">
+      <form string="Technical File Modification">
+        <header>
+          <button name="%(action_modification_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+          <button name="action_process" states="assigned,scheduled" string="Revisión" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+          <button name="%(action_scheduled_modification_assigned)d" string="Cita de Homologación" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+          <button name="%(action_modification_done)d" string="Complete" states="scheduled" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_user" />
+          <field name="state" widget="statusbar" statusbar_visible="draft,assigned,process,scheduled,done"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button class="oe_stat_button" name="action_view_tfr_request" type="object" icon="fa-file-excel-o">
+              <field string="TFR" name="tfr_count" widget="statinfo"/>
+            </button>
+          </div>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only" string="#Request:"/>
+            <h1>
+              <field name="name" placeholder="Name"/>
+            </h1>
+          </div>
+          <group>
+            <group name="request" string="Request">
+              <field name="technical_file_id" widget="many2one"/>
+              <field name="technical_file_name" />
+              <field name="models_id" widget="many2one"/>
+              <field name="brand_id" widget="many2one"/>
+              <field name="contact_ids" widget="many2many_tags"/>
+            </group>
+            <group name="sale" string="Sales Team">
+              <field name="responsible_sales_id" widget="many2one"/>
+              <field name="sales_team_id" widget="many2one"/>
+              <field name="responsible_team_lider_id" widget="many2one"/>
+              <field name="priority" widget="priority" groups="regulatory_issue.group_regulatory_issue_lider"/>
+              <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+            </group>
+          </group>
+          <group>
+            <group name="regulatory" string="Regulatory Team" attrs="{'invisible':[('user_id', '=', False)]}">
+              <field name="user_id" widget="many2one" readonly="1"/>
+              <field name='date_planned' readonly="1"/>
+              <field name='entity_id' readonly="1"/>
+              <field name='location_homologation'/>
+            </group>
+            <group name="info" string="Info" groups="regulatory_issue.group_regulatory_issue_lider">
+              <field name='create_uid'/>
+              <field name='create_date'/>
+              <field name='write_uid'/>
+              <field name='write_date'/>
+            </group>
+          </group>
+          <group>
+            <field name='observation' placeholder="Observation ......."/>
+          </group>
+          <notebook>
+            <page name="line" string="Modification Line">
+              <group string="Modification Line">
+                <field name="modification_lines" nolabel="1">
+                  <tree string="Modification Line" editable="bottom">
                     <field name="name"/>
-                    <field name="technical_file_id" widget="many2one"/>
-                    <field name="brand_id" widget="many2one"/>
-                    <field name="sales_team_id" widget="many2one"/>
-                    <field name="user_id" widget="many2one"/>
-                    <field name="responsible_sales_id" widget="many2one"/>
-                </tree>
-            </field>
-        </record>
+                    <field name="value"/>
+                  </tree>
+                </field>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="message_ids" widget="mail_thread"/>
+        </div>
+      </form>
+    </field>
+  </record>
 
-        <record id="regulatory_technical_file_modification_view_graph" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.modification.view.graph</field>
-            <field name="model">regulatory.technical.file.modification</field>
-            <field name="arch" type="xml">
-                <graph string="Technical File Modification"  type="pie">
-                    <field name="brand_id" type="col"/>
-                    <field name="responsible_sales_id" type="col"/>
-                    <field name="user_id" type="row"/>
-                </graph>
-            </field>
-        </record>
+  <record id="regulatory_technical_file_modification_view_tree" model="ir.ui.view">
+    <field name="name">regulatory.technical.file.modification.view.tree</field>
+    <field name="model">regulatory.technical.file.modification</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="technical_file_id"/>
+        <field name="models_id"/>
+        <field name="brand_id"/>
+        <field name="responsible_sales_id"/>
+        <field name="sales_team_id"/>
+        <field name="responsible_team_lider_id"/>
+        <field name="user_id"/>
+        <field name="priority" widget="priority" readonly="1"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record>
 
-        <record id="regulatory_technical_file_modification_view_pivot" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.modification.view.pivot</field>
-            <field name="model">regulatory.technical.file.modification</field>
-            <field name="arch" type="xml">
-                <pivot string="Technical File Modification" disable_linking="True">
-                    <field name="brand_id" type="row"/>
-                    <field name="responsible_sales_id" type="col"/>
-                    <field name="user_id" type="col"/>
-                </pivot>
-            </field>
-        </record>
+  <record id="regulatory_technical_file_modification_view_graph" model="ir.ui.view">
+    <field name="name">regulatory.technical.file.modification.view.graph</field>
+    <field name="model">regulatory.technical.file.modification</field>
+    <field name="arch" type="xml">
+      <graph string="Technical File Modification"  type="pie">
+        <field name="brand_id" type="col"/>
+        <field name="responsible_sales_id" type="col"/>
+        <field name="user_id" type="row"/>
+      </graph>
+    </field>
+  </record>
 
-        <record id="regulatory_technical_file_modification_view_dashboard" model="ir.ui.view">
-            <field name="name">regulatory.technical.file.modification.view.dashboard</field>
-            <field name="model">regulatory.technical.file.modification</field>
-            <field name="mode">primary</field>
-            <field name="arch" type="xml">
-                <dashboard>
-                    <view type="graph" ref="regulatory_issue.regulatory_technical_file_modification_view_graph"/>
-                    <view type="pivot" ref="regulatory_issue.regulatory_technical_file_modification_view_pivot"/>
-                </dashboard>
-            </field>
-        </record>
+  <record id="regulatory_technical_file_modification_view_pivot" model="ir.ui.view">
+    <field name="name">regulatory.technical.file.modification.view.pivot</field>
+    <field name="model">regulatory.technical.file.modification</field>
+    <field name="arch" type="xml">
+      <pivot string="Technical File Modification" disable_linking="True">
+        <field name="brand_id" type="row"/>
+        <field name="responsible_sales_id" type="col"/>
+        <field name="user_id" type="col"/>
+      </pivot>
+    </field>
+  </record>
 
-        <!-- Technical File Modification : actions -->
-        <record id="regulatory_technical_file_modification_action" model="ir.actions.act_window">
-            <field name="name">Technical File Modification</field>
-            <field name="res_model">regulatory.technical.file.modification</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form,pivot,graph,dashboard</field>
-        </record>
+  <record id="regulatory_technical_file_modification_view_dashboard" model="ir.ui.view">
+    <field name="name">regulatory.technical.file.modification.view.dashboard</field>
+    <field name="model">regulatory.technical.file.modification</field>
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+      <dashboard>
+        <view type="graph" ref="regulatory_issue.regulatory_technical_file_modification_view_graph"/>
+        <view type="pivot" ref="regulatory_issue.regulatory_technical_file_modification_view_pivot"/>
+      </dashboard>
+    </field>
+  </record>
 
-    </data>
+  <!-- Technical File Modification : actions -->
+  <record id="regulatory_technical_file_modification_action" model="ir.actions.act_window">
+    <field name="name">Technical File Modification Action</field>
+    <field name="res_model">regulatory.technical.file.modification</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form,pivot,graph,dashboard</field>
+  </record>
+
 </odoo>

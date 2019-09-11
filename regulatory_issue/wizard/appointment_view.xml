@@ -9,9 +9,8 @@
                 <form string="Pending Ticket" version="7.0">
                     <group>
                         <field name="date_planned"/>
-                        <field name="location_appointment"/>
-                        <field name="entity"/>
-
+                        <field name="entity_id"/>
+                        <field name="location_homologation"/>
                     </group>
                     <footer>
                         <button name="appointment_assigned" string="Cita Asignada" type="object"  class="oe_highlight"  />

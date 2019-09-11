@@ -23,17 +23,6 @@ TICKET_PRIORITY = [
     ('3', 'Urgent'),
 ]
 
-class RegulatoryTechnicalFileRegistryStage(models.Model):
-    _name = 'regulatory.technical.file.registry.stage'
-    _description = 'Regulatory Technical File Registry Stage'
-    _order = 'sequence, id'
-
-    name = fields.Char('Name', required=True, translate=True)
-    sequence = fields.Integer('Sequence', default=20)
-    fold = fields.Boolean('Folded in Regulatory Technical File Registry Pipe')
-    done = fields.Boolean('Request Done')
-
-
 class RegulatoryTechnicalFileRegistry(models.Model):
     _name = 'regulatory.technical.file.registry'
     _description = 'Regulatory Technical File Registry'
@@ -60,9 +49,11 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('css', 'CSS'),
     ]
 
-    @api.returns('self')
-    def _default_stage(self):
-        return self.env['regulatory.technical.file.registry.stage'].search([], limit=1)
+    def _default_tfc(self):
+        return self.env['regulatory.technical.file.creation'].browse(self._context.get('active_id'))
+
+    def _default_tfm(self):
+        return self.env['regulatory.technical.file.modification'].browse(self._context.get('active_id'))
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
@@ -74,10 +65,9 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     responsible_team_lider_id = fields.Many2one('res.users', related='team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
-    stage_id = fields.Many2one('regulatory.technical.file.registry.stage', string='Stage', track_visibility='onchange', default=_default_stage)
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
     category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, track_visibility='onchange')
-    contact_id=fields.Many2one('res.partner', string='Factory Contact', track_visibility='onchange', required=True)
+    contact_ids = fields.Many2many('res.partner', 'regulatory_tfr_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the order is confirmed the status is set to 'Assigned'.\n\
@@ -97,6 +87,10 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+    location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
+    tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC', default=_default_tfc, track_visibility='onchange', readonly=True)
+    tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM', default=_default_tfm, track_visibility='onchange', readonly=True)
+    tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfr_tag_rel', 'tfr_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
 
     @api.model
     def _onchange_user_values(self, user_id):
@@ -131,7 +125,6 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     def action_wait(self):
-        stage_id = self.env['regulatory.technical.file.registry.stage'].search([('sequence', '=', '2')], order="sequence asc", limit=1)
         self.write({'state': 'wait'})
         return True
 
