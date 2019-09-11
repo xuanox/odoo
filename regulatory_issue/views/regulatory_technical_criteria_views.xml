@@ -11,8 +11,9 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
-            <label for="qty_available" class="oe_edit_only" string="qty_available"/>
-            <field string="Quantity" name="qty_available" widget="progressbar"/>
+            <button class="oe_stat_button" name="#" type="object" icon="fa-dot-circle-o">
+              <field string="Quantity" name="qty_available" widget="percentpie"/>
+            </button>
           </div>
           <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_minimum_quantity', '=', False)]}">Cumple</div>
           <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_unavailable', '=', False)]}">Unavailable</div>
