@@ -38,7 +38,7 @@
               <field name='description' placeholder="Description ......."/>
             </group>
             <group>
-              <field name='minimum_quantity'/>
+              <field name='minimum_quantity' string="Notification Minimum"/>
               <field name='max_quantity'/>
               <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}">
                Available</field>
