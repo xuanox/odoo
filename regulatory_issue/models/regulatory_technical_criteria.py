@@ -47,6 +47,7 @@ class RegulatoryTechnicalCriteria(models.Model):
     description=fields.Text('Description', track_visibility='onchange')
     qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.", track_visibility='onchange')
     minimum_quantity = fields.Integer('Minimum Quantity', default=0, help="Assign Minimum Quantity.", track_visibility='onchange')
+    max_quantity = fields.Integer('Max Quantity', default=0, help="Assign Max Quantity.", track_visibility='onchange')
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the TC is Valid the status is set to 'Valid'.\n\
