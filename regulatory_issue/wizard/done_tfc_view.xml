@@ -9,7 +9,7 @@
                 <group>
                   <field name="technical_file_id"/>
                   <field name="technical_file_name"/>
-                  <field name="contact_ids"/>
+                  <field name="contact_ids" widget="many2many_tags"/>
                 </group>
                 <footer>
                     <button name="done_creation_request" string="Done TFC" type="object" class="oe_highlight"/>
