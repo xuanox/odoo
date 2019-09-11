@@ -12,7 +12,7 @@
         <sheet>
           <div class="oe_button_box" name="button_box">
             <button class="oe_stat_button" name="#" type="object" icon="fa-dot-circle-o">
-              <field string="Available" name="qty_available"/>
+              <field string="Available" name="qty_available" widget="statinfo"/>
             </button>
           </div>
           <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_minimum_quantity', '=', False)]}">Cumple</div>
