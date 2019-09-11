@@ -39,6 +39,8 @@
             </group>
             <group>
               <field name='minimum_quantity'/>
+              <field name='is_minimum_quantity' invisible="1"/>
+              <field name='is_unavailable' invisible="1"/>
             </group>
           </group>
         </sheet>
