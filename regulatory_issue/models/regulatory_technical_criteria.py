@@ -56,13 +56,3 @@ class RegulatoryTechnicalCriteria(models.Model):
         If the TC is Expired Technical Criteria, the status is set to 'Expired TC'.", default='valid')
     is_minimum_quantity = fields.Boolean('Minimum Quantity', track_visibility=True)
     is_unavailable = fields.Boolean('Unavailable', track_visibility=True)
-
-    @api.onchange('qty_available', 'minimum_quantity')
-    def onchange_qty_available(self):
-        minimum = self.minimum_quantity
-        available = self.qty_available
-        if available =< minimum:
-            self.is_minimum_quantity = True
-        if available == 0:
-            self.is_unavailable = True
-        return True
