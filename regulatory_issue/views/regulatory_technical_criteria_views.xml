@@ -16,7 +16,7 @@
           <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_unavailable', '=', False)]}">Unavailable</div>
           <div class="oe_title">
             <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}" class="oe_avatar oe_right"/>
-            <label for="name" class="oe_edit_only" string="Name"/>
+            <label for="name" string="Technical Criteria"/>
             <h3>
               <field name="name" placeholder="Certificate Name"/>
             </h3>
