@@ -46,6 +46,7 @@
         'wizard/assign_responsible_tfm_view.xml',
         'wizard/done_tfc_view.xml',
         'wizard/done_tfm_view.xml',
+        'wizard/update_qty_tc_view.xml',
         'views/regulatory_templates.xml',
         'views/regulatory_license_views.xml',
         'views/regulatory_legal_documentation_views.xml',

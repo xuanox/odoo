@@ -12,5 +12,4 @@ class RegulatoryTechnicalCriteriaUpdateQty(models.TransientModel):
     @api.multi
     def action_update_qty(self):
         registry = self.env['regulatory.technical.criteria'].browse(self.env.context.get('active_ids'))
-        registry.write({'qty_available': self.qty})
-        return registry.action_check_qty()
+        return registry.write({'qty_available': self.qty})
