@@ -65,3 +65,4 @@ class RegulatoryTechnicalCriteria(models.Model):
             self.is_minimum_quantity = True
         if available == 0:
             self.is_unavailable = True
+        return True
