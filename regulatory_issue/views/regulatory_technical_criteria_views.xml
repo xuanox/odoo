@@ -39,7 +39,8 @@
             </group>
             <group>
               <field name='minimum_quantity'/>
-              <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'qty_available'}">
+              <field name='max_quantity'/>
+              <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}">
                Available</field>
               <field name='is_minimum_quantity' invisible="1"/>
               <field name='is_unavailable' invisible="1"/>
