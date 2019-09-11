@@ -11,7 +11,7 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
-            <button class="oe_stat_button" name="#" icon="fa-building-o" type="action">
+            <button class="oe_stat_button" name="#" icon="fa-stamp" type="action">
               <field string="Quantity" name="qty_available" widget="progressbar"/>
             </button>
           </div>
