@@ -67,7 +67,8 @@ class RegulatoryTechnicalFileModification(models.Model):
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
     tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
     tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
-    contact_ids = fields.Many2many('res.partner', 'regulatory_tfm_res_partner_rel', string='Contacts', states={'done': [('readonly', True)]})
+    contact_id = fields.Many2one('res.partner', string='Contact', states={'done': [('readonly', True)]})
+    contact_ids = fields.Many2many('res.partner', string='Contacts', states={'done': [('readonly', True)]})
     tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfm_tag_rel', 'tfm_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
 
     def action_assigned(self):
@@ -96,7 +97,7 @@ class RegulatoryTechnicalFileModification(models.Model):
                 'responsible_sales_id':request.responsible_sales_id.id,
                 'team_id': request.sales_team_id.id,
                 'category': 'update',
-                'contact_ids':request.contact_ids.id,
+                'contact_id':request.contact_id.id,
                 'tfm_id': request.id,
             })
         return tfr_id.id

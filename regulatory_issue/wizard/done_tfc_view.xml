@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-        <record id="view_creation_done_wizard" model="ir.ui.view">
-            <field name="name">Done to the Creation Request</field>
-            <field name="model">regulatory.technical.file.creation.done</field>
-            <field name="arch" type="xml">
-                <form string="Done to the Creation Request">
-                    <group>
-                        <field name="technical_file_id"/>
-                        <field name="technical_file_name"/>
-                        <field name="contact_ids"/>
-                    </group>
-                    <footer>
-                        <button name="done_creation_request" string="Done TFC" type="object"  class="oe_highlight"  />
-                        or
-                        <button string="Cancel" class="oe_link" special="cancel" />
-                    </footer>
-                </form>
-            </field>
-        </record>
+<openerp>
+  <data>
+    <record id="view_creation_done_wizard" model="ir.ui.view">
+        <field name="name">Done to the Creation Request</field>
+        <field name="model">regulatory.technical.file.creation.done</field>
+        <field name="arch" type="xml">
+            <form string="Done to the Creation Request" version="7.0">
+                <group>
+                  <field name="technical_file_id"/>
+                  <field name="technical_file_name"/>
+                  <field name="contact_id"/>
+                </group>
+                <footer>
+                    <button name="done_creation_request" string="Done TFC" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <record id="action_creation_done" model="ir.actions.act_window">
-            <field name="name">Done to the Creation Request</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">regulatory.technical.file.creation.done</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
+    <record id="action_creation_done" model="ir.actions.act_window">
+      <field name="name">Done to the Creation Request</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">regulatory.technical.file.creation.done</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
 
-</odoo>
+  </data>
+</openerp>
