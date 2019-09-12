@@ -67,6 +67,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
     priority = fields.Selection(TICKET_PRIORITY, string='Priority', default='0')
     category = fields.Selection(CATEGORY_SELECTION, 'Category', required=True, track_visibility='onchange')
+    contact_id = fields.Many2one('res.partner', string='Contact', required=True, states={'done': [('readonly', True)]})
     contact_ids = fields.Many2many('res.partner', string='Contacts', states={'done': [('readonly', True)]})
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
