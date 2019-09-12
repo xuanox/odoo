@@ -15,14 +15,14 @@ class RegulatoryTechnicalFileCreationDone(models.TransientModel):
 
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
-    contact_ids = fields.Many2many('res.partner', string='Contacts', required=True)
+    contact_id = fields.Many2one('res.partner', string='Contact', required=True)
 
     def done_creation_request(self):
         active_id = self._context.get('active_id')
         if active_id:
             request = self.env['regulatory.technical.file.creation'].browse(self._context.get('active_id'))
             request.write({'technical_file_id': self.technical_file_id.id})
-            request.write({'contact_ids': self.contact_ids.id})
+            request.write({'contact_id': self.contact_id.id})
             request.action_confirm()
             request.action_done()
         return {'type': 'ir.actions.act_window_close',}
