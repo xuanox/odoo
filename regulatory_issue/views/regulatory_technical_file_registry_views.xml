@@ -8,9 +8,9 @@
               <form string="Technical File Registry">
                 <header>
                   <button name="%(action_request_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
-                  <button name="%(action_appointment_assigned)d" string="Cita Asignada" states="review,wait,rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
-                  <button name="action_send_mail" states="review,wait" string="Consulta a Fábrica" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
-                  <button name="action_review" states="assigned,wait,rejected,correct" string="Revisión" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="%(action_appointment_assigned)d" string="Schedule Appointment" states="review,wait,rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+                  <button name="action_send_mail" states="review,wait" string="Consult" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_review" states="assigned,wait,rejected,correct" string="In Review" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="action_set_fulfill" states="review,wait,appointment" string="Cumple" attrs="{'invisible': ['|', ('is_won', '=', True)]}" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(registry_lost_action)d" states="review,wait" string="No Cumple" attrs="{'invisible': ['|', ('is_lost', '=', True)]}" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(action_registry_reject)d" states="waiting" string="Rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
@@ -51,7 +51,7 @@
                     </group>
                   </group>
                   <group>
-                    <group string="Regulatory Info" attrs="{'invisible':[('entity_id', '=', False)]}">
+                    <group string="Regulatory Info" attrs="{'invisible':[('user_id', '=', False)]}">
                       <field name="user_id" widget="many2one"/>
                       <field name="date_planned" />
                       <field name="entity_id"/>
@@ -107,6 +107,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="technical_file_id" widget="many2one"/>
+                    <field name="category"/>
                     <field name="models_id" widget="many2one"/>
                     <field name="brand_id" widget="many2one"/>
                     <field name="team_id" widget="many2one"/>

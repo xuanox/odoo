@@ -13,7 +13,7 @@ class RegulatoryTechnicalFileModificationDone(models.TransientModel):
     _name = 'regulatory.technical.file.modification.done'
     _description = 'Done to the Modification Request'
 
-    contact_id = fields.Many2many('res.partner', string='Contact', required=True)
+    contact_id = fields.Many2one('res.partner', string='Contact', required=True)
 
     def done_modification_request(self):
         active_id = self._context.get('active_id')

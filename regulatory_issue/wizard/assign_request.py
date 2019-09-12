@@ -14,7 +14,6 @@ class RegulatoryTechnicalFileRegistryAssign(models.TransientModel):
     _description = 'Regulatory Technical File Registry Assign'
 
     user_id = fields.Many2one('res.users', string='Assigned to', required=True, track_visibility='onchange', default=lambda self: self.env.user.id, domain=lambda self: [('groups_id', 'in', self.env.ref('regulatory_issue.group_regulatory_issue_manager').id)])
-    detail = fields.Text('Detail')
 
     def assign_request(self):
         active_id = self._context.get('active_id')
