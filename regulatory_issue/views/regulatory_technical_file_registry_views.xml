@@ -27,13 +27,13 @@
                   <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_rejected', '=', False)]}">Rejected</div>
                   <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_approved', '=', False)]}">Approved</div>
                   <div class="oe_title">
-                    <label for="name" class="oe_edit_only" string="#Request:"/>
+                    <label for="name" string="#Request:"/>
                     <h1>
                       <field name="name" placeholder="Name"/>
                     </h1>
                   </div>
                   <group>
-                    <group name="request" string="Request">
+                    <group name="request" string="Request Info">
                       <field name="technical_file_id" widget="many2one"/>
                       <field name="technical_file_name" />
                       <field name="models_id" widget="many2one"/>
@@ -41,7 +41,7 @@
                       <field name="contact_id"/>
                       <field name="contact_ids" widget="many2many_tags"/>
                     </group>
-                    <group name="sale" string="Sales Team">
+                    <group name="sale" string="Sale Info">
                       <field name="responsible_sales_id" widget="many2one"/>
                       <field name="team_id" widget="many2one"/>
                       <field name="responsible_team_lider_id"/>
@@ -51,15 +51,19 @@
                     </group>
                   </group>
                   <group>
-                    <group string="Appointment Assigned" attrs="{'invisible':[('entity_id', '=', False)]}">
+                    <group string="Regulatory Info" attrs="{'invisible':[('entity_id', '=', False)]}">
+                      <field name="user_id" widget="many2one"/>
                       <field name="date_planned" />
                       <field name="entity_id"/>
                       <field name="location_homologation"/>
                       <field name="tfc_id" widget="many2one" attrs="{'invisible':[('tfc_id', '=', False)]}"/>
                       <field name="tfm_id" widget="many2one" attrs="{'invisible':[('tfm_id', '=', False)]}"/>
                     </group>
-                    <group string="Info" attrs="{'invisible':[('user_id', '=', False)]}">
-                      <field name="user_id" widget="many2one"/>
+                    <group name="info" string="Log Info" groups="regulatory_issue.group_regulatory_issue_lider">
+                      <field name='create_uid'/>
+                      <field name='create_date'/>
+                      <field name='write_uid'/>
+                      <field name='write_date'/>
                       <field name='is_won' invisible="1"/>
                       <field name='is_lost' invisible="1"/>
                       <field name='is_approved' invisible="1"/>

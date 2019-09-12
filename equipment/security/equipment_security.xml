@@ -19,6 +19,12 @@
             <field name="implied_ids" eval="[(4, ref('group_equipment_customer'))]"/>
         </record>
 
+        <record id="group_equipment_sale" model="res.groups">
+            <field name="name">Sale User</field>
+            <field name="category_id" ref="module_category_equipment"/>
+            <field name="implied_ids" eval="[(4, ref('group_equipment_customer'))]"/>
+        </record>
+
         <record id="group_equipment_engineer" model="res.groups">
             <field name="name">Engineer TS</field>
             <field name="category_id" ref="module_category_equipment"/>
