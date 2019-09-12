@@ -44,11 +44,6 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('done', 'Completed')
     ]
 
-    ENTITY_SELECTION = [
-        ('minsa', 'MINSA'),
-        ('css', 'CSS'),
-    ]
-
     def _default_tfc(self):
         return self.env['regulatory.technical.file.creation'].browse(self._context.get('active_id'))
 
@@ -78,14 +73,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         If the stock is available then the status is set to 'Approved'.\n\
         When the maintenance is over, the status is set to 'Rejected'.", default='draft')
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    location_appointment = fields.Text('Appointment Location')
     is_won = fields.Boolean('Cumple', track_visibility=True)
     is_lost = fields.Boolean('No Cumple', track_visibility=True)
     is_approved = fields.Boolean('Approved', track_visibility=True)
     is_rejected = fields.Boolean('Rejected', track_visibility=True)
     lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
-    entity = fields.Selection(ENTITY_SELECTION, 'Entity', track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
