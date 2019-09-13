@@ -104,6 +104,21 @@ access_equipment_software_list_engineer,equipment.software.list engineer,model_e
 access_equipment_modality_engineer,equipment.modality engineer,model_equipment_modality,equipment.group_equipment_engineer,1,1,1,1
 access_equipment_history_state_engineer,equipment.history.state engineer,model_equipment_history_state,equipment.group_equipment_engineer,1,1,1,1
 
+access_equipment_equipment_sale,equipment.equipment sale,model_equipment_equipment,equipment.group_equipment_sale,1,1,1,0
+access_equipment_state_sale,equipment.state sale,model_equipment_state,equipment.group_equipment_sale,1,0,0,0
+access_equipment_category_sale,equipment.category sale,model_equipment_category,equipment.group_equipment_sale,1,0,0,0
+access_equipment_brand_sale,equipment.brand sale,model_equipment_brand,equipment.group_equipment_sale,1,1,1,0
+access_equipment_dicom_sale,equipment.dicom sale,model_equipment_dicom,equipment.group_equipment_sale,1,0,0,0
+access_equipment_dicom_type_sale,equipment.dicom.type sale,model_equipment_dicom_type,equipment.group_equipment_sale,1,0,0,0
+access_equipment_software_sale,equipment.software sale,model_equipment_software,equipment.group_equipment_sale,1,0,0,0
+access_equipment_software_type_sale,equipment.software.type sale,model_equipment_software_type,equipment.group_equipment_sale,1,0,0,0
+access_equipment_zone_sale,equipment.zone sale,model_equipment_zone,equipment.group_equipment_sale,1,0,0,0
+access_equipment_model_sale,equipment.model sale,model_equipment_model,equipment.group_equipment_sale,1,1,1,0
+access_equipment_network_sale,equipment.network sale,model_equipment_network,equipment.group_equipment_sale,1,0,0,0
+access_equipment_software_list_sale,equipment.software.list sale,model_equipment_software_list,equipment.group_equipment_sale,1,0,0,0
+access_equipment_modality_sale,equipment.modality sale,model_equipment_modality,equipment.group_equipment_sale,1,0,0,0
+access_equipment_history_state_sale,equipment.history.state sale,model_equipment_history_state,equipment.group_equipment_sale,1,0,0,0
+
 access_equipment_equipment_user,equipment.equipment user,model_equipment_equipment,equipment.group_equipment_user,1,1,0,0
 access_equipment_state_user,equipment.state user,model_equipment_state,equipment.group_equipment_user,1,1,0,0
 access_equipment_category_user,equipment.category user,model_equipment_category,equipment.group_equipment_user,1,1,0,0

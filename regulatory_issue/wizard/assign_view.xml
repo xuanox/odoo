@@ -9,7 +9,6 @@
                 <form string="Assign Request">
                     <group>
                         <field name="user_id"/>
-                        <field name="detail"/>
                     </group>
                     <footer>
                         <button name="assign_request" string="Assign Request" type="object"  class="oe_highlight"  />
