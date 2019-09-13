@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+  <!-- View Calendar-->
   <record id="regulatory_technical_criteria_view_form" model="ir.ui.view">
     <field name="name">regulatory.technical.criteria.view.form</field>
     <field name="model">regulatory.technical.criteria</field>
@@ -51,6 +52,7 @@
       </form>
     </field>
   </record>
+
 
   <record id="regulatory_technical_criteria_view_tree" model="ir.ui.view">
     <field name="name">regulatory.technical.criteria.view.tree</field>
