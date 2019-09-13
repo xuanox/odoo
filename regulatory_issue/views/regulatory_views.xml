@@ -22,38 +22,23 @@
         sequence="2"/>
 
       <menuitem
-        id="regulatory_management_legal_documentation"
-        name="Legal Documents"
+        id="regulatory_management_documents"
         parent="regulatory_management_menu"
-        action="regulatory_legal_documentation_action"
-        sequence="3" />
-
-      <menuitem
-        id="regulatory_management_technical_criteria"
-        parent="regulatory_management_menu"
-        action="regulatory_technical_criteria_action"
-        name="Technical Criteria"
-        sequence="4"/>
-
-      <menuitem
-        id="regulatory_management_license"
-        parent="regulatory_management_menu"
-        action="regulatory_license_action"
-        name="License"
-        sequence="5"/>
+        name="Documents"
+        sequence="3"/>
 
       <menuitem
         id="regulatory_management_statistics"
         parent="regulatory_management_menu"
         action="regulatory_technical_file_action"
         name="Statistics"
-        sequence="6"/>
+        sequence="4"/>
 
       <menuitem
         id="regulatory_management_configuration"
         parent="regulatory_management_menu"
         name="Configuration"
-        sequence="7" />
+        sequence="5" />
 
       <!-- Registry -->
       <menuitem
@@ -75,6 +60,28 @@
         parent="regulatory_management_registry"
         action="regulatory_technical_file_registry_action"
         name="Registry Request"
+        sequence="3"/>
+
+      <!-- Configuration -->
+      <menuitem
+        id="regulatory_management_legal_documentation"
+        name="Legal Documents"
+        parent="regulatory_management_documents"
+        action="regulatory_legal_documentation_action"
+        sequence="1" />
+
+      <menuitem
+        id="regulatory_management_technical_criteria"
+        parent="regulatory_management_documents"
+        action="regulatory_technical_criteria_action"
+        name="Technical Criteria"
+        sequence="2"/>
+
+      <menuitem
+        id="regulatory_management_license"
+        parent="regulatory_management_documents"
+        action="regulatory_license_action"
+        name="License"
         sequence="3"/>
 
       <!-- Configuration -->
@@ -101,18 +108,24 @@
 
       <menuitem
         id="regulatory_legal_documentation_type"
+        name="Legal Documentation Type"
         parent="regulatory_management_configuration"
-        action="regulatory_legal_documentation_type_action"/>
+        action="regulatory_legal_documentation_type_action"
+        sequence="4"/>
 
       <menuitem
         id="regulatory_technical_file_type_area"
+        name="Technical File Type Area"
         parent="regulatory_management_configuration"
-        action="regulatory_technical_file_type_area_action"/>
+        action="regulatory_technical_file_type_area_action"
+        sequence="5"/>
 
       <menuitem
         id="regulatory_technical_file_group"
+        name="Technical File Group"
         parent="regulatory_management_configuration"
-        action="regulatory_technical_file_group_action"/>
+        action="regulatory_technical_file_group_action"
+        sequence="6"/>
 
     </data>
 </odoo>
