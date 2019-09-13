@@ -174,11 +174,11 @@ class RegulatoryTechnicalFileCreation(models.Model):
     def activity_update_scheduled(self):
         """ Update maintenance activities based on current record set state.
         It reschedule, unlink or create maintenance request activities. """
-        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation'])
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_scheduled_ar_regulatory_technical_file_creation'])
         for request in self.filtered(lambda request: request.date_planned):
             date_dl = fields.Datetime.from_string(request.date_planned).date()
             updated = request.activity_reschedule(
-                ['regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation'],
+                ['regulatory_issue.mail_act_scheduled_ar_regulatory_technical_file_creation'],
                 date_deadline=date_dl,
                 new_user_id=request.user_id.id or self.env.uid)
             if not updated:
@@ -187,7 +187,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
                 else:
                     note = False
                 request.activity_schedule(
-                    'regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation',
+                    'regulatory_issue.mail_act_scheduled_ar_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.date_planned).date(),
                     note=note, user_id=request.user_id.id or self.env.uid)
 
