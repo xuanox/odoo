@@ -76,7 +76,7 @@
     <field name="model">regulatory.technical.criteria</field>
     <field name="priority" eval="2"/>
     <field name="arch" type="xml">
-      <calendar color="user_id" date_start="criterion_expiration_date" string="Scheduled Appointment">
+      <calendar color="state" date_start="criterion_expiration_date" string="Scheduled Appointment">
           <field name="name"/>
           <field name="ctni"/>
           <field name="technical_file"/>
