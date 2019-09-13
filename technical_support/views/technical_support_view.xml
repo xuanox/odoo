@@ -98,6 +98,7 @@
 									<group>
 										<field name="brand_id" widget="manyone"/>
 	                  <field name="model_id" widget="manyone"/>
+										<field name="state" groups="technical_support.group_technical_support_manager"/>
 									</group>
 								</group>
 							</page>
