@@ -123,13 +123,13 @@ class RegulatoryTechnicalFileModification(models.Model):
         res = super(RegulatoryTechnicalFileModification, self).write(vals)
         if 'state' in vals:
             self.filtered(lambda m: m.state == 'process')
-            self.activity_feedback(['regulatory_issue.mail_act_regulatory_technical_file_modification'])
+            self.activity_feedback(['regulatory_issue.mail_act_review_regulatory_technical_file_modification'])
         if vals.get('user_id') or vals.get('create_date'):
             self.activity_update()
         if vals.get('models_id'):
             # need to change description of activity also so unlink old and create new activity
-            self.activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_modification'])
-            self.activity_update_responsible_team_lider()
+            self.activity_unlink(['regulatory_issue.mail_act_review_regulatory_technical_file_modification'])
+            self.activity_update()
         return res
 
     def activity_update_responsible_team_lider(self):
