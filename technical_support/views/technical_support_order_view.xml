@@ -103,7 +103,6 @@
 																	<field name="location" widget="manyone"/>
 																	<field name="ticket_id" widget="many2one" groups="technical_support.group_technical_support_manager"/>
 																	<field name="request_id" widget="many2one" groups="technical_support.group_technical_support_manager"/>
-																	<field name="state" groups="technical_support.group_technical_support_manager"/>
 																</group>
 													  </group>
 														<separator string="Cliente"/>
