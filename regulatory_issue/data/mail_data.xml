@@ -8,15 +8,51 @@
         <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
     </record>
 
+    <record id="mail_act_review_regulatory_technical_file_creation" model="mail.activity.type">
+        <field name="name">Regulatory - TFC Review</field>
+        <field name="icon">fa-check-square</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
+    </record>
+
+    <record id="mail_act_scheduled_regulatory_technical_file_creation" model="mail.activity.type">
+        <field name="name">Regulatory - TFM Scheduled Appointment</field>
+        <field name="icon">fa-calendar-check-o</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
+    </record>
+
     <record id="mail_act_regulatory_technical_file_modification" model="mail.activity.type">
         <field name="name">Regulatory - Assign Priority TFM</field>
         <field name="icon">fa-star</field>
         <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_modification"/>
     </record>
 
+    <record id="mail_act_review_regulatory_technical_file_modification" model="mail.activity.type">
+        <field name="name">Regulatory - TFM Review</field>
+        <field name="icon">fa-check-square</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_modification"/>
+    </record>
+
+    <record id="mail_act_scheduled_regulatory_technical_file_modification" model="mail.activity.type">
+        <field name="name">Regulatory - TFM Scheduled Appointment</field>
+        <field name="icon">fa-calendar-check-o</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_modification"/>
+    </record>
+
     <record id="mail_act_regulatory_technical_file_registry" model="mail.activity.type">
         <field name="name">Regulatory - Assign Priority TFR</field>
         <field name="icon">fa-star</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_registry"/>
+    </record>
+
+    <record id="mail_act_review_regulatory_technical_file_registry" model="mail.activity.type">
+        <field name="name">Regulatory - TFR Review</field>
+        <field name="icon">fa-check-square</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_registry"/>
+    </record>
+
+    <record id="mail_act_scheduled_regulatory_technical_file_registry" model="mail.activity.type">
+        <field name="name">Regulatory - TFR Scheduled Appointment</field>
+        <field name="icon">fa-calendar-check-o</field>
         <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_registry"/>
     </record>
 

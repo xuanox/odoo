@@ -72,6 +72,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
+        self.activity_update()
         return True
 
     def action_process(self):
@@ -142,7 +143,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
                 new_user_id=request.responsible_team_lider_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                    note = _('Assign Priority TFC - This activity is to assign priority to the creation request')
                 else:
                     note = False
                 request.activity_schedule(
@@ -150,64 +151,63 @@ class RegulatoryTechnicalFileCreation(models.Model):
                     fields.Datetime.from_string(request.create_date).date(),
                     note=note, user_id=request.responsible_team_lider_id.id or self.env.uid)
 
-
     def activity_update(self):
         """ Update maintenance activities based on current record set state.
         It reschedule, unlink or create maintenance request activities. """
-        self.filtered(lambda request: not request.create_date).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
+        self.filtered(lambda request: not request.create_date).activity_unlink(['regulatory_issue.mail_act_review_regulatory_technical_file_creation'])
         for request in self.filtered(lambda request: request.create_date):
             date_dl = fields.Datetime.from_string(request.create_date).date()
             updated = request.activity_reschedule(
-                ['regulatory_issue.mail_act_regulatory_technical_file_creation'],
+                ['regulatory_issue.mail_act_review_regulatory_technical_file_creation'],
                 date_deadline=date_dl,
                 new_user_id=request.user_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                    note = _('Regulatory TFC Review - Review of the Request for Creation of the Technical Data Sheet ')
                 else:
                     note = False
                 request.activity_schedule(
-                    'regulatory_issue.mail_act_regulatory_technical_file_creation',
+                    'regulatory_issue.mail_act_review_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.create_date).date(),
                     note=note, user_id=request.user_id.id or self.env.uid)
 
     def activity_update_scheduled(self):
         """ Update maintenance activities based on current record set state.
         It reschedule, unlink or create maintenance request activities. """
-        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation'])
         for request in self.filtered(lambda request: request.date_planned):
             date_dl = fields.Datetime.from_string(request.date_planned).date()
             updated = request.activity_reschedule(
-                ['regulatory_issue.mail_act_regulatory_technical_file_creation'],
+                ['regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation'],
                 date_deadline=date_dl,
                 new_user_id=request.user_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                    note = _('Regulatory Scheduled Appointment')
                 else:
                     note = False
                 request.activity_schedule(
-                    'regulatory_issue.mail_act_regulatory_technical_file_creation',
+                    'regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.date_planned).date(),
                     note=note, user_id=request.user_id.id or self.env.uid)
 
     def activity_update_scheduled_responsible_sales(self):
         """ Update maintenance activities based on current record set state.
         It reschedule, unlink or create maintenance request activities. """
-        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_creation'])
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation'])
         for request in self.filtered(lambda request: request.date_planned):
             date_dl = fields.Datetime.from_string(request.date_planned).date()
             updated = request.activity_reschedule(
-                ['regulatory_issue.mail_act_regulatory_technical_file_creation'],
+                ['regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation'],
                 date_deadline=date_dl,
                 new_user_id=request.responsible_sales_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Priority Request Creation for <a href="#" data-oe-model="%s" data-oe-id="%s">%s</a>')
+                    note = _('Regulatory Scheduled Appointment')
                 else:
                     note = False
                 request.activity_schedule(
-                    'regulatory_issue.mail_act_regulatory_technical_file_creation',
+                    'regulatory_issue.mail_act_scheduled_regulatory_technical_file_creation',
                     fields.Datetime.from_string(request.date_planned).date(),
                     note=note, user_id=request.responsible_sales_id.id or self.env.uid)
 

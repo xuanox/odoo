@@ -73,6 +73,7 @@ class RegulatoryTechnicalFileModification(models.Model):
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
+        self.activity_update()
         return True
 
     def action_process(self):
@@ -81,6 +82,8 @@ class RegulatoryTechnicalFileModification(models.Model):
 
     def action_scheduled(self):
         self.write({'state': 'scheduled'})
+        self.activity_update_scheduled()
+        self.activity_update_scheduled_responsible_sales()
         return True
 
     def action_done(self):
@@ -127,13 +130,73 @@ class RegulatoryTechnicalFileModification(models.Model):
                 new_user_id=request.responsible_team_lider_id.id or self.env.uid)
             if not updated:
                 if request.models_id:
-                    note = _('Assign Priority TFM')
+                    note = _('Assign Priority TFM - This activity is to assign priority to the modification request')
                 else:
                     note = False
                 request.activity_schedule(
                     'regulatory_issue.mail_act_regulatory_technical_file_modification',
                     fields.Datetime.from_string(request.create_date).date(),
                     note=note, user_id=request.responsible_team_lider_id.id or self.env.uid)
+
+    def activity_update(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.create_date).activity_unlink(['regulatory_issue.mail_act_review_regulatory_technical_file_modification'])
+        for request in self.filtered(lambda request: request.create_date):
+            date_dl = fields.Datetime.from_string(request.create_date).date()
+            updated = request.activity_reschedule(
+                ['regulatory_issue.mail_act_review_regulatory_technical_file_modification'],
+                date_deadline=date_dl,
+                new_user_id=request.user_id.id or self.env.uid)
+            if not updated:
+                if request.models_id:
+                    note = _('Regulatory TFM Review - Review of the Request for Modification of the Technical Data Sheet ')
+                else:
+                    note = False
+                request.activity_schedule(
+                    'regulatory_issue.mail_act_review_regulatory_technical_file_modification',
+                    fields.Datetime.from_string(request.create_date).date(),
+                    note=note, user_id=request.user_id.id or self.env.uid)
+
+    def activity_update_scheduled(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_scheduled_regulatory_technical_file_modification'])
+        for request in self.filtered(lambda request: request.date_planned):
+            date_dl = fields.Datetime.from_string(request.date_planned).date()
+            updated = request.activity_reschedule(
+                ['regulatory_issue.mail_act_scheduled_regulatory_technical_file_modification'],
+                date_deadline=date_dl,
+                new_user_id=request.user_id.id or self.env.uid)
+            if not updated:
+                if request.models_id:
+                    note = _('Regulatory Scheduled Appointment')
+                else:
+                    note = False
+                request.activity_schedule(
+                    'regulatory_issue.mail_act_scheduled_regulatory_technical_file_modification',
+                    fields.Datetime.from_string(request.date_planned).date(),
+                    note=note, user_id=request.user_id.id or self.env.uid)
+
+    def activity_update_scheduled_responsible_sales(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.date_planned).activity_unlink(['regulatory_issue.mail_act_scheduled_regulatory_technical_file_modification'])
+        for request in self.filtered(lambda request: request.date_planned):
+            date_dl = fields.Datetime.from_string(request.date_planned).date()
+            updated = request.activity_reschedule(
+                ['regulatory_issue.mail_act_scheduled_regulatory_technical_file_modification'],
+                date_deadline=date_dl,
+                new_user_id=request.responsible_sales_id.id or self.env.uid)
+            if not updated:
+                if request.models_id:
+                    note = _('Regulatory Scheduled Appointment')
+                else:
+                    note = False
+                request.activity_schedule(
+                    'regulatory_issue.mail_act_scheduled_regulatory_technical_file_modification',
+                    fields.Datetime.from_string(request.date_planned).date(),
+                    note=note, user_id=request.responsible_sales_id.id or self.env.uid)
 
     def action_view_tfr_request(self):
         return {
