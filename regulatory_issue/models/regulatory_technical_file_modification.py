@@ -118,6 +118,20 @@ class RegulatoryTechnicalFileModification(models.Model):
         request.activity_update_responsible_team_lider()
         return request
 
+    @api.multi
+    def write(self, vals):
+        res = super(RegulatoryTechnicalFileModification, self).write(vals)
+        if 'state' in vals:
+            self.filtered(lambda m: m.state == 'process')
+            self.activity_feedback(['regulatory_issue.mail_act_regulatory_technical_file_modification'])
+        if vals.get('user_id') or vals.get('create_date'):
+            self.activity_update()
+        if vals.get('models_id'):
+            # need to change description of activity also so unlink old and create new activity
+            self.activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_modification'])
+            self.activity_update_responsible_team_lider()
+        return res
+
     def activity_update_responsible_team_lider(self):
         """ Update maintenance activities based on current record set state.
         It reschedule, unlink or create maintenance request activities. """
