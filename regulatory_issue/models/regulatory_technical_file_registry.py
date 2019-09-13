@@ -181,7 +181,29 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code('regulatory.technical.file.registry') or '/'
-        return super(RegulatoryTechnicalFileRegistry, self).create(vals)
+        request = super(RegulatoryTechnicalFileRegistry, self).create(vals)
+        request.activity_update_responsible_team_lider()
+        return request
+
+    def activity_update_responsible_team_lider(self):
+        """ Update maintenance activities based on current record set state.
+        It reschedule, unlink or create maintenance request activities. """
+        self.filtered(lambda request: not request.create_date).activity_unlink(['regulatory_issue.mail_act_regulatory_technical_file_registry'])
+        for request in self.filtered(lambda request: request.create_date):
+            date_dl = fields.Datetime.from_string(request.create_date).date()
+            updated = request.activity_reschedule(
+                ['regulatory_issue.mail_act_regulatory_technical_file_registry'],
+                date_deadline=date_dl,
+                new_user_id=request.responsible_team_lider_id.id or self.env.uid)
+            if not updated:
+                if request.models_id:
+                    note = _('Assign Priority TFR')
+                else:
+                    note = False
+                request.activity_schedule(
+                    'regulatory_issue.mail_act_regulatory_technical_file_registry',
+                    fields.Datetime.from_string(request.create_date).date(),
+                    note=note, user_id=request.responsible_team_lider_id.id or self.env.uid)
 
 
 class RegulatoryTechnicalFileRegistryLostReason(models.Model):

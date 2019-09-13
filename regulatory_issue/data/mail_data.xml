@@ -3,9 +3,21 @@
 <data>
     <!-- Regulatory -specific activities, for automatic generation mainly -->
     <record id="mail_act_regulatory_technical_file_creation" model="mail.activity.type">
-        <field name="name">Regulatory - Technical File Creation</field>
-        <field name="icon">fa-wrench</field>
+        <field name="name">Regulatory - Assign Priority TFC</field>
+        <field name="icon">fa-star</field>
         <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
+    </record>
+
+    <record id="mail_act_regulatory_technical_file_modification" model="mail.activity.type">
+        <field name="name">Regulatory - Assign Priority TFM</field>
+        <field name="icon">fa-star</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_modification"/>
+    </record>
+
+    <record id="mail_act_regulatory_technical_file_registry" model="mail.activity.type">
+        <field name="name">Regulatory - Assign Priority TFR</field>
+        <field name="icon">fa-star</field>
+        <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_registry"/>
     </record>
 
 </data>
