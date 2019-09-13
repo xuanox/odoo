@@ -30,6 +30,7 @@ class RegulatoryTechnicalCriteria(models.Model):
     _name = 'regulatory.technical.criteria'
     _description = 'Regulatory Technical Criteria'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'name asc'
 
     STATE_SELECTION = [
         ('valid', 'Valid'),
@@ -55,5 +56,5 @@ class RegulatoryTechnicalCriteria(models.Model):
         If the TC is Expired Stamp the status is set to 'Expired Stamp'.\n\
         If the TC is Technical Criteria to Expire then the status is set to 'TC to Expire'.\n\
         If the TC is Expired Technical Criteria, the status is set to 'Expired TC'.", default='valid')
-    is_minimum_quantity = fields.Boolean('Minimum Quantity', track_visibility=True)
+    is_minimum_quantity = fields.Boolean('Check Minimum Quantity', track_visibility=True)
     is_unavailable = fields.Boolean('Unavailable', track_visibility=True)
