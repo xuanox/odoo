@@ -22,6 +22,7 @@
 ###################################################################################
 
 from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
