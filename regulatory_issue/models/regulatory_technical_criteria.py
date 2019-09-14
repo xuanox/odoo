@@ -34,8 +34,6 @@ class RegulatoryTechnicalCriteria(models.Model):
 
     STATE_SELECTION = [
         ('valid', 'Valid'),
-        ('stamp_to_expire', 'Stamp to Expire'),
-        ('expired_stamp', 'Expired Stamp'),
         ('tc_to_expire', 'TC to Expire'),
         ('expired_tc', 'Expired TC')
     ]
@@ -52,9 +50,55 @@ class RegulatoryTechnicalCriteria(models.Model):
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange',
         help="When the maintenance order is created the status is set to 'New'.\n\
         If the TC is Valid the status is set to 'Valid'.\n\
-        If the TC is Stamp to Expire the status is set to 'Stamp to Expire'.\n\
-        If the TC is Expired Stamp the status is set to 'Expired Stamp'.\n\
         If the TC is Technical Criteria to Expire then the status is set to 'TC to Expire'.\n\
         If the TC is Expired Technical Criteria, the status is set to 'Expired TC'.", default='valid')
     is_minimum_quantity = fields.Boolean('Check Minimum Quantity', track_visibility=True)
     is_unavailable = fields.Boolean('Unavailable', track_visibility=True)
+    is_stamp_to_expire = fields.Boolean('Stamp to Expire', track_visibility=True)
+    is_expired_stamp = fields.Boolean('Expired Stamp', track_visibility=True)
+
+    def set_stamp_to_expire(self):
+        return self.write({'is_stamp_to_expire': True})
+
+    def set_expired_stamp(self):
+        return self.write({'is_expired_stamp': True})
+
+    def set_tc_to_expire(self):
+        return self.write({'state': 'tc_to_expire'})
+
+    def set_expired_tc(self):
+        return self.write({'state': 'expired_tc'})
+
+    @api.model
+    def _cron_change_state_tc(self):
+        today = fields.Date.today()
+        next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
+
+        # set to pending if date is in less than a month
+        domain_pending = [('criterion_expiration_date', '<', next_month), ('state', '=', 'valid')]
+        subscriptions_pending = self.search(domain_pending)
+        subscriptions_pending.set_tc_to_expire()
+
+        # set to close if date is passed
+        domain_close = [('criterion_expiration_date', '<', today), ('state', '=', 'tc_to_expire')]
+        subscriptions_close = self.search(domain_close)
+        subscriptions_close.set_expired_tc()
+
+        return dict(pending=subscriptions_pending.ids, closed=subscriptions_close.ids)
+
+    @api.model
+    def _cron_change_state_tc_stamp(self):
+        today = fields.Date.today()
+        next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
+
+        # set to pending if date is in less than a month
+        domain_pending = [('date_expiration_authenticated_seal', '<', next_month), ('is_stamp_to_expire', '=', False)]
+        subscriptions_pending = self.search(domain_pending)
+        subscriptions_pending.set_stamp_to_expire()
+
+        # set to close if date is passed
+        domain_close = [('date_expiration_authenticated_seal', '<', today), ('is_expired_stamp', '=', False)]
+        subscriptions_close = self.search(domain_close)
+        subscriptions_close.set_expired_stamp()
+
+        return dict(pending=subscriptions_pending.ids, closed=subscriptions_close.ids)
