@@ -43,6 +43,8 @@
               <field name='max_quantity'/>
               <field name='is_minimum_quantity' invisible="1"/>
               <field name='is_unavailable' invisible="1"/>
+              <field name='is_stamp_to_expire' invisible="1"/>
+              <field name='is_expired_stamp' invisible="1"/>
             </group>
           </group>
         </sheet>
