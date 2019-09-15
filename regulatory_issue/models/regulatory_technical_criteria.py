@@ -113,7 +113,7 @@ class RegulatoryTechnicalCriteria(models.Model):
         next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
 
         # set to expiration tc if date is in less than a month
-        domain_expiration = [('criterion_expiration_date', '<', next_month), ('state', '=', 'valid')]
+        domain_expiration = [('criterion_expiration_date', '<', next_month),  '|', ('state', '=', 'expired_tc'), ('state', '=', 'valid')]
         tc_expired = self.search(domain_expiration)
         tc_expired.set_tc_to_expire()
 
