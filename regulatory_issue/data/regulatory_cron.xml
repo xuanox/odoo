@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo >
+		<record model="ir.cron" id="regulatory_technical_criteria_stamp_cron">
+        <field name="name">Regulatory: Change State Technical Criteria Stamp</field>
+				<field name="model_id" ref="model_regulatory_technical_criteria"/>
+				<field name="state">code</field>
+				<field name="code">model._cron_change_state_tc_stamp()</field>
+				<field name="interval_number">1</field>
+				<field name="interval_type">days</field>
+				<field name="numbercall">-1</field>
+				<field name="doall" eval="False"/>
+    </record>
+
+		<record model="ir.cron" id="regulatory_technical_criteria_cron">
+				<field name="name">Regulatory: Change State Technical Criteria</field>
+				<field name="model_id" ref="model_regulatory_technical_criteria"/>
+				<field name="state">code</field>
+				<field name="code">model._cron_change_state_tc()</field>
+				<field name="interval_number">1</field>
+				<field name="interval_type">days</field>
+				<field name="numbercall">-1</field>
+				<field name="doall" eval="False"/>
+		</record>
+</odoo>
