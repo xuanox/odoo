@@ -42,8 +42,8 @@ class RegulatoryTechnicalCriteria(models.Model):
     name = fields.Char(string="Certificate Name", required=True, translate=True, track_visibility='onchange')
     ctni=fields.Char('CTNI', track_visibility='onchange')
     technical_file=fields.Char('Certificate Number', track_visibility='onchange')
-    criterion_expiration_date = fields.Date(u'Criterion Expiration Date', track_visibility='onchange')
-    date_expiration_authenticated_seal = fields.Date(u'Date Expiration of the Authenticated Seal', track_visibility='onchange')
+    criterion_expiration_date = fields.Date(string='Criterion Expiration Date', track_visibility='onchange')
+    date_expiration_authenticated_seal = fields.Date(string='Date Expiration Stamp', track_visibility='onchange')
     description=fields.Text('Description', track_visibility='onchange')
     qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.", track_visibility='onchange')
     minimum_quantity = fields.Integer('Minimum Quantity', default=0, help="Assign Minimum Quantity.", track_visibility='onchange')
@@ -101,10 +101,21 @@ class RegulatoryTechnicalCriteria(models.Model):
         return super(RegulatoryTechnicalCriteria, self)
 
     @api.multi
+    def check_expiration_stamp(self):
+        if self.is_stamp_to_expire == False:
+            self._cron_change_state_tc_stamp()
+        if self.is_stamp_to_expire == True or self.is_expired_stamp == True:
+            self.change_expiration_tc_stamp()
+            self._cron_change_state_tc_stamp()
+        return super(RegulatoryTechnicalCriteria, self)
+
+    @api.multi
     def write(self, vals):
         res = super(RegulatoryTechnicalCriteria, self).write(vals)
         if vals.get('criterion_expiration_date'):
             self.check_status()
+        if vals.get('date_expiration_authenticated_seal'):
+            self.check_expiration_stamp()
         return res
 
     @api.model
@@ -152,3 +163,16 @@ class RegulatoryTechnicalCriteria(models.Model):
         expired_tc_stamp.set_expired_stamp()
 
         return dict(expiration_stamp=tc_stamp_expired.ids, expired_stamp=expired_tc_stamp.ids)
+
+    @api.model
+    def change_expiration_tc_stamp(self):
+        today = fields.Date.today()
+        next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
+
+        # set to expiration tc if date is in less than a month
+        domain_stamp = [('date_expiration_authenticated_seal', '>', next_month), '|', ('is_stamp_to_expire', '=', True), ('is_expired_stamp', '=', True)]
+        tc_stamp = self.search(domain_stamp)
+        tc_stamp.set_stamp_to_expire_false()
+        tc_stamp.set_expired_stamp_false()
+
+        return dict(stamp_tc=tc_stamp.ids)
