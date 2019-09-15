@@ -98,7 +98,7 @@ class RegulatoryTechnicalCriteria(models.Model):
         if self.state == 'tc_to_expire' or self.state == 'expired_tc':
             self.set_to_valid()
             self._cron_change_state_tc()
-        return super(RegulatoryTechnicalCriteria, self).write(vals)
+        return super(RegulatoryTechnicalCriteria, self)
 
     @api.multi
     def write(self, vals):
