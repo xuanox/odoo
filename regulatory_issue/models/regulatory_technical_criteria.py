@@ -153,13 +153,14 @@ class RegulatoryTechnicalCriteria(models.Model):
         next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
 
         # set to expiration if date is in less than a month
-        domain_expiration_stamp = [('date_expiration_authenticated_seal', '<', next_month), '|', ('is_stamp_to_expire', '=', False), ('is_expired_stamp', '=', True)]
+        domain_expiration_stamp = [('date_expiration_authenticated_seal', '<', next_month), ('is_stamp_to_expire', '=', False)]
         tc_stamp_expired = self.search(domain_expiration_stamp)
         tc_stamp_expired.set_stamp_to_expire()
 
         # set to expired if date is passed
-        domain_expired_stamp = [('date_expiration_authenticated_seal', '<', today), '|', ('is_stamp_to_expire', '=', True), ('is_expired_stamp', '=', False)]
+        domain_expired_stamp = [('date_expiration_authenticated_seal', '<', today), ('is_expired_stamp', '=', False)]
         expired_tc_stamp = self.search(domain_expired_stamp)
+        expired_tc_stamp.set_stamp_to_expire_false()
         expired_tc_stamp.set_expired_stamp()
 
         return dict(expiration_stamp=tc_stamp_expired.ids, expired_stamp=expired_tc_stamp.ids)
