@@ -102,7 +102,7 @@ class RegulatoryTechnicalCriteria(models.Model):
 
     @api.multi
     def check_expiration_stamp(self):
-        if self.is_stamp_to_expire == False:
+        if self.is_stamp_to_expire == False or self.is_expired_stamp == False:
             self._cron_change_state_tc_stamp()
         if self.is_stamp_to_expire == True or self.is_expired_stamp == True:
             self.change_expiration_tc_stamp()
