@@ -96,7 +96,7 @@ class RegulatoryTechnicalCriteria(models.Model):
         if self.state == 'valid':
             self._cron_change_state_tc()
         if self.state == 'tc_to_expire' or self.state == 'expired_tc':
-            self.set_to_valid()
+            self.change_state_valid_tc()
             self._cron_change_state_tc()
         return super(RegulatoryTechnicalCriteria, self)
 
@@ -123,6 +123,18 @@ class RegulatoryTechnicalCriteria(models.Model):
         expired_tc.set_expired_tc()
 
         return dict(expiration_tc=tc_expired.ids, expired_tc=expired_tc.ids)
+
+    @api.model
+    def change_state_valid_tc(self):
+        today = fields.Date.today()
+        next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
+
+        # set to expiration tc if date is in less than a month
+        domain_valid = [('criterion_expiration_date', '>', next_month), '|', ('state', '=', 'tc_to_expire'), ('state', '=', 'expired_tc')]
+        tc_valid = self.search(domain_valid)
+        tc_valid.set_to_valid()
+
+        return dict(valid_tc=tc_valid.ids)
 
     @api.model
     def _cron_change_state_tc_stamp(self):
