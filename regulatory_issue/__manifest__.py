@@ -36,6 +36,7 @@
         'data/ir_sequence_data.xml',
         'data/mail_template_data.xml',
         'data/mail_data.xml',
+        'data/regulatory_cron.xml',
         'wizard/assign_view.xml',
         'wizard/appointment_view.xml',
         'wizard/registry_lost_views.xml',

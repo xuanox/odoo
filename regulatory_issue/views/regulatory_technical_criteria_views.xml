@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <!-- View Calendar-->
+  <!-- View Form-->
   <record id="regulatory_technical_criteria_view_form" model="ir.ui.view">
     <field name="name">regulatory.technical.criteria.view.form</field>
     <field name="model">regulatory.technical.criteria</field>
@@ -15,8 +15,8 @@
           </div>
           <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_minimum_quantity', '=', False)]}">Minimum Quantity</div>
           <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_unavailable', '=', False)]}">Unavailable</div>
-          <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_stamp_to_expire', '=', False)]}">Minimum Quantity</div>
-          <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_expired_stamp', '=', False)]}">Unavailable</div>
+          <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_stamp_to_expire', '=', False)]}">Stamp To Expire</div>
+          <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_expired_stamp', '=', False)]}">Expired Stamp</div>
           <div class="oe_title">
             <field name="qty_available" widget="gauge" style="width:120px;height:90px;cursor:pointer;" options="{'max_field':'max_quantity'}" class="oe_avatar oe_right"/>
             <label for="name" string="Technical Criteria"/>
@@ -57,7 +57,7 @@
     </field>
   </record>
 
-
+  <!-- View Tree-->
   <record id="regulatory_technical_criteria_view_tree" model="ir.ui.view">
     <field name="name">regulatory.technical.criteria.view.tree</field>
     <field name="model">regulatory.technical.criteria</field>
@@ -66,9 +66,9 @@
         <field name="name"/>
         <field name="ctni"/>
         <field name="technical_file"/>
-        <field name="criterion_expiration_date" widget="date"/>
-        <field name="date_expiration_authenticated_seal" widget="date"/>
-        <field string="Quantity" name="qty_available" widget="progressbar"/>
+        <field name="criterion_expiration_date"/>
+        <field name="date_expiration_authenticated_seal"/>
+        <field name="qty_available" string="Quantity"/>
         <field name="state"/>
       </tree>
     </field>
