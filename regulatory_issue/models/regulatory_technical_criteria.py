@@ -58,17 +58,54 @@ class RegulatoryTechnicalCriteria(models.Model):
     is_stamp_to_expire = fields.Boolean('Stamp to Expire', track_visibility=True)
     is_expired_stamp = fields.Boolean('Expired Stamp', track_visibility=True)
 
+    def set_is_minimum_quantity(self):
+        return self.write({'is_minimum_quantity': True})
+
+    def set_is_minimum_quantity_false(self):
+        return self.write({'is_minimum_quantity': False})
+
+    def set_is_unavailable(self):
+        return self.write({'is_unavailable': True})
+
+    def set_is_unavailable_false(self):
+        return self.write({'is_unavailable': False})
+
     def set_stamp_to_expire(self):
         return self.write({'is_stamp_to_expire': True})
 
+    def set_stamp_to_expire_false(self):
+        return self.write({'is_stamp_to_expire': False})
+
     def set_expired_stamp(self):
         return self.write({'is_expired_stamp': True})
+
+    def set_expired_stamp_false(self):
+        return self.write({'is_expired_stamp': False})
+
+    def set_to_valid(self):
+        return self.write({'state': 'valid'})
 
     def set_tc_to_expire(self):
         return self.write({'state': 'tc_to_expire'})
 
     def set_expired_tc(self):
         return self.write({'state': 'expired_tc'})
+
+    @api.multi
+    def check_status(self, vals):
+        if self.state == 'valid':
+            self._cron_change_state_tc()
+        if self.state == 'tc_to_expire' or self.state == 'expired_tc':
+            self.set_to_valid()
+            self._cron_change_state_tc()
+        return super(RegulatoryTechnicalCriteria, self).write(vals)
+
+    @api.multi
+    def write(self, vals):
+        res = super(RegulatoryTechnicalCriteria, self).write(vals)
+        if vals.get('criterion_expiration_date'):
+            self.check_status()
+        return res
 
     @api.model
     def _cron_change_state_tc(self):
