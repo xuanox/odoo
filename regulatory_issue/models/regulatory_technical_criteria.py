@@ -75,31 +75,31 @@ class RegulatoryTechnicalCriteria(models.Model):
         today = fields.Date.today()
         next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
 
-        # set to pending if date is in less than a month
-        domain_pending = [('criterion_expiration_date', '<', next_month), ('state', '=', 'valid')]
-        subscriptions_pending = self.search(domain_pending)
-        subscriptions_pending.set_tc_to_expire()
+        # set to expiration tc if date is in less than a month
+        domain_expiration = [('criterion_expiration_date', '<', next_month), ('state', '=', 'valid')]
+        tc_expired = self.search(domain_expiration)
+        tc_expired.set_tc_to_expire()
 
-        # set to close if date is passed
-        domain_close = [('criterion_expiration_date', '<', today), ('state', '=', 'tc_to_expire')]
-        subscriptions_close = self.search(domain_close)
-        subscriptions_close.set_expired_tc()
+        # set to expiration tc if date is passed
+        domain_expired = [('criterion_expiration_date', '<', today), '|', ('state', '=', 'tc_to_expire'), ('state', '=', 'valid')]
+        expired_tc = self.search(domain_expired)
+        expired_tc.set_expired_tc()
 
-        return dict(pending=subscriptions_pending.ids, closed=subscriptions_close.ids)
+        return dict(expiration_tc=tc_expired.ids, expired_tc=expired_tc.ids)
 
     @api.model
     def _cron_change_state_tc_stamp(self):
         today = fields.Date.today()
         next_month = fields.Date.to_string(fields.Date.from_string(today) + relativedelta(months=1))
 
-        # set to pending if date is in less than a month
-        domain_pending = [('date_expiration_authenticated_seal', '<', next_month), ('is_stamp_to_expire', '=', False)]
-        subscriptions_pending = self.search(domain_pending)
-        subscriptions_pending.set_stamp_to_expire()
+        # set to expiration if date is in less than a month
+        domain_expiration_stamp = [('date_expiration_authenticated_seal', '<', next_month), ('is_stamp_to_expire', '=', False)]
+        tc_stamp_expired = self.search(domain_expiration_stamp)
+        tc_stamp_expired.set_stamp_to_expire()
 
-        # set to close if date is passed
-        domain_close = [('date_expiration_authenticated_seal', '<', today), ('is_expired_stamp', '=', False)]
-        subscriptions_close = self.search(domain_close)
-        subscriptions_close.set_expired_stamp()
+        # set to expired if date is passed
+        domain_expired_stamp = [('date_expiration_authenticated_seal', '<', today), '|', ('is_stamp_to_expire', '=', False), ('is_expired_stamp', '=', False)]
+        expired_tc_stamp = self.search(domain_expired_stamp)
+        expired_tc_stamp.set_expired_stamp()
 
-        return dict(pending=subscriptions_pending.ids, closed=subscriptions_close.ids)
+        return dict(expiration_stamp=tc_stamp_expired.ids, expired_stamp=expired_tc_stamp.ids)

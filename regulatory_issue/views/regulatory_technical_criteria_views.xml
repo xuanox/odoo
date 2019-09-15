@@ -66,8 +66,8 @@
         <field name="name"/>
         <field name="ctni"/>
         <field name="technical_file"/>
-        <field name="criterion_expiration_date"/>
-        <field name="date_expiration_authenticated_seal"/>
+        <field name="criterion_expiration_date" string="Expired TC"/>
+        <field name="date_expiration_authenticated_seal" string="Expired Stamp"/>
         <field name="qty_available" string="Quantity"/>
         <field name="state"/>
       </tree>
