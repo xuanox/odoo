@@ -107,7 +107,7 @@ class RegulatoryTechnicalCriteria(models.Model):
         if self.is_stamp_to_expire == True:
             self.change_expiration_tc_stamp()
             self._cron_change_state_tc_stamp()
-        if self.is_expired_stamp == False:
+        if self.is_expired_stamp == True:
             self.change_expiration_tc_stamp()
             self._cron_change_state_tc_stamp()
         return super(RegulatoryTechnicalCriteria, self)
