@@ -227,17 +227,12 @@
 
             </xpath>
 
-            <xpath expr="//a[@name='%(project.action_project_task_user_tree_filtered)d']" position="attributes">
+            <xpath expr="//a[@name='%(portal.portal_share_action)d']" position="attributes">
                 <attribute name="name">open_tasks</attribute>
                 <attribute name="type">object</attribute>
             </xpath>
 
-            <xpath expr="//t[@t-esc='record.task_count.value']/../../.." position="attributes">
-                <attribute name="name">open_tasks</attribute>
-                <attribute name="type">object</attribute>
-            </xpath>
-
-            <xpath expr="//button[@t-if='record.task_needaction_count.raw_value']" position="attributes">
+            <xpath expr="//t[@t-esc='record.task_count.value']" position="attributes">
                 <attribute name="name">open_tasks</attribute>
                 <attribute name="type">object</attribute>
             </xpath>
