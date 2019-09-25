@@ -7,7 +7,7 @@
           <field name="arch" type="xml">
               <xpath expr="//button[@name='action_send_mail']" position="after">
                 <button name="%(action_close_ticket)d" string="CLOSE ORDER/TICKET" states="ready" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
-                <button name="%(action_tso_change_equipment)d" string="CLOSE ORDER/TICKET" states="ready" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+                <button name="%(action_tso_change_equipment)d" string="CHANGE EQUIPMENT" states="draft,ready" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
               </xpath>
           </field>
       </record>

@@ -20,7 +20,7 @@ class TsoChangeEquipment(models.TransientModel):
             return ticket.client_id.id
         return False
 
-    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, default=_default_client)
+    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
 
     def change_equipment(self):
