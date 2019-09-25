@@ -7,7 +7,7 @@
                 <form string="TSO Change Equipment">
                     <group>
                         <field name="client_id"/>
-                        <field name="equipment_id"/>
+                        <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
                     </group>
                     <footer>
                         <button name="change_equipment" string="Change" type="object"  class="oe_highlight"  />

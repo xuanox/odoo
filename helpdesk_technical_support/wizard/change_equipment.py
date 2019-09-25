@@ -21,12 +21,13 @@ class TsoChangeEquipment(models.TransientModel):
         return False
 
     client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, default=_default_client)
-    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True, domain=[('client_id', '=', 'client_id.id')])
+    equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
 
     def change_equipment(self):
         active_id = self._context.get('active_id')
         if active_id:
             tso = self.env['technical_support.order'].browse(self._context.get('active_id'))
             tso.write({'equipment_id': self.equipment_id.id})
-            tso.action_change_equipment()
+            tso.action_change_equipment_ticket()
+            tso.action_change_equipment_tsr()
         return {'type': 'ir.actions.act_window_close',}

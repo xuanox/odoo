@@ -205,6 +205,18 @@ class TechnicalSupportOrder(models.Model):
                 order.ticket_id.cause_reason= order.cause_reason.id
         return True
 
+    def action_change_equipment_ticket(self):
+        for order in self:
+            if order.ticket_id:
+                order.ticket_id.equipment_id = order.equipment_id
+        return True
+
+    def action_change_equipment_tsr(self):
+        for order in self:
+            if order.request_id:
+                order.request_id.equipment_id = order.equipment_id
+        return True
+
     def _track_subtype(self, init_values):
         # init_values contains the modified fields' values before the changes
         #
