@@ -15,12 +15,12 @@ class TsoChangeEquipment(models.TransientModel):
 
     @api.model
     def _default_client(self):
-        ticket = self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
+        ticket = self.env['technical_support.order'].browse(self._context.get('active_id'))
         if ticket:
-            return ticket.client_id.id
+            return ticket.ticket_id.client_id.id
         return False
 
-    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True)
+    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, default=_default_client)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
 
     def change_equipment(self):
