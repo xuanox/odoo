@@ -101,7 +101,8 @@ class TechnicalSupportOrder(models.Model):
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
         help='Request a online signature to the customer in order to confirm orders automatically.')
     signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
-    wait_time= fields.Float(help="Wait Time in hours and minutes.", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    wait_time= fields.Float(help="Wait Time in hours and minutes.", track_visibility='onchange')
+    transportation_time= fields.Float(help="Transportation Time in hours and minutes.", track_visibility='onchange')
     duration = fields.Float('Real Duration', store=True)
 
     detail_cause = fields.Text('Detail Causa', readonly=True)
