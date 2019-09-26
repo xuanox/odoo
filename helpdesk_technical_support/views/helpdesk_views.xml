@@ -102,6 +102,8 @@
           <field name="create_date"/>
           <field name="assign_date"/>
           <field name="close_date"/>
+          <field name="total_days"/>
+          <field name="total_time"/>
         </xpath>
       </field>
     </record>
