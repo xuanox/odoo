@@ -142,6 +142,28 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         return True
 
     @api.multi
+    def action_send_mail(self):
+        self.ensure_one()
+        template_id = self.env.ref('regulatory_issue.mail_template_regulatory_issue_consulting').id
+        ctx = {
+            'default_model': 'regulatory.technical.file.registry',
+            'default_res_id': self.id,
+            'default_use_template': bool(template_id),
+            'default_template_id': template_id,
+            'default_composition_mode': 'comment',
+            'custom_layout': 'mail.mail_notification_light',
+            'mark_consulting_as_sent': True,
+        }
+        return {
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'target': 'new',
+            'context': ctx,
+        }
+
+    @api.multi
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
         if self.env.context.get('mark_consulting_as_sent'):
