@@ -52,6 +52,20 @@ class HelpdeskTicket(models.Model):
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
     duration = fields.Float('Real Duration', store=True)
 
+    total_days = fields.Integer(string="Days", store=True, compute="_compute_total_time")
+    total_time = fields.Float(string="Time (HH:MM)", digits=(16,2), store=True, compute="_compute_total_time")
+
+    @api.depends('create_date', "close_date")
+    def _compute_total_time(self):
+        for state in self:
+            diff_timedelta = (state.close_date or fields.Datetime.now()) - state.create_date
+            diff_seconds = diff_timedelta.days * 24 * 3600 + diff_timedelta.seconds
+            diff_minutes, diff_seconds = divmod(diff_seconds, 60)
+            diff_hours, diff_minutes = divmod(diff_minutes, 60)
+            diff_days, diff_hours = divmod(diff_hours, 24)
+            state.total_days = diff_days
+            state.total_time = diff_hours + (diff_minutes/60)
+
     @api.onchange('equipment_id','team_id')
     def onchange_equipment(self):
         if self.equipment_id:
