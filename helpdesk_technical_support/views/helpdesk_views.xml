@@ -62,7 +62,7 @@
             </group>
           </page>
 
-          <page string="Cliente">
+          <page string="Detail">
             <group>
               <group>
                 <field name="detail_reason"/>
@@ -71,6 +71,8 @@
               <group>
                 <field name="detail_cause"/>
                 <field name="cause_reason"/>
+                <field name="total_days"/>
+                <field name="total_time"/>
               </group>
             </group>
           </page>
