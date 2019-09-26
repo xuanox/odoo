@@ -79,6 +79,12 @@
 																	 widget="float_time"
 																	 class="oe_inline"/> <span class="ml8">hours</span>
 												</div>
+												<label for="transportation_time"/>
+												<div>
+														<field name="transportation_time"
+																	 widget="float_time"
+																	 class="oe_inline"/> <span class="ml8">hours</span>
+												</div>
 												<field name="date_scheduled" string="Start"/>
 												<field name="date_finish" string="End"/>
                       </group>

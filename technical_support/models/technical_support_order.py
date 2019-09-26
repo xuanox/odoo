@@ -101,7 +101,8 @@ class TechnicalSupportOrder(models.Model):
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
         help='Request a online signature to the customer in order to confirm orders automatically.')
     signed_by = fields.Char('Signed by', help='Name of the person that signed the SO.', copy=False)
-    wait_time= fields.Float(help="Wait Time in hours and minutes.", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    wait_time= fields.Float(help="Wait Time in hours and minutes.", track_visibility='onchange')
+    transportation_time= fields.Float(help="Transportation Time in hours and minutes.", track_visibility='onchange')
     duration = fields.Float('Real Duration', store=True)
 
     detail_cause = fields.Text('Detail Causa', readonly=True)
@@ -202,6 +203,18 @@ class TechnicalSupportOrder(models.Model):
                 order.ticket_id.remote = order.remote
                 order.ticket_id.detail_cause= order.detail_cause
                 order.ticket_id.cause_reason= order.cause_reason.id
+        return True
+
+    def action_change_equipment_ticket(self):
+        for order in self:
+            if order.ticket_id:
+                order.ticket_id.equipment_id = order.equipment_id
+        return True
+
+    def action_change_equipment_tsr(self):
+        for order in self:
+            if order.request_id:
+                order.request_id.equipment_id = order.equipment_id
         return True
 
     def _track_subtype(self, init_values):
