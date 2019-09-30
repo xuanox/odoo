@@ -1,78 +1,85 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+  <!-- Technical Support Menu Icon-->
+    <menuitem
+      name="Technical Support"
+  		id="technical_support_menu_root"
+  		groups="technical_support.group_technical_support_customer"
+  		web_icon="technical_support,static/description/icon.png"
+  		sequence="7"/>
 
-      <!-- Technical Support Menu Icon-->
-  		<menuitem name="Technical Support"
-  				id="base.menu_technical_support_root"
-  				groups="technical_support.group_technical_support_customer"
-  				web_icon="technical_support,static/description/icon.png"
-  				sequence="80"/>
+  <!-- Technical Support Menu -->
+    <menuitem
+      name="Dashboard"
+      id="technical_support_menu_dashboard"
+      groups="technical_support.group_technical_support_customer"
+      parent="technical_support_menu_root"
+      action=""
+      sequence="1"/>
 
-      <!-- Technical Support Menu -->
-  		<menuitem name="Orders"
-  			id="menu_technical_support_maintenance"
-  			parent="base.menu_technical_support_root"
-  			sequence="1"/>
+  	<menuitem
+      name="Requests"
+  		id="technical_support_menu_request"
+      groups="technical_support.group_technical_support_customer"
+  		parent="technical_support_menu_root"
+      action=""
+  		sequence="2"/>
 
-      <!-- Technical Support Orders Menu -->
-  		<menuitem name="Technical Support Orders"
-  			action="action_orders"
-  			id="menu_technical_support_order"
-  			parent="menu_technical_support_maintenance"
-  			sequence="10"/>
+    <menuitem
+      name="Data"
+    	id="technical_support_menu_data"
+      groups="technical_support.group_technical_support_engineer"
+    	parent="technical_support_menu_root"
+      action=""
+    	sequence="3"/>
 
-  		<!-- Technical Support Parts menu -->
-  		<menuitem name="Parts"
-  			id="menu_maintenance_parts"
-  			parent="base.menu_technical_support_root"
-  			groups="technical_support.group_technical_support_engineer"
-  			sequence="9"/>
+    <menuitem
+      name="Statistics"
+    	id="technical_support_menu_statistics"
+      groups="technical_support.group_technical_support_backoffice"
+    	parent="technical_support_menu_root"
+      action=""
+    	sequence="4"/>
 
-  		<menuitem name="Parts"
-  			action="part_action"
-  			id="menu_maintenance_parts_parts"
-  			parent="menu_maintenance_parts"
-  			sequence="100"/>
+    <menuitem
+      name="Configuration"
+    	id="technical_support_menu_configuration"
+      groups="technical_support.group_technical_support_backoffice"
+    	parent="technical_support_menu_root"
+      action=""
+    	sequence="5"/>
 
-  		<!-- Technical Support Tasks menu -->
-  		<menuitem name="Tasks"
-  			id="menu_maintenance_tasks"
-  			parent="base.menu_technical_support_root"
-  			sequence="9"/>
+  <!-- Technical Support Menu -->
+    <menuitem
+      name="TSR"
+      action="action_requests"
+      id="technical_support_menu_tsr"
+      groups="technical_support.group_technical_support_engineer"
+      parent="technical_support_menu_request"
+      sequence="1"/>
 
-  		<menuitem name="Tasks"
-  			action="action_tasks"
-  			id="menu_maintenance_tasks_tasks"
-  			parent="menu_maintenance_tasks"
-  			sequence="100"/>
+  	<menuitem
+      name="TSO"
+  		action="action_orders"
+  		id="technical_support_menu_tso"
+      groups="technical_support.group_technical_support_backoffice"
+  		parent="technical_support_menu_request"
+  		sequence="2"/>
 
-      <!-- Technical Support Menu -->
-    	<menuitem
-    		name="Technical Support Requests"
-    		action="action_requests"
-    		id="menu_technical_support_request"
-    		groups="technical_support.group_technical_support_backoffice"
-    		parent="menu_technical_support_maintenance"
-    		sequence="1"/>
+  <!-- Technical Support Parts menu -->
+  	<menuitem
+      name="Parts"
+  		action="part_action"
+  		id="technical_support_menu_parts"
+  		parent="technical_support_menu_data"
+  		sequence="3"/>
 
-    		<!-- liste controle
-    		<menuitem name="Checklist"
-    			id="menu_technical_support_checklist_history"
-    			parent="base.menu_technical_support_root"
-    			sequence="7"/>
+  <!-- Technical Support Tasks menu -->
+  	<menuitem
+      name="Checklist"
+  		action="action_tasks"
+  		id="technical_support_menu_tasks"
+  		parent="technical_support_menu_data"
+  		sequence="5"/>
 
-    		<menuitem name="Lista de control"
-    			id="technical_support_action_view_checklis_id"
-    			parent="menu_technical_support_checklist_history"
-    			action="technical_support_checklist_action"/>
-
-    		<menuitem name="Lista Completa de Mantenimiento"
-    			id="menu_maintenance_checklist_all"
-    			action="technical_support_checklist_history_action"
-    			parent="menu_technical_support_checklist_history"
-    			sequence="5" />   -->
-
-
-    </data>
 </odoo>
