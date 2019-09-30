@@ -5,6 +5,9 @@
       <field name="name">Observation Equipment</field>
       <field name="icon">fa-search-plus</field>
       <field name="res_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+      <field name="delay_count">2</field>
+      <field name="delay_unit">days</field>
+      <field name="delay_from">previous_activity</field>
     </record>
     <!-- Ticket related subtypes for messaging / Chatter
     <record id="mt_ticket_new" model="mail.message.subtype">
