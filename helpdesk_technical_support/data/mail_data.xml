@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo><data>
+<odoo>
 
-
+    <record id="mail_act_helpdesk_ticket" model="mail.activity.type">
+      <field name="name">Observation Equipment</field>
+      <field name="icon">fa-search-plus</field>
+      <field name="res_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+    </record>
     <!-- Ticket related subtypes for messaging / Chatter
     <record id="mt_ticket_new" model="mail.message.subtype">
         <field name="name">Ticket Created</field>
@@ -72,7 +76,7 @@
     % endif
     ha sido asignado un responsable. El Ingeniero Asignado ${object.user_id.display_name}.
     La Referencia de su ticket es ${object.id}.<br /><br />
-    
+
     ${object.company_id.name or 'Helpdesk'} - Technical Support.
 </div>
         </field>
@@ -102,5 +106,5 @@
         </field>
         <field name="auto_delete" eval="False"/>
     </record>
-</data>
+
 </odoo>
