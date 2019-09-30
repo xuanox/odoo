@@ -15,6 +15,7 @@
                       <field name="cause_reason" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
                       <field name="detail_cause" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
                       <field name="remote" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
+                      <field name="observation" attrs="{'invisible':[('close_order_ticket','=',False)]}"/>
                   </group>
                   <footer>
                       <button name="close_ticket" string="Close Order and Ticket" attrs="{'invisible':[('close_order_ticket','=',False)]}" type="object"  class="oe_highlight"  />

@@ -110,6 +110,7 @@ class TechnicalSupportOrder(models.Model):
     remote = fields.Boolean('Remote Attention', copy=False)
     close_order = fields.Boolean('Close Order Only', copy=False)
     close_ticket = fields.Boolean('Close Order and Ticket', copy=False)
+    observation = fields.Boolean('Observation', copy=False)
 
     @api.onchange('equipment_id','maintenance_type')
     def onchange_equipment(self):
@@ -201,6 +202,7 @@ class TechnicalSupportOrder(models.Model):
             if order.ticket_id:
                 order.ticket_id.write({'stage_id': 3})
                 order.ticket_id.remote = order.remote
+                order.ticket_id.observation = order.observation
                 order.ticket_id.detail_cause= order.detail_cause
                 order.ticket_id.cause_reason= order.cause_reason.id
         return True
