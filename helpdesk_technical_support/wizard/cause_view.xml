@@ -3,7 +3,7 @@
     <data>
 
         <record id="view_ticket_cause_wizard" model="ir.ui.view">
-            <field name="name">Cause Ticket</field>
+            <field name="name">Close Ticket</field>
             <field name="model">helpdesk.ticket.cause</field>
             <field name="arch" type="xml">
                 <form string="Cause Ticket" version="7.0">
@@ -11,6 +11,7 @@
                         <field name="cause_reason_id"/>
                         <field name="detail_cause"/>
                         <field name="remote"/>
+                        <field name="observation"/>
                     </group>
                     <footer>
                         <button name="cause_ticket" string="cause Ticket" type="object"  class="oe_highlight"  />
@@ -22,7 +23,7 @@
         </record>
 
         <record id="action_ticket_cause" model="ir.actions.act_window">
-            <field name="name">Cause Ticket</field>
+            <field name="name">Close Ticket</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">helpdesk.ticket.cause</field>
             <field name="view_type">form</field>

@@ -16,6 +16,7 @@ class HelpdeskTicketCause(models.TransientModel):
     cause_reason_id = fields.Many2one('helpdesk.ticket.cause.reason', 'Cause')
     detail_cause = fields.Text('Detail')
     remote = fields.Boolean('Remote Attention', copy=False)
+    observation = fields.Boolean('Observation', copy=False)
 
     def cause_ticket(self):
         active_id = self._context.get('active_id')
@@ -23,6 +24,7 @@ class HelpdeskTicketCause(models.TransientModel):
             ticket = self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
             ticket.write({'detail_cause':self.detail_cause})
             ticket.write({'remote':self.remote})
+            ticket.write({'observation':self.observation})
             ticket.write({'cause_reason': self.cause_reason_id.id})
             ticket.action_cause()
         return {'type': 'ir.actions.act_window_close',}
