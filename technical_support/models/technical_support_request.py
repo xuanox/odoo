@@ -2,36 +2,42 @@
 ##############################################################################
 #
 #    By Rocendo Tejada
-#    Copyright (C) 2013-2018 emsa (<http://www.electronicamedica.com>).
+#    Copyright (C) 2019-2020 emsa (<http://www.electronicamedica.com>).
 #
 ##############################################################################
 
 import time
+import odoo.addons.decimal_precision as dp
 from odoo import api, fields, models, _
 from odoo import netsvc
-import odoo.addons.decimal_precision as dp
 
 
 class TechnicalSupportRequest(models.Model):
     _name = 'technical_support.request'
     _description = 'Technical Support Request'
     _inherit =  ['mail.thread', 'mail.activity.mixin']
+    _order = 'name desc'
 
     STATE_SELECTION = [
         ('draft', 'Draft'),
+        ('waiting_for_part', 'Waiting For Part'),
+        ('waiting_for_customer', 'Waiting For Customer'),
         ('confirm', 'Confirm'),
+        ('scheduled', 'Scheduled'),
         ('assigned', 'Assigned'),
         ('run', 'In Process'),
         ('done', 'Done'),
+        ('awaiting_report', 'Awaiting Report'),
+        ('completed', 'Completed'),
         ('reject', 'Rejected'),
         ('cancel', 'Canceled')
     ]
 
     MAINTENANCE_TYPE_SELECTION = [
         ('pm', 'Preventive'),
+        ('pd', 'Predictive'),
         ('in', 'Install'),
-        ('cbm', 'Predictive'),
-        ('din', 'Uninstall'),
+        ('un', 'Uninstall'),
         ('fco', 'FCO')
     ]
 
@@ -41,23 +47,20 @@ class TechnicalSupportRequest(models.Model):
             self.technical_support_count = order.search_count([('request_id', '=', request.id)])
 
     name = fields.Char('Reference', size=64, copy=False)
+    subject = fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
+    description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
+
+    requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
+    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=False,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
         If the request is sent the status is set to 'confirm'.\n\
         If the request is confirmed the status is set to 'Execution'.\n\
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft', copy=False)
-    subject = fields.Char('Subject', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]})
-    description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
-    reject_reason = fields.Text('Reject Reason')
-    detail_confirm_client = fields.Text('Detail Confirm Client')
-    detail_confirm_done = fields.Text('Detail Confirm Done')
-    requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
-    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
-    date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    detail_new_order = fields.Text('Detail Reason', readonly=True)
 
     client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
     equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
@@ -68,6 +71,11 @@ class TechnicalSupportRequest(models.Model):
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True)
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
     duration = fields.Float('Real Duration', store=True)
+
+    reject_reason = fields.Text('Reject Reason')
+    detail_confirm_client = fields.Text('Detail Confirm Client')
+    detail_confirm_done = fields.Text('Detail Confirm Done')
+    detail_new_order = fields.Text('Detail Reason', readonly=True)
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
@@ -98,6 +106,54 @@ class TechnicalSupportRequest(models.Model):
                 value['requested_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
             request.write(value)
 
+    ##################
+    # Actions States #
+    ##################
+
+    def action_draft(self):
+        self.write({'state': 'draft'})
+        return True
+
+    def action_waiting_for_part(self):
+        self.write({'state': 'waiting_for_part'})
+        return True
+
+    def action_waiting_for_customer(self):
+        self.write({'state': 'waiting_for_customer'})
+        return True
+
+    def action_scheduled(self):
+        self.write({'state': 'scheduled'})
+        return True
+
+    def action_run(self):
+        self.write({'state': 'run'})
+        return True
+
+    def action_done(self):
+        self.write({'state': 'done'})
+        return True
+
+    def action_run(self):
+        self.write({'state': 'run'})
+        return True
+
+    def action_awaiting_report(self):
+        self.write({'state': 'awaiting_report'})
+        return True
+
+    def action_completed(self):
+        self.write({'state': 'completed'})
+        return True
+
+    def action_reject(self):
+        self.write({'state': 'reject'})
+        return True
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+        return True
+
     def action_confirm(self):
         order = self.env['technical_support.order']
         order_id = False
@@ -117,26 +173,6 @@ class TechnicalSupportRequest(models.Model):
             })
         self.write({'state': 'assigned'})
         return order_id.id
-
-    def action_done(self):
-        self.write({'state': 'done', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
-        return True
-
-    def action_reject(self):
-        self.write({'state': 'reject', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
-        return True
-
-    def action_confirm_client(self):
-        self.write({'state': 'confirm'})
-        return True
-
-    def action_cancel(self):
-        self.write({'state': 'cancel', 'execution_date': time.strftime('%Y-%m-%d %H:%M:%S')})
-        return True
-
-    def action_draft(self):
-        self.write({'state': 'draft'})
-        return True
 
     @api.model
     def create(self, vals):
