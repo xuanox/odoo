@@ -18,6 +18,7 @@ class TechnicalSupportCloseTicket(models.TransientModel):
     remote = fields.Boolean('Remote Attention', copy=False)
     close_order = fields.Boolean('Close Order Only', copy=False)
     close_order_ticket = fields.Boolean('Close Order and Ticket', copy=False)
+    observation = fields.Boolean('Observation', copy=False)
 
     def close_ticket(self):
         active_id = self._context.get('active_id')
@@ -26,6 +27,7 @@ class TechnicalSupportCloseTicket(models.TransientModel):
             request.write({'detail_cause':self.detail_cause})
             request.write({'cause_reason': self.cause_reason.id})
             request.write({'remote':self.remote})
+            request.write({'observation':self.observation})
             request.write({'close_order':self.close_order})
             request.write({'close_ticket':self.close_ticket})
             request.ticket_done()

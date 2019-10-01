@@ -83,7 +83,7 @@ class TechnicalSupportOrder(models.Model):
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', store=True, readonly=True)
     order_id = fields.Many2one('technical_support.checklist.history', string='Control List')
-    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', domain=[('team','=','3')], readonly=True)
+    equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', domain=[('team','=','3')], readonly=True, store=True)
 
     parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', track_visibility='onchange', states={'done':[('readonly',True)], 'cancel':[('readonly',True)]})
@@ -110,6 +110,7 @@ class TechnicalSupportOrder(models.Model):
     remote = fields.Boolean('Remote Attention', copy=False)
     close_order = fields.Boolean('Close Order Only', copy=False)
     close_ticket = fields.Boolean('Close Order and Ticket', copy=False)
+    observation = fields.Boolean('Observation', copy=False)
 
     @api.onchange('equipment_id','maintenance_type')
     def onchange_equipment(self):
@@ -201,6 +202,7 @@ class TechnicalSupportOrder(models.Model):
             if order.ticket_id:
                 order.ticket_id.write({'stage_id': 3})
                 order.ticket_id.remote = order.remote
+                order.ticket_id.observation = order.observation
                 order.ticket_id.detail_cause= order.detail_cause
                 order.ticket_id.cause_reason= order.cause_reason.id
         return True

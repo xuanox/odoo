@@ -47,7 +47,7 @@
         <field name="context">{}</field>  <!-- force empty -->
     </record>
 
-    <menuitem name="Stage Statistics" id="report_stage_analysis" parent="base.menu_technical_support_root"
-    sequence="99" action="technical_support_stage_action_analysis"/>
+    <menuitem name="Stage Statistics" id="report_stage_analysis" parent="technical_support.technical_support_menu_statistics"
+    sequence="6" action="technical_support_stage_action_analysis"/>
 
 </odoo>

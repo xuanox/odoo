@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Technical Support Menu Icon-->
+    <menuitem
+      name="Technical Support"
+  		id="technical_support_menu_root"
+  		groups="technical_support.group_technical_support_customer"
+  		web_icon="technical_support,static/description/icon.png"
+  		sequence="7"/>
+
+  <!-- Technical Support Menu -->
+    <menuitem
+      name="Dashboard"
+      id="technical_support_menu_dashboard"
+      groups="technical_support.group_technical_support_customer"
+      parent="technical_support_menu_root"
+      action=""
+      sequence="1"/>
+
+  	<menuitem
+      name="Requests"
+  		id="technical_support_menu_request"
+      groups="technical_support.group_technical_support_customer"
+  		parent="technical_support_menu_root"
+      action=""
+  		sequence="2"/>
+
+    <menuitem
+      name="Data"
+    	id="technical_support_menu_data"
+      groups="technical_support.group_technical_support_engineer"
+    	parent="technical_support_menu_root"
+      action=""
+    	sequence="3"/>
+
+    <menuitem
+      name="Statistics"
+    	id="technical_support_menu_statistics"
+      groups="technical_support.group_technical_support_backoffice"
+    	parent="technical_support_menu_root"
+      action=""
+    	sequence="4"/>
+
+    <menuitem
+      name="Configuration"
+    	id="technical_support_menu_configuration"
+      groups="technical_support.group_technical_support_backoffice"
+    	parent="technical_support_menu_root"
+      action=""
+    	sequence="5"/>
+
+  <!-- Technical Support Menu -->
+    <menuitem
+      name="TSR"
+      action="action_requests"
+      id="technical_support_menu_tsr"
+      groups="technical_support.group_technical_support_engineer"
+      parent="technical_support_menu_request"
+      sequence="1"/>
+
+  	<menuitem
+      name="TSO"
+  		action="action_orders"
+  		id="technical_support_menu_tso"
+      groups="technical_support.group_technical_support_backoffice"
+  		parent="technical_support_menu_request"
+  		sequence="2"/>
+
+  <!-- Technical Support Parts menu -->
+  	<menuitem
+      name="Parts"
+  		action="part_action"
+  		id="technical_support_menu_parts"
+  		parent="technical_support_menu_data"
+  		sequence="3"/>
+
+    <menuitem
+      name="Vendors"
+      id="technical_support_menu_vendors"
+      parent="technical_support_menu_data"
+      action="base.action_partner_supplier_form" 
+      sequence="4"/>
+
+  <!-- Technical Support Tasks menu -->
+  	<menuitem
+      name="Checklist"
+  		action="action_tasks"
+  		id="technical_support_menu_tasks"
+  		parent="technical_support_menu_data"
+  		sequence="5"/>
+
+</odoo>

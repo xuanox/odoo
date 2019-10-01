@@ -537,51 +537,5 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 
-
-		<!-- Technical Support Menu Icon-->
-		<menuitem name="Technical Support"
-				id="base.menu_technical_support_root"
-				groups="technical_support.group_technical_support_customer"
-				web_icon="technical_support,static/description/icon.png"
-				sequence="80"/>
-
-    <!-- Technical Support Menu -->
-		<menuitem name="Orders"
-			id="menu_technical_support_maintenance"
-			parent="base.menu_technical_support_root"
-			sequence="1"/>
-
-    <!-- Technical Support Orders Menu -->
-		<menuitem name="Technical Support Orders"
-			action="action_orders"
-			id="menu_technical_support_order"
-			parent="menu_technical_support_maintenance"
-			sequence="10"/>
-
-		<!-- Technical Support Parts menu -->
-		<menuitem name="Parts"
-			id="menu_maintenance_parts"
-			parent="base.menu_technical_support_root"
-			groups="technical_support.group_technical_support_engineer"
-			sequence="9"/>
-
-		<menuitem name="Parts"
-			action="part_action"
-			id="menu_maintenance_parts_parts"
-			parent="menu_maintenance_parts"
-			sequence="100"/>
-
-		<!-- Technical Support Tasks menu -->
-		<menuitem name="Tasks"
-			id="menu_maintenance_tasks"
-			parent="base.menu_technical_support_root"
-			sequence="9"/>
-
-		<menuitem name="Tasks"
-			action="action_tasks"
-			id="menu_maintenance_tasks_tasks"
-			parent="menu_maintenance_tasks"
-			sequence="100"/>
-
  	</data>
 </odoo>
