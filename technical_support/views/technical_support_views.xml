@@ -74,6 +74,13 @@
   		parent="technical_support_menu_data"
   		sequence="3"/>
 
+    <menuitem
+      name="Vendors"
+      id="technical_support_menu_vendors"
+      parent="technical_support_menu_data"
+      action="base.action_partner_supplier_form" 
+      sequence="4"/>
+
   <!-- Technical Support Tasks menu -->
   	<menuitem
       name="Checklist"
