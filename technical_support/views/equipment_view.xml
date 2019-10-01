@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
-
         <record id="view_equipment_equipment_technical_support_buttons_from" model="ir.ui.view">
             <field name="name">equipment.equipment.technical_support.button.inherit</field>
             <field name="model">equipment.equipment</field>
@@ -44,6 +42,4 @@
                 </xpath>
             </field>
         </record>
-
- 	</data>
 </odoo>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
+
 
 		<!-- Technical Support Request Tree View -->
     <record id="technical_support_request_tree_view" model="ir.ui.view">
@@ -143,5 +143,5 @@
             <field name="context">{'search_default_open': 1}</field>
         </record>
 
- 	</data>
+
 </odoo>
