@@ -89,9 +89,6 @@ class TechnicalSupportRequest(models.Model):
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
-    ##################
-    # Actions States #
-    ##################
 
     def action_draft(self):
         self.write({'state': 'draft'})
