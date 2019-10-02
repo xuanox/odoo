@@ -109,6 +109,46 @@
                   </group>
                 </group>
               </page>
+              <page name="predictive" string="Predictive" attrs="{'invisible':[('maintenance_type', '!=', 'pd')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="install" string="Install" attrs="{'invisible':[('maintenance_type', '!=', 'in')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="Uninstall" string="Uninstall" attrs="{'invisible':[('maintenance_type', '!=', 'un')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="fco" string="FCO" attrs="{'invisible':[('maintenance_type', '!=', 'fco')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
 						</notebook>
           </sheet>
 					<div class="oe_chatter">
