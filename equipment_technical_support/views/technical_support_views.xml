@@ -7,13 +7,11 @@
         <field name="inherit_id" ref="technical_support.technical_support_request_form_view"/>
         <field name="arch" type="xml">
           <xpath expr="//field[@name='execution_date']" position="after">
+            <field name="request_date"/>
+            <field name="close_date"/>
             <field name="schedule_date"/>
             <label for="duration"/>
             <div><field name="duration" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>
-          </xpath>
-          <xpath expr="//field[@name='subject']" position="after">
-            <field name="request_date"/>
-            <field name="close_date"/>
           </xpath>
         </field>
     </record>

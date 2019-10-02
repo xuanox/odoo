@@ -15,7 +15,7 @@ Manage Maintenance process in Odoo
 =====================================
 
 Equipment Maintenance, Diagnostic, Repair and Operation.
-Support Breakdown Maintenance and Corrective Maintenance.
+Support Maintenance and Corrective Maintenance.
 
 Main Features
 -------------

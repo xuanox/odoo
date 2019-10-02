@@ -48,19 +48,21 @@ class TechnicalSupportRequest(models.Model):
 
     name = fields.Char('Reference', size=64, copy=False)
     subject = fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
+
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
 
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
     execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    breakdown = fields.Boolean('Breakdown', readonly=True, states={'draft': [('readonly', False)]}, default=False)
-    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=False,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
         If the request is sent the status is set to 'confirm'.\n\
         If the request is confirmed the status is set to 'Execution'.\n\
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft', copy=False)
+
+    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
     equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
@@ -69,6 +71,7 @@ class TechnicalSupportRequest(models.Model):
     model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
     parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
     modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True)
+
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
     duration = fields.Float('Real Duration', store=True)
 
@@ -78,33 +81,6 @@ class TechnicalSupportRequest(models.Model):
     detail_new_order = fields.Text('Detail Reason', readonly=True)
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
-
-    @api.onchange('requested_date')
-    def onchange_requested_date(self):
-        self.execution_date = self.requested_date
-
-    @api.onchange('execution_date','state','breakdown')
-    def onchange_execution_date(self):
-        if self.state == 'draft' and not self.breakdown:
-            self.requested_date = self.execution_date
-
-    def action_view_report(self):
-        return {
-            'domain': "[('request_id','in',[" + ','.join(map(str, self.ids)) + "])]",
-            'name': _('Technical Support Orders'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'technical_support.order',
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-        }
-
-    def action_send(self):
-        value = {'state': 'confirm'}
-        for request in self:
-            if request.breakdown:
-                value['requested_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
-            request.write(value)
 
     ##################
     # Actions States #
@@ -173,6 +149,17 @@ class TechnicalSupportRequest(models.Model):
             })
         self.write({'state': 'assigned'})
         return order_id.id
+
+    def action_view_report(self):
+        return {
+            'domain': "[('request_id','in',[" + ','.join(map(str, self.ids)) + "])]",
+            'name': _('Technical Support Orders'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'technical_support.order',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
 
     @api.model
     def create(self, vals):
