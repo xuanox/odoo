@@ -23,9 +23,9 @@ Equipment in Technical Support
 """,
     'depends': ['equipment', 'technical_support'],
     'data': [
-        'views/equipment_views.xml',
-        'views/technical_support_views.xml',
-        'data/maintenance_cron.xml',
+        #'views/equipment_views.xml',
+        #'views/technical_support_views.xml',
+        #'data/maintenance_cron.xml',
     ],
     'demo': [],
     'auto_install': True,

@@ -49,11 +49,13 @@ class TechnicalSupportRequest(models.Model):
     name = fields.Char('Reference', size=64, copy=False)
     subject = fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
 
-    description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
-
     requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
     execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    schedule_date = fields.Datetime('Scheduled Date', help="Date the maintenance team plans the maintenance.  It should not differ much from the Request Date. ")
+
+    request_date = fields.Date('Request Date', track_visibility='onchange', default=fields.Date.context_today, help="Date requested for the maintenance to happen")
+    close_date = fields.Date('Close Date', default=fields.Date.context_today, help="Date the maintenance was finished. ")
 
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=False,
         help="When the maintenance request is created the status is set to 'Draft'.\n\
@@ -64,17 +66,22 @@ class TechnicalSupportRequest(models.Model):
 
     user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
-    client_id=fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
+    client_id = fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
+
     equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
-    brand_id=fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
-    zone_id=fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True)
-    model_id=fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
-    parent_id=fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
-    modality_id=fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True)
+    equipment_number=fields.Char(related='equipment_id.equipment_number', string='N° de Equipo', readonly=True)
+
+    brand_id = fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
+    zone_id = fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True)
+    model_id = fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
+    parent_id = fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
+    modality_id = fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True)
 
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
+
     duration = fields.Float('Real Duration', store=True)
 
+    description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason')
     detail_confirm_client = fields.Text('Detail Confirm Client')
     detail_confirm_done = fields.Text('Detail Confirm Done')
@@ -82,6 +89,7 @@ class TechnicalSupportRequest(models.Model):
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
+    duration = fields.Float(help="Duration in hours and minutes.")
     ##################
     # Actions States #
     ##################

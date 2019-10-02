@@ -57,30 +57,22 @@
 						</div>
             <div class="oe_title">
               <h1># <field name="name" readonly="1"/></h1>
-              <h5><field name="subject"/></h5>
+              <h5><field name="subject" placeholder="Subject ..."/></h5>
             </div>
             <group>
               <group name="request" string="Request Detail">
+                <field name="maintenance_type" string="Type of Request"/>
 								<field name="client_id"/>
                 <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
 								<field name="user_id"/>
-								<field name="maintenance_type"/>
               </group>
               <group name="date" string="Dates Information">
                 <field name="requested_date"/>
 								<field name="execution_date"/>
 							</group>
             </group>
-            <group>
-							<group>
-
-	            </group>
-							<group>
-
-	            </group>
-            </group>
             <group name="more_description" string="Descripción">
-              <field name="description" colspan="4" nolabel="1"/>
+              <field name="description" placeholder="write more detail of the request ..." colspan="4" nolabel="1"/>
             </group>
 						<notebook>
 							<page name="detail" string="More Details">
