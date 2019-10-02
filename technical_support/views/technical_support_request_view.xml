@@ -96,7 +96,7 @@
 			            <field name="reject_reason" colspan="4" nolabel="1"/>
 			          </group>
 							</page>
-              <page name="preventive" string="Preventive" attrs="{'invisible':[('maintenance_type', '=', 'pm')]}">
+              <page name="preventive" string="Preventive" attrs="{'invisible':[('maintenance_type', '!=', 'pm')]}">
                 <group>
                   <group name="preventive_date" string="Preventive Date">
                     <field name="request_date"/>
