@@ -41,8 +41,7 @@
       <field name="arch" type="xml">
       	<form string="TSR">
         	<header>
-						<button name="%(action_confirm_client)d" states="draft" string="Confirmed by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
-						<button name="action_confirm_client" states="draft" string="Confirm" type="object" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="%(action_pending_client)d" states="draft" string="Pending by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="%(action_order_assign)d" states="draft,confirm,assigned,run,done" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
             <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
@@ -64,11 +63,15 @@
                 <field name="maintenance_type" string="Type of Request"/>
 								<field name="client_id"/>
                 <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+                <field name="equipment_number"/>
+                <field name="brand_id" widget="manyone"/>
+                <field name="model_id" widget="manyone"/>
 								<field name="user_id"/>
               </group>
               <group name="date" string="Dates Information">
                 <field name="requested_date"/>
                 <field name="schedule_date"/>
+                <field name="date_planned"/>
 								<field name="execution_date"/>
 							</group>
             </group>
@@ -79,8 +82,6 @@
 							<page name="detail" string="More Details">
                 <group>
 									<group name="equipment_information" string="Equipment Information">
-                    <field name="brand_id" widget="manyone"/>
-                    <field name="model_id" widget="manyone"/>
 										<field name="modality_id" widget="manyone"/>
 										<field name="parent_id" widget="manyone"/>
 										<field name="zone_id" widget="manyone"/>

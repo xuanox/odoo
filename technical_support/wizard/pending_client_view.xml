@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
 
-        <record id="view_confirm_client_wizard" model="ir.ui.view">
-            <field name="name">Confirm Client</field>
-            <field name="model">technical_support.confirm.client</field>
+        <record id="view_pending_client_wizard" model="ir.ui.view">
+            <field name="name">Pending Client</field>
+            <field name="model">technical_support.pending.client</field>
             <field name="arch" type="xml">
-                <form string="Confirm Client" version="7.0">
+                <form string="Pending Client" version="7.0">
                     <group>
                         <field name="detail"/>
                     </group>
                     <footer>
-                        <button name="confirm_client" string="Confirm" type="object"  class="oe_highlight"  />
+                        <button name="pending_client" string="Pending" type="object"  class="oe_highlight"  />
                         or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
@@ -19,14 +18,13 @@
             </field>
         </record>
 
-        <record id="action_confirm_client" model="ir.actions.act_window">
-            <field name="name">Confirm Client</field>
+        <record id="action_pending_client" model="ir.actions.act_window">
+            <field name="name">Pending Client</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">technical_support.confirm.client</field>
+            <field name="res_model">technical_support.pending.client</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
 
-    </data>
-</openerp>
+</odoo>

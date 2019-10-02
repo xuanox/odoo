@@ -49,10 +49,10 @@ class TechnicalSupportRequest(models.Model):
     name = fields.Char('Reference', size=64, copy=False)
     subject = fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
 
-    requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, help="Date requested by the customer for maintenance.", default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    execution_date = fields.Datetime('Execution Date', required=True, readonly=True, states={'draft':[('readonly',False)],'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    execution_date = fields.Datetime('Execution Date', readonly=True,'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    schedule_date = fields.Datetime('Scheduled Date', help="Date the maintenance team plans the maintenance.  It should not differ much from the Request Date. ")
+    schedule_date = fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
     request_date = fields.Date('Request Date', track_visibility='onchange', default=fields.Date.context_today, help="Date requested for the maintenance to happen")
     close_date = fields.Date('Close Date', default=fields.Date.context_today, help="Date the maintenance was finished. ")
@@ -154,7 +154,7 @@ class TechnicalSupportRequest(models.Model):
                 'problem_description': request.description,
                 'request_id': request.id,
             })
-        self.write({'state': 'assigned'})
+        self.action_scheduled()
         return order_id.id
 
     def action_view_report(self):
