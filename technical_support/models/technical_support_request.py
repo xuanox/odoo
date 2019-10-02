@@ -79,7 +79,7 @@ class TechnicalSupportRequest(models.Model):
 
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
 
-    duration = fields.Float('Real Duration', store=True)
+    duration = fields.Float('Duration', help="Duration in hours and minutes.")
 
     description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason')
@@ -89,7 +89,6 @@ class TechnicalSupportRequest(models.Model):
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
-    duration = fields.Float(help="Duration in hours and minutes.")
     ##################
     # Actions States #
     ##################

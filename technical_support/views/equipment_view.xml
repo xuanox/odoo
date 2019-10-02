@@ -42,4 +42,29 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="equipment_view_form_inherit_technical_support" model="ir.ui.view">
+            <field name="name">equipment.view.form.inherit.technical_support</field>
+            <field name="model">equipment.equipment</field>
+            <field name="inherit_id" ref="equipment.equipments_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='info']" position="after">
+                  <page string="Maintenance">
+                      <group name="maintenance">
+                          <field name="next_action_date" class="oe_read_only" string="Next Preventive Maintenance"/>
+                          <label for="period" string="Preventive Maintenance Frequency"/>
+                          <div class="o_row">
+                              <field name="period"/> days
+                          </div>
+                          <label for="maintenance_duration" string="Maintenance Duration"/>
+                          <div class="o_row">
+                              <field name="maintenance_duration"/> hours
+                          </div>
+                      </group>
+                      <group>
+                      </group>
+                  </page>
+                </xpath>
+            </field>
+        </record>
 </odoo>
