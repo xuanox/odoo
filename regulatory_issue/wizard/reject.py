@@ -20,7 +20,7 @@ class RegulatoryTechnicalFileRegistryReject(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             registry = self.env['regulatory.technical.file.registry'].browse(self._context.get('active_id'))
-            registry.write({'reject_reason_id':self.reject_reason_id.id})
+            registry.write({'reject_reason':self.reject_reason_id.id})
             registry.write({'description_reject':self.description})
             registry.action_rejected()
         return {'type': 'ir.actions.act_window_close'}
