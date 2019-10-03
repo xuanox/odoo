@@ -52,7 +52,7 @@ class TechnicalSupportRequest(models.Model):
     name= fields.Char('Reference', size=64, copy=False)
     subject= fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
 
-    #requested_date=fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    requested_date=fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     #execution_date=fields.Datetime('Execution Date', readonly=True,'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
     #date_planned=fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     #Sschedule_date=fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
