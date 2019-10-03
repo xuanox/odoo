@@ -7,6 +7,7 @@
                 <form string="Lost Reason">
                     <group class="oe_title">
                         <field name="lost_reason_id"/>
+                        <field name="description"/>
                     </group>
                     <footer>
                         <button name="action_lost_reason_apply" string="Submit" type="object" class="btn-primary"/>
