@@ -10,7 +10,6 @@
                     <group>
                         <field name="user_id"/>
                         <field name="date_planned"/>
-                        <field name="detail"/>
                     </group>
                     <footer>
                         <button name="assign_order" string="Assign Order" type="object"  class="oe_highlight"  />
