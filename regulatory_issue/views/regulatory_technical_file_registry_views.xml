@@ -14,8 +14,8 @@
                   <button name="action_set_fulfill" states="review,wait,appointment" string="Cumple" attrs="{'invisible': ['|', ('is_won', '=', True)]}" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(registry_lost_action)d" states="review,wait" string="No Cumple" attrs="{'invisible': ['|', ('is_lost', '=', True)]}" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(action_registry_reject)d" states="waiting" string="Rejected Registry" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
-                  <button name="action_approved" states="waiting" string="Approved" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
-                  <button name="action_appointment_approved" states="appointment" string="Approved" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_approved" states="waiting" string="Approved Registry" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="action_appointment_approved" states="appointment" string="Approved Documents" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="action_appointment_rejected" states="appointment" string="Rejected Documents" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <field name="state" widget="statusbar" statusbar_visible="draft,assigned,review,appointment,waiting,done" statusbar_colors='{"assigned":"red","appointment":"blue"}'/>
                 </header>
