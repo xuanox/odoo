@@ -14,7 +14,7 @@ class RegulatoryTechnicalFileAppointmentAssigned(models.TransientModel):
     _description = 'Appointment Assigned'
 
     date_planned = fields.Datetime('Planned Date', default=time.strftime('%Y-%m-%d %H:%M:%S'), required=True, track_visibility='onchange')
-    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
+    entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange', required=True)
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
 
     def appointment_assigned(self):

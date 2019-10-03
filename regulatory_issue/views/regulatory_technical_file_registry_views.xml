@@ -69,6 +69,9 @@
                       <field name='is_approved' invisible="1"/>
                       <field name='is_rejected' invisible="1"/>
                       <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
+                      <field name='description_lost' attrs="{'invisible':[('is_lost', '=', False)]}"/>
+                      <field name='reject_reason' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
+                      <field name='description_reject' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
                     </group>
                   </group>
                   <group>
@@ -112,6 +115,7 @@
                     <field name="models_id" widget="many2one"/>
                     <field name="brand_id" widget="many2one"/>
                     <field name="team_id" widget="many2one"/>
+                    <field name="responsible_sales_id" widget="many2one"/>
                     <field name="user_id" widget="many2one"/>
                     <field name="priority" widget="priority"/>
                     <field name="state" />

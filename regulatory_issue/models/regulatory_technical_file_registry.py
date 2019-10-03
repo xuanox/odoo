@@ -79,6 +79,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     tfc_id = fields.Many2one('regulatory.technical.file.creation', string='TFC', track_visibility='onchange', readonly=True)
     tfm_id = fields.Many2one('regulatory.technical.file.modification', string='TFM', track_visibility='onchange', readonly=True)
     tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfr_tag_rel', 'tfr_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
+    description_lost=fields.Text('Description Lost')
+    description_reject=fields.Text('Description Reject')
 
     @api.model
     def _onchange_user_values(self, user_id):
