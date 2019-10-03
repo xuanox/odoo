@@ -392,7 +392,10 @@ class TechnicalSupportTask(models.Model):
 
     MAINTENANCE_TYPE_SELECTION = [
         ('pm', 'Preventive'),
-        ('cm', 'Corrective')
+        ('pd', 'Predictive'),
+        ('in', 'Install'),
+        ('un', 'Uninstall'),
+        ('fco', 'FCO')
     ]
 
     name = fields.Char('Description', size=64, required=True, translate=True)

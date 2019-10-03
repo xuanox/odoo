@@ -12,6 +12,10 @@
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
+              <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive"
+                      attrs="{'invisible': [('active', '=', True)]}">
+                  <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+              </button>
           </div>
           <div class="badge-pill badge-warning float-right" attrs="{'invisible': ['|', ('is_minimum_quantity', '=', False)]}">Minimum Quantity</div>
           <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_unavailable', '=', False)]}">Unavailable</div>
