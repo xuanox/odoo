@@ -24,4 +24,4 @@ class TechnicalSupportAssign(models.TransientModel):
             order.write({'requested_date':self.date_planned})
             order.write({'date_planned':self.date_planned})
             order.action_confirm()
-        return {'type': 'ir.actions.act_window_close',}
+        return {'type': 'ir.actions.act_window_close'}
