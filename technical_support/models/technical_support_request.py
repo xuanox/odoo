@@ -53,9 +53,9 @@ class TechnicalSupportRequest(models.Model):
     subject= fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
 
     requested_date=fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    #execution_date=fields.Datetime('Execution Date', readonly=True,'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    #date_planned=fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    #Sschedule_date=fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    execution_date=fields.Datetime('Execution Date', readonly=True, states={'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    date_planned=fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    schedule_date=fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
     request_date = fields.Date('Request Date', track_visibility='onchange', default=fields.Date.context_today, help="Date requested for the maintenance to happen")
     close_date = fields.Date('Close Date', default=fields.Date.context_today, help="Date the maintenance was finished. ")
@@ -84,7 +84,7 @@ class TechnicalSupportRequest(models.Model):
 
     duration = fields.Float('Duration', help="Duration in hours and minutes.")
 
-    #description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
+    description = fields.Text('Description', readonly=True, states={'draft': [('readonly', False)]})
     reject_reason = fields.Text('Reject Reason')
     detail_confirm_client = fields.Text('Detail Confirm Client')
     detail_confirm_done = fields.Text('Detail Confirm Done')
