@@ -51,7 +51,7 @@ Required modules:
         'wizard/confirm_done_view.xml',
         'wizard/assign_view.xml',
         'views/technical_support_order_view.xml',
-        #'views/technical_support_request_view.xml',
+        'views/technical_support_request_view.xml',
         'views/equipment_view.xml',
         'views/product_view.xml',
         'views/technical_support_views.xml',
