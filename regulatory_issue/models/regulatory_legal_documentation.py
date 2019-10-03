@@ -63,5 +63,5 @@ class RegulatoryLegalDocumentation(models.Model):
     expiration_date = fields.Date(u'Expiration Date')
     description=fields.Text('Description')
     observation=fields.Text('Observation')
-    type_id = fields.Many2one('regulatory.legal.documentation.type', u'Type')
+    type_id = fields.Many2one('regulatory.legal.documentation.type', string='Type')
     stage_id = fields.Many2one('regulatory.legal.documentation.stage', string='Stage', default=_default_stage)

@@ -81,7 +81,8 @@
                       <group>
                         <field name="pending_documentation_ids" nolabel="1">
     											<tree editable="bottom">
-    												<field name="legal_documentation_id" widget="manyone"/>
+                            <field name="type_id" widget="manyone"/>
+    												<field name="legal_documentation_id" widget="manyone" domain="[('type_id','=',type_id)]"/>
     												<field name="name"/>
     												<field name="note"/>
                             <field name="status"/>

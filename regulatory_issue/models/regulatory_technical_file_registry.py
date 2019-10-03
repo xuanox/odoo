@@ -309,6 +309,7 @@ class RegulatoryTechnicalFileRegistryPendingDocumentation(models.Model):
 
     name = fields.Char('Description', required=True)
     legal_documentation_id=fields.Many2one('regulatory.legal.documentation', string='Documentation', required=True)
+    type_id = fields.Many2one('regulatory.legal.documentation.type', string='Type')
     registry_id=fields.Many2one('regulatory.technical.file.registry', string='Registry')
     status=fields.Selection(CHOICE_STATUS, string="Status")
     done = fields.Boolean('Done')
