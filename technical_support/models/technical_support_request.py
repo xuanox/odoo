@@ -8,9 +8,12 @@
 
 import time
 import odoo.addons.decimal_precision as dp
-from odoo import api, fields, models, _
 from odoo import netsvc
-
+from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from dateutil.relativedelta import relativedelta
+from datetime import date, datetime, timedelta
 
 class TechnicalSupportRequest(models.Model):
     _name = 'technical_support.request'
@@ -46,13 +49,13 @@ class TechnicalSupportRequest(models.Model):
         for request in self:
             self.technical_support_count = order.search_count([('request_id', '=', request.id)])
 
-    name = fields.Char('Reference', size=64, copy=False)
-    subject = fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
+    name= fields.Char('Reference', size=64, copy=False)
+    subject= fields.Char('Subject', size=64, required=True, states={'draft': [('readonly', False)]})
 
-    requested_date = fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    execution_date = fields.Datetime('Execution Date', readonly=True,'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
-    date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    schedule_date = fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    requested_date=fields.Datetime('Requested Date', required=True, readonly=True, states={'draft': [('readonly', False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    execution_date=fields.Datetime('Execution Date', readonly=True,'confirm':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    date_planned=fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    schedule_date=fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
     request_date = fields.Date('Request Date', track_visibility='onchange', default=fields.Date.context_today, help="Date requested for the maintenance to happen")
     close_date = fields.Date('Close Date', default=fields.Date.context_today, help="Date the maintenance was finished. ")
