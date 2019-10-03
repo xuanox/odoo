@@ -57,7 +57,7 @@ class TechnicalSupportRequest(models.Model):
     #date_planned=fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     #Sschedule_date=fields.Datetime('Scheduled Date', readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
-    #request_date = fields.Date('Request Date', track_visibility='onchange', default=fields.Date.context_today, help="Date requested for the maintenance to happen")
+    request_date = fields.Date('Request Date', track_visibility='onchange', default=fields.Date.context_today, help="Date requested for the maintenance to happen")
     #close_date = fields.Date('Close Date', default=fields.Date.context_today, help="Date the maintenance was finished. ")
 
     state = fields.Selection(STATE_SELECTION, 'Status', readonly=False,
