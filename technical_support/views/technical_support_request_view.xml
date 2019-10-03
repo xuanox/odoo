@@ -41,7 +41,6 @@
       <field name="arch" type="xml">
       	<form string="TSR">
         	<header>
-						<button name="%(action_pending_client)d" states="draft" string="Pending by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="%(action_order_assign)d" states="draft,confirm,assigned,run,done" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
             <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>

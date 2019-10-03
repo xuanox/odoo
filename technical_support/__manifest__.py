@@ -47,7 +47,7 @@ Required modules:
         'data/mail_data.xml',
         'wizard/reject_view.xml',
         'wizard/convert_order.xml',
-        'wizard/pending_client_view.xml',
+        #'wizard/pending_client_view.xml',
         'wizard/confirm_done_view.xml',
         'wizard/assign_view.xml',
         'views/technical_support_order_view.xml',
