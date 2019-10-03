@@ -15,7 +15,7 @@ Manage Maintenance process in Odoo
 =====================================
 
 Equipment Maintenance, Diagnostic, Repair and Operation.
-Support Breakdown Maintenance and Corrective Maintenance.
+Support Maintenance and Corrective Maintenance.
 
 Main Features
 -------------
@@ -40,25 +40,21 @@ Required modules:
     'data': [
         'security/technical_support_security.xml',
         'security/ir.model.access.csv',
-        'wizard/reject_view.xml',
-        'wizard/convert_order.xml',
-        'wizard/confirm_client_view.xml',
-        'wizard/confirm_done_view.xml',
-        'wizard/assign_view.xml',
         'data/technical_support_sequence.xml',
         'data/technical_support_data.xml',
+        'data/technical_support_cron.xml',
         'data/mail_template_data.xml',
         'data/mail_data.xml',
+        'wizard/reject_view.xml',
+        'wizard/convert_order.xml',
+        'wizard/pending_client_view.xml',
+        'wizard/confirm_done_view.xml',
+        'wizard/assign_view.xml',
         'views/technical_support_order_view.xml',
         'views/technical_support_request_view.xml',
         'views/equipment_view.xml',
         'views/product_view.xml',
         'views/technical_support_views.xml',
-        #'views/technical_support_workorder_view.xml',
-        #'report/report_technical_support_order.xml',
-        #'report/report_technical_support_request.xml',
-        #'report/technical_support_report.xml',
-        #'report/report_technical_support_templates.xml',
     ],
     'application': True,
 }

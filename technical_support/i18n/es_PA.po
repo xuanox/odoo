@@ -23,11 +23,6 @@ msgid "# Maintenance"
 msgstr "Mantenimiento"
 
 #. module: technical_support
-#: model_terms:ir.ui.view,arch_db:technical_support.report_technical_support_request
-msgid "(Breakdown)"
-msgstr "(Offline)"
-
-#. module: technical_support
 #: model:mail.template,body_html:technical_support.mail_template_technical_support_consulting
 msgid ""
 "<?xml version=\"1.0\"?>\n"
@@ -267,11 +262,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_request__brand_id
 msgid "Brand"
 msgstr "Marca"
-
-#. module: technical_support
-#: model:ir.model.fields,field_description:technical_support.field_technical_support_request__breakdown
-msgid "Breakdown"
-msgstr ""
 
 #. module: technical_support
 #: selection:technical_support.order,state:0

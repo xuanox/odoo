@@ -9,16 +9,16 @@
 from odoo import api, fields, models
 from odoo import netsvc
 
-class TechnicalSupportConfirmClient(models.TransientModel):
-    _name = 'technical_support.confirm.client'
-    _description = 'Confirm Client'
+class TechnicalSupportPendingClient(models.TransientModel):
+    _name = 'technical_support.pending.client'
+    _description = 'Pending Client'
 
     detail = fields.Text('Detail')
 
-    def confirm_client(self):
+    def pending_client(self):
         active_id = self._context.get('active_id')
         if active_id:
             request = self.env['technical_support.request'].browse(self._context.get('active_id'))
-            request.write({'detail_confirm_client':self.detail})
-            request.action_confirm_client()
-        return {'type': 'ir.actions.act_window_close',}
+            request.write({'detail_pending_client':self.detail})
+            request.action_waiting_for_customer()
+        return {'type': 'ir.actions.act_window_close'}

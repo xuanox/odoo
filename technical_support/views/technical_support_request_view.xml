@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
+  <!-- Technical Support Request Views -->
 
-		<!-- Technical Support Request Tree View -->
+	<!-- Technical Support Request - Tree View -->
     <record id="technical_support_request_tree_view" model="ir.ui.view">
-    	<field name="name">Technical Support Request Tree</field>
+    	<field name="name">TSR Tree View</field>
       <field name="model">technical_support.request</field>
       <field name="arch" type="xml">
-      	<tree string="Technical Support Requests">
+      	<tree string="TSR">
           <field name="name"/>
 					<field name="requested_date"/>
 					<field name="client_id"/>
@@ -19,9 +19,9 @@
       </field>
     </record>
 
-		<!-- Technical Support Request - Caendar View -->
+	<!-- Technical Support Request - Calendar View -->
     <record id="technical_support_request_calendar_view" model="ir.ui.view">
-      <field name="name">Technical Support Request - Calendar</field>
+      <field name="name">TSR - Calendar View</field>
       <field name="model">technical_support.request</field>
       <field name="arch" type="xml">
         <calendar color="user_id" date_start="requested_date" date_delay="duration" string="Technical Support Requests">
@@ -34,20 +34,19 @@
       </field>
     </record>
 
-		<!-- Technical Support Request Form View -->
+	<!-- Technical Support Request - Form View -->
     <record id="technical_support_request_form_view" model="ir.ui.view">
     	<field name="name">technical_support.request.form</field>
     	<field name="model">technical_support.request</field>
       <field name="arch" type="xml">
-      	<form string="Technical Support Request">
+      	<form string="TSR">
         	<header>
-						<button name="%(action_confirm_client)d" states="draft" string="Confirmed by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
-						<button name="action_confirm_client" states="draft" string="Confirm" type="object" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
-						<button name="%(action_order_assign)d" states="draft,confirm,assigned,run,done" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="%(action_pending_client)d" states="draft" string="Pending by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="%(action_order_assign)d" states="draft,waiting_for_customer,run,done" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
             <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
 						<button name="action_draft" states="assigned" string="Draft" type="object" groups="technical_support.group_technical_support_backoffice"/>
-            <field name="state" widget="statusbar" statusbar_visible="draft,confirm,assigned,run,done"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,scheduled,run,done,awaiting_report,completed"/>
           </header>
           <sheet>
 						<div class="oe_button_box" name="button_box">
@@ -56,57 +55,107 @@
 	          	</button>
 						</div>
             <div class="oe_title">
-              <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
+              <h1># <field name="name" readonly="1"/></h1>
+              <h5><field name="subject" placeholder="Subject ..."/></h5>
             </div>
             <group>
-              <group>
+              <group name="request" string="Request Detail">
+                <field name="maintenance_type" string="Type of Request"/>
 								<field name="client_id"/>
                 <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
+                <field name="equipment_number"/>
+                <field name="brand_id" widget="manyone"/>
+                <field name="model_id" widget="manyone"/>
 								<field name="user_id"/>
-								<field name="maintenance_type"/>
               </group>
-              <group>
+              <group name="date" string="Dates Information">
                 <field name="requested_date"/>
+                <field name="schedule_date"/>
+                <field name="date_planned"/>
 								<field name="execution_date"/>
 							</group>
             </group>
-            <group>
-							<group>
-								<field name="subject"/>
-	            </group>
-							<group>
-
-	            </group>
+            <group name="more_description" string="Descripción">
+              <field name="description" placeholder="write more detail of the request ..." colspan="4" nolabel="1"/>
             </group>
 						<notebook>
-							<page string="Description">
+							<page name="detail" string="More Details">
+                <group>
+									<group name="equipment_information" string="Equipment Information">
+										<field name="modality_id" widget="manyone"/>
+										<field name="parent_id" widget="manyone"/>
+										<field name="zone_id" widget="manyone"/>
+									</group>
+									<group name="subscription_information" string="Subscription Information">
+
+									</group>
+								</group>
 								<group>
-									<field name="description" colspan="4" nolabel="1"/>
 									<field name="detail_new_order" colspan="4" nolabel="1"/>
 								</group>
 								<group string="Reject Reason" states="reject">
 			            <field name="reject_reason" colspan="4" nolabel="1"/>
 			          </group>
 							</page>
-							<page string="Equipment">
-								<group>
-									<group>
-										<field name="modality_id" widget="manyone"/>
-										<field name="parent_id" widget="manyone"/>
-										<field name="zone_id" widget="manyone"/>
-									</group>
-									<group>
-										<field name="brand_id" widget="manyone"/>
-	                  <field name="model_id" widget="manyone"/>
-									</group>
-								</group>
-							</page>
+              <page name="preventive" string="Preventive" attrs="{'invisible':[('maintenance_type', '!=', 'pm')]}">
+                <group>
+                  <group name="preventive_date" string="Preventive Date">
+                    <field name="request_date"/>
+                    <field name="close_date"/>
+                  </group>
+                  <group name="preventive_duration" string="Preventive Duration">
+                    <label for="duration"/>
+                    <div><field name="duration" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>
+                  </group>
+                </group>
+              </page>
+              <page name="predictive" string="Predictive" attrs="{'invisible':[('maintenance_type', '!=', 'pd')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="install" string="Install" attrs="{'invisible':[('maintenance_type', '!=', 'in')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="Uninstall" string="Uninstall" attrs="{'invisible':[('maintenance_type', '!=', 'un')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="fco" string="FCO" attrs="{'invisible':[('maintenance_type', '!=', 'fco')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
 						</notebook>
           </sheet>
-          <div class="oe_chatter">
-            <field name="message_follower_ids" widget="mail_followers"/>
-            <field name="message_ids" widget="mail_thread"/>
-          </div>
+					<div class="oe_chatter">
+							<field name="message_follower_ids" widget="mail_followers"/>
+							<field name="activity_ids" widget="mail_activity"/>
+							<field name="message_ids" widget="mail_thread"/>
+					</div>
         </form>
       </field>
 		</record>
@@ -143,5 +192,5 @@
             <field name="context">{'search_default_open': 1}</field>
         </record>
 
- 	</data>
+
 </odoo>

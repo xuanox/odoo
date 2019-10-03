@@ -57,6 +57,7 @@ class RegulatoryTechnicalCriteria(models.Model):
     is_unavailable = fields.Boolean('Unavailable', track_visibility=True)
     is_stamp_to_expire = fields.Boolean('Stamp to Expire', track_visibility=True)
     is_expired_stamp = fields.Boolean('Expired Stamp', track_visibility=True)
+    active = fields.Boolean(default=True)
 
     def set_is_minimum_quantity(self):
         return self.write({'is_minimum_quantity': True})
