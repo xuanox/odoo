@@ -42,11 +42,11 @@
       	<form string="TSR">
         	<header>
 						<button name="%(action_pending_client)d" states="draft" string="Pending by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_backoffice"/>
-						<button name="%(action_order_assign)d" states="draft,confirm,assigned,run,done" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
+						<button name="%(action_order_assign)d" states="draft,waiting_for_customer,run,done" string="New Order" type="action" class="oe_highlight" groups="technical_support.group_technical_support_backoffice"/>
             <button name="%(action_request_reject)d" states="draft" string="Reject Request" type="action" groups="technical_support.group_technical_support_backoffice"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
 						<button name="action_draft" states="assigned" string="Draft" type="object" groups="technical_support.group_technical_support_backoffice"/>
-            <field name="state" widget="statusbar" statusbar_visible="draft,confirm,scheduled,assigned,run,done,awaiting_report,completed"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,scheduled,run,done,awaiting_report,completed"/>
           </header>
           <sheet>
 						<div class="oe_button_box" name="button_box">
