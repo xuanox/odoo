@@ -160,29 +160,38 @@
       </field>
 		</record>
 
-
+  <!-- Technical Support Request - Search View -->
     <record id="technical_support_request_search" model="ir.ui.view">
-            <field name="name">technical_support.request.search</field>
-            <field name="model">technical_support.request</field>
-            <field name="arch" type="xml">
-                <search string="Search Technical Support Request">
-                    <field name="state"/>
-                    <field name="name"/>
-										<field name="client_id"/>
-                    <field name="equipment_id"/>
-                    <filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
-                    <separator/>
-                    <filter icon="terp-document-new" name="open" string="Open" domain="['|',('state','in',('draft','confirm')),('message_unread','=',True)]" help="Undecided maintenance request"/>
-                    <group expand="0" string="Group By">
-                      <filter name="group_state"
-                              string="State"
-                              context="{'group_by': 'state'}"
-                              />
-                    </group>
-                </search>
-            </field>
-        </record>
+      <field name="name">Technical Support Request - Search</field>
+      <field name="model">technical_support.request</field>
+      <field name="arch" type="xml">
+        <search string="Search Technical Support Request">
+          <field name="state"/>
+          <field name="name"/>
+					<field name="client_id"/>
+          <field name="equipment_id"/>
+          <filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
+          <filter string="My TSR" domain="[('user_id','=',uid)]" name="my_tsr"/>
+          <separator/>
+            <filter string="My Activities" name="activities_my" domain="[('activity_ids.user_id', '=', uid)]"/>
+          <separator/>
+            <filter string="Late Activities" name="activities_overdue" domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]" help="Show all records which has next action date is before today"/>
+            <filter string="Today Activities" name="activities_today" domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+            <filter string="Future Activities" name="activities_upcoming_all" domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+          <separator/>
+          <filter icon="terp-document-new" name="open" string="Open" domain="['|',('state','in',('draft', 'waiting_for_part', 'waiting_for_customer', 'scheduled', 'run', 'done', 'awaiting_report')),('message_unread','=',True)]" help="Request"/>
+          <group expand="0" string="Group By">
+            <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+            <filter name="group_type" string="Request Type" context="{'group_by': 'maintenance_type'}"/>
+            <filter name="group_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
+            <filter name="group_client" string="Client" context="{'group_by': 'client_id'}"/>
+            <filter name="group_user" string="Responsible" context="{'group_by': 'user_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
 
+  <!-- Technical Support Request - Action -->
     <record id="action_requests" model="ir.actions.act_window">
             <field name="name">Technical Support Requests</field>
             <field name="type">ir.actions.act_window</field>
@@ -191,6 +200,5 @@
             <field name="view_mode">tree,form,calendar</field>
             <field name="context">{'search_default_open': 1}</field>
         </record>
-
 
 </odoo>
