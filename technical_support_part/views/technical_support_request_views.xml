@@ -17,9 +17,6 @@
                     <page name="spr" string="SPR">
                       <group>
                         <field name="part_ids" nolabel="1">
-                          <kanban>
-                            <field name="name">
-                          </kanban>
                         </field>
                       </group>
                     </page>
