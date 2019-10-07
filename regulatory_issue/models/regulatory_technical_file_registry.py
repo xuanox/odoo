@@ -9,12 +9,13 @@
 #
 ###################################################################################
 import time
-from odoo import api, fields, models, _
+from odoo import api, fields, models, SUPERUSER_ID, _
 from odoo import netsvc
 import odoo.addons.decimal_precision as dp
 from datetime import date, datetime, timedelta
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 
 TICKET_PRIORITY = [
     ('0', 'All'),
@@ -44,6 +45,14 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         ('done', 'Completed')
     ]
 
+    @api.multi
+    def _track_subtype(self, init_values):
+        self.ensure_one()
+        if 'state' in init_values and self.state == 'draft':
+            return 'regulatory_issue.registry_request_created'
+        elif 'state' in init_values and self.state != 'draft':
+            return 'regulatory_issue.registry_request_status'
+        return super(RegulatoryTechnicalFileRegistry, self)._track_subtype(init_values)
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='Technical File Number', required=True, track_visibility='onchange')
