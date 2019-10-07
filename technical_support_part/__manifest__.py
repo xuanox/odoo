@@ -17,7 +17,7 @@ This shortcut allows you to generate a Spare Part Request.
     'data': [
         'wizard/spare_part_request_view.xml',
         'views/part_views.xml',
-        'views/technical_support_views.xml',
+        'views/technical_support_request_views.xml',
         'views/technical_support_order_views.xml',
     ],
     'auto_install': True,
