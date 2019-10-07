@@ -58,9 +58,5 @@ class TechnicalSupportRequest(models.Model):
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
             'res_model': 'part.order',
-            'target': 'current',
-            'context': {
-                'default_request_id': self.ids,
-                'default_equipment_id': self.equipment_id
-            }
+            'target': 'current'
         }
