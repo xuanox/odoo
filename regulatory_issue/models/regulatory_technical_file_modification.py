@@ -42,6 +42,15 @@ class RegulatoryTechnicalFileModification(models.Model):
         for tfr in self:
             self.tfr_count = request.search_count([('tfm_id', '=', tfr.id)])
 
+    @api.multi
+    def _track_subtype(self, init_values):
+        self.ensure_one()
+        if 'state' in init_values and self.state == 'draft':
+            return 'regulatory_issue.modification_request_created'
+        elif 'state' in init_values and self.state != 'draft':
+            return 'regulatory_issue.modification_request_status'
+        return super(RegulatoryTechnicalFileModification, self)._track_subtype(init_values)
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     technical_file_id = fields.Many2one('regulatory.technical.file', string='#Technical File', track_visibility='onchange', required=True)
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')

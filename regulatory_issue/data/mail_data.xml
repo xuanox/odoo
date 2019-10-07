@@ -89,7 +89,7 @@
         <field name="description">Status Changed</field>
     </record>
 
-    <!-- creation Request-related subtypes for messaging / Chatter -->
+    <!-- Mreation Request-related subtypes for messaging / Chatter -->
     <record id="creation_request_created" model="mail.message.subtype">
         <field name="name">Creation Request - Created</field>
         <field name="res_model">regulatory.technical.file.creation</field>
@@ -101,6 +101,22 @@
     <record id="creation_request_status" model="mail.message.subtype">
         <field name="name">Creation Request - Status Changed</field>
         <field name="res_model">regulatory.technical.file.creation</field>
+        <field name="default" eval="True"/>
+        <field name="description">Status Changed</field>
+    </record>
+
+    <!-- Modification Request-related subtypes for messaging / Chatter -->
+    <record id="modification_request_created" model="mail.message.subtype">
+        <field name="name">Modification Request - Created</field>
+        <field name="res_model">regulatory.technical.file.modification</field>
+        <field name="default" eval="False"/>
+        <field name="hidden" eval="True"/>
+        <field name="description">Modification Request Created</field>
+    </record>
+
+    <record id="modification_request_status" model="mail.message.subtype">
+        <field name="name">Modification Request - Status Changed</field>
+        <field name="res_model">regulatory.technical.file.modification</field>
         <field name="default" eval="True"/>
         <field name="description">Status Changed</field>
     </record>
