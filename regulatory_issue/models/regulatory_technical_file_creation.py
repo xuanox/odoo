@@ -42,6 +42,15 @@ class RegulatoryTechnicalFileCreation(models.Model):
         for tfr in self:
             self.tfr_count = request.search_count([('tfc_id', '=', tfr.id)])
 
+    @api.multi
+    def _track_subtype(self, init_values):
+        self.ensure_one()
+        if 'state' in init_values and self.state == 'draft':
+            return 'regulatory_issue.creation_request_created'
+        elif 'state' in init_values and self.state != 'draft':
+            return 'regulatory_issue.creation_request_status'
+        return super(RegulatoryTechnicalFileCreation, self)._track_subtype(init_values)
+
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     observation=fields.Text('Observation', track_visibility='onchange')
     responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
