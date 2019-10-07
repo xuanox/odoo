@@ -15,10 +15,7 @@ from dateutil.relativedelta import *
 class Part(models.Model):
     _inherit = 'part.order'
 
-    def _default_request(self):
-        return self.env['technical_support.request'].browse(self._context.get('active_id'))
-
-    request_id = fields.Many2one('technical_support.request', default=_default_request, string='Request', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
+    request_id = fields.Many2one('technical_support.request', string='Request', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
 
     @api.onchange('request_id')
     def onchange_request(self):
@@ -28,10 +25,7 @@ class Part(models.Model):
 class PartLine(models.Model):
     _inherit = 'part.line'
 
-    def _default_request(self):
-        return self.env['technical_support.request'].browse(self._context.get('active_id'))
-
-    request_id = fields.Many2one('technical_support.request', default=_default_request, string='Request', track_visibility='onchange')
+    request_id = fields.Many2one('technical_support.request', string='Request', track_visibility='onchange')
 
     @api.model_create_multi
     def create(self, vals_list):
