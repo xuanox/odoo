@@ -61,6 +61,6 @@ class TechnicalSupportRequest(models.Model):
             'target': 'current',
             'context': {
                 'default_request_id': self.ids,
-                'default_equipment_id': self.equipment_id.id
+                'default_equipment_id': self.equipment_id
             }
         }
