@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
     <!-- Regulatory -specific activities, for automatic generation mainly -->
     <record id="mail_act_regulatory_technical_file_creation" model="mail.activity.type">
         <field name="name">Regulatory - Assign Priority TFC</field>
@@ -74,5 +73,20 @@
         <field name="res_model_id" ref="regulatory_issue.model_regulatory_technical_file_registry"/>
     </record>
 
-</data>
+    <!-- Registry Request-related subtypes for messaging / Chatter -->
+    <record id="registry_request_created" model="mail.message.subtype">
+        <field name="name">Registry Request - Created</field>
+        <field name="res_model">regulatory.technical.file.registry</field>
+        <field name="default" eval="False"/>
+        <field name="hidden" eval="True"/>
+        <field name="description">Registry Request Created</field>
+    </record>
+
+    <record id="registry_request_status" model="mail.message.subtype">
+        <field name="name">Registry Request - Status Changed</field>
+        <field name="res_model">regulatory.technical.file.registry</field>
+        <field name="default" eval="True"/>
+        <field name="description">Status Changed</field>
+    </record>
+
 </odoo>
