@@ -14,6 +14,7 @@
                    </button>
                 </xpath>
                 <xpath expr="//button[@name='action_cancel']" position="before">
+                  <button name="action_submit_expenses" string="Create SPR" type="object" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}"/>
                   <button name="%(action_spare_part_request_support)d" string="SP Request" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"/>
                 </xpath>
             </field>
