@@ -60,7 +60,7 @@ class TechnicalSupportRequest(models.Model):
             'res_model': 'part.order',
             'target': 'current',
             'context': {
-                'default_request_id': self.id,
+                'default_request_id': self.ids,
                 'default_equipment_id': self.equipment_id.id
             }
         }
