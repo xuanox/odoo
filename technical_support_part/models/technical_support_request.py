@@ -50,13 +50,3 @@ class TechnicalSupportRequest(models.Model):
             'type': 'ir.actions.act_window',
             'target': 'current',
         }
-
-    @api.multi
-    def action_submit_expenses(self):
-        return {
-            'name': _('New SPR Request'),
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'res_model': 'part.order',
-            'target': 'current'
-        }
