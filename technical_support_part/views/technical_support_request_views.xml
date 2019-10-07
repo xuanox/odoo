@@ -13,7 +13,7 @@
                      <field string="Part List" name="part_line_count" widget="statinfo"/>
                    </button>
                 </xpath>
-                <xpath expr="//page[@name='detail']" position="before">
+                <xpath expr="//page[@name='detail']" position="after">
                     <page name="spr" string="SPR">
                       <group>
                         <field name="part_ids" nolabel="1">
