@@ -19,7 +19,6 @@
                         <field name="part_ids" nolabel="1">
                           <tree string="SPR">
                             <field name="name"/>
-                            <field name="date_order"/>
                             <field name="state"/>
                           </tree>
                         </field>
