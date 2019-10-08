@@ -18,7 +18,7 @@ class RegulatoryTechnicalFileRegistryCreateTfm(models.TransientModel):
     def create_modification_request(self):
         active_id = self._context.get('active_id')
         if active_id:
-            request = self.env['regulatory.technical.file.modification'].browse(self._context.get('active_id'))
+            request = self.env['regulatory.technical.file.registry'].browse(self._context.get('active_id'))
             request.write({'user_id': self.user_id.id})
             request.action_creation_tfm()
         return {'type': 'ir.actions.act_window_close',}
