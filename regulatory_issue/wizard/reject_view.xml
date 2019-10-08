@@ -9,6 +9,7 @@
                 <form string="Reject Registry" version="7.0">
                     <group>
                         <field name="reject_reason_id"/>
+                        <field name="description"/>
                     </group>
                     <footer>
                         <button name="reject_registry" string="Reject Registry" type="object"  class="oe_highlight"  />
