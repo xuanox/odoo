@@ -33,6 +33,7 @@
               <field name="technical_file"/>
             </group>
             <group>
+              <field name="emission_date" widget="date"/>
               <field name="criterion_expiration_date" widget="date"/>
               <field name="date_expiration_authenticated_seal" widget="date"/>
             </group>
@@ -69,6 +70,7 @@
         <field name="name"/>
         <field name="ctni"/>
         <field name="technical_file"/>
+        <field name="emission_date" widget="date"/>
         <field name="criterion_expiration_date" string="Expired TC"/>
         <field name="date_expiration_authenticated_seal" string="Expired Stamp"/>
         <field name="qty_available" string="Quantity"/>

@@ -11,6 +11,7 @@
                   <button name="%(action_appointment_assigned)d" string="Schedule Appointment" states="review,wait,rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
                   <button name="action_send_mail" states="review,wait" string="Consult" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="action_review" states="assigned,wait,rejected,correct" string="In Review" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
+                  <button name="%(action_modification_create)d" string="Create TFM" states="rejected" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
                   <button name="action_set_fulfill" states="review,wait,appointment" string="Cumple" attrs="{'invisible': ['|', ('is_won', '=', True)]}" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(registry_lost_action)d" states="review,wait" string="No Cumple" attrs="{'invisible': ['|', ('is_lost', '=', True)]}" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
                   <button name="%(action_registry_reject)d" states="waiting" string="Rejected Registry" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
@@ -64,14 +65,6 @@
                       <field name='create_date'/>
                       <field name='write_uid'/>
                       <field name='write_date'/>
-                      <field name='is_won' invisible="1"/>
-                      <field name='is_lost' invisible="1"/>
-                      <field name='is_approved' invisible="1"/>
-                      <field name='is_rejected' invisible="1"/>
-                      <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
-                      <field name='description_lost' attrs="{'invisible':[('is_lost', '=', False)]}"/>
-                      <field name='reject_reason' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
-                      <field name='description_reject' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
                     </group>
                   </group>
                   <group>
@@ -91,6 +84,20 @@
                             <field name="status"/>
     											</tree>
     										</field>
+                      </group>
+                      <group>
+                        <group>
+                          <field name='is_won' invisible="1"/>
+                          <field name='is_lost' invisible="1"/>
+                          <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
+                          <field name='description_lost' attrs="{'invisible':[('is_lost', '=', False)]}"/>
+                        </group>
+                        <group>
+                          <field name='is_approved' invisible="1"/>
+                          <field name='is_rejected' invisible="1"/>
+                          <field name='reject_reason' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
+                          <field name='description_reject' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
+                        </group>
                       </group>
                     </page>
                 </notebook>

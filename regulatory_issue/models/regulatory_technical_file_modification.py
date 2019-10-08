@@ -75,6 +75,7 @@ class RegulatoryTechnicalFileModification(models.Model):
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
     tfr_ids = fields.One2many('regulatory.technical.file.registry', 'tfm_id', string='TFR')
+    tfr_id = fields.Many2one('regulatory.technical.file.registry', string='TFR', track_visibility='onchange', readonly=True)
     tfr_count = fields.Integer(compute='_tfr_count', string='TFR')
     contact_id = fields.Many2one('res.partner', string='Contact', states={'done': [('readonly', True)]})
     contact_ids = fields.Many2many('res.partner', string='Contacts', states={'done': [('readonly', True)]})

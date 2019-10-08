@@ -153,6 +153,20 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         self.write({'is_rejected': True})
         return True
 
+    def action_creation_tfm(self):
+        tfm = self.env['regulatory.technical.file.modification']
+        tfm_id = False
+        for request in self:
+            tfm_id = tfm.create({
+                'technical_file_id':request.technical_file_id.id,
+                'models_id':request.models_id.id,
+                'responsible_sales_id':request.responsible_sales_id.id,
+                'sales_team_id': request.team_id.id,
+                'tfr_id': request.id,
+            })
+        self.write({'state': 'done'})
+        return tfm_id.id
+
     @api.multi
     def action_send_mail(self):
         self.ensure_one()

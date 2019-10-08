@@ -43,6 +43,7 @@ class RegulatoryTechnicalCriteria(models.Model):
     ctni=fields.Char('CTNI', track_visibility='onchange')
     technical_file=fields.Char('Certificate Number', track_visibility='onchange')
     criterion_expiration_date = fields.Date(string='Criterion Expiration Date', track_visibility='onchange')
+    emission_date = fields.Date(string='Emission Date', track_visibility='onchange')
     date_expiration_authenticated_seal = fields.Date(string='Date Expiration Stamp', track_visibility='onchange')
     description=fields.Text('Description', track_visibility='onchange')
     qty_available = fields.Integer('Quantity Available', default=0, help="Assign Quantity Available.", track_visibility='onchange')
