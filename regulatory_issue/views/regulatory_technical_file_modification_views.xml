@@ -69,7 +69,7 @@
                 </field>
               </group>
             </page>
-            <page name="tfr" string="TFR">
+            <page name="tfr" string="TFR" attrs="{'invisible':[('tfr_id', '=', False)]}">
               <group string="TFR">
                 <field name="tfr_id"/>
               </group>
