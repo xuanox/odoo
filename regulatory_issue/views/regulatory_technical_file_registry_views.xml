@@ -100,7 +100,7 @@
                         </group>
                       </group>
                     </page>
-                    <page name="tfm" string="TFM" attrs="{'invisible':[('tfm_id', '=', False)]}">
+                    <page name="tfm" string="TFM">
                       <group>
                         <field name='tfm_id'/>
                       </group>
