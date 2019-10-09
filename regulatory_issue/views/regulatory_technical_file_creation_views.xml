@@ -84,6 +84,8 @@
     <field name="arch" type="xml">
       <tree string="Technical File Creation">
         <field name="name"/>
+        <field name="technical_file_id"/>
+        <field name="technical_file_name"/>
         <field name="brand_id" widget="many2one"/>
         <field name="models_id" widget="many2one"/>
         <field name="user_id" widget="many2one"/>
