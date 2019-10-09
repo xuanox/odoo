@@ -84,6 +84,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     is_rejected = fields.Boolean('Rejected', track_visibility=True)
     lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
+    lost_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Not Satisfy', index=True, track_visibility='onchange')
+    reject_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Reject', index=True, track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
