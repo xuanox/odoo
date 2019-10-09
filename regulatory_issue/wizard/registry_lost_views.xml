@@ -6,7 +6,6 @@
             <field name="arch" type="xml">
                 <form string="Lost Reason">
                     <group class="oe_title">
-                        <field name="lost_reason_id"/>
                         <field name="reason_id"/>
                         <field name="description"/>
                     </group>

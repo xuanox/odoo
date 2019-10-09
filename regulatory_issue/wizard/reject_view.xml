@@ -8,7 +8,6 @@
             <field name="arch" type="xml">
                 <form string="Reject Registry" version="7.0">
                     <group>
-                        <field name="reject_reason_id"/>
                         <field name="reason_id"/>
                         <field name="description"/>
                     </group>
