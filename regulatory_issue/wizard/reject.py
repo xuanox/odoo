@@ -13,7 +13,7 @@ class RegulatoryTechnicalFileRegistryReject(models.TransientModel):
     _name = 'regulatory.technical.file.registry.reject'
     _description = 'Registry Reject'
 
-    reject_reason_id = fields.Many2one('regulatory.lost.reason', required=True, string='Reject Reason')
+    reject_reason_id = fields.Many2one('regulatory.technical.file.registry.reject.reason', required=True, string='Reject Reason')
     description=fields.Text('Description')
 
     def reject_registry(self):
