@@ -7,7 +7,7 @@ class RegulatoryTechnicalFileRegistryLost(models.TransientModel):
     _name = 'regulatory.technical.file.registry.lost'
     _description = 'Get Lost Reason'
 
-    lost_reason_id = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Lost Reason', required=True)
+    lost_reason_id = fields.Many2one('regulatory.lost.reason', string='Lost Reason', required=True)
     description=fields.Text('Description')
 
     @api.multi

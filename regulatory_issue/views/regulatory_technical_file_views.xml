@@ -234,4 +234,42 @@
           </p>
         </field>
       </record>
+
+      <record id="regulatory_reason_form" model="ir.ui.view">
+        <field name="name">Regulatory Reason Form</field>
+        <field name="model">regulatory.lost.reason</field>
+        <field name="arch" type="xml">
+          <form string="Regulatory Reason">
+            <group>
+              <field name="name"/>
+              <field name="description" string="Location"/>
+            </group>
+          </form>
+        </field>
+      </record>
+
+      <record id="regulatory_reason_tree" model="ir.ui.view">
+        <field name="name">Regulatory Reason Tree</field>
+        <field name="model">regulatory.lost.reason</field>
+        <field name="arch" type="xml">
+          <tree string="Regulatory Reason">
+            <field name="name"/>
+            <field name="description" string="Location"/>
+          </tree>
+        </field>
+      </record>
+
+      <record id="regulatory_reason_action" model="ir.actions.act_window">
+        <field name="name">Reason</field>
+        <field name="res_model">regulatory.lost.reason</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="regulatory_reason_tree"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new reason for your Regulatory Request
+          </p><p>
+            Create reason for your requests.
+          </p>
+        </field>
+      </record>
 </odoo>

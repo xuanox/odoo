@@ -134,5 +134,12 @@
         action="regulatory_entity_action"
         sequence="7"/>
 
+      <menuitem
+        id="regulatory_reason"
+        name="Reason"
+        parent="regulatory_management_configuration"
+        action="regulatory_reason_action"
+        sequence="8"/>
+
     </data>
 </odoo>
