@@ -13,7 +13,7 @@ class RegulatoryTechnicalFileRegistryCreateTfm(models.TransientModel):
     _name = 'regulatory.technical.file.registry.create.tfm'
     _description = 'Create TFM in TFR'
 
-    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
+    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user, required=True)
 
     def create_modification_request(self):
         active_id = self._context.get('active_id')
