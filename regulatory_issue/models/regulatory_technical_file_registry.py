@@ -80,6 +80,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     is_won = fields.Boolean('Cumple', track_visibility=True)
     is_lost = fields.Boolean('No Cumple', track_visibility=True)
     is_approved = fields.Boolean('Approved', track_visibility=True)
+    is_registry_approved = fields.Boolean('Registry Approved', track_visibility=True)
     is_rejected = fields.Boolean('Rejected', track_visibility=True)
     lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
     reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
@@ -142,6 +143,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     def action_approved(self):
         self.write({'state': 'done'})
+        self.write({'is_registry_approved': True})
         return True
 
     def action_rejected(self):
