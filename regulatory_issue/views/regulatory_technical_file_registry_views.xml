@@ -81,22 +81,20 @@
     										</field>
                       </group>
                       <group name="log_info" string="Log Info" groups="regulatory_issue.group_regulatory_issue_lider">
-                        <field name='create_uid'/>
-                        <field name='create_date'/>
-                        <field name='write_uid'/>
-                        <field name='write_date'/>
-                      </group>
-                      <group>
+                        <group>
+                          <field name='create_uid'/>
+                          <field name='create_date'/>
+                          <field name='write_uid'/>
+                          <field name='write_date'/>
+                        </group>
                         <group>
                           <field name='is_won' invisible="1"/>
                           <field name='is_lost' invisible="1"/>
-                          <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
-                          <field name='description_lost' string="Description" attrs="{'invisible':[('is_lost', '=', False)]}"/>
-                        </group>
-                        <group>
                           <field name='is_approved' invisible="1"/>
                           <field name='is_registry_approved' invisible="1"/>
                           <field name='is_rejected' invisible="1"/>
+                          <field name='lost_reason' attrs="{'invisible':[('is_lost', '=', False)]}"/>
+                          <field name='description_lost' string="Description" attrs="{'invisible':[('is_lost', '=', False)]}"/>
                           <field name='reject_reason' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
                           <field name='description_reject' attrs="{'invisible':[('is_rejected', '=', False)]}"/>
                         </group>

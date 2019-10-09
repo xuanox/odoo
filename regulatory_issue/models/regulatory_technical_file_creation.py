@@ -53,9 +53,9 @@ class RegulatoryTechnicalFileCreation(models.Model):
 
     name = fields.Char('#Request:', readonly=True, copy=False, required=True, default='New')
     observation=fields.Text('Observation', track_visibility='onchange')
-    responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user)
-    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
-    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True)
+    responsible_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', default=lambda self: self.env.user, domain=lambda self: [('groups_id', 'in', self.env.ref('regulatory_issue.group_regulatory_issue_manager').id)])
+    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', domain=lambda self: [('groups_id', 'in', self.env.ref('regulatory_issue.group_regulatory_issue_manager').id)])
+    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True, domain=lambda self: [('groups_id', 'in', self.env.ref('regulatory_issue.group_regulatory_issue_user').id)])
     sales_team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid))
     responsible_team_lider_id = fields.Many2one('res.users', related='sales_team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Model Equipment', track_visibility='onchange', required=True)

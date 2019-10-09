@@ -197,4 +197,41 @@
         </field>
       </record>
 
+      <record id="regulatory_entity_form" model="ir.ui.view">
+        <field name="name">Regulatory Entity Form</field>
+        <field name="model">regulatory.entity</field>
+        <field name="arch" type="xml">
+          <form string="Regulatory Entity">
+            <group>
+              <field name="name"/>
+              <field name="description" string="Location"/>
+            </group>
+          </form>
+        </field>
+      </record>
+
+      <record id="regulatory_entity_tree" model="ir.ui.view">
+        <field name="name">Regulatory Entity Tree</field>
+        <field name="model">regulatory.entity</field>
+        <field name="arch" type="xml">
+          <tree string="Regulatory Entity">
+            <field name="name"/>
+            <field name="description" string="Location"/>
+          </tree>
+        </field>
+      </record>
+
+      <record id="regulatory_entity_action" model="ir.actions.act_window">
+        <field name="name">Entity</field>
+        <field name="res_model">regulatory.entity</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="regulatory_entity_tree"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new Entity for your Regulatory Request
+          </p><p>
+            Create entity for your requests.
+          </p>
+        </field>
+      </record>
 </odoo>
