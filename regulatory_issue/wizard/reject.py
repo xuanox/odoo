@@ -13,6 +13,7 @@ class RegulatoryTechnicalFileRegistryReject(models.TransientModel):
     _name = 'regulatory.technical.file.registry.reject'
     _description = 'Registry Reject'
 
+    reject_reason_id = fields.Many2one('regulatory.technical.file.registry.reject.reason', required=True, string='Reject Reason')
     reason_id = fields.Many2one('regulatory.lost.reason', required=True, string='Reason')
     description=fields.Text('Description')
 
@@ -20,6 +21,7 @@ class RegulatoryTechnicalFileRegistryReject(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             registry = self.env['regulatory.technical.file.registry'].browse(self._context.get('active_id'))
+            registry.write({'reject_reason':self.reject_reason_id.id})
             registry.write({'reject_reason_id':self.reason_id.id})
             registry.write({'description_reject':self.description})
             registry.action_rejected()
