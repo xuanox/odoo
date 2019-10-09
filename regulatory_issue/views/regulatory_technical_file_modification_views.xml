@@ -69,6 +69,11 @@
                 </field>
               </group>
             </page>
+            <page name="tfr" string="TFR">
+              <group string="TFR">
+                <field name="tfr_id"/>
+              </group>
+            </page>
           </notebook>
         </sheet>
         <div class="oe_chatter">
