@@ -92,6 +92,7 @@
       <tree>
         <field name="name"/>
         <field name="technical_file_id"/>
+        <field name="technical_file_name" />
         <field name="models_id"/>
         <field name="brand_id"/>
         <field name="responsible_sales_id"/>
