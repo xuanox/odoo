@@ -62,7 +62,7 @@
         name="Registry Request"
         sequence="3"/>
 
-      <!-- Configuration -->
+      <!-- Legal Documents -->
       <menuitem
         id="regulatory_management_legal_documentation"
         name="Legal Documents"
@@ -126,6 +126,20 @@
         parent="regulatory_management_configuration"
         action="regulatory_technical_file_group_action"
         sequence="6"/>
+
+      <menuitem
+        id="regulatory_entity"
+        name="Entity"
+        parent="regulatory_management_configuration"
+        action="regulatory_entity_action"
+        sequence="7"/>
+
+      <menuitem
+        id="regulatory_reason"
+        name="Reason"
+        parent="regulatory_management_configuration"
+        action="regulatory_reason_action"
+        sequence="8"/>
 
     </data>
 </odoo>

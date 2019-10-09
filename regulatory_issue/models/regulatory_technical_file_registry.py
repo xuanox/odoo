@@ -59,8 +59,8 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     technical_file_name = fields.Char(related='technical_file_id.technical_file_name', string='Technical File Name', track_visibility='onchange')
     observation=fields.Text('Observation', track_visibility='onchange')
     team_id = fields.Many2one('crm.team', string='Sales Team', required=True, track_visibility='onchange', default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid))
-    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange')
-    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True)
+    user_id = fields.Many2one('res.users', string='Responsible AR', track_visibility='onchange', domain=lambda self: [('groups_id', 'in', self.env.ref('regulatory_issue.group_regulatory_issue_manager').id)])
+    responsible_sales_id = fields.Many2one('res.users', string='Responsible Sale', track_visibility='onchange', default=lambda self: self.env.user, required=True, domain=lambda self: [('groups_id', 'in', self.env.ref('regulatory_issue.group_regulatory_issue_user').id)])
     responsible_team_lider_id = fields.Many2one('res.users', related='team_id.user_id', string='Team Lider', track_visibility='onchange')
     models_id = fields.Many2one('equipment.model', string='Models Equipments', required=True, track_visibility='onchange')
     brand_id=fields.Many2one('equipment.brand', related='models_id.brand_id', store=True, string='Brand', track_visibility='onchange')
@@ -80,9 +80,12 @@ class RegulatoryTechnicalFileRegistry(models.Model):
     is_won = fields.Boolean('Cumple', track_visibility=True)
     is_lost = fields.Boolean('No Cumple', track_visibility=True)
     is_approved = fields.Boolean('Approved', track_visibility=True)
+    is_registry_approved = fields.Boolean('Registry Approved', track_visibility=True)
     is_rejected = fields.Boolean('Rejected', track_visibility=True)
-    lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
-    reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
+    #lost_reason = fields.Many2one('regulatory.technical.file.registry.lost.reason', string='Porque no cumple', index=True, track_visibility='onchange')
+    #reject_reason = fields.Many2one('regulatory.technical.file.registry.reject.reason', string='Reject Reason', index=True, track_visibility='onchange')
+    lost_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Not Satisfy', index=True, track_visibility='onchange')
+    reject_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Reject', index=True, track_visibility='onchange')
     pending_documentation_ids=fields.One2many('regulatory.technical.file.registry.pending.documentation','registry_id', string='Pending Documentation', readonly=True, states={'review':[('readonly',False)],'wait':[('readonly',False)]})
     entity_id = fields.Many2one('regulatory.entity', string='Entity', track_visibility='onchange')
     location_homologation=fields.Text(related='entity_id.description', string='Homologation Location', readonly=True, track_visibility='onchange')
@@ -142,6 +145,7 @@ class RegulatoryTechnicalFileRegistry(models.Model):
 
     def action_approved(self):
         self.write({'state': 'done'})
+        self.write({'is_registry_approved': True})
         return True
 
     def action_rejected(self):
@@ -152,6 +156,20 @@ class RegulatoryTechnicalFileRegistry(models.Model):
         self.write({'state': 'correct'})
         self.write({'is_rejected': True})
         return True
+
+    def action_creation_tfm(self):
+        tfm = self.env['regulatory.technical.file.modification']
+        tfm_id = False
+        for request in self:
+            tfm_id = tfm.create({
+                'technical_file_id':request.technical_file_id.id,
+                'models_id':request.models_id.id,
+                'responsible_sales_id':request.responsible_sales_id.id,
+                'sales_team_id': request.team_id.id,
+                'tfr_id': request.id,
+            })
+        self.write({'state': 'done'})
+        return tfm_id.id
 
     @api.multi
     def action_send_mail(self):

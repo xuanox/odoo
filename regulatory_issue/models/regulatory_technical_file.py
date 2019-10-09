@@ -64,6 +64,7 @@ class RegulatoryEntity(models.Model):
     name = fields.Char('Entity', required=True)
     description=fields.Text('Location')
 
+
 class RegulatoryTag(models.Model):
 
     _name = "regulatory.tag"
@@ -82,4 +83,5 @@ class RegulatoryLostReason(models.Model):
     _description = 'Regulatory Lost Reason'
 
     name = fields.Char('Name', required=True, translate=True)
+    description=fields.Text('Description')
     active = fields.Boolean('Active', default=True)
