@@ -10,6 +10,7 @@
           <button name="%(action_modification_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
           <button name="action_process" states="assigned,scheduled" string="In Review" type="object" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
           <button name="%(action_scheduled_modification_assigned)d" string="Schedule Appointment" states="process" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager" />
+          <button name="%(action_modification_reject)d" states="process,scheduled" string="Rejected Modification" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_manager"/>
           <button name="%(action_modification_done)d" string="Complete" states="scheduled" type="action" class="oe_highlight" groups="regulatory_issue.group_regulatory_issue_user" />
           <field name="state" widget="statusbar" statusbar_visible="draft,assigned,process,scheduled,done"/>
         </header>
@@ -19,6 +20,8 @@
               <field string="TFR" name="tfr_count" widget="statinfo"/>
             </button>
           </div>
+          <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_modification_rejected', '=', True),  ('state', '!=', 'done')]}">Approved Modification</div>
+          <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_modification_rejected', '=', False)]}">Rejected Modification</div>
           <div class="oe_title">
             <label for="name" class="oe_edit_only" string="#Request:"/>
             <h1>
@@ -67,6 +70,13 @@
                     <field name="value"/>
                   </tree>
                 </field>
+              </group>
+              <group>
+                <group>
+                  <field name='is_modification_rejected' invisible="1"/>
+                  <field name='reject_reason_id' attrs="{'invisible':[('is_modification_rejected', '=', False)]}"/>
+                  <field name='description_reject' attrs="{'invisible':[('is_modification_rejected', '=', False)]}"/>
+                </group>
               </group>
             </page>
             <page name="tfr" string="TFR" attrs="{'invisible':[('tfr_id', '=', False)]}">

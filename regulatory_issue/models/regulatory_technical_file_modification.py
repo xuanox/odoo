@@ -121,7 +121,8 @@ class RegulatoryTechnicalFileModification(models.Model):
 
 
     def action_rejected(self):
-        self.write({'state': 'rejected'})
+        self.write({'state': 'done'})
+        self.write({'is_modification_rejected': True})
         return True
 
     @api.model
