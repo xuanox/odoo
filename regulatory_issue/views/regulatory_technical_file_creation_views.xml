@@ -20,8 +20,8 @@
               <field string="TFR" name="tfr_count" widget="statinfo"/>
             </button>
           </div>
-          <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_creation_rejected', '=', False),  ('state', '=', 'done')]}">Approved Creation</div>
-          <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_creation_rejected', '=', True)]}">Rejected Creation</div>
+          <div class="badge-pill badge-success float-right" attrs="{'invisible': ['|', ('is_creation_rejected', '=', True),  ('state', '=', 'done')]}">Approved Creation</div>
+          <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('is_creation_rejected', '=', False)]}">Rejected Creation</div>
           <div class="oe_title">
             <label for="name" class="oe_edit_only" string="#Request:"/>
             <h1>
