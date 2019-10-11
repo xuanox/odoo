@@ -80,6 +80,9 @@ class RegulatoryTechnicalFileModification(models.Model):
     contact_id = fields.Many2one('res.partner', string='Contact', states={'done': [('readonly', True)]})
     contact_ids = fields.Many2many('res.partner', string='Contacts', states={'done': [('readonly', True)]})
     tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfm_tag_rel', 'tfm_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
+    is_modification_rejected = fields.Boolean('Modification Approved', track_visibility=True)
+    reject_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Reject', index=True, track_visibility='onchange')
+    description_reject=fields.Text('Description Reject')
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
@@ -98,6 +101,7 @@ class RegulatoryTechnicalFileModification(models.Model):
 
     def action_done(self):
         self.write({'state': 'done'})
+        self.write({'is_modification_approved': True})
         return True
 
     def action_confirm(self):

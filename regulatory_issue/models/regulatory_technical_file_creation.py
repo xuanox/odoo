@@ -78,6 +78,9 @@ class RegulatoryTechnicalFileCreation(models.Model):
     contact_id = fields.Many2one('res.partner', string='Contact', states={'done': [('readonly', True)]})
     contact_ids = fields.Many2many('res.partner', string='Contacts', states={'done': [('readonly', True)]})
     tag_ids = fields.Many2many('regulatory.tag', 'regulatory_tfc_tag_rel', 'tfc_id', 'tag_id', string='Tags', help="Classify and analyze your request like: Training, Service")
+    is_creation_rejected = fields.Boolean('Creation Approved', track_visibility=True)
+    reject_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Reject', index=True, track_visibility='onchange')
+    description_reject=fields.Text('Description Reject')
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
@@ -114,7 +117,8 @@ class RegulatoryTechnicalFileCreation(models.Model):
         return tfr_id.id
 
     def action_rejected(self):
-        self.write({'state': 'rejected'})
+        self.write({'state': 'done'})
+        self.write({'is_creation_rejected': True})
         return True
 
     @api.model

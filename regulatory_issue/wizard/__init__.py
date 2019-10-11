@@ -26,6 +26,7 @@ from . import appointment
 from . import validate
 from . import registry_lost
 from . import reject
+from . import reject_creation
 from . import homologation
 from . import scheduled_tfm
 from . import assign_responsible_tfc
