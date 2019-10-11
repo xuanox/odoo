@@ -62,7 +62,7 @@
       name="TSO"
   		action="action_orders"
   		id="technical_support_menu_tso"
-      groups="technical_support.group_technical_support_backoffice"
+      groups="technical_support.group_technical_support_engineer"
   		parent="technical_support_menu_request"
   		sequence="2"/>
 
@@ -78,7 +78,7 @@
       name="Vendors"
       id="technical_support_menu_vendors"
       parent="technical_support_menu_data"
-      action="base.action_partner_supplier_form" 
+      action="base.action_partner_supplier_form"
       sequence="4"/>
 
   <!-- Technical Support Tasks menu -->
