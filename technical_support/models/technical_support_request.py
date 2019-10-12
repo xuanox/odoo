@@ -39,7 +39,9 @@ class TechnicalSupportRequest(models.Model):
         ('pd', 'Predictive'),
         ('in', 'Install'),
         ('un', 'Uninstall'),
-        ('fco', 'FCO')
+        ('pcc', 'PCC'),
+        ('fco', 'FCO'),
+        ('demo', 'Demo')
     ]
 
     def _technical_support_count(self):
