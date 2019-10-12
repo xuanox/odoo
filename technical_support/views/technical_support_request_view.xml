@@ -63,9 +63,6 @@
                 <field name="maintenance_type" string="Type of Request"/>
 								<field name="client_id"/>
                 <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
-                <field name="equipment_number"/>
-                <field name="brand_id" widget="manyone"/>
-                <field name="model_id" widget="manyone"/>
 								<field name="user_id"/>
               </group>
               <group name="date" string="Dates Information">
@@ -82,6 +79,9 @@
 							<page name="detail" string="More Details">
                 <group>
 									<group name="equipment_information" string="Equipment Information">
+                    <field name="equipment_number"/>
+                    <field name="brand_id" widget="manyone"/>
+                    <field name="model_id" widget="manyone"/>
 										<field name="modality_id" widget="manyone"/>
 										<field name="parent_id" widget="manyone"/>
 										<field name="zone_id" widget="manyone"/>
