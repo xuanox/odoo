@@ -121,14 +121,6 @@
         <field name="description">Status Changed</field>
     </record>
 
-    <!-- state "New" gets created by default with sequence 0-->
-    <record id="state_draft" model="regulatory.technical.file.creation">
-        <field name="name">New</field>
-        <field name="state">draft</field>
-        <field name="is_creation_rejected" eval="False"/>
-        <field name="template_id" ref="regulatory_issue.new_tfc_request_email_template"/>
-    </record>
-
     <record id="new_tfc_request_email_template" model="mail.template">
         <field name="name">Ticket: Reception Acknowledgment</field>
         <field name="model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
@@ -152,5 +144,13 @@
 </div>
         </field>
         <field name="auto_delete" eval="False"/>
+    </record>
+
+    <!-- state "New" gets created by default with sequence 0-->
+    <record id="state_draft" model="regulatory.technical.file.creation">
+        <field name="name">New</field>
+        <field name="state">draft</field>
+        <field name="is_creation_rejected" eval="False"/>
+        <field name="template_id" ref="regulatory_issue.new_tfc_request_email_template"/>
     </record>
 </odoo>
