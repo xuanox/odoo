@@ -121,12 +121,4 @@
         <field name="description">Status Changed</field>
     </record>
 
-    <!-- state "New" gets created by default with sequence 0-->
-    <record id="state_draft" model="regulatory.technical.file.creation">
-        <field name="name">New</field>
-        <field name="state">draft</field>
-        <field name="is_creation_rejected" eval="False"/>
-        <field name="template_id" ref="regulatory_issue.new_tfc_request_email_template"/>
-    </record>
-
 </odoo>

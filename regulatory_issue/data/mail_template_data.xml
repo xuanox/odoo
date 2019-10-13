@@ -18,29 +18,4 @@
           <field name="user_signature" eval="True"/>
       </record>
 
-      <record id="new_tfc_request_email_template" model="mail.template">
-          <field name="name">Ticket: Reception Acknowledgment</field>
-          <field name="model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
-          <field name="subject">Test</field>
-          <field name="email_from">${object.user_id.email_formatted | safe}</field>
-          <field name="email_to">aregulatorio@electronicamedica.com</field>
-          <field name="partner_to"></field>
-          <field name="lang"> ${object.user_id.lang or user.lang | safe}</field>
-          <field name="body_html" type="xml">
-  <div>
-      Dear,<br /><br />
-      Your request
-      % if object.access_token:
-      <a href=""></a>
-      % endif
-      has been received and is being reviewed by our team.
-      The reference of your ticket is.<br /><br />
-      To add additional comments, reply to this email.<br />
-      Thanks you,<br /><br />
-      Team.
-  </div>
-          </field>
-          <field name="auto_delete" eval="False"/>
-      </record>
-
 </odoo>
