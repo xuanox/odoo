@@ -149,6 +149,26 @@
                   </group>
                 </group>
               </page>
+              <page name="pcc" string="PCC" attrs="{'invisible':[('maintenance_type', '!=', 'pcc')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
+              <page name="demo" string="Demo" attrs="{'invisible':[('maintenance_type', '!=', 'demo')]}">
+                <group>
+                  <group name="" string="">
+
+                  </group>
+                  <group name="" string="">
+
+                  </group>
+                </group>
+              </page>
 						</notebook>
           </sheet>
 					<div class="oe_chatter">

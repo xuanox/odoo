@@ -9,6 +9,9 @@ class TechnicalSupportOrder(models.Model):
     _inherit = "technical_support.order"
     tracking_fields = ['state', 'user_id']
 
+class TechnicalSupportRequest(models.Model):
+    _inherit = "technical_support.request"
+    tracking_fields = ['state', 'user_id']
 
 class Part(models.Model):
     _inherit = "part.order"
