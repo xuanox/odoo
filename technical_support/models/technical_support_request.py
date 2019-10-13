@@ -67,7 +67,7 @@ class TechnicalSupportRequest(models.Model):
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft', copy=False)
 
-    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', readonly=True, default=lambda self: self._uid, states={'draft': [('readonly', False)]})
 
     client_id = fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
 
