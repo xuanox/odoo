@@ -28,7 +28,7 @@ class TechnicalSupportRequest(models.Model):
         ('scheduled', 'Scheduled'),
         ('run', 'In Process'),
         ('done', 'Done'),
-        ('awaiting_report', 'Awaiting Report'),
+        ('awaiting', 'Awaiting'),
         ('completed', 'Completed'),
         ('reject', 'Rejected'),
         ('cancel', 'Canceled')

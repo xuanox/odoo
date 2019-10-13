@@ -89,7 +89,7 @@
         <field name="description">Status Changed</field>
     </record>
 
-    <!-- Mreation Request-related subtypes for messaging / Chatter -->
+    <!-- Creation Request-related subtypes for messaging / Chatter -->
     <record id="creation_request_created" model="mail.message.subtype">
         <field name="name">Creation Request - Created</field>
         <field name="res_model">regulatory.technical.file.creation</field>
@@ -121,4 +121,36 @@
         <field name="description">Status Changed</field>
     </record>
 
+    <!-- state "New" gets created by default with sequence 0-->
+    <record id="state_draft" model="regulatory.technical.file.creation">
+        <field name="name">New</field>
+        <field name="state">draft</field>
+        <field name="is_creation_rejected" eval="False"/>
+        <field name="template_id" ref="regulatory_issue.new_tfc_request_email_template"/>
+    </record>
+
+    <record id="new_tfc_request_email_template" model="mail.template">
+        <field name="name">Ticket: Reception Acknowledgment</field>
+        <field name="model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
+        <field name="subject">${object.name}</field>
+        <field name="email_from">${object.user_id.email_formatted | safe}</field>
+        <field name="email_to"></field>
+        <field name="partner_to"></field>
+        <field name="lang"> ${object.user_id.lang or user.lang | safe}</field>
+        <field name="body_html" type="xml">
+<div>
+    Dear ${object.sudo().user_id.name or 'Madam/Sir'},<br /><br />
+    Your request
+    % if object.access_token:
+    <a href="">${object.name}</a>
+    % endif
+    has been received and is being reviewed by our team.
+    The reference of your ticket is ${object.name}.<br /><br />
+    To add additional comments, reply to this email.<br />
+    Thanks you,<br /><br />
+    Team.
+</div>
+        </field>
+        <field name="auto_delete" eval="False"/>
+    </record>
 </odoo>

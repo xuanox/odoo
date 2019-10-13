@@ -46,7 +46,7 @@
             <button name="%(action_request_reject)d" states="draft,waiting_for_customer" string="Reject Request" type="action" groups="technical_support.group_technical_support_engineer"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
 						<button name="action_draft" states="scheduled,run" string="Draft" type="object" groups="technical_support.group_technical_support_engineer"/>
-            <field name="state" widget="statusbar" statusbar_visible="draft,scheduled,run,done,awaiting_report,completed"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,scheduled,run,done,completed"/>
           </header>
           <sheet>
 						<div class="oe_button_box" name="button_box">

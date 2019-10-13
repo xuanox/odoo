@@ -81,6 +81,7 @@ class RegulatoryTechnicalFileCreation(models.Model):
     is_creation_rejected = fields.Boolean('Creation Approved', track_visibility=True)
     reject_reason_id = fields.Many2one('regulatory.lost.reason', string='Reason - Reject', index=True, track_visibility='onchange')
     description_reject=fields.Text('Description Reject')
+    template_id = fields.Many2one('mail.template', 'Automated Answer Email Template', domain="[('model', '=', 'regulatory.technical.file.creation')]", help="Automated email sent to the ticket's customer.")
 
     def action_assigned(self):
         self.write({'state': 'assigned'})
