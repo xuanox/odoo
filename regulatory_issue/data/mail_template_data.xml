@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
       <record id="mail_template_regulatory_issue_consulting" model="mail.template">
           <field name="name">Regulatory Issue - Consulting Factory: Send by email</field>
           <field name="model_id" ref="regulatory_issue.model_regulatory_technical_file_registry"/>
@@ -18,5 +17,30 @@
           <field name="auto_delete" eval="True"/>
           <field name="user_signature" eval="True"/>
       </record>
-    </data>
+
+      <record id="new_tfc_request_email_template" model="mail.template">
+          <field name="name">Ticket: Reception Acknowledgment</field>
+          <field name="model_id" ref="regulatory_issue.model_regulatory_technical_file_creation"/>
+          <field name="subject">${object.name}</field>
+          <field name="email_from">${object.user_id.email_formatted | safe}</field>
+          <field name="email_to"></field>
+          <field name="partner_to"></field>
+          <field name="lang"> ${object.user_id.lang or user.lang | safe}</field>
+          <field name="body_html" type="xml">
+  <div>
+      Dear ${object.sudo().user_id.name or 'Madam/Sir'},<br /><br />
+      Your request
+      % if object.access_token:
+      <a href="">${object.name}</a>
+      % endif
+      has been received and is being reviewed by our team.
+      The reference of your ticket is ${object.name}.<br /><br />
+      To add additional comments, reply to this email.<br />
+      Thanks you,<br /><br />
+      Team.
+  </div>
+          </field>
+          <field name="auto_delete" eval="False"/>
+      </record>
+
 </odoo>
