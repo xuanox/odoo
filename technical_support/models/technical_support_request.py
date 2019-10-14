@@ -92,6 +92,10 @@ class TechnicalSupportRequest(models.Model):
     detail_confirm_done = fields.Text('Detail Confirm Done')
     detail_new_order = fields.Text('Detail Reason', readonly=True)
 
+    fco_code = fields.Char(string='FCO Code', track_visibility='onchange')
+    fco_deadline = fields.Date(string='FCO Deadline', track_visibility='onchange', default=fields.Date.context_today, help="FCO Deadline")
+
+
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
 
