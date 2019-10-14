@@ -89,7 +89,7 @@
         <field name="description">Status Changed</field>
     </record>
 
-    <!-- Mreation Request-related subtypes for messaging / Chatter -->
+    <!-- Creation Request-related subtypes for messaging / Chatter -->
     <record id="creation_request_created" model="mail.message.subtype">
         <field name="name">Creation Request - Created</field>
         <field name="res_model">regulatory.technical.file.creation</field>

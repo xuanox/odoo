@@ -28,7 +28,7 @@ class TechnicalSupportRequest(models.Model):
         ('scheduled', 'Scheduled'),
         ('run', 'In Process'),
         ('done', 'Done'),
-        ('awaiting_report', 'Awaiting Report'),
+        ('awaiting', 'Awaiting'),
         ('completed', 'Completed'),
         ('reject', 'Rejected'),
         ('cancel', 'Canceled')
@@ -67,20 +67,22 @@ class TechnicalSupportRequest(models.Model):
         If the request is rejected the status is set to 'Rejected'.\n\
         When the maintenance is over, the status is set to 'Done'.", track_visibility='onchange', default='draft', copy=False)
 
-    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', default=lambda self: self._uid, states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    user_id = fields.Many2one('res.users', 'Responsible', track_visibility='onchange', readonly=True, default=lambda self: self._uid, states={'draft': [('readonly', False)]})
 
     client_id = fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
 
     equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
-    equipment_number=fields.Char(related='equipment_id.equipment_number', string='N° de Equipo', readonly=True)
+    equipment_number=fields.Char(string='N° de Equipment', related='equipment_id.equipment_number', readonly=True, store=True, track_visibility='onchange')
+    serial = fields.Char('Serial no.', related='equipment_id.serial', readonly=True, store=True, track_visibility='onchange')
+    location = fields.Char('Location', related='equipment_id.location', readonly=True, store=True, track_visibility='onchange')
 
-    brand_id = fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True)
-    zone_id = fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True)
-    model_id = fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True)
-    parent_id = fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True)
-    modality_id = fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True)
+    brand_id = fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True, store=True, track_visibility='onchange')
+    zone_id = fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True, store=True, track_visibility='onchange')
+    model_id = fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True, store=True, track_visibility='onchange')
+    parent_id = fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True, store=True, track_visibility='onchange')
+    modality_id = fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True, store=True, track_visibility='onchange')
 
-    maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
+    maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Request Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
 
     duration = fields.Float('Duration', help="Duration in hours and minutes.")
 
