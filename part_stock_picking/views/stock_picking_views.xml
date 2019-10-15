@@ -8,6 +8,7 @@
       <xpath expr="//field[@name='priority']" position="after">
               <group>
                 <field name="ticket_id"/>
+                <field name="request_id"/>
                 <field name="part_order_id"/>
                 <field name="equipment_id"/>
               </group>

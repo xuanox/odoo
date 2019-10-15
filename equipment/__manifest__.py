@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo
-#    Copyright (C) 2013-2018 emsa (<http://www.electronicamedica.com>).
+#    Copyright (C) 2018-2019 emsa (<http://www.electronicamedica.com>).
 #
 ##############################################################################
 
@@ -32,6 +32,9 @@ Support following feature:
     'data': [
         'security/equipment_security.xml',
         'security/ir.model.access.csv',
+        'data/equipment_data.xml',
+        'data/stock_data.xml',
+        'data/equipment_sequence.xml',
         'views/equipment_view.xml',
         'views/equipment_brand_view.xml',
         'views/equipment_zone_view.xml',
@@ -41,9 +44,6 @@ Support following feature:
         'views/equipment_network_view.xml',
         'views/equipment_modality_view.xml',
         'views/equipment.xml',
-        'data/equipment_data.xml',
-        'data/stock_data.xml',
-        'data/equipment_sequence.xml',
     ],
     'installable': True,
     'application': True,
