@@ -86,8 +86,6 @@
 										<field name="parent_id" widget="manyone"/>
 										<field name="zone_id" widget="manyone"/>
 									</group>
-									<group name="subscription_information" string="Subscription Information">
-									</group>
 								</group>
 								<group>
 									<field name="detail_new_order" colspan="4" nolabel="1"/>
