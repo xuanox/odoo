@@ -94,6 +94,7 @@
 								</group>
 								<group string="Reject Reason" states="reject">
 			            <field name="reject_reason" colspan="4" nolabel="1"/>
+                  <field name='is_reassigned' invisible="1"/>
 			          </group>
 							</page>
               <page name="preventive" string="Preventive" attrs="{'invisible':[('maintenance_type', '!=', 'pm')]}">
