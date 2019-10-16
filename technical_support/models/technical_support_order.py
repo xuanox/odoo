@@ -87,6 +87,8 @@ class TechnicalSupportOrder(models.Model):
     order_id = fields.Many2one('technical_support.checklist.history', string='Control List')
     equipment_state_id = fields.Many2one('equipment.state', related='equipment_id.maintenance_state_id', string='Equipment State', domain=[('team','=','3')], readonly=True, store=True)
 
+    subscription_id = fields.One2many('sale.subscription.equipment', related='equipment_id.subscription_ids', string='Subscription')
+
     parts_lines = fields.One2many('technical_support.order.parts.line', 'maintenance_id', 'Planned Parts', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     assets_lines = fields.One2many('technical_support.order.assets.line', 'maintenance_id', 'Planned Tools', track_visibility='onchange', states={'done':[('readonly',True)], 'cancel':[('readonly',True)]})
     checklist_lines = fields.One2many('technical_support.order.checklist.line', 'maintenance_id', 'CheckList', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
