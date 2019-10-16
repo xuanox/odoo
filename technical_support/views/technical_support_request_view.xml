@@ -87,7 +87,6 @@
 										<field name="zone_id" widget="manyone"/>
 									</group>
 									<group name="subscription_information" string="Subscription Information">
-                    <field name="subscription_id" widget="one2many_list"/>
 									</group>
 								</group>
 								<group>

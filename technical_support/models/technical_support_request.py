@@ -82,8 +82,6 @@ class TechnicalSupportRequest(models.Model):
     parent_id = fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True, store=True, track_visibility='onchange')
     modality_id = fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True, store=True, track_visibility='onchange')
 
-    subscription_id = fields.One2many('sale.subscription.equipment', related='equipment_id.subscription_ids', string='Subscription')
-
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Request Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='pm')
 
     duration = fields.Float('Duration', help="Duration in hours and minutes.")
@@ -96,7 +94,6 @@ class TechnicalSupportRequest(models.Model):
 
     fco_code = fields.Char(string='FCO Code', track_visibility='onchange')
     fco_deadline = fields.Date(string='FCO Deadline', track_visibility='onchange', help="FCO Deadline")
-
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
