@@ -38,6 +38,7 @@ class PartLine(models.Model):
             'location_id': self.location_id.id,
             'equipment_id': self.part_id.equipment_id.id,
             'ticket_id': self.part_id.ticket_id.id,
+            'request_id': self.part_id.request_id.id,
         }
 
     @api.multi
@@ -60,6 +61,7 @@ class PartLine(models.Model):
             'part_order_id': self.part_id.id,
             'equipment_id': self.part_id.equipment_id.id,
             'ticket_id': self.part_id.ticket_id.id,
+            'request_id': self.part_id.request_id.id,
             'part_line_id': self.id,
         }
 

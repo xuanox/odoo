@@ -9,6 +9,7 @@ class Picking(models.Model):
 
     part_order_id = fields.Many2one('part.order', string='Part Order', readonly=True)
     ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', readonly=True)
+    request_id = fields.Many2one('technical_support.request', string='TSR', readonly=True)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', readonly=True, states={'draft': [('readonly', False)]})
 
     @api.multi
@@ -31,4 +32,5 @@ class StockMove(models.Model):
     part_order_id = fields.Many2one('part.order', string='Part Order', readonly=True)
     part_line_id = fields.Many2one('part.line', string='Part Line', readonly=True)
     ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', readonly=True)
+    request_id = fields.Many2one('technical_support.request', string='TSR', readonly=True)
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', readonly=True, states={'draft': [('readonly', False)]})

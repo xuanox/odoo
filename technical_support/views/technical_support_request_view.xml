@@ -141,11 +141,11 @@
               </page>
               <page name="fco" string="FCO" attrs="{'invisible':[('maintenance_type', '!=', 'fco')]}">
                 <group>
-                  <group name="" string="">
-
+                  <group name="code_fco" string='Code'>
+                    <field name="fco_code" attrs="{'required':[('maintenance_type', '=', 'fco')]}"/>
                   </group>
-                  <group name="" string="">
-
+                  <group name="deadline_fco" string='Deadline'>
+                    <field name="fco_deadline" attrs="{'required':[('maintenance_type', '=', 'fco')]}"/>
                   </group>
                 </group>
               </page>
