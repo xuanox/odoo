@@ -35,7 +35,7 @@ Required modules:
     'website': 'http://www.electronicamedica.com',
     'category': 'Productivity',
     'sequence': 0,
-    'depends': ['asset','equipment','purchase','helpdesk', 'part', 'sale_subscription'],
+    'depends': ['asset','equipment','purchase','helpdesk', 'part', 'sale_subscription', 'sale_subscription_equipment'],
     'demo': ['data/technical_support_demo.xml'],
     'data': [
         'security/technical_support_security.xml',
