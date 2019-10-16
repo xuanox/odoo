@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <odoo>
-    	<record id="technical_support_subscription_form_view_inherited" model="ir.ui.view">
+    	<record id="technical_support_request_subscription_form_view_inherited" model="ir.ui.view">
         <field name="name">technical.support.request.subscription.form.view.inherited</field>
         <field name="model">technical_support.request</field>
         <field name="inherit_id" ref="technical_support.technical_support_request_form_view"/>
@@ -17,5 +17,22 @@
                       </page>
                 </xpath>
             </field>
+        </record>
+
+        <record id="technical_support_order_subscription_form_view_inherited" model="ir.ui.view">
+          <field name="name">technical.support.order.subscription.form.view.inherited</field>
+          <field name="model">technical_support.order</field>
+          <field name="inherit_id" ref="technical_support.technical_support_order_form_view"/>
+          <field name="arch" type="xml">
+            <xpath expr="//group[@name='equipment_information']" position="after">
+              <group name="subscription_information" string="Subscription Information">
+                <field name="subscription_id" widget="one2many_list" nolabel="1">
+                  <tree>
+                    <field name="analytic_account_id" widget="many2one"/>
+                  </tree>
+                </field>
+              </group>
+            </xpath>
+          </field>
         </record>
     </odoo>
