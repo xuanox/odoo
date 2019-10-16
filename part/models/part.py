@@ -110,6 +110,8 @@ class Part(models.Model):
     fiscal_position_id = fields.Many2one('account.fiscal.position', string='Fiscal Position')
     date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
 
+    subscription_id = fields.One2many('sale.subscription.equipment', related='equipment_id.subscription_ids', string='Subscription')
+
     @api.one
     @api.depends('partner_id')
     def _compute_default_address_id(self):
