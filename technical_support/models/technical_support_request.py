@@ -97,6 +97,7 @@ class TechnicalSupportRequest(models.Model):
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Reports')
 
+    is_reassigned = fields.Boolean('Reassigned', track_visibility=True)
 
     def action_draft(self):
         self.write({'state': 'draft'})
@@ -161,6 +162,10 @@ class TechnicalSupportRequest(models.Model):
             })
         self.action_scheduled()
         return order_id.id
+
+    def action_reasign(self):
+        self.write({'is_reassigned': True})
+        return True
 
     def action_view_report(self):
         return {
