@@ -42,7 +42,7 @@
             <field name="category_ids" widget="many2many_tags" placeholder="Tags..."/>
           </div>
           <group>
-					  <group>
+					  <group name="detail" string="Detail">
               <field name="client_id" widget="many2one"/>
 							<field name="model_id" widget="many2one"/>
               <field name="brand_id" widget="many2one"/>
@@ -70,6 +70,7 @@
                 <group>
                   <field name="location"/>
                   <field name="zone_id" widget="many2one"/>
+                  <field name="vendor_id"/>
 									<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 									<field name="criticality"/>
                 </group>
@@ -84,7 +85,6 @@
 									<field name="dealer_warranty_start_date"/>
 								</group>
 								<group>
-									<field name="vendor_id"/>
 									<field name="warranty_end_date"/>
 									<field name="dealer_warranty_end_date"/>
 								</group>
