@@ -10,8 +10,8 @@
                   <field name="subscription_ids" widget="one2many_list" nolabel="1">
                     <tree>
                         <field name="analytic_account_id" widget="many2one"/>
-                        <field name="analytic_account_id.date_start" widget="date"/>
-                        <field name="analytic_account_id.date" widget="date"/>
+                        <field name="date_start" widget="date"/>
+                        <field name="date" widget="date"/>
                         <field name="stage_id" widget="many2one"/>
                     </tree>
                   </field>

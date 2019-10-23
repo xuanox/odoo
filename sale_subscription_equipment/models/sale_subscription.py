@@ -14,6 +14,8 @@ class SaleSubscriptionEquipment(models.Model):
     analytic_account_id = fields.Many2one('sale.subscription', string='Subscription')
     name = fields.Text('Description', index=True, required=True)
     client_id = fields.Many2one('res.partner', related='analytic_account_id.partner_id', store=True, readonly=False)
+    date_start = fields.Date(string='Start Date', related='analytic_account_id.date_start')
+    date = fields.Date(string='End Date', related='analytic_account_id.date')
     equipment_id = fields.Many2one('equipment.equipment', string='Equipment', required=True)
 
     @api.onchange('equipment_id')
