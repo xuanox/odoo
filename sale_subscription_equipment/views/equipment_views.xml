@@ -22,6 +22,10 @@
                    <field string="SUB" name="subscription_count" widget="statinfo"/>
                </button>
             </xpath>
+            <xpath expr="//field[@name='image_medium']" position="after">
+              <div class="badge-pill badge-warning float-right" attrs="{'invisible': [('subscription_ids.to_renew', '=', False)]}">SUB - To Renew</div>
+              <div class="badge-pill badge-info float-right" attrs="{'invisible': [('subscription_ids.in_progress', '=', False)]}">SUB - In Progress</div>
+            </xpath>
         </field>
     </record>
 </odoo>
