@@ -25,8 +25,8 @@ class TechnicalSupportRequest(models.Model):
         for ticket in self:
             self.part_line_count = request.search_count([('request_id', '=', ticket.id)])
 
-    part_ids=fields.One2many('part.order','request_id', string='Parts Request')
-    part_count = fields.Integer(compute='_part_count', string='# Parts Request')
+    part_ids=fields.One2many('part.order','request_id', string='SPR')
+    part_count = fields.Integer(compute='_part_count', string='# SPR')
     part_line_count = fields.Integer(compute='_part_line_count', string='# Parts List')
 
     def action_view_part_request(self):

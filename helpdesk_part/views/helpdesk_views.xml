@@ -17,6 +17,18 @@
                   <button name="%(action_spare_part_request)d" string="SP Request" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer"
                     context="{'default_partner_id': partner_id}"/>
                 </xpath>
+                <xpath expr="//page[@name='description']" position="after">
+                    <page name="spr" string="SPR">
+                      <group>
+                        <field name="part_ids" nolabel="1">
+                          <tree string="SPR">
+                            <field name="name"/>
+                            <field name="state"/>
+                          </tree>
+                        </field>
+                      </group>
+                    </page>
+                </xpath>
             </field>
         </record>
     </odoo>
