@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <odoo>
     	<record id="helpdesk_ticket_part_form_view_inherited" model="ir.ui.view">
-            <field name="name">Helpdesk Ticket - Part Form View Inherited</field>
+            <field name="name">Helpdesk Ticket</field>
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
