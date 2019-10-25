@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <odoo>
+<odoo>
     	<record id="helpdesk_ticket_part_form_view_inherited" model="ir.ui.view">
         <field name="name">Helpdesk Ticket</field>
         <field name="model">helpdesk.ticket</field>
@@ -16,18 +16,6 @@
           <xpath expr="//button[@name='assign_ticket_to_self']" position="after">
             <button name="%(action_spare_part_request)d" string="SP Request" type="action" class="oe_highlight" attrs="{'invisible':  [('user_id', '=', False)]}" groups="technical_support.group_technical_support_engineer" context="{'default_partner_id': partner_id}"/>
           </xpath>
-          <xpath expr="//field[@name='description']" position="after">
-            <page name="spr" string="SPR">
-              <group>
-                <field name="part_ids" nolabel="1">
-                  <tree string="SPR">
-                    <field name="name"/>
-                    <field name="state"/>
-                  </tree>
-                </field>
-              </group>
-            </page>
-          </xpath>
         </field>
       </record>
-    </odoo>
+</odoo>
