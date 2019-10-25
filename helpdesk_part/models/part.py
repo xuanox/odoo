@@ -15,6 +15,9 @@ from dateutil.relativedelta import *
 class Part(models.Model):
     _inherit = 'part.order'
 
+    def _default_ticket(self):
+        return self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
+
     ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
     incorrect_part_number_ids = fields.Many2many('part.line', string='Incorrect Part Number')
     detail_incorrect_part_number= fields.Text('Detail')
@@ -38,8 +41,12 @@ class Part(models.Model):
 class PartLine(models.Model):
     _inherit = 'part.line'
 
+    def _default_ticket(self):
+        return self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
+
     ticket_id = fields.Many2one('helpdesk.ticket', default=_default_ticket, string='Ticket', track_visibility='onchange')
     order_ids = fields.Many2many('technical_support.order', 'technical_support_order_part_line_rel', 'part_line_id', 'technical_support_order_id', string="Orders", copy=False, readonly=True)
+
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -48,4 +55,5 @@ class PartLine(models.Model):
             vals['ticket_id'] = move.ticket_id.id
 
         lines = super(PartLine, self).create(vals_list)
+
         return lines
