@@ -53,7 +53,5 @@ class PartLine(models.Model):
         for vals in vals_list:
             move = self.env['part.order'].browse(vals['part_id'])
             vals['ticket_id'] = move.ticket_id.id
-
         lines = super(PartLine, self).create(vals_list)
-
         return lines
