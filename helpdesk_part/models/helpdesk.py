@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 from odoo import api, fields, models, SUPERUSER_ID, _, exceptions
 import time
 import datetime as dt
@@ -11,6 +10,7 @@ from dateutil import relativedelta
 from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from dateutil.relativedelta import *
+
 
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
@@ -25,8 +25,8 @@ class HelpdeskTicket(models.Model):
         for ticket in self:
             self.part_line_count = request.search_count([('ticket_id', '=', ticket.id)])
 
-    part_ids=fields.One2many('part.order','ticket_id', string='Parts Request')
-    part_count = fields.Integer(compute='_part_count', string='# Parts Request')
+    part_ids=fields.One2many('part.order','ticket_id', string='SPR')
+    part_count = fields.Integer(compute='_part_count', string='# SPR')
     part_line_count = fields.Integer(compute='_part_line_count', string='# Parts List')
 
     def action_view_part_request(self):

@@ -93,15 +93,12 @@
                     </group>
                     <notebook>
 												<page string="Information" name="information">
-														<separator string="Equipo"/>
 														<group>
-																<group>
+																<group name="equipment_information" string="Equipment Information">
 																	<field name="equipment_number"/>
 																	<field name="brand_id" widget="manyone"/>
 																	<field name="model_id" widget="manyone"/>
 																	<field name="serial"/>
-																</group>
-																<group>
 																	<field name="modality_id" widget="manyone"/>
 																	<field name="parent_id" widget="manyone"/>
 																	<field name="zone_id" widget="manyone"/>
@@ -110,17 +107,16 @@
 																	<field name="request_id" widget="many2one" groups="technical_support.group_technical_support_manager"/>
 																</group>
 													  </group>
-														<separator string="Cliente"/>
-														<group>
-																<group>
-
-																</group>
-																<group>
-
-																</group>
-													  </group>
 												</page>
-                        <page string="Tools">
+                        <page string="Documentation" name="documentation">
+													<separator string="Problem Found"/>
+													<field name="operations_description" placeholder="Problem found..."/>
+													<separator string="Work Done"/>
+													<field name="labor_description" placeholder="Work Done Specify ..."/>
+                          <separator string="Observation"/>
+                          <field name="documentation_description" placeholder="Observation ..."/>
+                        </page>
+												<page string="Tools">
 													<group string="Tools">
 														<field name="assets_lines" nolabel="1">
 																			<tree editable="bottom">
@@ -130,10 +126,10 @@
 																			</tree>
 																	</field>
 															</group>
-                                <separator string="Description for Tools"/>
-                                <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..."/>
-                        </page>
-                        <page string="Operations">
+																<separator string="Description for Tools"/>
+																<field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..."/>
+												</page>
+												<page string="CheckList">
 															<field name="checklist_lines" nolabel="1">
 																<tree string="Checklist" editable="bottom">
 																	<field name="question_id"/>
@@ -141,15 +137,7 @@
 																	<field name="name"/>
 																</tree>
 															</field>
-                        </page>
-                        <page string="Documentation" name="documentation">
-													<separator string="Problem Found"/>
-													<field name="operations_description" placeholder="Problem found..."/>
-													<separator string="Work Done"/>
-													<field name="labor_description" placeholder="Work Done Specify ..."/>
-                          <separator string="Observation"/>
-                          <field name="documentation_description" placeholder="Observation ..."/>
-                        </page>
+												</page>
 												<page string="Users" name="user">
 															<field name="signature_lines" nolabel="1">
 																<tree string="Users" editable="bottom">

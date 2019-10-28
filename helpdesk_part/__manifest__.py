@@ -13,7 +13,7 @@ This module adds a shortcut the Spare Part Request in Helpdesk.
 This shortcut allows you to generate a Spare Part Request.
 
     """,
-    'depends': ['helpdesk', 'technical_support', 'equipment', 'part'],
+    'depends': ['helpdesk', 'technical_support', 'equipment', 'part', 'helpdesk_technical_support'],
     'data': [
         'wizard/spare_part_request_view.xml',
         'wizard/incorrect_part_number_view.xml',

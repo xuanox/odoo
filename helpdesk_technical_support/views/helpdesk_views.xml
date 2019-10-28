@@ -36,7 +36,7 @@
         </xpath>
         <xpath expr="//field[@name='description']" position="after">
           <notebook colspan="4">
-          <page string="Equipo">
+          <page name="info" string="Equipo">
             <group>
               <group>
                 <field name="modality_id" widget="manyone"/>

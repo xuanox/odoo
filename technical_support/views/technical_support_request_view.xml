@@ -43,6 +43,7 @@
         	<header>
 						<button name="%(action_pending_client)d" states="draft,waiting_for_part,scheduled,run" string="Pending by the Customer" class="oe_highlight" type="action" groups="technical_support.group_technical_support_engineer"/>
 						<button name="%(action_order_assign)d" states="draft,waiting_for_customer,waiting_for_part,scheduled,run,done" string="New TSO" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
+            <button name="%(action_tsr_reasign)d" states="waiting_for_customer,waiting_for_part,scheduled,run" string="Reasign TSR" type="action" class="oe_highlight" groups="technical_support.group_technical_support_engineer"/>
             <button name="%(action_request_reject)d" states="draft,waiting_for_customer" string="Reject Request" type="action" groups="technical_support.group_technical_support_engineer"/>
 						<button name="action_cancel" states="draft" string="Cancel" type="object"/>
 						<button name="action_draft" states="scheduled,run" string="Draft" type="object" groups="technical_support.group_technical_support_engineer"/>
@@ -54,6 +55,7 @@
 	            	<field string="TSO" name="technical_support_count" widget="statinfo"/>
 	          	</button>
 						</div>
+            <div class="badge-pill badge-info float-right" attrs="{'invisible': ['|', ('is_reassigned', '=', False)]}">Reassigned</div>
             <div class="oe_title">
               <h1># <field name="name" readonly="1"/></h1>
               <h5><field name="subject" placeholder="Subject ..."/></h5>
@@ -86,15 +88,13 @@
 										<field name="parent_id" widget="manyone"/>
 										<field name="zone_id" widget="manyone"/>
 									</group>
-									<group name="subscription_information" string="Subscription Information">
-
-									</group>
 								</group>
 								<group>
 									<field name="detail_new_order" colspan="4" nolabel="1"/>
 								</group>
 								<group string="Reject Reason" states="reject">
 			            <field name="reject_reason" colspan="4" nolabel="1"/>
+                  <field name='is_reassigned' invisible="1"/>
 			          </group>
 							</page>
               <page name="preventive" string="Preventive" attrs="{'invisible':[('maintenance_type', '!=', 'pm')]}">
