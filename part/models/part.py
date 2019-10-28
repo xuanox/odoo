@@ -110,13 +110,13 @@ class Part(models.Model):
     fiscal_position_id = fields.Many2one('account.fiscal.position', string='Fiscal Position')
     date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
 
-    @api.multi
+
     @api.depends('partner_id')
     def _compute_default_address_id(self):
         if self.partner_id:
             self.default_address_id = self.partner_id.address_get(['contact'])['contact']
 
-    @api.multi
+
     @api.depends('equipment_id')
     def _compute_default_equipment_id(self):
         if self.equipment_id:
