@@ -51,7 +51,7 @@ class ContinuingEducationDashboard(models.Model):
         ('otro', 'Otros')
         ]
 
-    service_type = fields.Selection(SERVICE_TYPE_SELECTION, 'Tipo de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='entre', track_visibility='onchange')
+    service_type = fields.Selection(SERVICE_TYPE_SELECTION, 'Tipo de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='capac', track_visibility='onchange')
     state=fields.Selection(STATE_SELECTION, 'Estado', readonly=False, track_visibility='onchange', help="", default='draft', copy=False)
     name=fields.Char(string="Solicitud", required=False)
     user_id=fields.Many2one('res.users', string='Responsable', index=True, track_visibility='onchange', default=lambda self: self._uid)
