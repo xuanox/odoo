@@ -75,7 +75,7 @@
                       </group>
 
                       <group name="indications" string="Indicaciones">
-                        <field name="nivel_type" attrs="{'invisible':[('service_type', '!=', aplic)]}"/>
+                        <field name="nivel_type" attrs="{'invisible':[('service_type', '!=', 'aplic')]}"/>
                         <field name="department"/>
                         <field name='description'/>
                         <field name="priority" eval="1"  widget="priority"/>
