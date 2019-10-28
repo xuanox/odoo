@@ -34,8 +34,7 @@
             <field string="Reports" name="technical_support_count" widget="statinfo"/>
           </button>
         </xpath>
-        <xpath expr="//field[@name='description']" position="after">
-          <notebook colspan="4">
+        <xpath expr="//notebook" position="inside">
           <page string="Equipo">
             <group>
               <group>
@@ -79,7 +78,6 @@
           <page string="Team" attrs="{'invisible': [('user_id','=',True)]}">
             <separator string="Ticket and TSO"/>
           </page>
-          </notebook>
         </xpath>
       </field>
     </record>

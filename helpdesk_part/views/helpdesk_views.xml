@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    	<record id="helpdesk_ticket_part_form_view_inherited" model="ir.ui.view">
-        <field name="name">Helpdesk Ticket</field>
-        <field name="model">helpdesk.ticket</field>
-        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
-        <field name="arch" type="xml">
-          <xpath expr="//field[@name='description']" position="after">
-            <notebook>
-              <page name="spr" string="SPR">
-                <group>
-                  <field name="part_ids" nolabel="1">
-                    <tree string="SPR">
-                      <field name="name"/>
-                      <field name="state"/>
-                    </tree>
-                  </field>
-                </group>
-              </page>
-            </notebook>
-          </xpath>
-        </field>
-      </record>
+  <record id="helpdesk_ticket_part_form_view_inherited" model="ir.ui.view">
+    <field name="name">Helpdesk Ticket</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='description']" position="after">
+        <notebook>
+          <page name="spr" string="SPR">
+            <group>
+              <field name="part_ids" nolabel="1">
+                <tree string="SPR">
+                  <field name="name"/>
+                  <field name="state"/>
+                </tree>
+              </field>
+            </group>
+          </page>
+        </notebook>
+      </xpath>
+    </field>
+  </record>
 </odoo>
