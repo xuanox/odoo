@@ -16,7 +16,7 @@
 	# Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
 	# for the full list
 	'category': 'other',
-	'version': '0.3',
+	'version': '1',
 
 	# any module necessary for this one to work correctly
 	'depends': ['base', 'account'],
@@ -25,7 +25,7 @@
 	'data': [
 		# 'security/ir.model.access.csv',
 		'security/account_invoice_groups.xml'
-		'views/account_invoice.xml',
+		'views/account_invoice_view.xml',
 	],
 
 	# only loaded in demonstration mode
