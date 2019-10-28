@@ -81,6 +81,16 @@
                         <field name="priority" eval="1"  widget="priority"/>
                       </group>
                   </group>
+                  
+                  <page string="Documentation" name="documentation">
+                    <separator string="Problem Found"/>
+                    <field name="operations_description" placeholder="Problem found..."/>
+                    <separator string="Work Done"/>
+                    <field name="labor_description" placeholder="Work Done Specify ..."/>
+                    <separator string="Observation"/>
+                    <field name="documentation_description" placeholder="Observation ..."/>
+                  </page>
+
               </sheet>
               <div class="oe_chatter">
                   <field name="message_follower_ids" widget="mail_followers"/>
