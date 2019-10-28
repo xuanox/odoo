@@ -6,7 +6,8 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='info']" position="after">
+            <xpath expr="//field[@name='description']" position="after">
+                <notebook colspan="4">
                     <page name="history" string="History">
                         <field name="stage_ids" attrs="{'readonly': 1}">
                             <tree default_order="id desc">
@@ -20,6 +21,7 @@
                             </tree>
                         </field>
                     </page>
+                </notebook>
             </xpath>
         </field>
     </record>
