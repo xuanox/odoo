@@ -55,7 +55,7 @@ class ContinuingEducationDashboard(models.Model):
         ]
 
     NIVEL_TYPE_SELECTION = [
-            ('basic', 'Aplicaciones'),
+            ('basic', 'Basico'),
             ('advanced', 'Avanzado')
             ]
 
