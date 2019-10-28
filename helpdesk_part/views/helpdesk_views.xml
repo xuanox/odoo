@@ -5,8 +5,7 @@
     <field name="model">helpdesk.ticket</field>
     <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
     <field name="arch" type="xml">
-      <xpath expr="//field[@name='description']" position="after">
-        <notebook>
+      <xpath expr="//notebook" position="inside">
           <page name="spr" string="SPR">
             <group>
               <field name="part_ids" nolabel="1">
@@ -17,7 +16,6 @@
               </field>
             </group>
           </page>
-        </notebook>
       </xpath>
     </field>
   </record>
