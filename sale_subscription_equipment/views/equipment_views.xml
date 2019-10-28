@@ -5,21 +5,21 @@
         <field name="model">equipment.equipment</field>
         <field name="inherit_id" ref="equipment.equipments_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='agreement']" position="inside">
-                <group name="subscription" string="Subscription">
+            <xpath expr="//page[@name='info']" position="after">
+              <page string="Subscriptions">
+                <group>
                   <field name="subscription_ids" widget="one2many_list" nolabel="1">
-                    <tree>
+                    <tree editable="bottom">
                         <field name="analytic_account_id" widget="many2one"/>
-                        <field name="date_start" widget="date"/>
-                        <field name="date" widget="date"/>
-                        <field name="stage_id" widget="many2one"/>
                     </tree>
                   </field>
                 </group>
+              </page>
             </xpath>
-            <xpath expr="//button[@name='toggle_active']" position="before">
-               <button class="oe_inline oe_stat_button" name="action_view_maintenance" type="object" icon="fa-usd" groups="equipment.group_equipment_backoffice">
-                   <field string="SUB" name="subscription_count" widget="statinfo"/>
+            <xpath expr="//div[@name='buttons']" position="inside">
+               <button class="oe_inline oe_stat_button" name="action_view_maintenance" type="object"
+                   icon="fa-cogs">
+                   <field string="Subscriptions" name="subscription_count" widget="statinfo"/>
                </button>
             </xpath>
         </field>
