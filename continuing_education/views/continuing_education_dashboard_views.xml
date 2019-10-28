@@ -3,11 +3,11 @@
     <data>
 
   <!-- Vista : tree / vista principal  -->
-      <record id="messenger_service_dashboard_view_tree" model="ir.ui.view">
-            <field name="name">Messenger Service Dashboard View Tree</field>
-            <field name="model">messenger.service.dashboard</field>
+      <record id="continuing_education_dashboard_view_tree" model="ir.ui.view">
+            <field name="name">Continuing Education Dashboard View Tree</field>
+            <field name="model">continuing.education.dashboard</field>
             <field name="arch" type="xml">
-                <tree string="Messenger Service Dashboard">
+                <tree string="Continuing Education Dashboard">
                     <field name="name"/>
                     <field name="client_id"/>
                     <field name="user_id"/>
@@ -26,24 +26,24 @@
             </field>
       </record>
 <!-- Vista : FORM / formulario principal -->
-      <record id="Messenger_service_form_view" model="ir.ui.view">
-          <field name="name">Messenger_service.form</field>
-          <field name="model">messenger.service.dashboard</field>
+      <record id="continuing_education_form_view" model="ir.ui.view">
+          <field name="name">continuing_education.form</field>
+          <field name="model">continuing.education.dashboard</field>
           <field name="arch" type="xml">
-              <form string="Messenger Service Form">
+              <form string="Continuing Education Form">
                 <header>
-                    <button name="action_assigned" states="draft" string="Asignar" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_manager"/>
+                    <button name="action_assigned" states="draft" string="Asignar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
-                    <button name="action_replanned" states="asign,run" string="Reagendar" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_manager"/>
+                    <button name="action_replanned" states="asign,run" string="Reagendar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
-                    <button name="action_reassigned" states="asign,run" string="Reasignar" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_manager"/>
+                    <button name="action_reassigned" states="asign,run" string="Reasignar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
-                    <button name="action_done" states="run" string="Realizado" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_manager"/>
+                    <button name="action_done" states="run" string="Realizado" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
-                    <button name="action_run" states="asign" string="En Proceso" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_manager"/>
+                    <button name="action_run" states="asign" string="En Proceso" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
-                    <button name="action_canceled" states="draft" string="Cancelar" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_user"/>
-                    <button name="action_canceled" states="asign,run" string="Cancelar" type="object" class="oe_highlight" groups="messenger_service.group_messenger_service_manager"/>
+                    <button name="action_canceled" states="draft" string="Cancelar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_user"/>
+                    <button name="action_canceled" states="asign,run" string="Cancelar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
 
                     <field name="state" widget="statusbar"/>
@@ -63,7 +63,7 @@
                   <group>
                       <group name="solicitud" string="Solicitud">
                           <field name="user_id"/>
-                          <field name="assigned_id" groups="messenger_service.group_messenger_service_manager"/>
+                          <field name="assigned_id" groups="continuing_education.group_continuing_education_manager"/>
                           <field name="client_id"/>
                           <field name="service_type"/>
                       </group>
@@ -91,9 +91,9 @@
           </field>
       </record>
 <!-- Vista : CALENDAR -->
-      <record model="ir.ui.view" id="view_messenger_service_calendar">
-          <field name="name">messenger.service.calendar</field>
-          <field name="model">messenger.service.dashboard</field>
+      <record model="ir.ui.view" id="view_continuing_education_calendar">
+          <field name="name">continuing.education.calendar</field>
+          <field name="model">continuing.education.dashboard</field>
           <field eval="2" name="priority"/>
           <field name="arch" type="xml">
               <calendar date_start="date_planned" date_stop="date_end" string="Event Organization" color="service_type">
@@ -105,9 +105,9 @@
           </field>
       </record>
 <!-- Vista : KANBAN -->
-      <record id="messenger_service_view_kanban" model="ir.ui.view">
-      <field name="name">messenger.service.view.kanban</field>
-      <field name="model">messenger.service.dashboard</field>
+      <record id="continuing_education_view_kanban" model="ir.ui.view">
+      <field name="name">continuing.education.view.kanban</field>
+      <field name="model">continuing.education.dashboard</field>
       <field name="arch" type="xml">
           <kanban class="o_kanban_small_column" default_group_by="state">
               <field name="state"/>
@@ -129,9 +129,9 @@
       </record>
 
         <!-- stages : actions -->
-      <record id="messenger_service_dashboard_view_action" model="ir.actions.act_window">
+      <record id="continuing_education_dashboard_view_action" model="ir.actions.act_window">
             <field name="name">Solicitud Servicio de Mensajería</field>
-            <field name="res_model">messenger.service.dashboard</field>
+            <field name="res_model">continuing.education.dashboard</field>
             <field name="view_mode">tree,form,calendar,kanban</field>
             <field name="view_type">form</field>
             <field name="help" type="html">

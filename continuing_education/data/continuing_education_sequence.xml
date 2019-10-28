@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-      <!-- Sequences for Messenger Service Request -->
+      <!-- Sequences for Continuing Education Request -->
       <record id="continuing_education_request" model="ir.sequence">
-        <field name="name">Messenger Service Request</field>
+        <field name="name">Continuing Education Request</field>
         <field name="code">continuing_education.request</field>
         <field name="prefix">MSR</field>
         <field name="padding">5</field>
