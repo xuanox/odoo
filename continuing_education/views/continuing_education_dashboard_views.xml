@@ -89,11 +89,6 @@
                     <separator string="Observation"/>
                     <field name="documentation_description" placeholder="Observation ..."/>
                   </page>
-                  <page string="Users" name="user">
-                          <tree string="Users" editable="bottom">
-                            <field name="user_id"/>
-                          </tree>
-                  </page>
               </sheet>
               <div class="oe_chatter">
                   <field name="message_follower_ids" widget="mail_followers"/>
