@@ -110,26 +110,26 @@ class Part(models.Model):
     fiscal_position_id = fields.Many2one('account.fiscal.position', string='Fiscal Position')
     date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={'draft': [('readonly', False)], 'confirmed': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
 
-    @api.multi
+    @api.one
     @api.depends('partner_id')
     def _compute_default_address_id(self):
         if self.partner_id:
             self.default_address_id = self.partner_id.address_get(['contact'])['contact']
 
-    @api.multi
+    @api.one
     @api.depends('equipment_id')
     def _compute_default_equipment_id(self):
         if self.equipment_id:
             self.default_equipment_id = self.equipment_id
 
-    @api.multi
+    @api.one
     @api.depends('operations.price_subtotal', 'invoice_method', 'fees_lines.price_subtotal', 'pricelist_id.currency_id')
     def _amount_untaxed(self):
         total = sum(operation.price_subtotal for operation in self.operations)
         total += sum(fee.price_subtotal for fee in self.fees_lines)
         self.amount_untaxed = self.pricelist_id.currency_id.round(total)
 
-    @api.multi
+    @api.one
     @api.depends('operations.price_unit', 'operations.product_uom_qty', 'operations.product_id',
                  'fees_lines.price_unit', 'fees_lines.product_uom_qty', 'fees_lines.product_id',
                  'pricelist_id.currency_id', 'partner_id')
@@ -147,7 +147,7 @@ class Part(models.Model):
                     val += c['amount']
         self.amount_tax = val
 
-    @api.multi
+    @api.one
     @api.depends('amount_untaxed', 'amount_tax')
     def _amount_total(self):
         self.amount_total = self.pricelist_id.currency_id.round(self.amount_untaxed + self.amount_tax)
