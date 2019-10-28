@@ -19,6 +19,41 @@
                       </field>
                   </div>
                 </page>
+                <page name="terms" string="Terminos de Contrato">
+                  <group>
+                    <group name="details" string="Detalles del contrato">
+                      <field name="contract_state"/>
+                      <field name="parts_true"/>
+                      <field name="parts_ex"/>
+                      <field name="desc_check"/>
+                      <label for="desc_parts" attrs="{'invisible':[('desc_check', '!=', True)]}"/>
+                      <div><field name="desc_parts" attrs="{'invisible':[('desc_check', '!=', True)], 'required':['|', ('desc_check', '!=', True)]}"/><span class="ml8" attrs="{'invisible':[('desc_check', '!=', True)]}">%</span></div>
+                    </group>
+                    <group>
+                    </group>
+                  </group>
+                  <group>
+                    <group name="answer" string="Tiempo de respuesta">
+                      <label for="answer_time"/>
+                      <div><field name="answer_time" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>
+                    </group>
+                    <group name="solution" string="Tiempo de Solución">
+                      <label for="solution_time"/>
+                      <div><field name="solution_time"/></div>
+                    </group>
+                  </group>
+                  <group>
+                    <group name="recarg" string="Recargos">
+                      <label for="late_payment"/>
+                      <div><field name="late_payment" placeholder="en %"/><span class="ml8">%</span></div>
+                      <label for="surcharge_reprog"/>
+                      <div><field name="surcharge_reprog"/><span class="ml8">$</span></div>
+                    </group>
+                    <group name="calendar" string="Horario de Atención">
+                      <field name="resource_calendar_id"/>
+                    </group>
+                  </group>
+                </page>
             </xpath>
         </field>
     </record>
