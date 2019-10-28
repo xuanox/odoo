@@ -17,6 +17,7 @@ class Part(models.Model):
 
     request_id = fields.Many2one('technical_support.request', string='Request', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
 
+
 class PartLine(models.Model):
     _inherit = 'part.line'
 
