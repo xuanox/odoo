@@ -20,7 +20,7 @@
                   </div>
                 </page>
                 <page name="terms" string="Terminos de Contrato">
-                  <group name="details" string="Detalles del contrato">
+                  <group>
                     <group name="details" string="Detalles del contrato">
                       <field name="contract_state"/>
                       <field name="parts_true"/>
@@ -49,8 +49,7 @@
                       <label for="surcharge_reprog"/>
                       <div><field name="surcharge_reprog"/><span class="ml8">$</span></div>
                     </group>
-                    <group>
-                      <label for="resource_calendar_id"/>
+                    <group name="calendar" string="Horario de Atención">
                       <field name="resource_calendar_id"/>
                     </group>
                   </group>
