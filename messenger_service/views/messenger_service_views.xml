@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <menuitem
+      id="messenger_service_menu"
+      name="Messenger Service"
+      groups="group_messenger_service_user"
+      web_icon="messenger_service,static/description/icon.png"/>
+
+  <menuitem
+    id="messenger_service_dashboard"
+    action="messenger_service_dashboard_view_action"
+    sequence="1"
+    parent="messenger_service_menu"
+    name="Dashboard"/>
+
+    <menuitem
+      id="messenger_service_ticket"
+      action="messenger_service_dashboard_view_action"
+      sequence="2"
+      parent="messenger_service_menu"
+      name="Solicitudes"/>
+
+      <menuitem
+        id="messenger_service_statistics"
+        action="messenger_service_dashboard_view_action"
+        sequence="3"
+        parent="messenger_service_menu"
+        name="Estadísticas"/>
+
+        <menuitem
+          id="messenger_service_configuration"
+          action="messenger_service_dashboard_view_action"
+          sequence="4"
+          parent="messenger_service_menu"
+          name="Configuración"/>
+
+</odoo>
