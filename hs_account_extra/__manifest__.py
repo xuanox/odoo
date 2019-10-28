@@ -25,7 +25,7 @@
 
 	# always loaded
 	'data': [
-		'security/account_invoice_groups.xml'
+		'security/account_invoice_groups.xml',
 		'views/account_invoice_view.xml',
 	],
 
