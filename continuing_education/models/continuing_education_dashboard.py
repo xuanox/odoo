@@ -44,15 +44,14 @@ class ContinuingEducationDashboard(models.Model):
         ('cancel', 'Cancelado')
     ]
     SERVICE_TYPE_SELECTION = [
-        ('entre', 'Entrega'),
-        ('retir', 'Retiro'),
-        ('busq', 'Búsqueda de Firma'),
-        ('licit', 'Licitación'),
-        ('equip', 'Entrega de Equipo'),
+        ('capac', 'Capacitación'),
+        ('aplic', 'Aplicacionista'),
+        ('service', 'Servicio Tecnico'),
+        ('semi', 'Seminario'),
         ('otro', 'Otros')
         ]
 
-    service_type = fields.Selection(SERVICE_TYPE_SELECTION, 'Tipo de mensajería', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='entre', track_visibility='onchange')
+    service_type = fields.Selection(SERVICE_TYPE_SELECTION, 'Tipo de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='entre', track_visibility='onchange')
     state=fields.Selection(STATE_SELECTION, 'Estado', readonly=False, track_visibility='onchange', help="", default='draft', copy=False)
     name=fields.Char(string="Solicitud", required=False)
     user_id=fields.Many2one('res.users', string='Responsable', index=True, track_visibility='onchange', default=lambda self: self._uid)
@@ -62,8 +61,8 @@ class ContinuingEducationDashboard(models.Model):
     direction=fields.Text('Dirección destino', required=True)
     department=fields.Char(string="Departamento Destino", required=True)
     company_id= fields.Many2one('res.company', 'Company', required=True, index=True, default=lambda self: self.env.user.company_id.id)#
-    date_planned=fields.Datetime('Fecha de Entrega', track_visibility='onchange')
-    date_end = fields.Datetime(string='Fecha límite', required=True,track_visibility='onchange', states={'done': [('readonly', True)]})
+    date_planned=fields.Datetime('Fecha de Inicio', track_visibility='onchange')
+    date_end = fields.Datetime(string='Fecha de Terminación', required=True,track_visibility='onchange', states={'done': [('readonly', True)]})
     create_date=fields.Datetime('Fecha de creación', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     category_ids = fields.Many2many('continuing.education.tags', id1='equipment_id', id2='category_id', string='Etiquetas')
     priority = fields.Selection(TICKET_PRIORITY, string='Prioridad', default='0')
