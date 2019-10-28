@@ -21,7 +21,7 @@
 	'version': '1.00',
 
 	# any module necessary for this one to work correctly
-	'depends': ['base', 'account'],
+	'depends': ['base', 'account', 'account_cancel'],
 
 	# always loaded
 	'data': [
