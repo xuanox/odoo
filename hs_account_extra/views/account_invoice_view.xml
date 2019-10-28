@@ -14,7 +14,7 @@
 				
 
 				<xpath expr="//button[@name='action_invoice_cancel']" position="attributes">
-					<attribute name="groups">hs_account_extra.ButtonVendorBillsCancel</attribute>
+					<attribute name="groups">ButtonVendorBillsCancel</attribute>
 				</xpath>
 			</field>
 		</record>
