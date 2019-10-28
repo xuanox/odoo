@@ -35,6 +35,7 @@
           </button>
         </xpath>
         <xpath expr="//notebook" position="inside">
+          <notebook colspan="4">
           <page string="Equipo">
             <group>
               <group>
@@ -78,6 +79,7 @@
           <page string="Team" attrs="{'invisible': [('user_id','=',True)]}">
             <separator string="Ticket and TSO"/>
           </page>
+          </notebook>
         </xpath>
       </field>
     </record>
