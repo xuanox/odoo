@@ -49,6 +49,12 @@
                     <field name="state" widget="statusbar"/>
                 </header>-->
                   <sheet>
+                <!--    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Name"/>
+                        <h1>
+                            <field name="name" placeholder="Asunto"/>
+                        </h1>
+                  </div>-->
                     <div class="oe_title">
                           <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
                   </div>
@@ -75,10 +81,6 @@
                         <field name="priority" eval="1"  widget="priority"/>
                       </group>
                   </group>
-
-                  <page string="Documentation" name="documentation">
-                  </page>
-
               </sheet>
               <div class="oe_chatter">
                   <field name="message_follower_ids" widget="mail_followers"/>
