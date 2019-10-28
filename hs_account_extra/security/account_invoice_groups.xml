@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data noupdate="1">
+		<!-- Add you code here -->
+		
+		<!--record id="group_user" model="res.groups">
+			<field name="name">User</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+			<field name="users" eval="[(4, ref('base.user_root'))]"/>
+			<field name="category_id" ref="user_access_rights_demo.module_management"/>
+		</record-->
+ 
+		<record id="ButtonVendorBillsCancel" model="res.groups">
+			<field name="name">Cancelar Facturas A Proveedores</field>
+			<field name="implied_ids" eval="[(4, ref('account.group_account_invoice'))]"/>
+			<field name="category_id" ref="base.module_category_accounting_and_finance"/>
+		</record>
+
+	</data>
+</odoo>

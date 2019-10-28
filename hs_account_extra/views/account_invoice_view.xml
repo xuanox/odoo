@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+	<data>
+		<!-- Add you code here -->
+		
+
+		<!-- model.name inherit form view -->
+		<record id="invoice_cancel_inherit" model="ir.ui.view">
+			<field name="name">invoice.cancel.inherit</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account_cancel.invoice_supplier_cancel_form_inherit"/>
+			<field name="arch" type="xml">
+				<!-- Add your xpath here -->
+				
+
+				<xpath expr="//button[@name='action_invoice_cancel']" position="attributes">
+					<attribute name="groups">hs_account_extra.ButtonVendorBillsCancel</attribute>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>
