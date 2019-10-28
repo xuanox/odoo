@@ -256,7 +256,7 @@
 	</record>
 
   <!-- Equipment Search  -->
-  <record model="ir.ui.view" id="equipments_search">
+  <record id="equipments_search" model="ir.ui.view">
     <field name="name">Equipment Search</field>
     <field name="model">equipment.equipment</field>
     <field name="arch" type="xml">
