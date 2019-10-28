@@ -36,7 +36,7 @@
         </xpath>
         <xpath expr="//field[@name='description']" position="after">
           <notebook colspan="4">
-          <page name="info" string="Equipo">
+          <page name="info" string="More Details">
             <group>
               <group>
                 <field name="modality_id" widget="manyone"/>
@@ -61,8 +61,7 @@
               </group>
             </group>
           </page>
-
-          <page string="Detail">
+          <page name="detail" string="Info">
             <group>
               <group>
                 <field name="detail_reason"/>
@@ -75,9 +74,6 @@
                 <field name="total_time"/>
               </group>
             </group>
-          </page>
-          <page string="Team" attrs="{'invisible': [('user_id','=',True)]}">
-            <separator string="Ticket and TSO"/>
           </page>
           </notebook>
         </xpath>
