@@ -17,11 +17,6 @@ class Part(models.Model):
 
     request_id = fields.Many2one('technical_support.request', string='Request', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
 
-    @api.onchange('request_id')
-    def onchange_request(self):
-        self.equipment_id = self.request_id.equipment_id
-        self.partner_id = self.request_id.client_id
-
 class PartLine(models.Model):
     _inherit = 'part.line'
 

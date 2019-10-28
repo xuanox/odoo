@@ -24,11 +24,6 @@ class Part(models.Model):
     incorrect_part_number_ids = fields.Many2many('part.line', string='Incorrect Part Number')
     detail_incorrect_part_number= fields.Text('Detail')
 
-    @api.onchange('ticket_id')
-    def onchange_ticket(self):
-        self.partner_id = self.rel_client_id
-        self.equipment_id = self.rel_equipment_id
-
     def action_incorrect_part_number_ids(self):
         self.write({'state': 'incorrect_part_number'})
         return True
