@@ -26,7 +26,7 @@ from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
 
-class MessengerServiceStage(models.Model):
+class ContinuingEducationStage(models.Model):
     _name = 'continuing.education.stage'
     _description = 'Continuing Education Stage'
     _order = 'sequence, id'
@@ -36,14 +36,14 @@ class MessengerServiceStage(models.Model):
     fold = fields.Boolean('Folded in Continuing Education Pipe')
     done = fields.Boolean('Request Done')
 
-class MessengerServiceType(models.Model):
+class ContinuingEducationType(models.Model):
     _name = 'continuing.education.type'
     _description = ' Continuing Education Type'
     _order = 'id'
 
     name = fields.Char(string="Type", required=True, translate=True)
 
-class MessengerService(models.Model):
+class ContinuingEducation(models.Model):
     _name = 'continuing.education'
     _description = 'Continuing Education'
     _order = 'id'

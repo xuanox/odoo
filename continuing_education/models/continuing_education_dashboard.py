@@ -30,7 +30,7 @@ class continuing_education_tags(models.Model):
    equipment_ids = fields.Many2many('continuing.education.dashboard', id1='category_id', id2='equipment_id', string='Equipments')
 
 
-class MessengerServiceDashboard(models.Model):
+class ContinuingEducationDashboard(models.Model):
     _name = 'continuing.education.dashboard'
     _description = 'Continuing Education Dashboard'
     _order = 'name'
@@ -97,4 +97,4 @@ class MessengerServiceDashboard(models.Model):
     def create(self, vals):
         if vals.get('name','/')=='/':
             vals['name'] = self.env['ir.sequence'].next_by_code('continuing_education.request') or '/'
-        return super(MessengerServiceDashboard, self).create(vals)
+        return super(ContinuingEducationDashboard, self).create(vals)
