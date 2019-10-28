@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-	'name': "hs_emsa_account",
+	'name': "hs_account_extra",
 
 	'summary': """
 		Configuraciones extra a accounting """,
