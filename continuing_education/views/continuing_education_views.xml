@@ -3,7 +3,7 @@
 
   <menuitem
       id="continuing_education_menu"
-      name="Continuing Education"
+      name="Education"
       groups="group_continuing_education_user"
       web_icon="continuing_education,static/description/icon.png"/>
 
