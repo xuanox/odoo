@@ -24,8 +24,8 @@ class Part(models.Model):
 
     @api.onchange('ticket_id')
     def onchange_ticket(self):
-        self.equipment_id = self.ticket_id.equipment_id
         self.partner_id = self.ticket_id.client_id
+        self.equipment_id = self.ticket_id.equipment_id
 
     def action_incorrect_part_number_ids(self):
         self.write({'state': 'incorrect_part_number'})
