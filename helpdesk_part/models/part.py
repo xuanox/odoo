@@ -18,7 +18,7 @@ class Part(models.Model):
     def _default_ticket(self):
         return self.env['helpdesk.ticket'].browse(self._context.get('active_id'))
 
-    ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
+    ticket_id = fields.Many2one('helpdesk.ticket', default=_default_ticket, string='Ticket', track_visibility='onchange', readonly=True, states={'draft':[('readonly',False)]})
     rel_equipment_id=fields.Many2one('equipment.equipment', related='ticket_id.equipment_id', string='Rel Equipment')
     rel_client_id = fields.Many2one('res.partner', related='ticket_id.client_id', string='Rel Customer')
     incorrect_part_number_ids = fields.Many2many('part.line', string='Incorrect Part Number')
