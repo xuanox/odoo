@@ -122,14 +122,14 @@ class Part(models.Model):
         if self.equipment_id:
             self.default_equipment_id = self.equipment_id
 
-    @api.one
+    @api.multi
     @api.depends('operations.price_subtotal', 'invoice_method', 'fees_lines.price_subtotal', 'pricelist_id.currency_id')
     def _amount_untaxed(self):
         total = sum(operation.price_subtotal for operation in self.operations)
         total += sum(fee.price_subtotal for fee in self.fees_lines)
         self.amount_untaxed = self.pricelist_id.currency_id.round(total)
 
-    @api.one
+    @api.multi
     @api.depends('operations.price_unit', 'operations.product_uom_qty', 'operations.product_id',
                  'fees_lines.price_unit', 'fees_lines.product_uom_qty', 'fees_lines.product_id',
                  'pricelist_id.currency_id', 'partner_id')
@@ -147,7 +147,7 @@ class Part(models.Model):
                     val += c['amount']
         self.amount_tax = val
 
-    @api.one
+    @api.multi
     @api.depends('amount_untaxed', 'amount_tax')
     def _amount_total(self):
         self.amount_total = self.pricelist_id.currency_id.round(self.amount_untaxed + self.amount_tax)
