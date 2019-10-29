@@ -288,7 +288,7 @@
   </record>
 
   <!-- Management equipment Kanban View  -->
-  <record model="ir.ui.view" id="management_equipments_kanban_view">
+  <record id="management_equipments_kanban_view" model="ir.ui.view">
     <field name="name">Manage states Equipment Kanban</field>
     <field name="model">equipment.equipment</field>
     <field name="arch" type="xml">
@@ -339,7 +339,7 @@
     <field name="view_id" eval="False"/>
   </record>
 
-  <record model="ir.actions.act_window.view" id="action_management_equipments_kanban_view">
+  <record id="action_management_equipments_kanban_view" model="ir.actions.act_window.view">
     <field name="sequence" eval="0"/>
     <field name="view_mode">kanban</field>
     <field name="view_id" ref="management_equipments_kanban_view"/>
@@ -371,7 +371,7 @@
   </record>
 
   <!-- equipment State Kanban View  -->
-  <record model="ir.ui.view" id="equipment_state_kanban_view">
+  <record id="equipment_state_kanban_view" model="ir.ui.view">
     <field name="name">Equipment State Kanban</field>
     <field name="model">equipment.state</field>
     <field name="arch" type="xml">
