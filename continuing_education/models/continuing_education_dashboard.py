@@ -77,7 +77,7 @@ class ContinuingEducationDashboard(models.Model):
     priority = fields.Selection(TICKET_PRIORITY, string='Prioridad', default='0')
     labor_description = fields.Text('Labor Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     operations_description = fields.Text('Operations Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
-    documentation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    observation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     participants_list = fields.Text('Lista de Participantes', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     def action_assigned(self):
