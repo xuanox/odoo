@@ -88,9 +88,9 @@
                       <page string="Users" name="user">
 
                               <tree string="Users" editable="bottom">
-                                <field name="user_id"/>
+                                <field name="client_id"/>
                               </tree>
-                            
+
                       </page>
                     </notebook>
 
