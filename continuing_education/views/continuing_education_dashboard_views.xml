@@ -77,12 +77,12 @@
                         </group>
                     <notebook>
                       <page string="Informe" name="inform">
-                        <separator string="Problem Found"/>
-                        <field name="operations_description" placeholder="Problem found..."/>
-                        <separator string="Work Done"/>
-                        <field name="labor_description" placeholder="Work Done Specify ..."/>
-                        <separator string="Observation"/>
-                        <field name="documentation_description" placeholder="Observation ..."/>
+                        <separator string="Tema Principal"/>
+                        <field name="operations_description" placeholder="Título del Tema..."/>
+                        <separator string="Servicio Realizado"/>
+                        <field name="labor_description" placeholder="Descripción del servicio ..."/>
+                        <separator string="Observación"/>
+                        <field name="observation_description" placeholder="Observaciones ..."/>
                       </page>
 
                       <page string="Participantes" name="user">
