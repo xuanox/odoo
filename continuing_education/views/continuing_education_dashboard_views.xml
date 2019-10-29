@@ -81,11 +81,12 @@
                         <field name="priority" eval="1"  widget="priority"/>
                       </group>
                   </group>
+                  <page name="terms" string="Terminos de Contrato">
+                      <group>
+                        </group>
+                    </page>
               </sheet>
-              <page name="terms" string="Terminos de Contrato">
-                  <group>
-                    </group>
-                </page>
+
               <div class="oe_chatter">
                   <field name="message_follower_ids" widget="mail_followers"/>
                   <field name="activity_ids" widget="mail_activity"/>
