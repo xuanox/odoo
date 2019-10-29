@@ -85,11 +85,11 @@
                         <field name="documentation_description" placeholder="Observation ..."/>
                       </page>
 
-                      <page string="Users" name="user">
+                      <page string="Participantes" name="user">
 
-                              <tree string="Users" editable="bottom">
+                                <tree string="Users" editable="bottom">
                                 <field name="client_id"/>
-                              </tree>
+                                </tree>
 
                       </page>
                     </notebook>
