@@ -38,10 +38,10 @@
                       <div><field name="answer_time" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>
                     </group>
                     <group name="solution" string="Tiempo de Solución">
-                      <label for="solution_time"/>
-                      <div><field name="solution_time"/></div>
                       <label for="solution_part_time"/>
-                      <div><field name="solution_part_time"/></div>
+                      <div><field name="solution_part_time" placeholder="en días..."/></div>
+                      <label for="solution_time"/>
+                      <div><field name="solution_time" placeholder="en días..."/></div>
                     </group>
                   </group>
                   <group>
