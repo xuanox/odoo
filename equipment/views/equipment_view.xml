@@ -223,9 +223,8 @@
 	  <field name="name">Equipment Graph View</field>
 	  <field name="model">equipment.equipment</field>
 	  <field name="arch" type="xml">
-	    <graph string="Equipment"  type="pie">
+	    <graph string="Equipment"  type="bar" stacked="True">
 	      <field name="modality_id" type="col"/>
-	      <field name="brand_id" type="row"/>
 	    </graph>
 	  </field>
 	</record>
@@ -235,9 +234,8 @@
 	  <field name="name">Equipment Pivot View</field>
 	  <field name="model">equipment.equipment</field>
 	  <field name="arch" type="xml">
-	    <pivot string="Equipment" disable_linking="True">
-	      <field name="modality_id" type="col"/>
-	      <field name="brand_id" type="row"/>
+	    <pivot string="Equipment" display_quantity="True">
+	      <field name="modality_id" type="row"/>
 	    </pivot>
 	  </field>
 	</record>
