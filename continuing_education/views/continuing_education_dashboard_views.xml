@@ -84,6 +84,14 @@
                         <separator string="Observation"/>
                         <field name="documentation_description" placeholder="Observation ..."/>
                       </page>
+
+                      <page string="Users" name="user">
+												
+												<tree string="Users" editable="bottom">
+												<field name="user_id"/>
+												</tree>
+												</field>
+                      </page>
                     </notebook>
 
                     </sheet>
