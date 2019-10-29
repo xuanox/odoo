@@ -60,6 +60,7 @@
                           <field name="assigned_id" groups="continuing_education.group_continuing_education_manager"/>
                           <field name="client_id"/>
                           <field name="service_type"/>
+                          <field name="company_id"/>
                         </group>
 
                         <group name="dates" string="Fechas">
