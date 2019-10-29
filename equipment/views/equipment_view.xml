@@ -14,7 +14,6 @@
         <field name="client_id" widget="many2one"/>
 				<field name="modality_id" widget="many2one"/>
 				<field name="zone_id" widget="many2one"/>
-        <field name="maintenance_state_id" widget="many2one"/>
       </tree>
     </field>
   </record>
@@ -24,7 +23,7 @@
     <field name="name">equipment.equipment.form</field>
     <field name="model">equipment.equipment</field>
     <field name="arch" type="xml">
-      <form string="Equipments" version="7.0">
+      <form string="Equipments">
         <header>
           <field name="maintenance_state_id" widget="statusbar" clickable="True"/>
         </header>
@@ -34,10 +33,10 @@
                 <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
             </button>
           </div>
-          <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+          <field name="image_medium" widget="image" class="oe_avatar"/>
+          <h1><field name="equipment_number" class="oe_inline" readonly="1"/></h1>
           <div class="oe_title">
             <label for="name" class="oe_edit_only"/>
-            <h1><field name="equipment_number" class="oe_inline" readonly="1"/></h1>
 						<h2><field name="name"/></h2>
             <field name="category_ids" widget="many2many_tags" placeholder="Tags..."/>
           </div>
@@ -57,7 +56,7 @@
 						</group>
           </group>
           <notebook>
-            <page name="info" string="Info">
+            <page name="info" string="More Detail">
               <group>
                 <group>
 									<field name="software_v"/>
@@ -65,27 +64,27 @@
 									<field name="assign_date"/>
                   <field name="start_date"/>
                   <field name="effective_date"/>
-									<field name="cost"/>
                 </group>
                 <group>
                   <field name="location"/>
                   <field name="zone_id" widget="many2one"/>
-                  <field name="vendor_id"/>
 									<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 									<field name="criticality"/>
                 </group>
               </group>
             </page>
-						<page name="agreement" string="Agreement">
+						<page name="sale" string="Sale">
 							<group>
-								<group>
+								<group name="supplier_warranty" string="Supplier Warranty">
 									<field name="manufacturer_id"/>
 									<field name="provider_id"/>
+                  <field name="warranty_end_date"/>
 									<field name="warranty_start_date"/>
-									<field name="dealer_warranty_start_date"/>
 								</group>
-								<group>
-									<field name="warranty_end_date"/>
+								<group name="company_warranty" string="Company Warranty">
+                  <field name="vendor_id"/>
+                  <field name="cost"/>
+                  <field name="dealer_warranty_start_date"/>
 									<field name="dealer_warranty_end_date"/>
 								</group>
 							</group>

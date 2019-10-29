@@ -23,8 +23,8 @@
             <field name="model">equipment.equipment</field>
             <field name="inherit_id" ref="equipment.equipments_tree_view"/>
             <field name="arch" type="xml">
-                <field name="name" position="after">
-                    <field name="maintenance_state_id"/>
+                <field name="zone_id" position="after">
+                  <field name="maintenance_state_id" widget="many2one"/>
                 </field>
             </field>
         </record>
