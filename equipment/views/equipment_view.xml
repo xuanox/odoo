@@ -126,11 +126,7 @@
 		          </field>
 		        </page>
 		        <page name="accesory" string="Accesory">
-		          <field name="child_ids" >
-		            <tree>
-		              <field name="name" />
-		            </tree>
-		          </field>
+		          <field name="child_ids"/>
 		        </page>
 						<page name="history" string="State History">
 		          <field name="history_state_ids" >
