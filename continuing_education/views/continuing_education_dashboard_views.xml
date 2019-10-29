@@ -75,8 +75,11 @@
                         <field name="priority" eval="1"  widget="priority"/>
                         </group>
                         </group>
+                    <notebook>
                         <page name="terms" string="Terminos de Contrato">
                         </page>
+                    </notebook>
+                    
                     </sheet>
 
               <div class="oe_chatter">
