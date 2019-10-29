@@ -86,12 +86,9 @@
                       </page>
 
                       <page string="Participantes" name="user">
-															<field name="signature_lines" nolabel="1">
-																<tree string="Users" editable="bottom">
-																	<field name="client_id"/>
-																</tree>
-															</field>
-                        </page>
+                        <separator string="Agregar Participantes"/>
+                        <field name="participants_list" placeholder="Lista de Participantes..."/>
+                      </page>
                     </notebook>
 
                     </sheet>

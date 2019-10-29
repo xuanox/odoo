@@ -22,9 +22,6 @@ TICKET_PRIORITY = [
     ('3', 'Urgente'),
 ]
 
-
-
-
 class continuing_education_tags(models.Model):
    _description = 'Continuing Education Tags'
    _name = 'continuing.education.tags'
@@ -81,7 +78,7 @@ class ContinuingEducationDashboard(models.Model):
     labor_description = fields.Text('Labor Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     operations_description = fields.Text('Operations Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     documentation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
-    signature_lines = fields.One2many('technical_support.order.signature.line', 'Users', track_visibility='onchange')
+    participants_list = fields.Text('Lista de Participantes', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     def action_assigned(self):
         self.write({'state': 'asign'})
@@ -112,9 +109,3 @@ class ContinuingEducationDashboard(models.Model):
         if vals.get('name','/')=='/':
             vals['name'] = self.env['ir.sequence'].next_by_code('continuing_education.request') or '/'
         return super(ContinuingEducationDashboard, self).create(vals)
-
-class TechnicalSupportOrderSignatureLine(models.Model):
-            _name = 'technical_support.order.signature.line'
-            _description = 'Technical Support Order Signature Line'
-
-            client_id=fields.Many2one('res.partner', string='Participantess', required=True)
