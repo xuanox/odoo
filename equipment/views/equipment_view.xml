@@ -74,6 +74,12 @@
               </group>
             </page>
 						<page name="sale" string="Sale">
+              <group>
+								<group name="crm_info" string="CRM Information">
+								</group>
+								<group name="sale_info" string="Sale Information">
+								</group>
+							</group>
 							<group>
 								<group name="supplier_warranty" string="Supplier Warranty">
 									<field name="manufacturer_id"/>
@@ -89,7 +95,7 @@
 								</group>
 							</group>
 						</page>
-						<page string="Softwares">
+						<page name="software" string="Softwares">
 		          <field name="software_ids" >
 		            <tree>
 		              <field name="name" />
@@ -97,7 +103,7 @@
 		            </tree>
 		          </field>
 		        </page>
-		        <page string="Network">
+		        <page name="network" string="Network">
 		          <field name="network_ids" >
 		            <tree>
 		              <field name="name" />
@@ -109,7 +115,7 @@
 		            </tree>
 		          </field>
 		        </page>
-		        <page string="Dicom">
+		        <page name="dicom" string="Dicom">
 		          <field name="dicom_ids" >
 		            <tree>
 		              <field name="name" />
@@ -119,7 +125,7 @@
 		            </tree>
 		          </field>
 		        </page>
-		        <page string="Accesory">
+		        <page name="accesory" string="Accesory">
 		          <field name="child_ids" >
 		            <tree>
 		              <field name="name" />
@@ -128,7 +134,7 @@
 		            </tree>
 		          </field>
 		        </page>
-						<page string="State History">
+						<page name="history" string="State History">
 		          <field name="history_state_ids" >
 		            <tree>
 		              <field name="equipment_state_id" />
@@ -138,7 +144,7 @@
 		            </tree>
 		          </field>
 		        </page>
-						<page string="Statistics">
+						<page name="statistic" string="Statistics">
 							<group name="statistics">
 						    <label for="expected_mtbf" string="Expected Mean Time Between Failure"/>
 						    <div class="o_row">
@@ -271,6 +277,12 @@
           <filter name="group_brand" string="Brand" context="{'group_by': 'brand_id'}"/>
           <filter name="group_client" string="Client" context="{'group_by': 'client_id'}"/>
 					<filter name="group_modality" string="Modality" context="{'group_by': 'modality_id'}"/>
+          <filter name="group_model" string="Model" context="{'group_by': 'model_id'}"/>
+          <filter name="group_zone" string="Zone" context="{'group_by': 'zone_id'}"/>
+          <separator orientation="vertical" />
+          <filter string="Instalation Date" context="{'group_by':'instalation_date:month'}" name="month"/>
+          <filter string="Supplier Warranty End" name="warranty_end_date" context="{'group_by':'warranty_end_date'}"/>
+          <filter string="Dealer Warranty End" name="dealer_warranty_end_date" context="{'group_by':'dealer_warranty_end_date'}"/>
         </group>
       </search>
     </field>
