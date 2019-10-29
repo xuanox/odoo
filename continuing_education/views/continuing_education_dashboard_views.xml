@@ -76,10 +76,16 @@
                         </group>
                         </group>
                     <notebook>
-                        <page name="terms" string="Terminos de Contrato">
-                        </page>
+                      <page string="Informe" name="inform">
+                        <separator string="Problem Found"/>
+                        <field name="operations_description" placeholder="Problem found..."/>
+                        <separator string="Work Done"/>
+                        <field name="labor_description" placeholder="Work Done Specify ..."/>
+                        <separator string="Observation"/>
+                        <field name="documentation_description" placeholder="Observation ..."/>
+                      </page>
                     </notebook>
-                    
+
                     </sheet>
 
               <div class="oe_chatter">

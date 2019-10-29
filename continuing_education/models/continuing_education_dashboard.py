@@ -75,6 +75,9 @@ class ContinuingEducationDashboard(models.Model):
     create_date=fields.Datetime('Fecha de creación', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     category_ids = fields.Many2many('continuing.education.tags', id1='equipment_id', id2='category_id', string='Etiquetas')
     priority = fields.Selection(TICKET_PRIORITY, string='Prioridad', default='0')
+    labor_description = fields.Text('Labor Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    operations_description = fields.Text('Operations Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    documentation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
 
     def action_assigned(self):
