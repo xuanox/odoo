@@ -86,12 +86,12 @@
                       </page>
 
                       <page string="Participantes" name="user">
-
-                                <tree string="Users" editable="bottom">
-                                <field name="client_id"/>
-                                </tree>
-
-                      </page>
+															<field name="signature_lines" nolabel="1">
+																<tree string="Users" editable="bottom">
+																	<field name="client_id"/>
+																</tree>
+															</field>
+                        </page>
                     </notebook>
 
                     </sheet>
