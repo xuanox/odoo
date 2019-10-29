@@ -39,9 +39,9 @@
                     </group>
                     <group name="solution" string="Tiempo de Solución">
                       <label for="solution_part_time"/>
-                      <div><field name="solution_part_time"/><span class="ml8">dias</span></div>
+                      <div><field name="solution_part_time"/></div>
                       <label for="solution_time"/>
-                      <div><field name="solution_time"/><span class="ml8">dias</span></div>
+                      <div><field name="solution_time"/></div>
                     </group>
                   </group>
                   <group>
