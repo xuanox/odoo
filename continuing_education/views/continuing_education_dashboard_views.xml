@@ -86,11 +86,11 @@
                       </page>
 
                       <page string="Users" name="user">
-												
-												<tree string="Users" editable="bottom">
-												<field name="user_id"/>
-												</tree>
-												</field>
+                        <tree editable="bottom" string="tittle_parts">
+                                              <field name="client_id" invisible="1"/>
+                                              <field name="name"/>
+                        </tree>
+
                       </page>
                     </notebook>
 
