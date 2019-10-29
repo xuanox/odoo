@@ -78,7 +78,7 @@ class ContinuingEducationDashboard(models.Model):
     labor_description = fields.Text('Labor Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     operations_description = fields.Text('Operations Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     documentation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
-    signature_client_lines = fields.One2many('technical_support.order.signature.client.line', 'maintenance_id', 'Clients', track_visibility='onchange')
+    signature_client_lines = fields.One2many('technical_support.order.signature.client.line', 'Clients', track_visibility='onchange')
 
     def action_assigned(self):
         self.write({'state': 'asign'})
