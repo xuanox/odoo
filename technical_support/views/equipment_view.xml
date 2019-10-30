@@ -7,10 +7,10 @@
             <field name="groups_id" eval="[(4, ref('technical_support.group_technical_support_engineer'))]"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='toggle_active']" position="before">
-                   <button class="oe_inline oe_stat_button" name="action_view_tso" type="object" icon="fa-file-pdf-o">
+                   <button class="oe_stat_button" name="action_view_tso" type="object" icon="fa-file-pdf-o">
                        <field string="TSO" name="technical_support_count" widget="statinfo"/>
                    </button>
-                   <button class="oe_inline oe_stat_button" name="action_view_tsr" type="object" icon="fa-file-pdf-o">
+                   <button class="oe_stat_button" name="action_view_tsr" type="object" icon="fa-file-pdf-o">
                        <field string="TSR" name="tsr_count" widget="statinfo"/>
                    </button>
                 </xpath>
