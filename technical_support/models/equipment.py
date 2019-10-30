@@ -21,6 +21,11 @@ class EquipmentEquipment(models.Model):
         for equipment in self:
             self.technical_support_count = maintenance.search_count([('equipment_id', '=', equipment.id)])
 
+    def _tsr_count(self):
+        maintenance = self.env['technical_support.request']
+        for equipment in self:
+            self.tsr_count = maintenance.search_count([('equipment_id', '=', equipment.id)])
+
     def _next_maintenance(self):
         maintenance = self.env['technical_support.order']
         for equipment in self:
@@ -31,7 +36,8 @@ class EquipmentEquipment(models.Model):
             if len(order_ids) > 0:
                 self.maintenance_date = order_ids[0].date_execution
 
-    technical_support_count = fields.Integer(compute='_technical_support_count', string='# Maintenance')
+    technical_support_count = fields.Integer(compute='_technical_support_count', string='# TSO')
+    tsr_count = fields.Integer(compute='_tsr_count', string='# TSR')
     maintenance_date = fields.Datetime(compute='_next_maintenance', string='Maintenance Date')
 
     maintenance_ids = fields.One2many('technical_support.request', 'equipment_id')
@@ -109,13 +115,24 @@ class EquipmentEquipment(models.Model):
                 equipment._create_new_request(equipment.next_action_date)
 
 
-    def action_view_maintenance(self):
+    def action_view_tso(self):
         return {
             'domain': "[('equipment_id','in',[" + ','.join(map(str, self.ids)) + "])]",
-            'name': _('Maintenance Orders'),
+            'name': _('TSO'),
             'view_type': 'form',
             'view_mode': 'tree,form',
             'res_model': 'technical_support.order',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
+
+    def action_view_tsr(self):
+        return {
+            'domain': "[('equipment_id','in',[" + ','.join(map(str, self.ids)) + "])]",
+            'name': _('TSR'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'technical_support.request',
             'type': 'ir.actions.act_window',
             'target': 'current',
         }
