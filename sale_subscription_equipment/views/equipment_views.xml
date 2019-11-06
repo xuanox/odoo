@@ -5,7 +5,7 @@
         <field name="model">equipment.equipment</field>
         <field name="inherit_id" ref="equipment.equipments_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='agreement']" position="inside">
+            <xpath expr="//page[@name='info']" position="inside">
                 <group name="subscription" string="Subscription">
                   <field name="subscription_ids" widget="one2many_list" nolabel="1">
                     <tree>
@@ -18,7 +18,7 @@
                 </group>
             </xpath>
             <xpath expr="//button[@name='toggle_active']" position="before">
-               <button class="oe_inline oe_stat_button" name="action_view_maintenance" type="object" icon="fa-usd" groups="equipment.group_equipment_backoffice">
+               <button class="oe_stat_button" name="action_view_sub" type="object" icon="fa-usd" groups="equipment.group_equipment_backoffice">
                    <field string="SUB" name="subscription_count" widget="statinfo"/>
                </button>
             </xpath>

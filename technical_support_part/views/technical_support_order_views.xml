@@ -7,7 +7,7 @@
 					<field name="inherit_id" ref="technical_support.technical_support_order_form_view"/>
 					<field name="arch" type="xml">
 							<xpath expr="//page[@name='information']" position="after">
-								<page string="Parts - R">
+								<page string="Parts - R" attrs="{'invisible':[('request_id','=',False)]}">
 									<group string="Parts">
 										<field name="part_line_ids" nolabel="1" domain="[('request_id.id','=',request_id), ('state', '=', 'available'), ('installed', '=', False)]">
 											<tree editable="bottom">

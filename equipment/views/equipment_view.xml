@@ -14,17 +14,16 @@
         <field name="client_id" widget="many2one"/>
 				<field name="modality_id" widget="many2one"/>
 				<field name="zone_id" widget="many2one"/>
-        <field name="maintenance_state_id" widget="many2one"/>
       </tree>
     </field>
   </record>
 
-  <!-- equipment Form View  -->
+  <!-- Equipment Form View  -->
   <record id="equipments_form_view" model="ir.ui.view">
     <field name="name">equipment.equipment.form</field>
     <field name="model">equipment.equipment</field>
     <field name="arch" type="xml">
-      <form string="Equipments" version="7.0">
+      <form string="Equipments">
         <header>
           <field name="maintenance_state_id" widget="statusbar" clickable="True"/>
         </header>
@@ -34,10 +33,10 @@
                 <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
             </button>
           </div>
-          <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+          <field name="image_medium" widget="image" class="oe_avatar"/>
+          <h1><field name="equipment_number" class="oe_inline" readonly="1"/></h1>
           <div class="oe_title">
             <label for="name" class="oe_edit_only"/>
-            <h1><field name="equipment_number" class="oe_inline" readonly="1"/></h1>
 						<h2><field name="name"/></h2>
             <field name="category_ids" widget="many2many_tags" placeholder="Tags..."/>
           </div>
@@ -57,7 +56,7 @@
 						</group>
           </group>
           <notebook>
-            <page name="info" string="Info">
+            <page name="info" string="More Detail">
               <group>
                 <group>
 									<field name="software_v"/>
@@ -65,42 +64,48 @@
 									<field name="assign_date"/>
                   <field name="start_date"/>
                   <field name="effective_date"/>
-									<field name="cost"/>
                 </group>
                 <group>
                   <field name="location"/>
                   <field name="zone_id" widget="many2one"/>
-                  <field name="vendor_id"/>
 									<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 									<field name="criticality"/>
                 </group>
               </group>
             </page>
-						<page name="agreement" string="Agreement">
+						<page name="sale" string="Sale">
+              <group>
+								<group name="crm_info" string="CRM Information">
+								</group>
+								<group name="sale_info" string="Sale Information">
+								</group>
+							</group>
 							<group>
-								<group>
+								<group name="supplier_warranty" string="Supplier Warranty">
 									<field name="manufacturer_id"/>
 									<field name="provider_id"/>
+                  <field name="warranty_end_date"/>
 									<field name="warranty_start_date"/>
-									<field name="dealer_warranty_start_date"/>
 								</group>
-								<group>
-									<field name="warranty_end_date"/>
+								<group name="company_warranty" string="Company Warranty">
+                  <field name="vendor_id"/>
+                  <field name="cost"/>
+                  <field name="dealer_warranty_start_date"/>
 									<field name="dealer_warranty_end_date"/>
 								</group>
 							</group>
 						</page>
-						<page string="Softwares">
+						<page name="software" string="Softwares">
 		          <field name="software_ids" >
-		            <tree>
+		            <tree  editable="bottom">
 		              <field name="name" />
 		              <field name="software_id"/>
 		            </tree>
 		          </field>
 		        </page>
-		        <page string="Network">
+		        <page name="network" string="Network">
 		          <field name="network_ids" >
-		            <tree>
+		            <tree  editable="bottom">
 		              <field name="name" />
 		              <field name="subred"/>
 		              <field name="gateway"/>
@@ -110,9 +115,9 @@
 		            </tree>
 		          </field>
 		        </page>
-		        <page string="Dicom">
+		        <page name="dicom" string="Dicom">
 		          <field name="dicom_ids" >
-		            <tree>
+		            <tree  editable="bottom">
 		              <field name="name" />
 		              <field name="ip"/>
 		              <field name="port"/>
@@ -120,16 +125,10 @@
 		            </tree>
 		          </field>
 		        </page>
-		        <page string="Accesory">
-		          <field name="child_ids" >
-		            <tree>
-		              <field name="name" />
-		              <field name="brand_id"/>
-		              <field name="model_id"/>
-		            </tree>
-		          </field>
+		        <page name="accesory" string="Accesory">
+		          <field name="child_ids"/>
 		        </page>
-						<page string="State History">
+						<page name="history" string="State History">
 		          <field name="history_state_ids" >
 		            <tree>
 		              <field name="equipment_state_id" />
@@ -139,7 +138,7 @@
 		            </tree>
 		          </field>
 		        </page>
-						<page string="Statistics">
+						<page name="statistic" string="Statistics">
 							<group name="statistics">
 						    <label for="expected_mtbf" string="Expected Mean Time Between Failure"/>
 						    <div class="o_row">
@@ -171,276 +170,260 @@
     </field>
   </record>
 
-        <!-- Equipment Kanban View  -->
-        <record id="equipments_kanban_view" model="ir.ui.view">
-            <field name="name">Equipment Kanban</field>
-            <field name="model">equipment.equipment</field>
-            <field name="arch" type="xml">
-                <kanban>
-                    <field name="maintenance_state_id"/>
-                    <field name="maintenance_state_color"/>
-                    <field name="client_id"/>
-                    <field name="modality_id"/>
-                    <field name="id" />
-										<field name="equipment_number" />
-										<field name="user_id"/>
-										<field name="criticality"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_vignette">
-                                <div class="emsa_kanban_left">
-                                    <a type="open"><img t-att-alt="Equipment" t-att-src="kanban_image('equipment.equipment', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
-                                    <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="emsa_status_color_#{record.maintenance_state_color.raw_value} emsa_status"></div>
-                                </div>
-                                <div class="oe_kanban_details">
-                                    <h4>
-                                        <a type="open"><field name="equipment_number"/>-<field name="name"/>-<field name="serial"/></a>
-                                    </h4>
-                                    <ul>
-                                        <li>Model: <field name="model_id"></field></li>
-                                        <li>Brand: <field name="brand_id"></field></li>
-																				<li>Modality: <field name="modality_id"></field></li>
-                                        <li class="emsa_kanban_info">
-                                        <a t-if="record.criticality.raw_value == 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value lte 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <img t-att-alt="Equipment" t-att-src="kanban_image('res.partner', 'image_small', record.client_id.raw_value)" t-att-title="record.client_id.value" width="24" height="24" class="oe_kanban_avatar"/>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+  <!-- Equipment Kanban View  -->
+  <record id="equipments_kanban_view" model="ir.ui.view">
+    <field name="name">Equipment Kanban</field>
+    <field name="model">equipment.equipment</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="maintenance_state_id"/>
+        <field name="maintenance_state_color"/>
+        <field name="client_id"/>
+        <field name="modality_id"/>
+        <field name="id" />
+        <field name="equipment_number" />
+        <field name="user_id"/>
+        <field name="criticality"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_vignette">
+              <div class="emsa_kanban_left">
+                <a type="open"><img t-att-alt="Equipment" t-att-src="kanban_image('equipment.equipment', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="emsa_status_color_#{record.maintenance_state_color.raw_value} emsa_status"></div>
+              </div>
+              <div class="oe_kanban_details">
+                <h4>
+                  <a type="open"><field name="equipment_number"/>-<field name="name"/>-<field name="serial"/></a>
+                </h4>
+                <ul>
+                  <li>Model: <field name="model_id"></field></li>
+                  <li>Brand: <field name="brand_id"></field></li>
+                  <li>Modality: <field name="modality_id"></field></li>
+                  <li class="emsa_kanban_info">
+                    <a t-if="record.criticality.raw_value == 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+                    <a t-if="record.criticality.raw_value gt 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
+                    <a t-if="record.criticality.raw_value lte 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+                    <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
+                    <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+                    <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
+                    <img t-att-alt="Equipment" t-att-src="kanban_image('res.partner', 'image_small', record.client_id.raw_value)" t-att-title="record.client_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
 
-        <!-- Equipment Graph View  -->
-				<record id="equipments_graph_view" model="ir.ui.view">
-	            <field name="name">Equipment Graph View</field>
-	            <field name="model">equipment.equipment</field>
-	            <field name="arch" type="xml">
-	                <graph string="Equipment"  type="pie">
-	                    <field name="modality_id" type="col"/>
-	                    <field name="brand_id" type="row"/>
-	                </graph>
-	            </field>
-	      </record>
+  <!-- Equipment Graph View  -->
+	<record id="equipments_graph_view" model="ir.ui.view">
+	  <field name="name">Equipment Graph View</field>
+	  <field name="model">equipment.equipment</field>
+	  <field name="arch" type="xml">
+	    <graph string="Equipment"  type="bar" stacked="True">
+	      <field name="modality_id" type="col"/>
+	    </graph>
+	  </field>
+	</record>
 
-        <!-- Equipment Pivot View  -->
-	      <record id="equipments_pivot_view" model="ir.ui.view">
-	            <field name="name">Equipment Pivot View</field>
-	            <field name="model">equipment.equipment</field>
-	            <field name="arch" type="xml">
-	                <pivot string="Equipment" disable_linking="True">
-	                  <field name="modality_id" type="col"/>
-	                  <field name="brand_id" type="row"/>
-	                </pivot>
-	            </field>
-	        </record>
+  <!-- Equipment Pivot View  -->
+	<record id="equipments_pivot_view" model="ir.ui.view">
+	  <field name="name">Equipment Pivot View</field>
+	  <field name="model">equipment.equipment</field>
+	  <field name="arch" type="xml">
+	    <pivot string="Equipment" display_quantity="True">
+	      <field name="modality_id" type="row"/>
+	    </pivot>
+	  </field>
+	</record>
 
-        <!-- Equipment Dashboard View  -->
-	      <record id="equipments_dashboard_view" model="ir.ui.view">
-	            <field name="name">Equipment Dashboard View</field>
-	            <field name="model">equipment.equipment</field>
-	            <field name="mode">primary</field>
-	            <field name="arch" type="xml">
-	                <dashboard>
-	                    <view type="graph" ref="equipment.equipments_graph_view"/>
-	                    <view type="pivot" ref="equipment.equipments_pivot_view"/>
-	                </dashboard>
-	            </field>
-	        </record>
+  <!-- Equipment Dashboard View  -->
+	<record id="equipments_dashboard_view" model="ir.ui.view">
+	  <field name="name">Equipment Dashboard View</field>
+	  <field name="model">equipment.equipment</field>
+	  <field name="mode">primary</field>
+	  <field name="arch" type="xml">
+	    <dashboard>
+	      <view type="graph" ref="equipment.equipments_graph_view"/>
+	      <view type="pivot" ref="equipment.equipments_pivot_view"/>
+	    </dashboard>
+	  </field>
+	</record>
 
-        <!-- Equipment Search  -->
-        <record model="ir.ui.view" id="equipments_search">
-            <field name="name">Equipment Search</field>
-            <field name="model">equipment.equipment</field>
-            <field name="arch" type="xml">
-                <search string="Equipment Search">
-                    <field name="equipment_number"/>
-										<field name="serial"/>
-                    <field name="name"/>
-                    <field name="brand_id"/>
-                    <field name="model_id"/>
-                    <field name="client_id"/>
-                    <field name="category_ids"/>
-										<field name="modality_id"/>
-                    <separator />
-                    <group expand="0" string="Group By">
-                      <filter name="group_brand" string="Brand" context="{'group_by': 'brand_id'}"/>
-                      <filter name="group_client" string="Client" context="{'group_by': 'client_id'}"/>
-											<filter name="group_modality" string="Modality" context="{'group_by': 'modality_id'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
+  <!-- Equipment Search  -->
+  <record id="equipments_search" model="ir.ui.view">
+    <field name="name">Equipment Search</field>
+    <field name="model">equipment.equipment</field>
+    <field name="arch" type="xml">
+      <search string="Equipment Search">
+        <field name="equipment_number"/>
+				<field name="serial"/>
+        <field name="name"/>
+        <field name="brand_id"/>
+        <field name="model_id"/>
+        <field name="client_id"/>
+        <field name="category_ids"/>
+				<field name="modality_id"/>
+        <separator />
+        <group expand="0" string="Group By">
+          <filter name="group_brand" string="Brand" context="{'group_by': 'brand_id'}"/>
+          <filter name="group_client" string="Client" context="{'group_by': 'client_id'}"/>
+					<filter name="group_modality" string="Modality" context="{'group_by': 'modality_id'}"/>
+          <filter name="group_model" string="Model" context="{'group_by': 'model_id'}"/>
+          <filter name="group_zone" string="Zone" context="{'group_by': 'zone_id'}"/>
+          <separator orientation="vertical" />
+          <filter string="Instalation Date" context="{'group_by':'instalation_date:month'}" name="month"/>
+          <filter string="Supplier Warranty End" name="warranty_end_date" context="{'group_by':'warranty_end_date'}"/>
+          <filter string="Dealer Warranty End" name="dealer_warranty_end_date" context="{'group_by':'dealer_warranty_end_date'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
 
-        <record id="action_equipments" model="ir.actions.act_window">
-            <field name="name">Equipments</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">equipment.equipment</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form,kanban,pivot,graph,dashboard</field>
-            <field name="view_id" eval="False"/>
-        </record>
+  <!-- Equipment Action  -->
+  <record id="action_equipments" model="ir.actions.act_window">
+    <field name="name">Equipments</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">equipment.equipment</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form,pivot,graph,dashboard</field>
+    <field name="view_id" eval="False"/>
+  </record>
 
-        <record model="ir.actions.act_window.view" id="action_equipments_kanban_view">
-            <field name="sequence" eval="0"/>
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="equipments_kanban_view"/>
-            <field name="act_window_id" ref="action_equipments"/>
-        </record>
+  <!-- Management equipment Kanban View  -->
+  <record id="management_equipments_kanban_view" model="ir.ui.view">
+    <field name="name">Manage states Equipment Kanban</field>
+    <field name="model">equipment.equipment</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="maintenance_state_id" create="false" delete="false">
+        <field name="maintenance_state_id"/>
+        <field name="maintenance_state_color"/>
+        <field name="user_id"/>
+        <field name="criticality"/>
+        <field name="id" />
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_card emsa_kanban_status oe_kanban_global_click">
+                <div class="emsa_kanban_left">
+                  <a type="open"><img t-att-alt="Equipment" t-att-src="kanban_image('equipment.equipment', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                  <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="emsa_status_color_#{record.maintenance_state_color.raw_value} emsa_status"></div>
+                </div>
+                <div class="emsa_kanban_details">
+                  <h4>
+                    <a type="open"><field name="name"/></a>
+                  </h4>
+                  <ul>
+                    <li title="Model"><field name="model"></field></li>
+                    <li title="Manufacturer"><field name="manufacturer_id"></field></li>
+                    <li class="emsa_kanban_info">
+                      <a t-if="record.criticality.raw_value == 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+                      <a t-if="record.criticality.raw_value gt 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
+                      <a t-if="record.criticality.raw_value lte 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+                      <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
+                      <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+                      <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
+                      <img t-att-alt="Equipment" t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </t>
+          </templates>
+      </kanban>
+    </field>
+  </record>
 
-        <record model="ir.actions.act_window.view" id="action_equipments_tree_view">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="equipments_tree_view"/>
-            <field name="act_window_id" ref="action_equipments"/>
-        </record>
+  <record id="action_management_equipments" model="ir.actions.act_window">
+    <field name="name">Manage states</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">equipment.equipment</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,form</field>
+    <field name="view_id" eval="False"/>
+  </record>
 
-        <record model="ir.actions.act_window.view" id="action_equipments_form_view">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="equipments_form_view"/>
-            <field name="act_window_id" ref="action_equipments"/>
-        </record>
+  <record id="action_management_equipments_kanban_view" model="ir.actions.act_window.view">
+    <field name="sequence" eval="0"/>
+    <field name="view_mode">kanban</field>
+    <field name="view_id" ref="management_equipments_kanban_view"/>
+    <field name="act_window_id" ref="action_management_equipments"/>
+  </record>
 
-        <!-- Management equipment Kanban View  -->
-        <record model="ir.ui.view" id="management_equipments_kanban_view">
-            <field name="name">Manage states Equipment Kanban</field>
-            <field name="model">equipment.equipment</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="maintenance_state_id" create="false" delete="false">
-                    <field name="maintenance_state_id"/>
-                    <field name="maintenance_state_color"/>
-                    <field name="user_id"/>
-                    <field name="criticality"/>
-                    <field name="id" />
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_card emsa_kanban_status oe_kanban_global_click">
-                                <div class="emsa_kanban_left">
-                                    <a type="open"><img t-att-alt="Equipment" t-att-src="kanban_image('equipment.equipment', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
-                                    <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="emsa_status_color_#{record.maintenance_state_color.raw_value} emsa_status"></div>
-                                </div>
-                                <div class="emsa_kanban_details">
-                                    <h4>
-                                        <a type="open"><field name="name"/></a>
-                                    </h4>
-                                    <ul>
-                                        <li title="Model"><field name="model"></field></li>
-                                        <li title="Manufacturer"><field name="manufacturer_id"></field></li>
-                                        <li class="emsa_kanban_info">
-                                        <a t-if="record.criticality.raw_value == 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 0" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value lte 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="emsa_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <img t-att-alt="Equipment" t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+  <!-- equipment State Form View  -->
+  <record id="equipment_state_form_view" model="ir.ui.view">
+    <field name="name">equipment.state.form</field>
+    <field name="model">equipment.state</field>
+    <field name="arch" type="xml">
+      <form string="State" version="7.0">
+        <sheet>
+          <div class="oe_title">
+            <label for="name"/>
+            <h1><field name="name" class="oe_inline"/></h1>
+          </div>
+          <group>
+            <group>
+              <field name="state_color"/>
+              <field name="team"/>
+            </group>
+            <group>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
 
-        <record id="action_management_equipments" model="ir.actions.act_window">
-            <field name="name">Manage states</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">equipment.equipment</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,form</field>
-            <field name="view_id" eval="False"/>
-        </record>
+  <!-- equipment State Kanban View  -->
+  <record id="equipment_state_kanban_view" model="ir.ui.view">
+    <field name="name">Equipment State Kanban</field>
+    <field name="model">equipment.state</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="team">
+        <field name="name"/>
+        <field name="team"/>
+        <field name="state_color"/>
+        <field name="sequence" widget="handle"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div t-attf-class="oe_kanban_card emsa_kanban_status oe_kanban_global_click">
+              <h4>
+                <a name="change_color" string="Change color" type="object"><span t-attf-class="emsa_status_color_#{record.state_color.raw_value} emsa_status"></span></a>
+                <field name="name"/>
+              </h4>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
 
-        <record model="ir.actions.act_window.view" id="action_management_equipments_kanban_view">
-            <field name="sequence" eval="0"/>
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="management_equipments_kanban_view"/>
-            <field name="act_window_id" ref="action_management_equipments"/>
-        </record>
+  <record id="action_equipment_state" model="ir.actions.act_window">
+    <field name="name">Equipment States</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">equipment.state</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,form</field>
+  </record>
 
-        <!-- equipment State Form View  -->
-        <record id="equipment_state_form_view" model="ir.ui.view">
-            <field name="name">equipment.state.form</field>
-            <field name="model">equipment.state</field>
-            <field name="arch" type="xml">
-                <form string="State" version="7.0">
-                    <sheet>
-                        <div class="oe_title">
-                            <label for="name"/>
-                            <h1><field name="name" class="oe_inline"/></h1>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="state_color"/>
-                                <field name="team"/>
-                            </group>
-                            <group>
-                            </group>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+  <record id="equipment_category_tree_view" model="ir.ui.view">
+    <field name="name">equipment.category.tree</field>
+    <field name="model">equipment.category</field>
+    <field name="arch" type="xml">
+      <tree string="Equipment Tags" editable="top">
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
 
-        <!-- equipment State Kanban View  -->
-        <record model="ir.ui.view" id="equipment_state_kanban_view">
-            <field name="name">Equipment State Kanban</field>
-            <field name="model">equipment.state</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="team">
-                    <field name="name"/>
-                    <field name="team"/>
-                    <field name="state_color"/>
-                    <field name="sequence" widget="handle"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_card emsa_kanban_status oe_kanban_global_click">
-                                <h4>
-                                <a name="change_color" string="Change color" type="object"><span t-attf-class="emsa_status_color_#{record.state_color.raw_value} emsa_status"></span></a>
-                                <field name="name"/>
-                                </h4>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
-
-        <record id="action_equipment_state" model="ir.actions.act_window">
-            <field name="name">Equipment States</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">equipment.state</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,form</field>
-        </record>
-
-        <!-- equipment Tags Tree View -->
-        <record id="equipment_category_tree_view" model="ir.ui.view">
-            <field name="name">equipment.category.tree</field>
-            <field name="model">equipment.category</field>
-            <field name="arch" type="xml">
-                <tree string="Equipment Tags" editable="top">
-                    <field name="name"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="action_equipment_category" model="ir.actions.act_window">
-            <field name="name">Equipment Tags</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">equipment.category</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree</field>
-        </record>
+  <!-- equipment Tags Tree View -->
+  <record id="action_equipment_category" model="ir.actions.act_window">
+    <field name="name">Equipment Tags</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">equipment.category</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree</field>
+  </record>
 
 </odoo>
