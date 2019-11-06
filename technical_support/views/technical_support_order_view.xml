@@ -110,9 +110,9 @@
 												</page>
                         <page string="Documentation" name="documentation">
 													<separator string="Problem Found"/>
-													<field name="operations_description" placeholder="Problem found..."/>
+													<field name="operations_description" placeholder="Problem found..." attrs="{'required':[('state', '=', 'ready')]}"/>
 													<separator string="Work Done"/>
-													<field name="labor_description" placeholder="Work Done Specify ..."/>
+													<field name="labor_description" placeholder="Work Done Specify ..." attrs="{'required':[('state', '=', 'ready')]}"/>
                           <separator string="Observation"/>
                           <field name="documentation_description" placeholder="Observation ..."/>
                         </page>
