@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Odoo
-#    Copyright (C) 2013-2018 CodUP (<http://codup.com>).
-#
-##############################################################################
 
 from odoo import api, fields, models
 from odoo import tools
@@ -23,9 +17,6 @@ STATE_COLOR_SELECTION = [
 ]
 
 class asset_state(models.Model):
-    """
-    Model for asset states.
-    """
     _name = 'asset.state'
     _description = 'State of Asset'
     _order = "sequence"
@@ -58,9 +49,6 @@ class asset_category(models.Model):
 
 
 class asset_asset(models.Model):
-    """
-    Assets
-    """
     _name = 'asset.asset'
     _description = 'Asset'
     _inherit = ['mail.thread']
@@ -106,6 +94,11 @@ class asset_asset(models.Model):
         ('3', 'Critical')
     ]
 
+    STATE_SELECTION = [
+        ('online', 'Online'),
+        ('offline', 'Offline')
+    ]
+
     name = fields.Char('Asset Name', size=64, required=True, translate=True)
     finance_state_id = fields.Many2one('asset.state', 'State Finance', domain=[('team','=','0')])
     warehouse_state_id = fields.Many2one('asset.state', 'State Warehouse', domain=[('team','=','1')])
@@ -114,6 +107,7 @@ class asset_asset(models.Model):
     accounting_state_id = fields.Many2one('asset.state', 'State Accounting', domain=[('team','=','4')])
     maintenance_state_color = fields.Selection(related='maintenance_state_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
+    state = fields.Selection(STATE_SELECTION, string='State', default='online')
     property_stock_asset = fields.Many2one(
         'stock.location', "Asset Location",
         company_dependent=True, domain=[('usage', 'like', 'asset')],
