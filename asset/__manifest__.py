@@ -2,7 +2,7 @@
 
 {
     'name': 'Assets',
-    'version': '12.0',
+    'version': '1.12',
     'summary': 'Asset Management',
     'description': """Managing Assets in Odoo""",
     'author': 'Rocendo Tejada',
