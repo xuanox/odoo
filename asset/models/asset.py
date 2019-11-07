@@ -39,8 +39,24 @@ class asset_state(models.Model):
         if (color>9): color = 0
         return self.write({'state_color': str(color)})
 
+class AssetStage(models.Model):
+    _name = 'asset.stage'
+    _description = 'Stage of Asset'
+    _order = "sequence"
 
-class asset_category(models.Model):
+    name = fields.Char('Stage', size=64, required=True, translate=True)
+    sequence = fields.Integer('Sequence', help="Used to order stages.", default=1)
+    state_color = fields.Selection(STATE_COLOR_SELECTION, string='State Color')
+    is_offline = fields.Boolean('Offline')
+    fold = fields.Boolean('Folded', help='Folded in kanban view')
+    template_id = fields.Many2one('mail.template', 'Automated Answer Email Template', domain="[('model', '=', 'asset.stage')]")
+
+    def change_color(self):
+        color = int(self.state_color) + 1
+        if (color>9): color = 0
+        return self.write({'state_color': str(color)})
+
+class AssetCategory(models.Model):
     _description = 'Asset Tags'
     _name = 'asset.category'
 
@@ -48,7 +64,7 @@ class asset_category(models.Model):
     asset_ids = fields.Many2many('asset.asset', id1='category_id', id2='asset_id', string='Assets')
 
 
-class asset_asset(models.Model):
+class AssetAsset(models.Model):
     _name = 'asset.asset'
     _description = 'Asset'
     _inherit = ['mail.thread']
@@ -94,11 +110,6 @@ class asset_asset(models.Model):
         ('3', 'Critical')
     ]
 
-    STATE_SELECTION = [
-        ('online', 'Online'),
-        ('offline', 'Offline')
-    ]
-
     name = fields.Char('Asset Name', size=64, required=True, translate=True)
     finance_state_id = fields.Many2one('asset.state', 'State Finance', domain=[('team','=','0')])
     warehouse_state_id = fields.Many2one('asset.state', 'State Warehouse', domain=[('team','=','1')])
@@ -107,10 +118,8 @@ class asset_asset(models.Model):
     accounting_state_id = fields.Many2one('asset.state', 'State Accounting', domain=[('team','=','4')])
     maintenance_state_color = fields.Selection(related='maintenance_state_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
-    state = fields.Selection(STATE_SELECTION, string='State', default='online')
-    property_stock_asset = fields.Many2one(
-        'stock.location', "Asset Location",
-        company_dependent=True, domain=[('usage', 'like', 'asset')],
+    stage_id = fields.Many2one('asset.stage', string='Stage', ondelete='restrict', track_visibility='onchange', copy=False, index=True)    
+    property_stock_asset = fields.Many2one('stock.location', "Asset Location", company_dependent=True, domain=[('usage', 'like', 'asset')],
         help="This location will be used as the destination location for installed parts during asset life.")
     user_id = fields.Many2one('res.users', 'Assigned to', track_visibility='onchange')
     active = fields.Boolean('Active', default=True)
@@ -139,9 +148,9 @@ class asset_asset(models.Model):
     @api.model
     def create(self, vals):
         tools.image_resize_images(vals)
-        return super(asset_asset, self).create(vals)
+        return super(AssetAsset, self).create(vals)
 
     @api.multi
     def write(self, vals):
         tools.image_resize_images(vals)
-        return super(asset_asset, self).write(vals)
+        return super(AssetAsset, self).write(vals)
