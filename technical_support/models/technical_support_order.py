@@ -157,6 +157,12 @@ class TechnicalSupportOrder(models.Model):
         self.equipment_id = self.ticket_id.equipment_id
         self.user_id = self.ticket_id.user_id
 
+    @api.constrains('date_scheduled', 'date_finish')
+    def _check_date_time(self):
+        if self.date_scheduled > self.date_finish:
+            raise ValidationError(_(
+                'End Time cannot be set before Start Time.'))
+
     def test_ready(self):
         res = True
         for order in self:
