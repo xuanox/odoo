@@ -60,7 +60,7 @@ class TechnicalSupportOrder(models.Model):
     ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
     date_planned = fields.Datetime('Planned Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    date_scheduled = fields.Datetime('Start Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    date_scheduled = fields.Datetime('Start Date', required=True, track_visibility='onchange')
     date_execution = fields.Datetime('Execution Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)],'ready':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     date_finish = fields.Datetime('Finish Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
