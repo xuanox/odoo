@@ -8,7 +8,7 @@
     </template>
 
     <!-- Top menu item -->
-    <menuitem name="Maintenance"
+    <menuitem name="Assets"
         id="base.menu_mro_root"
         sequence="80"/>
 
@@ -73,6 +73,6 @@
       	parent="menu_maintenance_config"
         groups="asset.group_mro_manager"
       	sequence="2"/>
-              
+
   </data>
 </odoo>

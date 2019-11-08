@@ -125,197 +125,79 @@
       </field>
     </record>
 
-        <!-- Asset Search  -->
-        <record model="ir.ui.view" id="assets_search">
-            <field name="name">Asset Search</field>
-            <field name="model">asset.asset</field>
-            <field name="arch" type="xml">
-                <search string="Asset Search">
-                    <field name="asset_number"/>
-                    <field name="name"/>
-                    <field name="property_stock_asset"/>
-                    <field name="criticality"/>
-                    <field name="user_id"/>
-                    <field name="category_ids"/>
-                    <separator />
-                    <group expand="0" string="Group By">
-                      <filter name="group_name"
-                              string="Name"
-                              context="{'group_by': 'name'}"
-                              />
-                      <filter name="group_user"
-                              string="User"
-                              context="{'group_by': 'user_id'}"
-                              />
-                    </group>
-                </search>
-            </field>
-        </record>
+    <!-- Asset Search  -->
+    <record model="ir.ui.view" id="assets_search">
+    	<field name="name">Asset Search</field>
+      <field name="model">asset.asset</field>
+      <field name="arch" type="xml">
+        <search string="Asset Search">
+          <field name="asset_number"/>
+          <field name="name"/>
+          <field name="property_stock_asset"/>
+          <field name="criticality"/>
+          <field name="user_id"/>
+          <field name="category_ids"/>
+          <separator />
+          <group expand="0" string="Group By">
+          	<filter name="group_name" string="Name" context="{'group_by': 'name'}"/>
+          	<filter name="group_user" string="User" context="{'group_by': 'user_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
 
-        <record id="action_assets" model="ir.actions.act_window">
-            <field name="name">Assets</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">asset.asset</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
-            <field name="view_id" eval="False"/>
-        </record>
+		<!-- Asset Action  -->
+    <record id="action_assets" model="ir.actions.act_window">
+      <field name="name">Assets</field>
+      <field name="type">ir.actions.act_window</field>
+    	<field name="res_model">asset.asset</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="view_id" eval="False"/>
+    </record>
 
-        <record model="ir.actions.act_window.view" id="action_assets_kanban_view">
-            <field name="sequence" eval="0"/>
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="assets_kanban_view"/>
-            <field name="act_window_id" ref="action_assets"/>
-        </record>
+    <record model="ir.actions.act_window.view" id="action_assets_kanban_view">
+      <field name="sequence" eval="0"/>
+      <field name="view_mode">kanban</field>
+      <field name="view_id" ref="assets_kanban_view"/>
+      <field name="act_window_id" ref="action_assets"/>
+    </record>
 
-        <record model="ir.actions.act_window.view" id="action_assets_tree_view">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="assets_tree_view"/>
-            <field name="act_window_id" ref="action_assets"/>
-        </record>
+    <record model="ir.actions.act_window.view" id="action_assets_tree_view">
+      <field name="sequence" eval="1"/>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="assets_tree_view"/>
+      <field name="act_window_id" ref="action_assets"/>
+    </record>
 
-        <record model="ir.actions.act_window.view" id="action_assets_form_view">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="assets_form_view"/>
-            <field name="act_window_id" ref="action_assets"/>
-        </record>
+    <record model="ir.actions.act_window.view" id="action_assets_form_view">
+      <field name="sequence" eval="2"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="assets_form_view"/>
+      <field name="act_window_id" ref="action_assets"/>
+    </record>
 
-        <!-- Management Asset Kanban View  -->
-        <record model="ir.ui.view" id="management_assets_kanban_view">
-            <field name="name">Manage states Asset Kanban</field>
-            <field name="model">asset.asset</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="maintenance_state_id" create="false" delete="false">
-                    <field name="maintenance_state_id"/>
-                    <field name="maintenance_state_color"/>
-                    <field name="user_id"/>
-                    <field name="criticality"/>
-                    <field name="id" />
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_card codup_kanban_status oe_kanban_global_click">
-                                <div class="codup_kanban_left">
-                                    <a type="open"></a>
-                                    <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="codup_status_color_#{record.maintenance_state_color.raw_value} codup_status"></div>
-                                </div>
-                                <div class="codup_kanban_details">
-                                    <h4>
-                                        <a type="open"><field name="name"/></a>
-                                    </h4>
-                                    <ul>
-                                        <li title="Model"><field name="model"></field></li>
-                                        <li title="Manufacturer"><field name="manufacturer_id"></field></li>
-                                        <li class="codup_kanban_info">
-                                        <a t-if="record.criticality.raw_value == 0" t-attf-title="#{record.criticality.value}" class="codup_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 0" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value lte 1" t-attf-title="#{record.criticality.value}" class="codup_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 1" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value lte 2" t-attf-title="#{record.criticality.value}" class="codup_attention_off"><span class="fa fa-exclamation-triangle"/></a>
-                                        <a t-if="record.criticality.raw_value gt 2" t-attf-title="#{record.criticality.value}" class="codup_attention_on"><span class="fa fa-exclamation-triangle"/></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+    <!-- Asset Tags Tree View -->
+    <record id="asset_category_tree_view" model="ir.ui.view">
+    	<field name="name">asset.category.tree</field>
+      <field name="model">asset.category</field>
+      <field name="arch" type="xml">
+      	<tree string="Asset Tags" editable="top">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
 
-        <record id="action_management_assets" model="ir.actions.act_window">
-            <field name="name">Manage states</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">asset.asset</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,form</field>
-            <field name="view_id" eval="False"/>
-        </record>
+		<!-- Asset Tags Action -->
+    <record id="action_asset_category" model="ir.actions.act_window">
+      <field name="name">Asset Tags</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">asset.category</field>
+    	<field name="view_type">form</field>
+      <field name="view_mode">tree</field>
+    </record>
 
-        <record model="ir.actions.act_window.view" id="action_management_assets_kanban_view">
-            <field name="sequence" eval="0"/>
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="management_assets_kanban_view"/>
-            <field name="act_window_id" ref="action_management_assets"/>
-        </record>
-
-        <!-- Asset State Form View  -->
-        <record id="asset_state_form_view" model="ir.ui.view">
-            <field name="name">asset.state.form</field>
-            <field name="model">asset.state</field>
-            <field name="arch" type="xml">
-                <form string="State" version="7.0">
-                    <sheet>
-                        <div class="oe_title">
-                            <label for="name"/>
-                            <h1><field name="name" class="oe_inline"/></h1>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="state_color"/>
-                                <field name="team"/>
-                            </group>
-                            <group>
-                            </group>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!-- Asset State Kanban View  -->
-        <record model="ir.ui.view" id="asset_state_kanban_view">
-            <field name="name">Asset State Kanban</field>
-            <field name="model">asset.state</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="team">
-                    <field name="name"/>
-                    <field name="team"/>
-                    <field name="state_color"/>
-                    <field name="sequence" widget="handle"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_card codup_kanban_status oe_kanban_global_click">
-                                <h4>
-                                <a name="change_color" string="Change color" type="object"><span t-attf-class="codup_status_color_#{record.state_color.raw_value} codup_status"></span></a>
-                                <field name="name"/>
-                                </h4>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
-
-        <record id="action_asset_state" model="ir.actions.act_window">
-            <field name="name">Asset States</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">asset.state</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,form</field>
-        </record>
-
-        <!-- Asset Tags Tree View -->
-        <record id="asset_category_tree_view" model="ir.ui.view">
-            <field name="name">asset.category.tree</field>
-            <field name="model">asset.category</field>
-            <field name="arch" type="xml">
-                <tree string="Asset Tags" editable="top">
-                    <field name="name"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="action_asset_category" model="ir.actions.act_window">
-            <field name="name">Asset Tags</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">asset.category</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree</field>
-        </record>
-
-	<!-- Asset State Form View  -->
+		<!-- Asset State Form View  -->
 		<record id="asset_stage_form_view" model="ir.ui.view">
 			<field name="name">asset.stage.form</field>
 		  <field name="model">asset.stage</field>
@@ -342,7 +224,7 @@
 		  </field>
 		</record>
 
-	<!-- Asset State Kanban View  -->
+		<!-- Asset State Kanban View  -->
 		<record id="asset_stage_tree_view" model="ir.ui.view">
 		  <field name="name">Asset Stage Tree</field>
 		  <field name="model">asset.stage</field>
@@ -358,6 +240,7 @@
 		  </field>
 		</record>
 
+		<!-- Asset Stage Action -->
 		<record id="action_asset_stage" model="ir.actions.act_window">
 		  <field name="name">Asset Stages</field>
 		 	<field name="type">ir.actions.act_window</field>
