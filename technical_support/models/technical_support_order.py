@@ -62,7 +62,7 @@ class TechnicalSupportOrder(models.Model):
     date_planned = fields.Datetime('Planned Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     date_scheduled = fields.Datetime('Start Date', required=True, track_visibility='onchange')
     date_execution = fields.Datetime('Execution Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)],'ready':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    date_finish = fields.Datetime('Finish Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    date_finish = fields.Datetime('Finish Date', required=True, track_visibility='onchange')
 
     tools_description = fields.Text('Tools Description', track_visibility='onchange')
     labor_description = fields.Text('Labor Description', track_visibility='onchange')

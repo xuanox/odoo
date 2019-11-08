@@ -150,6 +150,7 @@ class TechnicalSupportRequest(models.Model):
             order_id = order.create({
                 'date_planned':request.requested_date,
                 'date_scheduled':request.requested_date,
+                'date_finish':request.requested_date,
                 'date_execution':request.requested_date,
                 'origin': request.name,
                 'user_id': request.user_id.id,
