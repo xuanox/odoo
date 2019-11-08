@@ -81,6 +81,7 @@ class HelpdeskTicket(models.Model):
                 'date_planned':request.date_planned,
                 'date_scheduled':request.date_planned,
                 'date_execution':request.date_planned,
+                'date_finish':request.date_planned,
                 'origin': request.id,
                 'user_id': request.user_id.id,
                 'state': 'draft',
