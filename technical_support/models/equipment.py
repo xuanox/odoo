@@ -40,7 +40,7 @@ class EquipmentEquipment(models.Model):
     tsr_count = fields.Integer(compute='_tsr_count', string='# TSR')
     maintenance_date = fields.Datetime(compute='_next_maintenance', string='Maintenance Date')
 
-    maintenance_ids = fields.One2many('technical_support.request', 'equipment_id')
+    maintenance_ids = fields.One2many('technical_support.request', 'equipment_id', string='TSR')
     period = fields.Integer('Days between each preventive maintenance')
     next_action_date = fields.Date(compute='_compute_next_maintenance', string='Date of the next preventive maintenance', store=True)
     maintenance_duration = fields.Float(help="Maintenance Duration in hours.")

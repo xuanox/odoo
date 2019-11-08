@@ -10,6 +10,7 @@ import time
 from odoo import api, fields, models, _
 from odoo import netsvc
 import odoo.addons.decimal_precision as dp
+from odoo.exceptions import ValidationError
 
 
 class TechnicalSupportOrder(models.Model):
@@ -156,6 +157,12 @@ class TechnicalSupportOrder(models.Model):
     def onchange_ticket(self):
         self.equipment_id = self.ticket_id.equipment_id
         self.user_id = self.ticket_id.user_id
+
+    @api.constrains('date_scheduled', 'date_finish')
+    def _check_date_time(self):
+        if self.date_scheduled > self.date_finish:
+            raise ValidationError(_(
+                'End Time cannot be set before Start Time.'))
 
     def test_ready(self):
         res = True
@@ -314,7 +321,6 @@ class TechnicalSupportOrder(models.Model):
             self.filtered(lambda o: o.state == 'ready').write({'state': 'consulting'})
         return super(TechnicalSupportOrder, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
 
-
 class TechnicalSupportOrderPartsLine(models.Model):
     _name = 'technical_support.order.parts.line'
     _description = 'Maintenance Planned Parts'
@@ -386,18 +392,18 @@ class TechnicalSupportOrderChecklistLine(models.Model):
         return True
 
 class TechnicalSupportTask(models.Model):
-    """
-    Maintenance Tasks (Template for order)
-    """
     _name = 'technical_support.task'
     _description = 'Maintenance Task'
 
     MAINTENANCE_TYPE_SELECTION = [
+        ('cm', 'Corrective'),
         ('pm', 'Preventive'),
         ('pd', 'Predictive'),
         ('in', 'Install'),
         ('un', 'Uninstall'),
-        ('fco', 'FCO')
+        ('pcc', 'PCC'),
+        ('fco', 'FCO'),
+        ('demo', 'Demo')
     ]
 
     name = fields.Char('Description', size=64, required=True, translate=True)
@@ -471,7 +477,7 @@ class TechnicalSupportOrderAssetsLine(models.Model):
     name = fields.Char('Description', size=64)
     assets_id = fields.Many2one('asset.asset', 'Assets', required=True)
     maintenance_id = fields.Many2one('technical_support.order', 'Maintenance Order')
-    maintenance_state_id = fields.Many2one('asset.state', related='assets_id.maintenance_state_id', string='State')
+    stage_id = fields.Many2one('asset.stage', related='assets_id.stage_id', string='Stage')
 
 class TechnicalSupportChecklistHistory(models.Model):
     _name="technical_support.checklist.history"

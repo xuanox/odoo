@@ -1,10 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <template id="assets_backend" name="asset assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/asset/static/src/css/asset.css"/>
-            </xpath>
-        </template>
-    </data>
-</openerp>
+<odoo>
+  <data>
+    <template id="assets_backend" name="asset assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/asset/static/src/css/asset.css"/>
+      </xpath>
+    </template>
+
+    <!-- Top menu item -->
+    <menuitem name="Assets"
+        id="base.menu_mro_root"
+        sequence="80"/>
+
+    <!-- Asset menu -->
+    <menuitem name="Assets"
+        id="menu_maintenance_assets"
+        parent="base.menu_mro_root"
+        groups="asset.group_mro_customer"
+        sequence="9"/>
+
+    <!-- Asset item -->
+    <menuitem name="Assets"
+        action="action_assets"
+        id="menu_maintenance_assets_assets"
+        parent="menu_maintenance_assets"
+        groups="asset.group_mro_customer"
+        sequence="100"/>
+
+    <!-- Management Asset item -->
+    <menuitem name="Manage states"
+        action="action_management_assets"
+        id="menu_maintenance_assets_management"
+        parent="menu_maintenance_assets"
+        groups="asset.group_mro_user"
+        sequence="100"/>
+
+    <!-- Report menu -->
+    <menuitem name="Reports"
+        id="menu_maintenance_report"
+        parent="base.menu_mro_root"
+        groups="asset.group_mro_customer"
+        sequence="30"/>
+
+    <!-- Configuration menu -->
+    <menuitem name="Configuration"
+        id="menu_maintenance_config"
+        parent="base.menu_mro_root"
+        groups="asset.group_mro_manager"
+        sequence="200"/>
+
+        <!-- Asset state item -->
+    <menuitem name="Asset States"
+        action="action_asset_state"
+        id="menu_asset_state"
+        parent="menu_maintenance_config"
+        groups="asset.group_mro_manager"
+        sequence="100"/>
+
+    <!-- Asset Tags item -->
+    <menuitem name="Asset Tags"
+        action="action_asset_category"
+        id="menu_asset_category"
+        parent="menu_maintenance_config"
+        groups="asset.group_mro_manager"
+        sequence="100"/>
+
+    <!-- Asset state item -->
+    <menuitem
+      	name="Asset Stages"
+      	action="action_asset_stage"
+      	id="menu_asset_stage"
+      	parent="menu_maintenance_config"
+        groups="asset.group_mro_manager"
+      	sequence="2"/>
+
+  </data>
+</odoo>
