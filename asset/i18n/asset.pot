@@ -507,13 +507,6 @@ msgstr ""
 msgid "Start Date"
 msgstr ""
 
-#. module: asset
-#: field:asset.asset,finance_state_id:0
-#: field:asset.asset,maintenance_state_id:0
-#: field:asset.asset,manufacture_state_id:0
-#: field:asset.asset,warehouse_state_id:0
-#: view:asset.state:asset.asset_state_form_view
-#: field:asset.state,name:0
 msgid "State"
 msgstr ""
 
@@ -639,4 +632,3 @@ msgstr ""
 #: selection:asset.state,state_color:0
 msgid "Yellow"
 msgstr ""
-
