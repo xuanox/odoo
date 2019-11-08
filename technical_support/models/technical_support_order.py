@@ -477,7 +477,7 @@ class TechnicalSupportOrderAssetsLine(models.Model):
     name = fields.Char('Description', size=64)
     assets_id = fields.Many2one('asset.asset', 'Assets', required=True)
     maintenance_id = fields.Many2one('technical_support.order', 'Maintenance Order')
-    maintenance_state_id = fields.Many2one('asset.state', related='assets_id.maintenance_state_id', string='State')
+    stage_id = fields.Many2one('asset.stage', related='assets_id.stage_id', string='Stage')
 
 class TechnicalSupportChecklistHistory(models.Model):
     _name="technical_support.checklist.history"
