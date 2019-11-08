@@ -182,14 +182,6 @@
             <field name="act_window_id" ref="action_assets"/>
         </record>
 
-        <!-- Asset item -->
-        <menuitem name="Assets"
-            action="action_assets"
-            id="menu_maintenance_assets_assets"
-            parent="menu_maintenance_assets"
-            groups="asset.group_mro_customer"
-            sequence="100"/>
-
         <!-- Management Asset Kanban View  -->
         <record model="ir.ui.view" id="management_assets_kanban_view">
             <field name="name">Manage states Asset Kanban</field>
@@ -248,28 +240,6 @@
             <field name="act_window_id" ref="action_management_assets"/>
         </record>
 
-        <!-- Management Asset item -->
-        <menuitem name="Manage states"
-            action="action_management_assets"
-            id="menu_maintenance_assets_management"
-            parent="menu_maintenance_assets"
-            groups="asset.group_mro_user"
-            sequence="100"/>
-
-        <!-- Report menu -->
-        <menuitem name="Reports"
-            id="menu_maintenance_report"
-            parent="base.menu_mro_root"
-            groups="asset.group_mro_customer"
-            sequence="30"/>
-
-        <!-- Configuration menu -->
-        <menuitem name="Configuration"
-            id="menu_maintenance_config"
-            parent="base.menu_mro_root"
-            groups="asset.group_mro_manager"
-            sequence="200"/>
-
         <!-- Asset State Form View  -->
         <record id="asset_state_form_view" model="ir.ui.view">
             <field name="name">asset.state.form</field>
@@ -326,14 +296,6 @@
             <field name="view_mode">kanban,form</field>
         </record>
 
-        <!-- Asset state item -->
-        <menuitem name="Asset States"
-            action="action_asset_state"
-            id="menu_asset_state"
-            parent="menu_maintenance_config"
-            groups="asset.group_mro_manager"
-            sequence="100"/>
-
         <!-- Asset Tags Tree View -->
         <record id="asset_category_tree_view" model="ir.ui.view">
             <field name="name">asset.category.tree</field>
@@ -352,14 +314,6 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
         </record>
-
-        <!-- Asset Tags item -->
-        <menuitem name="Asset Tags"
-            action="action_asset_category"
-            id="menu_asset_category"
-            parent="menu_maintenance_config"
-            groups="asset.group_mro_manager"
-            sequence="100"/>
 
 	<!-- Asset State Form View  -->
 		<record id="asset_stage_form_view" model="ir.ui.view">
@@ -411,15 +365,6 @@
 		  <field name="view_type">form</field>
 		  <field name="view_mode">tree,form</field>
 		</record>
-
-	<!-- Asset state item -->
-		<menuitem
-			name="Asset Stages"
-		  action="action_asset_stage"
-		  id="menu_asset_stage"
-		  parent="menu_maintenance_config"
-		  groups="asset.group_mro_manager"
-		  sequence="2"/>
 
  	</data>
 </odoo>
