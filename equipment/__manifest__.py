@@ -27,7 +27,7 @@ Support following feature:
     'website': 'http://www.electronicamedica.com',
     'category': 'Industries',
     'sequence': 0,
-    'depends': ['stock', 'helpdesk'],
+    'depends': ['stock', 'helpdesk', 'asset'],
     'demo': ['data/equipment_demo.xml'],
     'data': [
         'security/equipment_security.xml',

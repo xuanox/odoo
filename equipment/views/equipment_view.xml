@@ -70,6 +70,7 @@
                   <field name="zone_id" widget="many2one"/>
 									<field name="property_stock_equipment" domain="[('usage','=','equipment')]"/>
 									<field name="criticality"/>
+                  <field name="parent_id" widget="many2one"/>
                 </group>
               </group>
             </page>
@@ -128,6 +129,15 @@
 		        <page name="accesory" string="Accesory">
 		          <field name="child_ids"/>
 		        </page>
+            <page name="tool" string="Tools">
+
+            </page>
+            <page name="hardware" string="Hardware">
+
+            </page>
+            <page name="consumable" string="Consumable">
+
+            </page>
 						<page name="history" string="State History">
 		          <field name="history_state_ids" >
 		            <tree>
