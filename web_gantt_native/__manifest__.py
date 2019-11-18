@@ -4,7 +4,7 @@
     "summary": """Added support Gantt Chart Widget View""",
     "category": "Project",
     "images": ['static/description/icon.png'],
-    "version": "12.18.11.9.0",
+    "version": "12.29.09.08.0",
     "description": """
         Update: python 3.6.3 and click to gantt line
         Fix: momentjs fix
@@ -27,6 +27,16 @@
         Update: Detail plan, fix ghost bar, fix default start time: allow neagative value..
         Fix: mouse flicker 
         Update: UI - new arrows designe.
+        Update: added - bar load
+        Fix: some fix gantt bar
+        Update: Loop Detect.
+        Update: Add subtask in group, from tree
+        Fix: Model load
+        Update: Sorting and Deadline
+        FIX: wrong el for sorted
+        Update: UI ztree
+        Fix: Tree
+        
     """,
 
     "author": "Viktor Vorobjov",

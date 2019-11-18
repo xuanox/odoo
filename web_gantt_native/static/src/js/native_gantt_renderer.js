@@ -7,8 +7,7 @@ var field_utils = require('web.field_utils');
 var time = require('web.time');
 
 var GanttToolField =    require('web_gantt_native.ToolField');
-var GanttListItem =     require('web_gantt_native.Item');
-var GanttItemSorted = require('web_gantt_native.Item_sorted');
+
 
 var GanttTimeLineHead = require('web_gantt_native.TimeLineHead');
 var GanttTimeLineHeader = require('web_gantt_native.TimeLineHeader');
@@ -23,6 +22,20 @@ var GanttTimeLineSummary = require('web_gantt_native.Summary');
 var GanttTimeLineFirst = require('web_gantt_native.BarFirst');
 
 var GanttTimeLineInfo = require('web_gantt_native.Info');
+
+var GanttResourcesLevel = require('web_gantt_native.ResLevel');
+var GanttResourcesBar = require('web_gantt_native.ResBar');
+
+
+var GanttListOptionsItem = require('web_gantt_native.ItemOptions');
+var GanttTimeLineDocs = require('web_gantt_native.Docs');
+
+
+
+var GanttListAction = require('web_gantt_native.ItemAction');
+var GanttItemzTree = require('web_gantt_native.ItemzTree');
+var GanttListInfo = require('web_gantt_native.ItemInfo');
+
 
 var session = require('web.session');
 
@@ -164,7 +177,7 @@ return AbstractRenderer.extend({
     _renderGantt: function () {
         var self = this;
 
-        var parent = {};
+        // var parent = {};
 
         self.Predecessor = self.state.data.predecessor;
         self.Task_Info = self.state.data.task_info;
@@ -185,40 +198,20 @@ return AbstractRenderer.extend({
         self.model_fields_dict  = self.state.data.model_fields_dict;
         self.TreeView = self.state.data.TreeView;
 
-        parent.fields = self.state.fields;
-        parent.model_fields_dict = self.state.data.model_fields_dict;
-        parent.gantt_attrs = self.state.data.model_fields_view.arch.attrs;
-        parent.second_sort = self.state.data.second_sort;
-        parent.main_group = self.state.data.main_group;
+        self.LoadMode = self.state.data.LoadMode;
+        self.Load_Data = self.state.data.Load_Data;
 
+        self.Task_Load_Data = self.state.data.Task_Load_Data;
 
-
-        var tasks = self.state.data.ntasks;
-        var group_bys = self.state.data.group_bys;
-
-
-        var groupRows = GanttToolField.groupRows(tasks, group_bys, parent);
-
-        //Get all tasks with group
-        self.projects = groupRows["projects"];
-
-        //Get Max Min date for data
-        self.GtimeStopA = self.GtimeStopA.concat(groupRows["timestop"]);
-        self.GtimeStartA = self.GtimeStartA.concat(groupRows["timestart"]);
-
-        //Calc Min - Max
-        self.GtimeStart = Math.min.apply(null, self.GtimeStartA); // MAX date in date range
-        self.GtimeStop = Math.max.apply(null, self.GtimeStopA); // Min date in date range
-        //Clean
-        self.GtimeStartA = [];
-        self.GtimeStopA = [];
-
+        self.GtimeStart = self.state.data.GtimeStart;
+        self.GtimeStop = self.state.data.GtimeStop;
 
 
         //set time scale type if is undefined
         if ( self.timeType === undefined ) {
             self.timeType = 'month_day';
         }
+
 
         //Gantt Conteriner Render.
         self.$el.html(QWeb.render('GanttContainerView.main', {
@@ -230,37 +223,7 @@ return AbstractRenderer.extend({
         }));
 
         //Sorted and grouped to flat list
-        self.rows_to_gantt = GanttToolField.flatRows(self.projects);
-
-        //Gantt Data Widget Render
-        _.map(self.rows_to_gantt, function(record){
-
-            var options = { items_sorted: self.ItemsSorted,
-                            export_wizard: self.ExportWizard,
-                            main_group_id_name: self.Main_Group_Id_Name,
-                            tree_view : self.TreeView,
-                            action_menu: self.Action_Menu,
-
-            };
-
-            var row = new GanttListItem(self, record, options);
-            row.appendTo(self.$('.task-gantt-items'));
-            self.widgets.push(row);
-
-            }
-        );
-
-        //Gantt Data Widget Render
-        _.map(self.rows_to_gantt, function(record){
-
-            var options = { items_sorted: self.ItemsSorted};
-
-            var row = new GanttItemSorted.GanttListSortingItem(self, record, options);
-            row.appendTo(self.$('.task-sorting-items'));
-            self.widgets.push(row);
-
-            }
-        );
+        self.rows_to_gantt = self.state.data.rows_to_gantt;
 
 
         // Start - End month
@@ -269,9 +232,55 @@ return AbstractRenderer.extend({
         self.timeScaleUTC = self.lastDayDate.valueOf() - self.firstDayDate.valueOf(); // raznica vremeni
         self.firstDayScale = self.firstDayDate.valueOf();
 
-        //Sorted Item if sorted allow
-        GanttItemSorted.sorted(self, this.ItemsSorted);
 
+
+        var options = { items_sorted: self.ItemsSorted,
+                        export_wizard: self.ExportWizard,
+                        main_group_id_name: self.Main_Group_Id_Name,
+                        tree_view : self.TreeView,
+                        action_menu: self.Action_Menu,
+
+        };
+
+        self.widget_ztree = new GanttItemzTree(self, self.rows_to_gantt, options);
+        self.widget_ztree.appendTo(self.$('.task-gantt-items'));
+
+
+    },
+
+
+    AddItemsData: function (){
+        var self = this;
+
+
+        //Item Action
+        if (self.widget_item_action){
+            this.widget_item_action.destroy();
+            self.widget_item_action = [];
+        }
+
+        var options = {
+            items_sorted: self.ItemsSorted,
+            export_wizard: self.ExportWizard,
+            main_group_id_name: self.Main_Group_Id_Name,
+            tree_view: self.TreeView,
+            action_menu: self.Action_Menu,
+        };
+
+
+        self.widget_item_action = new GanttListAction(self, options);
+        self.widget_item_action.appendTo(self.$('.task-gantt-action'));
+
+
+
+        //Item Info
+        if (self.widget_item_info){
+            this.widget_item_info.destroy();
+            self.widget_item_info = [];
+        }
+
+        self.widget_item_info = new GanttListInfo(self, options);
+        self.widget_item_info.appendTo(self.$('.task-gantt-info'));
 
 
     },
@@ -314,6 +323,12 @@ return AbstractRenderer.extend({
         this.gantt_timeline_header_widget.appendTo(ctrl_panel);
 
 
+        if (this.gantt_item_options_widget){
+            this.gantt_item_options_widget.destroy();
+            this.gantt_item_options_widget = [];
+        }
+        this.gantt_item_options_widget = new GanttListOptionsItem.OptionsItem(self);
+        this.gantt_item_options_widget.appendTo(self.$('.timeline-gantt-options'));
 
 
         if (this.gantt_timeline_scroll_widget){
@@ -363,15 +378,35 @@ return AbstractRenderer.extend({
            //  })
         }
 
-        var options = { items_sorted: self.ItemsSorted, tree_view : self.TreeView, };
+        var $zTree = self.widget_ztree.$zTree;
+        var options = { items_sorted: self.ItemsSorted, tree_view : self.TreeView};
+        var nodes = $zTree.getNodes();
 
-        _.map(rows_to_gantt, function (record) {
+         _.each(nodes, function (node) {
 
-             var gantt_time_line_data = new GanttTimeLineData(self, timeScale, time_type, record, options);
+             var childNodes = $zTree.transformToArray(node);
 
-             gantt_time_line_data.appendTo(self.$('.task-gantt-timeline-data'));
-             self.gantt_timeline_data_widget.push(gantt_time_line_data);
-        });
+             _.each(childNodes, function (child) {
+
+                 var gantt_time_line_data = new GanttTimeLineData(self, timeScale, time_type, child, options);
+
+                gantt_time_line_data.appendTo(self.$('.task-gantt-timeline-data'));
+                self.gantt_timeline_data_widget.push(gantt_time_line_data);
+
+
+
+             })
+         });
+
+        // var options = { items_sorted: self.ItemsSorted, tree_view : self.TreeView};
+        //
+        // _.map(rows_to_gantt, function (record) {
+        //
+        //      var gantt_time_line_data = new GanttTimeLineData(self, timeScale, time_type, record, options);
+        //
+        //      gantt_time_line_data.appendTo(self.$('.task-gantt-timeline-data'));
+        //      self.gantt_timeline_data_widget.push(gantt_time_line_data);
+        // });
 
 
 
@@ -398,6 +433,32 @@ return AbstractRenderer.extend({
 
         this.gantt_timeline_info_widget = new GanttTimeLineInfo.InfoWidget(self);
         this.gantt_timeline_info_widget.appendTo(self.$('.task-gantt-bar-plan'));
+
+        //Resources Level
+        if (self.gantt_timeline_res_level_widget){
+            this.gantt_timeline_res_level_widget.destroy();
+            self.gantt_timeline_res_level_widget = [];
+        }
+        this.gantt_timeline_res_level_widget = new GanttResourcesLevel.ResLevelWidget(self);
+        this.gantt_timeline_res_level_widget.appendTo(self.$('.task-gantt-timeline-data'));
+
+
+        //Detail Task
+        if (self.gantt_timeline_res_bar_widget){
+            this.gantt_timeline_res_bar_widget.destroy();
+            self.gantt_timeline_res_bar_widget = [];
+        }
+        this.gantt_timeline_res_bar_widget= new GanttResourcesBar.ResBarWidget(self);
+        this.gantt_timeline_res_bar_widget.appendTo(self.$('.task-gantt-timeline-data'));
+
+
+        //Docs
+        if (self.gantt_timeline_docs_widget){
+            this.gantt_timeline_docs_widget.destroy();
+            self.gantt_timeline_docs_widget = [];
+        }
+        this.gantt_timeline_docs_widget= new GanttTimeLineDocs.DocsWidget(self);
+        this.gantt_timeline_docs_widget.appendTo(self.$('.task-gantt-timeline-data'));
 
 
     },

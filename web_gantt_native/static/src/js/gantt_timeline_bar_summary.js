@@ -26,7 +26,9 @@ var GanttTimeLineSummary = Widget.extend({
 
                 var row_id = widget.record.id;
 
-                if (widget.record.subtask_count > 0) {
+                // if (widget.record.subtask_count > 0 || widget.record.isParent) {
+
+                if (widget.record.isParent) {
 
                     var start_time = false;
                     if (widget.record.summary_date_start){
@@ -38,34 +40,40 @@ var GanttTimeLineSummary = Widget.extend({
                         stop_time = widget.record.summary_date_end.getTime();
                     }
 
-                    var start_pxscale = Math.round((start_time-parentg.firstDayScale) / parentg.pxScaleUTC);
-                    var stop_pxscale = Math.round((stop_time-parentg.firstDayScale) / parentg.pxScaleUTC);
+                    if (start_time && stop_time){
 
-                    var bar_left = start_pxscale;
-                    var bar_width = stop_pxscale-start_pxscale;
+                        var start_pxscale = Math.round((start_time-parentg.firstDayScale) / parentg.pxScaleUTC);
+                        var stop_pxscale = Math.round((stop_time-parentg.firstDayScale) / parentg.pxScaleUTC);
 
-                    var summary_bar = $('<div class="task-gantt-bar-summary"></div>');
+                        var bar_left = start_pxscale;
+                        var bar_width = stop_pxscale-start_pxscale;
 
-                    summary_bar.addClass("task-gantt-bar-summary-"+row_id);
+                        var summary_bar = $('<div class="task-gantt-bar-summary"></div>');
 
-                    summary_bar.css({"left": bar_left + "px"});
-                    summary_bar.css({"width": bar_width + "px"});
+                        summary_bar.addClass("task-gantt-bar-summary-"+row_id);
 
-                    var row_data = _.find(parentg.gantt_timeline_data_widget, function (o) { return o.record_id === row_id; })
-                    var rowdata = row_data.el;
+                        summary_bar.css({"left": bar_left + "px"});
+                        summary_bar.css({"width": bar_width + "px"});
 
-                    var bar_summary_start = $('<div class="task-gantt-summary task-gantt-summary-start"></div>');
-                    var bar_summary_end = $('<div class="task-gantt-summary task-gantt-summary-end"></div>');
+                        var row_data = _.find(parentg.gantt_timeline_data_widget, function (o) { return o.record_id === row_id; })
+                        var rowdata = row_data.el;
 
-                    summary_bar.append(bar_summary_start);
-                    summary_bar.append(bar_summary_end);
+                        var bar_summary_start = $('<div class="task-gantt-summary task-gantt-summary-start"></div>');
+                        var bar_summary_end = $('<div class="task-gantt-summary task-gantt-summary-end"></div>');
 
-                    var bar_summary_width = $('<div class="task-gantt-summary-width"></div>');
-                    bar_summary_width.css({"width": bar_width + "px"});
+                        summary_bar.append(bar_summary_start);
+                        summary_bar.append(bar_summary_end);
 
-                    summary_bar.append(bar_summary_width);
+                        var bar_summary_width = $('<div class="task-gantt-summary-width"></div>');
+                        bar_summary_width.css({"width": bar_width + "px"});
 
-                    $(rowdata).append(summary_bar);
+                        summary_bar.append(bar_summary_width);
+
+                        $(rowdata).append(summary_bar);
+
+                    }
+
+
 
                 }
 

@@ -121,12 +121,12 @@ var GanttListItem = Widget.extend({
 
         if (!this.record.is_group) {
             this.$el.append('<span class="task-gantt-focus"><i class="fa fa-crosshairs fa-1x"></i></span>');
+
         }
 
         if (this.record.is_group) {
 
             this.$el.css({'background-color':  "rgba(40, 95, 143, 0.10)"});
-
 
         }
 
@@ -141,9 +141,13 @@ var GanttListItem = Widget.extend({
 
         this.$el.append('<span class="task-gantt-item-handle"></span>');
 
+
+
+
         if (this.record.is_group) {
 
             if (fold_group){
+
                 this.$el.append('<span class="task-gantt-caret-right"><i class="fa fa-caret-right"></i></span>');
 
                 name =  "("+self.record["task_count"] +") - " + name;
@@ -154,6 +158,7 @@ var GanttListItem = Widget.extend({
             }
 
             this.$el.append('<span class="task-gantt-item-name task-gantt-items-group">'+name+'</span>');
+
 
             if (this.record.group_field === self.action_menu){
 
@@ -181,7 +186,7 @@ var GanttListItem = Widget.extend({
 
             // if (subtask_count && this.items_sorted){
             if (subtask_count && this.tree_view){
-
+                    this.$el.append('<span class="task-gantt-task-plus"><i class="fa fa-plus-circle fa-1x"></i></span>');
                     if (fold_child){
 
                         this.$el.append('<span class="task-gantt-caret-right"><i class="fa fa-plus-square-o"></i></span>');
@@ -261,9 +266,17 @@ var GanttListItem = Widget.extend({
         var context = this.__parentedParent.state.contexts;
         var self = this.__parentedParent;
 
+        var rows_to_gantt = self.rows_to_gantt;
+        var time_type = self.timeType;
+
+
         var group_id = event.data["group_id"];
 
         context['default_group_id'] = group_id || false;
+        context['rows_to_gantt'] = rows_to_gantt || false;
+        context['time_type'] = time_type || false;
+
+
 
         var res_model = event.data["exoprt_wizard"];
 
@@ -277,17 +290,25 @@ var GanttListItem = Widget.extend({
     },
 
 
-    new_record: function(default_project_id){
+
+    new_record: function(default_project_id, default_parent_task_id){
 
         var context = this.__parentedParent.state.contexts;
         var self = this.__parentedParent;
+
         context['default_project_id'] = default_project_id || false;
+        context['default_parent_id'] = default_parent_task_id || false;
+
+
+        self.TimeToLeft = $('.task-gantt-timeline').scrollLeft();
+        self.ScrollToTop = $('.task-gantt').scrollTop();
+
 
         var pop = new dialogs.FormViewDialog(this.__parentedParent, {
             res_model: 'project.task',
             res_id: false,
             context: context,
-            title: _t("Please Select Project Firt For Task"),
+            title: _t("Please Select Project First For Task"),
             on_saved: function () {
                 self.trigger_up('gantt_refresh_after_change' )
                 },
@@ -370,7 +391,7 @@ var GanttListItem = Widget.extend({
 
     add_record: function(event) {
 
-        this.new_record(event.data.group_id);
+        this.new_record(event.data.group_id, event.data.task_parent_id);
     },
 
     open_record: function (event, options) {
@@ -596,7 +617,7 @@ var GanttListItem = Widget.extend({
                        is_group: is_group,
                        group_id: group_id,
                        group_field: group_field,
-                       exoprt_wizard: this.export_wizard
+                       exoprt_wizard: this.export_wizard,
                    });
 
                 }
@@ -616,6 +637,36 @@ var GanttListItem = Widget.extend({
                         start_date: start_date
                     });
                 }
+                //New Task -> Task
+                if ($(ev.target).hasClass("fa-plus-circle")) {
+
+                    var task_parent_id = false;
+
+                    if (is_group) {
+                        group_id = this.record.group_id[0];
+                        group_field = this.record.group_field;
+                    }
+                    else{
+
+                        if (this.record.id){
+                            task_parent_id = this.record.id
+                        }
+                        if (this.record.subtask_project_id){
+                            group_id = this.record.subtask_project_id[0]
+                        }
+
+                    }
+
+                    this.trigger_up('item_record_add', {
+                        id: this.record.id,
+                        is_group: is_group,
+                        group_id: group_id,
+                        task_parent_id: task_parent_id,
+                        group_field: group_field,
+                        start_date: start_date,
+                    });
+                }
+
                 //Scheduling action
                 if ($(ev.target).hasClass("fa-refresh")) {
 

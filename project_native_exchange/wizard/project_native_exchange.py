@@ -33,7 +33,6 @@ import xml.etree.ElementTree as ET
 class ProjectNativeExchangeImportTaskLine(models.TransientModel):
 
     _name = 'project.native.exchange.import.task.line'
-    _description = 'Poject Native Exchange Import Task Line'
 
     name = fields.Char(string='Field', readonly=True)
     seq_line = fields.Integer(string='Seq.', readonly=True)
@@ -48,7 +47,6 @@ class ProjectNativeExchangeImportTaskLine(models.TransientModel):
 class ProjectNativeExchangeImportPrjLine(models.TransientModel):
 
     _name = 'project.native.exchange.import.prj.line'
-    _description = 'Poject Native Exchange Import Project Line'
 
     name = fields.Char(string='Field', readonly=True)
     imp_value = fields.Char(string='imp value')
@@ -62,7 +60,6 @@ class ProjectNativeExchangeImportPrjLine(models.TransientModel):
 
 class ProjectNativeExchangeImport(models.TransientModel):
     _name = "project.native.exchange.import"
-    _description = 'Poject Native Exchange Import'
 
     name = fields.Char(string='File Name')
     file_load = fields.Binary(string='XML File')
@@ -214,7 +211,6 @@ class ProjectNativeExchangeImport(models.TransientModel):
             "date_end":         {"xml": "Finish",        "func": "datetime"},
             "color_gantt_set":  {"xml": "ColorGanttSet", "func": "bool"},
             "color_gantt":      {"xml": "ColorGantt",    "func": "str"},
-
             "is_milestone":     {"xml": "Milestone",      "func": "bool"},
             "on_gantt":         {"xml": "OnGantt",        "func": "bool"},
             "constrain_type":   {"xml": "ConstraintType", "func": "constraint_type"},
@@ -380,7 +376,7 @@ class ProjectNativeExchangeImport(models.TransientModel):
                         project_task_predecessor_model.create(predecesor_value_to_db)
 
 
-            project_task_model.sorting_update(sorting_ids=project_task_seq, subtask_project_id=False, project_id=project_id)
+            # project_task_model.sorting_update(sorting_ids=project_task_seq, subtask_project_id=False, project_id=project_id)
 
             return project_task_id_uid
 
@@ -443,7 +439,7 @@ class ProjectNativeExchangeImport(models.TransientModel):
 
 class ProjectNativeExchange(models.TransientModel):
     _name = "project.native.exchange"
-    _description = 'Poject Native Exchange'
+
 
     project_id = fields.Many2one('project.project', 'Project')
     name = fields.Char(string='File Name', default='project_exchange.xml')
