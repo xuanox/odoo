@@ -7,12 +7,13 @@ var Dialog = require('web.Dialog');
 
 var Widget = require('web.Widget');
 
-
+var time = require('web.time');
 var _t = core._t;
 
 
 var GanttToolTip = require('web_gantt_native.ToolTip');
 var GanttToolHint = require('web_gantt_native.ToolHint');
+var NativeGanttData = require('web_gantt_native.NativeGanttData');
 
 
 var GanttTimeLineData = Widget.extend({
@@ -22,14 +23,8 @@ var GanttTimeLineData = Widget.extend({
 
         'mouseover  .task-gantt-bar-plan'    :'HandleTipOver',
         'mouseout   .task-gantt-bar-plan'    :'HandleTipOut',
-
-        // 'mousedown .task-gantt-bar-plan': 'BarClick',
     },
 
-
-
-   // 'mouseover  .task-gantt-item, .task-gantt-timeline-row'     :'handleHoverOver',
-   // 'mouseout   .task-gantt-item, .task-gantt-timeline-row'     :'handleHoverOut',
 
     init: function(parent, timeScale, timeType, record, options) {
         this._super(parent);
@@ -42,72 +37,13 @@ var GanttTimeLineData = Widget.extend({
         this.BarClickX = undefined;
         this.BarClickDown = false;
 
-        this.deadline_status = false;
-
         this.items_sorted = options.items_sorted;
         this.tree_view = options.tree_view;
 
-
     },
 
-    get_position: function(gantt_date_start, gantt_date_stop, deadline_date){
 
-        var task_start_time = gantt_date_start.getTime();
-        var task_stop_time = gantt_date_stop.getTime();
-
-        var task_start_pxscale = Math.round((task_start_time-this.parent.firstDayScale) / this.parent.pxScaleUTC);
-        var task_stop_pxscale = Math.round((task_stop_time-this.parent.firstDayScale) / this.parent.pxScaleUTC);
-        // var bar_width = Math.round(task_time_len / this.parent.pxScaleUTC);
-        var bar_left = task_start_pxscale;
-        var bar_width = task_stop_pxscale-task_start_pxscale;
-
-
-        if (deadline_date) {
-
-            var date_deadline_time = deadline_date.getTime();
-            var date_deadline_pxscale = Math.round((date_deadline_time-this.parent.firstDayScale) / this.parent.pxScaleUTC);
-
-            var bar_deadline_left = false;
-            var bar_deadline_width = false;
-
-
-            if (date_deadline_pxscale >= task_stop_pxscale){
-
-                bar_deadline_left = bar_width;
-                bar_deadline_width = date_deadline_pxscale-task_stop_pxscale;
-
-                this.deadline_status = 'after_stop';
-
-            }
-
-            if (date_deadline_pxscale < task_stop_pxscale){
-
-                bar_deadline_left = bar_width - (task_stop_pxscale - date_deadline_pxscale);
-                bar_deadline_width = task_stop_pxscale-date_deadline_pxscale;
-                this.deadline_status = 'before_stop'
-
-            }
-
-            if (date_deadline_pxscale <= task_start_pxscale){
-
-                bar_deadline_left = bar_width - (task_stop_pxscale - date_deadline_pxscale);
-                bar_deadline_width = task_start_pxscale-date_deadline_pxscale;
-                this.deadline_status = 'before_start'
-
-            }
-
-        }
-
-        return {
-            bar_left: bar_left,
-            bar_width: bar_width,
-            bar_deadline_left : bar_deadline_left,
-            bar_deadline_width : bar_deadline_width
-        };
-
-    },
-
-    get_uposition: function(gantt_date_start, gantt_date_stop, any_date){
+    get_position_x: function(gantt_date_start, gantt_date_stop, any_date){
 
         var task_start_time = gantt_date_start.getTime();
         var task_stop_time = gantt_date_stop.getTime();
@@ -122,34 +58,33 @@ var GanttTimeLineData = Widget.extend({
 
         if (any_date) {
 
-            var date_deadline_time = any_date.getTime();
-            var date_deadline_pxscale = Math.round((date_deadline_time-this.parent.firstDayScale) / this.parent.pxScaleUTC);
+            var any_date_time = any_date.getTime();
+            var any_date_pxscale = Math.round((any_date_time-this.parent.firstDayScale) / this.parent.pxScaleUTC);
 
             var bar_any_left = false;
             var bar_any_width = false;
 
 
-            if (date_deadline_pxscale >= task_stop_pxscale){
+            if (any_date_pxscale >= task_stop_pxscale){
 
                 bar_any_left = bar_width;
-                bar_any_width = date_deadline_pxscale-task_stop_pxscale;
-
+                bar_any_width = any_date_pxscale-task_stop_pxscale;
                 any_status = 'after_stop';
 
             }
 
-            if (date_deadline_pxscale < task_stop_pxscale){
+            if (any_date_pxscale < task_stop_pxscale){
 
-                bar_any_left = bar_width - (task_stop_pxscale - date_deadline_pxscale);
-                bar_any_width = task_stop_pxscale-date_deadline_pxscale;
+                bar_any_left = bar_width - (task_stop_pxscale - any_date_pxscale);
+                bar_any_width = task_stop_pxscale-any_date_pxscale;
                 any_status = 'before_stop'
 
             }
 
-            if (date_deadline_pxscale <= task_start_pxscale){
+            if (any_date_pxscale <= task_start_pxscale){
 
-                bar_any_left = bar_width - (task_stop_pxscale - date_deadline_pxscale);
-                bar_any_width = task_start_pxscale-date_deadline_pxscale;
+                bar_any_left = bar_width - (task_stop_pxscale - any_date_pxscale);
+                bar_any_width = task_start_pxscale-any_date_pxscale;
                 any_status = 'before_start'
 
             }
@@ -166,6 +101,269 @@ var GanttTimeLineData = Widget.extend({
 
     },
 
+    deadline_slider_gen: function (get_possition, not_render, id, gantt_bar) {
+
+        // bar_any_left : bar_any_left,
+        // bar_any_width : bar_any_width,
+        // any_status: any_status
+        bar_deadline_slider = false;
+
+        if (!not_render) {
+
+            var bar_deadline_left = get_possition.bar_any_left;
+            var bar_deadline_width = get_possition.bar_any_width;
+            var bar_deadline_status = get_possition.any_status;
+
+            //Can Render Deadline
+            if (bar_deadline_left && bar_deadline_width) {
+
+
+                //Deadline Ssider
+                var bar_deadline_slider = $('<div class="task-gantt-deadline-slider"></div>');
+                var bar_deadline_slider_left = bar_deadline_left + bar_deadline_width;
+
+                if (bar_deadline_status === 'before_stop' || bar_deadline_status === 'before_start') {
+                    bar_deadline_slider_left = bar_deadline_left
+                }
+
+                bar_deadline_slider.css({"left": bar_deadline_slider_left + "px"});
+
+                // var deadline_left = this.lag_any(moment(), this.record.date_deadline, " late", " left", false);
+                // if (deadline_left) {
+                //
+                //     var bar_dl = $('<div class="task-gantt-done-info"/>');
+                //     var bar_dl_text = $('<a/>');
+                //     bar_dl_text.text(deadline_left);
+                //     bar_dl.append(bar_dl_text);
+                //     bar_deadline_slider.append(bar_dl);
+                // }
+            }
+        }
+
+        this.DragDeadLine(id, gantt_bar, bar_deadline_slider);
+
+        return bar_deadline_slider
+    },
+
+
+
+    deadline_bar_gen: function (get_possition, deadline_lag) {
+
+        var deadline_bar = false;
+
+        if (!deadline_lag && this.record.date_deadline) {
+
+            var bar_deadline_left = get_possition.bar_any_left;
+            var bar_deadline_width = get_possition.bar_any_width;
+            var bar_deadline_status = get_possition.any_status;
+
+            //Bar to Today
+
+            var deadline_today = get_possition;
+            var text_margin = 20;
+            if (this.parent.isTODAYline){
+                deadline_today = this.get_position_x(moment().toDate(), moment().toDate(), this.record.date_deadline);
+                text_margin = 5;
+            }
+
+
+            deadline_bar = $('<div class="task-gantt-bar-deadline"></div>');
+
+            var bar_today_left = bar_deadline_left;
+            var bar_today_width = deadline_today.bar_any_width;
+            var bar_today_status = deadline_today.any_status;
+            var gantt_bar_size = get_possition.bar_left + get_possition.bar_width;
+            var lag_calc = 0;
+
+            //deadline color and align
+            deadline_bar.css({"background": "rgba(255, 190, 190, 0.33)"});
+            var text_align = "right";
+
+            if (bar_today_status === 'after_stop') {
+                deadline_bar.css({"background": "rgba(167, 239, 62, 0.33)"});
+                text_align = "left";
+            }
+
+
+
+            //deadline possition
+
+            if (bar_today_status === 'after_stop') {
+                bar_today_left = bar_deadline_left-bar_today_width;
+
+            }
+
+
+            if (bar_today_status === 'after_stop' && bar_deadline_status === "after_stop"){
+                bar_today_left = bar_deadline_left-(bar_today_width-bar_deadline_width);
+            }
+
+
+
+            if ((bar_today_status === "before_start" || bar_today_status === "before_stop")  &&  bar_deadline_status === 'after_stop' ) {
+                bar_today_left = bar_deadline_left + bar_deadline_width;
+            }
+
+
+
+            deadline_bar.css({"left": bar_today_left + "px"});
+            deadline_bar.css({"width": bar_today_width + "px"});
+
+
+
+
+            // var deadline_left = this.lag_any(moment(), this.record.date_deadline, "late ", " left", false);
+            var deadline_left = this.lag_any(moment(), this.record.date_deadline, "-  ", "+ ", true);
+                if (deadline_left) {
+
+                    var bar_dl = $('<div class="task-gantt-bar-deadline-info"/>');
+
+                    bar_dl.css({"text-align": text_align});
+                    bar_dl.css("margin-"+text_align.toString(), lag_calc + text_margin + "px" );
+                    bar_dl.text(deadline_left);
+                    deadline_bar.append(bar_dl);
+
+
+
+                }
+
+        }
+
+        return deadline_bar
+
+    },
+
+    done_bar_gen: function (deadline_lag) {
+
+        var done_append = true;
+        var done_slider = false;
+
+        if (this.parent.fields_view.arch.attrs.state_status) {
+            done_append = false;
+
+            if(this.record.state === this.parent.fields_view.arch.attrs.state_status){
+                done_append = true;
+            }
+        }
+
+        if (done_append){
+
+            var get_upossition_done = this.get_position_x(this.record.task_start, this.record.task_stop, this.record.date_done);
+            var done_status = get_upossition_done.any_status;
+
+            if (done_status){
+
+                done_slider = $('<div class="task-gantt-done-slider fa fa-check-circle-o"></div>');
+
+                var done_left = get_upossition_done.bar_any_left;
+                var done_width = get_upossition_done.bar_any_width;
+                var done_slider_left = done_left+done_width;
+
+                if (done_status === 'before_stop' || done_status === 'before_start'){
+                    done_slider_left = done_left;
+                }
+
+                done_slider.css({"left": done_slider_left + "px"});
+
+
+                    var bar_d = $('<div class="task-gantt-done-info"/>');
+                    var bar_d_text = $('<a/>');
+                    if (deadline_lag){
+                        bar_d_text.text(deadline_lag);
+                     }
+                    bar_d.append(bar_d_text);
+                    done_slider.append(bar_d);
+
+
+            }
+        }
+
+        return done_slider
+
+
+    },
+
+    progress_bar_gen: function (get_possition) {
+
+        var bar_progress = false;
+
+
+        if (this.record.progress) {
+
+            var progress_value = (get_possition.bar_width / 100) * this.record.progress;
+
+            if (progress_value < 0) {
+
+                progress_value = -progress_value + get_possition.bar_width
+            }
+
+            bar_progress = $('<div class="task-gantt-progress"></div>');
+            bar_progress.css({"width": progress_value + "px"});
+
+        }
+
+        return bar_progress
+
+
+    },
+
+    progress_bar_on_gantt_gen: function (get_possition, gantt_bar) {
+
+        var bar_progress = false;
+
+        if (this.record.progress && !this.record.on_gantt) {
+
+            bar_progress = $('<div class="task-gantt-progress2">' + this.record.progress + '%</div>');
+            bar_progress.css({"left": get_possition.bar_width / 3 + "px"});
+
+            if (gantt_bar.width() > 40){
+                var d_k = 3;
+                if (gantt_bar.width() < 65){
+                    d_k = 10;
+                }
+                bar_progress.css({"left": get_possition.bar_width / d_k + "px"});
+            }
+        }
+
+        return bar_progress
+
+    },
+
+    lag_any: function (first_date, second_date, lag_pos, lag_neg, left_position) {
+
+        var lag_result = false;
+
+        if (first_date && second_date){
+
+            var m_diff = moment(first_date).diff(moment(second_date));
+            var m_duration = moment.duration(m_diff);
+
+            var duration_seconds = parseInt(m_duration.asSeconds());
+
+            if (duration_seconds){
+
+                lag_result = humanizeDuration(duration_seconds*1000,{ units: "d",  maxDecimalPoints: 2 });
+
+                var pos_neg = lag_pos;
+
+                if (duration_seconds < 0){
+                    pos_neg = lag_neg
+                }
+
+                if (left_position){
+                    lag_result = pos_neg+lag_result;
+                }
+                else{
+                    lag_result = lag_result+pos_neg;
+                }
+
+            }
+        }
+
+        return lag_result
+
+    },
+
 
     start: function(){
 
@@ -176,37 +374,44 @@ var GanttTimeLineData = Widget.extend({
         if (!this.record.is_group) {
 
             //Color
-
             var color_gantt = false;
 
             if (this.record["color_gantt_set"]){
-
                 color_gantt = this.record["color_gantt"]
-
             }
+
+            if (!color_gantt){
+                color_gantt = 'rgba(242, 197, 116, 0.6)';
+
+                if (this.record.schedule_mode === "auto") {
+                    color_gantt = "rgba(111, 197, 242, 0.6)";
+                }
+
+                if (this.record.constrain_type !== "asap" && this.record.constrain_type !== undefined && this.record.schedule_mode === "auto") {
+                    color_gantt = "rgba(242, 133, 113, 0.6)";
+                }
+            }
+
 
             //Gantt Bar
-
             var gantt_bar = $('<div class="task-gantt-bar-plan"></div>');
 
-            if (this.record.schedule_mode === "auto") {
-                gantt_bar = $('<div class="task-gantt-bar-plan task-gantt-bar-plan-auto"></div>');
-            }
-
-            if (this.record.constrain_type !== "asap" && this.record.constrain_type !== undefined && this.record.schedule_mode === "auto") {
-                gantt_bar = $('<div class="task-gantt-bar-plan task-gantt-bar-plan-constrain"></div>');
-            }
 
 
-            //Possition
-            var get_possition = this.get_position(this.record.task_start, this.record.task_stop, this.record.date_deadline);
+            //Possition X
+            var get_possition = this.get_position_x(this.record.task_start, this.record.task_stop, this.record.date_deadline);
 
             gantt_bar.css({"left": get_possition.bar_left + "px"});
             gantt_bar.css({"width": get_possition.bar_width + "px"});
 
+            // this.bar_left = get_possition.bar_left;
+            // this.bar_width = get_possition.bar_width;
+
+
             //Hiden Star End bar for change main bar
             var bar_start = $('<div class="ui-resizable-handle ui-resizable-w task-gantt-bar-plan-start"></div>');
             var bar_end = $('<div class="ui-resizable-handle ui-resizable-e task-gantt-bar-plan-end"></div>');
+
 
 
             if (get_possition.bar_width === 0) {
@@ -217,198 +422,77 @@ var GanttTimeLineData = Widget.extend({
             gantt_bar.append(bar_start);
             gantt_bar.append(bar_end);
 
-            //Summary Bar : summary_date_start - summary_date_end
-            // if (this.record.subtask_count > 0) {
-            //
-            //     var bar_summary_start = $('<div class="task-gantt-summary task-gantt-summary-start"></div>');
-            //     var bar_summary_end = $('<div class="task-gantt-summary task-gantt-summary-end"></div>');
-            //
-            //     gantt_bar.append(bar_summary_start);
-            //     gantt_bar.append(bar_summary_end);
-            //
-            //     var summary_width = get_possition.bar_width;
-            //     var bar_summary_width = $('<div class="task-gantt-summary-width"></div>');
-            //     bar_summary_width.css({"width": summary_width + "px"});
-            //
-            //     gantt_bar.append(bar_summary_width);
-            //
-            // }
 
+            // Get deadline_lag if exist
+            var deadline_lag = this.lag_any(this.record.date_deadline, this.record.date_done, "+ ", "- ", true);
 
-            // var bar_point_start = $('<div class="task-gantt-point task-gantt-point-start"></div>');
-            // var bar_point_end = $('<div class="task-gantt-point task-gantt-point-end"></div>');
+            var gantt_bar_widget = {};
+            //Done Bar
+            gantt_bar_widget["done_slider"] = this.done_bar_gen(deadline_lag);
 
-            // gantt_bar.append(bar_point_start);
-            // gantt_bar.append(bar_point_end);
+            //Deadline Slider
+            gantt_bar_widget["deadline_slider"] = this.deadline_slider_gen(get_possition, deadline_lag, id, gantt_bar);
 
+            //Deadline bar
+            gantt_bar_widget["deadline_bar"] = this.deadline_bar_gen(get_possition, deadline_lag);
 
-            var done_append = true;
+            //Progress bar
+            gantt_bar_widget["progress_bar"] = this.progress_bar_gen(get_possition);
 
-            if (this.parent.fields_view.arch.attrs.state_status) {
-                done_append = false;
-                if(this.record.state === this.parent.fields_view.arch.attrs.state_status){
-                    done_append = true;
-                }
-            }
+            //Progress bar on gantt
+            gantt_bar_widget["progress_bar_on_gantt"] = this.progress_bar_on_gantt_gen(get_possition, gantt_bar);
 
-            if (done_append){
 
-                var get_upossition_done = this.get_uposition(this.record.task_start, this.record.task_stop, this.record.date_done);
-                var done_status = get_upossition_done.any_status;
-                if (done_status){
-
-                    var done_left = get_upossition_done.bar_any_left;
-                    var done_width = get_upossition_done.bar_any_width;
-
-                    var done_slider = $('<div class="task-gantt-done-slider fa fa-thumbs-o-up"></div>');
-                    var done_slider_left = done_left+done_width;
-
-                    if (done_status == 'before_stop' || done_status == 'before_start'){
-
-                        done_slider_left = done_left;
-                    }
-
-                    done_slider.css({"left": done_slider_left + "px"});
-                    gantt_bar.append(done_slider);
-
-
-                }
-            }
-
-
-            //Deadline
-
-            //Position cont
-
-            var bar_deadline_left = get_possition.bar_deadline_left;
-            var bar_deadline_width = get_possition.bar_deadline_width;
-
-
-            //HTML render
-            if (bar_deadline_left && bar_deadline_width){
-
-                //Bar Deadline
-                var bar_deadline = $('<div class="task-gantt-bar-deadline"></div>');
-
-                if (this.deadline_status === 'after_stop' || this.deadline_status === 'before_start') {
-
-                    bar_deadline.css({"left": bar_deadline_left + "px"});
-                    bar_deadline.css({"width": bar_deadline_width + "px"});
-                    gantt_bar.append(bar_deadline);
-
-                }
-
-                if (this.deadline_status === 'before_start') {
-
-                    bar_deadline.css({"left": bar_deadline_left + "px"});
-                    bar_deadline.css({"width": bar_deadline_width + "px"});
-                    bar_deadline.css({"background": "rgba(255, 190, 190, 0.2)" });
-
-                    gantt_bar.append(bar_deadline);
-
-                }
-
-                // var bar_deadline_overdue = $('<div class="task-gantt-bar-deadline-overdue"></div>');
-                var bar_deadline_slider = $('<div class="task-gantt-deadline-slider"></div>');
-                var bar_deadline_slider_left = bar_deadline_left+bar_deadline_width;
-
-                if (this.deadline_status === 'before_stop' || this.deadline_status === 'before_start'){
-
-                    bar_deadline_slider_left = bar_deadline_left
-                }
-
-                bar_deadline_slider.css({"left": bar_deadline_slider_left + "px"});
-
-                // gantt_bar.append(bar_deadline_overdue);
-                gantt_bar.append(bar_deadline_slider);
-
-
-                this.DragDeadLine(self,id , gantt_bar, bar_deadline_slider, this.record);
-
-
-            }
-
-            //progress
-            if (this.record.progress){
-
-                // var bar_progress = $('<div class="task-gantt-progress">'+ this.record.progress +'%</div>');
-                //
-                // bar_progress.css({"left": get_possition.bar_width/3 + "px"});
-                // gantt_bar.append(bar_progress);
-
-
-                var progress_value = (get_possition.bar_width/100)*this.record.progress;
-
-                if (progress_value < 0){
-
-                    progress_value = -progress_value+get_possition.bar_width
-                }
-
-                var bar_progress = $('<div class="task-gantt-progress"></div>');
-
-                bar_progress.css({"width": progress_value + "px"});
-
-                gantt_bar.append(bar_progress);
-
-
-
-                if (!this.record.on_gantt) {
-
-                    var bar_progress2 = $('<div class="task-gantt-progress2">' + this.record.progress + '%</div>');
-
-                    if (gantt_bar.width() > 40){
-                        var d_k = 3;
-                        if (gantt_bar.width() < 65){
-                            d_k = 10;
-                        }
-
-                        bar_progress2.css({"left": get_possition.bar_width / d_k + "px"});
-                        gantt_bar.append(bar_progress2);
-                    }
-
-
-
-                }
-
-            }
-
-
-            //Milestone
-            if (this.record.is_milestone) {
-
-                bar_end.addClass("fa fa-flag fa-1x");
-                gantt_bar.css({"background": "rgba(242, 197, 116, 0.1)"});
-
-
-                if (this.record.schedule_mode === "auto") {
-                    gantt_bar.css({"background": "rgba(111, 197, 242, 0.1)"});
-                }
-
-                if (this.record.constrain_type !== "asap" && this.record.schedule_mode === "auto") {
-                    gantt_bar.css({"background": "rgba(242, 133, 113, 0.1)"});
-                }
-
-            }
             //Task Name on Gantt
             if (this.record.on_gantt) {
 
                 var bar_name = $('<div class="task-gantt-name">'+ this.record.value_name +'</div>');
-
                 bar_name.css({"width": get_possition.bar_width-5 + "px"});
                 gantt_bar.append(bar_name);
+            }
+
+
+            //Milestone
+            var color_gantt_milestone = false;
+            if (this.record.is_milestone) {
+
+                bar_end.addClass("fa fa-flag fa-1x");
+                color_gantt_milestone  = "rgba(242, 197, 116, 0.1";
+
+                if (this.record.schedule_mode === "auto") {
+                    color_gantt_milestone  = "rgba(111, 197, 242, 0.1)"
+                }
+
+                if (this.record.constrain_type !== "asap" && this.record.schedule_mode === "auto") {
+                    color_gantt_milestone = "rgba(242, 133, 113, 0.1)";
+                }
+            }
+
+
+            if (self.tree_view) {
+
+                var isParent = this.record['isParent'];
+                if (isParent) {
+                    gantt_bar.css({"opacity": "0.4"});
+                }
+
+            }else{
+                //       Task have subtask
+                var subtask_count = this.record['subtask_count'];
+                if (subtask_count) {
+                    gantt_bar.css({"opacity": "0.4"});
+                }
 
             }
 
-            var subtask_count = this.record['subtask_count'];
-            if (subtask_count) {
 
-                gantt_bar.css({"opacity": "0.8"});
 
-            }
+
+
 
 
             //if exist id for data gantt
-            if (id != undefined) {
+            if (id !== undefined) {
 
                 this.$el.prop('id', "task-gantt-timeline-row-" + id + "");
                 this.$el.prop('data-id', id);
@@ -422,23 +506,38 @@ var GanttTimeLineData = Widget.extend({
 
             }
 
-
-            if (color_gantt){
-
-                gantt_bar.css({"background": color_gantt});
-                // gantt_bar.css({"background": color_gantt.replace(/[^,]+(?=\))/, '0.5')});
-                // var yty = 787;
-            }
-
+            //Critical path
             var critical_path = this.record['critical_path'];
             var cp_shows = this.record['cp_shows'];
-            if (critical_path && cp_shows){
+            var p_loop = this.record['p_loop'];
+
+            if (p_loop){
+                gantt_bar.addClass("task-gantt-items-p-loop");
+            }
+            else if (critical_path && cp_shows){
                 gantt_bar.addClass("task-gantt-items-critical-path");
             }
 
 
+            // Gantt Bar Color
+            if (color_gantt_milestone){
+              color_gantt = color_gantt_milestone
+            }
+
+            this.record.color_gantt = color_gantt;
+            gantt_bar.css({"background": color_gantt});
 
 
+
+            //Widget to gantt bar
+
+             this.bar_widget = gantt_bar_widget;
+            _.each(gantt_bar_widget, function (widget, key) {
+                gantt_bar.append(widget);
+            });
+
+
+            //Gantt Bar to EL
             this.$el.append(gantt_bar);
 
         }
@@ -459,99 +558,76 @@ var GanttTimeLineData = Widget.extend({
         this.ChangeSizeStart(self, id, gantt_bar, this.record);
 
 
-        var fold_self = self.record['fold_self'];
+        var fold = self.record['fold'];
         if (self.tree_view) {
-            if (fold_self) {
+            if (fold) {
                 this.$el.css({'display': 'none'});
             }
         }
 
-
-
-
-
    },
 
 
-    DragDeadLine: function(self, id, gantt_el, element, record) {
+    DragDeadLine: function(id, gantt_el, element) {
 
+        if (element) {
+            var record = this.record;
+            var self = this;
+            var drag_el = element;
+            var containment_el =  "task-gantt-timeline-row-" + id + "";
 
+            drag_el.draggable({
 
+                 axis: "x",
+                 containment: containment_el,
+                 scroll: false,
 
-                 // var
-                 var drag_el = element;
-                 var containment_el =  "task-gantt-timeline-row-" + id + "";
+                 start: function (event, ui) {
 
-                 drag_el.draggable({
+                    self.BarRecord = record;
+                    //
+                    //Hint Widget Destroy
+                    self.HintDestroy(self.parent);
 
-                     axis: "x",
-                     containment: containment_el,
-                     scroll: false,
+                    //Tip Widget Destroy
+                    self.TipDestroy(self.parent);
 
-                     start: function (event, ui) {
+                    //Create Bar Hint
+                    var gantt_line_hint = new GanttToolHint(self.parent);
+                    gantt_line_hint.appendTo(self.parent.$('.task-gantt-line-hints'));
 
-                        self.BarRecord = record;
-                        //
+                    self.parent.hint_move_widget = gantt_line_hint;
+
+                    //Hide
+                    self.HideDeadline("deadline");
+                    self.$el.prop('allowRowHover', false);
+
+                 },
+                 drag: function (event, ui) {
+
+                    //Hint
+                    var bar_info = self.GetGanttBarPlanPxTime();
+                    self.parent.hint_move_widget.show_hint(drag_el, bar_info, ui, "deadline");
+
+                 },
+
+                 stop: function (event, ui) {
+
+                        //Bar Save
+                        self.BarSave(self.BarRecord.id, "deadline");
+
                         //Hint Widget Destroy
                         self.HintDestroy(self.parent);
 
-                        //Tip Widget Destroy
-                        self.TipDestroy(self.parent);
+                        self.BarRecord = undefined;
 
-                        //Create Bar Hint
-                        var gantt_line_hint = new GanttToolHint(self.parent);
-                        gantt_line_hint.appendTo(self.parent.$('.task-gantt-line-hints'));
+                        // drag_el.draggable('disable');
 
-                        self.parent.hint_move_widget = gantt_line_hint;
-                        //
-                        // //Hide
-                        self.HideDeadline("deadline");
-                        self.$el.prop('allowRowHover', false);
+                 }
 
-
-                        // // drag_el.css({"position": "relative" });
-                        // // drag_el.css({"opacity": 0.8 });
-                        // // drag_el.css({"background": "rgb(76, 92, 246)" });
-                        // gantt_el.css({"background": "rgba(98, 196, 51, 0.38)"});
-
-
-
-                     },
-                     drag: function (event, ui) {
-
-                        //Hint
-                        var bar_info = self.GetGanttBarPlanPxTime();
-                        self.parent.hint_move_widget.show_hint(drag_el, bar_info, ui, "deadline");
-
-                     },
-
-
-                     stop: function (event, ui) {
-
-                            //Bar Save
-                            self.BarSave(self.BarRecord.id, "deadline");
-
-                            //Hint Widget Destroy
-                            self.HintDestroy(self.parent);
-
-                            self.BarRecord = undefined;
-
-                            drag_el.draggable('disable');
-
-
-
-
-                     }
-
-                 }).css("position", "absolute");
-
-
-
-
-
+            }).css("position", "absolute");
+        }
     },
-
-
 
 
 
@@ -622,8 +698,8 @@ var GanttTimeLineData = Widget.extend({
                             self.HintDestroy(self.parent);
 
                             self.BarRecord = undefined;
-                            gantt_bar.resizable('disable');
-                            gantt_bar.draggable('disable');
+                            // gantt_bar.resizable('disable');
+                            // gantt_bar.draggable('disable');
 
                             // self.$el.prop('allowRowHover', true);
                             self.ScrollToTop = $('.task-gantt').scrollTop();
@@ -646,8 +722,6 @@ var GanttTimeLineData = Widget.extend({
 
             if (record["schedule_mode"] === "manual" || record["schedule_mode"] === undefined) {
 
-
-                                 // var
                  var drag_el = element;
                  var containment_el =  "task-gantt-timeline-row-" + id + "";
 
@@ -689,26 +763,22 @@ var GanttTimeLineData = Widget.extend({
                      },
                      drag: function (event, ui) {
 
-
-
                         //Hint
                         var bar_info = self.GetGanttBarPlanPxTime();
                         self.parent.hint_move_widget.show_hint(gantt_bar, bar_info, ui);
 
+                        var offsetWidth = event.target.offsetParent.offsetWidth;
+                        var DiffForMove = self.BarClickX - event.clientX; //raznica mez nazatijem i tekuchej poziciji mishi
+                        var BarNewPos = offsetWidth  - DiffForMove; //Velichina smechenija bloka.
+                        var NewBarClickDiffX = offsetWidth - event.clientX; //tekucheje rastojanija mezdu nachalom blok i tekuchem pol mishki
+                        var Kdiff =  self.BarClickDiffX - NewBarClickDiffX + 5; //Koeficent corekciji dla poderzanija rastojanije meszu nachalom
+                        //bloka i tekuchem polozenijem mishi. 5 shirina elemnta end (div dragabble)
 
-                         var offsetWidth = event.target.offsetParent.offsetWidth;
-                         var DiffForMove = self.BarClickX - event.clientX; //raznica mez nazatijem i tekuchej poziciji mishi
-                         var BarNewPos = offsetWidth  - DiffForMove; //Velichina smechenija bloka.
-                         var NewBarClickDiffX = offsetWidth - event.clientX; //tekucheje rastojanija mezdu nachalom blok i tekuchem pol mishki
-                         var Kdiff =  self.BarClickDiffX - NewBarClickDiffX + 5; //Koeficent corekciji dla poderzanija rastojanije meszu nachalom
-                            //bloka i tekuchem polozenijem mishi. 5 shirina elemnta end (div dragabble)
-
-                         var new_width = BarNewPos+Kdiff+DiffForMove;
+                        var new_width = BarNewPos+Kdiff+DiffForMove;
 
                         if (new_width > 0){
                              gantt_bar.css({"width": (new_width) + "px"});
                         }
-
 
                      },
 
@@ -728,29 +798,21 @@ var GanttTimeLineData = Widget.extend({
 
                             drag_el.css({"position": "absolute" });
 
-
                      }
 
                  }).css("position", "absolute");
-
-
             }
-
         }
-
     },
 
 
 
     DragGantt: function(self, id, element, record) {
 
-
         if (id !== undefined) {
 
             if (record["schedule_mode"] === "manual" || record["schedule_mode"] === undefined) {
 
-
-                 // var
                  var drag_el = element;
                  var containment_el =  "task-gantt-timeline-row-" + id + "";
 
@@ -785,42 +847,32 @@ var GanttTimeLineData = Widget.extend({
                         // drag_el.css({"background": "rgb(76, 92, 246)" });
                         drag_el.css({"background": "rgba(98, 196, 51, 0.38)"});
 
-
-
                      },
-                     drag: function (event, ui) {
 
+                     drag: function (event, ui) {
                         //Hint
                         var bar_info = self.GetGanttBarPlanPxTime();
                         self.parent.hint_move_widget.show_hint(drag_el, bar_info);
 
                      },
 
-
                      stop: function (event, ui) {
+                        //Bar Save
+                        self.BarSave(self.BarRecord.id, "bar");
 
-                            //Bar Save
-                            self.BarSave(self.BarRecord.id, "bar");
+                        //Hint Widget Destroy
+                        self.HintDestroy(self.parent);
 
-                            //Hint Widget Destroy
-                            self.HintDestroy(self.parent);
+                        self.BarRecord = undefined;
 
-                            self.BarRecord = undefined;
-
-                            drag_el.resizable('disable');
-                            drag_el.draggable('disable');
-
+                        // drag_el.resizable('disable');
+                        // drag_el.draggable('disable');
 
                      }
 
                  }).css("position", "absolute");
-
             }
-
-
         }
-
-
     },
 
 
@@ -831,7 +883,6 @@ var GanttTimeLineData = Widget.extend({
             parent.hint_move_widget.destroy();
             parent.hint_move_widget = undefined;
         }
-
     },
 
     TipDestroy: function(parent) {
@@ -840,7 +891,6 @@ var GanttTimeLineData = Widget.extend({
             parent.tip_move_widget.destroy();
             parent.tip_move_widget = undefined;
         }
-
     },
 
 
@@ -864,12 +914,11 @@ var GanttTimeLineData = Widget.extend({
 
              var gantt_bar = this.$el.children('.task-gantt-bar-plan');
             // //Create Bar Hint
-            var gantt_line_tip = new GanttToolTip(self.parent, gantt_bar);
+            var gantt_line_tip = new GanttToolTip(self.parent, gantt_bar, event);
             gantt_line_tip.appendTo(self.parent.$('.task-gantt-line-tips'));
             self.parent.tip_move_widget = gantt_line_tip;
 
          }
-
     },
 
 
@@ -881,7 +930,6 @@ var GanttTimeLineData = Widget.extend({
             self.parent.tip_move_widget.destroy();
             self.parent.tip_move_widget = undefined;
         }
-
     },
 
 
@@ -890,24 +938,14 @@ var GanttTimeLineData = Widget.extend({
 
         var gantt_bar = this.$el.children('.task-gantt-bar-plan');
 
-
-
-        if (type==="deadline"){
-
-            //Deadline
-            var gantt_bardeadline = gantt_bar.children('.task-gantt-bar-deadline');
-            if (gantt_bardeadline) {
-                gantt_bardeadline.hide();
-            }
-
-
+        //Deadline
+        var gantt_bardeadline = gantt_bar.children('.task-gantt-bar-deadline');
+        if (gantt_bardeadline) {
+            gantt_bardeadline.hide();
         }
-        else{
-            //Deadline
-            var gantt_bardeadline = gantt_bar.children('.task-gantt-bar-deadline');
-            if (gantt_bardeadline) {
-                gantt_bardeadline.hide();
-            }
+
+
+        if (type !== "deadline"){
 
             //Done Slider
             var gantt_done_slider = gantt_bar.children('.task-gantt-done-slider');
@@ -922,77 +960,13 @@ var GanttTimeLineData = Widget.extend({
             if (bar_deadline_slider) {
                 bar_deadline_slider.hide();
             }
-
         }
-
-
-
     },
 
 
 //Save BAR
 
-    CheckReadonly: function(fields){
-        var self = this;
 
-        var readonly_fields = [];
-        _.each(fields, function (field, field_key ) {
-
-            var readonly_status  = false;
-            var check_field = self.parent.fields[field];
-            var check_state = self.BarRecord["state"];
-            var states = check_field["states"];
-
-            if (check_state && states ){
-
-                var where_state = [];
-
-                _.each(states, function (state, key) {
-
-                    var param1 = false;
-                    var param2 = false;
-
-                    if (state[0].length === 2){
-
-                        param1 = state[0][0];
-                        param2 = state[0][1];
-                    }
-
-                    if (param1 === 'readonly'){
-                       where_state.push({state : key, param: param2 });
-                    }
-
-                    if (param2 === true){
-                        readonly_status = true
-                    }
-
-                });
-
-                var check_readonly = _.findWhere(where_state,{state: check_state});
-
-                if (readonly_status){
-                    if (!check_readonly){
-                        readonly_status = false
-                    }
-                }
-                else{
-                    if (!check_readonly){
-                        readonly_status = true
-                    }
-                }
-            }
-            else{
-
-                readonly_status = check_field.readonly
-
-            }
-
-         readonly_fields.push({field : field, readonly: readonly_status });
-
-        });
-        return readonly_fields;
-
-    },
 
 
 
@@ -1005,6 +979,12 @@ var GanttTimeLineData = Widget.extend({
 
         var model_fields_dict = this.parent.model_fields_dict;
         var parent = this.parent;
+
+        // var match_task_id = _.find(parent.rows_to_gantt, function(item) { return item.id === r_id });
+
+        var $zTree = parent.widget_ztree.$zTree;
+
+        var match_task_id = $zTree.getNodeByParam('id', r_id);
 
         if (type === "bar"){
 
@@ -1019,8 +999,11 @@ var GanttTimeLineData = Widget.extend({
 
             // Redonly Check
 
-            var check_filed = [f_data_start, f_date_stop];
-            var readonly = this.CheckReadonly(check_filed);
+            var check_fieds = [f_data_start, f_date_stop];
+            // var readonly = this.CheckReadonly(check_filed);
+
+            var readonly = NativeGanttData.CheckReadOnly(check_fieds,  self.parent.fields, self.BarRecord);
+
 
             var check_readonly = _.findWhere(readonly,{readonly: true});
 
@@ -1029,6 +1012,26 @@ var GanttTimeLineData = Widget.extend({
 
                 return self.trigger_up('gantt_refresh_after_change');
             }
+
+            var l10n = _t.database.parameters;
+
+            var formatDate = time.strftime_to_moment_format( l10n.date_format + ' ' + l10n.time_format);
+
+            // var task_start = moment(bar_info.task_start).format(formatDate);
+            // var task_end = moment(bar_info.task_end).format(formatDate);
+
+            var duration = moment.duration(moment(bar_info.task_start).diff(moment(bar_info.task_end)));
+
+            var duration_seconds = duration.asSeconds();
+
+
+            if (match_task_id) {
+                match_task_id.task_start = bar_info.task_start;
+                match_task_id.task_stop = bar_info.task_end;
+                match_task_id.duration = duration_seconds;
+            }
+
+            $zTree.selectNode(match_task_id);
 
         }
 
@@ -1047,8 +1050,9 @@ var GanttTimeLineData = Widget.extend({
 
             // Redonly Check
 
-            var check_filed_deadline = [f_date_deadline];
-            var readonly_deadline = this.CheckReadonly(check_filed_deadline);
+            var check_field_deadline = [f_date_deadline];
+            // var readonly_deadline = this.CheckReadonly(check_filed_deadline);
+            var readonly_deadline = NativeGanttData.CheckReadOnly(check_field_deadline,  self.parent.fields, self.BarRecord);
 
             var check_readonly_deadline = _.findWhere(readonly_deadline,{readonly: true});
 
@@ -1060,9 +1064,10 @@ var GanttTimeLineData = Widget.extend({
             }
 
 
-
+            if (match_task_id) {
+                match_task_id.date_deadline = bar_info.deadline_time;
+            }
         }
-
 
 
         //Save and refresh after change
@@ -1073,8 +1078,17 @@ var GanttTimeLineData = Widget.extend({
                 context: parent.state.contexts
             })
             .then(function(ev) {
-                self.trigger_up('gantt_refresh_after_change',ev );
+                // self.trigger_up('gantt_refresh_after_change',ev );
+
+                self.trigger_up('warning', {
+                    title: _t('Bar Data Update'),
+                    message: _t('Data updated : ') + ev
+                });
+
         });
+
+        self.trigger_up('gantt_fast_refresh_after_change');
+
 
     },
 
@@ -1104,13 +1118,6 @@ var GanttTimeLineData = Widget.extend({
 
         if (gantt_bar_deadline) {
 
-            // var deadline_left = parseInt(gantt_bar_deadline.css('left'), 10);
-            // var deadline_width = parseInt(gantt_bar_deadline.css('width'), 10);
-            //var deadline_px = deadline_left + deadline_width;
-            // var deadline_px = parseInt(gantt_bar_deadline.css('left'), 10);
-
-            // var deadline_left = parseInt(gantt_bar_deadline.css('left'), 10);
-
             var deadline_px1 = parseInt(gantt_bar_deadline.css('left'), 10);
 
             var deadline_px = deadline_px1 + tleft;
@@ -1120,16 +1127,11 @@ var GanttTimeLineData = Widget.extend({
                 deadline_px = tleft + deadline_px1;
             }
 
-
             deadline_time = (deadline_px*this.parent.pxScaleUTC)+this.parent.firstDayScale;
 
             var new_deadline_time = new Date(0); // The 0 there is the key, which sets the date to the epoch setUTCSeconds(task_start);
             new_deadline_time.setTime(deadline_time);
-
-            var test = 45;
-
-
-
+            new_deadline_time.setUTCHours(0, 0, 0, 0)
 
         }
 
@@ -1138,11 +1140,8 @@ var GanttTimeLineData = Widget.extend({
             task_start: new_task_start,
             task_end:new_task_end,
             deadline_time : new_deadline_time
-
         };
-
      }
-
 
 
 });

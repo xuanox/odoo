@@ -14,11 +14,23 @@
 								<field name="name"/>
 							</group>
 							<group>
+
 							</group>
 						</group>
+						<group>
+							<field name="note" nolabel="1"/>
+						</group>
 						<notebook>
-							<page string="Note">
-								<field name="note" nolabel="1"/>
+							<page string="Tool">
+								<group>
+									<field name="tool_id">
+										<tree string="Tools">
+											<field name="asset_id"/>
+		                  <field name="stage_id"/>
+											<field name="name"/>
+		                </tree>
+									</field>
+								</group>
 							</page>
 						</notebook>
 					</sheet>

@@ -4,10 +4,11 @@
     "summary": """Added support Gantt""",
     "category": "Project",
     "images": ['static/description/icon.png'],
-    "version": "12.18.10.11.1",
+    "version": "12.19.06.19.1",
     "description": """
         PDF report
         fix context
+        start date
 
     """,
     "author": "Viktor Vorobjov",

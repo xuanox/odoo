@@ -55,6 +55,7 @@
 	        <field name="arch" type="xml">
 	            <tree  create="false" edit="false">
                     <field name="name"/>
+                    <field name="resource_id"/>
                      <field name="task_id"/>
                      <field name="type_level"/>
                      <field name="data_from"/>
@@ -66,23 +67,6 @@
 	        </field>
 		</record>
 
-		<!--&lt;!&ndash; form &ndash;&gt;-->
-		<!--<record id="project_task_detail_plan_form_view" model="ir.ui.view">-->
-            <!--<field name="name">project.task.detail.plan.form</field>-->
-			<!--<field name="model">project.task.detail.plan</field>-->
-	        <!--<field name="arch" type="xml">-->
-	            <!--<form>-->
-					<!--<sheet>-->
-						<!--<group >-->
-							<!--<group>-->
-								<!--<field name="name"/>-->
-							<!--</group>-->
-						<!--</group>-->
-
-	                <!--</sheet>-->
-	            <!--</form>-->
-	        <!--</field>-->
-		<!--</record>-->
 
         <record id="project_task_detail_plan_view_ganttaps" model="ir.ui.view">
             <field name="name">project.task.detail.plan.ganttaps</field>
@@ -111,6 +95,8 @@
 
                         color_gantt_set = "color_gantt_set"
                         color_gantt = "color_gantt"
+
+                        default_order="data_from asc"
 
                 >
 

@@ -4,7 +4,7 @@
     "summary": """Added support Gantt""",
     "category": "Project",
     "images": ['static/description/icon.png'],
-    "version": "12.18.11.9.0",
+    "version": "12.19.09.08.0",
     "description": """
         Update 1: python 3.6.3 and click to gantt line
         Fix: datalist check
@@ -23,6 +23,14 @@
         Update: Info for gantt bar and Critical path calculation.
         Update: Detail plan, fix ghost bar, fix default start time: allow neagative value..
         Update: Gantt for Projects View.
+        Update: Resource for taks
+        Update: Loop Detect.
+        Fix: default date in auto sheduling
+        Fix: predecessor
+        Update: Sorting and Deadline
+        Update: UI ztree
+        Fix: next day
+        Fix: Tree
     """,
     "author": "Viktor Vorobjov",
     "license": "OPL-1",
@@ -39,8 +47,10 @@
     "external_dependencies": {"python": [], "bin": []},
     "data": [
         'views/project_task_view.xml',
+        'views/project_task_resource_view.xml',
         'views/project_task_detail_plan_view.xml',
         'views/project_calendar_access_view.xml',
+        'views/resource_views.xml',
         'views/project_project_view.xml',
         'security/ir.model.access.csv',
     ],

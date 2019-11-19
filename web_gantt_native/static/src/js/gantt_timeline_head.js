@@ -19,7 +19,7 @@ var GanttTimeLineHead = Widget.extend({
 
         this.first_scale = first_scale;
         this.second_scale = second_scale;
-
+        this.parent = parent;
         this.TODAY = moment();
 
        // this.record_id = this.record['id']
@@ -172,9 +172,10 @@ var GanttTimeLineHead = Widget.extend({
                 if (moment(day).isoWeekday() === 6 || moment(day).isoWeekday() === 7){
                     div_cell.addClass('task-gantt-weekend-column');
                 }
-
+                self.parent.isTODAYline = false;
                 if (moment(day).isSame(self.TODAY, 'day')){
                     div_cell.addClass('task-gantt-today-column');
+                    self.parent.isTODAYline = true;
                 }
 
                  div_cell.css({ 'margin-top': -52 + "px" });

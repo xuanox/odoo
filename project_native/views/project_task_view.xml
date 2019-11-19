@@ -3,20 +3,6 @@
     <data>
 
 
-        <!--<record id="view_task_form2_inherited_gantt" model="ir.ui.view">-->
-            <!--<field name="name">project.task.form.inherit.timesheet</field>-->
-            <!--<field name="model">project.task</field>-->
-            <!--<field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<xpath expr="//field[@name='planned_hours']" position="attributes">-->
-                    <!--<attribute name="attrs">{'readonly':[('schedule_mode','=','auto')]}</attribute>-->
-                <!--</xpath>-->
-            <!--</field>-->
-        <!--</record>-->
-
-
-
-
         <record id="ganttaps_view_task_form2" model="ir.ui.view">
             <field name="name">project.task.ganttaps.form</field>
             <field name="model">project.task</field>
@@ -36,11 +22,17 @@
                         <attribute name="attrs">{'invisible': 0}</attribute>
                 </button>
 
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                     <field name="date_finished"/>
+                </xpath>
+
                 <xpath expr="//notebook/page[2]" position="after">
 
                     <page name="gantt_view" string="Gantt View">
                             <group>
                                 <group>
+
+                                    <field name="fixed_calc_type"/>
 
                                     <label for="plan_duration" attrs="{'invisible':['|',('schedule_mode', '=' ,'manual'), ('child_ids','!=', [])]}" string="Plan Duration"/>
                                     <div attrs="{'invisible':['|',('schedule_mode', '=' ,'manual'), ('child_ids','!=', [])]}" >
@@ -55,10 +47,18 @@
                                     <div>
                                         <field name="duration" widget="time_delta" options="{'mask_humanize_field': 'duration_scale', 'mask_picker_field' : 'duration_picker'}" class="oe_inline"/>
                                     </div>
+
+                                    <label for="detail_plan_work"/>
+                                    <div>
+                                        <field name="detail_plan_work" widget="time_delta" options="{'mask_humanize_field': 'duration_work_scale', 'mask_picker_field' : 'duration_picker'}" class="oe_inline"/>
+                                    </div>
+
+
                                     <field name="duration_scale" invisible="1"/>
+                                    <field name="duration_work_scale" invisible="1"/>
                                     <field name="duration_picker" invisible="1"/>
 
-                                    <field name="date_finished"/>
+
 
 
                                 </group>
@@ -80,6 +80,8 @@
                                     <field name="summary_date_start" invisible="1"/>
                                     <field name="summary_date_end" invisible="1"/>
                                     <field name="detail_plan"/>
+<!--                                    <field name="p_loop"/>-->
+
 
 
                                 </group>
@@ -97,6 +99,19 @@
                                 <field name="lag_type"/>
                             </tree>
                         </field>
+                    </page>
+
+                    <page name="resources" string="Resources">
+                            <field name="task_resource_ids" nolabel="1" widget="one2many_list">
+                                <tree string="Resources Link" editable="bottom" >
+                                    <field name="resource_id" />
+                                    <field name="load_factor" />
+                                    <field name="resource_type" />
+                                    <field name="load_control" />
+
+                                </tree>
+                            </field>
+
                     </page>
 
                     <page name="info_task" string="Info">
@@ -154,8 +169,6 @@
 
                         user_id = "user_id"
 
-                        sorting_seq="sorting_seq"
-                        sorting_level="sorting_level"
 
                         project_id="project_id"
                         date_deadline="date_deadline"
@@ -169,7 +182,7 @@
                         predecessor_parent_task_id="parent_task_id"
                         predecessor_type="type"
 
-                        subtask_project_id = "subtask_project_id"
+                        subtask_project_id = "project_id"
                         parent_id = "parent_id"
                         subtask_count = "subtask_count"
 
@@ -199,13 +212,15 @@
 
                         export_wizard="project.native.report"
 
-                        default_seq="seq"
+                        sorting_seq="sorting_seq"
+                        sorting_level="sorting_level"
+
+                        default_seq="sequence"
                         second_seq_link_field="stage_id"
                         second_seq_model="project.task.type"
                         second_seq_field="sequence"
 
-                        fold_self="fold_self"
-                        fold_child="fold_child"
+                        fold="fold"
 
                         limit_view="250"
 
@@ -215,6 +230,19 @@
                         critical_path="critical_path"
                         cp_shows="cp_shows"
                         cp_detail="cp_detail"
+
+                        p_loop="p_loop"
+
+                        load_group_id_name = ""
+                        load_bar_model = "project.task.detail.plan"
+                        load_id = "task_id"
+                        load_id_from = "task_id"
+                        load_ids_from = "id"
+                        load_data_id = "id"
+
+                        default_order="date_start desc"
+
+                        doc_count = "attachment_ids"
 
                 >
 

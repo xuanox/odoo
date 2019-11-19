@@ -76,7 +76,7 @@ class equipment_equipment(models.Model):
     _name = 'equipment.equipment'
     _description = 'Equipment'
     _inherit =  ['mail.thread', 'mail.activity.mixin']
-    
+
     def _read_group_state_ids(self, domain, read_group_order=None, access_rights_uid=None, team='3'):
         access_rights_uid = access_rights_uid or self.uid
         stage_obj = self.env['equipment.state']
@@ -338,6 +338,7 @@ class EquipmentModality(models.Model):
     color = fields.Integer('Color Index')
     note = fields.Text('Comments', translate=True)
     equipment_ids = fields.One2many('equipment.equipment', 'modality_id', string='Equipments', copy=False)
+    tool_id=fields.Many2one('equipment.modality.tool.line','Tools')    
 
 class EquipmentHistoryState(models.Model):
     _name = 'equipment.history.state'
@@ -364,3 +365,19 @@ class EquipmentHistoryState(models.Model):
                 blocktime.duration = round(diff.total_seconds() / 60.0, 2)
             else:
                 blocktime.duration = 0.0
+
+class EquipmentModalityToolLine(models.Model):
+    _name = 'equipment.modality.tool.line'
+    _description = 'Modality Tools'
+
+    name = fields.Char(string='Description')
+    asset_id=fields.Many2one('asset.asset', string='Tool', required=True)
+    stage_id = fields.Many2one('asset.stage', related='asset_id.stage_id', string='Stage', store=True, track_visibility='onchange', copy=False)
+
+class EquipmentTool(models.Model):
+    _name = "equipment.tool"
+    _description = "Equipment Tools"
+
+    name = fields.Char(string='Description')
+    asset_id=fields.Many2one('asset.asset', string='Tool', required=True)
+    stage_id = fields.Many2one('asset.stage', related='asset_id.stage_id', string='Stage', store=True, track_visibility='onchange', copy=False)

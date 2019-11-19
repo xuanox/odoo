@@ -15,7 +15,8 @@ odoo.define('web_gantt_native.ToolField', function (require) {
         // this.fields_keys = _.keys(this.fields_view.fields);
 
         var gantt_fields_0 = [
-            "id"
+            "id",
+            "display_name"
         ];
 
         var gantt_fields_1 = [
@@ -38,6 +39,8 @@ odoo.define('web_gantt_native.ToolField', function (require) {
             "state",
 
             "subtask_project_id",
+            "load_data_id",
+
             "parent_id",
 
             "default_seq",
@@ -62,12 +65,15 @@ odoo.define('web_gantt_native.ToolField', function (require) {
             "color_gantt",
             "duration_scale",
 
-            "fold_self",
-            "fold_child",
+            "fold",
 
             "critical_path",
             "cp_shows",
-            "cp_detail"
+            "cp_detail",
+
+            "p_loop",
+
+            "doc_count"
 
 
         ];
@@ -94,26 +100,43 @@ odoo.define('web_gantt_native.ToolField', function (require) {
 
 
 
-    function flatRows (row_datas) {
+    function flatRows (row_datas, ItemsSorted) {
 
         var rows_to_gantt = [];
+        var self = this;
+        //var sefl = undefined;
+        self.ItemsSorted = ItemsSorted;
 
         //recursive tree to flat task.
-        var generate_flat_gantt = function(value) {
+        var generate_flat_gantt = function(value, parent_value) {
+
+            var zt_id = false;
+            var zt_pId = false;
+
+
+            if (parent_value && !self.ItemsSorted){
+
+                zt_pId = parent_value.zt_id
+            }
+
 
             if (value.is_group) {
+
+                    value.zt_id ="root_"+value.group_info[0];
 
                 rows_to_gantt.push({
 
                     id: value.id,
                     is_group: value.is_group,
                     group_id: value.group_info,
-                    level: value.level,
+                    // level: value.level,
                     value_name: value.task_name,
                     group_field: value.group_field,
                     task_count: value.task_count,
-                    fold_group:value.fold_group
+                    fold: value.fold,
 
+                    zt_pId: zt_pId,
+                    zt_id:  value.zt_id,
                 });
 
             }
@@ -125,12 +148,38 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                      assign_to = value.assign_to[1];
                 } catch (err) {}
 
+
+                if (self.ItemsSorted){
+
+                    zt_pId = parent_value.zt_id;
+
+                    if ( value.parent_id ){
+
+                        zt_pId = value.parent_id[0]
+
+                    }
+
+                }
+
+
+                // zt_pId = 0;
+                // if ( value.parent_id ){
+                //
+                //     zt_pId = value.parent_id[0]
+                // }
+
+
                 rows_to_gantt.push({
 
+                    zt_id:  value.id,
+                    zt_pId : zt_pId,
+
+                    is_group: value.is_group,
+                    // group_field: value.group_field,
 
                     id: value.id,
                     group_id: value.group_info,
-                    level: value.level,
+                    // level: value.level,
                     value_name: value.task_name,
 
                     assign_to: assign_to,
@@ -169,25 +218,29 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                     summary_date_end: value.summary_date_end,
 
                     subtask_project_id: value.subtask_project_id,
+                    load_data_id: value.load_data_id,
+
                     parent_id: value.parent_id,
                     subtask_count: value.subtask_count,
 
                     date_done: value.date_done,
                     state: value.state,
 
-                    fold_self: value.fold_self,
-                    fold_child: value.fold_child,
+                    fold: value.fold,
 
                     critical_path: value.critical_path,
                     cp_shows: value.cp_shows,
-                    cp_detail: value.cp_detail
+                    cp_detail: value.cp_detail,
+
+                    p_loop: value.p_loop,
+                    doc_count: value.doc_count,
 
                 });
 
             }
 
             _.map(value.child_task, function(sub_task) {
-                generate_flat_gantt(sub_task);
+                generate_flat_gantt(sub_task, value);
             });
         };
 
@@ -203,7 +256,7 @@ odoo.define('web_gantt_native.ToolField', function (require) {
     }
 
 
-    function groupRows (tasks, group_bys, self_parent) {
+    function groupRows (tasks, group_bys, self_parent, ItemsSorted) {
 
         var parent = self_parent;
         var GtimeStopA  = [];
@@ -231,12 +284,12 @@ odoo.define('web_gantt_native.ToolField', function (require) {
 
 
         //Sort
-        var sort_fld = undefined;
+        var sort_fld = "sequence";
 
 
         if (second_sort){
 
-             sort_fld = model_fields_dict["default_seq"];
+                sort_fld = model_fields_dict["default_seq"];
                 if (sort_fld) {
                     tasks = _.sortBy(tasks, function (o) {
                     return o[sort_fld];
@@ -247,12 +300,17 @@ odoo.define('web_gantt_native.ToolField', function (require) {
 
         if (!second_sort){
 
-            sort_fld = model_fields_dict["sorting_seq"];
+            if (ItemsSorted){
+
+                sort_fld = model_fields_dict["sorting_seq"];
                 if (sort_fld) {
                     tasks = _.sortBy(tasks, function (o) {
                     return o[sort_fld];
                     });
                 }
+
+            }
+
         }
 
 
@@ -337,7 +395,7 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                 var task_infos = _.compact(_.map(task.tasks, function(sub_task) {
                     return generate_task_info(sub_task, level + 1);
                 }));
-                if (task_infos.length == 0)
+                if (task_infos.length === 0)
                     return;
 
                 //before
@@ -363,10 +421,10 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                 }
 
                 // Group by check is fold
-                var fold_group = false;
+                var fold = false;
                 if (task.hasOwnProperty("g_data"))
                 {
-                    fold_group = task.g_data["fold_group"]
+                    fold = task.g_data["fold"]
                 }
 
 
@@ -380,10 +438,14 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                     task_name:group_name,
                     level:level,
                     task_count: task_count,
-                    fold_group: fold_group
+                    fold: fold
                 };
             } else {
-                var  today = new Date();
+
+                var today = new Date();
+                var task_name = task.__name;
+
+
                 assign_to = task[model_fields_dict["user_id"]];
 
                 var mp_level = task[model_fields_dict["mp_level"]];
@@ -394,11 +456,11 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                 var sorting_seq = task[model_fields_dict["sorting_seq"]];
 
                 var subtask_project_id = task[model_fields_dict["subtask_project_id"]];
+                var load_data_id = task[model_fields_dict["load_data_id"]];
+
                 var parent_id = task[model_fields_dict["parent_id"]];
                 var subtask_count = task[model_fields_dict["subtask_count"]];
 
-
-                var task_name = task.__name;
 
                 var task_start = time.auto_str_to_date(task[model_fields_dict["date_start"]]);
                 if (!task_start){
@@ -464,12 +526,14 @@ odoo.define('web_gantt_native.ToolField', function (require) {
 
                 var state = task[model_fields_dict["state"]];
 
-                var fold_self = task[model_fields_dict["fold_self"]];
-                var fold_child = task[model_fields_dict["fold_child"]];
+                var fold = task[model_fields_dict["fold"]];
 
                 var critical_path = task[model_fields_dict["critical_path"]];
                 var cp_shows = task[model_fields_dict["cp_shows"]];
                 var cp_detail = task[model_fields_dict["cp_detail"]];
+
+                var p_loop = task[model_fields_dict["p_loop"]];
+                var doc_count = task[model_fields_dict["doc_count"]];
 
 
 
@@ -538,23 +602,31 @@ odoo.define('web_gantt_native.ToolField', function (require) {
                     on_gantt: on_gantt,
 
                     subtask_project_id: subtask_project_id,
+                    load_data_id: load_data_id,
+
                     parent_id: parent_id,
                     subtask_count: subtask_count,
 
                     date_done: date_done,
                     state: state,
 
-                    fold_self:fold_self,
-                    fold_child:fold_child,
+                    fold:fold,
 
                     critical_path:critical_path,
                     cp_shows: cp_shows,
-                    cp_detail: cp_detail
+                    cp_detail: cp_detail,
+
+                    p_loop: p_loop,
+
+                    doc_count: doc_count,
+
+                    is_group: false,
+                    // group_field: group_bys[level],
 
 
                 };
             }
-        }
+        };
 
         //generate projects info from groupby
         var projects = _.map(groups, function(result) {

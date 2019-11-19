@@ -72,30 +72,15 @@ class Project(models.Model):
     # humanize duration
     duration_scale = fields.Char(string='Duration Scale', default='d,h', help="You can set: y,mo,w,d,h,m,s,ms")
     duration_picker = fields.Selection('_get_duration_picker', string='Duration Picker', default=None, help="Empty it is Hide: day and second")
-
+    duration_work_scale = fields.Char(string='Duration Work Scale', default='h', help="You can set: y,mo,w,d,h,m,s,ms")
 
     tz = fields.Selection(_tz_get, string='Timezone', default=lambda self: self._context.get('tz'),
                           help="Time Zone")
     tz_offset = fields.Char(compute='_compute_tz_offset', string='Timezone offset', invisible=True)
 
-    fold_group = fields.Boolean(name="Fold Project",help="Fold project", default=False)
-
     cp_shows = fields.Boolean(name="Critical Path", help="Critical Path Shows", default=True)
     cp_detail = fields.Boolean(name="Critical Path Detail", help="Critical Path Shows Detail on Gantt", default=False)
 
-
-
-    @api.model
-    def fold(self, project_id):
-        prj = self.browse(project_id)
-        value = not prj.fold_group
-        prj.write({'fold_group': value})
-
-        domain = ['|', ('active', '=', True), ('active', '=', False)]
-        all_tasks = self.env['project.task'].sudo().search(domain)
-        for task in all_tasks:
-            if task.fold_child and not value:
-                task.write({'fold_child': value})
 
 
     @api.depends('tz')
@@ -134,7 +119,6 @@ class Project(models.Model):
 
 class ProjectTaskPredecessor(models.Model):
     _name = 'project.task.predecessor'
-    _description = "Project Task Predecessor"
 
     @api.model
     def _get_link_type(self):
@@ -147,7 +131,7 @@ class ProjectTaskPredecessor(models.Model):
         ]
         return value
 
-    task_id = fields.Many2one('project.task', 'Task')
+    task_id = fields.Many2one('project.task', 'Task', ondelete='cascade')
     parent_task_id = fields.Many2one('project.task', 'Parent Task', required=True, ondelete='restrict',
                                      domain="[('project_id','=', parent.project_id)]")
     type = fields.Selection('_get_link_type',
@@ -193,9 +177,6 @@ class ProjectTaskPredecessor(models.Model):
                     'predecessor_parent': 0
                 })
 
-
-
-
         return res
 
 
@@ -230,7 +211,7 @@ class ProjectTaskNative(models.Model):
     def _default_date_end(self):
 
         date_end = fields.Datetime.from_string(fields.Datetime.now())
-        date_end = date_end.replace(hour=0, minute=0, second=0)
+        date_end = date_end.replace(hour=0, minute=0, second=0, microsecond=0)
         date_end = date_end + timedelta(days=1)
 
         if 'default_project_id' in self._context:
@@ -240,7 +221,7 @@ class ProjectTaskNative(models.Model):
 
             if project.task_default_duration != 0 and project.task_default_start != 0:
                 date_end = fields.Datetime.from_string(fields.Datetime.now())
-                date_end = date_end.replace(hour=0, minute=0, second=0)
+                date_end = date_end.replace(hour=0, minute=0, second=0, microsecond=0)
                 date_end = date_end + timedelta(seconds=project.task_default_start + project.task_default_duration)
 
         return date_end
@@ -249,7 +230,7 @@ class ProjectTaskNative(models.Model):
     def _default_date_start(self):
 
         date_start = fields.Datetime.from_string(fields.Datetime.now())
-        date_start = date_start.replace(hour=0, minute=0, second=0)
+        date_start = date_start.replace(hour=0, minute=0, second=0, microsecond=0)
         if 'default_project_id' in self._context:
             project_id = self._context['default_project_id']
 
@@ -260,15 +241,27 @@ class ProjectTaskNative(models.Model):
 
         return date_start
 
+
+
+    @api.model
+    def _get_fixed_calc_type(self):
+        value = [
+            ('duration', _('Duration')),
+            ('work', _('Work')),
+
+        ]
+        return value
+
+    fixed_calc_type = fields.Selection('_get_fixed_calc_type',
+                                       string='Calc Type',
+                                       required=True,
+                                       default='work')
+
     # link
     predecessor_ids = fields.One2many('project.task.predecessor', 'task_id', 'Links')
     predecessor_count = fields.Integer(compute='_compute_predecessor_count', string='Predecessor Count', store=True)
     predecessor_parent = fields.Integer(compute='_compute_predecessor_count', string='Predecessor parent', store=True)
 
-    # sorting
-    sorting_seq = fields.Integer(string='Sorting Seq.')
-    sorting_level = fields.Integer('Sorting Level', default=0)
-    sorting_level_seq = fields.Integer('Sorting Level Seq.', default=0)
 
     # Gantt
     is_milestone = fields.Boolean("Mark as Milestone", default=False)
@@ -295,7 +288,7 @@ class ProjectTaskNative(models.Model):
     constrain_date = fields.Datetime('Constraint Date')
 
     plan_action = fields.Integer(compute='_compute_plan_action', string='Plan Action', store=True)
-    plan_duration = fields.Integer(string='Plan Duration', default=86400)
+    plan_duration = fields.Integer(string='Plan Value', default=86400)
 
     # redefine default
     date_start = fields.Datetime(string='Starting Date',
@@ -316,9 +309,8 @@ class ProjectTaskNative(models.Model):
 
     # humanize duration
     duration_scale = fields.Char(string='Duration Scale', related="project_id.duration_scale", readonly=True, )
-    duration_picker = fields.Selection(string='Duration Picker', related="project_id.duration_picker", readonly=True, )
-
-
+    duration_picker = fields.Selection(string='Duration Picker', related="project_id.duration_picker", readonly=True,)
+    duration_work_scale = fields.Char(string='Duration Work Scale', related="project_id.duration_work_scale", readonly=True, )
 
 
     def update_date_end(self, stage_id):
@@ -330,7 +322,8 @@ class ProjectTaskNative(models.Model):
     def _onchange_user(self):
         if self.user_id:
             # self.date_start = fields.Datetime.now()
-            dummy = "dummy"
+            # task.detail_plan_ids.unlink()
+            pass
 
     @api.multi
     def _get_summary_date(self):
@@ -372,34 +365,7 @@ class ProjectTaskNative(models.Model):
     summary_date_start = fields.Datetime(compute='_get_summary_date', string="Summary Date Start")
     summary_date_end = fields.Datetime(compute='_get_summary_date', string="Summary Date End")
 
-
-    #fold
-    fold_self = fields.Boolean(string="Fold Self", compute='_compute_fold',help="Fold task", default=False, store=True)
-    fold_group = fields.Boolean(string="Fold Group", help="Fold task", related="project_id.fold_group", readonly=True)
-    fold_child = fields.Boolean(string="Fold Child", invisible=False, default=False)
-
-    @api.one
-    @api.depends('project_id.fold_group')
-    def _compute_fold(self):
-        # ProjectTask = self.env['project.task']
-        for obj in self:
-            fold = False
-            if obj.fold_group:
-                fold = True
-
-            obj.fold_self = fold
-
-
-    @api.model
-    def fold(self, task_id):
-        task = self.browse(task_id)
-
-        child_ids = self.search([('id', 'child_of', [task_id]), ('id', '!=', task_id)])
-        task.fold_child = not task.fold_child
-
-        for child_id in child_ids:
-            child_id.fold_self = task.fold_child
-
+    p_loop = fields.Boolean("Loop Detected")
 
 
     @api.onchange('project_id')
@@ -417,6 +383,7 @@ class ProjectTaskNative(models.Model):
                         'You can not change a Project for Task.\nPlease Delete or Remove - sub tasks first.'))
 
             super(ProjectTaskNative, self)._onchange_project()
+
 
     @api.depends("predecessor_ids")
     def _compute_predecessor_count(self):
@@ -436,10 +403,6 @@ class ProjectTaskNative(models.Model):
 
 
 
-
-
-    # _logger.warning("#### 3 step:{}".format(stask.ids))
-
     @api.model
     def scheduler_plan(self, project_id):
 
@@ -450,8 +413,11 @@ class ProjectTaskNative(models.Model):
             raise UserError(_(
                 'Not work in manual mode. Please set in project: Backwork or Forward'))
 
-        self._scheduler_plan_start_calc(project=search_project, scheduling_type=scheduling_type)
-        self.do_sorting(project_id=project_id)
+        # project_task_scheduler.py
+        self._scheduler_plan_start_calc(project=search_project)
+
+        # self.do_sorting(project_id=project_id)
+
         self._summary_work(project_id=project_id)
         self._scheduler_plan_complite(project_id=project_id, scheduling_type=scheduling_type)
 
@@ -459,6 +425,8 @@ class ProjectTaskNative(models.Model):
 
 
     def _scheduler_plan_complite(self, project_id, scheduling_type):
+
+        # Calculate data start/stop for project.
 
         search_tasks = self.env['project.task'].sudo().search([('project_id', '=', project_id)])
 
@@ -494,6 +462,7 @@ class ProjectTaskNative(models.Model):
                     'date_start': new_prj_date_start,
                 })
 
+
     def _summary_work(self, project_id):
 
         search_tasks = self.env['project.task'].sudo().search(
@@ -512,13 +481,15 @@ class ProjectTaskNative(models.Model):
 
                     # var_data["duration"] = diff.total_seconds()
 
-            task.sudo().write(var_data)
+                task.sudo().write(var_data)
+
 
     @api.depends("predecessor_ids.task_id", "predecessor_ids.type", "constrain_type", "constrain_date", "plan_duration",
-                 "duration", "project_id.scheduling_type", )
+                 "duration", "project_id.scheduling_type", "task_resource_ids.name")
     def _compute_plan_action(self):
         for task in self:
             task.plan_action = True
+
 
     @api.depends('date_end', 'date_start')
     def _compute_duration(self):
@@ -527,11 +498,11 @@ class ProjectTaskNative(models.Model):
             if task.date_end and task.date_start:
                 diff = fields.Datetime.from_string(task.date_end) - fields.Datetime.from_string(task.date_start)
                 duration = diff.total_seconds()
-                # task.plan_duration = diff.total_seconds()
             else:
                 duration = 0.0
 
             task.duration = duration
+
 
     @api.multi
     def unlink(self):
@@ -541,20 +512,10 @@ class ProjectTaskNative(models.Model):
                 'You can not delete a Parent Task.\nPlease Delete - sub tasks first.'))
         return super(ProjectTaskNative, self).unlink()
 
-    @api.model
-    def create(self, vals):
-
-        get_parent_id = vals.get('parent_id', None)
-
-        new_id = super(ProjectTaskNative, self).create(vals)
-
-        if get_parent_id:
-            self.do_sorting(new_id.subtask_project_id.id)
-
-        return new_id
 
 
     def conv_sec_tofloat(self, sec, type="sec"):
+
         if type == "sec":
             tde = timedelta(seconds=sec)
         if type == "hrs":
@@ -562,148 +523,5 @@ class ProjectTaskNative(models.Model):
 
         return tde.total_seconds() / timedelta(hours=1).total_seconds()
 
-    @api.multi
-    def write(self, vals):
 
-        result = super(ProjectTaskNative, self).write(vals)
-
-        get_parent_id = vals.get('parent_id', None)
-        if get_parent_id is not None and result:
-            self.do_sorting(self.subtask_project_id.id)
-
-        return result
-
-    @api.one
-    @api.depends('parent_id')
-    def _compute_sorting(self):
-        self.do_sorting(self.subtask_project_id.id)
-
-    def tree_onfly(self, query, parent):  # array with inside array for sorting only in level.
-        parent['children'] = []
-        for item in query:
-            if item['parent_id'] == parent['id']:
-                parent['children'].append(item)
-                self.tree_onfly(query, item)
-        return parent
-
-    def flat_onfly(self, object, level=0):  # recusive search sub level.
-        result = []
-
-        def _get_rec(object, level, parent=None):
-
-            object = sorted(object, key=itemgetter('sorting_level_seq'))
-            for line in object:
-
-                res = {}
-                res['id'] = '{}'.format(line["id"])
-                res['name'] = u'{}'.format(line["name"])
-                res['parent_id'] = u'{}'.format(line["parent_id"])
-                res['sorting_level_seq'] = line["sorting_level_seq"]
-                res['level'] = '{}'.format(level)
-
-                result.append(res)
-
-                if line["children"]:
-
-                    if level < 16:
-                        level += 1
-                        parent = line["id"]
-
-                    _get_rec(line["children"], level, parent)
-
-                    if level > 0 and level < 16:
-                        level -= 1
-                        parent = None
-
-            return result
-
-        children = _get_rec(object, level)
-
-        return children
-
-    def do_sorting(self, subtask_project_id=None, project_id=None):  # recusive search sub level.
-
-        search_id = subtask_project_id
-
-        if not subtask_project_id:
-
-            if project_id:
-                project = self.env['project.project'].sudo().search([('id', '=', project_id)])
-                if project.id:
-                    if not project.subtask_project_id:
-                        project.sudo().write({"subtask_project_id": project_id})
-                    search_id = project_id
-
-        search_objs = self.sudo().search([('subtask_project_id', '=', search_id)])
-
-        line_datas = []
-        for search_obj in search_objs:
-            res = {}
-            res['id'] = '{}'.format(search_obj.id)
-            res['name'] = u'{}'.format(search_obj.name)
-            res['parent_id'] = u'{}'.format(search_obj.parent_id.id)
-            res['sorting_level_seq'] = search_obj.sorting_level_seq
-
-            line_datas.append(res)
-
-        root = {'id': "False"}
-
-        #Stroim derevo s uchetom vseh pod urovnej.
-        tree_onfly = self.tree_onfly(line_datas, root)
-
-        #Razvorachivajem derevo v ploskuju strukturu i sortirujem po Index. Takim obrazom poluchajem
-        # otsortirovanoje derevo dla vivoda v proskom rezime na UI.
-        flat_onfly = self.flat_onfly(tree_onfly["children"])
-
-        for index, line in enumerate(flat_onfly):
-            var_data = {
-                "sorting_seq": index + 1,
-                "sorting_level": int(line["level"]),
-            }
-
-            task_obj = self.env['project.task']
-            task_obj_search = task_obj.sudo().search([('id', '=', int(line["id"]))])
-            task_obj_search.sudo().write(var_data)
-
-        self.after_do_sorting(tree_onfly, flat_onfly)
-
-    @api.model
-    def sorting_update(self, sorting_ids, subtask_project_id, project_id):
-
-        for sort in sorting_ids:
-            id = sort["id"]
-            seq = sort["seq"]
-
-            var_data = {
-                "sorting_level_seq": int(seq)
-            }
-            task_obj_search = self.sudo().search([('id', '=', int(id))])
-            task_obj_search.sudo().write(var_data)
-
-        if not subtask_project_id:
-
-            if project_id:
-                project = self.env['project.project'].sudo().search([('id', '=', project_id)])
-                if project.id:
-                    project.sudo().write({"subtask_project_id": project_id})
-                    self.do_sorting(project_id)
-
-        if subtask_project_id:
-            self.do_sorting(subtask_project_id[0])
-
-
-
-
-    @api.model
-    def childs_get(self, ids_field_name, ids, fields):
-
-        test = "OK"
-        return test
-
-
-    @api.model
-    def after_do_sorting(self, tree_onfly, flat_onfly):
-
-        test = "OK"
-        return test
 
