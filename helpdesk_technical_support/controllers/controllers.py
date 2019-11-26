@@ -5,9 +5,9 @@ from odoo import tools
 from odoo.tools.translate import _
 
 
-class OpenMaintenance(http.Controller):
+class OpenTicket(http.Controller):
     @http.route('/intervention', type='http', auth='user', website=True)
-    def navigate_to_intervention_page(self):
+    def navigate_to_ticket_page(self):
         user = http.request.env.context.get('uid')
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
