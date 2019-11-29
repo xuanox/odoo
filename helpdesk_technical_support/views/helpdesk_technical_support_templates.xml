@@ -11,7 +11,7 @@
                   <select name="equipment_id" id="equipment_id" class="form-control">
                       <option value=""> -- Seleccione el Equipo -- </option>
                       <t t-foreach="equipment_id" t-as="equipment_id">
-                          <option t-att-value="#{equipment_id.id}">
+                          <option t-att-value="equipment_id.id">
                               <t t-esc="equipment_id.name"/>
                           </option>
                       </t>
