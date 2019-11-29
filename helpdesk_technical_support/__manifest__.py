@@ -31,7 +31,6 @@ This shortcut allows you to generate a Technical Support Order.
         'views/res_config_settings_views.xml',
         'views/res_partner_views.xml',
         'views/website_templates.xml',
-        'views/helpdesk_templates.xml',
     ],
     'auto_install': True,
 }
