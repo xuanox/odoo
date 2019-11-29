@@ -142,7 +142,7 @@ class CustomerPortal(CustomerPortal):
 
     @http.route(['/helpdesk'], type='http', auth="public", website=True)
     def helpdesk(self, **kw):
-        team = http.request.env.ref('helpdesk_technical_support.team_alpha')
+        team = http.request.env.ref('helpdesk.team')
         team.website_published = False
         return request.render("helpdesk_technical_support.helpdesk",{ 'use_website_helpdesk_form' : True,
                                                     'team': team,
