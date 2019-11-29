@@ -33,6 +33,7 @@ This shortcut allows you to generate a Technical Support Order.
         'views/error_template.xml',
         'views/succes_template.xml',
         'views/website_templates.xml',
+        'views/helpdesk_templates.xml',
     ],
     'auto_install': True,
 }
