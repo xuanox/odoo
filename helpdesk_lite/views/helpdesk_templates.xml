@@ -72,7 +72,7 @@
                                     <t t-call='portal.record_pager'/>
                                     Ticket - <span t-field="ticket.name"/> (#<span t-esc="ticket.id"/>)
                                     <span t-field="ticket.stage_id.name" class="pull-right label label-info" title="Current stage of this ticket"/>
-                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=helpdesk.ticket&amp;id=%s&amp;view_type=form' % (ticket.id)" groups="helpdesk.group_helpdesk_user">Edit Task</a>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=helpdesk_lite.ticket&amp;id=%s&amp;view_type=form' % (ticket.id)" groups="helpdesk_lite.group_helpdesk_lite_user">Edit Task</a>
                                 </h4>
                             </div>
                         </div>
@@ -153,8 +153,8 @@
                                             -
                                             <span t-field="ticket.name"/>
                                             <a class="btn btn-info"
-                                               t-att-href="'/web#return_label=Website&amp;model=helpdesk.ticket&amp;id=%s&amp;view_type=form' % (ticket.id)"
-                                               groups="helpdesk.group_helpdesk_user">Edit Ticket
+                                               t-att-href="'/web#return_label=Website&amp;model=helpdesk_lite.ticket&amp;id=%s&amp;view_type=form' % (ticket.id)"
+                                               groups="helpdesk_lite.group_helpdesk_user">Edit Ticket
                                             </a>
                                             <span t-field="ticket.stage_id.name" class="pull-right label label-info"
                                                   title="Current stage of this ticket"/>
@@ -210,8 +210,8 @@
 -->
         </t>
     </template>
-
-    <template id="helpdesk_technical_support.new_ticket" name="New Ticket" page="True">
+<!--
+    <template id="helpdesk_lite.new_ticket" name="New Ticket" page="True">
         <t t-name="website.new_ticket">
             <t t-call="website.layout">
                 <div class="container mt16">
@@ -222,7 +222,7 @@
                     </div>
                 </div>
                 <div id="wrap" class="oe_structure oe_empty">
-                    <form data-success_page="ticket_thanks" data-model_name="helpdesk.ticket" action="/website_form/"
+                    <form data-success_page="ticket_thanks" data-model_name="helpdesk_lite.ticket" action="/website_form/"
                           method="post" class="s_website_form form-horizontal container-fluid mt32"
                           enctype="multipart/form-data">
 
@@ -283,8 +283,8 @@
         </t>
     </template>
 
-    <template id="helpdesk_technical_support.helpdesk" name="Helpdesk" page="True">
-        <t name="Helpdesk Team" t-name="helpdesk.team">
+    <template id="helpdesk_lite.helpdesk" name="Helpdesk" page="True">
+        <t name="Helpdesk Team" t-name="website_helpdesk_lite.team">
             <t t-call="website.layout">
                 <t t-set="additional_title">Helpdesk</t>
                 <div class="container mt16">
