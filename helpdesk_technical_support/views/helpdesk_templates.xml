@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-<!--
+
             <div id="wrap">
                 <div class="container">
                     <div class="oe_structure">
@@ -207,10 +207,10 @@
                     </div>
                 </div>
             </div>
--->
+
         </t>
     </template>
-<!--
+
     <template id="helpdesk_technical_support.new_ticket" name="New Ticket" page="True">
         <t t-name="website.new_ticket">
             <t t-call="website.layout">
@@ -368,6 +368,6 @@
             </div>
         </t>
     </template>
--->
+
 
 </odoo>
