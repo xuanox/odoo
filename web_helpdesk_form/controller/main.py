@@ -8,7 +8,7 @@ from odoo.addons.website_form.controllers.main import WebsiteForm
 
 class WebsiteForm(WebsiteForm):
 
-    @http.route('''/helpdesk/<model("helpdesk.team", "[('use_web_helpdesk_form','=',True)]"):team>/submit''', type='http', auth="public", website=True)
+    @http.route('''/helpdesk/<model("helpdesk.team", "[('use_website_helpdesk_form','=',True)]"):team>/submit''', type='http', auth="public", website=True)
     def web_helpdesk_form(self, team, **kwargs):
         if not team.active or not team.website_published:
             return request.render("website_helpdesk.not_published_any_team")
