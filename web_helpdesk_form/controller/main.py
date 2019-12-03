@@ -10,14 +10,13 @@ class WebsiteForm(WebsiteForm):
 
     @http.route('''/helpdesk/<model("helpdesk.team", "[('use_website_helpdesk_form','=',True)]"):team>/submit''', type='http', auth="public", website=True)
     def web_helpdesk_form(self, team, **kwargs):
-        equipments = request.env['equipment.equipment'].sudo().search([])
         if not team.active or not team.website_published:
             return request.render("website_helpdesk.not_published_any_team")
         default_values = {}
         if request.env.user.partner_id != request.env.ref('base.public_partner'):
             default_values['name'] = request.env.user.partner_id.name
             default_values['email'] = request.env.user.partner_id.email
-            default_values['equipments'] = equipments
+            default_values['equipments'] = request.env['equipment.equipment'].sudo().search([])
         return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values})
 
     @http.route('/website_form/<string:model_name>', type='http', auth="public", methods=['POST'], website=True)
