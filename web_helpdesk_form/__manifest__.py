@@ -9,6 +9,7 @@
     'depends': [
         'website_form_editor',
         'website_helpdesk',
+        'helpdesk_technical_support',
     ],
     'description': """
 Generate tickets in Helpdesk app from a form published on your website. This form can be customized thanks to the *Form Builder* module (available in Odoo Enterprise).
