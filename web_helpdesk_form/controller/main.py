@@ -16,8 +16,8 @@ class WebsiteForm(WebsiteForm):
         if request.env.user.partner_id != request.env.ref('base.public_partner'):
             default_values['name'] = request.env.user.partner_id.name
             default_values['email'] = request.env.user.partner_id.email
-            
-        equipments = request.env['maintenance.equipment'].sudo().search([])
+
+        equipments = request.env['equipment.equipment'].sudo().search([])
         values = {'equipments' : equipments}
         return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values, 'values': values})
 
