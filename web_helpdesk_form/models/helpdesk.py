@@ -11,5 +11,5 @@ class HelpdeskTeam(models.Model):
     feature_form_url = fields.Char('URL to Submit Issue', readonly=True, compute='_get_form_url')
 
     def _get_form_url(self):
-        for team in self.filtered(lambda team: team.name and team.use_website_helpdesk_form and team.id):
-            team.feature_form_url = (team.use_website_helpdesk_form and team.id) and ('/helpdesk/' + slug(team) + '/submit') or False
+        for team in self.filtered(lambda team: team.name and team.use_web_helpdesk_form and team.id):
+            team.feature_form_url = (team.use_web_helpdesk_form and team.id) and ('/helpdesk/' + slug(team) + '/submit') or False

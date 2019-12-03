@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="website_helpdesk_form.ticket_submited" name="Ticket Received">
+    <template id="web_helpdesk_form.ticket_submited" name="Ticket Received">
         <t t-call="website.layout">
             <div id="wrap" class="oe_structure oe_empty">
                 <div class="container">
@@ -25,7 +25,7 @@
         <field name="view_id" ref="ticket_submited" />
     </record>
 
-    <template id="website_helpdesk_form.ticket_submit" name="Helpdesk: Submit a Ticket">
+    <template id="web_helpdesk_form.ticket_submit" name="Helpdesk: Submit a Ticket">
         <t name="Helpdesk" priority="29" t-name="website.helpdesk">
             <t t-call="website.layout">
                 <t t-set="additional_title">Ticket</t>
