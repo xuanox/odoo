@@ -16,8 +16,10 @@ class WebsiteForm(WebsiteForm):
         if request.env.user.partner_id != request.env.ref('base.public_partner'):
             default_values['name'] = request.env.user.partner_id.name
             default_values['email'] = request.env.user.partner_id.email
-            default_values['equipments'] = request.env['equipment.equipment'].sudo().search([])
-        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values})
+            
+        equipments = request.env['maintenance.equipment'].sudo().search([])
+        values = {'equipments' : equipments}
+        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values, 'values': values})
 
     @http.route('/website_form/<string:model_name>', type='http', auth="public", methods=['POST'], website=True)
     def website_form(self, model_name, **kwargs):
