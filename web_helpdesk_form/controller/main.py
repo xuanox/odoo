@@ -19,7 +19,7 @@ class WebsiteForm(WebsiteForm):
 
         equipments = request.env['equipment.equipment'].sudo().search([])
         values = {'equipments' : equipments}
-        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values, 'values': values})
+        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values}, values)
 
     @http.route('/website_form/<string:model_name>', type='http', auth="public", methods=['POST'], website=True)
     def website_form(self, model_name, **kwargs):
