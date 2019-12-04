@@ -40,7 +40,9 @@ class WebsiteForm(WebsiteForm):
             'user': user,
             'create_uid': user,
             'parent': parent,
-            'parent_name': parent_name
+            'parent_name': parent_name,
+            'partner_name': partner_name,
+            'partner_email': partner_email
             }
         return request.render("web_helpdesk_form.request", values)
 
