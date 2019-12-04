@@ -79,7 +79,6 @@
     </template>
 
     <template id="request" name="Helpdesk: Submit a Ticket">
-        <t name="Helpdesk" priority="29" t-name="website.helpdesk">
             <t t-call="website.layout">
                 <t t-set="additional_title">Ticket</t>
                 <h2 t-if="team" class="text-center text-muted">
@@ -93,7 +92,7 @@
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                     <input type="hidden" name="user" t-att-value="user"/>
                                     <input type="hidden" name="parent" t-att-value="parent"/>
-                                    
+
                                     <div class="form-group row form-field o_website_form_required">
                                         <div class="col-lg-3 col-md-4 text-right">
                                             <label class="col-form-label" for="equipment_id">Equipment</label>
@@ -136,6 +135,5 @@
                     </div>
                 </div>
             </t>
-        </t>
     </template>
 </odoo>
