@@ -3,6 +3,8 @@
 
 from odoo import http
 from odoo.http import request
+from odoo import tools
+from odoo.tools.translate import _
 from odoo.addons.website_form.controllers.main import WebsiteForm
 
 
@@ -27,7 +29,7 @@ class WebsiteForm(WebsiteForm):
         return super(WebsiteForm, self).website_form(model_name, **kwargs)
 
     #data post
-    MANDATORY_BILLING_FIELDS = ["name","equipment_id", "description"]
+    MANDATORY_BILLING_FIELDS = ["name"]
     @http.route('/intervention/request/success', type='http', auth='user', website=True)
     def navigate_to_success_page(self):
         user = http.request.env.context.get('uid')
