@@ -126,7 +126,7 @@
                                             <label class="col-form-label" for="partner_name">Your Name</label>
                                         </div>
                                         <div class="col-lg-7 col-md-8">
-                                            <input type="text" class="form-control o_website_form_input" name="partner_name" t-att-value="default_values.get('name', '')" required="1"/>
+                                            <input type="text" class="form-control o_website_form_input" name="partner_name" t-att-value="partner_name" required="1"/>
                                         </div>
                                     </div>
                                     <div class="form-group row form-field o_website_form_required">
@@ -134,7 +134,7 @@
                                             <label class="col-form-label" for="partner_email">Your Email</label>
                                         </div>
                                         <div class="col-lg-7 col-md-8">
-                                            <input type='email' class='form-control o_website_form_input' name="partner_email" t-att-value="default_values.get('email', '')" required="1"/>
+                                            <input type='email' class='form-control o_website_form_input' name="partner_email" t-att-value="partner_email"/>
                                         </div>
                                     </div>
                                     <div class="form-group row form-field o_website_form_required">

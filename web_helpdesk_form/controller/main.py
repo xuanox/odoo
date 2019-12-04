@@ -16,10 +16,7 @@ class WebsiteForm(WebsiteForm):
         if request.env.user.partner_id != request.env.ref('base.public_partner'):
             default_values['name'] = request.env.user.partner_id.name
             default_values['email'] = request.env.user.partner_id.email
-
-        equipments = request.env['equipment.equipment'].sudo().search([])
-        values = {'equipments' : equipments}
-        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values}, values)
+        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values})
 
     @http.route('/website_form/<string:model_name>', type='http', auth="public", methods=['POST'], website=True)
     def website_form(self, model_name, **kwargs):
@@ -30,29 +27,22 @@ class WebsiteForm(WebsiteForm):
         return super(WebsiteForm, self).website_form(model_name, **kwargs)
 
 
-    @http.route('''/helpdesk/<model("helpdesk.team", "[('use_website_helpdesk_form','=',True)]"):team>/submit''', type='http', auth="public", website=True)
-    def web_helpdesk_form(self, team, **kwargs):
-        if not team.active or not team.website_published:
-            return request.render("website_helpdesk.not_published_any_team")
-        default_values = {}
-        if request.env.user.partner_id != request.env.ref('base.public_partner'):
-            default_values['name'] = request.env.user.partner_id.name
-            default_values['email'] = request.env.user.partner_id.email
-
-        equipments = request.env['equipment.equipment'].sudo().search([])
-        values = {'equipments' : equipments}
-        return request.render("web_helpdesk_form.ticket_submit", {'team': team, 'default_values': default_values}, values)
-
-
     @http.route(['/intervention/request'], type='http', auth='public', website=True)
     def register(self, redirect=None, **post):
-        default_values = {}
-        if request.env.user.partner_id != request.env.ref('base.public_partner'):
-            default_values['name'] = request.env.user.partner_id.name
-            default_values['email'] = request.env.user.partner_id.email
-        equipments = request.env['equipment.equipment'].sudo().search([])
-        values = {'equipments' : equipments}
-        return request.render("web_helpdesk_form.request", values, {'default_values': default_values})
+        partner_name = request.env.user.partner_id.name
+        partner_email = request.env.user.partner_id.email
+        user = request.env.user.id
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        equipments = request.env['equipment.equipment'].sudo().search([('client_id.id','=',parent)])
+        values = {
+            'equipments' : equipments,
+            'user': user,
+            'create_uid': user,
+            'parent': parent,
+            'parent_name': parent_name
+            }
+        return request.render("web_helpdesk_form.request", values)
 
 
     def _process_registration(self, post):
