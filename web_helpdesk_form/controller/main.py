@@ -95,7 +95,6 @@ class WebsiteForm(WebsiteForm):
     def _process_registration(self, post):
         equipment_id = post.get('equipment_id')
         equipments = request.env['equipment.equipment'].sudo().search([('id','=',equipment_id)])
-        team = request.equipment_id.team_id.id
         request.env['helpdesk.ticket'].sudo().create({
             'name' : post.get('name'),
             'equipment_id': post.get('equipment_id'),
@@ -103,7 +102,7 @@ class WebsiteForm(WebsiteForm):
             'description': post.get('description'),
             'create_uid':post.get('user'),
             'partner_id':request.env.user.partner_id.id,
-            'team_id': equipment_id.team_id.id,
+            'team_id': equipments.team_id.id,
     })
 
 
