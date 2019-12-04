@@ -105,7 +105,7 @@
                     <div class="container">
                         <div class="row">
                             <section id="forms">
-                                <form action="/website_form/" method="post" class="s_website_form container-fluid mt32" enctype="multipart/form-data" data-model_name="helpdesk.ticket" data-success_page="/your-ticket-has-been-submitted" data-editable-form="false">
+                                <form action="/intervention/request" method="post" class="s_website_form container-fluid mt32" enctype="multipart/form-data">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                     <input type="text" name="user" t-att-value="user"/>
                                     <input type="text" name="parent" t-att-value="parent"/>
