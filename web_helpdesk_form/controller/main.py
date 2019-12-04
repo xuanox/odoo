@@ -26,8 +26,33 @@ class WebsiteForm(WebsiteForm):
                 request.params['partner_id'] = Partner.id
         return super(WebsiteForm, self).website_form(model_name, **kwargs)
 
+    #data post
+    MANDATORY_BILLING_FIELDS = ["name","equipment_id", "description"]
+    @http.route('/intervention/request/success', type='http', auth='user', website=True)
+    def navigate_to_success_page(self):
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+        }
+        return http.request.render('web_helpdesk_form.succes_page', values)
 
-    @http.route(['/intervention/request'], type='http', auth='public', website=True)
+    @http.route('/intervention/request/error', type='http', auth='user', website=True)
+    def navigate_to_error_page(self):
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+        }
+        return http.request.render('web_helpdesk_form.error_page', values)
+
+    @http.route(['/intervention/request'], type='http', auth='user', website=True)
     def register(self, redirect=None, **post):
         partner_name = request.env.user.partner_id.name
         partner_email = request.env.user.partner_id.email
@@ -35,6 +60,22 @@ class WebsiteForm(WebsiteForm):
         parent = request.env.user.parent_id.id
         parent_name = request.env.user.parent_id.name
         equipments = request.env['equipment.equipment'].sudo().search([('client_id.id','=',parent)])
+
+        values = {
+            'error': {},
+            'error_message': []
+        }
+
+        if post:
+            error, error_message = self._form_validate(post)
+            values.update({'error': error, 'error_message': error_message})
+            values.update(post)
+            if error:
+                return request.redirect('/intervention/request/error')
+            if not error:
+                self._process_registration(post)
+                return request.redirect('/intervention/request/success')
+
         values = {
             'equipments' : equipments,
             'user': user,
@@ -48,16 +89,12 @@ class WebsiteForm(WebsiteForm):
 
 
     def _process_registration(self, post):
-        request.env['helpdesk'].sudo().create({
-            'category_id' : post.get('category_id'),
+        request.env['helpdesk.ticket'].sudo().create({
+            'name' : post.get('name'),
             'equipment_id': post.get('equipment_id'),
-            'motif': post.get('motif'),
-            'priority': post.get('priority'),
-            'failure_type': post.get('failure_type'),
-            'partner': post.get('partner_id'),
-            'zone_id': post.get('zone_id'),
-            'state_machine': post.get('state_id'),
-
+            'description': post.get('description'),
+            'create_uid':post.get('user'),
+            'partner_id':post.get('parent')
     })
 
 

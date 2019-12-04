@@ -57,20 +57,6 @@
                                     </div>
                                     <div class="form-group row form-field o_website_form_required">
                                         <div class="col-lg-3 col-md-4 text-right">
-                                            <label class="col-form-label" for="equipment_id">Equipment</label>
-                                        </div>
-                                        <div class="col-lg-7 col-md-8">
-                                            <select name="equipment_id" class="form-control">
-                      	                      <t t-foreach="equipments" t-as="equipment_id">
-                      	                        <option t-att-value="equipment_id.id">
-                      	                          <t t-esc="equipment_id.name" />
-                      	                        </option>
-                      	                      </t>
-                      	                    </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row form-field o_website_form_required">
-                                        <div class="col-lg-3 col-md-4 text-right">
                                             <label class="col-form-label" for="name">Subject</label>
                                         </div>
                                         <div class="col-lg-7 col-md-8">
@@ -121,6 +107,8 @@
                             <section id="forms">
                                 <form action="/website_form/" method="post" class="s_website_form container-fluid mt32" enctype="multipart/form-data" data-model_name="helpdesk.ticket" data-success_page="/your-ticket-has-been-submitted" data-editable-form="false">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <input type="text" name="user" t-att-value="user"/>
+                                    <input type="text" name="parent" t-att-value="parent"/>
                                     <div class="form-group row form-field o_website_form_required">
                                         <div class="col-lg-3 col-md-4 text-right">
                                             <label class="col-form-label" for="partner_name">Your Name</label>
@@ -149,6 +137,22 @@
                                                 </option>
                                               </t>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row form-field o_website_form_required">
+                                        <div class="col-lg-3 col-md-4 text-right">
+                                            <label class="col-form-label" for="name">Subject</label>
+                                        </div>
+                                        <div class="col-lg-7 col-md-8">
+                                            <input type="text" class="form-control o_website_form_input" name="name" required="1"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row form-field">
+                                        <div class="col-lg-3 col-md-4 text-right">
+                                            <label class="col-form-label" for="description">Description</label>
+                                        </div>
+                                        <div class="col-lg-7 col-md-8">
+                                            <textarea class="form-control o_website_form_input" name="description" required="1"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
