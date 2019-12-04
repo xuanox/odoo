@@ -56,6 +56,7 @@ class WebsiteForm(WebsiteForm):
 
     @http.route(['/intervention/request'], type='http', auth='user', website=True)
     def register(self, redirect=None, **post):
+        team_id = request.env['helpdesk.team'].sudo().search([('id','=',post.get('equipment_id.team_id.id'))])
         partner_name = request.env.user.partner_id.name
         partner_email = request.env.user.partner_id.email
         user = request.env.user.id
@@ -86,11 +87,13 @@ class WebsiteForm(WebsiteForm):
             'parent': parent,
             'partner_name': partner_name,
             'partner_email': partner_email,
+            'team_id': team_id,
             }
         return request.render("web_helpdesk_form.request", values)
 
 
     def _process_registration(self, post):
+
         request.env['helpdesk.ticket'].sudo().create({
             'name' : post.get('name'),
             'equipment_id': post.get('equipment_id'),

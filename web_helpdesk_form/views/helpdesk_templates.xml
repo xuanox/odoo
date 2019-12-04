@@ -92,12 +92,13 @@
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                     <input type="hidden" name="user" t-att-value="user"/>
                                     <input type="hidden" name="parent" t-att-value="parent"/>
+                                    <input type="text" name="team_id" t-att-value="team_id"/>
                                     <div class="form-group row form-field o_website_form_required">
                                         <div class="col-lg-3 col-md-4 text-right">
                                             <label class="col-form-label" for="partner_name">Your Name</label>
                                         </div>
                                         <div class="col-lg-7 col-md-8">
-                                            <input type="text" class="form-control o_website_form_input" name="partner_name" t-att-value="partner_name" required="1"/>	
+                                            <input type="text" class="form-control o_website_form_input" name="partner_name" t-att-value="partner_name" required="1"/>
                                         </div>
                                     </div>
                                     <div class="form-group row form-field o_website_form_required">
