@@ -46,9 +46,13 @@ class WebsiteForm(WebsiteForm):
 
     @http.route(['/intervention/request'], type='http', auth='public', website=True)
     def register(self, redirect=None, **post):
+        default_values = {}
+        if request.env.user.partner_id != request.env.ref('base.public_partner'):
+            default_values['name'] = request.env.user.partner_id.name
+            default_values['email'] = request.env.user.partner_id.email
         equipments = request.env['equipment.equipment'].sudo().search([])
         values = {'equipments' : equipments}
-        return request.render("web_helpdesk_form.request", values)
+        return request.render("web_helpdesk_form.request", values, {'default_values': default_values})
 
 
     def _process_registration(self, post):
