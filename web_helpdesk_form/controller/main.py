@@ -92,6 +92,7 @@ class WebsiteForm(WebsiteForm):
             'equipment_id': post.get('equipment_id'),
             'description': post.get('description'),
             'create_uid':post.get('user'),
+            'partner_id':request.env.user.parent_id.id
     })
 
 
