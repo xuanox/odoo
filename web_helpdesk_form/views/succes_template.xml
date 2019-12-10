@@ -16,9 +16,9 @@
 				    En los proximos minutos, una vez revisemos todos sus datos y la disponibilidad,
 				    usted estará recibiendo una confirmación y podrá revisar el estado de su solicitud en el portal.
                                 </p>
-                                <t t-if="ticket">
-                                    <h1 class="text-center">Su Numero de Ticket es <a t-if="request.session.uid" t-attf-href="/helpdesk/ticket/#{ticket.id}">#<span t-field="ticket.id"/></a><t t-if="not request.session.get('uid')">#<span t-field="ticket.id"/></t>.</h1>
-                                </t>
+                                <p>
+                                    <h1 class="text-center">Ver sus Solicitudes <a t-attf-href="/my/tickets"><span>Mi Tickets</span></a></h1>
+                                </p>
                                 <p class="mt64">
                                     Si tiene una emergencia, no dude en contactarnos vía telefónica:
                                 </p>
