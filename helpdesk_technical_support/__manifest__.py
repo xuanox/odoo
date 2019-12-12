@@ -30,8 +30,6 @@ This shortcut allows you to generate a Technical Support Order.
         'views/equipment_views.xml',
         'views/res_config_settings_views.xml',
         'views/res_partner_views.xml',
-        'views/error_template.xml',
-        'views/succes_template.xml',
         'views/website_templates.xml',
     ],
     'auto_install': True,
