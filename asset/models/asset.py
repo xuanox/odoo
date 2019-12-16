@@ -42,7 +42,7 @@ class asset_state(models.Model):
 class AssetStage(models.Model):
     _name = 'asset.stage'
     _description = 'Stage of Asset'
-    _order = "sequence"
+    _order = 'sequence'
 
     name = fields.Char('Stage', size=64, required=True, translate=True)
     sequence = fields.Integer('Sequence', help="Used to order stages.", default=1)

@@ -338,7 +338,7 @@ class EquipmentModality(models.Model):
     color = fields.Integer('Color Index')
     note = fields.Text('Comments', translate=True)
     equipment_ids = fields.One2many('equipment.equipment', 'modality_id', string='Equipments', copy=False)
-    tool_id=fields.Many2one('equipment.modality.tool.line','Tools')    
+    tool_id=fields.Many2one('equipment.modality.tool.line','Tools')
 
 class EquipmentHistoryState(models.Model):
     _name = 'equipment.history.state'
@@ -375,8 +375,8 @@ class EquipmentModalityToolLine(models.Model):
     stage_id = fields.Many2one('asset.stage', related='asset_id.stage_id', string='Stage', store=True, track_visibility='onchange', copy=False)
 
 class EquipmentTool(models.Model):
-    _name = "equipment.tool"
-    _description = "Equipment Tools"
+    _name = 'equipment.tool'
+    _description = 'Equipment Tools'
 
     name = fields.Char(string='Description')
     asset_id=fields.Many2one('asset.asset', string='Tool', required=True)
