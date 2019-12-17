@@ -110,9 +110,9 @@
 												</page>
                         <page string="Documentation" name="documentation">
 													<separator string="Problem Found"/>
-													<field name="operations_description" placeholder="Problem found..." attrs="{'required':[('state', '=', 'ready')]}"/>
+													<field name="operations_description" placeholder="Problem found..."/>
 													<separator string="Work Done"/>
-													<field name="labor_description" placeholder="Work Done Specify ..." attrs="{'required':[('state', '=', 'ready')]}"/>
+													<field name="labor_description" placeholder="Work Done Specify ..."/>
                           <separator string="Observation"/>
                           <field name="documentation_description" placeholder="Observation ..."/>
                         </page>
@@ -122,7 +122,7 @@
 																			<tree editable="bottom">
 																					<field name="assets_id"/>
 																					<field name="name"/>
-																					<field name="stage_id"/>
+																					<field name="maintenance_state_id"/>
 																			</tree>
 																	</field>
 															</group>

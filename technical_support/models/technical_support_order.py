@@ -10,7 +10,6 @@ import time
 from odoo import api, fields, models, _
 from odoo import netsvc
 import odoo.addons.decimal_precision as dp
-from odoo.exceptions import ValidationError
 
 
 class TechnicalSupportOrder(models.Model):
@@ -59,16 +58,16 @@ class TechnicalSupportOrder(models.Model):
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='cm', track_visibility='onchange')
     ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type", track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
 
-    date_planned = fields.Datetime('Planned Date', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    date_scheduled = fields.Datetime('Start Date', track_visibility='onchange')
+    date_planned = fields.Datetime('Planned Date', required=True, readonly=True, states={'draft':[('readonly',False)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
+    date_scheduled = fields.Datetime('Start Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
     date_execution = fields.Datetime('Execution Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)],'ready':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
-    date_finish = fields.Datetime('Finish Date', track_visibility='onchange')
+    date_finish = fields.Datetime('Finish Date', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
 
-    tools_description = fields.Text('Tools Description', track_visibility='onchange')
-    labor_description = fields.Text('Labor Description', track_visibility='onchange')
-    operations_description = fields.Text('Operations Description', track_visibility='onchange')
-    documentation_description = fields.Text('Documentation Description', track_visibility='onchange')
-    problem_description = fields.Text(related='ticket_id.description', string='Problem Description', readonly=True, store=True)
+    tools_description = fields.Text('Tools Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    labor_description = fields.Text('Labor Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    operations_description = fields.Text('Operations Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    documentation_description = fields.Text('Documentation Description', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
+    problem_description = fields.Text(related='ticket_id.description', string='Problem Description', readonly=True, store=True, track_visibility='onchange')
 
     ticket_id = fields.Many2one('helpdesk.ticket', string='Ticket', track_visibility='onchange', states={'done':[('readonly',True)],'cancel':[('readonly',True)]})
     task_id = fields.Many2one('technical_support.task', 'Task', states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, domain="[('model_id', '=', model_id)]")
@@ -157,12 +156,6 @@ class TechnicalSupportOrder(models.Model):
     def onchange_ticket(self):
         self.equipment_id = self.ticket_id.equipment_id
         self.user_id = self.ticket_id.user_id
-
-    @api.constrains('date_scheduled', 'date_finish')
-    def _check_date_time(self):
-        if self.date_scheduled > self.date_finish:
-            raise ValidationError(_(
-                'End Time cannot be set before Start Time.'))
 
     def test_ready(self):
         res = True
@@ -321,6 +314,7 @@ class TechnicalSupportOrder(models.Model):
             self.filtered(lambda o: o.state == 'ready').write({'state': 'consulting'})
         return super(TechnicalSupportOrder, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
 
+
 class TechnicalSupportOrderPartsLine(models.Model):
     _name = 'technical_support.order.parts.line'
     _description = 'Maintenance Planned Parts'
@@ -392,18 +386,18 @@ class TechnicalSupportOrderChecklistLine(models.Model):
         return True
 
 class TechnicalSupportTask(models.Model):
+    """
+    Maintenance Tasks (Template for order)
+    """
     _name = 'technical_support.task'
     _description = 'Maintenance Task'
 
     MAINTENANCE_TYPE_SELECTION = [
-        ('cm', 'Corrective'),
         ('pm', 'Preventive'),
         ('pd', 'Predictive'),
         ('in', 'Install'),
         ('un', 'Uninstall'),
-        ('pcc', 'PCC'),
-        ('fco', 'FCO'),
-        ('demo', 'Demo')
+        ('fco', 'FCO')
     ]
 
     name = fields.Char('Description', size=64, required=True, translate=True)
@@ -477,7 +471,7 @@ class TechnicalSupportOrderAssetsLine(models.Model):
     name = fields.Char('Description', size=64)
     assets_id = fields.Many2one('asset.asset', 'Assets', required=True)
     maintenance_id = fields.Many2one('technical_support.order', 'Maintenance Order')
-    stage_id = fields.Many2one('asset.stage', related='assets_id.stage_id', string='Stage')
+    maintenance_state_id = fields.Many2one('asset.state', related='assets_id.maintenance_state_id', string='State')
 
 class TechnicalSupportChecklistHistory(models.Model):
     _name="technical_support.checklist.history"

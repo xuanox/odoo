@@ -83,7 +83,7 @@ function sorted (gantt, ItemsSorted) {
             sortable.sortable({
                 placeholder: "ui-state-highlight",
                 cursor: 'move',
-                items: 'div:not(.ui-state-disabled):not(.ui-state-disabled-group):not(.task-gantt-item-info)',
+                items: 'div:not(.ui-state-disabled):not(.ui-state-disabled-group)',
                 cancel: ".ui-state-disabled",
                 tolerance: "pointer",
                 connectWith: '.task-gantt-sorting-item',
@@ -288,7 +288,7 @@ function sorted (gantt, ItemsSorted) {
 
                     }else{
                         framework.unblockUI();
-                        //self.do_search(self.last_domains, self.last_contexts, self.last_group_bys, self.options);
+                        self.do_search(self.last_domains, self.last_contexts, self.last_group_bys, self.options);
 
 
                     }

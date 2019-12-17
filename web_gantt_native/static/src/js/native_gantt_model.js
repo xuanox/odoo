@@ -7,8 +7,6 @@ var GanttTimeLineGhost = require('web_gantt_native.Ghost');
 var GanttTimeLineFirst = require('web_gantt_native.BarFirst');
 var framework = require('web.framework');
 
-
-
 return AbstractModel.extend({
 
     init: function () {
@@ -24,9 +22,8 @@ return AbstractModel.extend({
     load: function (params) {
         this.modelName = params.modelName;
         this.fields_view  = params.fieldsView;
-        //this.params = params;
-        // this.fieldNames = params.fieldNames;
-        // this.fieldsInfo = params.fieldsInfo;
+        this.fieldNames = params.fieldNames;
+        this.fieldsInfo = params.fieldsInfo;
         this.gantt = {
             modelName : params.modelName,
             group_bys : params.groupedBy,
@@ -34,8 +31,7 @@ return AbstractModel.extend({
             contexts :  params.context || {},
             fields_view : params.fieldsView,
             fields : params.fields,
-            pager : [],
-            orderedBy : params.orderedBy
+            pager : []
 
         }
 
@@ -125,43 +121,13 @@ return AbstractModel.extend({
         self.model_fields_dict = getFields["model_fields_dict"];
 
         var fields = self.model_fields;
-        // fields.push('display_name');
+        fields.push('display_name');
 
         // this.fields_view.arch.attrs.default_group_by
         var export_wizard = false;
 
         if (self.fields_view.arch.attrs.hasOwnProperty('export_wizard')){
             export_wizard = self.fields_view.arch.attrs.export_wizard
-        }
-
-
-
-        //Pager
-        var limit_view = 0;
-        if (self.fields_view.arch.attrs.hasOwnProperty('limit_view')){
-            limit_view = parseInt(self.fields_view.arch.attrs.limit_view)
-        }
-
-        if(self.gantt.pager.limit){
-            limit_view = self.gantt.pager.limit
-        }
-
-
-        //Load Level
-        var load_group_id_name = self.fields_view.arch.attrs.load_group_id_name;
-        self.LoadMode = false;
-        if (group_bys.length === 1) {
-
-            if (group_bys[0] === load_group_id_name || group_bys[-1] === load_group_id_name) {
-                self.LoadMode = true;
-            }
-        }
-
-        if (group_bys.length > 1 ) {
-
-            if (group_bys[group_bys.length-1] === load_group_id_name) {
-                self.LoadMode = true;
-            }
         }
 
 
@@ -174,9 +140,18 @@ return AbstractModel.extend({
             model_fields : fields,
             model_fields_dict : self.model_fields_dict,
             model_fields_view : self.fields_view,
-            LoadMode : self.LoadMode,
 
         };
+
+        var limit_view = 0;
+        if (self.fields_view.arch.attrs.hasOwnProperty('limit_view')){
+            limit_view = parseInt(self.fields_view.arch.attrs.limit_view)
+        }
+
+        if(self.gantt.pager.limit){
+            limit_view = self.gantt.pager.limit
+        }
+
 
         return this._rpc({
                 model: this.modelName,
@@ -184,8 +159,7 @@ return AbstractModel.extend({
                 context: this.gantt.contexts,
                 domain: this.gantt.domains,
                 fields: _.uniq(fields),
-                limit: limit_view,
-                orderBy: this.gantt.orderedBy,
+                limit: limit_view
             })
             .then(function (data) {
                 self.gantt.pager.limit = limit_view;
@@ -193,12 +167,6 @@ return AbstractModel.extend({
             });
 
     },
-
-
-
-
-
-
 
 
     on_data_loaded_count: function(tasks, group_bys) {
@@ -305,7 +273,7 @@ return AbstractModel.extend({
 
     },
 
-
+            //Fist Entry poin load predecessor after. get atributes from XML
     on_data_loaded_ghost: function(tasks, group_bys) {
         var self = this;
         var ids = _.pluck(tasks, "id");
@@ -338,12 +306,6 @@ return AbstractModel.extend({
         }
 
     },
-
-
-
-
-
-
 
     on_data_loaded_barfirst: function(tasks, group_bys) {
 
@@ -441,14 +403,11 @@ return AbstractModel.extend({
                     fields: _.uniq(['id',s_field])
                 })
                 .then(function (result) {
+
                     self.gantt.data["second_sort"] = result;
-                    return self.get_minmax_step(tasks, group_bys);
                 });
             }
-            else {
-                return self.get_main_group_data(tasks, group_bys);
-            }
-
+            return self.get_main_group_data(tasks, group_bys);
 
     },
 
@@ -461,7 +420,7 @@ return AbstractModel.extend({
 
             var main_id = gantt_attrs["main_group_id_name"];
             var s_model =  gantt_attrs["main_group_model"];
-            var s_field = ["id", "name","fold"];
+            var s_field = ["id", "name","fold_group"];
 
             if (group_bys.length === 1 && group_bys[0] === main_id && s_model) {
 
@@ -473,6 +432,8 @@ return AbstractModel.extend({
                     }
                 });
 
+
+
                 return this._rpc({
                     model: s_model,
                     method: 'search_read',
@@ -482,244 +443,22 @@ return AbstractModel.extend({
                 })
                 .then(function (result) {
                     self.gantt.data["main_group"] = result;
-                    return self.get_minmax_step(tasks, group_bys);
+
+
+                    // return result
+                    return true
+
                 });
-            }
-            else{
-                return self.get_minmax_step(tasks, group_bys);
+
             }
 
 
-
-    },
-
-
-    get_minmax_step: function(tasks, group_bys) {
-        var self = this;
-
-        var parent = {};
-
-        parent.fields = self.gantt.fields;
-
-        parent.model_fields_dict = self.gantt.data.model_fields_dict;
-        parent.gantt_attrs = self.gantt.data.model_fields_view.arch.attrs;
-        parent.second_sort = self.gantt.data.second_sort;
-        parent.main_group = self.gantt.data.main_group;
-
-        var groupRows = GanttToolField.groupRows(tasks, group_bys, parent, self.ItemsSorted);
-
-        self.gantt.data["rows_to_gantt"] =  GanttToolField.flatRows(groupRows["projects"], self.ItemsSorted);
-
-        // self.gantt.data["projects"] = groupRows["projects"];
-        //Get Max Min date for data
-        var GtimeStartA = groupRows["timestart"];
-        var GtimeStopA = groupRows["timestop"];
-
-
-        self.gantt.data["GtimeStart"] = Math.min.apply(null, GtimeStartA); // MAX date in date range
-        self.gantt.data["GtimeStop"] = Math.max.apply(null, GtimeStopA); // Min date in date range
-
-        GtimeStopA = [];
-        GtimeStartA = [];
-
-        return self.get_res_task_load(tasks, group_bys);
-
-
-    },
-
-    get_res_task_load: function(tasks, group_bys) {
-        var self = this;
-
-        var gantt_attrs = self.fields_view.arch.attrs;
-
-        var load_model = gantt_attrs["load_bar_model"];
-        var load_id = gantt_attrs["load_id"];
-        var load_id_from = gantt_attrs["load_id_from"];
-        var load_ids_from = gantt_attrs["load_ids_from"];
-
-        var ids = false;
-        if (load_ids_from === "id"){
-
-            ids = _.pluck(tasks, "id");
-
-        }
-        else if(load_ids_from !== "" && load_ids_from !== undefined){
-
-            var gp_load =  _.map(tasks , function (group_value) {
-                if (group_value[load_ids_from] !== false && group_value[load_ids_from] !== undefined && group_value[load_ids_from].length > 0 ){
-                    return group_value[load_ids_from][0]
-                }
-
-                // if (group_value[load_id] !== false && group_value[load_id].length == 1 ){
-                //     return group_value[load_id]
-                // }
-
-            });
-
-            ids = _.compact(gp_load);
-
-        }
-
-
-        if (ids){
-                   var _fields = [load_id, load_id_from, 'data_from', 'data_to', 'data_aggr', 'duration'];
-                   var _domain = [[load_id_from, 'in', _.uniq(ids)]];
-
-                    return this._rpc({
-                            model: load_model,
-                            method: 'search_read',
-                            context: this.gantt.contexts,
-                            domain: _domain,
-                            fields: _fields
-                        })
-                        .then(function (result) {
-                           self.gantt.data["Task_Load_Data"] = result;
-                           return self.get_res_load(tasks, group_bys);
-                        });
-
-       }
-       else{
-          return true
-       }
-
-
-        // var ghost_id = self.fields_view.arch.attrs.ghost_id;
-        // var ghost_model = self.fields_view.arch.attrs.ghost_model;
-        // var ghost_name = self.fields_view.arch.attrs.ghost_name;
-        // var ghost_date_start = self.fields_view.arch.attrs.ghost_date_start;
-        // var ghost_date_end = self.fields_view.arch.attrs.ghost_date_end;
-        // var ghost_durations = self.fields_view.arch.attrs.ghost_durations;
-        //
-        // if (ghost_model) {
-        //     return this._rpc({
-        //             model: ghost_model,
-        //             method: 'search_read',
-        //             context: this.gantt.contexts,
-        //             domain: [[ghost_id, 'in', _.uniq(ids)]],
-        //             fields: _.uniq([ghost_id ,ghost_name, ghost_date_start, ghost_date_end, ghost_durations])
-        //         })
-        //         .then(function (result) {
-        //             self.gantt.data.Ghost = result;
-        //             self.gantt.data.Ghost_Data = GanttTimeLineGhost.get_data_ghosts(self);
-        //
-        //             return self.get_res_load(tasks, group_bys);
-        //         });
-        //
-        // }
-        // else{
-        //     return self.get_res_load(tasks, group_bys);
-        // }
-
-    },
-
-
-
-    get_res_load: function(tasks, group_bys) {
-
-        var self = this;
-
-
-        if (self.LoadMode) {
-
-            // var _contexts = self.gantt.contexts;
-
-            // var _ctx = {
-            //         'group_by': 'data_aggr',
-            //         'lang': _contexts.lang,
-            //         'tz': _contexts.tz,
-            //         'uid': _contexts.uid
-            // };
-            var gantt_attrs = self.fields_view.arch.attrs;
-            var load_model = gantt_attrs["load_bar_model"];
-            var _ctx = self.gantt.contexts;
-
-            var m_GtimeStart = moment(self.gantt.data["GtimeStart"]).format("YYYY-MM-DD");
-            var m_GtimeStop = moment(self.gantt.data["GtimeStop"]).format("YYYY-MM-DD");
-            // var _domain = [['data_aggr', '>=', m_GtimeStart], ['data_aggr', '<=', m_GtimeStop]];
-
-            var data_load_group = _.where(self.gantt.data["rows_to_gantt"], {is_group: true});
-
-            var gp_load =  _.map(data_load_group , function (group_value) {
-                if (group_value.group_id !== false && group_value.group_id.length > 0 ){
-                    return group_value.group_id[0]
-                }
-            });
-
-            var gp_domain_ids = _.compact(gp_load);
-            var _domain = [['resource_id', 'in', _.uniq(gp_domain_ids)],['data_aggr', '>=', m_GtimeStart], ['data_aggr', '<=', m_GtimeStop]];
-            var _fields = ['task_id', 'data_from', 'data_to', 'user_id', 'data_aggr', 'duration', 'resource_id'];
-
-            // project.task.detail.plan
-            // project.task.detail.plan.res.link
-            return this._rpc({
-                model: load_model,
-                method: 'search_read',
-                context: _ctx,
-                domain: _domain,
-                fields: _fields
-            })
-
-            .then(function (result) {
-                self.gantt.data["Load_Data"] = result;
-                return true
-            });
-
-        }
-        else{
             return true
-        }
-
 
     },
 
-        // var m_GtimeStart = moment(self.GtimeStart).format("YYYY-MM-DD");
-        // var m_GtimeStop = moment(self.GtimeStop).format("YYYY-MM-DD");
-        //
-        // var _contexts = self.state.contexts;
-        //
-        // // var _domain = [['data_aggr', '>=', m_GtimeStartA], ['data_aggr', '<=', m_GtimeStopA], ['iser_id', 'in', _.uniq(ids)]];
-        // // _.uniq([user_id ,ghost_name, ghost_date_start, ghost_date_end, ghost_durations])
-        //
-        // var _domain = [['data_aggr', '>=', m_GtimeStart], ['data_aggr', '<=', m_GtimeStop]];
-        // var _fields = ['task_id', 'data_from', 'data_to', 'durations', 'user_id', 'data_aggr'];
-        //
-        //
-        // if (self.LoadMode) {
-        //         this._rpc({
-        //
-        //             model: "project.task.detail.plan",
-        //             method: 'search_read',
-        //             context: _contexts,
-        //             domain: _domain,
-        //             fields: _fields
-        //         })
-        //
-        //         .then(function (result) {
-        //             self.state.data.Dloads = result;
-        //         });
-        //
-        // }
 
-            // var tasks = self.state.data.ntasks;
-        // var group_bys = self.state.data.group_bys;
-        //
-        //
-        // var groupRows = GanttToolField.groupRows(tasks, group_bys, parent);
-
-        // //Get all tasks with group
-        // self.projects = groupRows["projects"];
-        //
-        // //Get Max Min date for data
-        // self.GtimeStopA = self.GtimeStopA.concat(groupRows["timestop"]);
-        // self.GtimeStartA = self.GtimeStartA.concat(groupRows["timestart"]);
-        //
-        // //Calc Min - Max
-        // self.GtimeStart = Math.min.apply(null, self.GtimeStartA); // MAX date in date range
-        // self.GtimeStop = Math.max.apply(null, self.GtimeStopA); // Min date in date range
-        //
-        // //Clean
-        // self.GtimeStartA = [];
-        // self.GtimeStopA = [];
+    // this.gantt.data.push();
 
 
 

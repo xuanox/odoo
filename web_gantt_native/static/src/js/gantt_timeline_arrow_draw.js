@@ -46,33 +46,17 @@ odoo.define('web_gantt_native.TimeLineArrowDraw', function (require) {
         return cycleL;
     }
 
-    function LinkLine (prop, type ) {
+    function LinkLine (prop, dir ) {
 
-        var Px = $('<div class="gantt_timeline_link_'+prop.dir+'"></div>');
-
-        Px.css({'background-color': prop.color});
-        Px.css({'width': prop.width + "px"});
-        Px.css({'height': prop.height + "px"});
+        var Px = $('<div class="gantt_timeline_link_'+dir+'"></div>');
+            Px.css({'background-color': prop.color});
+            Px.css({'width': prop.width + "px"});
+            Px.css({'height': prop.height + "px"});
 
             // if (prop.critical_path){
             //     Px.css({'box-shadow': "0 0 2px 1px #f30b0b6e"});
             // }
-        if (prop.mark) {
-            var P_type = $('<div class="gantt_timeline_link_type"></div>');
-
-            if (prop.p_loop){
-                P_type.addClass("fa fa-undo");
-                P_type.css({'color': '#f39a27'});
-
-            }else{
-                P_type.text(prop.type);
-                P_type.css({'color': prop.color});
-            }
-
-            Px.append(P_type);
-        }
-
-        return Px
+            return Px
     }
 
     function LinkArrow (path) {
@@ -267,13 +251,12 @@ odoo.define('web_gantt_native.TimeLineArrowDraw', function (require) {
 
     }
 
-    function CalcPath(prop, from, to, dir, step, mark) {
+    function CalcPath(prop, from, to, dir, step) {
 
          var path = {"top": 0, "left": 0, "width": 0, "height": 0, "color": prop.color, "type": prop.type, "dir": 0,
-        "align_center" : 0, "mark" : mark};
+        "align_center" : 0};
 
          path.critical_path = prop.critical_path;
-         path.p_loop = prop.p_loop;
 
 
          if (path.critical_path){
@@ -510,17 +493,6 @@ odoo.define('web_gantt_native.TimeLineArrowDraw', function (require) {
             prop.critical_path = 1
         }
 
-        prop.p_loop = undefined;
-        // if (from_obj.p_loop || to_obj.p_loop){
-        //
-        //     prop.p_loop = 1
-        // }
-        if (to_obj.p_loop){
-
-            prop.p_loop = 1
-        }
-
-
         var LinkWrapperR = [];
 
         prop["line_size"] = 2;
@@ -529,7 +501,7 @@ odoo.define('web_gantt_native.TimeLineArrowDraw', function (require) {
         prop["circle_width"] = 8;
         prop["circle_height"] = 16;
         prop["margin_arrow_down"] = 5;
-        prop["margin_arrow_top"] = 5;
+        prop["margin_arrow_top"] = 4;
 
 
         var s1 = LinkStartPoint(prop);
@@ -556,23 +528,23 @@ odoo.define('web_gantt_native.TimeLineArrowDraw', function (require) {
             if (steps_i === 4){
 
                 paths.push(CalcPath(prop, s1, undefined, steps[0], 0));
-                paths.push(CalcPath(prop, paths[0], e1, steps[1], 1, true));
+                paths.push(CalcPath(prop, paths[0], e1, steps[1], 1));
                 paths.push(CalcPath(prop, paths[1], e1, steps[2], 2));
                 paths.push(CalcPath(prop, paths[2], e1, steps[3], 0));
             }
 
             if (steps_i === 3){
                 paths.push(CalcPath(prop, s1, undefined, steps[0], 0));
-                paths.push(CalcPath(prop, paths[0], e1, steps[1], 1, true));
+                paths.push(CalcPath(prop, paths[0], e1, steps[1], 1));
                 paths.push(CalcPath(prop, paths[1], e1, steps[2], 0));
             }
 
             if (steps_i === 1){
-                paths.push(CalcPath(prop, s1, e1, steps[0], 0, true));
+                paths.push(CalcPath(prop, s1, e1, steps[0], 0));
             }
 
             if (steps_i === 2){
-                paths.push(CalcPath(prop, s1, e1, steps[0], 0,true));
+                paths.push(CalcPath(prop, s1, e1, steps[0], 0));
                 paths.push(CalcPath(prop, paths[0], e1, steps[1], 0));
             }
 

@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * maintenance
-#
+# 
 # Translators:
 # Martin Trigaux <mat@odoo.com>, 2017
 msgid ""
@@ -463,6 +463,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_category_id
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_id
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request_id
+#: model:ir.model.fields,field_description:maintenance.field_maintenance_stage_id
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_team_id
 msgid "ID"
 msgstr "ID"

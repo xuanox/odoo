@@ -8,7 +8,7 @@
 
 {
     'name': 'Equipment',
-    'version': '1.4',
+    'version': '1.1',
     'summary': 'Equipment Management',
     'description': """
 Managing Equipment in Odoo.
@@ -27,7 +27,7 @@ Support following feature:
     'website': 'http://www.electronicamedica.com',
     'category': 'Industries',
     'sequence': 0,
-    'depends': ['stock', 'helpdesk', 'asset'],
+    'depends': ['stock', 'helpdesk'],
     'demo': ['data/equipment_demo.xml'],
     'data': [
         'security/equipment_security.xml',

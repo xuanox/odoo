@@ -22,6 +22,7 @@ var GanttTimeLineHeader = Widget.extend({
 
         this.TODAY = moment();
 
+       // this.record_id = this.record['id']
 
     },
 
@@ -33,9 +34,22 @@ var GanttTimeLineHeader = Widget.extend({
 
         var gutterOffset = self.__parentedParent.gutterOffsetSession || self.__parentedParent.gutterOffset;
 
+            //         <!--<div class="timeline-gantt-items">-->
+            //     <!--<div class="timeline-gantt-gutter"></div>-->
+            // <!--</div>-->
+            //
+            // <!--<div class="timeline-gantt-head"></div>-->
+
         var el_gantt_items = el.find('.timeline-gantt-items');
 
-        el_gantt_items.css("width", gutterOffset);
+        el_gantt_items.css("width", gutterOffset+20);
+
+
+        // 'gutterOffset' : this.gutterOffset,
+
+         // <div class="timeline-gantt-items">
+
+        // this.$el.append('<div class="timeline-gantt-h-scroll">OK</div>');
 
 
         var el_scale_primary = el.find('.timeline-gantt-scale-primary');

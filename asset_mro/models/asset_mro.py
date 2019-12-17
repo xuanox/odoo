@@ -7,7 +7,7 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMA
 from dateutil.relativedelta import relativedelta
 from datetime import date, datetime, timedelta
 
-class AssetAsset(models.Model):
+class asset_asset(models.Model):
     _inherit = "asset.asset"
 
     maintenance_ids = fields.One2many('mro.order', 'asset_id')

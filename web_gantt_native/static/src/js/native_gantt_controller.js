@@ -19,11 +19,6 @@ var NativeGanttController = AbstractController.extend({
 
     custom_events: _.extend({}, AbstractController.prototype.custom_events, {
         gantt_refresh_after_change: '_onGanttRefresh',
-        gantt_fast_refresh_after_change: '_update',
-        gantt_add_hover: '_add_hover',
-        gantt_remove_hover: '_remove_hover',
-
-        // gantt_drop_item: '_drop_item',
 
         'sort_item': function (event) {
             this.sort_item(event.target);
@@ -34,8 +29,8 @@ var NativeGanttController = AbstractController.extend({
         'mousedown .task-gantt-gutter': 'GutterMouseDown',
 
 
-        'mouseover  .task-gantt-info, .task-gantt-timeline-row'     :'HandleHoverOver',
-        'mouseout   .task-gantt-info, .task-gantt-timeline-row'     :'HandleHoverOut',
+        'mouseover  .task-gantt-item, .task-gantt-timeline-row'     :'HandleHoverOver',
+        'mouseout   .task-gantt-item, .task-gantt-timeline-row'     :'HandleHoverOut',
 
         'mouseover  .task-gantt-gutter'     :'GutterOver',
         'mouseout   .task-gantt-gutter'     :'GutterOut'
@@ -50,6 +45,10 @@ var NativeGanttController = AbstractController.extend({
         this.context = params.context;
 
     },
+
+
+
+
 
 
     _onOpenRecord: function (event) {
@@ -185,6 +184,11 @@ var NativeGanttController = AbstractController.extend({
             this.$buttons.click(this.on_button_click.bind(this));
 
             this.$buttons.appendTo($node);
+
+
+
+
+
         }
     },
 
@@ -251,32 +255,10 @@ var NativeGanttController = AbstractController.extend({
         this.renderer.timeType = timeType;
         this.renderer.timeScale = 40; //px
 
-        var iter_k = moment(this.renderer.firstDayDate).twix(this.renderer.lastDayDate).iterate(1, 'hours');
-
-        var K_scale=0;
-        while(iter_k.hasNext()){
-             iter_k.next();
-             K_scale = K_scale + 1;
-        }
-
-        K_scale = K_scale / div_hour;
-        // var K_scale = hour2Range.length;
-        //
-        // var first_tzm_m = this.renderer.firstDayDate.format("ZZ");
-        // var second_tzm_m = this.renderer.lastDayDate.format("ZZ");
-        // var diff_tzm_h = ( first_tzm_m - second_tzm_m)/100;
-        //
-        // K_scale = K_scale - (diff_tzm_h / div_hour);
-
-
-
-        this.renderer.timeline_width = this.renderer.timeScale*K_scale; // min otrzok 60 - eto 4 4asa. v sutkah 6 otrezkov
-        // this.renderer.timeline_width = this.renderer.timeScale*1092.5; // min otrzok 60 - eto 4 4asa. v sutkah 6 otrezkov
-
+        this.renderer.timeline_width = this.renderer.timeScale*hour2Range.length; // min otrzok 60 - eto 4 4asa. v sutkah 6 otrezkov
         this.renderer.pxScaleUTC = Math.round(this.renderer.timeScaleUTC / this.renderer.timeline_width); // skolko vremeni v odnom px
 
 
-        this.renderer.AddItemsData();
 
         this.renderer.AddTimeLineHead(this.renderer.timeScale, this.renderer.timeType, daysGroup, false );
         this.renderer.AddTimeLineData(this.renderer.timeScale, this.renderer.timeType, this.renderer.rows_to_gantt);
@@ -329,7 +311,6 @@ var NativeGanttController = AbstractController.extend({
         this.renderer.timeline_width = this.renderer.timeScale*dayRange.length;
         this.renderer.pxScaleUTC = Math.round(this.renderer.timeScaleUTC / this.renderer.timeline_width); // skolko vremeni v odnom px
 
-        this.renderer.AddItemsData();
 
         this.renderer.AddTimeLineHead(this.renderer.timeScale, this.renderer.timeType, monthRange, dayRange );
         this.renderer.AddTimeLineData(this.renderer.timeScale, this.renderer.timeType, this.renderer.rows_to_gantt);
@@ -370,8 +351,6 @@ var NativeGanttController = AbstractController.extend({
         this.renderer.timeline_width = this.renderer.timeScale*month2Range.length; // min otrzok 60 - eto 4 4asa. v sutkah 6 otrezkov
         this.renderer.pxScaleUTC = Math.round(this.renderer.timeScaleUTC / this.renderer.timeline_width); // skolko vremeni v odnom px
 
-        this.renderer.AddItemsData();
-
         this.renderer.AddTimeLineHead(this.renderer.timeScale, this.renderer.timeType, monthGroup, false );
         this.renderer.AddTimeLineData(this.renderer.timeScale, this.renderer.timeType, this.renderer.rows_to_gantt);
 
@@ -410,7 +389,6 @@ var NativeGanttController = AbstractController.extend({
         this.renderer.timeline_width = this.renderer.timeScale*week2Range.length; // min otrzok 60 - eto 4 4asa. v sutkah 6 otrezkov
         this.renderer.pxScaleUTC = Math.round(this.renderer.timeScaleUTC / this.renderer.timeline_width); // skolko vremeni v odnom px
 
-        this.renderer.AddItemsData();
 
         this.renderer.AddTimeLineHead(this.renderer.timeScale, this.renderer.timeType, weeksGroup, false );
         this.renderer.AddTimeLineData(this.renderer.timeScale, this.renderer.timeType, this.renderer.rows_to_gantt);
@@ -453,8 +431,6 @@ var NativeGanttController = AbstractController.extend({
         this.renderer.pxScaleUTC = Math.round(this.renderer.timeScaleUTC / this.renderer.timeline_width); // skolko vremeni v odnom px
 
 
-        this.renderer.AddItemsData();
-
         this.renderer.AddTimeLineHead(this.renderer.timeScale, this.renderer.timeType, quarterGroup, false );
         this.renderer.AddTimeLineData(this.renderer.timeScale, this.renderer.timeType, this.renderer.rows_to_gantt);
 
@@ -489,7 +465,7 @@ var NativeGanttController = AbstractController.extend({
         var pxc = this.renderer.gutterOffsetX + (event.clientX - parentOffset.left);
 
         $('.task-gantt-list').width(pxc);
-        $('.timeline-gantt-items').width(pxc);
+        $('.timeline-gantt-items').width(pxc+20);
 
 
         this.renderer.session.gantt = pxc;
@@ -546,55 +522,22 @@ var NativeGanttController = AbstractController.extend({
 
     },
 
-    // _drop_item: function(ev) {
-    //
-    //     var df = 45;
-    //
-    // },
+
 
 // HandleHover
-    _add_hover:  function(ev) {
-
-        var rowdata = '#task-gantt-timeline-row-'+ev.data['data_id'];
-        $(rowdata).addClass("task-gantt-timeline-row-hover");
-
-        var item_info = '#item-info-'+ev.data['data_id'];
-        $(item_info).addClass("item-info-hover");
-
-
-    },
-
-    _remove_hover:  function(ev) {
-
-        var rowdata = '#task-gantt-timeline-row-'+ev.data['data_id'];
-        $(rowdata).removeClass("task-gantt-timeline-row-hover");
-
-        var item_info = '#item-info-'+ev.data['data_id'];
-        $(item_info).removeClass("item-info-hover");
-
-    },
 
     HandleHoverOver: function(ev) {
 
         if (ev.target.allowRowHover)
         {
 
-            // var rowsort = '#task-gantt-item-sorting-'+ev.target['data-id'];
+            var rowsort = '#task-gantt-item-sorting-'+ev.target['data-id'];
             var rowdata = '#task-gantt-timeline-row-'+ev.target['data-id'];
-            // var rowitem = '#task-gantt-item-'+ev.target['data-id'];
+            var rowitem = '#task-gantt-item-'+ev.target['data-id'];
 
-            var z_item = '.task-gantt-item-'+ev.target['data-id'];
-
-            // $(rowsort).addClass("task-gantt-sorting-item-hover");
-
+            $(rowsort).addClass("task-gantt-sorting-item-hover");
             $(rowdata).addClass("task-gantt-timeline-row-hover");
-            // $(rowitem).addClass("task-gantt-item-hover");
-
-            $(z_item).addClass("task-gantt-item-hover");
-
-            var item_info = '#item-info-'+ev.target['data-id'];
-            $(item_info).addClass("item-info-hover");
-
+            $(rowitem).addClass("task-gantt-item-hover");
 
         }
 
@@ -603,27 +546,15 @@ var NativeGanttController = AbstractController.extend({
 
     HandleHoverOut: function(ev) {
 
-
-        var item_info = '#item-info-'+ev.target['data-id'];
-        $(item_info).removeClass("item-info-hover");
-
-        // var rowsort = '#task-gantt-item-sorting-'+ev.target['data-id'];
+        var rowsort = '#task-gantt-item-sorting-'+ev.target['data-id'];
         var rowdata = '#task-gantt-timeline-row-'+ev.target['data-id'];
-        // var rowitem = '#task-gantt-item-'+ev.target['data-id'];
+        var rowitem = '#task-gantt-item-'+ev.target['data-id'];
 
-        var z_item = '.task-gantt-item-'+ev.target['data-id'];
-
-        // $(rowsort).removeClass("task-gantt-sorting-item-hover");
+        $(rowsort).removeClass("task-gantt-sorting-item-hover");
         $(rowdata).removeClass("task-gantt-timeline-row-hover");
-        // $(rowitem).removeClass("task-gantt-item-hover");
-
-        $(z_item).removeClass("task-gantt-item-hover");
+        $(rowitem).removeClass("task-gantt-item-hover");
 
     }
-
-
-
-
 
 
 
