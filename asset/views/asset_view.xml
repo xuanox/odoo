@@ -89,7 +89,6 @@
       <field name="arch" type="xml">
         <kanban>
           <field name="stage_id"/>
-          <field name="maintenance_state_color"/>
           <field name="user_id"/>
           <field name="criticality"/>
           <field name="id" />
@@ -98,7 +97,6 @@
               <div class="oe_kanban_vignette">
                 <div class="codup_kanban_left">
                   <a type="open"></a>
-                  <div t-attf-title="#{record.stage_id.value}" t-attf-class="codup_status_color_#{record.maintenance_state_color.raw_value} codup_status"></div>
                 </div>
                 <div class="oe_kanban_details">
                   <h4>

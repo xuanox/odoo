@@ -61,7 +61,6 @@ class AssetAsset(models.Model):
 
     name = fields.Char('Asset Name', size=64, required=True, translate=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
-    maintenance_state_color = fields.Selection(related='stage_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     property_stock_asset = fields.Many2one('stock.location', "Asset Location", company_dependent=True, domain=[('usage', 'like', 'asset')],
         help="This location will be used as the destination location for installed parts during asset life.")
     user_id = fields.Many2one('res.users', 'Assigned to', track_visibility='onchange')
