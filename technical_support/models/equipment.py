@@ -32,7 +32,7 @@ class EquipmentEquipment(models.Model):
                 self.maintenance_date = order_ids[0].date_execution
 
     technical_support_count = fields.Integer(compute='_technical_support_count', string='# Maintenance')
-    maintenance_date = fields.Datetime(compute='_next_maintenance', string='Maintenance Date')
+    maintenance_date = fields.Datetime(compute='_next_maintenance', string='Maintenance Dae')
 
     maintenance_ids = fields.One2many('technical_support.request', 'equipment_id')
     period = fields.Integer('Days between each preventive maintenance')
