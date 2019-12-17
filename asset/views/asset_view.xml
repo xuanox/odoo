@@ -13,7 +13,6 @@
           <field name="property_stock_asset"/>
           <field name="criticality"/>
           <field name="user_id"/>
-					<field name="stage_id"/>
         </tree>
       </field>
     </record>
@@ -25,7 +24,6 @@
       <field name="arch" type="xml">
         <form string="Assets" version="7.0">
           <header>
-            <field name="stage_id" widget="statusbar" clickable="True" groups="asset.group_mro_user"/>
           </header>
           <sheet>
             <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
@@ -88,7 +86,6 @@
       <field name="model">asset.asset</field>
       <field name="arch" type="xml">
         <kanban>
-          <field name="stage_id"/>
           <field name="user_id"/>
           <field name="criticality"/>
           <field name="id" />
