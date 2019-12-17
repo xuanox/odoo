@@ -365,3 +365,19 @@ class EquipmentHistoryState(models.Model):
                 blocktime.duration = round(diff.total_seconds() / 60.0, 2)
             else:
                 blocktime.duration = 0.0
+
+class EquipmentModalityToolLine(models.Model):
+    _name = 'equipment.modality.tool.line'
+    _description = 'Modality Tools'
+
+    name = fields.Char(string='Description')
+    asset_id=fields.Many2one('asset.asset', string='Tool', required=True)
+    stage_id = fields.Many2one('asset.stage', related='asset_id.stage_id', string='Stage', store=True, track_visibility='onchange', copy=False)
+
+class EquipmentTool(models.Model):
+    _name = "equipment.tool"
+    _description = "Equipment Tools"
+
+    name = fields.Char(string='Description')
+    asset_id=fields.Many2one('asset.asset', string='Tool', required=True)
+    stage_id = fields.Many2one('asset.stage', related='asset_id.stage_id', string='Stage', store=True, track_visibility='onchange', copy=False)

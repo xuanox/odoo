@@ -23,7 +23,13 @@
 						<notebook>
 							<page string="Tool">
 								<group>
-
+									<field name="tool_id">
+										<tree string="Tools">
+											<field name="asset_id"/>
+		                  <field name="stage_id"/>
+											<field name="name"/>
+		                </tree>
+									</field>
 								</group>
 							</page>
 						</notebook>
