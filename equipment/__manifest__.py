@@ -8,7 +8,7 @@
 
 {
     'name': 'Equipment',
-    'version': '1.2',
+    'version': '1.1',
     'summary': 'Equipment Management',
     'description': """
 Managing Equipment in Odoo.
