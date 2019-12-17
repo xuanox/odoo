@@ -9,7 +9,7 @@
 from odoo import api, fields, models, _
 
 
-class AssetAsset(models.Model):
+class asset_asset(models.Model):
     _name = 'asset.asset'
     _inherit = 'asset.asset'
 

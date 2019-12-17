@@ -26,7 +26,7 @@
             <field name="inherit_id" ref="asset.assets_tree_view"/>
             <field name="arch" type="xml">
                 <field name="user_id" position="after">
-                    <field name="stage_id"/>
+                    <field name="maintenance_state_id"/>
                 </field>
             </field>
         </record>
@@ -39,7 +39,7 @@
                 <xpath expr="//filter[@name='group_user']" position="after">
                   <filter name="group_maintenance_state"
                           string="Status"
-                          context="{'group_by': 'stage_id'}"
+                          context="{'group_by': 'maintenance_state_id'}"
                           />
                 </xpath>
             </field>

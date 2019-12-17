@@ -17,14 +17,3 @@ class equipment_equipment(models.Model):
 
     subscription_ids = fields.One2many('sale.subscription.equipment', 'equipment_id')
     subscription_count = fields.Integer(compute='_subscription_count', string='# Subscriptions')
-
-    def action_view_sub(self):
-        return {
-            'domain': "[('equipment_id','in',[" + ','.join(map(str, self.ids)) + "])]",
-            'name': _('SUB'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'sale.subscription.equipment',
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-        }

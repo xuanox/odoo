@@ -4,13 +4,12 @@
     "summary": """Added support Gantt""",
     "category": "Project",
     "images": ['static/description/icon.png'],
-    "version": "12.19.7.30.0",
+    "version": "12.18.10.11.0",
     "description": """
         FIX: load
         FIX: duration
         FIX: type
         UPDATE: constrain type
-        Update: not need sort
 
     """,
     "author": "Viktor Vorobjov",

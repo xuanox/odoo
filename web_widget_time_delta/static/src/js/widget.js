@@ -3,12 +3,8 @@ odoo.define('web_widget_time_delta.TimeDelta', function(require) {
 
     var field_registry = require('web.field_registry');
     var Field = field_registry.get('char');
-    var core = require('web.core');
-    var _t = core._t;
 
     var FieldTimeDelta = Field.extend({
-
-
 
         template: 'FieldTimeDelta',
         widget_class: 'oe_form_field_time_delta',
@@ -93,17 +89,6 @@ odoo.define('web_widget_time_delta.TimeDelta', function(require) {
                 $input.val(show_value);
                 var self = this;
                 $input.durationPicker({
-                  translations: {
-                        day: _('day'),
-                        hour:  _('hour'),
-                        minute:  _('minute'),
-                        second:  _('second'),
-                        days:  _('days'),
-                        hours:  _('hours'),
-                        minutes:  _('minutes'),
-                        seconds:  _('seconds')
-                      },
-
                     showSeconds: self.showSeconds,
                     showDays:  self.showDays,
                     onChanged: function (newVal) {

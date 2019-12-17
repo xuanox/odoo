@@ -9,7 +9,7 @@
 from odoo import api, fields, models
 
 
-class AssetAsset(models.Model):
+class asset_asset(models.Model):
     _inherit = 'asset.asset'
 
     gauge_ids = fields.One2many('mro.gauge', 'asset_id', 'Gauge')

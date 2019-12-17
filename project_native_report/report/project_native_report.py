@@ -10,10 +10,11 @@ from dateutil.relativedelta import relativedelta
 
 class ProjectNativeGanttReport(models.AbstractModel):
     _name = 'report.project_native_report.project_native_gantt_report'
+    _description = 'Project Native Gantt Report'
 
     def first_date_of_month(self, dt):
 
-        first = dt - timedelta(days=2)
+        first = dt.replace(day=1, hour=0, minute=0, second=0)
         return first
 
     def last_date_of_month(self, dt):

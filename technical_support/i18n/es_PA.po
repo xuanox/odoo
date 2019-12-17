@@ -1489,7 +1489,7 @@ msgstr "Fecha de inicio"
 
 #. module: technical_support
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_answer_history__answer
-#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__stage_id
+#: model:ir.model.fields,field_description:technical_support.field_technical_support_order_assets_line__maintenance_state_id
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order_checklist_line__answer
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_order_parts_line__answer
 #: model:ir.model.fields,field_description:technical_support.field_technical_support_task_checklist_line__answer

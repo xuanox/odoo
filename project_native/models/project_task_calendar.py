@@ -47,6 +47,13 @@ class ProjectTaskNativeCalendar(models.Model):
         return tz.localize(datetime.replace(tzinfo=None), is_dst=False).astimezone(pytz.UTC).replace(tzinfo=None)
 
 
+    def _get_calendar_level(self, task_obj, date_in, duration, direction="normal"):
+        if task_obj["project_id"] and task_obj["project_id"].use_calendar:
+            return self._get_calendar_interval(task=task_obj, date_in=date_in, duration=duration, direction=direction)
+        else:
+            return False
+
+
     def _get_date_from_level(self, levels, value=None, type_op=None):
         """
         :param levels: list of calendar level with leavs and attendance
@@ -69,11 +76,7 @@ class ProjectTaskNativeCalendar(models.Model):
         else:
             return False
 
-
-    # s1
-    def _get_calendar_level(self, task_obj, date_in, duration, t_params, direction="normal"):
-
-
+    def _get_calendar_interval(self, task, date_in, duration, direction=None):
         """
         :param task: Task obj for
         :param date_in: detetime start date or end date
@@ -81,149 +84,34 @@ class ProjectTaskNativeCalendar(models.Model):
         :param direction: norma or revers mode: from start date or end date
         :return: list of leves calendar
         """
-
-        if task_obj["project_id"] and task_obj["project_id"].use_calendar or task_obj["task_resource_ids"].ids:
-
-            diff = timedelta(seconds=duration)
-
-            tz_name = task_obj["project_id"].tz
-
-            if tz_name and date_in:
-                date_in = self.to_tz(date_in, tz_name)
-
-            if date_in:
-                # return level
-                return self._get_planned_x(t_params=t_params,
-                                           x_date=date_in,  # start_date/end_date
-                                           diff=diff,
-                                           level=[],
-                                           tz_name=tz_name, iteration=0, task=task_obj,
-                                           direct=direction  # "normal"/"revers"
-                                           )
-
-            return False
-
-        else:
-            return False
+        diff = timedelta(seconds=duration)
+        # attendance_ids = task.project_id.resource_calendar_id.attendance_ids
+        # global_leave_ids = task.project_id.resource_calendar_id.global_leave_ids
+        attendance_ids = task["attendance_ids"]
+        global_leave_ids = task["global_leave_ids"]
 
 
-    # 2
-    def _get_planned_x(self, t_params, x_date, diff, level=None, tz_name=None, iteration=None, task=None,
-                       direct=None):
+        ### tz
+        # tz_name = task.project_id.tz
+        tz_name = task["project_id"].tz
 
-        level = level
+        if tz_name and date_in:
+            date_in = self.to_tz(date_in, tz_name)
 
-        attendance_ids_param = t_params["attendance_ids"]
-        global_leave_ids_param = t_params["leave_ids"]
-        task_res = task["task_res"]
-
-        fixed_calc_type = task["fixed_calc_type"]
-
-        # diff_e_counter - how much for resource work
-        _calendar_ids, diff_e_counter = self._get_diff_e_counter(task_res, fixed_calc_type, diff)
-
-        attendance_ids = list(filter(lambda x: x["calendar_id"] in _calendar_ids, attendance_ids_param))
-
-        x_date_e = x_date
-        next_step = True
-
-        while next_step:
-
-            if not attendance_ids:
-                return level
-
-            weekday = x_date_e.weekday()
-            attendances = self._attendance_from_list(attendance_ids, weekday, x_date_e.date())
-
-            next_step_allow = []
-            len_attendances = len(attendances)
-            work_already_day = {}
-
-            work_time_day = self._get_work_time_day(attendances, task_res)
-
-            for inx, attendance in enumerate(attendances):
-
-                hour_from_att = timedelta(hours=float(attendance["hour_from"]))
-                hour_to_att = timedelta(hours=float(attendance["hour_to"]))
-
-                for _res in task_res:
-
-                    _load_factor = _res["load_factor"]
-                    _calendar_id = _res["calendar_id"]
-                    _resource_id = _res["resource_id"]
-                    _load_control = _res["load_control"]
-
-                    diff_e = diff_e_counter[_resource_id]
-
-                    if attendance["calendar_id"] == _calendar_id and diff_e > timedelta(hours=0):
-
-                        work_time, work_time_already = self._get_work_intervals(_resource_id, work_already_day,
-                                                                                work_time_day, _load_factor)
-
-                        hour_from, hour_to = self.check_load_factor(_load_factor,
-                                                                    hour_to_att, hour_from_att,
-                                                                    len_attendances, inx, work_time,
-                                                                    work_time_already)
-
-                        hour_from_date = x_date_e.replace(hour=0, minute=0, second=0, microsecond=0) + hour_from
-                        hour_to_date = x_date_e.replace(hour=0, minute=0, second=0, microsecond=0) + hour_to
-
-                        global_leave_ids = self.check_load_control(_load_control, _calendar_id, _resource_id,
-                                                                   global_leave_ids_param, direct)
-
-                        global_leave, cut_hour = self._check_leave(global_leave_ids,
-                                                                   dt_work_from=hour_from_date,
-                                                                   dt_work_to=hour_to_date, tz_name=tz_name)
-                        # if leave not full day
-                        if cut_hour:
-                            hour_from_date = cut_hour["from"]
-                            hour_to_date = cut_hour["to"]
-
-                            hour_from = timedelta(seconds=self.get_sec(hour_from_date.time()))
-                            hour_to = timedelta(seconds=self.get_sec(hour_to_date.time()))
-
-                        #
-                        if not global_leave:
-
-                            date_from, date_to, diff_e = self._calc_from_to(x_date_e, tz_name,
-                                                                            hour_from_date, hour_to_date,
-                                                                            hour_from, hour_to,
-                                                                            direct, diff_e)
-
-                            if date_to and date_from:
-
-                                # already work
-                                if _resource_id in work_already_day:
-                                    work_already_day[_resource_id] = work_already_day[_resource_id] + (
-                                                date_to - date_from)
-                                else:
-                                    work_already_day[_resource_id] = (date_to - date_from)
-
-                                diff_e_counter[_resource_id] = diff_e
-
-                                level, global_leave_ids_param = self._push_interval_log(level,
-                                                                                        global_leave_ids_param,
-                                                                                        attendance,
-                                                                                        date_from, date_to,
-                                                                                        iteration,
-                                                                                        _resource_id, _calendar_id,
-                                                                                        direct=direct)
-
-            for _res in task_res:
-                _resource_id = _res["resource_id"]
-                res_diff = diff_e_counter[_resource_id]
-                if res_diff > timedelta(hours=0):
-                    next_step_allow.append(True)
-
-            date_next = self._get_planned_interval_next_date(day_before=x_date_e, direct=direct)
-            next_step = False
-
-            if next_step_allow and all(next_step_allow) and date_next:
-                iteration += 1
-                next_step = True
-                x_date_e = date_next
-
-        return level
+        if date_in:
+            #normal
+            if direction == "normal" and attendance_ids:
+                return self._get_planned_interval(attendance_ids=attendance_ids,
+                                                  global_leave_ids=global_leave_ids,
+                                                  start_date=date_in, diff=diff,
+                                                  level=[], tz_name=tz_name, iteration=0)
+            #revers
+            if direction == "revers" and attendance_ids:
+                return self._get_planned_interval_revers(attendance_ids=attendance_ids,
+                                                         global_leave_ids=global_leave_ids,
+                                                         end_date=date_in, diff=diff,
+                                                         level=[], tz_name=tz_name, iteration=0)
+        return False
 
 
     def _check_leave(self, global_leave_ids, dt_work_from, dt_work_to, tz_name):
@@ -240,10 +128,8 @@ class ProjectTaskNativeCalendar(models.Model):
         """
         if tz_name:
             for global_leave_id in global_leave_ids:
-                # dt_leave_from = fields.Datetime.from_string(global_leave_id.date_from)
-                # dt_leave_to = fields.Datetime.from_string(global_leave_id.date_to)
-                dt_leave_from = fields.Datetime.from_string(global_leave_id["date_from"])
-                dt_leave_to = fields.Datetime.from_string(global_leave_id["date_to"])
+                dt_leave_from = fields.Datetime.from_string(global_leave_id.date_from)
+                dt_leave_to = fields.Datetime.from_string(global_leave_id.date_to)
 
                 dt_leave_from = self.to_tz(dt_leave_from, tz_name)
                 dt_leave_to = self.to_tz(dt_leave_to, tz_name)
@@ -285,7 +171,7 @@ class ProjectTaskNativeCalendar(models.Model):
                         # _logger.warning(new_dt_work_to)
 
                         return False,   {
-                                            "name": global_leave_id["name"],
+                                            "name": global_leave_id.name,
                                             "from": new_dt_work_from,
                                             "to": new_dt_work_to
                                         }
@@ -295,247 +181,216 @@ class ProjectTaskNativeCalendar(models.Model):
         return False, False
 
 
-
-    def _attendance_from_list(self, els, wkd, start_date):
-        _list = []
-
-        # search_objs = filter(lambda x: x['dayofweek'] == str(wkd)
-        #                                and not (x['date_from'] and x['date_from'] < start_date)
-        #                                and not (x['date_to'] and x['date_to'] < start_date)
-        #                                and x['calendar_id'] == cal_id
-        #                                , els)
-
-        # start_date = start_date.replace(hour=0, minute=0, second=0)
-        _list = []
-
-        for x in els:
-            _ok = False
-
-            if x['dayofweek'] == str(wkd):
-                _ok = True
-
-                if x['date_from'] and x['date_to']:
-                    _ok = False
-
-                    if x['date_from'] <= start_date and x['date_to'] >= start_date:
-                        _ok = True
-
-            if _ok:
-                _list.append(x)
+    def _get_planned_interval(self, attendance_ids, global_leave_ids, start_date, diff,
+                              diff_e=None, level=None, tz_name=None, iteration=None ):
+        """
+         From Start to End DateTime , Get recusrsive working hour while duration > 0.
+        :param attendance_ids:
+        :param global_leave_ids:
+        :param start_date:
+        :param diff:
+        :param diff_e:
+        :param level:
+        :param tz_name:
+        :return:
+        """
 
 
-        _list = sorted(_list, key=lambda k: k['hour_from'])
+        weekday = start_date.weekday()
+        attendances = attendance_ids.filtered(lambda att:
+                                int(att.dayofweek) == weekday
+                                and not (att.date_from and fields.Date.from_string(att.date_from) > start_date.date())
+                                and not (att.date_to and fields.Date.from_string(att.date_to) < start_date.date())
+                                )
 
-        return _list
+        # _logger.warning("WeekDay: {}".format(weekday))
 
-
-
-    def _push_interval_log(self, level, global_leave_ids_param, attendance, date_from, date_to, iteration,
-                                  res_id, cal_id, direct="normal"):
-
-
-
-        level.append({"name": attendance["display_name"],
-                      "type": "attendance",
-                      "date_from": date_from,
-                      "date_to": date_to,
-                      "interval": (date_to - date_from),
-                      "iteration": iteration,
-                      "res_ids": res_id
-                      })
-
-
-        if res_id != -1:
-            global_leave_ids_param.append({"leave_id": "l{}r{}".format(cal_id, res_id),
-                                                   "calendar_id": cal_id,
-                                                   "name": direct,
-                                                   "resource_id": str(res_id),
-                                                   "date_from": fields.Datetime.to_string(date_from),
-                                                   "date_to": fields.Datetime.to_string(date_to),
-                                                   })
-
-
-        return level, global_leave_ids_param
-
-
-
-    def check_load_factor(self, _load_factor, hour_to, hour_from, len_attendances, inx, work_time, work_time_already):
-
-        interval_next = hour_to - hour_from
-        time_already_next = work_time_already + interval_next
-
-        if _load_factor < 1 and time_already_next > work_time:
-            interval_next = work_time - work_time_already
-
-
-        if _load_factor > 1 and inx == len_attendances - 1 and work_time > time_already_next:
-            interval_next = work_time - work_time_already
-
-
-        hour_to = hour_from + interval_next
-
-        if hour_to > timedelta(hours=24):
-            hour_to = timedelta(hours=24)
-
-        return hour_from, hour_to
-
-
-
-    def check_load_control(self, _load_control, _calendar_id, _resource_id, global_leave_ids_param, direct):
-
-        if direct == "normal":
-            direct = "revers"
-        elif direct == "revers":
-            direct = "normal"
-
-        if _load_control:
-
-            global_leave_ids = list(filter(
-                lambda x: x["calendar_id"] == _calendar_id
-                          and (x["resource_id"] == str(_resource_id) or x["resource_id"] == "-1")
-                          and x["name"] != direct, global_leave_ids_param))
-
-        else:
-            global_leave_ids = list(filter(
-                lambda x: x["calendar_id"] == _calendar_id
-                          and x["resource_id"] == "-1"
-                          and x["name"] != direct, global_leave_ids_param))
-
-        return global_leave_ids
-
-
-
-    def _calc_from_to(self, x_date_e, tz_name, hour_from_date, hour_to_date, hour_from, hour_to, direct, diff_e):
+        if not diff_e:
+            diff_e = diff
 
         date_to = False
-        date_from = False
-
-        if direct == "normal":
-
-            summ_hours = timedelta(hours=0)
-            # from 8:00 to 12:00
-            # if start 7:00 <=  available start 8:00 = start from 8:00 and sum 12:00-8:00
-            if x_date_e <= hour_from_date:
-                date_from = hour_from_date
-                summ_hours = hour_to - hour_from
-
-            #else if start between from and to ( 8:00 <= 9:00 < 12:00) = from 9:00 = summ 12:00-9:00
-            elif hour_from_date <= x_date_e < hour_to_date:
-                date_from = x_date_e
-                summ_hours = hour_to_date - date_from
-
-            # left diff < = available, 3h < = 4h = summ = 3h,  or 10h <= 4h = summ 4h
-            if diff_e <= summ_hours:
-                summ_hours = diff_e
-
-            # if available from and sum available > 0, new lef diff = diff - sum, 3-3=0 or 4-3=1,
-            # new date to = from - sum, 8:00 + 3:00 = 11:00, new period 8:00 to 11:00 and left diff = 0
-            if date_from and summ_hours > timedelta(hours=0):
-
-                diff_e = diff_e - summ_hours
-                date_to = date_from + summ_hours
-
-                date_from = self.to_naive_utc(date_from, tz_name)
-                date_to = self.to_naive_utc(date_to, tz_name)
-
-        if direct == "revers":
-
-            summ_hours = timedelta(hours=0)
-
-            if x_date_e >= hour_to_date:
-                date_to = hour_to_date
-                summ_hours = hour_to - hour_from
-
-            elif hour_from_date < x_date_e <= hour_to_date:
-                date_to = x_date_e
-                summ_hours = date_to - hour_from_date
-            if diff_e <= summ_hours:
-                summ_hours = diff_e
-
-            if date_to and summ_hours > timedelta(hours=0):
-                diff_e = diff_e - summ_hours
-                date_from = date_to - summ_hours
-
-                date_from = self.to_naive_utc(date_from, tz_name)
-                date_to = self.to_naive_utc(date_to, tz_name)
-
-
-
-        return date_from, date_to, diff_e
-
-
-
-    def _get_work_time_day(self, attendances, task_res ):
-
-        work_time = {}
-
         for attendance in attendances:
-            for _res in task_res:
-                _calendar_id = _res["calendar_id"]
-                _resource_id = _res["resource_id"]
+            hour_from = timedelta(hours=float(attendance.hour_from))
+            hour_to = timedelta(hours=float(attendance.hour_to))
 
-                if attendance["calendar_id"] == _calendar_id:
-                    hour_from_att = timedelta(hours=float(attendance["hour_from"]))
-                    hour_to_att = timedelta(hours=float(attendance["hour_to"]))
+            hour_from_date = start_date.replace(hour=0, minute=0, second=0) + hour_from
+            hour_to_date = start_date.replace(hour=0, minute=0, second=0) + hour_to
 
-                    working_time_res_id = timedelta(hours=0)
-                    if _resource_id in work_time:
-                        working_time_res_id = work_time[_resource_id]
+            #check global leave for calendar
 
-                    work_time[_resource_id] = working_time_res_id + (hour_to_att - hour_from_att)
+            global_leave, cut_hour = self._check_leave(global_leave_ids,
+                                                       dt_work_from=hour_from_date,
+                                                       dt_work_to=hour_to_date, tz_name=tz_name)
 
-        return work_time
+            if cut_hour:
 
+                hour_from_date = cut_hour["from"]
+                hour_to_date = cut_hour["to"]
 
-    def _get_diff_e_counter(self, task_res, fixed_calc_type, diff):
+                hour_from = timedelta(seconds = self.get_sec(hour_from_date.time()))
+                hour_to = timedelta(seconds = self.get_sec(hour_to_date.time()))
 
-        diff_e_counter = {}
-        _calendar_ids = []
+            if not global_leave:
+                date_from = False
+                summ_hours = timedelta(hours=0)
 
+                if start_date <= hour_from_date:
+                    date_from = hour_from_date
+                    summ_hours = hour_to - hour_from
+                elif hour_from_date <= start_date < hour_to_date:
+                    date_from = start_date
+                    summ_hours = hour_to_date - date_from
 
-        for _res in task_res:
+                if diff_e <= summ_hours:
+                    summ_hours = diff_e
 
-            _calendar_ids.append(_res["calendar_id"])
+                if date_from and summ_hours > timedelta(hours=0):
+                    diff_e = diff_e - summ_hours
+                    date_to = date_from + summ_hours
 
-            _load_factor = _res["load_factor"]
-            _resource_id = _res["resource_id"]
-            diff_k = diff
+                    if cut_hour:
+                        cut_hour_from = self.to_naive_utc(cut_hour["from"], tz_name)
+                        cut_hour_to = self.to_naive_utc(cut_hour["to"], tz_name)
 
-            if fixed_calc_type == "duration":
-                diff_e_counter[_resource_id] = diff_k * _load_factor
-
-            if fixed_calc_type == "work":
-                diff_k = diff / len(task_res)
-                diff_e_counter[_resource_id] = diff_k
-
-
-        return _calendar_ids, diff_e_counter
-
-
-    def _get_work_intervals(self, _resource_id, work_already_day, work_time_day, _load_factor):
-
-        work_time_already = timedelta(hours=0)
-        if _resource_id in work_already_day:
-            work_time_already = work_already_day[_resource_id]
-
-        work_time = work_time_day[_resource_id] * _load_factor
-
-        return work_time, work_time_already
+                        level.append({"name": cut_hour["name"],
+                                      "type": "cut",
+                                      "date_from": cut_hour_from,
+                                      "date_to": cut_hour_to,
+                                      "interval": (cut_hour_to - cut_hour_from),
+                                      "iteration": iteration
+                                      })
 
 
-    def _get_planned_interval_next_date(self, day_before, direct="normal"):
+                    date_from = self.to_naive_utc(date_from, tz_name)
+                    date_to = self.to_naive_utc(date_to, tz_name)
 
-        if direct == "normal":
-            start_date = (day_before + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=00)
-            return start_date
-
-        if direct == "revers":
-            end_date = (day_before - timedelta(days=1)).replace(hour=23, minute=59, second=59, microsecond=00)
-            return end_date
-
+                    level.append({  "name" : attendance.display_name,
+                                    "type": "attendance",
+                                    "date_from" : date_from,
+                                    "date_to"   : date_to,
+                                    "interval"  :(date_to - date_from),
+                                    "iteration": iteration
+                                  })
 
 
 
+
+        if diff_e > timedelta(hours=0) and iteration < 2000:
+            iteration += 1
+            if not date_to:
+                date_to = start_date
+
+            date_to = (date_to + timedelta(days=1)).replace(hour=0, minute=0, second=0)
+            self._get_planned_interval(attendance_ids, global_leave_ids,date_to, diff,
+                                       diff_e=diff_e, level=level, tz_name=tz_name, iteration=iteration)
+
+        return level
+
+
+    def _get_planned_interval_revers(self, attendance_ids, global_leave_ids, end_date, diff,
+                                     diff_e=None, level=None,  tz_name=None, iteration=None ):
+        """
+         From Start to End DateTime , Get recusrsive working hour while duration > 0.
+        :param attendance_ids:
+        :param global_leave_ids:
+        :param start_date:
+        :param diff:
+        :param diff_e:
+        :param level:
+        :param tz_name:
+        :return:
+        """
+
+        weekday = end_date.weekday()
+        attendances = attendance_ids.filtered(lambda att:
+                        int(att.dayofweek) == weekday
+                        and not (att.date_from and fields.Date.from_string(att.date_from) > end_date.date())
+                        and not (att.date_to and fields.Date.from_string(att.date_to) < end_date.date())
+                        )
+
+        if not diff_e:
+            diff_e = diff
+
+        date_from = False
+        for attendance in reversed(attendances):
+
+            hour_from = timedelta(hours=float(attendance.hour_from))
+            hour_to = timedelta(hours=float(attendance.hour_to))
+
+            hour_from_date = end_date.replace(hour=0, minute=0, second=0) + hour_from
+            hour_to_date = end_date.replace(hour=0, minute=0, second=0) + hour_to
+
+            #check global leave for calendar
+
+            global_leave, cut_hour = self._check_leave(global_leave_ids,
+                                                       dt_work_from=hour_from_date,
+                                                       dt_work_to=hour_to_date, tz_name=tz_name)
+
+            if cut_hour:
+
+                hour_from_date = cut_hour["from"]
+                hour_to_date = cut_hour["to"]
+
+                hour_from = timedelta(seconds = self.get_sec(hour_from_date.time()))
+                hour_to = timedelta(seconds = self.get_sec(hour_to_date.time()))
+
+            if not global_leave:
+
+                date_to = False
+                summ_hours = timedelta(hours=0)
+
+                if end_date >= hour_to_date:
+                    date_to = hour_to_date
+                    summ_hours = hour_to - hour_from
+                elif hour_from_date < end_date <= hour_to_date:
+                    date_to = end_date
+                    summ_hours = date_to - hour_from_date
+                if diff_e <= summ_hours:
+                    summ_hours = diff_e
+
+                if date_to and summ_hours > timedelta(hours=0):
+                    diff_e = diff_e - summ_hours
+                    date_from = date_to - summ_hours
+
+                    if cut_hour:
+                        cut_hour_from = self.to_naive_utc(cut_hour["from"], tz_name)
+                        cut_hour_to = self.to_naive_utc(cut_hour["to"], tz_name)
+
+                        level.append({"name": cut_hour["name"],
+                                      "type": "cut",
+                                      "date_from": cut_hour_from,
+                                      "date_to": cut_hour_to,
+                                      "interval": (cut_hour_to - cut_hour_from),
+                                      "iteration": iteration
+                                      })
+
+
+                    date_from = self.to_naive_utc(date_from, tz_name)
+                    date_to = self.to_naive_utc(date_to, tz_name)
+
+                    level.append({  "name" : attendance.display_name,
+                                    "type": "attendance",
+                                    "date_from" : date_from,
+                                    "date_to"   : date_to,
+                                    "interval"  :(date_to - date_from),
+                                    "iteration": iteration
+                                  })
+
+
+
+
+        if diff_e > timedelta(hours=0) and iteration < 2000:
+            iteration += 1
+            if not date_from:
+                date_from = end_date
+
+            date_to = (date_from - timedelta(days=1)).replace(hour=23, minute=59, second=59)
+            self._get_planned_interval_revers(attendance_ids,
+                                              global_leave_ids,
+                                              date_to, diff,
+                                              diff_e=diff_e, level=level, tz_name=tz_name, iteration=iteration)
+
+        return level
 
 
 

@@ -29,7 +29,7 @@ var GanttTimeLineArrow = Widget.extend({
 
             function(widget){
 
-            if (widget.items_sorted && widget.record.fold){
+            if (widget.items_sorted && widget.record.fold_self){
                 return false
             }
             return widget
@@ -60,10 +60,9 @@ var GanttTimeLineArrow = Widget.extend({
                  group: widget.record.is_group,
                  task_start_pxscale: task_start_pxscale,
                  task_stop_pxscale: task_stop_pxscale,
-                 fold: widget.record.fold,
+                 fold_self: widget.record.fold_self,
                  critical_path: widget.record.critical_path,
                  cp_shows: widget.record.cp_shows,
-                 p_loop: widget.record.p_loop,
 
              }
 

@@ -14,11 +14,10 @@ var GanttToolTip = Widget.extend({
 
    /// this.chart.tooltip.show(this.resizerOffsetX, this);
 
-    init: function(parent, ganttbar, event) {
+    init: function(parent, ganttbar) {
 
         this._super(parent);
         this.record = ganttbar;
-        this.event = event;
 
     },
 
@@ -203,10 +202,11 @@ var GanttToolTip = Widget.extend({
 
         if (self.record.offset()) {
 
-            var o_left = this.event.pageX;
+            var o_left = self.record.offset().left;
             var o_top = self.record.offset().top;
 
             var o_right = $(window).width() - (self.record.offset().left + self.record.outerWidth());
+
 
             var tip_lenght = this.$el.children(".task-gantt-line-tip-names").children().length;
             var top_new = o_top - (15*tip_lenght); // if added tip plus 15 every tip
@@ -219,8 +219,10 @@ var GanttToolTip = Widget.extend({
                 o_left = o_left - 200;
             }
 
+
             this.$el.offset({top: top_new , left: o_left});
         }
+
 
     },
 
