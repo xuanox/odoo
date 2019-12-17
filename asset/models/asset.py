@@ -39,23 +39,6 @@ class asset_state(models.Model):
         if (color>9): color = 0
         return self.write({'state_color': str(color)})
 
-class AssetStage(models.Model):
-    _name = 'asset.stage'
-    _description = 'Stage of Asset'
-    _order = 'sequence'
-
-    name = fields.Char('Stage', size=64, required=True, translate=True)
-    sequence = fields.Integer('Sequence', help="Used to order stages.", default=1)
-    state_color = fields.Selection(STATE_COLOR_SELECTION, string='State Color')
-    is_offline = fields.Boolean('Offline')
-    fold = fields.Boolean('Folded', help='Folded in kanban view')
-    template_id = fields.Many2one('mail.template', 'Automated Answer Email Template', domain="[('model', '=', 'asset.stage')]")
-
-    def change_color(self):
-        color = int(self.state_color) + 1
-        if (color>9): color = 0
-        return self.write({'state_color': str(color)})
-
 class AssetCategory(models.Model):
     _description = 'Asset Tags'
     _name = 'asset.category'
@@ -78,7 +61,6 @@ class AssetAsset(models.Model):
 
     name = fields.Char('Asset Name', size=64, required=True, translate=True)
     criticality = fields.Selection(CRITICALITY_SELECTION, 'Criticality')
-    stage_id = fields.Many2one('asset.stage', string='Stage', ondelete='restrict', track_visibility='onchange', copy=False, index=True)
     maintenance_state_color = fields.Selection(related='stage_id.state_color', selection=STATE_COLOR_SELECTION, string="Color", readonly=True)
     property_stock_asset = fields.Many2one('stock.location', "Asset Location", company_dependent=True, domain=[('usage', 'like', 'asset')],
         help="This location will be used as the destination location for installed parts during asset life.")
