@@ -18,6 +18,7 @@ class MaintenanceRequest(models.Model):
 
     maintenance_type = fields.Selection([('corrective', 'Corrective'), ('preventive', 'Preventive'), ('request', 'Request'), ('quotation', 'Quotation'),('installation', 'Installation')], string='Maintenance Type', default="corrective")
     tag_ids = fields.Many2many('maintenance.tag', string='Tags')
+    request_lines = fields.One2many('maintenance.line', 'maintenance_request_id', 'Request Line', track_visibility='onchange')
 
     @api.multi
     def name_get(self):
@@ -37,3 +38,10 @@ class MaintenanceTag(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Tag name already exists !"),
     ]
+
+class MaintenanceLine(models.Model):
+    _name = 'maintenance.line'
+    _description = 'Maintenance Line'
+
+    name = fields.Char('Subject', required=True, track_visibility='onchange')
+    description=fields.Text('Description', track_visibility='onchange')
