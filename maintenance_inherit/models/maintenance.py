@@ -17,6 +17,7 @@ class MaintenanceRequest(models.Model):
     _inherit = 'maintenance.request'
 
     maintenance_type = fields.Selection([('corrective', 'Corrective'), ('preventive', 'Preventive'), ('request', 'Request'), ('quotation', 'Quotation'),('installation', 'Installation')], string='Maintenance Type', default="corrective")
+    tag_ids = fields.Many2many('maintenance.tag', string='Tags')
 
     @api.multi
     def name_get(self):
@@ -24,3 +25,15 @@ class MaintenanceRequest(models.Model):
         for record in self:
             result.append((record.id, "{} ({})".format(record.name, record.id)))
         return result
+
+class MaintenanceTag(models.Model):
+    _name = 'maintenance.tag'
+    _description = 'Maintenance Tags'
+    _order = 'name'
+
+    name = fields.Char(required=True)
+    color = fields.Integer('Color')
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]

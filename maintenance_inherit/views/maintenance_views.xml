@@ -9,6 +9,9 @@
           <xpath expr="//field[@name='employee_id']" position="before">
             <field name="id"/>
           </xpath>
+          <xpath expr="//field[@name='priority']" position="before">
+            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+          </xpath>
         </field>
     </record>
 
