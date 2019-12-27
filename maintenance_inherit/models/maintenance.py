@@ -45,3 +45,4 @@ class MaintenanceLine(models.Model):
 
     name = fields.Char('Subject', required=True, track_visibility='onchange')
     description=fields.Text('Description', track_visibility='onchange')
+    maintenance_request_id = fields.Many2one('maintenance.request', 'Maintenance Request')
