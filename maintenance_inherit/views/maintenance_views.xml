@@ -12,6 +12,20 @@
           <xpath expr="//field[@name='priority']" position="before">
             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
           </xpath>
+          <xpath expr="//field[@name='description']" position="after">
+            <notebook>
+              <page name="line" string="Request">
+                <group string="Request Line">
+                  <field name="request_lines" nolabel="1">
+                    <tree string="Request Line" editable="bottom">
+                      <field name="name"/>
+                      <field name="description"/>
+                    </tree>
+                  </field>
+                </group>
+              </page>
+            </notebook>
+          </xpath>
         </field>
     </record>
 
