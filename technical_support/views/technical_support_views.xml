@@ -61,7 +61,7 @@
     <menuitem
       name="TSA"
       action="action_admins"
-      id="technical_support_menu_tsr"
+      id="technical_support_menu_tsa"
       groups="technical_support.group_technical_support_engineer"
       parent="technical_support_menu_request"
       sequence="2"/>
