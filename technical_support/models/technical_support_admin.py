@@ -65,17 +65,6 @@ class TechnicalSupportAdmin(models.Model):
 
     client_id = fields.Many2one('res.partner', string='Client', track_visibility='onchange', required=True, readonly=True, states={'draft': [('readonly', False)]})
 
-    equipment_id = fields.Many2one('equipment.equipment', 'Equipment', required=True, readonly=True, track_visibility='onchange', states={'draft': [('readonly', False)]})
-    equipment_number=fields.Char(string='N° de Equipment', related='equipment_id.equipment_number', readonly=True, store=True, track_visibility='onchange')
-    serial = fields.Char('Serial no.', related='equipment_id.serial', readonly=True, store=True, track_visibility='onchange')
-    location = fields.Char('Location', related='equipment_id.location', readonly=True, store=True, track_visibility='onchange')
-
-    brand_id = fields.Many2one('equipment.brand', related='equipment_id.brand_id', string='Brand', readonly=True, store=True, track_visibility='onchange')
-    zone_id = fields.Many2one('equipment.zone', related='equipment_id.zone_id', string='Zone', readonly=True, store=True, track_visibility='onchange')
-    model_id = fields.Many2one('equipment.model', related='equipment_id.model_id', string='Model', readonly=True, store=True, track_visibility='onchange')
-    parent_id = fields.Many2one('equipment.equipment', related='equipment_id.parent_id', string='Equipment Relation', readonly=True, store=True, track_visibility='onchange')
-    modality_id = fields.Many2one('equipment.modality', related='equipment_id.modality_id', string='Modality', readonly=True, store=True, track_visibility='onchange')
-
     maintenance_type = fields.Selection(MAINTENANCE_TYPE_SELECTION, 'Request Type', required=True, readonly=True, states={'draft': [('readonly', False)]}, default='ip')
 
     duration = fields.Float('Duration', help="Duration in hours and minutes.")
@@ -150,7 +139,6 @@ class TechnicalSupportAdmin(models.Model):
                 'user_id': request.user_id.id,
                 'state': 'draft',
                 'maintenance_type': request.maintenance_type,
-                'equipment_id': request.equipment_id.id,
                 'description': request.subject,
                 'problem_description': request.description,
                 'request_id': request.id,

@@ -22,10 +22,10 @@
       </record>
 
       <!-- Sequences for Work orders -->
-      <record id="sequence_technical_support_workorder" model="ir.sequence">
-        <field name="name">Technical Support Work order</field>
-        <field name="code">technical_support.workorder</field>
-        <field name="prefix">TSWO</field>
+      <record id="sequence_technical_support_admin" model="ir.sequence">
+        <field name="name">Technical Support Administrative</field>
+        <field name="code">technical_support.admin</field>
+        <field name="prefix">TSA</field>
         <field name="padding">5</field>
         <field name="number_next">1</field>
         <field name="number_increment">1</field>
