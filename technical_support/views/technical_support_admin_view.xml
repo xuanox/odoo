@@ -3,16 +3,15 @@
   <!-- Technical Support Request Views -->
 
 	<!-- Technical Support Request - Tree View -->
-    <record id="technical_support_request_tree_view" model="ir.ui.view">
-    	<field name="name">TSR Tree View</field>
-      <field name="model">technical_support.request</field>
+    <record id="technical_support_admin_tree_view" model="ir.ui.view">
+    	<field name="name">TSA Tree View</field>
+      <field name="model">technical_support.admin</field>
       <field name="arch" type="xml">
       	<tree string="TSR">
           <field name="name"/>
 					<field name="requested_date"/>
           <field name="date_planned"/>
 					<field name="client_id"/>
-          <field name="equipment_id"/>
 					<field name="user_id"/>
         	<field name="subject"/>
           <field name="state"/>
@@ -21,14 +20,13 @@
     </record>
 
 	<!-- Technical Support Request - Calendar View -->
-    <record id="technical_support_request_calendar_view" model="ir.ui.view">
-      <field name="name">TSR - Calendar View</field>
-      <field name="model">technical_support.request</field>
+    <record id="technical_support_admin_calendar_view" model="ir.ui.view">
+      <field name="name">TSA - Calendar View</field>
+      <field name="model">technical_support.admin</field>
       <field name="arch" type="xml">
         <calendar color="user_id" date_start="requested_date" date_delay="duration" string="Technical Support Requests">
           <field name="name"/>
 					<field name="client_id"/>
-					<field name="equipment_id"/>
 					<field name="user_id"/>
           <field name="subject"/>
         </calendar>
@@ -36,9 +34,9 @@
     </record>
 
 	<!-- Technical Support Request - Form View -->
-    <record id="technical_support_request_form_view" model="ir.ui.view">
-    	<field name="name">technical_support.request.form</field>
-    	<field name="model">technical_support.request</field>
+    <record id="technical_support_admin_form_view" model="ir.ui.view">
+    	<field name="name">technical_support.admin.form</field>
+    	<field name="model">technical_support.admin</field>
       <field name="arch" type="xml">
       	<form string="TSR">
         	<header>
@@ -65,7 +63,6 @@
               <group name="request" string="Request Detail">
                 <field name="maintenance_type" string="Type of Request"/>
 								<field name="client_id"/>
-                <field name="equipment_id" domain="[('client_id','=',client_id)]"/>
 								<field name="user_id"/>
               </group>
               <group name="date" string="Dates Information">
@@ -81,13 +78,8 @@
 						<notebook>
 							<page name="detail" string="More Details">
                 <group>
-									<group name="equipment_information" string="Equipment Information">
-                    <field name="equipment_number"/>
-                    <field name="brand_id" widget="manyone"/>
-                    <field name="model_id" widget="manyone"/>
-										<field name="modality_id" widget="manyone"/>
-										<field name="parent_id" widget="manyone"/>
-										<field name="zone_id" widget="manyone"/>
+									<group name="" string="Information">
+
 									</group>
 								</group>
 								<group>
@@ -98,69 +90,7 @@
                   <field name='is_reassigned' invisible="1"/>
 			          </group>
 							</page>
-              <page name="preventive" string="Preventive" attrs="{'invisible':[('maintenance_type', '!=', 'pm')]}">
-                <group>
-                  <group name="preventive_date" string="Preventive Date">
-                    <field name="request_date"/>
-                    <field name="close_date"/>
-                  </group>
-                  <group name="preventive_duration" string="Preventive Duration">
-                    <label for="duration"/>
-                    <div><field name="duration" widget="float_time" class="oe_inline"/> <span class="ml8">hours</span></div>
-                  </group>
-                </group>
-              </page>
-              <page name="predictive" string="Predictive" attrs="{'invisible':[('maintenance_type', '!=', 'pd')]}">
-                <group>
-                  <group name="" string="">
-
-                  </group>
-                  <group name="" string="">
-
-                  </group>
-                </group>
-              </page>
-              <page name="install" string="Install" attrs="{'invisible':[('maintenance_type', '!=', 'in')]}">
-                <group>
-                  <group name="" string="">
-
-                  </group>
-                  <group name="" string="">
-
-                  </group>
-                </group>
-              </page>
-              <page name="Uninstall" string="Uninstall" attrs="{'invisible':[('maintenance_type', '!=', 'un')]}">
-                <group>
-                  <group name="" string="">
-
-                  </group>
-                  <group name="" string="">
-
-                  </group>
-                </group>
-              </page>
-              <page name="fco" string="FCO" attrs="{'invisible':[('maintenance_type', '!=', 'fco')]}">
-                <group>
-                  <group name="code_fco" string='Code'>
-                    <field name="fco_code" attrs="{'required':[('maintenance_type', '=', 'fco')]}"/>
-                  </group>
-                  <group name="deadline_fco" string='Deadline'>
-                    <field name="fco_deadline" attrs="{'required':[('maintenance_type', '=', 'fco')]}"/>
-                  </group>
-                </group>
-              </page>
-              <page name="pcc" string="PCC" attrs="{'invisible':[('maintenance_type', '!=', 'pcc')]}">
-                <group>
-                  <group name="" string="">
-
-                  </group>
-                  <group name="" string="">
-
-                  </group>
-                </group>
-              </page>
-              <page name="demo" string="Demo" attrs="{'invisible':[('maintenance_type', '!=', 'demo')]}">
+              <page name="inspection" string="Inspection" attrs="{'invisible':[('maintenance_type', '!=', 'ip')]}">
                 <group>
                   <group name="" string="">
 
@@ -182,17 +112,16 @@
 		</record>
 
   <!-- Technical Support Request - Search View -->
-    <record id="technical_support_request_search" model="ir.ui.view">
+    <record id="technical_support_admin_search" model="ir.ui.view">
       <field name="name">Technical Support Request - Search</field>
-      <field name="model">technical_support.request</field>
+      <field name="model">technical_support.admin</field>
       <field name="arch" type="xml">
         <search string="Search Technical Support Request">
           <field name="state"/>
           <field name="name"/>
 					<field name="client_id"/>
-          <field name="equipment_id"/>
           <filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
-          <filter string="My TSR" domain="[('user_id','=',uid)]" name="my_tsr"/>
+          <filter string="My TSR" domain="[('user_id','=',uid)]" name="my_tsa"/>
           <separator/>
             <filter string="My Activities" name="activities_my" domain="[('activity_ids.user_id', '=', uid)]"/>
           <separator/>
@@ -204,7 +133,6 @@
           <group expand="0" string="Group By">
             <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
             <filter name="group_type" string="Request Type" context="{'group_by': 'maintenance_type'}"/>
-            <filter name="group_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
             <filter name="group_client" string="Client" context="{'group_by': 'client_id'}"/>
             <filter name="group_user" string="Responsible" context="{'group_by': 'user_id'}"/>
           </group>
@@ -213,10 +141,10 @@
     </record>
 
   <!-- Technical Support Request - Action -->
-    <record id="action_requests" model="ir.actions.act_window">
-            <field name="name">Technical Support Requests</field>
+    <record id="action_admins" model="ir.actions.act_window">
+            <field name="name">Technical Support Administrative</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">technical_support.request</field>
+            <field name="res_model">technical_support.admin</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,calendar</field>
             <field name="context">{'search_default_open': 1}</field>
