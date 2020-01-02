@@ -53,6 +53,7 @@ Required modules:
         'wizard/reasign_tsr_view.xml',
         'views/technical_support_order_view.xml',
         'views/technical_support_request_view.xml',
+        'views/technical_support_admin_view.xml',
         'views/equipment_view.xml',
         'views/product_view.xml',
         'views/technical_support_views.xml',

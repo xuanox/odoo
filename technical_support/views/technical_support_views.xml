@@ -58,13 +58,21 @@
       parent="technical_support_menu_request"
       sequence="1"/>
 
+    <menuitem
+      name="TSA"
+      action="action_admins"
+      id="technical_support_menu_tsr"
+      groups="technical_support.group_technical_support_engineer"
+      parent="technical_support_menu_request"
+      sequence="2"/>
+
   	<menuitem
       name="TSO"
   		action="action_orders"
   		id="technical_support_menu_tso"
       groups="technical_support.group_technical_support_engineer"
   		parent="technical_support_menu_request"
-  		sequence="2"/>
+  		sequence="3"/>
 
   <!-- Technical Support Parts menu -->
   	<menuitem

@@ -12,6 +12,7 @@
         <field name="date_scheduled" string="Date Scheduled" widget="date"/>
 				<field name="user_id"/>
         <field name="maintenance_type"/>
+				<field name="description"/>
         <field name="state"/>
       </tree>
       </field>

@@ -8,6 +8,6 @@
 
 from . import technical_support_request
 from . import technical_support_order
-from . import technical_support_workorder
+from . import technical_support_admin
 from . import product_template
 from . import equipment
