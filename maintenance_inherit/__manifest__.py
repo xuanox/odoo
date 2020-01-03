@@ -4,7 +4,7 @@
     'name': 'Maintenance Inherit',
     'version': '1.0',
     'sequence': 125,
-    'category': 'Human Resources',
+    'category': 'IT',
     'description': """
         Track equipments and maintenance requests""",
     'depends': ['maintenance'],
