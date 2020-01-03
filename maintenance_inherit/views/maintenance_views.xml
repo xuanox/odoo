@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="hr_equipment_request_view_form_inherit" model="ir.ui.view">
-        <field name="name">Equipment Request Form Inherit</field>
-        <field name="model">maintenance.request</field>
-        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
-        <field name="arch" type="xml">
-          <xpath expr="//field[@name='employee_id']" position="before">
-            <field name="id"/>
-          </xpath>
-          <xpath expr="//field[@name='priority']" position="before">
-            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-          </xpath>
-          <xpath expr="//field[@name='description']" position="after">
-            <notebook>
-              <page name="line" string="Detail">
-                <group string="Detail">
-                  <field name="request_lines" nolabel="1">
-                    <tree string="Detail" editable="bottom">
-                      <field name="name"/>
-                      <field name="description"/>
-                    </tree>
-                  </field>
-                </group>
-              </page>
-            </notebook>
-          </xpath>
-        </field>
-    </record>
+  <record id="hr_equipment_request_view_form_inherit" model="ir.ui.view">
+    <field name="name">Equipment Request Form Inherit</field>
+    <field name="model">maintenance.request</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='employee_id']" position="before">
+        <field name="id"/>
+      </xpath>
+      <xpath expr="//field[@name='priority']" position="before">
+        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+      </xpath>
+      <xpath expr="//field[@name='description']" position="after">
+        <notebook>
+          <page name="line" string="Detail">
+            <group string="Detail">
+              <field name="request_lines" nolabel="1">
+                <tree string="Detail" editable="bottom">
+                  <field name="name"/>
+                  <field name="description"/>
+                </tree>
+              </field>
+            </group>
+          </page>
+        </notebook>
+      </xpath>
+    </field>
+  </record>
 
     <record id="hr_equipment_request_view_tree_inherit" model="ir.ui.view">
         <field name="name">Equipment Request Tree Inherit</field>
@@ -37,6 +37,7 @@
           <xpath expr="//field[@name='request_date']" position="after">
             <field name="schedule_date" widget="datetime"/>
             <field name="priority" widget="priority"/>
+            <field name="tag_ids" widget="many2many_tags"/>
           </xpath>
         </field>
     </record>
@@ -48,6 +49,10 @@
     <field name="arch" type="xml">
       <xpath expr="//filter[@name='created_by']" position="before">
         <filter string='Team' name="maintenance_team_id" domain="[]" context="{'group_by' : 'maintenance_team_id'}"/>
+        <filter string='Equipment' name="equipment_id" domain="[]" context="{'group_by' : 'equipment_id'}"/>
+      </xpath>
+      <xpath expr="//field[@name='maintenance_team_id']" position="before">
+        <field name="tag_ids"/>
       </xpath>
     </field>
   </record>
