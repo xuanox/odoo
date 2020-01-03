@@ -29,6 +29,18 @@
         </field>
     </record>
 
+    <record id="hr_equipment_request_view_tree_inherit" model="ir.ui.view">
+        <field name="name">Equipment Request Tree Inherit</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='request_date']" position="after">
+            <field name="schedule_date" widget="datetime"/>
+            <field name="priority" widget="priority"/>
+          </xpath>
+        </field>
+    </record>
+
     <!-- equiment : views -->
     <record id="hr_equipment_view_form_inherit" model="ir.ui.view">
         <field name="name">equipment.form</field>
