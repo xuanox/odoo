@@ -51,7 +51,7 @@
         <filter string='Team' name="maintenance_team_id" domain="[]" context="{'group_by' : 'maintenance_team_id'}"/>
         <filter string='Equipment' name="equipment_id" domain="[]" context="{'group_by' : 'equipment_id'}"/>
       </xpath>
-      <xpath expr="//field[@name='maintenance_team_id']" position="before">
+      <xpath expr="//field[@name='maintenance_team_id']" position="after">
         <field name="tag_ids"/>
       </xpath>
     </field>
