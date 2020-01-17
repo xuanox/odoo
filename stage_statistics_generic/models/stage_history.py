@@ -72,7 +72,7 @@ class StageHistory(models.Model):
             state.total_time = diff_hours + (diff_minutes/60)
 
     name = fields.Char()
-    stage = fields.Char(string=_('Stage'), compute=_get_stage_name)
+    stage = fields.Char(string=_('Stage'), compute='_get_stage_name', store=True)
     stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
     entry_date = fields.Datetime(string=_("Stage Entry"))
     exit_date = fields.Datetime(string=_("Stage Exit"))
@@ -87,6 +87,8 @@ class StageHistory(models.Model):
         for s in self:
             if s.stage_id:
                 s.stage = s.stage_id.name
+            else:
+                s.stage = s.stage
 
 class Lead(models.Model):
     _inherit = "crm.lead"
