@@ -72,7 +72,8 @@ class StageHistory(models.Model):
             state.total_time = diff_hours + (diff_minutes/60)
 
     name = fields.Char()
-    stage = fields.Char(string=_('Stage'))
+    stage = fields.Char(string=_('Stage'), compute=_get_stage_name)
+    stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
     entry_date = fields.Datetime(string=_("Stage Entry"))
     exit_date = fields.Datetime(string=_("Stage Exit"))
     total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
@@ -81,6 +82,11 @@ class StageHistory(models.Model):
     res_id = fields.Integer(string=_('Message ID'))
     res_model = fields.Char(string=_('Model'))
 
+    @api.depends('stage_id')
+    def _get_stage_name(self):
+        for s in self:
+            if s.stage_id:
+                s.stage = s.stage_id.name
 
 class Lead(models.Model):
     _inherit = "crm.lead"
