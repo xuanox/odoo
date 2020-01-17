@@ -1,4 +1,4 @@
-import xmlrpclib
+import xmlrpc.client
 
 url = '<database-url>'
 db = '<database-name>'
@@ -22,11 +22,11 @@ for s in stages:
     obj[s.lower()] = stages[s].lower()
 
 stages = obj
-common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(url))
+common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
 uid = common.authenticate(db, username, password, {})
 print('User authentication success!')
 
-models = xmlrpclib.ServerProxy('{}/xmlrpc/2/object'.format(url))
+models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
 hd_stage_ids = models.execute_kw(db, uid, password, 'helpdesk.stage', 'search', [[]])
 hd_stages = models.execute_kw(db, uid, password, 'helpdesk.stage', 'read', [hd_stage_ids], {'fields': ['name']})
 
