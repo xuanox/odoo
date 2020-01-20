@@ -91,7 +91,7 @@
                       <h2 class="s_title_thin" style="font-size: 28px; text-align: center;">
                       <t>
                         <p>
-                          <font class="bg-beta" style="color: rgb(255, 255, 255);"><t t-esc="parent_name"/></font>
+                          <font class="bg-beta" style="color: rgb(255, 255, 255);"><t t-esc="parent"/></font>
                         </p>
                       </t>
                       </h2>
@@ -106,6 +106,10 @@
             </section>
           <div class="container">
             <section id="forms">
+              <br/>
+                <center><h2 class="s_title_thin" style="font-size: 28px; text-align: center;">Solicitud de Soporte Técnico</h2></center>
+              <br/>
+              <br/>
               <form action="/intervention/request" method="post">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                 <input type="hidden" name="user" t-att-value="user"/>
