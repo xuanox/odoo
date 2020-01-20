@@ -64,6 +64,8 @@ class WebsiteForm(WebsiteForm):
         parent_name = request.env.user.parent_id.name
         equipments = request.env['equipment.equipment'].sudo().search([('client_id.id','=',parent)])
         ticket_type = request.env['helpdesk.ticket.type'].sudo().search([])
+        equipment_states = request.env['equipment.state'].sudo().search([('team','=',3)])
+
         values = {
             'error': {},
             'error_message': []
@@ -82,6 +84,7 @@ class WebsiteForm(WebsiteForm):
         values = {
             'equipments' : equipments,
             'ticket_type' : ticket_type,
+            'equipment_states' : equipment_states,
             'user': user,
             'create_uid': user,
             'parent': parent,
