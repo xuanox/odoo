@@ -82,7 +82,6 @@
       <t t-call="website.layout">
         <div id="wrap">
         <div class="oe_structure" id="oe_structure_website_request_1"/>
-          <div class="container">
             <section class="s_cover parallax bg-black-50 oe_img_bg oe_custom_bg s_parallax_is_fixed pb0 pt0" data-scroll-background-ratio="1" style="background-image: none;">
               <span class="s_parallax_bg oe_img_bg oe_custom_bg" style="background-image: url(&quot;/web/image/949/azurion.jpg&quot;); background-position: 50% 0px;"/>
                 <div class="container">
@@ -105,6 +104,7 @@
                   </div>
                 </div>
             </section>
+          <div class="container">
             <section id="forms">
               <form action="/intervention/request" method="post">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
