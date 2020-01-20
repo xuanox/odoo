@@ -98,7 +98,10 @@ class WebsiteForm(WebsiteForm):
 
     def _process_registration(self, post):
         equipment_id = post.get('equipment_id')
+        equipment_state_id = post.get('equipment_state_id')
         equipments = request.env['equipment.equipment'].sudo().search([('id','=',equipment_id)])
+        equipments.write({'maintenance_state_id': equipment_state_id})
+
         request.env['helpdesk.ticket'].sudo().create({
             'name' : post.get('name'),
             'equipment_id': post.get('equipment_id'),
