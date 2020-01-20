@@ -84,9 +84,8 @@
                 <h2 t-if="team" class="text-center text-muted">
                     <span></span>
                 </h2>
-                <div id="wrap" class="oe_structure oe_empt">
-                    <div class="container">
-                        <div class="row">
+                <div id="wrap">
+                    <div class="oe_structure">
                           <section class="s_cover parallax bg-black-50 oe_img_bg oe_custom_bg s_parallax_is_fixed pb0 pt0" data-scroll-background-ratio="1" style="background-image: none;">
                         			<span class="s_parallax_bg oe_img_bg oe_custom_bg" style="background-image: url(&quot;/web/image/949/azurion.jpg&quot;); background-position: 50% 0px;"/>
                         			<div class="container">
@@ -111,7 +110,7 @@
                             			</div>
                         			</div>
                     			</section>
-                            <section id="forms">
+                          <section id="forms">
                                 <form action="/intervention/request" method="post">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                     <input type="hidden" name="user" t-att-value="user"/>
@@ -189,7 +188,6 @@
                                     </div>
                                 </form>
                             </section>
-                        </div>
                     </div>
                 </div>
             </t>
