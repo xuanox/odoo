@@ -91,7 +91,7 @@
                       <h2 class="s_title_thin" style="font-size: 28px; text-align: center;">
                       <t>
                         <p>
-                          <font class="bg-beta" style="color: rgb(255, 255, 255);"><t t-esc="parent"/></font>
+                          <font class="bg-beta" style="color: rgb(255, 255, 255);"><t t-esc="parent_name"/></font>
                         </p>
                       </t>
                       </h2>
@@ -193,7 +193,7 @@
                         <div class="container">
                           <div class="row s_nb_column_fixed">
                             <div class="col-lg-12 s_title pt32" data-name="Title">
-                              
+
                             </div>
                           </div>
                         </div>

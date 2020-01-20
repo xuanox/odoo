@@ -85,6 +85,7 @@ class WebsiteForm(WebsiteForm):
             'user': user,
             'create_uid': user,
             'parent': parent,
+            'parent_name': parent_name,
             'partner_name': partner_name,
             'partner_email': partner_email,
             'team_id': team_id,
