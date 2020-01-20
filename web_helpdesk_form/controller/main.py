@@ -107,7 +107,9 @@ class WebsiteForm(WebsiteForm):
             'create_uid':post.get('user'),
             'partner_id':request.env.user.partner_id.id,
             'team_id': equipments.team_id.id,
-    })
+        })
+        equipments = request.env['equipment.equipment'].browse(post.get('equipment_id'))
+        equipments.write({'maintenance_state_id': post.get('equipment_state_id')})
 
 
     def _form_validate(self, data):
