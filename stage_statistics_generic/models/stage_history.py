@@ -58,7 +58,6 @@ class MailThread(models.AbstractModel):
                     else: 
                         history['stage'] = _(state_name)
 
-                    print('\nhistory:', history, '\n')
                     rec.env['stage.history'].create(history)
 
         return super(MailThread, self).message_track(tracked_fields, initial_values)
