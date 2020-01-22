@@ -51,5 +51,5 @@ for s in stage_history:
     if to_write:
         print('Write: ', s['id'], s['stage'], to_write)
         models.execute_kw(db, uid, password, 'stage.history', 'write', [[s['id']], {
-            'stage_id': to_write
+            'hd_stage_id': to_write
         }])
