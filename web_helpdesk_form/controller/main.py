@@ -127,3 +127,17 @@ class WebsiteForm(WebsiteForm):
             error_message.append(_('Some required fields are empty.'))
 
         return error, error_message
+
+    @http.route('/cm', type='http', auth='user', website=True)
+    def navigate_to_cm_page(self):
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        cm_ids = http.request.env['helpdesk.ticket'].sudo().search([('client_id.id','=',parent)])
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+            'cm_ids': cm_ids,
+        }
+        return http.request.render('web_helpdesk_form.cm_page', values)
