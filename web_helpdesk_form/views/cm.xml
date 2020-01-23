@@ -58,8 +58,8 @@
 
                             <tbody>
                                 <tr t-foreach="cm_ids" t-as="l">
-                                    <td><span t-field="l.name"/></td>
-                                    <td><span t-field="l.equipment_id"/></td>
+                                  <td><a t-attf-href="/helpdesk/ticket/#{l.id}"><small>#</small><t t-esc="l.name"/></a></td>
+                                  <td><span t-field="l.equipment_id"/></td>
                                 </tr>
                             </tbody>
                         </table>
