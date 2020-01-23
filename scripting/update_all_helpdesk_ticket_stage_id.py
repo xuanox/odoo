@@ -32,9 +32,11 @@ hd_stages = models.execute_kw(db, uid, password, 'helpdesk.stage', 'read', [hd_s
 
 print('{} helpdesk stages found!'.format(len(hd_stage_ids)))
 
+names = {}
 for h in hd_stages:
     if stages[h['name']]:
         stages[h['name']] = h['id']
+        names[h['id']] = h['name']
     if stages[h['name'].lower()]:
         stages[h['name'].lower()] = h['id']
 
@@ -49,7 +51,11 @@ for s in stage_history:
     elif s['stage'] in stages:
         to_write = stages[s['stage']]
     if to_write:
-        print('Write: ', s['id'], s['stage'], to_write)
+        to_name = s['stage']
+        if to_write in names:
+            to_name = names[to_write]
+        print('Write: ', s['id'], to_name, to_write)
         models.execute_kw(db, uid, password, 'stage.history', 'write', [[s['id']], {
-            'hd_stage_id': to_write
+            'hd_stage_id': to_write,
+            'stage': to_name,
         }])

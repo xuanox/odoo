@@ -54,7 +54,7 @@ class MailThread(models.AbstractModel):
                         if 'stage_id' in self.tracking_fields:
                             history['hd_stage_id'] = rec.stage_id.id
                         else:
-                            history['stage'] = state_name
+                            history['stage'] = _(state_name)
                     else: 
                         history['stage'] = _(state_name)
 
@@ -82,9 +82,9 @@ class StageHistory(models.Model):
     def _get_stage_name(self):
         for s in self:
             if s.hd_stage_id:
-                s.stage = s.hd_stage_id.name
+                s.stage = _(s.hd_stage_id.name)
             else:
-                s.stage = s.stage
+                s.stage = _(s.stage)
 
     name = fields.Char()
     stage = fields.Char(string=_('Stage'), default='_get_stage_name', store=True)
