@@ -2,3 +2,4 @@
 hs_view_crm
 .idea/misc.xml
 .idea/odoo.iml
+*.pyc

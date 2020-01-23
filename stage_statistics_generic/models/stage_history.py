@@ -2,26 +2,24 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import date
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 class MailThread(models.AbstractModel):
     _inherit = 'mail.thread'
 
     tracking_fields = []
 
-    stage_ids = fields.One2many('stage.history', 'res_id', string="Stage History", domain=lambda self: [('res_model', '=', self._name)], auto_join=True)
+    stage_ids = fields.One2many('stage.history', 'res_id', string=_("Stage History"), domain=lambda self: [('res_model', '=', self._name)], auto_join=True)
 
     @api.multi
     def message_track(self, tracked_fields, initial_values):
         if self.tracking_fields:
             stage = self.tracking_fields[0]
             for rec in self:
-                if 'stage_id' in self.tracking_fields:
-                    state_name = rec.stage_id.name
-                elif 'state' in self.tracking_fields:
-                    state_name = rec.state
+                if 'state' in self.tracking_fields:
+                    state_name = _(rec.state)
                 elif 'quality_state' in self.tracking_fields:
-                    state_name = rec.quality_state
+                    state_name = _(rec.quality_state)
                 else:
                     state_name = False
 
@@ -44,14 +42,23 @@ class MailThread(models.AbstractModel):
                     else:
                         person_assign = False
 
-                    rec.env['stage.history'].create({
-                        'name': rec.name,
-                        'stage': state_name,
+                    history = {
+                        'name': _(rec.name),
                         'entry_date': fields.Datetime.now(),
                         'res_id': rec.id,
                         'res_model': rec._name,
                         'person_assign_id': person_assign,
-                    })
+                    }
+
+                    if not state_name:
+                        if 'stage_id' in self.tracking_fields:
+                            history['hd_stage_id'] = rec.stage_id.id
+                        else:
+                            history['stage'] = state_name
+                    else: 
+                        history['stage'] = _(state_name)
+
+                    rec.env['stage.history'].create(history)
 
         return super(MailThread, self).message_track(tracked_fields, initial_values)
 
@@ -70,16 +77,26 @@ class StageHistory(models.Model):
             diff_days, diff_hours = divmod(diff_hours, 24)
             state.total_days = diff_days
             state.total_time = diff_hours + (diff_minutes/60)
+    
+    @api.depends('hd_stage_id')
+    def _get_stage_name(self):
+        for s in self:
+            if s.hd_stage_id:
+                s.stage = s.hd_stage_id.name
+            else:
+                s.stage = s.stage
 
     name = fields.Char()
-    stage = fields.Char(string='Stage')
-    entry_date = fields.Datetime(string="Stage Entry")
-    exit_date = fields.Datetime(string="Stage Exit")
-    total_days = fields.Integer(string="Days", store=True, compute="_compute_total_time")
-    total_time = fields.Float(string="Time (HH:MM)", digits=(16,2), store=True, compute="_compute_total_time")
-    person_assign_id = fields.Many2one('res.users', string="Person Assigned")
-    res_id = fields.Integer(string='Message ID')
-    res_model = fields.Char(string='Model')
+    stage = fields.Char(string=_('Stage'), default='_get_stage_name', store=True)
+    hd_stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
+    entry_date = fields.Datetime(string=_("Stage Entry"))
+    exit_date = fields.Datetime(string=_("Stage Exit"))
+    total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
+    total_time = fields.Float(string=_("Time (HH:MM)"), digits=(16,2), store=True, compute="_compute_total_time")
+    person_assign_id = fields.Many2one('res.users', string=_("Person Assigned"))
+    res_id = fields.Integer(string=_('Message ID'))
+    res_model = fields.Char(string=_('Model'))
+
 
 
 class Lead(models.Model):
