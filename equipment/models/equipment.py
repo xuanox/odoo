@@ -334,6 +334,7 @@ class EquipmentDicom(models.Model):
 class EquipmentModality(models.Model):
     _name = 'equipment.modality'
     _description = 'Modality'
+    _order = 'name asc'
 
     name = fields.Char('Modality Name', required=True, translate=True)
     color = fields.Integer('Color Index')
