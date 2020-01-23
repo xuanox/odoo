@@ -53,7 +53,11 @@
                             <thead>
                                 <tr>
                                   <th>N°</th>
-                                  <th># Equipo</th>
+                                  <th>Equipo</th>
+                                  <th>Modalidad</th>
+                                  <th>Estado del Equipo</th>
+                                  <th>Asunto</th>
+                                  <th>Estado</th>
                                 </tr>
                             </thead>
 
@@ -61,6 +65,10 @@
                                 <tr t-foreach="cm_ids" t-as="l">
                                   <td><a t-attf-href="/helpdesk/ticket/#{l.id}"><small>#</small><t t-esc="l.id"/></a></td>
                                   <td><span t-field="l.equipment_id"/></td>
+                                  <td><span t-field="l.modality_id.name"/></td>
+                                  <td><span t-field="l.equipment_state_id.name"/></td>
+                                  <td><span t-field="l.name"/></td>
+                                  <td><span t-field="l.stage_id.name"/></td>
                                 </tr>
                             </tbody>
                         </table>
