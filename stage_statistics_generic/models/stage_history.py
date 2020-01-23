@@ -53,6 +53,9 @@ class MailThread(models.AbstractModel):
                     if not state_name:
                         if 'stage_id' in self.tracking_fields:
                             history['hd_stage_id'] = rec.stage_id.id
+                            history['stage'] = self.env['helpdesk.stage'].search([['id', '=', rec.stage_id.id]])
+                            if history['stage']:
+                                history['stage'] = history['stage'][0]['name']
                         else:
                             history['stage'] = _(state_name)
                     else: 
@@ -77,17 +80,9 @@ class StageHistory(models.Model):
             diff_days, diff_hours = divmod(diff_hours, 24)
             state.total_days = diff_days
             state.total_time = diff_hours + (diff_minutes/60)
-    
-    @api.depends('hd_stage_id')
-    def _get_stage_name(self):
-        for s in self:
-            if s.hd_stage_id:
-                s.stage = _(s.hd_stage_id.name)
-            else:
-                s.stage = _(s.stage)
 
     name = fields.Char()
-    stage = fields.Char(string=_('Stage'), default='_get_stage_name', store=True)
+    stage = fields.Char(string=_('Stage'), store=True)
     hd_stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
     entry_date = fields.Datetime(string=_("Stage Entry"))
     exit_date = fields.Datetime(string=_("Stage Exit"))
