@@ -25,7 +25,6 @@ This shortcut allows you to generate a Technical Support Order.
         'wizard/close_ticket_view.xml',
         'wizard/change_equipment_view.xml',
         'views/technical_support_views.xml',
-        'views/helpdesk_technical_support_templates.xml',
         'views/helpdesk_views.xml',
         'views/equipment_views.xml',
         'views/res_config_settings_views.xml',
