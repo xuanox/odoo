@@ -54,6 +54,7 @@
                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
+                                  <th>Accion</th>
                                   <th>N°</th>
                                   <th>Fecha</th>
                                   <th>Equipo</th>
@@ -66,7 +67,8 @@
 
                             <tbody>
                                 <tr t-foreach="cm_ids" t-as="l">
-                                  <td><a t-attf-href="/helpdesk/ticket/#{l.id}"><small>#</small><t t-esc="l.id"/></a></td>
+                                  <td><a t-attf-href="/helpdesk/ticket/#{l.id}">Ver</a></td>
+                                  <td><span t-field="l.id"/></td>
                                   <td><span t-field="l.create_date"/></td>
                                   <td><span t-field="l.equipment_id"/></td>
                                   <td><span t-field="l.modality_id.name"/></td>
