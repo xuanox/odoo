@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="cm_page" name="CM list">
+  <template id="cm_page" name="Tickets">
       <t t-call="website.layout">
         <div id="wrap">
         <div class="oe_structure" id="oe_structure_website_ticket_cm_1">
