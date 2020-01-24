@@ -18,9 +18,9 @@ class MailThread(models.AbstractModel):
             stage = self.tracking_fields[0]
             for rec in self:
                 if 'state' in self.tracking_fields:
-                    state_name = _(rec.state)
+                    state_name = rec.state
                 elif 'quality_state' in self.tracking_fields:
-                    state_name = _(rec.quality_state)
+                    state_name = rec.quality_state
                 else:
                     state_name = False
 
@@ -52,9 +52,9 @@ class MailThread(models.AbstractModel):
                         if 'stage_id' in self.tracking_fields:
                             history['stage_id'] = rec.stage_id.id
                         else:
-                            history['stage'] = _(state_name)
+                            history['stage'] = state_name
                     else: 
-                        history['stage'] = _(state_name)
+                        history['stage'] = state_name
 
                     print('\nhistory:', history, '\n')
                     if 'stage_id' in history:
