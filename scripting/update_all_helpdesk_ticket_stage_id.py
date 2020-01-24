@@ -1,9 +1,9 @@
 import xmlrpc.client
 
-url = '<database-url>'
-db = '<database-name>'
-username = '<email>'
-password = '<password>'
+url = 'http://localhost:8069'
+db = 'electronicamedica-odoo-master-160751'
+username = 'agp@odoo.com'
+password = 's2GexNk45W89tzv'
 
 stages = {
     'Nuevo': 'New',
@@ -40,8 +40,28 @@ for h in hd_stages:
     if stages[h['name'].lower()]:
         stages[h['name'].lower()] = h['id']
 
+# name = fields.Char()
+# stage = fields.Char(string=_('Stage'))
+# entry_date = fields.Datetime(string=_("Stage Entry"))
+# exit_date = fields.Datetime(string=_("Stage Exit"))
+# total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
+# total_time = fields.Float(string=_("Time (HH:MM)"), digits=(16,2), store=True, compute="_compute_total_time")
+# person_assign_id = fields.Many2one('res.users', string=_("Person Assigned"))
+# res_id = fields.Integer(string=_('Message ID'))
+# res_model = fields.Char(string=_('Model'))
+
 sh_ids = models.execute_kw(db, uid, password, 'stage.history', 'search', [[]])
-stage_history = models.execute_kw(db, uid, password, 'stage.history', 'read', [sh_ids], {'fields': ['stage']})
+stage_history = models.execute_kw(db, uid, password, 'stage.history', 'read', [sh_ids], {'fields': [
+    'name',
+    'entry_date',
+    'exit_date',
+    'total_days',
+    'total_time',
+    'person_assign_id',
+    'res_id',
+    'res_model',
+    'stage'
+]})
 print('{} stage history ids found!'.format(len(sh_ids)))
 
 for s in stage_history:
@@ -51,11 +71,18 @@ for s in stage_history:
     elif s['stage'] in stages:
         to_write = stages[s['stage']]
     if to_write:
-        to_name = s['stage']
-        if to_write in names:
-            to_name = names[to_write]
-        print('Write: ', s['id'], to_name, to_write)
-        models.execute_kw(db, uid, password, 'stage.history', 'write', [[s['id']], {
-            'hd_stage_id': to_write,
-            'stage': to_name,
+        person = False
+        if s['person_assign_id']:
+            person = s['person_assign_id'][0]
+        print('Create: ', s['name'], to_write)
+        models.execute_kw(db, uid, password, 'helpdesk.stage.history', 'create', [{
+            'name': s['name'],
+            'entry_date': s['entry_date'],
+            'exit_date': s['exit_date'],
+            'total_days': s['total_days'],
+            'total_time': s['total_time'],
+            'person_assign_id': person,
+            'res_id': s['res_id'],
+            'res_model': s['res_model'],
+            'stage_id': to_write
         }])
