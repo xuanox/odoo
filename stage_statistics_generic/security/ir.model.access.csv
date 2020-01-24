@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_stage_history,stage.history,model_stage_history,,1,1,1,0
+access_helpdesk_stage_history,helpdesk.stage.history,model_helpdesk_stage_history,,1,1,1,0

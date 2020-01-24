@@ -52,19 +52,19 @@ class MailThread(models.AbstractModel):
 
                     if not state_name:
                         if 'stage_id' in self.tracking_fields:
-                            history['hd_stage_id'] = rec.stage_id.id
-                            history['stage'] = self.env['helpdesk.stage'].search([['id', '=', rec.stage_id.id]])
-                            if history['stage']:
-                                history['stage'] = history['stage'][0]['name']
+                            history['stage_id'] = rec.stage_id.id
                         else:
                             history['stage'] = _(state_name)
                     else: 
                         history['stage'] = _(state_name)
 
-                    rec.env['stage.history'].create(history)
+                    print('\nhistory:', history, '\n')
+                    if 'stage_id' in history:
+                        rec.env['helpdesk.stage.history'].create(history)
+                    else:
+                        rec.env['stage.history'].create(history)
 
         return super(MailThread, self).message_track(tracked_fields, initial_values)
-
 
 class StageHistory(models.Model):
     _name = "stage.history"
@@ -80,18 +80,9 @@ class StageHistory(models.Model):
             diff_days, diff_hours = divmod(diff_hours, 24)
             state.total_days = diff_days
             state.total_time = diff_hours + (diff_minutes/60)
-    
-    @api.depends('hd_stage_id')
-    def _get_stage_name(self):
-        for s in self:
-            if s.hd_stage_id:
-                s.stage = s.hd_stage_id.name
-            else:
-                s.stage = s.stage
 
     name = fields.Char()
-    stage = fields.Char(string=_('Stage'), store=True)
-    hd_stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
+    stage = fields.Char(string=_('Stage'))
     entry_date = fields.Datetime(string=_("Stage Entry"))
     exit_date = fields.Datetime(string=_("Stage Exit"))
     total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
@@ -100,7 +91,30 @@ class StageHistory(models.Model):
     res_id = fields.Integer(string=_('Message ID'))
     res_model = fields.Char(string=_('Model'))
 
+class HelpdeskStageHistory(models.Model):
+    _name = "helpdesk.stage.history"
+    _description = "Helpdesk Stage History"
 
+    @api.depends('entry_date', "exit_date")
+    def _compute_total_time(self):
+        for state in self:
+            diff_timedelta = (state.exit_date or fields.Datetime.now()) - state.entry_date
+            diff_seconds = diff_timedelta.days * 24 * 3600 + diff_timedelta.seconds
+            diff_minutes, diff_seconds = divmod(diff_seconds, 60)
+            diff_hours, diff_minutes = divmod(diff_minutes, 60)
+            diff_days, diff_hours = divmod(diff_hours, 24)
+            state.total_days = diff_days
+            state.total_time = diff_hours + (diff_minutes/60)
+
+    name = fields.Char()
+    stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
+    entry_date = fields.Datetime(string=_("Stage Entry"))
+    exit_date = fields.Datetime(string=_("Stage Exit"))
+    total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
+    total_time = fields.Float(string=_("Time (HH:MM)"), digits=(16,2), store=True, compute="_compute_total_time")
+    person_assign_id = fields.Many2one('res.users', string=_("Person Assigned"))
+    res_id = fields.Integer(string=_('Message ID'))
+    res_model = fields.Char(string=_('Model'))
 
 class Lead(models.Model):
     _inherit = "crm.lead"

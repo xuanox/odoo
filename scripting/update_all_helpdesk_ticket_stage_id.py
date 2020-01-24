@@ -41,7 +41,17 @@ for h in hd_stages:
         stages[h['name'].lower()] = h['id']
 
 sh_ids = models.execute_kw(db, uid, password, 'stage.history', 'search', [[]])
-stage_history = models.execute_kw(db, uid, password, 'stage.history', 'read', [sh_ids], {'fields': ['stage']})
+stage_history = models.execute_kw(db, uid, password, 'stage.history', 'read', [sh_ids], {'fields': [
+    'name',
+    'entry_date',
+    'exit_date',
+    'total_days',
+    'total_time',
+    'person_assign_id',
+    'res_id',
+    'res_model',
+    'stage'
+]})
 print('{} stage history ids found!'.format(len(sh_ids)))
 
 for s in stage_history:
@@ -51,11 +61,18 @@ for s in stage_history:
     elif s['stage'] in stages:
         to_write = stages[s['stage']]
     if to_write:
-        to_name = s['stage']
-        if to_write in names:
-            to_name = names[to_write]
-        print('Write: ', s['id'], to_name, to_write)
-        models.execute_kw(db, uid, password, 'stage.history', 'write', [[s['id']], {
-            'hd_stage_id': to_write,
-            'stage': to_name,
+        person = False
+        if s['person_assign_id']:
+            person = s['person_assign_id'][0]
+        print('Create: ', s['name'], to_write)
+        models.execute_kw(db, uid, password, 'helpdesk.stage.history', 'create', [{
+            'name': s['name'],
+            'entry_date': s['entry_date'],
+            'exit_date': s['exit_date'],
+            'total_days': s['total_days'],
+            'total_time': s['total_time'],
+            'person_assign_id': person,
+            'res_id': s['res_id'],
+            'res_model': s['res_model'],
+            'stage_id': to_write
         }])
