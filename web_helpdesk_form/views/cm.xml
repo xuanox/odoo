@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="cm_page" name="CM list">
-    <t name="CM list" t-name="cm_page">
       <t t-call="website.layout">
-       <t t-set="title">Solicitudes Correctivas - Soporte Técnico</t>
         <div id="wrap">
-        <div class="oe_structure">
+        <div class="oe_structure" id="oe_structure_website_ticket_cm_1">
         <section class="s_cover parallax bg-black-50 oe_img_bg oe_custom_bg s_parallax_is_fixed pb0 pt0" data-scroll-background-ratio="1" style="background-image: none;">
-                    <span class="s_parallax_bg oe_img_bg oe_custom_bg" style="background-image: url(&quot;/web/image/949/azurion.jpg&quot;); background-position: 50% 0px;"/>
+                    <span class="s_parallax_bg oe_img_bg oe_custom_bg" style="background-image: url(&quot;/web_helpdesk_form/static/src/img/repair.jpg&quot;); background-position: 50% 0px;"/>
                     <div class="container">
                         <div class="row s_nb_column_fixed">
                             <div class="col-lg-12 s_title pt32" data-name="Title">
@@ -32,7 +30,11 @@
                 </section>
                 <section>
           <div class="container">
-      <center><h3>Mis Solicitudes Correctivas</h3></center>
+            <br/>
+  <center><h2 class="s_title_thin" style="font-size: 28px; text-align: center;">Solicitudes de Soporte Técnico</h2></center>
+<br/>
+<br/>
+
       <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet"/>
 
@@ -53,6 +55,7 @@
                             <thead>
                                 <tr>
                                   <th>N°</th>
+                                  <th>Fecha</th>
                                   <th>Equipo</th>
                                   <th>Modalidad</th>
                                   <th>Estado del Equipo</th>
@@ -64,6 +67,7 @@
                             <tbody>
                                 <tr t-foreach="cm_ids" t-as="l">
                                   <td><a t-attf-href="/helpdesk/ticket/#{l.id}"><small>#</small><t t-esc="l.id"/></a></td>
+                                  <td><span t-field="l.create_date"/></td>
                                   <td><span t-field="l.equipment_id"/></td>
                                   <td><span t-field="l.modality_id.name"/></td>
                                   <td><span t-field="l.equipment_state_id.name"/></td>
@@ -79,7 +83,7 @@
         </div>
         </div>
       </t>
-    </t>
+
     </template>
 
 </odoo>
