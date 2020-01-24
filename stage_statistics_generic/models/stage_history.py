@@ -109,7 +109,7 @@ class HelpdeskStageHistory(models.Model):
             state.total_time = diff_hours + (diff_minutes/60)
 
     name = fields.Char()
-    stage_id = fields.Many2one(string=_('Stage ID'), comodel_name="helpdesk.stage", ondelete="cascade")
+    stage_id = fields.Many2one(string=_('Stage'), comodel_name="helpdesk.stage", ondelete="cascade")
     entry_date = fields.Datetime(string=_("Stage Entry"))
     exit_date = fields.Datetime(string=_("Stage Exit"))
     total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
