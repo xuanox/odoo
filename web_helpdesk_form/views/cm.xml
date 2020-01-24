@@ -30,7 +30,11 @@
                 </section>
                 <section>
           <div class="container">
-      <center><h3>Mis Solicitudes Correctivas</h3></center>
+            <br/>
+  <center><h2 class="s_title_thin" style="font-size: 28px; text-align: center;">Solicitudes de Soporte Técnico</h2></center>
+<br/>
+<br/>
+
       <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet"/>
 
@@ -77,7 +81,7 @@
         </div>
         </div>
       </t>
-    
+
     </template>
 
 </odoo>
