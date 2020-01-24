@@ -9,11 +9,11 @@
             <xpath expr="//field[@name='description']" position="after">
                 <notebook>
                     <page name="history" string="History">
-                        <field name="stage_ids" attrs="{'readonly': 1}">
+                        <field name="hd_stage_ids" attrs="{'readonly': 1}">
                             <tree default_order="id desc">
                                 <field name="name"/>
                                 <field name="person_assign_id"/>
-                                <field name="stage"/>
+                                <field name="stage_id" string="Stage"/>
                                 <field name="entry_date"/>
                                 <field name="exit_date"/>
                                 <field name="total_days"/>

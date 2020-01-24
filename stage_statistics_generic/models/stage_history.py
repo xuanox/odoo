@@ -10,6 +10,7 @@ class MailThread(models.AbstractModel):
     tracking_fields = []
 
     stage_ids = fields.One2many('stage.history', 'res_id', string=_("Stage History"), domain=lambda self: [('res_model', '=', self._name)], auto_join=True)
+    hd_stage_ids = fields.One2many('helpdesk.stage.history', 'res_id', string=_("Helpdesk Stage History"), domain=lambda self: [('res_model', '=', self._name)], auto_join=True)
 
     @api.multi
     def message_track(self, tracked_fields, initial_values):
