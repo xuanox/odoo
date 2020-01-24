@@ -42,16 +42,18 @@
       <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"/>
       <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"/>
       <script>
- $(document).ready(function() {
+      $(document).ready(function() {
         $('#example').dataTable( {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
             }
         } );
     } );
-  </script>
+
+
+      </script>
                       <!-- table -->
-                       <table id="example" class="display" style="width:100%">
+                       <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                   <th>Accion</th>
@@ -77,18 +79,6 @@
                                   <td><span t-field="l.stage_id.name"/></td>
                                 </tr>
                             </tbody>
-                            <thead>
-                                <tr>
-                                  <th>Accion</th>
-                                  <th>N°</th>
-                                  <th>Fecha</th>
-                                  <th>Equipo</th>
-                                  <th>Modalidad</th>
-                                  <th>Estado del Equipo</th>
-                                  <th>Asunto</th>
-                                  <th>Estado</th>
-                                </tr>
-                            </thead>
                         </table>
           </div>
   </section>
