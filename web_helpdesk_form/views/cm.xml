@@ -105,6 +105,18 @@
                                   <td><span t-field="l.stage_id.name"/></td>
                                 </tr>
                             </tbody>
+                            <thead>
+                                <tr>
+                                  <th>Accion</th>
+                                  <th>N°</th>
+                                  <th>Fecha</th>
+                                  <th>Equipo</th>
+                                  <th>Modalidad</th>
+                                  <th>Estado del Equipo</th>
+                                  <th>Asunto</th>
+                                  <th>Estado</th>
+                                </tr>
+                            </thead>
                         </table>
           </div>
   </section>
