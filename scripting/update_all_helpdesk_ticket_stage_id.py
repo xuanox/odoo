@@ -1,9 +1,9 @@
 import xmlrpc.client
 
-url = 'http://localhost:8069'
-db = 'electronicamedica-odoo-master-160751'
-username = 'agp@odoo.com'
-password = 's2GexNk45W89tzv'
+url = '<database-url>'
+db = '<database-name>'
+username = '<email>'
+password = '<password>'
 
 stages = {
     'Nuevo': 'New',
@@ -39,16 +39,6 @@ for h in hd_stages:
         names[h['id']] = h['name']
     if stages[h['name'].lower()]:
         stages[h['name'].lower()] = h['id']
-
-# name = fields.Char()
-# stage = fields.Char(string=_('Stage'))
-# entry_date = fields.Datetime(string=_("Stage Entry"))
-# exit_date = fields.Datetime(string=_("Stage Exit"))
-# total_days = fields.Integer(string=_("Days"), store=True, compute="_compute_total_time")
-# total_time = fields.Float(string=_("Time (HH:MM)"), digits=(16,2), store=True, compute="_compute_total_time")
-# person_assign_id = fields.Many2one('res.users', string=_("Person Assigned"))
-# res_id = fields.Integer(string=_('Message ID'))
-# res_model = fields.Char(string=_('Model'))
 
 sh_ids = models.execute_kw(db, uid, password, 'stage.history', 'search', [[]])
 stage_history = models.execute_kw(db, uid, password, 'stage.history', 'read', [sh_ids], {'fields': [
