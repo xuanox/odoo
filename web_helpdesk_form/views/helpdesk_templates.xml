@@ -154,7 +154,7 @@
                       <option value=""> -- Seleccione el Equipo -- </option>
                       <t t-foreach="equipments" t-as="equipment_id">
                         <option t-att-value="equipment_id.id">
-                          Modalidad <t t-esc="equipment_id.modality_id.name" />
+                          <t t-esc="equipment_id.modality_id.name" />
                           Equipo <t t-esc="equipment_id.name" />
                           N° <t t-esc="equipment_id.equipment_number" />
                           Serie #<t t-esc="equipment_id.serial" />
