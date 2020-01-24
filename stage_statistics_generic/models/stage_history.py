@@ -33,9 +33,6 @@ class MailThread(models.AbstractModel):
                         flag = True
 
                 if flag:
-                    if rec.stage_ids:
-                        rec.stage_ids[-1].exit_date = fields.Datetime.now()
-
                     if 'team_id' in self.tracking_fields:
                         person_assign = rec.team_id.id
                     elif len(self.tracking_fields) > 1:
@@ -61,8 +58,12 @@ class MailThread(models.AbstractModel):
 
                     print('\nhistory:', history, '\n')
                     if 'stage_id' in history:
+                        if rec.hd_stage_ids:
+                            rec.hd_stage_ids[-1].exit_date = fields.Datetime.now()
                         rec.env['helpdesk.stage.history'].create(history)
                     else:
+                        if rec.stage_ids:
+                            rec.stage_ids[-1].exit_date = fields.Datetime.now()
                         rec.env['stage.history'].create(history)
 
         return super(MailThread, self).message_track(tracked_fields, initial_values)
