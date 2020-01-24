@@ -55,6 +55,7 @@
                             <thead>
                                 <tr>
                                   <th>N°</th>
+                                  <th>Fecha</th>
                                   <th>Equipo</th>
                                   <th>Modalidad</th>
                                   <th>Estado del Equipo</th>
@@ -66,6 +67,7 @@
                             <tbody>
                                 <tr t-foreach="cm_ids" t-as="l">
                                   <td><a t-attf-href="/helpdesk/ticket/#{l.id}"><small>#</small><t t-esc="l.id"/></a></td>
+                                  <td><span t-field="l.create_date"/></td>
                                   <td><span t-field="l.equipment_id"/></td>
                                   <td><span t-field="l.modality_id.name"/></td>
                                   <td><span t-field="l.equipment_state_id.name"/></td>
