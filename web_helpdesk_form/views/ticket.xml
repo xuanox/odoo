@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="cm_page" name="Tickets">
+  <template id="ticket_page" name="Tickets">
       <t t-call="website.layout">
         <div id="wrap">
         <div class="oe_structure" id="oe_structure_website_ticket_cm_1">
@@ -31,7 +31,7 @@
                 <section>
           <div class="container">
             <br/>
-  <center><h2 class="s_title_thin" style="font-size: 28px; text-align: center;">Ticket Abiertos de Soporte Técnico</h2></center>
+  <center><h2 class="s_title_thin" style="font-size: 28px; text-align: center;">Ticket de Soporte Técnico</h2></center>
 <br/>
 <br/>
 
@@ -68,7 +68,7 @@
                             </thead>
 
                             <tbody>
-                                <tr t-foreach="cm_ids" t-as="l">
+                                <tr t-foreach="ticket_ids" t-as="l">
                                   <td><a t-attf-href="/helpdesk/ticket/#{l.id}">Ver</a></td>
                                   <td><span t-field="l.id"/></td>
                                   <td><span t-field="l.create_date"/></td>
