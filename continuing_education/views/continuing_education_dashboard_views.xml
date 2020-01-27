@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+  <!-- Vista : tree / vista principal  -->
+      <record id="continuing_education_dashboard_view_tree" model="ir.ui.view">
+            <field name="name">Continuing Education Dashboard View Tree</field>
+            <field name="model">continuing.education.dashboard</field>
+            <field name="arch" type="xml">
+                <tree string="Continuing Education Dashboard">
+                    <field name="name"/>
+                    <field name="client_id"/>
+                    <field name="user_id"/>
+                    <field name="assigned_id"/>
+                    <field name="subject"/>
+                    <field name="description"/>
+                    <field name="date_planned" widget="datetime"/>
+                    <field name="date_end" widget="datetime"/>
+                    <field name="create_date" widget="datetime"/>
+                    <field name="services_type"/>
+                    <field name="state"/>
+                    <field name="category_ids"/>
+                    <field name="priority"/>
+                </tree>
+            </field>
+      </record>
+<!-- Vista : FORM / formulario principal -->
+      <record id="continuing_education_form_view" model="ir.ui.view">
+          <field name="name">continuing_education.form</field>
+          <field name="model">continuing.education.dashboard</field>
+          <field name="arch" type="xml">
+              <form string="Continuing Education Form">
+                <header>
+
+                    <button name="%(education_continuing_request_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+
+                    <button name="action_replanned" states="asign,run" string="Reagendar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+
+                    <button name="action_reassigned" states="asign,run" string="Reasignar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+
+                    <button name="action_done" states="run" string="Realizado" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+
+                    <button name="action_run" states="asign" string="En Proceso" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+
+                    <button name="action_canceled" states="draft" string="Cancelar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_user"/>
+                    <button name="action_canceled" states="asign,run" string="Cancelar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                  <sheet>
+                        <div class="oe_title">
+                          <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
+                        </div>
+                        <field name="category_ids" widget="many2many_tags" placeholder="Etiquetas..."/>
+
+                        <group>
+                          <group name="solicitud" string="Solicitud">
+                          <field name="user_id"/>
+                          <field name="assigned_id" groups="continuing_education.group_continuing_education_manager"/>
+                          <field name="person_type" widget="radio"/>
+                          <field name="services_type"/>
+                          <field name="asistent_select" widget="radio"/>
+                          <field name="client_id" attrs="{'invisible':[('person_type', '!=', 'client')]}"/>
+                          <field name="asistent_id" attrs="{'invisible':[('asistent_select', '!=', 'yes')]}"/>
+                          <field name="company_id" attrs="{'invisible':[('person_type', '!=', 'inter')]}"/>
+                          <field name="local_state" attrs="{'invisible':[('services_type', '!=', 'forma')]}" widget="radio"/>
+                          <field name="sale_id" attrs="{'invisible':[('services_type', '!=', 'apoyo')]}"/>
+                        </group>
+
+                        <group name="dates" string="Fechas">
+                          <field name="create_date" widget="datetime"/>
+                          <field name="date_planned" widget="datetime"/>
+                          <field name="date_end" widget="datetime"/>
+                        </group>
+
+                        <group name="indications" string="Indicaciones">
+                        <field name="subject"/>
+                        <field name="nivel_type" attrs="{'invisible':[('services_type', '!=', 'aplic')]}"/>
+                        <field name="software_version" attrs="{'invisible':[('services_type', '!=', 'act')]}"/>
+                        <field name='description'/>
+                        <field name="priority" eval="1"  widget="priority"/>
+                        </group>
+                        </group>
+                    <notebook>
+                      <page string="Informe" name="inform">
+                        <separator string="Tema Principal"/>
+                        <field name="operations_description" placeholder="Título del Tema..."/>
+                        <separator string="Servicio Realizado"/>
+                        <field name="labor_description" placeholder="Descripción del servicio ..."/>
+                        <separator string="Observación"/>
+                        <field name="observation_description" placeholder="Observaciones ..."/>
+                      </page>
+
+                      <page string="Participantes" name="user">
+                        <separator string="Agregar Participantes"/>
+                        <field name="participants_list" placeholder="Lista de Participantes..."/>
+                      </page>
+                    </notebook>
+
+                    </sheet>
+
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="activity_ids" widget="mail_activity"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+              </form>
+          </field>
+      </record>
+<!-- Vista : CALENDAR -->
+      <record model="ir.ui.view" id="view_continuing_education_calendar">
+          <field name="name">continuing.education.calendar</field>
+          <field name="model">continuing.education.dashboard</field>
+          <field eval="2" name="priority"/>
+          <field name="arch" type="xml">
+              <calendar date_start="date_planned" date_stop="date_end" string="Event Organization" color="services_type">
+                  <field name="name"/>
+                  <field name="assigned_id"/>
+                  <field name="client_id"/>
+                  <field name="services_type"/>
+              </calendar>
+          </field>
+      </record>
+<!-- Vista : KANBAN -->
+      <record id="continuing_education_view_kanban" model="ir.ui.view">
+      <field name="name">continuing.education.view.kanban</field>
+      <field name="model">continuing.education.dashboard</field>
+      <field name="arch" type="xml">
+          <kanban class="o_kanban_small_column" default_group_by="state">
+              <field name="state"/>
+              <templates>
+                  <t t-name="kanban-box">
+                      <div t-attf-class="oe_kanban_global_click">
+                          <div>
+                              <strong><field name="name"/></strong>
+                              <field name="assigned_id"/>
+                              <field name="services_type"/>
+                              <field name="client_id"/>
+                              <field name="priority" widget="priority"/>
+                          </div>
+                      </div>
+                  </t>
+              </templates>
+          </kanban>
+      </field>
+      </record>
+
+        <!-- stages : actions -->
+      <record id="continuing_education_dashboard_view_action" model="ir.actions.act_window">
+            <field name="name">Solicitud de Educación Continua</field>
+            <field name="res_model">continuing.education.dashboard</field>
+            <field name="view_mode">tree,form,calendar,kanban</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Add a new Dashboard
+              </p>
+            </field>
+      </record>
+
+    </data>
+</odoo>
