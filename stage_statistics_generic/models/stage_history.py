@@ -24,6 +24,7 @@ class MailThread(models.AbstractModel):
                 else:
                     state_name = False
 
+                print('state:', state_name)
                 flag = False
                 if self._fields[stage].type == 'selection':
                     if rec and initial_values and initial_values.get(rec.id).get(self.tracking_fields[0]) and state_name != initial_values.get(rec.id).get(self.tracking_fields[0]):
