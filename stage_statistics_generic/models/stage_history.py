@@ -24,7 +24,6 @@ class MailThread(models.AbstractModel):
                 else:
                     state_name = False
 
-                print('state:', state_name)
                 flag = False
                 if self._fields[stage].type == 'selection':
                     if rec and initial_values and initial_values.get(rec.id).get(self.tracking_fields[0]) and state_name != initial_values.get(rec.id).get(self.tracking_fields[0]):
@@ -57,7 +56,6 @@ class MailThread(models.AbstractModel):
                     else: 
                         history['stage'] = state_name
 
-                    print('\nhistory:', history, '\n')
                     if 'stage_id' in history:
                         if rec.hd_stage_ids:
                             rec.hd_stage_ids[-1].exit_date = fields.Datetime.now()
@@ -147,14 +145,6 @@ class SaleOrder(models.Model):
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
     tracking_fields = ['state', 'user_id']
-
-    @api.model_create_multi
-    @api.returns('self', lambda value: value.id)
-    def create(self, vals_list):
-        for s in self:
-            print(s)
-            self.env['mail.thread'].message_track(s.tracking_fields, vals_list)
-        return super(PurchaseOrder, self).create(vals_list)
 
 class Picking(models.Model):
     _inherit = "stock.picking"
