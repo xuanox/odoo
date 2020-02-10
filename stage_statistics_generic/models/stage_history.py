@@ -148,6 +148,13 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
     tracking_fields = ['state', 'user_id']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals_list):
+        for s in self:
+            print(s)
+            self.env['mail.thread'].message_track(s.tracking_fields, vals_list)
+        return super(PurchaseOrder, self).create(vals_list)
 
 class Picking(models.Model):
     _inherit = "stock.picking"
