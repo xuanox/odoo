@@ -15,6 +15,7 @@ from dateutil.relativedelta import *
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
     _rec_name = 'id'
+    _order = 'id desc'
 
     def _technical_support_count(self):
         order = self.env['technical_support.order']
