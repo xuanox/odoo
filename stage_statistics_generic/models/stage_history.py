@@ -38,7 +38,7 @@ class MailThread(models.AbstractModel):
                     elif len(self.tracking_fields) > 1:
                         person_assign = rec.user_id.id
                     else:
-                        person_assign = False
+                        person_assign = self.env.user.id
 
                     history = {
                         'name': _(rec.name),
