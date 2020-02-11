@@ -35,7 +35,7 @@ class MailThread(models.AbstractModel):
                 if flag:
                     if 'team_id' in self.tracking_fields:
                         person_assign = rec.team_id.id
-                    elif len(self.tracking_fields) > 1:
+                    elif 'user_id' in self.tracking_fields and rec.user_id:
                         person_assign = rec.user_id.id
                     else:
                         person_assign = self.env.user.id
