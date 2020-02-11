@@ -4,6 +4,42 @@
 from datetime import date
 from odoo import api, fields, models, _
 
+def create_stage_history(tracking_fields, state_name, rec, env):
+    if 'team_id' in tracking_fields:
+        person_assign = rec.team_id.id
+    elif 'user_id' in tracking_fields and rec.user_id:
+        person_assign = rec.user_id.id
+    else:
+        person_assign = env.user.id
+
+    history = {
+        'name': _(rec.name),
+        'entry_date': fields.Datetime.now(),
+        'res_id': rec.id,
+        'res_model': rec._name,
+        'person_assign_id': person_assign,
+    }
+
+    if not state_name:
+        if 'stage_id' in tracking_fields:
+            history['stage_id'] = rec.stage_id.id
+        else:
+            history['stage'] = state_name
+    else: 
+        history['stage'] = state_name
+    
+    return history
+
+def exit_stage(history, rec):
+    if 'stage_id' in history:
+        if rec.hd_stage_ids:
+            rec.hd_stage_ids[-1].exit_date = fields.Datetime.now()
+    else:
+        if rec.stage_ids:
+            rec.stage_ids[-1].exit_date = fields.Datetime.now()
+    
+    return history
+
 class MailThread(models.AbstractModel):
     _inherit = 'mail.thread'
 
@@ -17,10 +53,12 @@ class MailThread(models.AbstractModel):
         if self.tracking_fields:
             stage = self.tracking_fields[0]
             for rec in self:
-                if 'state' in self.tracking_fields:
-                    state_name = rec.state
+                if 'stage_id' in self.tracking_fields and not('helpdesk.ticket' in str(type(rec))):
+                    state_name = rec.stage_id.name
                 elif 'quality_state' in self.tracking_fields:
                     state_name = rec.quality_state
+                elif 'state' in self.tracking_fields:
+                    state_name = rec.state
                 else:
                     state_name = False
 
@@ -33,36 +71,12 @@ class MailThread(models.AbstractModel):
                         flag = True
 
                 if flag:
-                    if 'team_id' in self.tracking_fields:
-                        person_assign = rec.team_id.id
-                    elif 'user_id' in self.tracking_fields and rec.user_id:
-                        person_assign = rec.user_id.id
-                    else:
-                        person_assign = self.env.user.id
-
-                    history = {
-                        'name': _(rec.name),
-                        'entry_date': fields.Datetime.now(),
-                        'res_id': rec.id,
-                        'res_model': rec._name,
-                        'person_assign_id': person_assign,
-                    }
-
-                    if not state_name:
-                        if 'stage_id' in self.tracking_fields:
-                            history['stage_id'] = rec.stage_id.id
-                        else:
-                            history['stage'] = state_name
-                    else: 
-                        history['stage'] = state_name
+                    history = create_stage_history(self.tracking_fields, state_name, rec, self.env)
+                    history = exit_stage(history, rec)
 
                     if 'stage_id' in history:
-                        if rec.hd_stage_ids:
-                            rec.hd_stage_ids[-1].exit_date = fields.Datetime.now()
                         rec.env['helpdesk.stage.history'].create(history)
                     else:
-                        if rec.stage_ids:
-                            rec.stage_ids[-1].exit_date = fields.Datetime.now()
                         rec.env['stage.history'].create(history)
 
         return super(MailThread, self).message_track(tracked_fields, initial_values)
@@ -121,36 +135,102 @@ class Lead(models.Model):
     _inherit = "crm.lead"
     tracking_fields = ['stage_id', 'user_id']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.stage_id.name
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(Lead, self).create(vals)
 
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
     tracking_fields = ['stage_id', 'user_id']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            history = create_stage_history(s.tracking_fields, False, s, s.env)
+            s.env['helpdesk.stage.history'].create(history)
+        return super(HelpdeskTicket, self).create(vals)
 
 class Applicant(models.Model):
     _inherit = "hr.applicant"
     tracking_fields = ['stage_id', 'user_id']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.stage_id.name
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(Applicant, self).create(vals)
 
 class ProjectTask(models.Model):
     _inherit = "project.task"
     tracking_fields = ['stage_id', 'user_id']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.stage_id.name
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(ProjectTask, self).create(vals)
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
     tracking_fields = ['state', 'user_id']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.state
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(SaleOrder, self).create(vals)
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
-    tracking_fields = ['paid_state','state', 'user_id']
+    tracking_fields = ['state', 'user_id']
+
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.state
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(PurchaseOrder, self).create(vals)
 
 class Picking(models.Model):
     _inherit = "stock.picking"
     tracking_fields = ['state']
 
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.state
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(Picking, self).create(vals)
+
 
 class QualityCheck(models.Model):
     _inherit = "quality.check"
     tracking_fields = ['quality_state', 'team_id']
+
+    @api.model_create_multi
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        for s in self:
+            state_name = s.quality_state
+            history = create_stage_history(s.tracking_fields, state_name, s, s.env)
+            s.env['stage.history'].create(history)
+        return super(QualityCheck, self).create(vals)
