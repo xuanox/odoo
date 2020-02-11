@@ -144,7 +144,7 @@ class SaleOrder(models.Model):
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
-    tracking_fields = ['state', 'user_id']
+    tracking_fields = ['paid_state','state', 'user_id']
 
 class Picking(models.Model):
     _inherit = "stock.picking"
