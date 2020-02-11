@@ -10,7 +10,7 @@ def create_stage_history(tracking_fields, state_name, rec, env):
     elif 'user_id' in tracking_fields and rec.user_id:
         person_assign = rec.user_id.id
     else:
-        person_assign = env.user.id
+        person_assign = rec.create_uid.id
 
     history = {
         'name': _(rec.name),
