@@ -13,6 +13,7 @@
           <field name="date_planned"/>
 					<field name="client_id"/>
           <field name="equipment_id"/>
+          <field name="serial"/>
 					<field name="user_id"/>
         	<field name="subject"/>
           <field name="state"/>
