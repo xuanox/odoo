@@ -13,6 +13,7 @@
           <field name="date_planned"/>
 					<field name="client_id"/>
           <field name="equipment_id"/>
+          <field name="serial"/>
 					<field name="user_id"/>
         	<field name="subject"/>
           <field name="state"/>
@@ -191,6 +192,7 @@
           <field name="name"/>
 					<field name="client_id"/>
           <field name="equipment_id"/>
+          <field name="serial"/>
           <filter icon="terp-mail-message-new" string="Unread Messages" name="message_unread" domain="[('message_unread','=',True)]"/>
           <filter string="My TSR" domain="[('user_id','=',uid)]" name="my_tsr"/>
           <separator/>
