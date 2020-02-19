@@ -88,7 +88,7 @@
             <tr>
               <td align="center" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                 <a href="https://platzi.com/" target="_blank" border="0" style="text-decoration:none;">
-                <img src="https://static.platzi.com/media/public/uploads/curso-email-html-2x_45349101-b807-4bef-aca1-2583426e8a4c.jpg" alt="NUEVO Curso de Diseño y Maquetación de Emails" width="100%" border="0" style="max-width:600px;height:auto;display:block;">
+                <img src="https://static.platzi.com/media/public/uploads/curso-email-html-2x_45349101-b807-4bef-aca1-2583426e8a4c.jpg" alt="NUEVO Curso de Diseño y Maquetación de Emails" width="100%" border="0" style="max-width:600px;height:auto;display:block;"/>
                 </a>
               </td>
             </tr>
@@ -111,7 +111,7 @@
                           <!-- curso 1 - imagen -->
                           <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                             <a href="https://platzi.com/cursos/email-marketing/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="https://static.platzi.com/media/public/uploads/curso-marketing-2x_bcff89db-5b2e-4410-9b46-a2e27fa1c901.jpg" alt="Curso de Marketing" width="100%" border="0" style="max-width:280px;height:auto;">
+                            <img src="https://static.platzi.com/media/public/uploads/curso-marketing-2x_bcff89db-5b2e-4410-9b46-a2e27fa1c901.jpg" alt="Curso de Marketing" width="100%" border="0" style="max-width:280px;height:auto;"/>
                             </a>
                           </td>
                           <!-- curso 1 - imagen -->
@@ -147,7 +147,7 @@
                           <!-- curso 2 - imagen -->
                           <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                             <a href="https://platzi.com/cursos/google-analytics/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="https://static.platzi.com/media/public/uploads/curso-analytics_7d12c789-1b4d-4ee5-ad98-8452ab2b8f78.jpg" alt="Curso Profesional de Google Analytics" width="100%" border="0" style="max-width:280px;height:auto;">
+                            <img src="https://static.platzi.com/media/public/uploads/curso-analytics_7d12c789-1b4d-4ee5-ad98-8452ab2b8f78.jpg" alt="Curso Profesional de Google Analytics" width="100%" border="0" style="max-width:280px;height:auto;"/>
                             </a>
                           </td>
                           <!-- curso 2 - imagen -->
@@ -194,7 +194,7 @@
                           <!-- blog 1 - imagen -->
                           <td class="hide" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                             <a href="https://platzi.com/blog/herramientas-gratuitas-para-el-crecimiento-de-mi-emprendimiento/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/blog1.jpg" alt="Siete herramientas gratuitas para impulsar el crecimiento de tu emprendimiento" width="180" border="0" style="width:100%;max-width:180px;height:auto;">
+                            <img src="http://impre.tech/email/news/blog1.jpg" alt="Siete herramientas gratuitas para impulsar el crecimiento de tu emprendimiento" width="180" border="0" style="width:100%;max-width:180px;height:auto;"/>
                             </a>
                           </td>
                           <!-- blog 1 - imagen -->
@@ -233,7 +233,7 @@
                           <!-- blog 2 - imagen -->
                           <td class="hide" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                             <a href="https://platzi.com/blog/como-llegar-a-tus-clientes-y-potenciales-consumidores-a-traves-del-email-marketing/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/blog2-2x.jpg" alt="¿Cómo llegar a tus clientes y potenciales consumidores a través del email marketing?" width="180" border="0" style="width:100%;max-width:180px;height:auto;">
+                            <img src="http://impre.tech/email/news/blog2-2x.jpg" alt="¿Cómo llegar a tus clientes y potenciales consumidores a través del email marketing?" width="180" border="0" style="width:100%;max-width:180px;height:auto;"/>
                             </a>
                           </td>
                           <!-- blog 2 - imagen -->
@@ -272,7 +272,7 @@
                           <!-- blog 3 - imagen -->
                           <td class="hide" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                             <a href="https://platzi.com/blog/como-evitar-errores-al-enviar-una-campana-de-email-marketing/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/blog3.jpg" alt="Cómo evitar errores al enviar una campaña de Email Marketing" width="180" border="0" style="width:100%;max-width:180px;height:auto;">
+                            <img src="http://impre.tech/email/news/blog3.jpg" alt="Cómo evitar errores al enviar una campaña de Email Marketing" width="180" border="0" style="width:100%;max-width:180px;height:auto;"/>
                             </a>
                           </td>
                           <!-- blog 3 - imagen -->
@@ -323,22 +323,22 @@
                         <tbody><tr>
                           <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                             <a href="https://www.facebook.com/platzi" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-facebook.png" width="30" alt="Facebook" border="0" style="width:100%;max-width:30px;height:auto;">
+                            <img src="http://impre.tech/email/news/ic-facebook.png" width="30" alt="Facebook" border="0" style="width:100%;max-width:30px;height:auto;"/>
                             </a>
                           </td>
                           <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                             <a href="https://twitter.com/platzi" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-twitter.png" width="30" alt="Twitter" border="0" style="width:100%;max-width:30px;height:auto;">
+                            <img src="http://impre.tech/email/news/ic-twitter.png" width="30" alt="Twitter" border="0" style="width:100%;max-width:30px;height:auto;"/>
                             </a>
                           </td>
                           <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                             <a href="https://www.instagram.com/platzi/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-instagram.png" width="30" alt="Instagram" border="0" style="width:100%;max-width:30px;height:auto;">
+                            <img src="http://impre.tech/email/news/ic-instagram.png" width="30" alt="Instagram" border="0" style="width:100%;max-width:30px;height:auto;"/>
                             </a>
                           </td>
                           <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                             <a href="https://www.youtube.com/channel/UC55-mxUj5Nj3niXFReG44OQ" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-youtube.png" width="30" alt="YouTube" border="0" style="width:100%;max-width:30px;height:auto;">
+                            <img src="http://impre.tech/email/news/ic-youtube.png" width="30" alt="YouTube" border="0" style="width:100%;max-width:30px;height:auto;"/>
                             </a>
                           </td>
                         </tr>
