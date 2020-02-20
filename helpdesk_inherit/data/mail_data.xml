@@ -77,7 +77,7 @@
             <tbody><tr>
               <td align="center" style="padding-top:20px;padding-right:0;padding-bottom:20px;padding-left:0;">
                 <a href="https://platzi.com/" target="_blank" border="0" style="text-decoration:none;">
-                <img src="/web/image/45405/EMSA_Logo.png?access_token=becdafa1-df81-448b-bf54-9b6022ae5b76" alt="Electronica Médica S.A" width="127" border="0" style="max-width:127px;height:auto;display:block;"/>
+                <img src="https://www.electronicamedica.com/web/image/website/1/social_default_image" alt="Electronica Médica S.A" width="250" border="0" style="max-width:250px;height:auto;display:block;"/>
                 </a>
               </td>
             </tr>
@@ -87,282 +87,55 @@
             <!-- contenido destacado -->
             <tr>
               <td align="center" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-                <a href="https://platzi.com/" target="_blank" border="0" style="text-decoration:none;">
-                <img src="https://static.platzi.com/media/public/uploads/curso-email-html-2x_45349101-b807-4bef-aca1-2583426e8a4c.jpg" alt="NUEVO Curso de Diseño y Maquetación de Emails" width="100%" border="0" style="max-width:600px;height:auto;display:block;"/>
+                <a href="https://electronicamedica.com/" target="_blank" border="0" style="text-decoration:none;">
+                  <img src="https://electronicamedica-pa-test2-761165.dev.odoo.com/web_helpdesk_form/static/src/img/repair.jpg" alt="Electrónica Médica S.A" width="100%" border="0" style="max-width:600px;height:auto;display:block;"/>
                 </a>
               </td>
             </tr>
             <!-- contenido destacado -->
-            <!-- separador -->
-            <tr>
-              <td height="20" style="height:20px;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;"></td>
-            </tr>
-            <!-- separador -->
-            <tr>
-              <!-- 2 columnas) -->
-              <td class="two-column" align="center" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;text-align:center;font-size:0;">
-                <!-- columna izquierda -->
-                <table class="column" width="100%" style="max-width:300px;display:inline-block;" valign="top" border="0" cellspacing="0" cellpadding="0">
-                  <tbody><tr>
-                    <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                      <!-- curso 1 -->
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                          <!-- curso 1 - imagen -->
-                          <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-                            <a href="https://platzi.com/cursos/email-marketing/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="https://static.platzi.com/media/public/uploads/curso-marketing-2x_bcff89db-5b2e-4410-9b46-a2e27fa1c901.jpg" alt="Curso de Marketing" width="100%" border="0" style="max-width:280px;height:auto;"/>
-                            </a>
-                          </td>
-                          <!-- curso 1 - imagen -->
-                        </tr>
-                        <tr>
-                          <!-- curso 1 - texto -->
-                          <td height="60" style="height:60px;padding-top:10px;padding-right:0;padding-bottom:10px;padding-left:0;font-family:Arial,sans-serif;font-size:16px;line-height:20px;color:#333333;text-align:left;">
-                            <b>Curso de Email Marketing</b>, aprende a potenciar las campañas de tu empresa y fidelizar a tus clientes.
-                          </td>
-                          <!-- curso 1 - texto -->
-                        </tr>
-                        <tr>
-                          <!-- curso 1 - cta -->
-                          <td height="40" style="height:40px;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:10px;background-color:#98ca37;border-radius:6px;font-family:Arial,sans-serif;font-size:18px;color:#ffffff;text-align:center;">
-                            <a href="https://platzi.com/cursos/email-marketing/" target="_blank" border="0" style="text-decoration:none;font-family:Arial,sans-serif;color:#ffffff;">
-                            Estudiar ahora
-                            </a>
-                          </td>
-                          <!-- curso 1 - cta -->
-                        </tr>
-                      </tbody></table>
-                      <!-- curso 1 -->
-                    </td>
-                  </tr>
-                </tbody></table>
-                <!-- columna derecha -->
-                <table class="column" width="100%" style="max-width:300px;display:inline-block;" valign="top" border="0" cellspacing="0" cellpadding="0">
-                  <tbody><tr>
-                    <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                      <!-- curso 2 -->
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                          <!-- curso 2 - imagen -->
-                          <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-                            <a href="https://platzi.com/cursos/google-analytics/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="https://static.platzi.com/media/public/uploads/curso-analytics_7d12c789-1b4d-4ee5-ad98-8452ab2b8f78.jpg" alt="Curso Profesional de Google Analytics" width="100%" border="0" style="max-width:280px;height:auto;"/>
-                            </a>
-                          </td>
-                          <!-- curso 2 - imagen -->
-                        </tr>
-                        <tr>
-                          <!-- curso 2 - texto -->
-                          <td height="60" style="height:60px;padding-top:10px;padding-right:0;padding-bottom:10px;padding-left:0;font-family:Arial,sans-serif;font-size:16px;line-height:20px;color:#333333;text-align:left;">
-                            <b>Curso Profesional de Google Analytics</b>, aprende cómo analizar y medir el desempeño de tu sitio web.
-                          </td>
-                          <!-- curso 2 - texto -->
-                        </tr>
-                        <tr>
-                          <!-- curso 2 - cta -->
-                          <td height="40" style="height:40px;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:10px;background-color:#98ca37;border-radius:6px;font-family:Arial,sans-serif;font-size:18px;color:#ffffff;text-align:center;">
-                            <a href="https://platzi.com/cursos/google-analytics/" target="_blank" border="0" style="text-decoration:none;font-family:Arial,sans-serif;color:#ffffff;">
-                            Estudiar ahora
-                            </a>
-                          </td>
-                          <!-- curso 2 - cta -->
-                        </tr>
-                      </tbody></table>
-                      <!-- curso 2 -->
-                    </td>
-                  </tr>
-                </tbody></table>
-              </td>
-              <!-- fin 2 columnas -->
-            </tr>
-            <tr>
-              <!-- 3 columnas -->
-              <td class="three-column" style="padding-top:10px;padding-right:0;padding-bottom:10px;padding-left:0;text-align:center;font-size:0;">
-                <!--[if (gte mso 9)|(IE)]>
-                <table width="100%" style="border-spacing:0;" >
-                <tr>
-                <td width="200" valign="top" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;" >
-                <![endif]-->
-                <!-- columna izquierda -->
-                <table class="column" width="100%" style="max-width:200px;display:inline-block;" valign="top" border="0" cellspacing="0" cellpadding="0">
-                  <tbody><tr>
-                    <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                      <!-- blog1 -->
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                          <!-- blog 1 - imagen -->
-                          <td class="hide" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-                            <a href="https://platzi.com/blog/herramientas-gratuitas-para-el-crecimiento-de-mi-emprendimiento/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/blog1.jpg" alt="Siete herramientas gratuitas para impulsar el crecimiento de tu emprendimiento" width="180" border="0" style="width:100%;max-width:180px;height:auto;"/>
-                            </a>
-                          </td>
-                          <!-- blog 1 - imagen -->
-                        </tr>
-                        <tr>
-                          <!-- blog 1 - texto -->
-                          <td class="txt-mobile" style="padding-top:10px;padding-right:0;padding-bottom:10px;padding-left:0;font-family:Arial;font-size:14px;line-height:18px;color:#333333;text-align:center;">
-                            Siete herramientas gratuitas para impulsar tu emprendimiento
-                          </td>
-                          <!-- blog 1 - texto -->
-                        </tr>
-                        <tr>
-                          <!-- blog 1 - cta -->
-                          <td class="txt-mobile" style="padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;font-family:Arial;font-size:14px;line-height:0;color:#0a8ecd;">
-                            <a href="https://platzi.com/blog/herramientas-gratuitas-para-el-crecimiento-de-mi-emprendimiento/" target="_blank" border="0" style="font-family:Arial;color:#0a8ecd;text-decoration:none;">
-                            Leer más
-                            </a>
-                          </td>
-                          <!-- blog 1 - cta -->
-                        </tr>
-                      </tbody></table>
-                      <!-- blog 1 -->
-                    </td>
-                  </tr>
-                </tbody></table>
-                <!--[if (gte mso 9)|(IE)]>
-                </td><td width="200" valign="top" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;" >
-                <![endif]-->
-                <!-- columna centro -->
-                <table class="column" width="100%" style="max-width:200px;display:inline-block;" valign="top" border="0" cellspacing="0" cellpadding="0">
-                  <tbody><tr>
-                    <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                      <!-- blog 2 -->
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                          <!-- blog 2 - imagen -->
-                          <td class="hide" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-                            <a href="https://platzi.com/blog/como-llegar-a-tus-clientes-y-potenciales-consumidores-a-traves-del-email-marketing/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/blog2-2x.jpg" alt="¿Cómo llegar a tus clientes y potenciales consumidores a través del email marketing?" width="180" border="0" style="width:100%;max-width:180px;height:auto;"/>
-                            </a>
-                          </td>
-                          <!-- blog 2 - imagen -->
-                        </tr>
-                        <tr>
-                          <!-- blog 2 - texto -->
-                          <td class="txt-mobile" style="padding-top:10px;padding-right:0;padding-bottom:10px;padding-left:0;font-family:Arial;font-size:14px;line-height:18px;color:#333333;text-align:center;">
-                            ¿Cómo llegar a tus clientes a través del Email Marketing?
-                          </td>
-                          <!-- blog 2 - texto -->
-                        </tr>
-                        <tr>
-                          <!-- blog 2 - cta -->
-                          <td class="txt-mobile" style="padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;font-family:Arial;font-size:14px;line-height:0;color:#0a8ecd;">
-                            <a href="https://platzi.com/blog/como-llegar-a-tus-clientes-y-potenciales-consumidores-a-traves-del-email-marketing/" target="_blank" border="0" style="font-family:Arial;color:#0a8ecd;text-decoration:none;">
-                            Leer más
-                            </a>
-                          </td>
-                          <!-- blog 2 - cta -->
-                        </tr>
-                      </tbody></table>
-                      <!-- blog 2 -->
-                    </td>
-                  </tr>
-                </tbody></table>
-                <!--[if (gte mso 9)|(IE)]>
-                </td><td width="200" valign="top" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;" >
-                <![endif]-->
-                <!-- columna derecha -->
-                <table class="column" width="100%" style="max-width:200px;display:inline-block;" valign="top" border="0" cellspacing="0" cellpadding="0">
-                  <tbody><tr>
-                    <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                      <!-- blog 3 -->
-                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                          <!-- blog 3 - imagen -->
-                          <td class="hide" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
-                            <a href="https://platzi.com/blog/como-evitar-errores-al-enviar-una-campana-de-email-marketing/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/blog3.jpg" alt="Cómo evitar errores al enviar una campaña de Email Marketing" width="180" border="0" style="width:100%;max-width:180px;height:auto;"/>
-                            </a>
-                          </td>
-                          <!-- blog 3 - imagen -->
-                        </tr>
-                        <tr>
-                          <!-- blog 3 - texto -->
-                          <td class="txt-mobile" style="padding-top:10px;padding-right:0;padding-bottom:10px;padding-left:0;font-family:Arial;font-size:14px;line-height:18px;color:#333333;text-align:center;">
-                            Cómo evitar errores al enviar una campaña de Email Marketing
-                          </td>
-                          <!-- blog 3 - texto -->
-                        </tr>
-                        <tr>
-                          <!-- blog 3 - cta -->
-                          <td class="txt-mobile" style="padding-top:5px;padding-right:0;padding-bottom:0;padding-left:0;font-family:Arial;font-size:14px;line-height:0;color:#0a8ecd;">
-                            <a href="https://platzi.com/blog/como-evitar-errores-al-enviar-una-campana-de-email-marketing/" target="_blank" border="0" style="font-family:Arial;color:#0a8ecd;text-decoration:none;">
-                            Leer más
-                            </a>
-                          </td>
-                          <!-- blog 3 - cta -->
-                        </tr>
-                      </tbody></table>
-                      <!-- blog 3 -->
-                    </td>
-                  </tr>
-                </tbody></table>
-                <!--[if (gte mso 9)|(IE)]>
-                </td>
-                </tr>
-                </table>
-                <![endif]-->
+            <tr style="width:100%;position:relative;background-color:#33979e;" bgcolor="#33979e">
+              <td class="element" style="text-size-adjust:none;text-align:center;">
+                <p style="font-weight:normal;padding:10px;margin:4px 4px 2.00em;text-size-adjust:none;line-height:1.7;color:#fcfcfc;text-align:center;font-size:16px;mso-font-alt: Arial;font-family:Roboto, Arial, 'Helvetica Neue', Helvetica, sans-serif;"><br>Estimado Cliente,<br>Hemos recibido su solicitud de Servicio Técnico según los datos indicados en el formulario. En los próximos minutos, una vez revisemos todos sus datos y la disponibilidad, usted estará recibiendo una confirmación por este mismo medio.<br></p>
               </td>
             </tr>
-            <!-- contenido complementario 2 (3 columnas) -->
-          <!-- Fin Contenido -->
-            <!-- separador -->
-            <tr>
-              <td height="40" style="height:40px;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;"></td>
-            </tr>
-            <!-- separador -->
+            <!-- Fin Contenido -->
           <!-- Footer -->
             <tr>
-              <td align="center" bgcolor="#f4f4f4" style="padding-top:30px;padding-right:0;padding-bottom:40px;padding-left:0;">
-                <table width="100%" align="center" bgcolor="#f4f4f4" style="width:100%;max-width:600px;" valign="top" border="0" cellspacing="0" cellpadding="0">
-                  <tbody><tr>
+              <td align="center" bgcolor="#EBEBEA" style="padding-top:30px;padding-right:0;padding-bottom:40px;padding-left:0;">
+                <table width="100%" align="center" bgcolor="#EBEBEA" style="width:100%;max-width:600px;" valign="top" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
                     <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
                       <!-- redes sociales -->
                       <table align="center" width="100%" style="max-width:200px;;text-align:center;" border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                          <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                            <a href="https://www.facebook.com/platzi" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-facebook.png" width="30" alt="Facebook" border="0" style="width:100%;max-width:30px;height:auto;"/>
-                            </a>
-                          </td>
-                          <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                            <a href="https://twitter.com/platzi" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-twitter.png" width="30" alt="Twitter" border="0" style="width:100%;max-width:30px;height:auto;"/>
-                            </a>
-                          </td>
-                          <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                            <a href="https://www.instagram.com/platzi/" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-instagram.png" width="30" alt="Instagram" border="0" style="width:100%;max-width:30px;height:auto;"/>
-                            </a>
-                          </td>
-                          <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                            <a href="https://www.youtube.com/channel/UC55-mxUj5Nj3niXFReG44OQ" target="_blank" border="0" style="text-decoration:none;">
-                            <img src="http://impre.tech/email/news/ic-youtube.png" width="30" alt="YouTube" border="0" style="width:100%;max-width:30px;height:auto;"/>
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody></table>
+                        <tbody>
+                          <tr>
+                            <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                              <a href="https://www.facebook.com/electronicamedicasa" target="_blank" border="0" style="text-decoration:none;">
+                                <img src="https://electronicamedica-pa.odoo.com/web/image/45637/ic-facebook_60a552f6-c677-4029-b96b-9f1213a4476d.png" width="30" alt="Facebook" border="0" style="width:100%;max-width:30px;height:auto;"/>
+                              </a>
+                            </td>
+                            <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                              <a href="https://www.instagram.com/electronicamedicasa/" target="_blank" border="0" style="text-decoration:none;">
+                                <img src="https://electronicamedica-pa.odoo.com/web/image/45639/ic-instagram_622eebb1-556c-4a09-8913-a2c5e173c057.png" width="30" alt="Instagram" border="0" style="width:100%;max-width:30px;height:auto;"/>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                       <!-- redes sociales -->
                     </td>
                   </tr>
                   <!-- info marca -->
                   <tr>
                     <td align="center" style="padding-top:20px;padding-right:10px;padding-bottom:0;padding-left:10px;font-family:Arial,sans-serif;color:#1c3643;font-size:14px;text-align:center;">
-                      Enviado con <span style="color:#98ca3f;font-size:18px;">♥</span> por Platzi
+                      Enviado por <span style="color:#33979e;font-size:18px;">Team de Soporte</span>
                     </td>
                   </tr>
                   <!-- info marca -->
                   <!-- legales -->
                   <tr>
-                    <td align="center" style="padding-top:30px;padding-right:10px;padding-bottom:10px;padding-left:10px;font-family:Arial,sans-serif;color:#666666;font-size:12px;text-align:center;">
-                      Te enviamos este contenido porque haces parte de la comunidad Platzi.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="center" style="padding-top:0;padding-right:10px;padding-bottom:0;padding-left:10px;font-family:Arial,sans-serif;color:#666666;font-size:12px;text-align:center;">
-                      Lamentamos que te vayas, pero puedes <a href="https://platzi.com/contacto/" target="_blank" border="0" style="text-decoration:underline;color:#0a8ecd;">darte de baja aquí</a>.
-                    </td>
+                    >
                   </tr>
                   <!-- legales -->
                 </tbody></table>
