@@ -17,7 +17,7 @@
 				    usted estará recibiendo una confirmación y podrá revisar el estado de su solicitud en el portal.
                                 </p>
                                 <p>
-                                    <h3 class="text-center"><a t-attf-href="/my/tickets"><span>Ver mis Solicitudes</span></a></h3>
+                                    <h3 class="text-center"><a t-attf-href="/cm"><span>Ver mis Solicitudes</span></a></h3>
                                 </p>
                                 <p class="mt64">
                                     Si tiene una emergencia, no dude en contactarnos vía telefónica:

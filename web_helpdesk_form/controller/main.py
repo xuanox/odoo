@@ -64,6 +64,8 @@ class WebsiteForm(WebsiteForm):
         parent_name = request.env.user.parent_id.name
         equipments = request.env['equipment.equipment'].sudo().search([('client_id.id','=',parent)])
         ticket_type = request.env['helpdesk.ticket.type'].sudo().search([])
+        equipment_states = request.env['equipment.state'].sudo().search([('team','=',3)])
+
         values = {
             'error': {},
             'error_message': []
@@ -82,6 +84,7 @@ class WebsiteForm(WebsiteForm):
         values = {
             'equipments' : equipments,
             'ticket_type' : ticket_type,
+            'equipment_states' : equipment_states,
             'user': user,
             'create_uid': user,
             'parent': parent,
@@ -95,7 +98,10 @@ class WebsiteForm(WebsiteForm):
 
     def _process_registration(self, post):
         equipment_id = post.get('equipment_id')
+        equipment_state_id = post.get('equipment_state_id')
         equipments = request.env['equipment.equipment'].sudo().search([('id','=',equipment_id)])
+        equipments.write({'maintenance_state_id': equipment_state_id})
+
         request.env['helpdesk.ticket'].sudo().create({
             'name' : post.get('name'),
             'equipment_id': post.get('equipment_id'),
@@ -104,7 +110,7 @@ class WebsiteForm(WebsiteForm):
             'create_uid':post.get('user'),
             'partner_id':request.env.user.partner_id.id,
             'team_id': equipments.team_id.id,
-    })
+        })
 
 
     def _form_validate(self, data):
@@ -121,3 +127,31 @@ class WebsiteForm(WebsiteForm):
             error_message.append(_('Some required fields are empty.'))
 
         return error, error_message
+
+    @http.route('/cm', type='http', auth='user', website=True)
+    def navigate_to_cm_page(self):
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        cm_ids = http.request.env['helpdesk.ticket'].sudo().search([('client_id.id','=',parent), ('stage_id.is_close', '=', False)])
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+            'cm_ids': cm_ids,
+        }
+        return http.request.render('web_helpdesk_form.cm_page', values)
+
+    @http.route('/ticket', type='http', auth='user', website=True)
+    def navigate_to_ticket_page(self):
+        user = http.request.env.context.get('uid')
+        parent = request.env.user.parent_id.id
+        parent_name = request.env.user.parent_id.name
+        ticket_ids = http.request.env['helpdesk.ticket'].sudo().search([('client_id.id','=',parent)])
+        values = {
+            'user': user,
+            'parent': parent,
+            'parent_name': parent_name,
+            'ticket_ids': ticket_ids,
+        }
+        return http.request.render('web_helpdesk_form.ticket_page', values)
