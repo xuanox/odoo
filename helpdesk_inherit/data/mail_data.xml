@@ -71,13 +71,13 @@
         <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
         <field name="lang"> ${object.partner_id.lang or object.user_id.lang or user.lang | safe}</field>
         <field name="body_html" type="xml">
-          Estimado Team de Soporte Técnico,
+          <div>Estimado Team de Soporte Técnico,
 
 Nueva Solicitud de Servicio Técnico % if object.access_token: ${object.name} % endif ha sido creada, se debe verificar los datos del equipo y la disponibilidad de los Ingenieros. La Referencia de la solicitud es el siguiente: Ticket # ${object.id}.
 
 Gracias,
 
-${object.company_id.name or 'Helpdesk'} - Soporte Técnico.
+${object.company_id.name or 'Helpdesk'} - Soporte Técnico. </div>
         </field>
         <field name="auto_delete" eval="False"/>
     </record>
