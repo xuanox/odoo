@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mail_act_helpdesk_ticket" model="mail.activity.type">
+      <field name="name">Observation Equipment</field>
+      <field name="icon">fa-search-plus</field>
+      <field name="res_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+      <field name="delay_count">2</field>
+      <field name="delay_unit">days</field>
+      <field name="delay_from">previous_activity</field>
+    </record>
+    <!-- Ticket related subtypes for messaging / Chatter
+    <record id="mt_ticket_new" model="mail.message.subtype">
+        <field name="name">Ticket Created</field>
+        <field name="sequence">0</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="default" eval="False"/>
+        <field name="hidden" eval="True"/>
+        <field name="description">Ticket created</field>
+    </record>
+    <record id="mt_ticket_rated" model="mail.message.subtype">
+        <field name="name">Ticket Rated</field>
+        <field name="sequence">5</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="default" eval="False"/>
+        <field name="hidden" eval="False"/>
+        <field name="description">Ticket rated</field>
+    </record>
+    <record id="mt_ticket_stage" model="mail.message.subtype">
+        <field name="name">Stage Changed</field>
+        <field name="sequence">10</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="default" eval="False"/>
+        <field name="internal" eval="True"/>
+        <field name="description">Status Changed</field>
+    </record>
+
+
+
+    <record id="customer_pending_ticket_request_email_template" model="mail.template">
+        <field name="name">Ticket: Customer Pending</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="subject">${object.display_name}</field>
+        <field name="email_from">${object.user_id.email_formatted | safe}</field>
+        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+        <field name="lang"> ${object.partner_id.lang or object.user_id.lang or user.lang | safe}</field>
+        <field name="body_html" type="xml">
+<div>
+    Dear ${object.sudo().partner_id.name or 'Madam/Sir'},<br /><br />
+    Your request
+    % if object.access_token:
+    <a href="/helpdesk/ticket/${object.id}/${object.access_token}">${object.name}</a>
+    % endif
+    has been received and is Customer Pending.
+    The reference of your ticket is ${object.id}.<br /><br />
+    To add additional comments, reply to this email.<br />
+    Thanks you,<br /><br />
+    ${object.company_id.name or 'Helpdesk'} - Technical Support.
+</div>
+        </field>
+        <field name="auto_delete" eval="False"/>
+    </record>
+-->
+    <record id="assign_responsible_ticket_request_email_template" model="mail.template">
+        <field name="name">Ticket: Assigned Responsible</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="subject">${object.display_name}</field>
+        <field name="email_from">${object.user_id.email_formatted | safe}</field>
+        <field name="email_to">${('' if object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email else object.partner_email|safe)}</field>
+        <field name="partner_to">${object.partner_id and object.sudo().partner_id.email and object.sudo().partner_id.email==object.partner_email and object.sudo().partner_id.id or False}</field>
+        <field name="lang"> ${object.partner_id.lang or object.user_id.lang or user.lang | safe}</field>
+        <field name="body_html" type="xml">
+          <table align="center" width="100%" bgcolor="#ffffff" style="max-width:600px;" border="0" cellspacing="0" cellpadding="0">
+          <!-- Header -->
+            <!-- logo -->
+            <tbody><tr>
+              <td align="center" style="padding-top:20px;padding-right:0;padding-bottom:20px;padding-left:0;">
+                <a href="https://platzi.com/" target="_blank" border="0" style="text-decoration:none;">
+                <img src="https://www.electronicamedica.com/web/image/website/1/social_default_image" alt="Electronica Médica S.A" width="250" border="0" style="max-width:250px;height:auto;display:block;"/>
+                </a>
+              </td>
+            </tr>
+            <!-- logo -->
+          <!-- Fin Header -->
+          <!-- Contenido -->
+            <!-- contenido destacado -->
+            <tr>
+              <td align="center" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+                <a href="https://electronicamedica.com/" target="_blank" border="0" style="text-decoration:none;">
+                  <img src="https://electronicamedica-pa-test2-761165.dev.odoo.com/web_helpdesk_form/static/src/img/repair.jpg" alt="Electrónica Médica S.A" width="100%" border="0" style="max-width:600px;height:auto;display:block;"/>
+                </a>
+              </td>
+            </tr>
+            <!-- contenido destacado -->
+            <tr style="width:100%;position:relative;background-color:#33979e;" bgcolor="#33979e">
+              <td class="element" style="text-size-adjust:none;text-align:center;">
+                <p style="font-weight:normal;padding:10px;margin:4px 4px 2.00em;text-size-adjust:none;line-height:1.7;color:#fcfcfc;text-align:center;font-size:16px;mso-font-alt: Arial;font-family:Roboto, Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                  <br/>Estimado ${object.sudo().partner_id.name or 'Madam/Sir'},<br/>
+                  Hemos recibido su solicitud de Servicio Técnico
+                  % if object.access_token: ${object.name} % endif
+                  , según los datos indicados en el formulario. En los próximos minutos, una vez revisemos todos sus datos y la disponibilidad, usted estará recibiendo una confirmación por este mismo medio.<br/> La Referencia de su solicitud es el siguiente: Ticket# ${object.id}.
+                </p>
+              </td>
+            </tr>
+            <!-- Fin Contenido -->
+          <!-- Footer -->
+            <tr>
+              <td align="center" bgcolor="#EBEBEA" style="padding-top:30px;padding-right:0;padding-bottom:40px;padding-left:0;">
+                <table width="100%" align="center" bgcolor="#EBEBEA" style="width:100%;max-width:600px;" valign="top" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                    <td style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+                      <!-- redes sociales -->
+                      <table align="center" width="100%" style="max-width:200px;;text-align:center;" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr>
+                            <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                              <a href="https://www.facebook.com/electronicamedicasa" target="_blank" border="0" style="text-decoration:none;">
+                                <img src="https://electronicamedica-pa.odoo.com/web/image/45637/ic-facebook_60a552f6-c677-4029-b96b-9f1213a4476d.png" width="30" alt="Facebook" border="0" style="width:100%;max-width:30px;height:auto;"/>
+                              </a>
+                            </td>
+                            <td style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                              <a href="https://www.instagram.com/electronicamedicasa/" target="_blank" border="0" style="text-decoration:none;">
+                                <img src="https://electronicamedica-pa.odoo.com/web/image/45639/ic-instagram_622eebb1-556c-4a09-8913-a2c5e173c057.png" width="30" alt="Instagram" border="0" style="width:100%;max-width:30px;height:auto;"/>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- redes sociales -->
+                    </td>
+                  </tr>
+                  <!-- info marca -->
+                  <tr>
+                    <td align="center" style="padding-top:20px;padding-right:10px;padding-bottom:0;padding-left:10px;font-family:Arial,sans-serif;color:#1c3643;font-size:14px;text-align:center;">
+                      Enviado por <span style="color:#33979e;font-size:18px;">Team de Soporte</span>
+                    </td>
+                  </tr>
+                  <!-- info marca -->
+                  <!-- legales -->
+                  <tr>
+                    >
+                  </tr>
+                  <!-- legales -->
+                </tbody></table>
+              </td>
+            </tr>
+          <!-- Fin Footer -->
+          </tbody></table>
+        </field>
+        <field name="auto_delete" eval="False"/>
+    </record>
+<!--
+    <record id="new_ticket_request_email_template" model="mail.template">
+        <field name="name">Ticket: New Ticket - Backoffice Technical Support </field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="subject">New Ticket - ${object.display_name}</field>
+        <field name="email_from">${object.user_id.email_formatted | safe}</field>
+        <field name="email_to">soporte@electronicamedica.com</field>
+        <field name="partner_to"></field>
+        <field name="lang"> ${object.partner_id.lang or object.user_id.lang or user.lang | safe}</field>
+        <field name="body_html" type="xml">
+<div>
+    Dear ${object.sudo().team_id.name or 'Madam/Sir'},<br /><br />
+    Your request
+    % if object.access_token:
+    <a href="/helpdesk/ticket/${object.id}/${object.access_token}">${object.name}</a>
+    % endif
+    has been received and is pending to assign a responsible.
+    The reference of ticket is ${object.id}.<br /><br />
+    Thanks you,<br /><br />
+    ${object.company_id.name or 'Helpdesk'} - Technical Support.
+</div>
+        </field>
+        <field name="auto_delete" eval="False"/>
+    </record>
+-->
+</odoo>
