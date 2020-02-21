@@ -97,11 +97,9 @@
               <td class="element" style="text-size-adjust:none;text-align:center;">
                 <p style="font-weight:normal;padding:10px;margin:4px 4px 2.00em;text-size-adjust:none;line-height:1.7;color:#fcfcfc;text-align:center;font-size:16px;mso-font-alt: Arial;font-family:Roboto, Arial, 'Helvetica Neue', Helvetica, sans-serif;">
                   <br/>Estimado ${object.sudo().partner_id.name or 'Madam/Sir'},<br/>
-                  Hemos recibido su solicitud de Servicio Técnico
-                  % if object.access_token:
-                  <a href="/helpdesk/ticket/${object.id}/${object.access_token}">${object.name}</a>
-                  % endif
-                  , según los datos indicados en el formulario. En los próximos minutos, una vez revisemos todos sus datos y la disponibilidad, usted estará recibiendo una confirmación por este mismo medio.<br/> La Referencia de su solicitud es la siguiente: Ticket# ${object.id}.
+                  Hemos recibido su solicitud de Servicio Técnico <b>
+                  % if object.access_token: ${object.name} % endif
+                </b>, según los datos indicados en el formulario. En los próximos minutos, una vez revisemos todos sus datos y la disponibilidad, usted estará recibiendo una confirmación por este mismo medio.<br/> La Referencia de su solicitud es el siguiente: Ticket# ${object.id}.
                 </p>
               </td>
             </tr>
