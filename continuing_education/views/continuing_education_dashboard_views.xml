@@ -56,10 +56,11 @@
 
                         <group>
                           <group name="solicitud" string="Solicitud">
-                          <field name="services_type"/>
+                          <field name="person_type" widget="radio"/>
                           <field name="user_id"/>
                           <field name="assigned_id" groups="continuing_education.group_continuing_education_manager"/>
-                          <field name="person_type" widget="radio"/>
+                          
+                          <field name="services_type"/>
                           <field name="asistent_select" widget="radio"/>
                           <field name="client_id" attrs="{'invisible':[('person_type', '!=', 'client')]}"/>
                           <field name="asistent_id" attrs="{'invisible':[('asistent_select', '!=', 'yes')]}"/>
