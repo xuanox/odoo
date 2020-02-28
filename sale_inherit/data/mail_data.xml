@@ -4,8 +4,7 @@
     <record id="mail_activity_sale_call_quotation" model="mail.activity.type">
         <field name="name">Call to Confirm</field>
         <field name="icon">fa-phone</field>
-        <field name="res_model_id" ref="sale.order"/>
-        <field name="delay_count">10</field>
+        <field name="res_model_id" ref="sale_inherit.model_sale_order"/>
     </record>
 
 </odoo>
