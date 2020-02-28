@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale -specific activities, for automatic generation mainly -->
+    <record id="mail_activity_sale_call_quotation" model="mail.activity.type">
+        <field name="name">Call to Confirm</field>
+        <field name="icon">fa-phone</field>
+        <field name="res_model_id" ref="sale.order"/>
+        <field name="delay_count">10</field>
+    </record>
+
+</odoo>
