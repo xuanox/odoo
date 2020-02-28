@@ -90,7 +90,7 @@ class ContinuingEducationDashboard(models.Model):
     person_type= fields.Selection(PERSON_TYPE_SELECTION, 'Categoria de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='inter', track_visibility='onchange')
     state=fields.Selection(STATE_SELECTION, 'Estado', readonly=False, track_visibility='onchange', help="", default='draft', copy=False)
     name=fields.Char(string="Solicitud", required=False)
-    user_id=fields.Many2one('res.users', string='Solicitante', index=True, track_visibility='onchange', default=lambda self: self._uid)
+    user_id=fields.Many2one('res.users', string='Solicitante', readonly=True, index=True, track_visibility='onchange', default=lambda self: self._uid)
     assigned_id=fields.Many2one('res.users', string='Asignado', index=True, track_visibility='onchange', default=lambda self: self.env.user)
     sale_id=fields.Many2one('res.users', string='Vendedor', index=True, track_visibility='onchange', default=lambda self: self.env.user)
     client_id=fields.Many2one('res.partner', string='Cliente', required=False, track_visibility='onchange')
