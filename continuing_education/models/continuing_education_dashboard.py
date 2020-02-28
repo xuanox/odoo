@@ -96,7 +96,7 @@ class ContinuingEducationDashboard(models.Model):
     client_id=fields.Many2one('res.partner', string='Cliente', required=False, track_visibility='onchange')
     description=fields.Text('Descripción', required=False)
     subject=fields.Char(string="Tema Principal", required=True)
-    company_id= fields.Many2one('res.company', 'Compañia', required=True, index=True, default=lambda self: self.env.user.company_id.id)#
+    company_id= fields.Many2one('res.company', 'Compañia', required=True, readonly=True, index=True, default=lambda self: self.env.user.company_id.id)#
     date_planned=fields.Datetime('Fecha de Inicio', required=True, track_visibility='onchange')
     date_end = fields.Datetime(string='Fecha de Terminación', required=True, track_visibility='onchange', states={'done': [('readonly', True)]})
     create_date=fields.Datetime('Fecha de creación', required=True, default=time.strftime('%Y-%m-%d %H:%M:%S'), track_visibility='onchange')
