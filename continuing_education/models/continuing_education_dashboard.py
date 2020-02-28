@@ -71,7 +71,6 @@ class ContinuingEducationDashboard(models.Model):
             ]
 
     PERSON_TYPE_SELECTION = [
-                    ('inter', 'Interno'),
                     ('client', 'Clientes')
                     ]
 
@@ -87,7 +86,7 @@ class ContinuingEducationDashboard(models.Model):
 
     services_type = fields.Selection(SERVICES_TYPE_SELECTION, 'Tipo de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='aplic', track_visibility='onchange')
     nivel_type= fields.Selection(NIVEL_TYPE_SELECTION, 'Nivel de Aplicación', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='basic', track_visibility='onchange')
-    person_type= fields.Selection(PERSON_TYPE_SELECTION, 'Categoria de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='inter', track_visibility='onchange')
+    person_type= fields.Selection(PERSON_TYPE_SELECTION, 'Categoria de Servicio', required=True, states={'done':[('readonly',True)],'cancel':[('readonly',True)]}, default='client', track_visibility='onchange')
     state=fields.Selection(STATE_SELECTION, 'Estado', readonly=False, track_visibility='onchange', help="", default='draft', copy=False)
     name=fields.Char(string="Solicitud", required=False)
     user_id=fields.Many2one('res.users', string='Solicitante', readonly=True, index=True, track_visibility='onchange', default=lambda self: self._uid)
