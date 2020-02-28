@@ -5,6 +5,9 @@
         <field name="name">Call to Confirm</field>
         <field name="icon">fa-phone</field>
         <field name="res_model_id" ref="sale_inherit.model_sale_order"/>
+        <field name="delay_count">2</field>
+        <field name="delay_unit">days</field>
+        <field name="delay_from">previous_activity</field>
     </record>
 
 </odoo>
