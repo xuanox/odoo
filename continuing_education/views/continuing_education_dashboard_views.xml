@@ -32,7 +32,7 @@
               <form string="Continuing Education Form">
                 <header>
 
-                    <button name="%(education_continuing_request_assign)d" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+                    <button name="action_assigned" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
                     <button name="action_replanned" states="asign,run" string="Reagendar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
@@ -59,7 +59,7 @@
                           <field name="person_type" widget="radio"/>
                           <field name="user_id"/>
                           <field name="assigned_id" groups="continuing_education.group_continuing_education_manager"/>
-                          
+
                           <field name="services_type"/>
                           <field name="asistent_select" widget="radio"/>
                           <field name="client_id" attrs="{'invisible':[('person_type', '!=', 'client')]}"/>
