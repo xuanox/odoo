@@ -93,10 +93,7 @@
                         <field name="observation_description" placeholder="Observaciones ..."/>
                       </page>
 
-                      <page string="Participantes" name="user">
-                        <separator string="Agregar Participantes"/>
-                        <field name="participants_list" placeholder="Lista de Participantes..."/>
-                      </page>
+
                     </notebook>
 
                     </sheet>
