@@ -52,7 +52,7 @@
                         <div class="oe_title">
                           <h1># <field name="name" class="oe_inline" readonly="1"/></h1>
                         </div>
-                        <field name="category_ids" widget="many2many_tags" placeholder="Etiquetas..."/>
+
 
                         <group>
                           <group name="solicitud" string="Solicitud">
@@ -72,6 +72,7 @@
                           <field name="create_date" widget="datetime"/>
                           <field name="date_planned" widget="datetime"/>
                           <field name="date_end" widget="datetime"/>
+                          <field name="category_ids" widget="many2many_tags" placeholder="Etiquetas..."/>
                         </group>
 
                         <group name="indications" string="Indicaciones">
