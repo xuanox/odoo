@@ -32,7 +32,7 @@
               <form string="Continuing Education Form">
                 <header>
 
-                    <button name="action_assigned" string="Assign Responsible" states="draft" type="action" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
+                    <button name="action_assigned" string="Assign Responsible" states="draft" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
                     <button name="action_replanned" states="asign,run" string="Reagendar" type="object" class="oe_highlight" groups="continuing_education.group_continuing_education_manager"/>
 
