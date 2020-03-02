@@ -22,24 +22,24 @@
       name="Solicitudes"/>
 
       <menuitem
-          id="continuing_education_statistics"
+          id="continuing_education_sol1"
           action="continuing_education_dashboard_view_action"
-          sequence="3"
+          sequence="1"
           parent="continuing_education_ticket"
           name="Solicitudes Clientes"/>
 
           <menuitem
-            id="continuing_education_statistics"
+            id="continuing_education_sol2"
             action="continuing_education_dashboard_view_action"
-            sequence="4"
+            sequence="2"
             parent="continuing_education_ticket"
             name="Solicitudes Internas"/>
 
-      <!--  <menuitem
+      <menuitem
           id="continuing_education_configuration"
           action="continuing_education_dashboard_view_action"
-          sequence="5"
+          sequence="3"
           parent="continuing_education_menu"
-          name="Configuración"/> -->
+          name="Configuración"/>
 
 </odoo>
