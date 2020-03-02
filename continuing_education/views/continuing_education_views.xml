@@ -21,7 +21,7 @@
       parent="continuing_education_menu"
       name="Solicitudes"/>
 
-        <menuitem
+      <menuitem
           id="continuing_education_statistics"
           action="continuing_education_dashboard_view_action"
           sequence="3"
@@ -35,11 +35,11 @@
             parent="continuing_education_ticket"
             name="Solicitudes Internas"/>
 
-        <menuitem
+      <!--  <menuitem
           id="continuing_education_configuration"
           action="continuing_education_dashboard_view_action"
           sequence="5"
           parent="continuing_education_menu"
-          name="Configuración"/>
+          name="Configuración"/> -->
 
 </odoo>
