@@ -24,21 +24,21 @@
         <menuitem
           id="continuing_education_statistics"
           action="continuing_education_dashboard_view_action"
-          sequence="2"
+          sequence="3"
           parent="continuing_education_ticket"
           name="Solicitudes Clientes"/>
 
           <menuitem
             id="continuing_education_statistics"
             action="continuing_education_dashboard_view_action"
-            sequence="3"
+            sequence="4"
             parent="continuing_education_ticket"
             name="Solicitudes Internas"/>
 
         <menuitem
           id="continuing_education_configuration"
           action="continuing_education_dashboard_view_action"
-          sequence="3"
+          sequence="5"
           parent="continuing_education_menu"
           name="Configuración"/>
 
