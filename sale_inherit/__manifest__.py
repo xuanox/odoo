@@ -11,6 +11,7 @@ Contains advanced features for sale management
     """,
     'depends': ['sale'],
     'data': [
+        'data/mail_data.xml',
         'views/sale_views.xml',
     ],
     'demo': [
