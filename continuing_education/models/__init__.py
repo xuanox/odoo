@@ -24,3 +24,4 @@
 from . import continuing_education
 from . import continuing_education_config
 from . import continuing_education_dashboard
+from . import continuing_education_ticketin

@@ -23,14 +23,14 @@
 
       <menuitem
           id="continuing_education_sol1"
-          action="continuing_education_dashboard_view_action"
+          action="continuing_education_ticketout_view_action"
           sequence="1"
           parent="continuing_education_ticket"
           name="Solicitudes Clientes"/>
 
           <menuitem
             id="continuing_education_sol2"
-            action="continuing_education_dashboard_view_action"
+            action="continuing_education_ticketin_view_action"
             sequence="2"
             parent="continuing_education_ticket"
             name="Solicitudes Internas"/>

@@ -158,5 +158,17 @@
             </field>
       </record>
 
+      <record id="continuing_education_ticketin_view_action" model="ir.actions.act_window">
+            <field name="name">Solicitud de Educación Continua</field>
+            <field name="res_model">continuing.education.ticketin</field>
+            <field name="view_mode">tree,form,calendar,kanban</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Add a new Dashboard
+              </p>
+            </field>
+      </record>
+
     </data>
 </odoo>
