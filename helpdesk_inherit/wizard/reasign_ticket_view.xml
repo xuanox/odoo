@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_ticket_reasign_wizard" model="ir.ui.view">
+            <field name="name">Reasign Ticket</field>
+            <field name="model">helpdesk.ticket.reasign</field>
+            <field name="arch" type="xml">
+                <form string="Reasign Ticket" version="7.0">
+                    <group>
+                        <field name="user_id"/>
+                    </group>
+                    <footer>
+                        <button name="reasign_ticket" string="Reasign Ticket" type="object"  class="oe_highlight"  />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ticket_reasign" model="ir.actions.act_window">
+            <field name="name">Reasign Ticket</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpdesk.ticket.reasign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>
