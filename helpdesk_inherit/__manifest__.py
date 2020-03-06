@@ -10,6 +10,8 @@
     'depends': ['helpdesk'],
     'data': [
         'data/mail_data.xml',
+        'wizard/reasign_ticket_view.xml',
+        'views/helpdesk_views.xml',        
     ],
     'auto_install': True,
 }
