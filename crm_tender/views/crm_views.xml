@@ -24,7 +24,7 @@
   <menuitem 
     id="tender_menu_crm"
     name="Tenders"
-    parent="crm_menu_sales"
+    parent="crm.crm_menu_sales"
     action="action_tender_form"
     sequence="2"/>
 
