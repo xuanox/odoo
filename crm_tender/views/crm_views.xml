@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <!--  -->
+
+
+  <record id="action_tender_form" model="ir.actions.act_window">
+    <field name="name">Tenders</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">crm.lead</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="context">{"search_default_tender":1}</field>
+    <field name="search_view_id" ref="crm.view_crm_case_leads_filter"/>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+       Create a new customer in your address book
+      </p>
+      <p>
+       Odoo helps you easily track all activities related to a customer.
+      </p>
+    </field>
+  </record>
+
+  <menuitem 
+    id="tender_menu_crm"
+    name="Tenders"
+    parent="crm_menu_sales"
+    action="action_tender_form"
+    sequence="2"/>
+
   <record id="crm_lead_tender_view_form" model="ir.ui.view">
       <field name="name">Crm Lead - Tender Form</field>
       <field name="model">crm.lead</field>
