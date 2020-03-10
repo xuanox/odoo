@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <!-- inherit view of Lead Form : adding the "convert to task" button -->
-  <record id="crm_lead_bidding_view_form" model="ir.ui.view">
-      <field name="name">Crm Lead - Bidding Form</field>
+  <record id="crm_lead_tender_view_form" model="ir.ui.view">
+      <field name="name">Crm Lead - Tender Form</field>
       <field name="model">crm.lead</field>
       <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
       <field name="arch" type="xml">
           <xpath expr="//field[@name='description']" position="after">
-                <field name="bidding_line">
-                    <tree string="Bidding Lines" editable="bottom">
+                <field name="tender_line">
+                    <tree string="Tender Lines" editable="bottom">
                         <field name="line"/>
                         <field name="participation"/>
                         <field name="name"/>

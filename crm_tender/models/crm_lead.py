@@ -9,25 +9,25 @@ from odoo.tools import float_compare
 class Lead(models.Model):
     _inherit = 'crm.lead'
 
-    bidding = fields.Boolean('Bidding', default=False, track_visibility=True)
+    tender = fields.Boolean('Tender', default=False, track_visibility=True)
     homologation = fields.Boolean('Homologation', default=False, track_visibility=True)
     compliance_bond = fields.Boolean('Compliance Bond', default=False, track_visibility=True)
     compliance_bond_delivered = fields.Boolean('Compliance Bond Delivered', default=False, track_visibility=True)
     planned_revenue = fields.Monetary('Expected Revenue', currency_field='company_currency', track_visibility='always')
     adjudged_amount = fields.Monetary('Adjudged Amount', currency_field='company_currency', track_visibility='always')
-    link = fields.Char('Url', index=True, help="Website of the Bidding")
+    link = fields.Char('Url', index=True, help="Website of the Tender")
     publication_date = fields.Date('Publication Date', help="Publication Date")
     date_of_act = fields.Datetime('Date of Act')
     date_of_approval = fields.Datetime('Date of Approval')
     delivery_date_of_the_compliance_bond = fields.Datetime('Date of Approval')
     term_of_validity_of_the_bond = fields.Integer('Term of Validity of the Bond', default=0)
     adjudicated_company = fields.Many2one('res.partner', string='Adjudicated Company', track_visibility='onchange', track_sequence=1, index=True)
-    bidding_line = fields.One2many('bidding.line', 'opportunity_id', string='Bidding Lines', copy=True)
+    tender_line = fields.One2many('tender.line', 'opportunity_id', string='Tender Lines', copy=True)
     pricelist_id = fields.Many2one('product.pricelist', 'Pricelist', default=lambda self: self.env['product.pricelist'].search([], limit=1).id, help='Pricelist of the selected partner.')
 
-class BiddingLine(models.Model):
-    _name = 'bidding.line'
-    _description = 'Bidding Line'
+class TenderLine(models.Model):
+    _name = 'tender.line'
+    _description = 'Tender Line'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'line desc'
 
@@ -39,7 +39,7 @@ class BiddingLine(models.Model):
         ('done', 'Done'),
         ('cancel', 'Cancelled')], 'Status', default='draft',
         copy=False, required=True,
-        help='The status of a Bidding line is set automatically.')
+        help='The status of a tender line is set automatically.')
     technical_file_id = fields.Many2one('regulatory.technical.file', 'Technical File', required=True)
     model_id=fields.Many2one('equipment.model', string='Equipment Model')
     name = fields.Text('Description', required=True)
