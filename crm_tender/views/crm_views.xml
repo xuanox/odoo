@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <!-- Vista de Filtros para Licitaciones  -->
-
   <record id="view_crm_case_tenders_filter" model="ir.ui.view">
     <field name="name">crm.lead.search.tender</field>
     <field name="model">crm.lead</field>
@@ -62,7 +61,7 @@
     </field>
   </record>
 
-
+<!-- Action de Menu Licitaciones  -->
   <record id="action_tender_form" model="ir.actions.act_window">
     <field name="name">Tenders</field>
     <field name="type">ir.actions.act_window</field>
@@ -82,38 +81,44 @@
     </field>
   </record>
 
-  <menuitem 
+<!-- Menu de Licitaciones  -->
+  <menuitem
     id="tender_menu_crm"
     name="Tenders"
     parent="crm.crm_menu_sales"
     action="action_tender_form"
     sequence="2"/>
 
+<!-- Vista de Formulario para Licitaciones  -->
   <record id="crm_lead_tender_view_form" model="ir.ui.view">
-      <field name="name">Crm Lead - Tender Form</field>
-      <field name="model">crm.lead</field>
-      <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
-      <field name="arch" type="xml">
-          <xpath expr="//notebook" position="inside">
-            <page string="Tender">
-              <group>
-                <field name="tender_line">
-                    <tree string="Tender Lines" editable="bottom">
-                        <field name="line"/>
-                        <field name="participation"/>
-                        <field name="name"/>
-                        <field name="technical_file_id"/>
-                        <field name="model_id"/>
-                        <field name="product_id"/>
-                        <field name="product_uom_qty"/>
-                        <field name="product_uom"/>
-                        <field name="price_unit"/>
-                        <field name="price_subtotal"/>
-                    </tree>
-                </field>
-              </group>
-            </page>
-          </xpath>
-      </field>
+    <field name="name">Crm Lead - Tender Form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='partner_id']" position="before">
+        <field name="tender" string="Is Tender"/>
+      </xpath>
+      <xpath expr="//notebook" position="inside">
+        <page string="Tender">
+          <group>
+            <field name="tender_line">
+              <tree string="Tender Lines" editable="bottom">
+                <field name="line"/>
+                <field name="participation"/>
+                <field name="name"/>
+                <field name="technical_file_id"/>
+                <field name="model_id"/>
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="product_uom"/>
+                <field name="price_unit"/>
+                <field name="price_subtotal"/>
+              </tree>
+            </field>
+          </group>
+        </page>
+      </xpath>
+    </field>
   </record>
+
 </odoo>
